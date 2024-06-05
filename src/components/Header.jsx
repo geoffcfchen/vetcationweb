@@ -1,48 +1,70 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import logo from "../images/logo_3.svg"; // Adjust the path as necessary
-import { Dropdown } from "react-bootstrap";
+import logo from "../images/plain_icon_600.png"; // Adjust the path as necessary
+import { Dropdown, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
+const breakpoint = 900;
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #fff; // Set this to match your header's background
+  background-color: black;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px; // Space between logo and text
 `;
 
 const Logo = styled.img`
-  width: 120px; // Adjust as necessary
+  width: 40px; // Adjust as necessary
+`;
+
+const LogoText = styled.span`
+  font-size: 24px; // Adjust size as necessary
+  font-weight: bold; // Bold font
+  color: white; // Text color
 `;
 
 const Nav = styled.nav`
   display: flex;
   gap: 1rem;
+  overflow: hidden; // Prevents overflow of the nav elements
 
-  @media (max-width: 768px) {
+  align-items: center;
+
+  @media (max-width: ${breakpoint}px) {
     display: none;
   }
 `;
 
 const MenuLink = styled.a`
   text-decoration: none;
-  color: #333; // Adjust the color accordingly
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  color: white;
-  background-color: blue; // Use your color
-  border: none;
-  border-radius: 5px;
+  color: white; // Adjust the color accordingly
+  white-space: nowrap; // Prevents text from wrapping
+  overflow: hidden; // Keeps the text from overflowing the nav area
+  text-overflow: ellipsis; // Adds an ellipsis if the text is too long to fit
 `;
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  let navigate = useNavigate();
+
+  const handleJoinClick = () => {
+    navigate("/register"); // Navigates to the register page
+  };
+
+  const handleLoginClick = () => {
+    navigate("/login"); // Navigates to the login page
+  };
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -93,37 +115,49 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <Logo src={logo} alt="Roo Logo" />
+      <LogoContainer>
+        <Logo src={logo} alt="Vetcation Logo" />
+        <LogoText>Vetcation</LogoText>
+      </LogoContainer>
+
       <Nav>
+        <MenuLink href="/clients">for Pet Owners</MenuLink>
         <MenuLink href="/vets">for Vets</MenuLink>
-        <MenuLink href="/hospitals">for Hospitals</MenuLink>
         <MenuLink href="/techs">for Techs</MenuLink>
-        <MenuLink href="/students">for Students</MenuLink>
+        <MenuLink href="/hospitals">for Hospitals</MenuLink>
+        {/* <MenuLink href="/students">for Students</MenuLink> */}
         <MenuLink href="/about">About Us</MenuLink>
-        <Button>Join Vetcation</Button>
-        <Button>Log In</Button>
+        <Button variant="primary" onClick={handleJoinClick}>
+          Join Vetcation
+        </Button>
+        <Button variant="secondary" onClick={handleLoginClick}>
+          Log In
+        </Button>
       </Nav>
-      <Dropdown show={isOpen} onToggle={handleToggle}>
-        {windowWidth <= 768 && (
+
+      {windowWidth <= breakpoint && (
+        <Dropdown show={isOpen} onToggle={handleToggle}>
           <Dropdown.Toggle
             as="div"
             variant="success"
             id="dropdown-basic"
             onClick={toggleDropdown}
           >
-            {windowWidth <= 768 && <FontAwesomeIcon icon={faBars} />}
+            {windowWidth <= breakpoint && (
+              <FontAwesomeIcon icon={faBars} style={{ color: "white" }} />
+            )}
           </Dropdown.Toggle>
-        )}
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">for Vets</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">for Hospitals</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">for Techs</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">for Students</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Join Vetcation</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Log in</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/vets">for Pet Owners</Dropdown.Item>
+            <Dropdown.Item href="#/vets">for Vets</Dropdown.Item>
+            <Dropdown.Item href="#/vets">for Techs</Dropdown.Item>
+            <Dropdown.Item href="#/hospital">for Hospitals</Dropdown.Item>
+            <Dropdown.Item href="#/vets">Join Vetcation</Dropdown.Item>
+            <Dropdown.Item href="#/vets">Log in</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
     </HeaderContainer>
   );
 }
