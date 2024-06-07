@@ -21,6 +21,11 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px; // Space between logo and text
+  cursor: pointer; // Makes the cursor look like a pointer when hovering over this container
+
+  &:hover {
+    opacity: 0.8; // Optionally, add some visual feedback like changing the opacity
+  }
 `;
 
 const Logo = styled.img`
@@ -115,7 +120,7 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <LogoContainer>
+      <LogoContainer onClick={() => navigate("/")}>
         <Logo src={logo} alt="Vetcation Logo" />
         <LogoText>Vetcation</LogoText>
       </LogoContainer>
