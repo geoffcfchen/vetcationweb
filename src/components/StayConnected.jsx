@@ -75,8 +75,8 @@ const StayConnected = () => {
         help, STOP to cancel.
       </TextParagraph>
       <Callout>
-        <Link href="privacy-policy.html">Privacy Policy</Link> |{" "}
-        <Link href="sms-terms-and-conditions.html">SMS Terms & Conditions</Link>
+        <Link href="/privacy-policy">Privacy Policy</Link> |{" "}
+        <Link href="/SMSTerms">SMS Terms & Conditions</Link>
       </Callout>
     </StayConnectedContainer>
   );

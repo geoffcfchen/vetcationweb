@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import RedirectPage from "./pages/RedirectPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import SMSTermsPage from "./pages/SMSTermsPage";
 
 function App() {
   return (
@@ -29,7 +31,11 @@ function App() {
         {/* <Route path="/vets" element={<VetPage />} /> */}
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/redirect" element={<RedirectPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/SMSTerms" element={<SMSTermsPage />} />
       </Routes>
+      <GetStartedCallout />
+      <StayConnected />
       <Footer />
       {/* More Features as needed */}
     </>

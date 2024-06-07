@@ -10,9 +10,7 @@ function HomePage() {
     <>
       <HeroSection />
       <FeaturesSection />
-      <TestimonialsSection />
-      <GetStartedCallout />
-      <StayConnected />
+      {/* <TestimonialsSection /> */}
     </>
   );
 }
