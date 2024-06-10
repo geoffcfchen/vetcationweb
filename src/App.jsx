@@ -15,7 +15,7 @@ import RegisterPage from "./pages/RegisterPage";
 import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
-import ForVetPage from "./pages/forVetPage";
+import ForVetPage from "./pages/ForVetPage";
 
 function App() {
   return (
