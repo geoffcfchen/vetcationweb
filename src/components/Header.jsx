@@ -126,8 +126,8 @@ function Header() {
       </LogoContainer>
 
       <Nav>
-        <MenuLink href="/clients">for Pet Owners</MenuLink>
-        <MenuLink href="/vets">for Vets</MenuLink>
+        <MenuLink href="#/clients">for Pet Owners</MenuLink>
+        <MenuLink href="#/vets">for Vets</MenuLink>
         {/* <MenuLink href="/techs">for Techs</MenuLink> */}
         {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
         {/* <MenuLink href="/students">for Students</MenuLink> */}
