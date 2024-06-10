@@ -29,12 +29,12 @@ function App() {
       <StayConnected /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="#/vets" element={<ForVetPage />} />
-        <Route path="#/clients" element={<HomePage />} />
-        <Route path="#/register" element={<RegisterPage />} />
-        <Route path="#/redirect" element={<RedirectPage />} />
-        <Route path="#/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="#/SMSTerms" element={<SMSTermsPage />} />
+        <Route path="/vets" element={<ForVetPage />} />
+        <Route path="/clients" element={<HomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/redirect" element={<RedirectPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/SMSTerms" element={<SMSTermsPage />} />
       </Routes>
       <GetStartedCallout />
       <StayConnected />
