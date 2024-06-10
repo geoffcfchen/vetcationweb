@@ -21,7 +21,7 @@ function RegisterSection() {
       <Feature
         iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Welcome home!"
-        text="A app that designed for everyone who loves animals."
+        text="An app that is designed for everyone who loves animals."
         // linkText="Learn More"
         qrCodeLink={qrCodeImage}
         linkHref="#"

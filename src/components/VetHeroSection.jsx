@@ -88,7 +88,7 @@ const HeroImage = styled.img`
   animation: ${fadeIn} 1s ease-out; // Apply the animation here
 `;
 
-function HeroSection() {
+function VetHeroSection() {
   return (
     <StyledHeroSection>
       <Container style={{ maxWidth: "1140px" }}>
@@ -96,7 +96,8 @@ function HeroSection() {
           <Col md={6}>
             <div>
               <HeroHeader>
-                Connect with vets and make the right decision for your pets
+                Join the most advanced communication platform and stremaline
+                your work with your clients
               </HeroHeader>
               <HeroTagline>Build strong connections with your vets</HeroTagline>
               <HeroButton href="#">Get Started</HeroButton>
@@ -111,4 +112,4 @@ function HeroSection() {
   );
 }
 
-export default HeroSection;
+export default VetHeroSection;

@@ -128,16 +128,16 @@ function Header() {
       <Nav>
         <MenuLink href="/clients">for Pet Owners</MenuLink>
         <MenuLink href="/vets">for Vets</MenuLink>
-        <MenuLink href="/techs">for Techs</MenuLink>
-        <MenuLink href="/hospitals">for Hospitals</MenuLink>
+        {/* <MenuLink href="/techs">for Techs</MenuLink> */}
+        {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
         {/* <MenuLink href="/students">for Students</MenuLink> */}
-        <MenuLink href="/about">About Us</MenuLink>
+        {/* <MenuLink href="/about">About Us</MenuLink> */}
         <Button variant="primary" onClick={handleJoinClick}>
           Join Vetcation
         </Button>
-        <Button variant="secondary" onClick={handleLoginClick}>
+        {/* <Button variant="secondary" onClick={handleLoginClick}>
           Log In
-        </Button>
+        </Button> */}
       </Nav>
 
       {windowWidth <= breakpoint && (
