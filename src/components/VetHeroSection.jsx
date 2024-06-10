@@ -100,7 +100,7 @@ function VetHeroSection() {
                 your work with your clients
               </HeroHeader>
               <HeroTagline>Build strong connections with your vets</HeroTagline>
-              <HeroButton href="#">Get Started</HeroButton>
+              <HeroButton href="#/register">Get Started</HeroButton>
             </div>
           </Col>
           <Col md={6}>
