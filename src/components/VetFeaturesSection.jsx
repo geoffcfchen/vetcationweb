@@ -25,12 +25,15 @@ function VetFeaturesSection() {
           height: "100px",
         }}
       >
-        <h2>A community to help you make the right decision for your pets</h2>
+        <h2>
+          A best communication tool to help you stremaline your work with your
+          clients
+        </h2>
       </header>
       <Feature
         iconId="clock" // Use the ID of the icon from the sprite
-        heading="Reserve your earliest appointments"
-        text="Looking for early appointments or tired of waiting? Find the perfect solution at clinics near you! Book your earliest appointment today or join the waitlist to shorten your wait time. Don't wait, act now and experience hassle-free healthcare!"
+        heading="AI powered communication tool"
+        text="A AI-powered best communication tool to help you stremaline your work with your clients"
         linkText="Learn More"
         linkHref="#"
         image={{
@@ -39,7 +42,7 @@ function VetFeaturesSection() {
           png: fast1Png,
           png2x: fast1Png,
         }}
-        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1717708144.MP4?alt=media&token=490e6e2d-37f4-4527-880a-56e32cc3c771"
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718172660.MP4?alt=media&token=c988a6b5-9d7c-4d1c-934b-b496a02dca98"
       />
       <Feature
         iconId="wordpress" // Use the ID of the icon from the sprite
