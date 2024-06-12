@@ -33,7 +33,7 @@ function VetFeaturesSection() {
       <Feature
         iconId="clock" // Use the ID of the icon from the sprite
         heading="AI powered communication tool"
-        text="A AI-powered best communication tool to help you stremaline your work with your clients"
+        text=" Our human-level AI assistant is here to free you from time-consuming, repetitive work. We want you to focus on more important things at work and in your life."
         linkText="Learn More"
         linkHref="#"
         image={{
@@ -46,8 +46,8 @@ function VetFeaturesSection() {
       />
       <Feature
         iconId="wordpress" // Use the ID of the icon from the sprite
-        heading="Build strong connections with your doctor"
-        text="Looking for an efficient way to manage your clients and stay connected with them? Our platform can help you do just that! With our user-friendly interface, you can manage your clients with ease and be available to them at all times. Don't let distance or time constraints get in the way of your business. Join now and take your client management to the next level!"
+        heading="Build VCPR relationships with your clients and pets"
+        text="Your clients can easily connect with you and get best advice for the pets that have build VCPR relationships with you. No more medical questions from the pets you haven't seen."
         linkText="Learn More"
         linkHref="#"
         image={{
@@ -56,12 +56,12 @@ function VetFeaturesSection() {
           png: wordpress1Png,
           png2x: wordpress1Png,
         }}
-        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1717629711.MP4?alt=media&token=21e70d7f-101f-4412-a357-5ddcfb0a303a"
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718174604.MP4?alt=media&token=f3b1d940-e91d-4855-9ec8-c1b8bae2a780"
       />
       <Feature
         iconId="easy" // Use the ID of the icon from the sprite
-        heading="Super Easy to get advice"
-        text="Look no further! Our platform provides a unique opportunity to ask veterinarians questions and gain a veterinary perspective on your furry friend's well-being. Join now to ensure your pet receives the best care possible!"
+        heading="Earn for Every Consult"
+        text="Say goodbye to uncompensated follow-ups. Our app ensures you're rewarded for the service you provide. You can now earn for every consult you provide to your clients."
         linkText="Learn More"
         linkHref="#"
         image={{
@@ -70,7 +70,35 @@ function VetFeaturesSection() {
           png: easyPng,
           png2x: easyPng,
         }}
-        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1717710227.MP4?alt=media&token=7e0b7e77-0afa-4c11-a224-a2fc93b82386"
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718174935.MP4?alt=media&token=5c2f2514-87b3-4dcc-b767-3a6221e50fb0"
+      />
+      <Feature
+        iconId="easy" // Use the ID of the icon from the sprite
+        heading="One-way Calling"
+        text=" Connect with pet owners securely without sharing your personal contact. Never get unsolicited calls. You have full control of when and how to engage."
+        linkText="Learn More"
+        linkHref="#"
+        image={{
+          webp: easyWebp,
+          webp2x: easyWebp,
+          png: easyPng,
+          png2x: easyPng,
+        }}
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718175277.MP4?alt=media&token=fdcbd453-8ee8-40fd-a45e-71a70cb1b15d"
+      />
+      <Feature
+        iconId="easy" // Use the ID of the icon from the sprite
+        heading="Build Community & Share Knowledge"
+        text="Grow with a community of vets, share cases, learn together, and earn the respect your dedication deserves. (And potentially receive some donations!)"
+        linkText="Learn More"
+        linkHref="#"
+        image={{
+          webp: easyWebp,
+          webp2x: easyWebp,
+          png: easyPng,
+          png2x: easyPng,
+        }}
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718174935.MP4?alt=media&token=5c2f2514-87b3-4dcc-b767-3a6221e50fb0"
       />
     </FeaturesContainer>
   );
