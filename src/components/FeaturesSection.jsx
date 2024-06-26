@@ -23,6 +23,7 @@ function FeaturesSection() {
           justifyContent: "center",
           alignItems: "center",
           height: "100px",
+          marginTop: "50px",
         }}
       >
         <h2>A community to help you make the right decision for your pets</h2>
@@ -39,7 +40,7 @@ function FeaturesSection() {
           png: fast1Png,
           png2x: fast1Png,
         }}
-        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1717708144.MP4?alt=media&token=490e6e2d-37f4-4527-880a-56e32cc3c771"
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1719433820.MP4?alt=media&token=049ec9f7-34a2-4f12-9481-af710f1fad8d"
       />
       <Feature
         iconId="wordpress" // Use the ID of the icon from the sprite

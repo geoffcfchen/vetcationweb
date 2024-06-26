@@ -23,11 +23,11 @@ function VetFeaturesSection() {
           justifyContent: "center",
           alignItems: "center",
           height: "100px",
+          marginTop: "50px",
         }}
       >
         <h2>
-          A best communication tool to help you stremaline your work with your
-          clients
+          A communication tool to build a strong relationship with your clients
         </h2>
       </header>
       <Feature
@@ -88,8 +88,8 @@ function VetFeaturesSection() {
       />
       <Feature
         iconId="easy" // Use the ID of the icon from the sprite
-        heading="Build Community & Share Knowledge"
-        text="Grow with a community of vets, share cases, learn together, and earn the respect your dedication deserves. (And potentially receive some donations!)"
+        heading="Earn Recognition and Enhance Job Satisfaction"
+        text="Elevate your professional profile with recognition from pet owners who value your service. Receive shout-outs, appreciation, and thanks that contribute to a lifelong reputation and career growth. Engage with a network of veterinarians to share knowledge and experiences, boosting job satisfaction and professional development."
         linkText="Learn More"
         linkHref="#"
         image={{
@@ -98,7 +98,7 @@ function VetFeaturesSection() {
           png: easyPng,
           png2x: easyPng,
         }}
-        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718174935.MP4?alt=media&token=5c2f2514-87b3-4dcc-b767-3a6221e50fb0"
+        videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1719436047.MP4?alt=media&token=fc0ca1c5-32e7-4b89-bb0c-4398ef56da00"
       />
     </FeaturesContainer>
   );

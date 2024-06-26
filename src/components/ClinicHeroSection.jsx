@@ -88,7 +88,7 @@ const HeroImage = styled.img`
   animation: ${fadeIn} 1s ease-out; // Apply the animation here
 `;
 
-function VetHeroSection() {
+function ClinicHeroSection() {
   return (
     <StyledHeroSection>
       <Container style={{ maxWidth: "1140px" }}>
@@ -96,11 +96,12 @@ function VetHeroSection() {
           <Col md={6}>
             <div>
               <HeroHeader>
-                Elevate Veterinary Care with Vetcation’s Advanced Communication
-                Tools
+                Elevate your practice and become a top choice for veterinary
+                talent
               </HeroHeader>
               <HeroTagline>
-                Connect, Earn, and Grow in a Community of Esteemed Veterinarians
+                Transform Your Clinic Operations with Vetcation’s All-in-One
+                Platform
               </HeroTagline>
               <HeroButton href="#/register">Get Started</HeroButton>
             </div>
@@ -114,4 +115,4 @@ function VetHeroSection() {
   );
 }
 
-export default VetHeroSection;
+export default ClinicHeroSection;

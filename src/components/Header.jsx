@@ -128,6 +128,7 @@ function Header() {
       <Nav>
         <MenuLink href="#/clients">for Pet Owners</MenuLink>
         <MenuLink href="#/vets">for Vets</MenuLink>
+        <MenuLink href="#/clinics">for Hospitals</MenuLink>
         {/* <MenuLink href="/techs">for Techs</MenuLink> */}
         {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
         {/* <MenuLink href="/students">for Students</MenuLink> */}
@@ -154,12 +155,12 @@ function Header() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/vets">for Pet Owners</Dropdown.Item>
+            <Dropdown.Item href="#/clients">for Pet Owners</Dropdown.Item>
             <Dropdown.Item href="#/vets">for Vets</Dropdown.Item>
-            <Dropdown.Item href="#/vets">for Techs</Dropdown.Item>
-            <Dropdown.Item href="#/hospital">for Hospitals</Dropdown.Item>
-            <Dropdown.Item href="#/vets">Join Vetcation</Dropdown.Item>
-            <Dropdown.Item href="#/vets">Log in</Dropdown.Item>
+            {/* <Dropdown.Item href="#/vets">for Techs</Dropdown.Item> */}
+            <Dropdown.Item href="#/clinics">for Hospitals</Dropdown.Item>
+            {/* <Dropdown.Item onpres>Join Vetcation</Dropdown.Item> */}
+            {/* <Dropdown.Item href="#/vets">Log in</Dropdown.Item> */}
           </Dropdown.Menu>
         </Dropdown>
       )}

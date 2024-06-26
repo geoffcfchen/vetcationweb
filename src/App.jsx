@@ -16,6 +16,7 @@ import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
 import ForVetPage from "./pages/ForVetPage";
+import ForClinicPage from "./pages/ForClinicPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/vets" element={<ForVetPage />} />
         <Route path="/clients" element={<HomePage />} />
+        <Route path="/clinics" element={<ForClinicPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/redirect" element={<RedirectPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
