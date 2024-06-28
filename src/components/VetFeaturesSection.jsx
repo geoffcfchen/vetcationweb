@@ -27,7 +27,7 @@ function VetFeaturesSection() {
         }}
       >
         <h2>
-          A communication tool to build a strong relationship with your clients
+          A communication tool to build a respectful relationship with your clients
         </h2>
       </header>
       <Feature
