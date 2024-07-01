@@ -27,14 +27,15 @@ function VetFeaturesSection() {
         }}
       >
         <h2>
-          A communication tool to build a respectful relationship with your clients
+          A communication tool to build a respectful relationship with your
+          clients
         </h2>
       </header>
       <Feature
         iconId="clock" // Use the ID of the icon from the sprite
         heading="AI powered communication tool"
         text=" Our human-level AI assistant is here to free you from time-consuming, repetitive work. We want you to focus on more important things at work and in your life."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: fast1Webp,
@@ -48,7 +49,7 @@ function VetFeaturesSection() {
         iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Build VCPR relationships with your clients and pets"
         text="Your clients can easily connect with you and get best advice for the pets that have build VCPR relationships with you. No more medical questions from the pets you haven't seen."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: wordpress1Webp,
@@ -62,7 +63,7 @@ function VetFeaturesSection() {
         iconId="easy" // Use the ID of the icon from the sprite
         heading="Earn for Every Consult"
         text="Say goodbye to uncompensated follow-ups. Our app ensures you're rewarded for the service you provide. You can now earn for every consult you provide to your clients."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: easyWebp,
@@ -76,7 +77,7 @@ function VetFeaturesSection() {
         iconId="easy" // Use the ID of the icon from the sprite
         heading="One-way Calling"
         text=" Connect with pet owners securely without sharing your personal contact. Never get unsolicited calls. You have full control of when and how to engage."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: easyWebp,
@@ -90,7 +91,7 @@ function VetFeaturesSection() {
         iconId="easy" // Use the ID of the icon from the sprite
         heading="Earn Recognition and Enhance Job Satisfaction"
         text="Elevate your professional profile with recognition from pet owners who value your service. Receive shout-outs, appreciation, and thanks that contribute to a lifelong reputation and career growth. Engage with a network of veterinarians to share knowledge and experiences, boosting job satisfaction and professional development."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: easyWebp,

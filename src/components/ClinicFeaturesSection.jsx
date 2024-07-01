@@ -34,7 +34,7 @@ function ClinicFeaturesSection() {
         iconId="clock" // Use the ID of the icon from the sprite
         heading="Manage your clinic with ease"
         text="Our system is designed to help you manage your vet staff with ease. They will have badges to show their clients that they are the vet staffs from your clinic."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: fast1Webp,
@@ -48,7 +48,7 @@ function ClinicFeaturesSection() {
         iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Open new appointments for your clients in less 50 seconds"
         text="Unlock seamless appointment scheduling in less than 50 seconds with Vetcation. Our industry-leading system not only allows you to effortlessly set up appointments with varying times, dates, and durations, but also enables veterinarians to access all appointment details directly from their phones. By joining Vetcation, you gain access to the most comprehensive and user-friendly appointment management solution available. Start streamlining your booking process today and ensure your staff is well-prepared and informed for every client interaction."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: wordpress1Webp,
@@ -62,7 +62,7 @@ function ClinicFeaturesSection() {
         iconId="easy" // Use the ID of the icon from the sprite
         heading="Every vet can acceess Pre-Screen Summaries for every Upcoming Appointments"
         text="Enhance your preparation with Vetcation's advanced AI-driven features. Every veterinarian in your clinic can access comprehensive pre-screen summaries directly from the in-app calendar. These summaries include detailed information and images submitted by pet owners about their upcoming appointments. Our AI system meticulously analyzes the provided content to generate insightful summaries, helping veterinarians understand each pet's condition before the visit. This proactive approach not only saves time but also ensures more effective and efficient appointments. Join Vetcation to leverage cutting-edge technology for better care and streamlined operations."
-        linkText="Learn More"
+        // linkText="Learn More"
         linkHref="#"
         image={{
           webp: easyWebp,
