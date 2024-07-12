@@ -70,7 +70,7 @@ function FeaturesSection() {
         }}
         videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1717710227.MP4?alt=media&token=7e0b7e77-0afa-4c11-a224-a2fc93b82386"
       />
-      <Feature
+      {/* <Feature
         iconId="easy" // Use the ID of the icon from the sprite
         heading="Discover Expert Vet Insights"
         text="Explore a unique platform designed exclusively for pet owners seeking trustworthy veterinary advice. At our community space, you can post your pet health queries and have them addressed by professional veterinarians. While not all questions may receive answers, the insights shared here aim to empower you with the knowledge needed to make informed medical decisions for your pets. Remember, further questions aren't supported, reinforcing a focused and educational exchange."
@@ -83,7 +83,7 @@ function FeaturesSection() {
           png2x: easyPng,
         }}
         videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FRPReplay_Final1718143301.MP4?alt=media&token=88be2468-48ff-4358-b25a-0fdbbd1eb589"
-      />
+      /> */}
     </FeaturesContainer>
   );
 }
