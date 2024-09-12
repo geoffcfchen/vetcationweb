@@ -54,7 +54,8 @@ function SMSTermsPage() {
           <p>
             If you have any questions about these SMS Terms & Conditions, the
             practices of Vetcation, or your dealings with us, please contact us
-            at: <a href="mailto:gcfchen@gcfchen.com">gcfchen@gcfchen.com</a>.
+            at: <a href="mailto:gcfchen@vetcation.com">gcfchen@vetcation.com</a>
+            .
           </p>
         </Col>
       </Row>

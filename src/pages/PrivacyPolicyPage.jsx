@@ -91,7 +91,7 @@ function PrivacyPolicyPage() {
             If you have any questions about this Privacy Policy, the practices
             of this Service, or your dealings with this Service, please contact
             us at:
-            <a href="mailto:gcfchen@gmail.com">gcfchen@gmail.com</a>.
+            <a href="mailto:gcfchen@vetcation.com">gcfchen@vetcation.com</a>.
           </p>
         </Col>
       </Row>
