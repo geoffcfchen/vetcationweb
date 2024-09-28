@@ -191,7 +191,7 @@ export default function Feature({
           <img
             src={qrCodeLink}
             alt="QR Code"
-            style={{ marginTop: "10px", width: "430px", height: "210px" }}
+            style={{ marginTop: "10px", width: "200px", height: "200px" }}
           />
         )}
       </FeatureContent>
