@@ -22,24 +22,24 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
+      {/* <Header /> */}
       {/* <HeroSection />
       <FeaturesSection />
       <TestimonialsSection />
       <GetStartedCallout />
       <StayConnected /> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/vets" element={<ForVetPage />} />
+        <Route path="/" element={<RegisterPage />} />
+        {/* <Route path="/vets" element={<ForVetPage />} />
         <Route path="/clients" element={<HomePage />} />
-        <Route path="/clinics" element={<ForClinicPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/clinics" element={<ForClinicPage />} /> */}
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/redirect" element={<RedirectPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/SMSTerms" element={<SMSTermsPage />} />
       </Routes>
-      <GetStartedCallout />
-      <StayConnected />
+      {/* <GetStartedCallout /> */}
+      {/* <StayConnected /> */}
       <Footer />
       {/* More Features as needed */}
     </>

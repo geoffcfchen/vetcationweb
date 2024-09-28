@@ -95,10 +95,10 @@ function HeroSection() {
         <Row>
           <Col md={6}>
             <div>
-              <HeroHeader>
-                Connect with vets and make the right decision for your pets
-              </HeroHeader>
-              <HeroTagline>Build strong connections with your vets</HeroTagline>
+              <HeroHeader>Vetcation</HeroHeader>
+              <HeroTagline>
+                Connect and Learn from Veterinary Experts on Vetcation
+              </HeroTagline>
               <HeroButton href="#/register">Get Started</HeroButton>
             </div>
           </Col>

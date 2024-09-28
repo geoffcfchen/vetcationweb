@@ -119,7 +119,7 @@ const imageVariants = {
 };
 
 export default function Feature({
-  iconId,
+  iconId = null,
   heading,
   text,
   linkText,
@@ -137,13 +137,33 @@ export default function Feature({
       viewport={{ once: true }}
     >
       <FeatureContent variants={contentVariants}>
-        <IconContainer>
-          <svg>
-            <use xlinkHref={`${sprite}#${iconId}`} />
-          </svg>
-        </IconContainer>
-        <h3 style={{ fontSize: 30 }}>{heading}</h3>
-        <p style={{ fontSize: 20 }}>{text}</p>
+        {iconId && (
+          <IconContainer>
+            <svg>
+              <use xlinkHref={`${sprite}#${iconId}`} />
+            </svg>
+          </IconContainer>
+        )}
+        <h3
+          style={{
+            fontSize: 60,
+            color: "#316FF6",
+            fontFamily: "inherit",
+            marginBottom: 0,
+          }}
+        >
+          {heading}
+        </h3>
+        <p
+          style={{
+            fontSize: 30,
+            marginTop: 5,
+            lineHeight: 1.2,
+            fontFamily: "inherit",
+          }}
+        >
+          {text}
+        </p>
         <a
           href={linkHref}
           onMouseEnter={() => setHover(true)}
@@ -171,7 +191,7 @@ export default function Feature({
           <img
             src={qrCodeLink}
             alt="QR Code"
-            style={{ marginTop: "10px", width: "200px", height: "200px" }}
+            style={{ marginTop: "10px", width: "430px", height: "260px" }}
           />
         )}
       </FeatureContent>

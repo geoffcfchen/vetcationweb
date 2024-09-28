@@ -5,7 +5,7 @@ import styled from "styled-components";
 const FooterContainer = styled.footer`
   background: #232323;
   color: #7b858b;
-  padding: 5rem 2rem;
+  padding: 1rem 5.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,44 +135,44 @@ const FooterSection = ({ title, links }) => {
 
 const Footer = () => {
   const footerData = [
-    {
-      title: "Products",
-      links: [
-        { text: "Website Hosting", url: "#" },
-        { text: "Free Automated Wordpress Migrations", url: "#" },
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        { text: "About", url: "#" },
-        { text: "Affiliates", url: "#" },
-        { text: "Blog", url: "#" },
-      ],
-    },
-    {
-      title: "Support",
-      links: [
-        { text: "Contact", url: "#" },
-        { text: "Knowledge Base", url: "#" },
-        { text: "FAQ", url: "#" },
-      ],
-    },
-    {
-      title: "Domains",
-      links: [
-        { text: "Domain Checker", url: "#" },
-        { text: "Domain Transfer", url: "#" },
-        { text: "Free Domain", url: "#" },
-      ],
-    },
+    // {
+    //   title: "Products",
+    //   links: [
+    //     { text: "Website Hosting", url: "#" },
+    //     { text: "Free Automated Wordpress Migrations", url: "#" },
+    //   ],
+    // },
+    // {
+    //   title: "Company",
+    //   links: [
+    //     { text: "About", url: "#" },
+    //     { text: "Affiliates", url: "#" },
+    //     { text: "Blog", url: "#" },
+    //   ],
+    // },
+    // {
+    //   title: "Support",
+    //   links: [
+    //     { text: "Contact", url: "#" },
+    //     { text: "Knowledge Base", url: "#" },
+    //     { text: "FAQ", url: "#" },
+    //   ],
+    // },
+    // {
+    //   title: "Domains",
+    //   links: [
+    //     { text: "Domain Checker", url: "#" },
+    //     { text: "Domain Transfer", url: "#" },
+    //     { text: "Free Domain", url: "#" },
+    //   ],
+    // },
     {
       title: "Legal",
       links: [
-        { text: "Privacy Policy", url: "privacy-policy.html" },
+        { text: "Privacy Policy", url: "#/privacy-policy" },
         {
           text: "SMS Terms & Conditions",
-          url: "sms-terms-and-conditions.html",
+          url: "#/SMSTerms",
         },
       ],
     },

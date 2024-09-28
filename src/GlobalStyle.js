@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f2f4f7; // Example background color
+
   }
 `;
 
