@@ -1009,7 +1009,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   pointer-events: none; // This ensures that the frame does not interfere with video controls
 `,$A=_(or.video)`
   position: absolute;
-  top: 1.85%; // Center vertically in the frame, adjust as necessary
+  top: 1.69%; // Center vertically in the frame, adjust as necessary
   height: 96.3%; // Increased to make the video larger
   left: 0%; // Center horizontally in the frame, adjust as necessary
   width: 100%; // Increased to make the video larger
