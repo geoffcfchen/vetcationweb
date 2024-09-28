@@ -21,7 +21,7 @@ function RegisterSection() {
       <Feature
         // iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Vetcation"
-        text="Connect and Learn from Veterinary Experts on Vetcation"
+        text="Connect and Learn from Licensed Veterinary Experts on Vetcation"
         // linkText="Learn More"
         qrCodeLink={qrCodeImage}
         linkHref="#"
