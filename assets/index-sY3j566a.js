@@ -1224,7 +1224,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   max-width: 1140px;
   margin: 0 auto;
   padding: 0rem 2rem;
-`;function a5(){return C.jsx(o5,{children:C.jsx(UA,{heading:"Vetcation",text:"Connect and Learn from Veterinary Experts on Vetcation",qrCodeLink:i5,linkHref:"#",image:{webp:Mh,webp2x:Mh,png:jh,png2x:jh},videoSrc:"https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FScreenRecording_09-28-2024%2001-59-58_1_compress.mp4?alt=media&token=4ce6b9a5-4cbf-4102-ab6a-8ce4f99e36cd"})})}_.div`
+`;function a5(){return C.jsx(o5,{children:C.jsx(UA,{heading:"Vetcation",text:"Connect and Learn from Licensed Veterinary Experts on Vetcation",qrCodeLink:i5,linkHref:"#",image:{webp:Mh,webp2x:Mh,png:jh,png2x:jh},videoSrc:"https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FScreenRecording_09-28-2024%2001-59-58_1_compress.mp4?alt=media&token=4ce6b9a5-4cbf-4102-ab6a-8ce4f99e36cd"})})}_.div`
   display: flex;
   flex-direction: column;
   align-items: center;
