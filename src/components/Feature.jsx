@@ -97,7 +97,7 @@ const FrameImage = styled.img`
 
 const StyledVideo = styled(motion.video)`
   position: absolute;
-  top: 1.85%; // Center vertically in the frame, adjust as necessary
+  top: 1.69%; // Center vertically in the frame, adjust as necessary
   height: 96.3%; // Increased to make the video larger
   left: 0%; // Center horizontally in the frame, adjust as necessary
   width: 100%; // Increased to make the video larger
