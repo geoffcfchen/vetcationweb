@@ -6,6 +6,21 @@ import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa"; // Importing from Font Awesome
 import iPhoneFrame from "../images/iphone-frame_15pro.png"; // Make sure to have the correct path to your iPhone frame image
 
+const QRCodeImage = styled.img`
+  margin-top: 10px;
+  width: 430px;
+  height: 210px; // Maintain aspect ratio
+  max-width: 430px;
+  max-height: 210px;
+
+  @media (max-width: 768px) {
+    width: 320px;
+    height: 160px; // Maintain aspect ratio
+    margin-left: auto;
+    margin-right: auto; // Center QRCodeImage for smaller screens
+  }
+`;
+
 const FeatureBlock = styled(motion.article)`
   display: grid;
   gap: 4rem;
@@ -58,6 +73,10 @@ const FeatureContent = styled(motion.div)`
     display: inline-flex;
     align-items: center;
     position: relative; // Relative positioning for pseudoelements
+  }
+  @media (max-width: 768px) {
+    align-items: center; // Center the items in the middle
+    text-align: center; // Center-align text for smaller screens
   }
 `;
 
@@ -187,13 +206,7 @@ export default function Feature({
             />
           )}
         </a>
-        {qrCodeLink && (
-          <img
-            src={qrCodeLink}
-            alt="QR Code"
-            style={{ marginTop: "10px", width: "200px", height: "200px" }}
-          />
-        )}
+        {qrCodeLink && <QRCodeImage src={qrCodeLink} alt="QR Code" />}
       </FeatureContent>
       {videoSrc ? (
         <VideoFrameContainer>
