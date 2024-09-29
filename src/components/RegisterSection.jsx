@@ -7,7 +7,7 @@ import fast1Png from "../images/fast1@2x.png"; // Adjust the path
 import wordpress1Webp from "../images/wordpress1.webp";
 import wordpress1Png from "../images/wordpress1@2x.png"; // Adjust the path
 import Feature from "./Feature";
-import qrCodeImage from "../images/qrcode3.png"; // Adjust path as necessary
+import qrCodeImage from "../images/qrcode4.png"; // Adjust path as necessary
 
 const FeaturesContainer = styled.section`
   max-width: 1140px;
