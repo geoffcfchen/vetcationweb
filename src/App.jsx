@@ -27,7 +27,8 @@ function App() {
       <StayConnected /> */}
       <Routes>
         <Route path="/" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        {/* <Route path="/" element={<LoginPage />} /> */}
+        {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         {/* <Route path="/vets" element={<ForVetPage />} />
         <Route path="/clients" element={<HomePage />} />
         <Route path="/clinics" element={<ForClinicPage />} /> */}
