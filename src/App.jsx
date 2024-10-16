@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import FeaturesSection from "./components/FeaturesSection";
+// import Header from "./components/Header";
+// import HeroSection from "./components/HeroSection";
+// import FeaturesSection from "./components/FeaturesSection";
+import RegisterPage from "./pages/RegisterPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "./GlobalStyle";
-import TestimonialsSection from "./components/TestimonialsSection";
-import GetStartedCallout from "./components/GetStartedCallout";
-import StayConnected from "./components/StayConnected";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
+
 import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
-import ForVetPage from "./pages/ForVetPage";
-import ForClinicPage from "./pages/ForClinicPage";
+
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
@@ -30,6 +27,7 @@ function App() {
       <StayConnected /> */}
       <Routes>
         <Route path="/" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         {/* <Route path="/vets" element={<ForVetPage />} />
         <Route path="/clients" element={<HomePage />} />
         <Route path="/clinics" element={<ForClinicPage />} /> */}
@@ -40,7 +38,7 @@ function App() {
       </Routes>
       {/* <GetStartedCallout /> */}
       {/* <StayConnected /> */}
-      <Footer />
+
       {/* More Features as needed */}
     </>
   );

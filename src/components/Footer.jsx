@@ -59,9 +59,9 @@ const Content = styled.div`
     display: block;
   }
 
-  // Conditionally show content on smaller screens based on isOpen
+  // Conditionally show content on smaller screens based on $isOpen
   @media (max-width: 768px) {
-    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+    display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
   }
 `;
 
@@ -120,7 +120,7 @@ const FooterSection = ({ title, links }) => {
         <Heading>{title}</Heading>
         <Icon>{isOpen ? <MdExpandMore /> : <MdChevronRight />}</Icon>
       </Header>
-      <Content isOpen={isOpen}>
+      <Content $isOpen={isOpen}>
         <LinkList>
           {links.map((link, index) => (
             <LinkItem key={index}>
