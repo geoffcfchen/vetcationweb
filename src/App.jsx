@@ -12,8 +12,8 @@ import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
 
-import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
+// import LoginPage from "./pages/LoginPage";
+// import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
