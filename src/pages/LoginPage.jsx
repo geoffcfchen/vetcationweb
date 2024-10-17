@@ -173,8 +173,8 @@ function LoginPage() {
             <div className="text-center">
               <FacebookText>Vetcation</FacebookText>
               <FacebookTagline>
-                Connect and Learn from a community of Licensed Veterinary
-                Experts on Vetcation
+                Ask, connect, and learn from a community of licensed veterinary
+                experts on Vetcation.
               </FacebookTagline>
             </div>
           </FixedSection>

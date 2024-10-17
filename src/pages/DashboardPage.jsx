@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"; // Firebase signOut function
 import { auth } from "../firebase"; // Firebase auth instance
+import PublicPosts from "../components/PublicPosts";
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -89,18 +90,7 @@ const DashboardPage = () => {
   const renderFeedContent = () => {
     switch (selectedMenu) {
       case "Home":
-        return (
-          <>
-            <Post>
-              <h3>@user1</h3>
-              <p>This is a sample post in the Home feed.</p>
-            </Post>
-            <Post>
-              <h3>@user2</h3>
-              <p>Welcome to the Home feed. Enjoy your stay!</p>
-            </Post>
-          </>
-        );
+        return <PublicPosts />; // Show public posts in Home feed
       case "Profile":
         return (
           <>
