@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
+import TweetQA from "./TweetQA";
 
 const Post = styled.div`
   padding: 15px;
@@ -89,10 +90,7 @@ const PublicPosts = () => {
       endMessage={<p>No more posts to display</p>} // Message to show when no more posts
     >
       {posts.map((post) => (
-        <Post key={post.id}>
-          <h3>@{post.author || "Anonymous"}</h3>
-          <p>{post.content}</p>
-        </Post>
+        <TweetQA key={post.id} collection="questions" tweet={post} />
       ))}
     </InfiniteScroll>
   );
