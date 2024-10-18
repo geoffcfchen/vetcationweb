@@ -17,6 +17,7 @@ import {
   LicensedTechBadges,
   PremiumBadges,
   PremiumTestBadges,
+  TechBadges,
 } from "./Badges";
 
 export default function NameBadge({

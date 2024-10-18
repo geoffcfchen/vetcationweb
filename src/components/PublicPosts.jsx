@@ -34,46 +34,62 @@ const PublicPosts = () => {
 
   const fetchPosts = async () => {
     const postsQuery = query(
-      collection(firestore, "questions"), // Use collection() to specify collection path
-      where("isPublic", "==", true), // Filter where isPublic is true
-      orderBy("createdAt", "desc"), // Order by createdAt in descending order
-      limit(10) // Limit to 10 documents
+      collection(firestore, "questions"),
+      where("isPublic", "==", true),
+      orderBy("createdAt", "desc"),
+      limit(10)
     );
 
     try {
-      const querySnapshot = await getDocs(postsQuery); // Use getDocs() to execute the query
+      const querySnapshot = await getDocs(postsQuery);
       const postsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setPosts(postsData); // Set the posts
-      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]); // Save last visible for pagination
-      setHasMore(querySnapshot.docs.length === 10); // If fewer than 10 items, stop further fetch
+      setPosts(postsData);
+      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+
+      // Log to check if lastVisible is set
+      console.log(
+        "Last visible after initial fetch:",
+        querySnapshot.docs[querySnapshot.docs.length - 1]
+      );
+
+      setHasMore(querySnapshot.docs.length === 10);
     } catch (error) {
       console.error("Error fetching public posts: ", error);
     }
   };
 
   const fetchMorePosts = async () => {
-    if (!lastVisible) return;
+    console.log("Fetching more posts...");
+    if (!lastVisible) {
+      console.log("No more posts to fetch");
+      return;
+    }
+
+    console.log("Fetching posts after lastVisible:", lastVisible);
 
     const postsQuery = query(
-      collection(firestore, "questions"), // Use collection() to specify collection path
-      where("isPublic", "==", true), // Filter where isPublic is true
-      orderBy("createdAt", "desc"), // Order by createdAt in descending order
+      collection(firestore, "questions"),
+      where("isPublic", "==", true),
+      orderBy("createdAt", "desc"),
       startAfter(lastVisible), // Start after the last visible document
-      limit(10) // Limit to 10 documents
+      limit(10)
     );
 
     try {
-      const querySnapshot = await getDocs(postsQuery); // Use getDocs() to execute the query
+      const querySnapshot = await getDocs(postsQuery);
+
+      console.log("Number of new posts fetched:", querySnapshot.docs.length);
+
       const newPosts = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setPosts((prevPosts) => [...prevPosts, ...newPosts]); // Append new posts
+      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
       setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]); // Update last visible
       setHasMore(querySnapshot.docs.length === 10); // Check if there are more posts to fetch
     } catch (error) {
@@ -81,18 +97,27 @@ const PublicPosts = () => {
     }
   };
 
+  console.log("hasMore", hasMore);
+
   return (
-    <InfiniteScroll
-      dataLength={posts.length} // Length of data currently loaded
-      next={fetchMorePosts} // Function to fetch more data
-      hasMore={hasMore} // If there are more posts to fetch
-      loader={<h4>Loading more posts...</h4>} // Loader to show while fetching more posts
-      endMessage={<p>No more posts to display</p>} // Message to show when no more posts
+    // Add a scrollable div with a unique ID
+    <div
+      id="scrollableDiv"
+      style={{ height: "100vh", overflow: "auto", padding: "0 16px" }}
     >
-      {posts.map((post) => (
-        <TweetQA key={post.id} collection="questions" tweet={post} />
-      ))}
-    </InfiniteScroll>
+      <InfiniteScroll
+        dataLength={posts.length} // Length of data currently loaded
+        next={fetchMorePosts} // Function to fetch more data
+        hasMore={hasMore} // If there are more posts to fetch
+        scrollableTarget="scrollableDiv" // Set the scrollable target
+        loader={<h4>Loading more posts...</h4>} // Loader to show while fetching more posts
+        endMessage={<p>No more posts to display</p>} // Message to show when no more posts
+      >
+        {posts.map((post) => (
+          <TweetQA key={post.id} collection="questions" tweet={post} />
+        ))}
+      </InfiniteScroll>
+    </div>
   );
 };
 
