@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // import Header from "./components/Header";
 // import HeroSection from "./components/HeroSection";
@@ -19,28 +19,14 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      {/* <Header /> */}
-      {/* <HeroSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <GetStartedCallout />
-      <StayConnected /> */}
       <Routes>
         <Route path="/" element={<RegisterPage />} />
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
-        {/* <Route path="/vets" element={<ForVetPage />} />
-        <Route path="/clients" element={<HomePage />} />
-        <Route path="/clinics" element={<ForClinicPage />} /> */}
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
         <Route path="/redirect" element={<RedirectPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/SMSTerms" element={<SMSTermsPage />} />
       </Routes>
-      {/* <GetStartedCallout /> */}
-      {/* <StayConnected /> */}
-
-      {/* More Features as needed */}
     </>
   );
 }

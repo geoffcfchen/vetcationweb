@@ -7,6 +7,7 @@ import AppText from "./AppText";
 import MainContainerTopComment from "./MainContainerTopComment";
 import NameBadge from "./NameBadge";
 import useGetSingleUser from "../hooks/useGetSingleUser";
+import FooterQA from "./FooterQA";
 
 const Container = styled.div`
   flex: 1;
@@ -98,6 +99,9 @@ const MainContainerQA = ({ tweet, collection }) => {
 
       {/* MediaDisplay component to display images or videos */}
       {tweet.mediaUrls && <MediaDisplay mediaUrls={tweet.mediaUrls} />}
+      {collection == "questions" && (
+        <FooterQA tweet={tweet} collection={collection} />
+      )}
       {/* Render top comment */}
       {tweet.topComment && (
         <div style={{ marginTop: "10px" }}>
