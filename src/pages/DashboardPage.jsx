@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"; // Firebase signOut function
 import { auth } from "../firebase"; // Firebase auth instance
 import PublicPosts from "../components/PublicPosts";
+import FeedDetailScreen from "../screens/FeedDetailScreen";
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -77,6 +78,8 @@ const Button = styled.button`
 const DashboardPage = () => {
   const navigate = useNavigate();
   const [selectedMenu, setSelectedMenu] = useState("Home"); // State to track the selected menu
+  const [activeScreen, setActiveScreen] = useState("Home"); // New state to manage active screen
+  const [selectedTweet, setSelectedTweet] = useState(null); // State to hold the selected tweet
 
   const handleLogout = async () => {
     try {
@@ -87,10 +90,17 @@ const DashboardPage = () => {
     }
   };
 
+  console.log("activeScreen", activeScreen);
+
   const renderFeedContent = () => {
     switch (selectedMenu) {
       case "Home":
-        return <PublicPosts />; // Show public posts in Home feed
+        return (
+          <PublicPosts
+            setActiveScreen={setActiveScreen}
+            setSelectedTweet={setSelectedTweet}
+          />
+        ); // Show public posts in Home feed
       case "Profile":
         return (
           <>
@@ -135,7 +145,16 @@ const DashboardPage = () => {
       </MenuContainer>
 
       {/* Middle - Feed (Dynamic based on selected menu) */}
-      <FeedContainer>{renderFeedContent()}</FeedContainer>
+      <FeedContainer>
+        {activeScreen === "Home" && renderFeedContent()}
+        {activeScreen === "FeedDetail" && (
+          <FeedDetailScreen
+            tweet={selectedTweet}
+            collection="questions"
+            setActiveScreen={setActiveScreen}
+          />
+        )}
+      </FeedContainer>
 
       {/* Right Side - Search */}
       <SearchContainer>

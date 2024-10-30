@@ -22,7 +22,7 @@ const Post = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 `;
 
-const PublicPosts = () => {
+const PublicPosts = ({ setActiveScreen, setSelectedTweet }) => {
   const [posts, setPosts] = useState([]);
   const [lastVisible, setLastVisible] = useState(null); // For pagination
   const [hasMore, setHasMore] = useState(true); // Track if more data is available
@@ -97,8 +97,6 @@ const PublicPosts = () => {
     }
   };
 
-  console.log("hasMore", hasMore);
-
   return (
     // Add a scrollable div with a unique ID
     <div
@@ -114,7 +112,13 @@ const PublicPosts = () => {
         endMessage={<p>No more posts to display</p>} // Message to show when no more posts
       >
         {posts.map((post) => (
-          <TweetQA key={post.id} collection="questions" tweet={post} />
+          <TweetQA
+            key={post.id}
+            collection="questions"
+            tweet={post}
+            setActiveScreen={setActiveScreen}
+            setSelectedTweet={setSelectedTweet}
+          />
         ))}
       </InfiniteScroll>
     </div>

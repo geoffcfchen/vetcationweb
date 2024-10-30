@@ -13,12 +13,14 @@ const Container = styled.div`
   cursor: pointer; // Add cursor style to indicate it's clickable
 `;
 
-const TweetQA = ({ tweet, collection }) => {
+const TweetQA = ({ tweet, collection, setActiveScreen, setSelectedTweet }) => {
   const navigate = useNavigate();
 
   // Handle click to navigate to detailed view
   const handleClick = () => {
-    navigate("/feed-detail", { state: { tweet, collection } });
+    // navigate("/feed-detail", { state: { tweet, collection } });
+    setSelectedTweet(tweet); // Set the selected tweet
+    setActiveScreen("FeedDetail"); // Switch to the FeedDetail screen
   };
 
   return (
