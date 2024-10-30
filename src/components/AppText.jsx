@@ -6,6 +6,7 @@ const Text = styled.p`
   font-size: ${({ fontSize }) => fontSize || "16px"};
   color: ${({ color }) => color || "black"};
   margin: 0;
+  white-space: pre-wrap; /* Preserve spaces and line breaks */
 `;
 
 const LinkText = styled.a`

@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { AiOutlineArrowLeft } from "react-icons/ai"; // Importing the left arrow icon
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import FeedDetails from "../components/FeedDetails";
+
+const ScrollContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Ensure the container takes the full viewport height */
+  overflow-y: auto;
+`;
 
 const BackButtonContainer = styled.div`
   position: sticky;
@@ -33,7 +40,7 @@ export default function FeedDetailScreen({
   };
 
   return (
-    <div style={{ position: "relative", width: "100%", overflowY: "auto" }}>
+    <ScrollContainer>
       <BackButtonContainer>
         <BackButton onClick={handleBackClick}>
           <AiOutlineArrowLeft style={{ marginRight: "8px" }} /> Back
@@ -44,6 +51,6 @@ export default function FeedDetailScreen({
         collection={collection}
         setActiveScreen={setActiveScreen}
       />
-    </div>
+    </ScrollContainer>
   );
 }

@@ -1,7 +1,7 @@
 // src/components/FeedDetails.jsx
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-// import Comment from "./Tweet/Comment";
+import Comment from "./Tweet/Comment";
 import LeftContainerCommentHeader from "./Tweet/LeftContainerCommentHeader";
 import MainContainerCommentHeader from "./Tweet/MainContainer/MainContainerCommentHeader";
 import {
@@ -71,9 +71,9 @@ function FeedDetails({ tweet, collection: collectionName }) {
   const role = checkRole();
   const { userData } = useContext(GlobalContext);
 
-  console.log("tweet", tweet);
+  // console.log("tweet", tweet);
 
-  console.log("userData", userData);
+  // console.log("userData", userData);
 
   const [stats, setStats] = useState({
     numberOfUpvotes: tweet?.numberOfUpvotes,
@@ -156,6 +156,8 @@ function FeedDetails({ tweet, collection: collectionName }) {
     );
   };
 
+  // console.log("parsedComments", parsedComments);
+
   return (
     <div style={{ width: "100%", flex: 1 }}>
       <HeaderContainer>
@@ -167,14 +169,14 @@ function FeedDetails({ tweet, collection: collectionName }) {
         />
       </HeaderContainer>
       <div>
-        {/* {parsedComments.map((comment) => (
+        {parsedComments.map((comment) => (
           <Comment
             key={comment.id}
             comment={comment}
             commentCollectionName={commentCollectionName}
             onRemoveBlockedPost={removeBlockedPost}
           />
-        ))} */}
+        ))}
       </div>
       {(role === "Doctor" ||
         role === "LicensedTech" ||

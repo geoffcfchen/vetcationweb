@@ -6,6 +6,7 @@ import LeftContainer from "./LeftContainer";
 // import FooterQA from "./FooterQA"; // Assuming FooterQA is another component you’ve converted
 import AppText from "./AppText";
 import NameBadge from "./NameBadge";
+import FooterQA from "./FooterQA";
 
 const Container = styled.div`
   padding: 10px;
@@ -83,7 +84,7 @@ const MainContainerTopComment = ({
         )}
       </div>
 
-      {/* <FooterQA tweet={topComment} collection="questionComments" comment /> */}
+      <FooterQA tweet={topComment} collection="questionComments" comment />
     </Container>
   );
 };

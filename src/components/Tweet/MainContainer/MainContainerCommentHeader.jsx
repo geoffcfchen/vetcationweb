@@ -16,7 +16,9 @@ function MainContainerCommentHeader({
       {tweet.content && collection === "questions" && (
         <AppText className="content">{tweet.content}</AppText>
       )}
-      {/* <MediaDisplay mediaUrls={tweet.mediaUrls} onImageClick={onImagePress} /> */}
+      {tweet.mediaUrls && (
+        <MediaDisplay mediaUrls={tweet.mediaUrls} onImageClick={onImagePress} />
+      )}
       {tweet.content && collection === "posts" && (
         <AppText className="content">{tweet.content}</AppText>
       )}

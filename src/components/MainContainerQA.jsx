@@ -21,6 +21,7 @@ const TweetHeaderContainer = styled.div`
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 const TweetHeaderNames = styled.div`
@@ -95,7 +96,7 @@ const MainContainerQA = ({ tweet, collection }) => {
       </TweetHeaderContainer>
 
       {/* Render tweet content */}
-      {tweet.content && <Content>{tweet.content}</Content>}
+      {tweet.content && <AppText>{tweet.content}</AppText>}
 
       {/* MediaDisplay component to display images or videos */}
       {tweet.mediaUrls && <MediaDisplay mediaUrls={tweet.mediaUrls} />}
