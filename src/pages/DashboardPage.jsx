@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth"; // Firebase signOut function
 import { auth } from "../firebase"; // Firebase auth instance
 import PublicPosts from "../components/PublicPosts";
 import FeedDetailScreen from "../screens/FeedDetailScreen";
+import SearchContainer from "../components/SearchContainer";
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -26,11 +27,6 @@ const FeedContainer = styled.div`
   padding: 1rem;
   border-right: 1px solid #ccc;
   overflow-y: auto;
-`;
-
-const SearchContainer = styled.div`
-  background-color: #f7f9fa;
-  padding: 1rem;
 `;
 
 const MenuItem = styled.div`
@@ -157,10 +153,7 @@ const DashboardPage = () => {
       </FeedContainer>
 
       {/* Right Side - Search */}
-      <SearchContainer>
-        <h3>Search</h3>
-        <SearchInput type="text" placeholder="Search here..." />
-      </SearchContainer>
+      <SearchContainer />
     </DashboardContainer>
   );
 };

@@ -25,7 +25,7 @@ function App() {
   const { setUserData } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  // // Handle authentication state
+  // Handle authentication state
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
   //     setIsUserLoading(true);
