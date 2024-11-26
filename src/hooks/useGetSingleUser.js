@@ -1,7 +1,6 @@
 // src/hooks/useGetSingleUser.js
 import { useState, useEffect, useRef, useCallback } from "react";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
-import { firestore } from "../firebase"; // Ensure you import the Firestore instance from your Firebase config
 
 /**
  * Hook to listen to a single user document updates.

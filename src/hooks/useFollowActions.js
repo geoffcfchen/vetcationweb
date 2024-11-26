@@ -16,18 +16,29 @@ const firestore = getFirestore();
 const useFollowActions = (userData, userBDataUID) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const userFollowingRef = doc(firestore, "following", userData.uid);
+  const userFollowingRef = userData
+    ? doc(firestore, "following", userData.uid)
+    : null;
   const userBFollowersRef = doc(firestore, "followers", userBDataUID);
-  const userBThatUserFollowingRef = doc(
-    collection(firestore, "following", userData.uid, "userFollowing"),
-    userBDataUID
-  );
-  const FollowersOfUserBRef = doc(
-    collection(firestore, "followers", userBDataUID, "userFollower"),
-    userData.uid
-  );
+  const userBThatUserFollowingRef = userData
+    ? doc(
+        collection(firestore, "following", userData.uid, "userFollowing"),
+        userBDataUID
+      )
+    : null;
+  const FollowersOfUserBRef = userData
+    ? doc(
+        collection(firestore, "followers", userBDataUID, "userFollower"),
+        userData.uid
+      )
+    : null;
 
   async function onFollow() {
+    if (!userData) {
+      console.warn("User data is missing; cannot perform follow action.");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const batch = writeBatch(firestore);
@@ -57,14 +68,16 @@ const useFollowActions = (userData, userBDataUID) => {
       const userBRef = doc(firestore, "notifications", userBDataUID);
       batch.set(userBRef, { unread: increment(1) }, { merge: true });
 
-      batch.set(userBThatUserFollowingRef, {
-        timestamp: serverTimestamp(),
-        notificationId,
-      });
-      batch.set(FollowersOfUserBRef, {
-        timestamp: serverTimestamp(),
-        notificationId,
-      });
+      if (userBThatUserFollowingRef && FollowersOfUserBRef) {
+        batch.set(userBThatUserFollowingRef, {
+          timestamp: serverTimestamp(),
+          notificationId,
+        });
+        batch.set(FollowersOfUserBRef, {
+          timestamp: serverTimestamp(),
+          notificationId,
+        });
+      }
 
       await batch.commit();
     } catch (error) {
@@ -75,6 +88,11 @@ const useFollowActions = (userData, userBDataUID) => {
   }
 
   async function onUnFollow() {
+    if (!userData) {
+      console.warn("User data is missing; cannot perform unfollow action.");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const batch = writeBatch(firestore);
@@ -95,8 +113,10 @@ const useFollowActions = (userData, userBDataUID) => {
         batch.delete(userBNotificationRef);
       }
 
-      batch.delete(userBThatUserFollowingRef);
-      batch.delete(FollowersOfUserBRef);
+      if (userBThatUserFollowingRef && FollowersOfUserBRef) {
+        batch.delete(userBThatUserFollowingRef);
+        batch.delete(FollowersOfUserBRef);
+      }
 
       await batch.commit();
     } catch (error) {

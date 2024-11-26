@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
-import TweetQA from "./TweetQA";
+import TweetQA from "./Tweet/TweetQA";
 
 const Post = styled.div`
   padding: 15px;
@@ -96,6 +96,8 @@ const PublicPosts = ({ setActiveScreen, setSelectedTweet }) => {
       console.error("Error fetching more public posts: ", error);
     }
   };
+
+  console.log("");
 
   return (
     // Add a scrollable div with a unique ID

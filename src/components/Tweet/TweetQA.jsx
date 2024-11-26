@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import styled from "styled-components";
-import MainContainerQA from "./MainContainerQA"; // Import MainContainerQA
+import MainContainerQA from "./MainContainer/MainContainerQA"; // Import MainContainerQA
 
 const Container = styled.div`
   width: 100%;

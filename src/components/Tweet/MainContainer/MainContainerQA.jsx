@@ -1,13 +1,13 @@
 import React from "react";
-import LeftContainer from "./LeftContainer"; // Import the LeftContainer component
-import MediaDisplay from "./MediaDisplay";
+import LeftContainer from "../../LeftContainer"; // Import the LeftContainer component
+import MediaDisplay from "../../MediaDisplay";
 import styled from "styled-components";
 import moment from "moment";
-import AppText from "./AppText";
+import AppText from "../../AppText";
 import MainContainerTopComment from "./MainContainerTopComment";
-import NameBadge from "./NameBadge";
-import useGetSingleUser from "../hooks/useGetSingleUser";
-import FooterQA from "./FooterQA";
+import NameBadge from "../../NameBadge";
+import useGetSingleUser from "../../../hooks/useGetSingleUser";
+import FooterQA from "../../FooterQA";
 
 const Container = styled.div`
   flex: 1;

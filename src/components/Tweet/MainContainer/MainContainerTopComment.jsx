@@ -2,11 +2,11 @@
 import React from "react";
 import styled from "styled-components";
 import moment from "moment";
-import LeftContainer from "./LeftContainer";
+import LeftContainer from "../../LeftContainer";
 // import FooterQA from "./FooterQA"; // Assuming FooterQA is another component you’ve converted
-import AppText from "./AppText";
-import NameBadge from "./NameBadge";
-import FooterQA from "./FooterQA";
+import AppText from "../../AppText";
+import NameBadge from "../../NameBadge";
+import FooterQA from "../../FooterQA";
 
 const Container = styled.div`
   padding: 10px;

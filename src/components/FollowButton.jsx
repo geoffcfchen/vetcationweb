@@ -16,17 +16,24 @@ function FollowButton({
 }) {
   const [following, setFollowing] = useState(false);
   const { userData } = useContext(GlobalContext);
+
+  // Add a check to avoid running if userData is null
   const { onFollow, onUnFollow, isLoading } = useFollowActions(
     userData,
     userBData.uid
   );
 
-  const allUsersThatUserFollowingRef = collection(
-    doc(firestore, "following", userData.uid),
-    "userFollowing"
-  );
-
   useEffect(() => {
+    if (!userData) {
+      console.warn("User data is missing; cannot fetch following list.");
+      return;
+    }
+
+    const allUsersThatUserFollowingRef = collection(
+      doc(firestore, "following", userData.uid),
+      "userFollowing"
+    );
+
     const unsubscribe = onSnapshot(
       allUsersThatUserFollowingRef,
       (querySnapshot) => {
@@ -41,23 +48,23 @@ function FollowButton({
     );
 
     return () => unsubscribe();
-  }, [allUsersThatUserFollowingRef, userBData.uid]);
+  }, [userData, userBData.uid]);
 
-  if (userBData.uid !== userData.uid) {
-    return (
-      <Container>
-        <StyledButton
-          variant={following ? "outline-dark" : "dark"}
-          onClick={following ? onUnFollow : onFollow}
-          disabled={isLoading}
-        >
-          {following ? Following : Follow}
-        </StyledButton>
-      </Container>
-    );
-  } else {
+  if (!userData || userBData.uid === userData.uid) {
     return null;
   }
+
+  return (
+    <Container>
+      <StyledButton
+        variant={following ? "outline-dark" : "dark"}
+        onClick={following ? onUnFollow : onFollow}
+        disabled={isLoading}
+      >
+        {following ? Following : Follow}
+      </StyledButton>
+    </Container>
+  );
 }
 
 export default FollowButton;

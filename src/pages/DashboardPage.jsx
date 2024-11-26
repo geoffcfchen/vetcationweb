@@ -1,5 +1,5 @@
 // src/pages/DashboardPage.jsx
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"; // Firebase signOut function
@@ -7,6 +7,8 @@ import { auth } from "../firebase"; // Firebase auth instance
 import PublicPosts from "../components/PublicPosts";
 import FeedDetailScreen from "../screens/FeedDetailScreen";
 import SearchContainer from "../components/SearchContainer";
+import ProfileInfoListScreen from "../screens/ProfileInfoListScreen";
+import GlobalContext from "../context/GlobalContext";
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -76,6 +78,7 @@ const DashboardPage = () => {
   const [selectedMenu, setSelectedMenu] = useState("Home"); // State to track the selected menu
   const [activeScreen, setActiveScreen] = useState("Home"); // New state to manage active screen
   const [selectedTweet, setSelectedTweet] = useState(null); // State to hold the selected tweet
+  const { userData } = useContext(GlobalContext);
 
   const handleLogout = async () => {
     try {
@@ -99,13 +102,9 @@ const DashboardPage = () => {
         ); // Show public posts in Home feed
       case "Profile":
         return (
-          <>
-            <Post>
-              <h3>@user1</h3>
-              <p>This is your profile info. You can see your posts here.</p>
-            </Post>
-          </>
+          <ProfileInfoListScreen userId={userData.uid}></ProfileInfoListScreen>
         );
+      // return <></>;
       case "Notifications":
         return (
           <>
