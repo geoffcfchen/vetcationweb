@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RegisterSection from "../components/RegisterSection";
+import Footer from "../components/Footer";
 
 const PageContainer = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ function RegisterPage() {
   return (
     <>
       <RegisterSection />
+      <Footer />
     </>
   );
 }
