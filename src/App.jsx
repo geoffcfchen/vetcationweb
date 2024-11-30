@@ -93,6 +93,7 @@ function App() {
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect" element={<RedirectPage />} />
+        <Route path="/app" element={<RedirectPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/SMSTerms" element={<SMSTermsPage />} />
       </Routes>
