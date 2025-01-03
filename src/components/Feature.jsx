@@ -6,6 +6,25 @@ import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa"; // Importing from Font Awesome
 import iPhoneFrame from "../images/iphone-frame_15pro.png"; // Make sure to have the correct path to your iPhone frame image
 
+const ContributionNote = styled.div`
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+
+  a {
+    color: #316ff6;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
 const QRCodeImage = styled.img`
   margin-top: 10px;
   width: 430px;
@@ -122,6 +141,16 @@ const StyledVideo = styled(motion.video)`
   width: 100%; // Increased to make the video larger
 `;
 
+// NEW: Image that occupies the same position as the video
+const FramedImage = styled(motion.img)`
+  position: absolute;
+  top: 1.5%; // Move down from the top
+  left: 1.5%; // Move in from the left
+  width: 97%; // Now only occupy 90% of the frame’s width
+  height: 97%;
+  object-fit: contain; // or "contain", depending on your preference
+`;
+
 // Animation variants
 const contentVariants = {
   hidden: { x: -100, opacity: 0 },
@@ -146,6 +175,7 @@ export default function Feature({
   qrCodeLink, // New prop for the QR code link
   image,
   videoSrc,
+  imageSrc, // NEW: a prop for the framed image
 }) {
   const [hover, setHover] = useState(false);
 
@@ -208,6 +238,11 @@ export default function Feature({
         </a>
         {qrCodeLink && <QRCodeImage src={qrCodeLink} alt="QR Code" />}
       </FeatureContent>
+      {/**
+       * 1) If "videoSrc" is provided, show the video in the iPhone frame
+       * 2) Else if "imageSrc" is provided, show the "FramedImage" in the iPhone frame
+       * 3) Otherwise, just fall back to the standard FeatureImage <picture>
+       */}
       {videoSrc ? (
         <VideoFrameContainer>
           <StyledVideo
@@ -218,8 +253,12 @@ export default function Feature({
             loop
             muted
             playsInline
-            as={motion.video}
           />
+          <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
+        </VideoFrameContainer>
+      ) : imageSrc ? (
+        <VideoFrameContainer>
+          <FramedImage variants={imageVariants} src={imageSrc} alt={heading} />
           <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
         </VideoFrameContainer>
       ) : (
@@ -228,10 +267,20 @@ export default function Feature({
             variants={imageVariants}
             src={image.png}
             alt={heading}
-            as={motion.img}
           />
         </picture>
       )}
+
+      {/* <ContributionNote>
+        If you want to contribute to this project, visit:{" "}
+        <a
+          href="https://gofund.me/45d8a14d"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GoFundMe
+        </a>
+      </ContributionNote> */}
     </FeatureBlock>
   );
 }
