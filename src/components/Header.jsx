@@ -129,7 +129,7 @@ function Header() {
         {/* <MenuLink href="#/clients">for Pet Owners</MenuLink> */}
         {/* <MenuLink href="#/vets">for Vets</MenuLink> */}
         {/* <MenuLink href="#/clinics">for Hospitals</MenuLink> */}
-        <MenuLink href="#/telemedicine-info">Telemedicine Info</MenuLink>
+        {/* <MenuLink href="#/telemedicine-info">Telemedicine Info</MenuLink> */}
 
         {/* <MenuLink href="/techs">for Techs</MenuLink> */}
         {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
