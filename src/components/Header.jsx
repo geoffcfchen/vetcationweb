@@ -20,7 +20,7 @@ const HeaderContainer = styled.header`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px; // Space between logo and text
+  gap: 15px; // Space between logo and text
   cursor: pointer; // Makes the cursor look like a pointer when hovering over this container
 
   &:hover {
@@ -29,7 +29,7 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 40px; // Adjust as necessary
+  width: 30px; // Adjust as necessary
 `;
 
 const LogoText = styled.span`
@@ -126,16 +126,18 @@ function Header() {
       </LogoContainer>
 
       <Nav>
-        {/* <MenuLink href="#/clients">for Pet Owners</MenuLink>
-        <MenuLink href="#/vets">for Vets</MenuLink>
-        <MenuLink href="#/clinics">for Hospitals</MenuLink> */}
+        {/* <MenuLink href="#/clients">for Pet Owners</MenuLink> */}
+        {/* <MenuLink href="#/vets">for Vets</MenuLink> */}
+        {/* <MenuLink href="#/clinics">for Hospitals</MenuLink> */}
+        <MenuLink href="#/telemedicine-info">Telemedicine Info</MenuLink>
+
         {/* <MenuLink href="/techs">for Techs</MenuLink> */}
         {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
         {/* <MenuLink href="/students">for Students</MenuLink> */}
         {/* <MenuLink href="/about">About Us</MenuLink> */}
-        <Button variant="primary" onClick={handleJoinClick}>
+        {/* <Button variant="primary" onClick={handleJoinClick}>
           Join Vetcation
-        </Button>
+        </Button> */}
         {/* <Button variant="secondary" onClick={handleLoginClick}>
           Log In
         </Button> */}

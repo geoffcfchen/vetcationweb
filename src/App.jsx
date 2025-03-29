@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
-// import Header from "./components/Header";
+import Header from "./components/Header";
 // import HeroSection from "./components/HeroSection";
 // import FeaturesSection from "./components/FeaturesSection";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -15,6 +15,9 @@ import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
 import Footer from "./components/Footer";
+import ForVetPage from "./pages/ForVetPage";
+import TelemedicineInfo from "./pages/TelemedicineInfo";
+import DocsPageLayoutPage from "./pages/DocsPageLayoutPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -89,7 +92,10 @@ function App() {
     <>
       <GlobalStyle />
       <Routes>
+        {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
+        <Route path="/vets" element={<ForVetPage />} />
+        <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} />
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect" element={<RedirectPage />} />
