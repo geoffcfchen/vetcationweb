@@ -137,52 +137,52 @@ const sideNavData = {
         },
       ],
     },
-    {
-      groupTitle: "USER MANUAL",
-      items: [
-        {
-          id: "scheduling", // parent ID
-          label: "Scheduling", // label shown in sidebar
-          subItems: [
-            {
-              id: "settingUpAvailability",
-              label: "Setting up availability",
-            },
-            {
-              id: "clientBookingFlow",
-              label: "Client booking flow",
-            },
-          ],
-        },
-        {
-          id: "videoCalls",
-          label: "Video Calls",
-          subItems: [
-            {
-              id: "startTelehealthSession",
-              label: "How to start a telehealth session",
-            },
-            {
-              id: "techRequirements",
-              label: "Tech requirements / best practices",
-            },
-          ],
-        },
-        {
-          id: "prescriptions",
-          label: "Prescriptions",
-          // subItems for E-prescribing basics, etc.
-          subItems: [
-            { id: "eprescribing", label: "E-prescribing basics" },
-            {
-              id: "pharmacyIntegrations",
-              label: "Pharmacy integrations / client’s choice",
-            },
-          ],
-        },
-        // ... you can add more
-      ],
-    },
+    // {
+    //   groupTitle: "USER MANUAL",
+    //   items: [
+    //     {
+    //       id: "scheduling", // parent ID
+    //       label: "Scheduling", // label shown in sidebar
+    //       subItems: [
+    //         {
+    //           id: "settingUpAvailability",
+    //           label: "Setting up availability",
+    //         },
+    //         {
+    //           id: "clientBookingFlow",
+    //           label: "Client booking flow",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       id: "videoCalls",
+    //       label: "Video Calls",
+    //       subItems: [
+    //         {
+    //           id: "startTelehealthSession",
+    //           label: "How to start a telehealth session",
+    //         },
+    //         {
+    //           id: "techRequirements",
+    //           label: "Tech requirements / best practices",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       id: "prescriptions",
+    //       label: "Prescriptions",
+    //       // subItems for E-prescribing basics, etc.
+    //       subItems: [
+    //         { id: "eprescribing", label: "E-prescribing basics" },
+    //         {
+    //           id: "pharmacyIntegrations",
+    //           label: "Pharmacy integrations / client’s choice",
+    //         },
+    //       ],
+    //     },
+    //     // ... you can add more
+    //   ],
+    // },
     {
       groupTitle: "Regulatory Compliance",
       items: [
