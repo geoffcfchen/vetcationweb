@@ -38,7 +38,7 @@ function MySidebar({
                 return (
                   <SidebarItemRow
                     key={parentItem.id}
-                    active={isActive}
+                    $active={isActive}
                     onClick={() => handleSelectItem(parentItem.id)}
                   >
                     <span>{parentItem.label}</span>
@@ -50,7 +50,7 @@ function MySidebar({
               return (
                 <div key={parentItem.id}>
                   <SidebarItemRow
-                    active={isActiveParent}
+                    $active={isActiveParent}
                     onClick={() => {
                       // Toggle expand
                       handleExpandCollapse(parentItem.id);
@@ -63,7 +63,7 @@ function MySidebar({
                   >
                     <span>{parentItem.label}</span>
                     {/* Arrow on the right */}
-                    <ArrowIcon isExpanded={isExpanded}>▸</ArrowIcon>
+                    <ArrowIcon $isExpanded={isExpanded}>▸</ArrowIcon>
                   </SidebarItemRow>
 
                   {/* If expanded, show second-level container (second vertical line) */}
@@ -74,7 +74,7 @@ function MySidebar({
                         return (
                           <SidebarItemRow
                             key={child.id}
-                            active={isChildActive}
+                            $active={isChildActive}
                             onClick={() => handleSelectItem(child.id)}
                           >
                             <span>{child.label}</span>

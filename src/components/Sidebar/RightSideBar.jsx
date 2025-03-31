@@ -13,7 +13,7 @@ function RightSidebar({
         {currentContent?.sections.map((sec) => (
           <SidebarItemRow
             key={sec.id}
-            active={activeSection === sec.id}
+            $active={activeSection === sec.id}
             onClick={() => handleRightSidebarClick(sec.id)}
           >
             <span>{sec.title}</span>

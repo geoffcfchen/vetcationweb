@@ -5,6 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import AccordionItem from "../components/accordion/AccordionItem";
 import MySidebar from "../components/Sidebar/MySidebar";
 import RightSideBar from "../components/Sidebar/RightSideBar";
+import iPhoneFrame from "../images/iphone-frame_15pro.png"; // same frame image as in Feature.jsx
+import { motion } from "framer-motion";
 
 // ===================== STYLED COMPONENTS ===================== //
 
@@ -29,8 +31,8 @@ const TopNavBar = styled.nav`
 // Each link in the top nav
 const TopNavLink = styled.span`
   cursor: pointer;
-  color: ${(props) => (props.active ? "#00bcd4" : "#ccc")};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
+  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
 
   &:hover {
     color: #fff;
@@ -137,52 +139,52 @@ const sideNavData = {
         },
       ],
     },
-    // {
-    //   groupTitle: "USER MANUAL",
-    //   items: [
-    //     {
-    //       id: "scheduling", // parent ID
-    //       label: "Scheduling", // label shown in sidebar
-    //       subItems: [
-    //         {
-    //           id: "settingUpAvailability",
-    //           label: "Setting up availability",
-    //         },
-    //         {
-    //           id: "clientBookingFlow",
-    //           label: "Client booking flow",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "videoCalls",
-    //       label: "Video Calls",
-    //       subItems: [
-    //         {
-    //           id: "startTelehealthSession",
-    //           label: "How to start a telehealth session",
-    //         },
-    //         {
-    //           id: "techRequirements",
-    //           label: "Tech requirements / best practices",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "prescriptions",
-    //       label: "Prescriptions",
-    //       // subItems for E-prescribing basics, etc.
-    //       subItems: [
-    //         { id: "eprescribing", label: "E-prescribing basics" },
-    //         {
-    //           id: "pharmacyIntegrations",
-    //           label: "Pharmacy integrations / client’s choice",
-    //         },
-    //       ],
-    //     },
-    //     // ... you can add more
-    //   ],
-    // },
+    {
+      groupTitle: "USER MANUAL",
+      items: [
+        {
+          id: "scheduling", // parent ID
+          label: "Scheduling", // label shown in sidebar
+          subItems: [
+            {
+              id: "settingUpAvailability",
+              label: "Setting up availability",
+            },
+            {
+              id: "clientBookingFlow",
+              label: "Client booking flow",
+            },
+          ],
+        },
+        {
+          id: "videoCalls",
+          label: "Video Calls",
+          subItems: [
+            {
+              id: "startTelehealthSession",
+              label: "How to start a telehealth session",
+            },
+            {
+              id: "techRequirements",
+              label: "Tech requirements / best practices",
+            },
+          ],
+        },
+        {
+          id: "prescriptions",
+          label: "Prescriptions",
+          // subItems for E-prescribing basics, etc.
+          subItems: [
+            { id: "eprescribing", label: "E-prescribing basics" },
+            {
+              id: "pharmacyIntegrations",
+              label: "Pharmacy integrations / client’s choice",
+            },
+          ],
+        },
+        // ... you can add more
+      ],
+    },
     {
       groupTitle: "Regulatory Compliance",
       items: [
@@ -251,6 +253,67 @@ const sideNavData = {
   ],
 };
 
+// Reuse exactly the same styles you used in Feature.jsx:
+const VideoFrameContainer = styled.div`
+  position: relative;
+  width: 300px; /* match your iPhoneFrame's width */
+  height: 600px; /* match your iPhoneFrame's height */
+  margin: 2rem auto; /* center it horizontally, with some spacing */
+`;
+
+const FrameImage = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none; // so the frame doesn't block interactions
+`;
+
+const FramedImage = styled(motion.img)`
+  position: absolute;
+  top: 1.5%; /* Adjust as needed so it fits nicely */
+  left: 1.5%;
+  width: 97%;
+  height: 97%;
+  object-fit: contain;
+`;
+
+// Define the block component
+function FramedImageBlock({ block }) {
+  // block will contain block.heading and block.imageSrc
+  const { heading, imageSrc } = block;
+
+  // optional: define framer variants if you want an animation
+  const imageVariants = {
+    hidden: { scale: 0.5, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { type: "spring", duration: 0.8 },
+    },
+  };
+
+  return (
+    <div style={{ marginTop: "2rem" }}>
+      {heading && (
+        <h3 style={{ marginBottom: "1rem", color: "#fff" }}>{heading}</h3>
+      )}
+      <VideoFrameContainer>
+        <FramedImage
+          variants={imageVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          src={imageSrc}
+          alt={heading}
+        />
+        <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
+      </VideoFrameContainer>
+    </div>
+  );
+}
+
 const QAContentBlock = ({ block }) => {
   return (
     <div style={{ marginBottom: "1.5rem" }}>
@@ -281,15 +344,6 @@ const QAContentBlock = ({ block }) => {
   );
 };
 
-const ParagraphBlock = ({ block }) => {
-  return (
-    <div style={{ marginBottom: "1.5rem", color: "#ccc", lineHeight: "1.6" }}>
-      {block.paragraphs.map((para, index) => (
-        <p key={index}>{para}</p>
-      ))}
-    </div>
-  );
-};
 const BulletListBlock = ({ block }) => {
   return (
     <BulletList>
@@ -1075,13 +1129,29 @@ and explain how Vetcation helps you comply.`,
   },
 
   VirtualClinic: {
-    mainTitle: "Setting Up a Virtual Clinic with Vetcation",
-    mainDescription: `Under California law, a telehealth-only location (like your home office) 
-  is exempt from premises registration if you do not conduct in-person exams, do not store 
-  or dispense medications, and securely maintain medical records. (BPC, § 4853(h).) 
-  Vetcation’s platform is designed to help you create a virtual clinic that meets these 
-  requirements. Below are how to Setting Up your Virtual Clinic with Vetcation.`,
+    mainTitle: "Build Your Virtual Clinic with Vetcation",
+    mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. 
+Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic—complete with secure recordkeeping, 
+automated scheduling, and client management—all while staying fully compliant with AB 1399. Learn the difference between telemedicine 
+and a virtual clinic, and follow simple steps to set up your own clinic from anywhere.`,
     sections: [
+      {
+        id: "diffTelemedVirtualClinic",
+        title: "Telemedicine vs. Virtual Clinic",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "What is the difference between practicing telemedicine and running a virtual clinic?",
+            answer:
+              "Telemedicine typically refers to providing remote consultations on an individual or ad-hoc basis—using tools like video calls or phone consultations. In contrast, a virtual clinic is a fully integrated, branded digital practice. It comes with structured scheduling, automated workflows, ongoing client relationship management, and integrated billing systems. Essentially, while telemedicine is a mode of delivering care, a virtual clinic is a complete business model designed to scale and enhance your remote practice.",
+            example:
+              "For example, if you simply offer remote consults via Zoom, that’s basic telemedicine. However, if you have your own branded platform with personalized scheduling, client records, and automated reminders, you're operating a virtual clinic.",
+            helpText:
+              "By building a virtual clinic with Vetcation, you not only provide remote care but also create a sustainable, scalable practice that maximizes earnings and deepens client relationships.",
+          },
+        ],
+      },
       {
         id: "updateLegalProfile",
         title: "Update Legal Profile",
@@ -1123,9 +1193,16 @@ and explain how Vetcation helps you comply.`,
           },
         ],
       },
+      // NEW FRAMED IMAGE BLOCK:
+      //   {
+      //     type: "framedImage",
+      //     heading: "Sample: Updating Your Legal Profile",
+      //     imageSrc:
+      //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+      //   },
       {
         id: "updatePublicProfile",
-        title: "Update Public Profile",
+        title: "Update Public Profile1",
         blocks: [
           {
             type: "bulletList",
@@ -1501,7 +1578,7 @@ export default function DocsPageLayoutPage() {
         {topNavData.map((navItem) => (
           <TopNavLink
             key={navItem.id}
-            active={activeTopNav === navItem.id}
+            $active={activeTopNav === navItem.id}
             onClick={() => handleTopNavClick(navItem.id)}
           >
             {navItem.label}
@@ -1579,6 +1656,11 @@ export default function DocsPageLayoutPage() {
                             case "trendPoints":
                               return (
                                 <TrendPointsBlock key={index} block={block} />
+                              );
+
+                            case "framedImage":
+                              return (
+                                <FramedImageBlock key={index} block={block} />
                               );
 
                             // Add more block types here as needed

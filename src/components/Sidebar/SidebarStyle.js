@@ -74,7 +74,7 @@ export const SidebarItemRow = styled.div`
   cursor: pointer;
   padding: 6px 0;
   font-size: 0.875rem;
-  color: ${(props) => (props.active ? "#fff" : "#ccc")};
+  color: ${(props) => (props.$active ? "#fff" : "#ccc")};
   transition: color 0.2s ease;
 
   &:hover {
@@ -83,7 +83,7 @@ export const SidebarItemRow = styled.div`
 
   /* Optional: highlight the active item with a small colored bar or bold text */
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       font-weight: 500;
     `}
@@ -93,6 +93,6 @@ export const SidebarItemRow = styled.div`
 export const ArrowIcon = styled.span`
   font-size: 0.95rem;
   margin-left: 8px;
-  transform: rotate(${(props) => (props.isExpanded ? "90deg" : "0deg")});
+  transform: rotate(${(props) => (props.$isExpanded ? "90deg" : "0deg")});
   transition: transform 0.2s ease;
 `;
