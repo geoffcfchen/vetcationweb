@@ -147,12 +147,32 @@ const sideNavData = {
           label: "Scheduling", // label shown in sidebar
           subItems: [
             {
-              id: "settingUpAvailability",
-              label: "Setting up availability",
+              id: "setMinimumNoticeTime",
+              label: "Set Minimum Notice Time",
             },
             {
-              id: "clientBookingFlow",
-              label: "Client booking flow",
+              id: "regularAvailability",
+              label: "Regular availability",
+            },
+            {
+              id: "specificAvailability",
+              label: "Specific Availability",
+            },
+            {
+              id: "pauseAvailability",
+              label: "Pause Availability",
+            },
+            {
+              id: "mySchedule",
+              label: "My Schedule",
+            },
+            {
+              id: "removeNotYetBookedSlots",
+              label: "Remove not yet booked slots",
+            },
+            {
+              id: "cancelBookedAppointment",
+              label: "Cancel booked appointment",
             },
           ],
         },
@@ -167,6 +187,20 @@ const sideNavData = {
             {
               id: "techRequirements",
               label: "Tech requirements / best practices",
+            },
+          ],
+        },
+        {
+          id: "InquiryBasedMessaging",
+          label: "Inquiry-Based Messaging",
+          subItems: [
+            {
+              id: "sendChargeableMessage",
+              label: "Send a chargeable message",
+            },
+            {
+              id: "respondToMessage",
+              label: "Respond to a message",
             },
           ],
         },
@@ -211,6 +245,10 @@ const sideNavData = {
         {
           id: "RecordKeepingDocumentation",
           label: "Record-Keeping & Documentation",
+        },
+        {
+          id: "MiscellaneousClarifications",
+          label: "Miscellaneous Clarifications",
         },
       ],
     },
@@ -270,19 +308,32 @@ const FrameImage = styled.img`
   pointer-events: none; // so the frame doesn't block interactions
 `;
 
-const FramedImage = styled(motion.img)`
+const FramedImage = styled.img`
   position: absolute;
-  top: 1.5%; /* Adjust as needed so it fits nicely */
+  top: 1.5%;
   left: 1.5%;
   width: 97%;
   height: 97%;
   object-fit: contain;
+  border-radius: 30px; /* Adjust this value to match your iPhone frame’s rounded corners */
+`;
+
+const InnerFrame = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px; /* Adjust as needed */
 `;
 
 // Define the block component
 function FramedImageBlock({ block }) {
-  // block will contain block.heading and block.imageSrc
-  const { heading, imageSrc } = block;
+  // block will contain something like:
+  // {
+  //   type: "framedImage",
+  //   heading: "Screenshots",
+  //   imageSrcs: [ ...array of image URLs... ]
+  // }
+  const { heading, imageSrcs = [] } = block;
 
   // optional: define framer variants if you want an animation
   const imageVariants = {
@@ -294,22 +345,39 @@ function FramedImageBlock({ block }) {
     },
   };
 
+  // If you do not want animations at all, either remove `motion` or
+  // just pass a regular <img />. For now, let's keep them in.
   return (
     <div style={{ marginTop: "2rem" }}>
       {heading && (
         <h3 style={{ marginBottom: "1rem", color: "#fff" }}>{heading}</h3>
       )}
-      <VideoFrameContainer>
-        <FramedImage
-          variants={imageVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          src={imageSrc}
-          alt={heading}
-        />
-        <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
-      </VideoFrameContainer>
+
+      {/* Container for multiple frames side-by-side (or wrapping) */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "0rem",
+          justifyContent: "space-evenly",
+        }}
+      >
+        {imageSrcs.map((src, idx) => (
+          <VideoFrameContainer key={idx}>
+            <InnerFrame>
+              <FramedImage
+                variants={imageVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                src={src}
+                alt={`framed-screenshot-${idx}`}
+              />
+            </InnerFrame>
+            <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
+          </VideoFrameContainer>
+        ))}
+      </div>
     </div>
   );
 }
@@ -426,12 +494,15 @@ const TrendPointsBlock = ({ block }) => {
  */
 const contentData = {
   introToVetcation: {
-    mainTitle: "Intro to Vetcation",
-    mainDescription: `Vetcation is a platform that provides real-time telemedicine 
-          capabilities for veterinary professionals and pet owners. Our mission is 
-          to make virtual care accessible, efficient, and compliant with all relevant 
-          regulations. Below is an overview of why Vetcation stands out and the goals 
-          you can achieve by embracing virtual care.`,
+    mainTitle: "Introduction to Vetcation",
+    mainDescription: `
+      Vetcation is an all-in-one telemedicine and virtual clinic platform tailored 
+      for licensed veterinarians in California. Whether you’re looking to bolster 
+      your existing practice with flexible virtual care or launch a fully remote 
+      clinic, Vetcation streamlines everything from scheduling and record-keeping 
+      to legal compliance under AB 1399. Below you'll see how our platform empowers 
+      you to work from anywhere, enhance client relationships, and keep more of 
+      the revenue you earn—all while remaining audit-ready and legally protected.`,
     sections: [
       {
         id: "achieveWithVetcation",
@@ -441,34 +512,33 @@ const contentData = {
             type: "bulletList",
             items: [
               {
-                heading: "Maximize your earning potential:",
+                heading: "Maximize Your Earning Potential:",
                 lines: [
-                  "Keep 70% of your revenue and easily surpass $300,000 in annual income (assuming you want to work around 40 hours per week).",
+                  "Retain up to 70% of the revenue from your virtual services, potentially exceeding $300,000 per year if you choose to work about 40 hours per week.",
                 ],
               },
               {
-                heading: "Your clinic, your clients:",
+                heading: "Build Your Own Virtual Clinic & Client Base:",
                 lines: [
-                  "Grow your virtual practice on your terms by building your own clinic and establishing lasting relationships with your clients.",
+                  "Establish and grow your digital practice on your terms—nurture strong, long-term client relationships, fully under your brand.",
                 ],
               },
               {
-                heading: "Practice from anywhere, anytime:",
+                heading: "Practice from Anywhere, Anytime:",
                 lines: [
-                  "Work when it suits you—whether you’re at home, a hotel, or the beach—while maintaining full control of your schedule.",
+                  "Enjoy the freedom to work wherever you have an internet connection—be it your home office or a beach on the other side of the world—while maintaining total control over your schedule.",
                 ],
               },
               {
-                heading: "Leverage an AI-powered assistant:",
+                heading: "AI-Powered Workflows:",
                 lines: [
-                  "Optimize your workflow and boost productivity with advanced AI tools that streamline documentation and administrative tasks.",
+                  "Streamline administrative tasks and elevate efficiency with robust AI assistance, from automated record creation to simplified client follow-ups.",
                 ],
               },
-
               {
-                heading: "Stay legally protected:",
+                heading: "Stay Legally Protected Under AB 1399:",
                 lines: [
-                  "Vetcation is built with California’s latest veterinary telemedicine laws in mind—automatically guiding you through VCPR, prescription limits, privacy rules, and documentation compliance.",
+                  "Vetcation’s automated workflows help you maintain compliance with California’s evolving telehealth regulations, so you can focus on patient care instead of worrying about the fine print.",
                 ],
               },
             ],
@@ -483,103 +553,502 @@ const contentData = {
             type: "bulletList",
             items: [
               {
-                heading: "Virtual Clinic Control:",
+                heading: "All-Inclusive Virtual Clinic Tools:",
                 lines: [
-                  "Licensed California veterinarians can run a fully virtual clinic with automated VCPR compliance and secure record-keeping. With Vetcation, you have the freedom to design your practice exactly as you envision it.",
+                  "Go beyond simple video calls with scheduling, billing, secure records, pharmacy integrations, and robust telemedicine features to run a complete remote practice.",
                 ],
               },
               {
                 heading: "Decentralized Medical Records:",
                 lines: [
-                  "Securely store and manage your clinic’s medical records—both yours and your clients’—just like a traditional brick-and-mortar clinic, but fully integrated within your virtual practice.",
+                  "Manage your clinic’s patient files in a centralized, encrypted environment. Your records stay compliant, secure, and instantly accessible—mirroring in-person best practices.",
                 ],
               },
               {
-                heading: "Flexible Scheduling Freedoms:",
+                heading: "Flexible Scheduling Made Easy:",
                 lines: [
-                  "Set your own availability, manage appointments, and accommodate emergencies—no restrictions, as long as all legal requirements are met.",
+                  "Set your own hours, enable last-minute booking or preplanned availability, and adjust as needed—so your virtual clinic runs on your schedule, not the other way around.",
                 ],
               },
               {
-                heading: "Inquiry-Based Messaging:",
+                heading: "Messaging & Asynchronous Follow-Ups:",
                 lines: [
-                  "Our chargeable messaging system helps foster ongoing client engagement by enabling continuous follow-up care. This allows you to address non-urgent questions and concerns efficiently, without the need for a full appointment.",
+                  "Chargeable chat or messaging consultations let you handle non-urgent queries and follow-up care on your terms, without requiring full appointments for every question.",
                 ],
               },
               {
                 heading: "Pharmacy Freedom:",
                 lines: [
-                  "Multiple pharmacy integrations give pet owners the option to choose affordable medications rather than being tied to a single provider.",
+                  "Offer prescription pick-up at virtually any pharmacy—including big-box chains, local independents, or mail-order options—giving your clients choice and convenience.",
                 ],
               },
               {
-                heading: "Rock-Solid Compliance:",
+                heading: "Confident Compliance:",
                 lines: [
-                  "A comprehensive legal framework ensures every consult meets California regulations, minimizing liability and offering total audit-readiness.",
+                  "Our platform incorporates AB 1399 rules and BPC guidance at every step, ensuring that forming a VCPR, prescribing meds, and documenting are all done correctly.",
                 ],
               },
               {
-                heading: "AI-Assisted Efficiency:",
+                heading: "AI-Assisted Documentation:",
                 lines: [
-                  "Draft medical notes and streamline appointment summaries with robust AI tools, elevating your practice to the next level of productivity.",
+                  "Accelerate note-taking with auto-generated appointment summaries and medical records based on the live video session—saving time while maintaining accuracy.",
                 ],
               },
               {
-                heading: "Dedicated Technical Team:",
+                heading: "Dedicated Technical & Regulatory Support:",
                 lines: [
-                  "A full support staff helps you achieve your goals and continuously improves the platform to match your evolving needs.",
+                  "Our support team is here to help you optimize your practice and stay updated on any new legal developments affecting veterinary telemedicine.",
                 ],
               },
             ],
           },
         ],
       },
-
       {
         id: "whyVirtualCareTrend",
-        title: "Why Virtual Care is the Trend",
+        title: "Why Virtual Care Is Growing—And Why It Matters",
         blocks: [
           {
             type: "trendPoints",
             introParagraphs: [
-              "The veterinary industry is undergoing a transformative shift driven by significant demand and urgent needs for more accessible veterinary care. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights key insights underscoring why veterinarians should urgently embrace virtual care:",
+              "Veterinary medicine is experiencing a dynamic shift, driven by the rising demand for convenient, accessible care. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights why veterinarians should embrace telehealth sooner than later:",
             ],
             items: [
               {
-                heading: "Urgent Need Due to Veterinary Shortages:",
+                heading: "Critical Shortages in Veterinary Services:",
                 lines: [
-                  `Over 22% (694 of 3,143) of counties in the U.S. currently have zero <span class="highlight">veterinary employees</span>, creating significant care deserts. Approximately 25.2 million companion animals reside in these <span class="highlight">underserved areas</span> (VVCA Report 2024, p. 7).`,
-                  `The nation faces a critical shortage of approximately <span class="highlight">12,000 veterinarians</span> and <span class="highlight">48,000 veterinary support staff</span>, severely impacting service availability (VVCA Report 2024, p. 7).`,
+                  `Over 22% of U.S. counties have <span class="highlight">no veterinary employees</span>, leaving millions of companion animals in <span class="highlight">underserved areas</span> (VVCA Report 2024, p. 7).`,
+                  `The country faces a deficit of <span class="highlight">12,000 veterinarians</span> and <span class="highlight">48,000 support staff</span>, demanding innovative solutions like telemedicine (VVCA Report 2024, p. 7).`,
                 ],
               },
               {
-                heading: "Rapid Growth and Consumer Demand:",
+                heading: "Rapid Consumer Adoption:",
                 lines: [
-                  "Consumer adoption of veterinary telemedicine surged dramatically, driven by pet owners' need for convenient, accessible care. Over 506,000 virtual care interactions globally were analyzed, highlighting telemedicine as a critical access point (VVCA Report 2024, Executive Summary).",
-                  "More than 50% of all virtual care consultations globally were sought by pet owners dealing with symptomatic concerns, indicating high consumer trust and willingness to utilize virtual solutions for immediate pet health needs (VVCA Report 2024, p. 10).",
+                  "Telehealth has become a key access point for pet owners seeking immediate answers—50% of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10).",
+                  "High demand and convenience are fueling telehealth’s growth, with pet owners embracing virtual visits to save travel time and reduce stress on their animals.",
                 ],
               },
               {
-                heading: "Enhances and Complements In-Person Care:",
+                heading: "Synergy with In-Person Care:",
                 lines: [
-                  "Virtual consultations enable veterinarians to efficiently manage symptomatic (50%) and chronic disease (31%) cases remotely, complementing in-person visits by allowing continuous follow-up and monitoring (VVCA Report 2024, p. 9).",
-                  "Approximately 57.7% of guidance-oriented consultations and 58.4% of treatment-oriented consultations effectively managed pet health remotely without immediate in-person intervention (VVCA Report 2024, p. 21).",
+                  "Telemedicine consultations supplement physical visits, allowing continuous follow-up for chronic or non-emergency conditions, while maximizing clinic efficiency.",
+                  "Over half of treatment consultations (58.4%) effectively resolved the issue without an immediate clinic visit, reducing in-person congestion (VVCA Report 2024, p. 21).",
                 ],
               },
               {
-                heading: "Operational Efficiency and Reduced Costs:",
+                heading: "Greater Efficiency & Cost Savings:",
                 lines: [
-                  "Veterinary practices adopting telemedicine reported significant operational efficiencies, including reduced overhead costs, minimized no-show rates, and streamlined scheduling systems, enhancing overall practice profitability (VVCA Report 2024).",
+                  "Practices that adopt telehealth often see reduced no-shows, more organized scheduling, and operational savings, boosting both profit and patient satisfaction (VVCA Report 2024).",
                 ],
               },
               {
-                heading:
-                  "High Client Satisfaction and Long-Term Relationships:",
+                heading: "High Client Satisfaction:",
                 lines: [
-                  "Pet owner satisfaction rates from virtual care consultations were exceptionally high, with an average satisfaction rating of 98.4%, demonstrating robust acceptance and client preference for virtual veterinary interactions (VVCA Report 2024, p. 14).",
-                  "Continuous virtual engagement fosters stronger, lasting relationships between veterinarians and pet owners, ensuring higher retention rates and consistent care quality.",
+                  "Virtual interactions garner an average 98.4% satisfaction rate—pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
                 ],
               },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  VirtualClinic: {
+    mainTitle: "Build Your Virtual Clinic with Vetcation",
+    mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. 
+Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic—complete with secure recordkeeping, 
+automated scheduling, and client management—all while staying fully compliant with AB 1399. Learn the difference between telemedicine 
+and a virtual clinic, the legal Compliance, and follow simple steps to set up your own clinic from anywhere.`,
+    sections: [
+      {
+        id: "diffTelemedVirtualClinic",
+        title: "Telemedicine vs. Virtual Clinic",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "What is the difference between practicing telemedicine and running a virtual clinic?",
+            answer:
+              "Telemedicine typically refers to providing remote consultations on an individual or ad-hoc basis—using tools like video calls or phone consultations. In contrast, a virtual clinic is a fully integrated, branded digital practice. It comes with structured scheduling, automated workflows, ongoing client relationship management, and integrated billing systems. Essentially, while telemedicine is a mode of delivering care, a virtual clinic is a complete business model designed to scale and enhance your remote practice.",
+            example:
+              "For example, if you simply offer remote consults via Zoom, that’s basic telemedicine. However, if you have your own branded platform with personalized scheduling, client records, and automated reminders, you're operating a virtual clinic.",
+            helpText:
+              "By building a virtual clinic with Vetcation, you not only provide remote care but also create a sustainable, scalable practice that maximizes earnings and deepens client relationships.",
+          },
+        ],
+      },
+      {
+        id: "legalCompliance",
+        title: "Legal Compliance",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "Are telehealth-only locations exempt from premises registration in California?",
+            answer:
+              "Under California law, a telehealth-only location (like your home office) is exempt from premises registration if you do not conduct in-person exams, do not store or dispense medications, and securely maintain medical records. (BPC, § 4853(h).) Vetcation’s platform is designed to help you create a virtual clinic that meets these requirements.",
+          },
+        ],
+      },
+
+      {
+        id: "updateLegalProfile",
+        title: "Update Legal Profile",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Legal first and last name",
+                lines: [
+                  "Make sure this matches your California license records.",
+                ],
+              },
+              {
+                heading: "Phone number",
+                lines: [
+                  "Used for secure pharmacy contact and client support if needed.",
+                ],
+              },
+              {
+                heading: "Address",
+                lines: [
+                  "List your legal business address. This can be your home if you do not conduct in-person exams.",
+                ],
+              },
+              {
+                heading: "Licenses",
+                lines: [
+                  "Upload a current California veterinary license. Ensure expiration dates are accurate.",
+                ],
+              },
+              {
+                heading: "Your signature",
+                lines: [
+                  "Provide a digital signature to appear on records and prescriptions, where required.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8359.PNG?alt=media&token=e9c21e33-85ba-4bb6-9ac9-5354259e197b",
+            ],
+          },
+        ],
+      },
+      // NEW FRAMED IMAGE BLOCK:
+
+      {
+        id: "updatePublicProfile",
+        title: "Update Public Profile",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "About me",
+                lines: [
+                  "Write a short, friendly introduction to help pet owners get to know you.",
+                ],
+              },
+              {
+                heading: "Which animals can you treat",
+                lines: [
+                  "Specify if you treat dogs, cats, exotics, livestock, etc.",
+                ],
+              },
+              {
+                heading: "Languages",
+                lines: [
+                  "List any languages you speak to make care accessible to diverse pet owners.",
+                ],
+              },
+              {
+                heading: "Specialized in",
+                lines: [
+                  "Mention any specialties such as dermatology, behavior, nutrition, etc.",
+                ],
+              },
+              {
+                heading: "Interested in",
+                lines: [
+                  "Optional: Share your clinical interests to help match with ideal cases.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8360.PNG?alt=media&token=deec5ee2-d232-488e-a8c1-e8dd9d953677",
+            ],
+          },
+        ],
+      },
+      {
+        id: "setRate",
+        title: "Set Rate",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Choose your consultation rate",
+                lines: [
+                  "Set the price clients will pay for each virtual visit.",
+                ],
+              },
+              {
+                heading: "Stay competitive",
+                lines: [
+                  "Vetcation can provide benchmarks to help you find the sweet spot for pricing.",
+                ],
+              },
+              {
+                heading: "Change anytime",
+                lines: [
+                  "You can update your rate anytime through your dashboard.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8361.PNG?alt=media&token=b40f0ccd-b0f5-4b3f-b7f6-de905f6cd258",
+            ],
+          },
+        ],
+      },
+      {
+        id: "setMinimumNotice",
+        title: "Set Minimum Notice Time",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Define how far in advance clients can book",
+                lines: [
+                  "Choose a minimum notice period to help manage your time effectively—e.g., 1 hour, 24 hours, etc.",
+                ],
+              },
+              {
+                heading: "Balance flexibility and control",
+                lines: [
+                  "Shorter notice = more spontaneous bookings. Longer notice = better planning.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
+            ],
+          },
+        ],
+      },
+      {
+        id: "setAvailability",
+        title: "Regular Availability",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Create a recurring weekly schedule",
+                lines: [
+                  "Block out hours when you are available to accept virtual appointments.",
+                ],
+              },
+              {
+                heading: "Update anytime",
+                lines: [
+                  "Modify your schedule as often as you like—daily, weekly, or seasonally.",
+                ],
+              },
+              {
+                heading: "Time zone aware",
+                lines: [
+                  "Our platform auto-adjusts for time zone differences so clients always see your availability correctly.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  setMinimumNoticeTime: {
+    // mainTitle: "Build Your Virtual Clinic with Vetcation",
+    //     mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice.
+    // Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic—complete with secure recordkeeping,
+    // automated scheduling, and client management—all while staying fully compliant with AB 1399. Learn the difference between telemedicine
+    // and a virtual clinic, the legal Compliance, and follow simple steps to set up your own clinic from anywhere.`,
+    sections: [
+      {
+        id: "setMinimumNotice",
+        title: "Minimum Notice Time",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "What is the minimum booking notice time, and why is it important for telemedicine appointments?",
+            answer:
+              "Minimum booking notice time is the shortest amount of advance notice you require from clients when scheduling telemedicine appointments. For example, you might set a minimum notice of 15 minutes, meaning clients must book at least 15 minutes ahead. Choosing a shorter minimum booking notice can significantly improve your visibility and ranking with potential clients, especially those who need acute care quickly. Many clients seek appointments within a 30-minute window, making your responsiveness and availability critical to attracting new clients. Selecting a minimum booking notice time that suits your schedule ensures you have adequate preparation time, while also optimizing your opportunity to assist clients promptly.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  regularAvailability: {
+    mainTitle: "Regular Availability",
+    mainDescription: `Regular Availability puts you in control of your schedule. You can set the times you’re available for appointments, and the system will automatically generate 30-minute appointment slots for the next 30 days based on your preferences. Once your regular availability is set, the system will continuously maintain this 30-day window by creating new slots each day. Clients can instantly book available times, and any updates you make will immediately reflect in future open slots—no manual adjustments needed.`,
+
+    sections: [
+      {
+        id: "regularAvailabilitySetup",
+        title: "Regular Availability Setup",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I set my Regular Availability?",
+            answer:
+              "From your availability settings, you can customize your weekly schedule—Monday through Sunday. Choose one or more time slots per day and assign different rates as needed. It's flexible, and you're in charge.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8349.PNG?alt=media&token=6d3c449f-d68b-4dfe-b2fa-7dda67b00b63",
+            ],
+          },
+          {
+            type: "qa",
+            question:
+              "Will modifying Regular Availability affect existing appointments?",
+            answer:
+              "No. Any appointments already booked will remain in place, so you don’t have to worry about losing scheduled sessions.",
+          },
+          {
+            type: "qa",
+            question:
+              "What if I want to offer availability only on specific days and times?",
+            answer:
+              "If you prefer a more targeted approach instead of a weekly routine, you can use the Specific Availability tool to open up time slots only when you choose.",
+          },
+          {
+            type: "qa",
+            question:
+              "Will changing Regular Availability affect slots I created with the Specific Availability tool?",
+            answer:
+              "Not at all. The two tools work independently, so changes to your regular schedule won’t interfere with any specific time slots you’ve manually opened.",
+          },
+        ],
+      },
+    ],
+  },
+
+  specificAvailability: {
+    mainTitle: "Specific Availability",
+    mainDescription: `Specific Availability lets you open up time slots for appointments on an as-needed basis. You can create new slots for any day and time, even if it’s outside your regular availability. This tool is perfect for adding extra hours during busy periods, accommodating special requests, or adjusting your schedule for holidays or vacations. Specific Availability slots are visible to clients immediately, so they can book these times without delay.`,
+    sections: [
+      {
+        id: "specificAvailabilitySetup",
+        title: "Specific Availability Setup",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I set my Specific Availability?",
+            answer:
+              "From your availability settings, you can open up time slots for appointments on any day and time. These slots will be visible to clients right away, so they can book these times without delay. The default rate you set will apply to these specific slots.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8352.PNG?alt=media&token=b511733c-6ce5-4cf9-b5e3-a34ff585c6ab",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8353.PNG?alt=media&token=0ce77fe4-5fc6-467a-8edd-8dae91b231d0",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  pauseAvailability: {
+    mainTitle: "Pause Availability",
+    mainDescription: `Pause Availability lets you temporarily hide your profile and stop new appointments from being booked. Whether you need an hour, a day, a week, or time off until a specific date, you can pause your availability quickly from this feature. This is perfect for handling last-minute conflicts, planned time off, or unexpected changes. Pausing only affects new bookings—any appointments already scheduled during the pause period will remain on your calendar and will not be canceled. The system will automatically reopen your schedule when the pause ends.`,
+
+    sections: [
+      {
+        id: "pauseAvailabilitySetup",
+        title: "Pause Availability Setup",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I reactive my availability after pausing it?",
+            answer:
+              "Once you’re ready to start accepting appointments again, you can reactivate your availability with just one click. The system will automatically update your profile and make your time slots visible to clients.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8356.PNG?alt=media&token=30ba526a-d3d5-45d3-9f93-f14a826ca625",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8357.PNG?alt=media&token=798a15a4-e683-416e-bcab-fff7b6edc45f",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  mySchedule: {
+    mainTitle: "My Schedule",
+    mainDescription: `My Schedule is your personal calendar that displays all your upcoming appointments in one place. You can view your schedule by day, week, or month, and easily manage your availability, appointments, and breaks. This feature helps you stay organized, plan your day effectively, and ensure you never miss a virtual consult. My Schedule is synced with your availability settings, so any changes you make will automatically update your calendar.`,
+
+    sections: [
+      {
+        id: "myScheduleOverview",
+        title: "My Schedule Overview",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I reactive my availability after pausing it?",
+            answer:
+              "Once you’re ready to start accepting appointments again, you can reactivate your availability with just one click. The system will automatically update your profile and make your time slots visible to clients.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8356.PNG?alt=media&token=30ba526a-d3d5-45d3-9f93-f14a826ca625",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8357.PNG?alt=media&token=798a15a4-e683-416e-bcab-fff7b6edc45f",
             ],
           },
         ],
@@ -1128,203 +1597,6 @@ and explain how Vetcation helps you comply.`,
     ],
   },
 
-  VirtualClinic: {
-    mainTitle: "Build Your Virtual Clinic with Vetcation",
-    mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. 
-Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic—complete with secure recordkeeping, 
-automated scheduling, and client management—all while staying fully compliant with AB 1399. Learn the difference between telemedicine 
-and a virtual clinic, and follow simple steps to set up your own clinic from anywhere.`,
-    sections: [
-      {
-        id: "diffTelemedVirtualClinic",
-        title: "Telemedicine vs. Virtual Clinic",
-        blocks: [
-          {
-            type: "qa",
-            question:
-              "What is the difference between practicing telemedicine and running a virtual clinic?",
-            answer:
-              "Telemedicine typically refers to providing remote consultations on an individual or ad-hoc basis—using tools like video calls or phone consultations. In contrast, a virtual clinic is a fully integrated, branded digital practice. It comes with structured scheduling, automated workflows, ongoing client relationship management, and integrated billing systems. Essentially, while telemedicine is a mode of delivering care, a virtual clinic is a complete business model designed to scale and enhance your remote practice.",
-            example:
-              "For example, if you simply offer remote consults via Zoom, that’s basic telemedicine. However, if you have your own branded platform with personalized scheduling, client records, and automated reminders, you're operating a virtual clinic.",
-            helpText:
-              "By building a virtual clinic with Vetcation, you not only provide remote care but also create a sustainable, scalable practice that maximizes earnings and deepens client relationships.",
-          },
-        ],
-      },
-      {
-        id: "updateLegalProfile",
-        title: "Update Legal Profile",
-        blocks: [
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "Legal first and last name",
-                lines: [
-                  "Make sure this matches your California license records.",
-                ],
-              },
-              {
-                heading: "Phone number",
-                lines: [
-                  "Used for secure pharmacy contact and client support if needed.",
-                ],
-              },
-              {
-                heading: "Address",
-                lines: [
-                  "List your legal business address. This can be your home if you do not conduct in-person exams.",
-                ],
-              },
-              {
-                heading: "Licenses",
-                lines: [
-                  "Upload a current California veterinary license. Ensure expiration dates are accurate.",
-                ],
-              },
-              {
-                heading: "Your signature",
-                lines: [
-                  "Provide a digital signature to appear on records and prescriptions, where required.",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      // NEW FRAMED IMAGE BLOCK:
-      //   {
-      //     type: "framedImage",
-      //     heading: "Sample: Updating Your Legal Profile",
-      //     imageSrc:
-      //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
-      //   },
-      {
-        id: "updatePublicProfile",
-        title: "Update Public Profile1",
-        blocks: [
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "About me",
-                lines: [
-                  "Write a short, friendly introduction to help pet owners get to know you.",
-                ],
-              },
-              {
-                heading: "Which animals can you treat",
-                lines: [
-                  "Specify if you treat dogs, cats, exotics, livestock, etc.",
-                ],
-              },
-              {
-                heading: "Languages",
-                lines: [
-                  "List any languages you speak to make care accessible to diverse pet owners.",
-                ],
-              },
-              {
-                heading: "Specialized in",
-                lines: [
-                  "Mention any specialties such as dermatology, behavior, nutrition, etc.",
-                ],
-              },
-              {
-                heading: "Interested in",
-                lines: [
-                  "Optional: Share your clinical interests to help match with ideal cases.",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "setRate",
-        title: "Set Rate",
-        blocks: [
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "Choose your consultation rate",
-                lines: [
-                  "Set the price clients will pay for each virtual visit.",
-                ],
-              },
-              {
-                heading: "Stay competitive",
-                lines: [
-                  "Vetcation can provide benchmarks to help you find the sweet spot for pricing.",
-                ],
-              },
-              {
-                heading: "Change anytime",
-                lines: [
-                  "You can update your rate anytime through your dashboard.",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "setMinimumNotice",
-        title: "Set Minimum Notice Time",
-        blocks: [
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "Define how far in advance clients can book",
-                lines: [
-                  "Choose a minimum notice period to help manage your time effectively—e.g., 1 hour, 24 hours, etc.",
-                ],
-              },
-              {
-                heading: "Balance flexibility and control",
-                lines: [
-                  "Shorter notice = more spontaneous bookings. Longer notice = better planning.",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "setAvailability",
-        title: "Regular Availability",
-        blocks: [
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "Create a recurring weekly schedule",
-                lines: [
-                  "Block out hours when you are available to accept virtual appointments.",
-                ],
-              },
-              {
-                heading: "Update anytime",
-                lines: [
-                  "Modify your schedule as often as you like—daily, weekly, or seasonally.",
-                ],
-              },
-              {
-                heading: "Time zone aware",
-                lines: [
-                  "Our platform auto-adjusts for time zone differences so clients always see your availability correctly.",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
   RacehorseCHRBRestrictions: {
     mainTitle: "Racehorse / CHRB Restrictions",
     mainDescription: `California law places special restrictions on prescribing 
@@ -1448,30 +1720,118 @@ and compliant, both for in-person visits and telehealth consultations.`,
       },
     ],
   },
-  roomsParticipantsTracks: {
-    mainTitle: "Rooms, Participants, and Tracks",
+  MiscellaneousClarifications: {
+    mainTitle: "Additional FAQs & Clarifications",
+    mainDescription: `Below are extra questions and answers addressing corner cases and nuanced
+  scenarios that may still be confusing under California’s AB 1399. While not
+  specifically addressed in the earlier sections, these clarifications can help
+  veterinarians navigate unique or evolving circumstances in telehealth practice.`,
     sections: [
       {
-        id: "roomsBasic",
-        title: "Rooms Basic Concept",
-        text: `A room is a virtual space for real-time communication. Participants can join, 
-        leave, and publish media tracks.`,
+        id: "faqMultiStateLicense",
+        title: "Multiple State Licenses & Traveling Patients",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "What if I hold licenses in both California and another state, and my client (with the same pet) travels back and forth between those states? Can I legally provide telemedicine for them in each location?",
+            answer:
+              "You must comply with the telehealth laws of whichever state the animal is physically located in at the time of the consult. If the patient is in California, you can proceed under your California license, following AB 1399. If the patient travels to your other licensed state, you can switch to practicing under that state’s rules, but you cannot rely on your California license alone in a jurisdiction where you aren’t licensed. Always verify you’re operating within the local telehealth statutes to avoid unlicensed practice.",
+            example:
+              "You have licenses in both California and Oregon. When the pet is physically in California, AB 1399 applies. The moment they cross into Oregon, you must follow Oregon’s telemedicine requirements—your California telehealth VCPR doesn’t automatically extend across state lines unless Oregon law allows it.",
+            helpText:
+              "Vetcation’s scheduling prompts can help identify the pet’s current location. If it’s out of California, Vetcation will warn you that California’s AB 1399 rules may not apply. You can then choose to proceed under your Oregon license—assuming you hold one and Oregon’s laws permit telehealth for that scenario.",
+          },
+        ],
       },
-      // ...Add more sub-sections as needed...
-    ],
-  },
-  authentication: {
-    mainTitle: "Authentication",
-    sections: [
       {
-        id: "authOverview",
-        title: "Overview",
-        text: `Authentication ensures only authorized users can join. 
-        LiveKit uses token-based authentication for secure access.`,
+        id: "faqNoSynchronousVideo",
+        title: "Telehealth Without Video (Phone or Text Only)",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "If I only speak with a client on the phone (or by text/email) and never see the animal via video or in person, does that count as telehealth under AB 1399?",
+            answer:
+              "Yes, these communications can still be considered telehealth, but you cannot establish a valid VCPR solely through non-visual means (phone, email, or text). Under AB 1399, the veterinarian must use synchronous audio-video to perform an exam if the VCPR hasn’t already been established in person. Phone calls, emails, or text messages may supplement an existing VCPR, but they cannot replace the initial real-time video or in-person exam requirements. (BPC, § 4826.6, subds. (b)(2), (d).)",
+            example:
+              "A client calls you about their dog’s cough but you’ve never met the animal. Phone guidance alone cannot establish a new VCPR—you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
+            helpText:
+              "Vetcation supports text or chat-based follow-ups for minor adjustments once the VCPR is formed (via in-person or synchronous video). Our interface keeps a clear record of these communications, ensuring continuity of care without violating AB 1399.",
+          },
+        ],
       },
-      // ...Add more sub-sections...
+      {
+        id: "faqInconclusiveExam",
+        title: "When Telehealth Exam Is Inconclusive",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "What if I attempt a telehealth exam via live video but find I cannot accurately diagnose or assess the animal’s condition? Am I required to refer them for an in-person exam?",
+            answer:
+              "Yes. If, at any point, you determine that a telehealth exam (even synchronous audio-video) is insufficient to meet the standard of care, you must advise the client to schedule an in-person visit. Telehealth is only permissible when it allows you to gather enough information to make safe, informed medical decisions. If that isn’t possible, continuing solely via telehealth would be inappropriate—and could subject you to disciplinary action if an error occurs. (BPC, § 4826.6, subd. (c).)",
+            example:
+              "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
+            helpText:
+              "Vetcation’s platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
+          },
+        ],
+      },
+      {
+        id: "faqSecondOpinion",
+        title: "Second Opinions Via Telehealth",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "Can I provide a telehealth-based second opinion if another veterinarian has already established a VCPR with the animal in person?",
+            answer:
+              "Yes, but to prescribe or diagnose independently, you must form your own VCPR under AB 1399. Often, a second opinion is advisory, with the primary veterinarian retaining responsibility for prescriptions. If you plan to take over care or write new prescriptions yourself, you must either perform a synchronous video exam or see the animal in person. Alternatively, you could rely on the existing in-person VCPR if you are part of the same practice and have access to all the relevant medical records. (BPC, § 4826.6, subd. (b); 16 CCR § 2032.1.)",
+            example:
+              "A client wants your telehealth opinion about their dog’s complex heart condition. If they share full medical records from the primary vet (and you do a synchronous video exam), you might decide you can advise on additional treatment. But if you plan to prescribe medication yourself, you must ensure you meet AB 1399’s VCPR requirements.",
+            helpText:
+              "Vetcation makes it easy to upload or request existing records. If the first veterinarian’s records are complete and the video exam is sufficient, you might lawfully proceed with a second-opinion prescription. Otherwise, you can limit your role to offering an opinion that the primary vet implements.",
+          },
+        ],
+      },
+      {
+        id: "faqEuthanasia",
+        title: "Euthanasia Considerations via Telehealth",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "Is it legal to perform euthanasia via telehealth, or to guide a client through euthanasia remotely?",
+            answer:
+              "No. California law requires in-person administration or supervision for euthanasia. Telehealth cannot substitute for the physical presence needed to ensure humane and legally compliant euthanasia. Even if a veterinarian gives verbal instructions, a controlled substance is typically involved, and prescribing or administering it remotely without an in-person exam and direct supervision is prohibited. (BPC, § 4826.6, subds. (i)(6).)",
+            example:
+              "A client in a remote area asks you to guide them through the euthanasia process by video. This is not allowed because it involves controlled substances and direct supervision requirements that can’t be met via telehealth.",
+            helpText:
+              "If a client inquires about end-of-life options through Vetcation, you should advise them that California law mandates an in-person procedure. Provide resources for mobile in-person euthanasia services if travel is an obstacle.",
+          },
+        ],
+      },
+      {
+        id: "faqVetLocationRegistration",
+        title: "Veterinarian Physical Location & Facility Registration",
+        blocks: [
+          {
+            type: "qa",
+            question:
+              "Do I need to register my physical location or maintain a brick-and-mortar facility in California if I’m providing all services through telehealth?",
+            answer:
+              "Under AB 1399, there’s no requirement to maintain a permanent facility in California solely for telehealth practice—provided you hold a valid, active California DVM license. However, you must still adhere to all Veterinary Medical Board regulations for recordkeeping and potential inspections. If you occasionally perform in-person services or store controlled substances in-state, you might need to register a veterinary premise license. Check Board regulations (BPC, §§ 4853–4854) to confirm whether a premise permit is required for your specific practice model.",
+            example:
+              "If you’re a fully remote vet living in Nevada but licensed in California, you can conduct telehealth consults for pets located in California without a California brick-and-mortar. But if you decide to offer limited in-person services in California (vaccination clinics, etc.), you’d likely need a registered premise.",
+            helpText:
+              "Vetcation’s software is designed so you can fully operate virtually without a physical clinic, as long as your license is in good standing and you meet AB 1399’s telehealth requirements. Always check with the Board if you expand into any in-person services that might trigger premise permit obligations.",
+          },
+        ],
+      },
     ],
   },
+
   // Similarly for the other topNav items...
 };
 
@@ -1643,30 +2003,25 @@ export default function DocsPageLayoutPage() {
                     >
                       <h2 style={{ marginTop: "2rem" }}>{sec.title}</h2>
                       {sec.blocks &&
-                        sec.blocks.map((block, index) => {
+                        sec.blocks.map((block, blockIndex) => {
+                          const key = `${sec.id}-block-${blockIndex}`; // stable enough if you won't reorder blocks
                           switch (block.type) {
                             case "bulletList":
                               return (
-                                <BulletListBlock key={index} block={block} />
+                                <BulletListBlock key={key} block={block} />
                               );
                             case "qa":
-                              return (
-                                <QAContentBlock key={index} block={block} />
-                              );
+                              return <QAContentBlock key={key} block={block} />;
                             case "trendPoints":
                               return (
-                                <TrendPointsBlock key={index} block={block} />
+                                <TrendPointsBlock key={key} block={block} />
                               );
-
                             case "framedImage":
                               return (
-                                <FramedImageBlock key={index} block={block} />
+                                <FramedImageBlock key={key} block={block} />
                               );
-
-                            // Add more block types here as needed
                             default:
-                              // fallback to rendering raw content if needed
-                              return <p key={index}>{block.content}</p>;
+                              return <p key={key}>{block.content}</p>;
                           }
                         })}
                     </div>
