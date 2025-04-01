@@ -164,15 +164,7 @@ const sideNavData = {
             },
             {
               id: "mySchedule",
-              label: "My Schedule",
-            },
-            {
-              id: "removeNotYetBookedSlots",
-              label: "Remove not yet booked slots",
-            },
-            {
-              id: "cancelBookedAppointment",
-              label: "Cancel booked appointment",
+              label: "Manage My Schedule",
             },
           ],
         },
@@ -1029,7 +1021,7 @@ and a virtual clinic, the legal Compliance, and follow simple steps to set up yo
   },
 
   mySchedule: {
-    mainTitle: "My Schedule",
+    mainTitle: "Manage My Schedule",
     mainDescription: `My Schedule is your personal calendar that displays all your upcoming appointments in one place. You can view your schedule by day, week, or month, and easily manage your availability, appointments, and breaks. This feature helps you stay organized, plan your day effectively, and ensure you never miss a virtual consult. My Schedule is synced with your availability settings, so any changes you make will automatically update your calendar.`,
 
     sections: [
@@ -1038,17 +1030,69 @@ and a virtual clinic, the legal Compliance, and follow simple steps to set up yo
         title: "My Schedule Overview",
         blocks: [
           {
-            type: "qa",
-            question: "How do I reactive my availability after pausing it?",
-            answer:
-              "Once you’re ready to start accepting appointments again, you can reactivate your availability with just one click. The system will automatically update your profile and make your time slots visible to clients.",
+            type: "bulletList",
+            items: [
+              {
+                heading: "View all appointments at a glance:",
+                lines: ["You can select any date to view the appointments."],
+              },
+              {
+                heading: "booked appointments (grey):",
+                lines: [
+                  "the grey color indicates the appointment is already booked. It shows the patient's name, breed, and the symptoms.",
+                ],
+              },
+              {
+                heading: "Available slots (green):",
+                lines: [
+                  "The green color indicates the available slots for booking.",
+                ],
+              },
+            ],
           },
           {
             type: "framedImage",
             // heading: "Sample: Updating Your Legal Profile",
             imageSrcs: [
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8356.PNG?alt=media&token=30ba526a-d3d5-45d3-9f93-f14a826ca625",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8357.PNG?alt=media&token=798a15a4-e683-416e-bcab-fff7b6edc45f",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8363.PNG?alt=media&token=f9ab1141-b8e7-4050-9ae0-68cc533fb4a5",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8364.PNG?alt=media&token=bda8ae8f-b822-441c-83cd-f1e81063058e",
+            ],
+          },
+          {
+            type: "qa",
+            question: "How do I view my upcoming appointments?",
+            answer:
+              "You can press any of the appointment in the calendar to view the details of the appointment.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Medical History:",
+                lines: ["You can view the medical history of the patient."],
+              },
+              {
+                heading: "Calendar:",
+                lines: ["You can add the appointment to your calendar."],
+              },
+              {
+                heading: "Join Call:",
+                lines: ["You can join the synchronous call with the patient."],
+              },
+              {
+                heading: "Cancel:",
+                lines: [
+                  "You can cancel the appointment. (see detail cancellation explanation in the next section)",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
             ],
           },
         ],
@@ -1755,7 +1799,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
             answer:
               "Yes, these communications can still be considered telehealth, but you cannot establish a valid VCPR solely through non-visual means (phone, email, or text). Under AB 1399, the veterinarian must use synchronous audio-video to perform an exam if the VCPR hasn’t already been established in person. Phone calls, emails, or text messages may supplement an existing VCPR, but they cannot replace the initial real-time video or in-person exam requirements. (BPC, § 4826.6, subds. (b)(2), (d).)",
             example:
-              "A client calls you about their dog’s cough but you’ve never met the animal. Phone guidance alone cannot establish a new VCPR—you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
+              "A client calls you about their dog’s cough but you’ve never met the animal. Messaging guidance alone cannot establish a new VCPR—you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
             helpText:
               "Vetcation supports text or chat-based follow-ups for minor adjustments once the VCPR is formed (via in-person or synchronous video). Our interface keeps a clear record of these communications, ensuring continuity of care without violating AB 1399.",
           },
