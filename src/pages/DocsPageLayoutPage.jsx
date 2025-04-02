@@ -2172,6 +2172,8 @@ export default function DocsPageLayoutPage() {
   // Refs to each section in the middle column for IntersectionObserver
   const sectionRefs = useRef({});
 
+  const closeOffcanvas = () => setShowOffcanvas(false);
+
   useEffect(() => {
     // We only observe the sections if we have them
     const currentSidebarData = sideNavData[activeTopNav] || [];
@@ -2306,6 +2308,7 @@ export default function DocsPageLayoutPage() {
               handleExpandCollapse={handleExpandCollapse}
               activeItem={activeSidebarItem} // or activeItem
               handleSelectItem={handleSelectItem}
+              closeOffcanvas={() => {}} // optional no-op, so no error on desktop
             />
           </Col>
 
@@ -2411,6 +2414,7 @@ export default function DocsPageLayoutPage() {
             handleExpandCollapse={handleExpandCollapse}
             activeItem={activeSidebarItem} // or activeItem
             handleSelectItem={handleSelectItem}
+            closeOffcanvas={() => setShowOffcanvas(false)} // <-- pass this
           />
         </Offcanvas.Body>
       </Offcanvas>

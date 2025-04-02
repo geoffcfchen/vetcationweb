@@ -15,8 +15,18 @@ function MySidebar({
   handleExpandCollapse,
   activeItem,
   handleSelectItem,
+  closeOffcanvas, // <----- ADD THIS
 }) {
   const groups = sideNavData[activeTopNav] || [];
+
+  // Helper function to handle clicks on an item
+  function onItemClick(itemId) {
+    handleSelectItem(itemId);
+    // If closeOffcanvas is passed in, call it (only matters on mobile)
+    if (closeOffcanvas) {
+      closeOffcanvas();
+    }
+  }
 
   return (
     <SidebarContainer>
@@ -39,7 +49,7 @@ function MySidebar({
                   <SidebarItemRow
                     key={parentItem.id}
                     $active={isActive}
-                    onClick={() => handleSelectItem(parentItem.id)}
+                    onClick={() => onItemClick(parentItem.id)} // <------
                   >
                     <span>{parentItem.label}</span>
                   </SidebarItemRow>
@@ -75,7 +85,7 @@ function MySidebar({
                           <SidebarItemRow
                             key={child.id}
                             $active={isChildActive}
-                            onClick={() => handleSelectItem(child.id)}
+                            onClick={() => onItemClick(child.id)} // <------
                           >
                             <span>{child.label}</span>
                           </SidebarItemRow>
