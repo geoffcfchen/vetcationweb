@@ -99,6 +99,11 @@ const BulletList = styled.ul`
   margin: 1rem 0;
   padding-left: 1.5rem;
   color: #ccc;
+
+  .highlight {
+    font-weight: bold;
+    color: #fff;
+  }
 `;
 
 const BulletListItem = styled.li`
@@ -173,12 +178,16 @@ const sideNavData = {
           label: "Video Calls",
           subItems: [
             {
-              id: "startTelehealthSession",
-              label: "How to start a telehealth session",
+              id: "joinVideoCall",
+              label: "Join a video call",
             },
             {
-              id: "techRequirements",
-              label: "Tech requirements / best practices",
+              id: "videoCallFeatures",
+              label: "Call Features & Settings",
+            },
+            {
+              id: "recordingAndConsent",
+              label: "Recording & Consent",
             },
           ],
         },
@@ -242,42 +251,6 @@ const sideNavData = {
           id: "MiscellaneousClarifications",
           label: "Miscellaneous Clarifications",
         },
-      ],
-    },
-  ],
-  aiAgents: [
-    {
-      groupTitle: "AI AGENTS OVERVIEW",
-      items: [
-        { id: "introAiAgents", label: "Intro to AI Agents" },
-        { id: "agentCapabilities", label: "Agent Capabilities" },
-      ],
-    },
-  ],
-  telephony: [
-    {
-      groupTitle: "TELEPHONY BASICS",
-      items: [
-        { id: "telephonyIntro", label: "Introduction to Telephony" },
-        { id: "pstnIntegration", label: "PSTN Integration" },
-      ],
-    },
-  ],
-  recipes: [
-    {
-      groupTitle: "RECIPES DOCS",
-      items: [
-        { id: "commonPatterns", label: "Common Patterns" },
-        { id: "sampleCode", label: "Sample Code" },
-      ],
-    },
-  ],
-  reference: [
-    {
-      groupTitle: "REFERENCE DOCS",
-      items: [
-        { id: "apiReference", label: "API Reference" },
-        { id: "cliReference", label: "CLI Reference" },
       ],
     },
   ],
@@ -410,14 +383,25 @@ const BulletListBlock = ({ block }) => {
       {block.items.map((item, index) => {
         const { heading = "", lines = [] } = item;
 
-        // Combine all lines into one string (if you only want a single line)
-        // If you have exactly one line per item, you can just use lines[0].
-        const combinedLines = lines.join(" ");
-
         return (
-          <BulletListItem key={index} style={{ marginBottom: "0.5rem" }}>
-            <span style={{ fontWeight: "bold", color: "#fff" }}>{heading}</span>{" "}
-            {combinedLines}
+          <BulletListItem key={index}>
+            {heading && (
+              <span style={{ fontWeight: "bold", color: "#fff" }}>
+                {heading}
+              </span>
+            )}
+
+            {lines.length > 0 && (
+              <ul style={{ marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
+                {lines.map((line, lineIdx) => (
+                  <li
+                    key={`line-${lineIdx}`}
+                    dangerouslySetInnerHTML={{ __html: line }}
+                    style={{ marginBottom: "0.25rem" }}
+                  />
+                ))}
+              </ul>
+            )}
           </BulletListItem>
         );
       })}
@@ -1875,7 +1859,287 @@ and compliant, both for in-person visits and telehealth consultations.`,
       },
     ],
   },
+  // 1. joinVideoCall
+  joinVideoCall: {
+    mainTitle: "Join a Video Call",
+    mainDescription: `
+      Vetcation’s video consultation feature enables you to meet clients 
+      face-to-face (virtually) and gather information needed 
+      to diagnose and treat patients. Below, learn how to access 
+      your scheduled calls, test your mic and camera, and begin 
+      your real-time telehealth session.
+    `,
+    sections: [
+      {
+        id: "howToJoinSection",
+        title: "How to Join",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Access Scheduled Appointments",
+                lines: [
+                  "Go to My Schedule for the upcoming appintment. Press it to navigate to the appointment card.",
+                  "Look for a “Join Call” button on the appointment card.",
+                ],
+              },
 
+              {
+                heading: "Stable Internet Connection",
+                lines: [
+                  "A strong connection helps keep video and audio smooth.",
+                  "If using mobile data, find a reliable spot with good reception.",
+                ],
+              },
+              {
+                heading: "Start the Call",
+                lines: [
+                  "Once you’re ready, click Join Call to enter the video call.",
+                  "Remember to enable your camera so the client can see you (and vice versa).",
+                  "Be mindful of background surroundings for privacy and professionalism.",
+                  "Under AB 1399, you must use synchronous audio-video to form a valid VCPR unless you’ve already examined the patient in person.",
+                ],
+              },
+              {
+                heading: "Camera Access Prompt",
+                lines: [
+                  `When you enable your camera, Vetcation may show a prompt such as “Vetcation Would Like to Access the Camera.”`,
+                  "Allowing camera access enables you to share live video with the client",
+                  "If you tap “Don’t Allow,” you’ll be unable to share your video directly from your device and VCPR establishment cannot be completed.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // 2. videoCallFeatures
+  videoCallFeatures: {
+    mainTitle: "Call Features & Settings",
+    mainDescription: `
+      Vetcation’s call interface offers more than a basic camera and microphone. 
+      From reducing background noise to customizing your video background, 
+      these features let you deliver professional, efficient telehealth 
+      consultations wherever you are.
+    `,
+    sections: [
+      {
+        id: "featureOverview",
+        title: "Features Overview",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Camera and Audio Requirements",
+                lines: [
+                  "To form a valid VCPR via telehealth (if you haven’t examined the patient in person), you must appear on video and turn on the microphone.",
+                  "Vetcation prompts you if your camera is off and nudges clients to enable theirs for an in-clinic-like interaction.",
+                ],
+              },
+              {
+                heading: "flip Camera",
+                lines: [
+                  "If you need to show the patient something, tap the camera icon to switch between front and back views.",
+                ],
+              },
+              {
+                heading: "Mute/Unmute",
+                lines: [
+                  "Tap the microphone icon to mute or unmute your audio during the call.",
+                ],
+              },
+
+              {
+                heading: "End Call",
+                lines: [
+                  "When you’re finished, tap the red Leave icon to leave the video call room.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+              // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Access Telemedicine Info",
+                lines: [
+                  "Tap the Vetcation icon during a video call to view important session details in real-time.",
+                  "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
+                  "You’ll also see confirmation of enhanced encryption and the U.S.-based data center powering the call.",
+                  "This feature promotes transparency and trust while also helping you keep accurate documentation during the session.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Access Telemedicine Info",
+                lines: [
+                  "Tap the Vetcation icon during a video call to view important session details in real-time.",
+                  "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
+                  "You’ll also see confirmation of enhanced encryption and the U.S.-based data center powering the call.",
+                  "This feature promotes transparency and trust while also helping you keep accurate documentation during the session.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "UpcomingFeatures",
+        title: "Upcoming Features",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Noise Cancellation (upcoming)",
+                lines: [
+                  "Filters out ambient noise—like clinic chatter or traffic—so you and your client can focus on what matters.",
+                  "Helpful if you’re on the move, in a busy setting, or simply want the clearest audio.",
+                  "Noise Cancellation will automatically be enabled when you join a call.",
+                ],
+              },
+              {
+                heading: "Virtual Backgrounds (upcoming)",
+                lines: [
+                  "Blur your real environment or replace it with a professional/branded image.",
+                  "Use the gear icon → Video tab to choose from a solid color, custom image, or no background.",
+                  "Ideal for protecting personal privacy or appearing more polished.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // 3. recordingAndConsent
+  recordingAndConsent: {
+    mainTitle: "Audio Processing & AI Summaries",
+    mainDescription: `
+      Vetcation uses a secure, audio-only processing system to generate AI-assisted 
+      medical records and summaries for each appointment. Unlike platforms that save 
+      entire video recordings, Vetcation does not store any media files after 
+      processing. This approach safeguards client and veterinarian privacy while 
+      preserving accurate, AI-enhanced documentation.
+    `,
+    sections: [
+      {
+        id: "recordingBasics",
+        title: "Recording Basics & Consent",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "No Media Storage",
+                lines: [
+                  "Vetcation does not retain video or audio once processing is complete.",
+                  "Audio is temporarily captured in real time so our AI can generate summaries, then permanently deleted.",
+                  "This minimizes privacy concerns and long-term data risks.",
+                ],
+              },
+              {
+                heading: "AI-Assisted Medical Records (No Saved Recordings)",
+                lines: [
+                  "Audio from the session is briefly processed to produce a draft medical record for review.",
+                  "After processing, the raw audio is discarded—only the structured text record remains.",
+                ],
+              },
+              {
+                heading: "Client-Facing Summaries",
+                lines: [
+                  "We create a plain-language recap that clients can view in their portal.",
+                  "This summary highlights key discussion points, recommended treatments, and next steps.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "privacySecurity",
+        title: "Privacy & Security",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Data Protection",
+                lines: [
+                  "All live calls are end-to-end encrypted. Only the assigned veterinarian and authorized staff can access session details.",
+                  "If audio is processed by our AI, it’s stored only until the summary is generated, then automatically deleted.",
+                ],
+              },
+              {
+                heading: "Liability Under BPC § 4857",
+                lines: [
+                  "A veterinarian can face civil liability for negligent release of confidential information.",
+                  "Handle any patient data carefully, whether it’s text, images, or ephemeral audio.",
+                ],
+              },
+              {
+                heading: "Deleting Audio Data",
+                lines: [
+                  "Vetcation’s AI system automatically removes audio once processing is complete.",
+                  "No manual deletion is required—ephemeral files never remain in storage.",
+                ],
+              },
+              {
+                heading: "Patient Requests",
+                lines: [
+                  "Clients can request copies of their medical summaries at any time.",
+                  "Per BPC § 4855, you must furnish these upon request, even if the client owes a balance.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
   // Similarly for the other topNav items...
 };
 
@@ -1957,6 +2221,14 @@ export default function DocsPageLayoutPage() {
   function handleSelectItem(itemId) {
     setActiveItem(itemId);
     setActiveSidebarItem(itemId);
+    // Ensure the middle content scrolls back to the top:
+    const contentContainer = document.getElementById("mainContentScrollArea");
+    if (contentContainer) {
+      contentContainer.scrollTo({
+        top: 0,
+        behavior: "smooth", // or 'auto'
+      });
+    }
   }
 
   // Handler for left sidebar click

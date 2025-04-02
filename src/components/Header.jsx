@@ -157,12 +157,14 @@ function Header() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/clients">for Pet Owners</Dropdown.Item>
-            <Dropdown.Item href="#/vets">for Vets</Dropdown.Item>
+            {/* <Dropdown.Item href="#/clients">for Pet Owners</Dropdown.Item> */}
+            {/* <Dropdown.Item href="#/vets">for Vets</Dropdown.Item> */}
             {/* <Dropdown.Item href="#/vets">for Techs</Dropdown.Item> */}
-            <Dropdown.Item href="#/clinics">for Hospitals</Dropdown.Item>
+            {/* <Dropdown.Item href="#/clinics">for Hospitals</Dropdown.Item> */}
             {/* <Dropdown.Item onpres>Join Vetcation</Dropdown.Item> */}
-            {/* <Dropdown.Item href="#/vets">Log in</Dropdown.Item> */}
+            <Dropdown.Item href="#/telemedicine-info">
+              Telemedicine Info
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       )}
