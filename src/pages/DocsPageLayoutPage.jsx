@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button, Offcanvas } from "react-bootstrap";
 import AccordionItem from "../components/accordion/AccordionItem";
 import MySidebar from "../components/Sidebar/MySidebar";
 import RightSideBar from "../components/Sidebar/RightSideBar";
@@ -17,6 +17,11 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   background-color: #111; /* Dark background to match the LiveKit theme */
   color: #fff;
+
+  @media (max-width: 576px) {
+    // On very small screens, remove fixed height
+    min-height: auto;
+  }
 `;
 
 // Top navigation bar (Home, AI Agents, Telephony, etc.)
@@ -45,6 +50,11 @@ const MainContent = styled.div`
   padding: 2rem;
   height: 100%;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    // If desired, reduce padding on small screens
+    padding: 1rem;
+  }
 `;
 
 // Right sidebar
@@ -2146,6 +2156,9 @@ and compliant, both for in-person visits and telehealth consultations.`,
 // ===================== MAIN COMPONENT ===================== //
 
 export default function DocsPageLayoutPage() {
+  // Offcanvas state
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
   // Track which top-level nav is active
   const [activeTopNav, setActiveTopNav] = useState("home");
   // Track which left sidebar item is currently active
@@ -2260,6 +2273,15 @@ export default function DocsPageLayoutPage() {
             {navItem.label}
           </TopNavLink>
         ))}
+
+        {/* Hamburger button: only visible below md */}
+        <Button
+          variant="primary"
+          className="d-md-none ms-auto" // d-md-none = hide at md+, ms-auto = push to right
+          onClick={() => setShowOffcanvas(true)}
+        >
+          ☰ Menu
+        </Button>
       </TopNavBar>
 
       {/* ============== BODY: 3-COLUMN LAYOUT ============== */}
@@ -2270,6 +2292,7 @@ export default function DocsPageLayoutPage() {
             xs={12}
             md={3}
             lg={2}
+            className="d-none d-md-block"
             style={{
               padding: 0,
               height: "calc(100vh - 60px)", // for example, if your top nav is ~60px
@@ -2354,6 +2377,7 @@ export default function DocsPageLayoutPage() {
             xs={12}
             md={3}
             lg={2}
+            className="d-none d-md-block" // hides below md, shows at md+
             style={{
               padding: 0,
               height: "calc(100vh - 60px)",
@@ -2368,6 +2392,28 @@ export default function DocsPageLayoutPage() {
           </Col>
         </Row>
       </Container>
+      {/* ============== OFFCANVAS for the LEFT SIDEBAR (small screens) ============== */}
+      <Offcanvas
+        show={showOffcanvas}
+        onHide={() => setShowOffcanvas(false)}
+        placement="start" // slide from left
+        style={{ backgroundColor: "#111" }} // optional, or override .offcanvas style
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {/* Render the same MySidebar here, so it's available on small screens */}
+          <MySidebar
+            sideNavData={sideNavData}
+            activeTopNav={activeTopNav}
+            expandedItems={expandedItems}
+            handleExpandCollapse={handleExpandCollapse}
+            activeItem={activeSidebarItem} // or activeItem
+            handleSelectItem={handleSelectItem}
+          />
+        </Offcanvas.Body>
+      </Offcanvas>
     </PageWrapper>
   );
 }
