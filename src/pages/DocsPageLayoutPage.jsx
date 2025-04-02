@@ -206,12 +206,32 @@ const sideNavData = {
           label: "Inquiry-Based Messaging",
           subItems: [
             {
-              id: "sendChargeableMessage",
-              label: "Send a chargeable message",
+              id: "InquiryBasedMessagingOverView",
+              label: "Overview",
             },
             {
-              id: "respondToMessage",
-              label: "Respond to a message",
+              id: "VCPRStatus",
+              label: "VCPR Status",
+            },
+            {
+              id: "StartNewCase",
+              label: "Start a New Case",
+            },
+            {
+              id: "RespondToCase",
+              label: "Respond to a Case",
+            },
+            {
+              id: "CloseCase",
+              label: "Close a Case",
+            },
+            {
+              id: "ViewCaseHistory",
+              label: "View Case History",
+            },
+            {
+              id: "MedicalNotes",
+              label: "Medical Notes",
             },
           ],
         },
@@ -1927,7 +1947,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
               // Replace with your actual screenshot URLs
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.29%20PM.png?alt=media&token=bdc2ed3f-ed6d-4022-a51d-67fa7619c24d",
             ],
           },
         ],
@@ -1984,7 +2004,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
             type: "framedImage",
             imageSrcs: [
               // Replace with your actual screenshot URLs
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
               // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
             ],
           },
@@ -1992,7 +2012,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
             type: "bulletList",
             items: [
               {
-                heading: "Access Telemedicine Info",
+                heading: "Access Telemedicine Info (top middle)",
                 lines: [
                   "Tap the Vetcation icon during a video call to view important session details in real-time.",
                   "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
@@ -2007,19 +2027,20 @@ and compliant, both for in-person visits and telehealth consultations.`,
             imageSrcs: [
               // Replace with your actual screenshot URLs
               // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.13.19%20PM.png?alt=media&token=086e22cd-ffcc-4028-a467-5e8b8b777788",
             ],
           },
           {
             type: "bulletList",
             items: [
               {
-                heading: "Access Telemedicine Info",
+                heading:
+                  "Access Inquiry-based messaging tool (bottom right corner)",
                 lines: [
-                  "Tap the Vetcation icon during a video call to view important session details in real-time.",
-                  "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
-                  "You’ll also see confirmation of enhanced encryption and the U.S.-based data center powering the call.",
-                  "This feature promotes transparency and trust while also helping you keep accurate documentation during the session.",
+                  "During a video call, you can use the inquiry-based messaging tool to send text messages to the client.",
+                  "This feature is useful for sharing links, files, or other details that might be hard to convey verbally.",
+                  "The chat is saved in the Inquiry-Based Messaging function, ensuring continuity of care.",
+                  "For more details, see the 'Inquiry-Based Messaging' section.",
                 ],
               },
             ],
@@ -2028,8 +2049,8 @@ and compliant, both for in-person visits and telehealth consultations.`,
             type: "framedImage",
             imageSrcs: [
               // Replace with your actual screenshot URLs
-              // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
             ],
           },
         ],
@@ -2043,7 +2064,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
             type: "bulletList",
             items: [
               {
-                heading: "Noise Cancellation (upcoming)",
+                heading: "Noise Cancellation",
                 lines: [
                   "Filters out ambient noise—like clinic chatter or traffic—so you and your client can focus on what matters.",
                   "Helpful if you’re on the move, in a busy setting, or simply want the clearest audio.",
@@ -2051,7 +2072,7 @@ and compliant, both for in-person visits and telehealth consultations.`,
                 ],
               },
               {
-                heading: "Virtual Backgrounds (upcoming)",
+                heading: "Virtual Backgrounds",
                 lines: [
                   "Blur your real environment or replace it with a professional/branded image.",
                   "Use the gear icon → Video tab to choose from a solid color, custom image, or no background.",
@@ -2144,6 +2165,58 @@ and compliant, both for in-person visits and telehealth consultations.`,
                   "Per BPC § 4855, you must furnish these upon request, even if the client owes a balance.",
                 ],
               },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  InquiryBasedMessagingOverView: {
+    mainTitle: "Inquiry-Based Messaging Overview",
+    mainDescription: `
+    Vetcation’s inquiry-based messaging tool helps you build strong, long-term relationships with your clients. 
+    Each conversation involves one pet owner, one veterinarian, and one patient (pet). If a valid VCPR has been established, either the pet owner or veterinarian can initiate a chat. 
+    When the veterinarian has fully addressed the inquiry, they can press "Close the Case" to end the current conversation. 
+    If the pet owner has additional questions later, they can initiate a new chat. 
+    All chat sessions are organized within one conversation thread, allowing easy access to previous interactions and ensuring continuity of care.
+  `,
+    sections: [
+      {
+        id: "howToUseSection",
+        title: "How to Use Inquiry-Based Messaging",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Access the Chat",
+                lines: [
+                  "During a video call, tap the chat icon in the bottom right corner of the screen.",
+                  "This opens the Inquiry-Based Messaging tool, where you can type and send messages.",
+                ],
+              },
+              {
+                heading: "Send a Message",
+                lines: [
+                  "Type your message in the text field at the bottom of the chat window.",
+                  "Press the send button to share the message with the client.",
+                ],
+              },
+              {
+                heading: "View Previous Messages",
+                lines: [
+                  "The chat history is saved in the Inquiry-Based Messaging tool.",
+                  "You can scroll up to view previous messages or refer back to earlier parts of the conversation.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
             ],
           },
         ],
