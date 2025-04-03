@@ -405,6 +405,24 @@ const contentData = {
           },
         ],
       },
+      {
+        id: "done",
+        title: "Done!",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading:
+                  "You’re all set! You can now start accepting virtual appointments through your clinic.",
+                // lines: [
+                //   "You can now start accepting virtual appointments through your clinic.",
+                // ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 
@@ -1455,7 +1473,7 @@ const contentData = {
               // Replace with your actual screenshot URLs
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.29%20PM.png?alt=media&token=bdc2ed3f-ed6d-4022-a51d-67fa7619c24d",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
             ],
           },
         ],
@@ -1693,34 +1711,27 @@ const contentData = {
     sections: [
       {
         id: "howToInitiateChat",
-        title: "How to initiate a chat event",
+        title: "How to Start a Vetssager Chat",
         blocks: [
           {
             type: "bulletList",
             items: [
               {
-                heading: "Access Inquiry-Based Messager",
+                heading: "Open Vetssager",
                 lines: [
-                  "Navigate to the bottom chat tab.",
-                  `click on the bottom right "+" icon to start a new chat session.`,
+                  "Navigate to the chat tab at the bottom.",
+                  `Click the "+" icon at the bottom right to start a new chat.`,
                 ],
               },
               {
-                heading: "Start a new case (or new chat session)",
+                heading: "Initiate a New Case (Chat Session)",
                 lines: [
-                  "Select the client (if you did not see the client, it means the client has not yet build a VCPR with you)",
-                  "Once you select a client, then select the patient (pet), who has build the VCPR with you.",
-                  "(optionally) you can select a licensed technicina who has partnered with you to join this chat thread.",
-                  "Select topic, title, and enter the messages",
-                  "Click on the send button to send the message",
-                  `if you press "X" button, the input informtion will be saved as a draft.`,
-                ],
-              },
-              {
-                heading: "View Previous Messages",
-                lines: [
-                  "The chat history is saved in the Inquiry-Based Messager.",
-                  "You can scroll up to view previous messages or refer back to earlier parts of the conversation.",
+                  "Select the client (if the client doesn't appear, it means you haven't established a valid VCPR with them yet).",
+                  "After selecting the client, choose the patient (pet) with whom you've established the VCPR.",
+                  "(Optional) Select a licensed technician who partners with you to join this chat session.",
+                  "Enter a topic, title, and your initial message.",
+                  "Press the Send button to submit your message and officially start the case.",
+                  `If you click "X," your current input will be saved as a draft.`,
                 ],
               },
             ],
@@ -1737,6 +1748,309 @@ const contentData = {
       },
     ],
   },
+  VetssagerVCPRStatus: {
+    mainTitle: "Vetssager VCPR Status",
+    mainDescription: `
+      Vetssager helps you deliver continuous care and maintain lasting relationships with your clients. To comply with California law (AB 1399), Vetssager can only be used after establishing a valid VCPR through an in-person visit or synchronous video consultation. Pet owners will be unable to initiate new cases until this requirement is fulfilled.
+    `,
+    sections: [
+      {
+        id: "vcprStatus",
+        title: "Understanding VCPR Status",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Check VCPR Status",
+                lines: [
+                  `If a valid VCPR is established, you'll see "Connected" displayed on the right side of the banner.`,
+                  `If a valid VCPR has not yet been established, you'll see "Connected?" displayed instead.`,
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URL
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8387.PNG?alt=media&token=5a1d8b4c-6f4b-4f4e-8d3c-0a3e8e8f6c0c",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  StartNewCase: {
+    mainTitle: "Start a New Case",
+    mainDescription: `
+      Starting a new case in Vetssager is easy and straightforward. Follow the steps below to initiate a new inquiry-based chat session with your client.
+    `,
+    sections: [
+      {
+        id: "startNewCase",
+        title: "How to Start a New Case",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Open Vetssager",
+                lines: [
+                  `Navigate to the chat tab at the bottom.`,
+                  `Click the "+" icon at the bottom right to start a new chat.`,
+                ],
+              },
+              {
+                heading: "Initiate a New Case (Chat Session)",
+                lines: [
+                  "Select the client (if the client doesn't appear, it means you haven't established a valid VCPR with them yet).",
+                  "After selecting the client, choose the patient (pet) with whom you've established the VCPR.",
+                  "(Optional) Select a licensed technician who partners with you to join this chat session.",
+                  "Enter a topic, title, and your initial message.",
+                  "Press the Send button to submit your message and officially start the case.",
+                  `If you click "X," your current input will be saved as a draft.`,
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8385.PNG?alt=media&token=f9c22fd2-a04a-4d73-bc6e-682c51c59800",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  RespondToCase: {
+    mainTitle: "Responding to a Vetssager Case",
+    mainDescription: `
+      Responding to a case on Vetssager indicates that you've agreed to handle the client's inquiry. Once you join a case, the pet owner is immediately charged the fee you set. Pet owners have the option to withdraw their inquiry before you join, in which case they won't be charged.
+    `,
+    sections: [
+      {
+        id: "respondToCase",
+        title: "How to Respond to a Case",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "View Pending Cases",
+                lines: [
+                  "Go to your Vetssager inbox to view new or pending inquiries.",
+                  "Cases awaiting your response will clearly indicate their status.",
+                ],
+              },
+              {
+                heading: "Review the Inquiry",
+                lines: [
+                  "Select the inquiry to review the details provided by the pet owner.",
+                  "You can see the topic, the initial message, and any related patient information.",
+                ],
+              },
+              {
+                heading: "Join the Case",
+                lines: [
+                  "To accept and respond to the inquiry, type your message and press Send.",
+                  "Once you join, the pet owner will be automatically charged the inquiry fee you've set.",
+                ],
+              },
+              {
+                heading: "Close the Case",
+                lines: [
+                  `After fully addressing the client's concerns, click "Close the Case" to mark the inquiry complete.`,
+                  "The chat history will remain accessible for future reference and ongoing care.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Pet Owner Withdrawal",
+                lines: [
+                  "Pet owners can withdraw their inquiry before you join the case.",
+                  "If withdrawn before your response, they won't incur any charge.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  CloseCase: {
+    mainTitle: "Closing a Vetssager Case",
+    mainDescription: `
+      Once you've fully addressed a client's inquiry in Vetssager, you can close the case. Vetssager will automatically generate an AI summary of the conversation to help streamline your documentation process. You also have the flexibility to reopen a case if additional follow-up is needed.
+    `,
+    sections: [
+      {
+        id: "closingTheCase",
+        title: "How to Close a Case",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Close the Case",
+                lines: [
+                  `Click the "Close the Case" button at the top of the conversation once the inquiry has been fully resolved.`,
+                  "After closing, the conversation will remain accessible for future reference.",
+                ],
+              },
+              {
+                heading: "AI-Generated Summary",
+                lines: [
+                  "Upon closing the case, Vetssager automatically generates a concise summary based on your conversation.",
+                  `To access this summary, click the "Medical Note" button. The AI-generated summary will appear below the note input field.`,
+                  "You can copy this summary into your notes and edit as necessary to ensure accuracy.",
+                ],
+              },
+              {
+                heading: "Privacy of Medical Notes",
+                lines: [
+                  "Medical notes are private and only visible to you.",
+                  "Clients do not have access to these notes.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "reopeningCases",
+        title: "Reopening a Closed Case",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Reopen a Closed Case",
+                lines: [
+                  "If you need to add more information or ask additional questions after closing, you can reopen the same case.",
+                  "Pet owners can respond freely without incurring an additional charge when a case is reopened.",
+                  `Once you've addressed any follow-up questions, click "Close the Case" again to finalize the conversation.`,
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  ViewCaseHistory: {
+    mainTitle: "Viewing Case History",
+    mainDescription: `
+      Vetssager makes it easy to review past cases with your clients. Quickly access and revisit previous inquiries for comprehensive and continuous care.
+    `,
+    sections: [
+      {
+        id: "howToViewCaseHistory",
+        title: "How to View Case History",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Open Case History",
+                lines: [
+                  `Within a Vetssager thread, click the three-dot icon (⋯) located at the top-right corner of the chat.`,
+                  `Select "View All Requests" from the dropdown menu to see a list of all previous cases related to this pet owner and patient.`,
+                ],
+              },
+              {
+                heading: "Navigate to Specific Case",
+                lines: [
+                  "Browse through the list of previous cases.",
+                  "Click on any case to navigate directly to that specific conversation.",
+                  "Easily reference past interactions to support ongoing care and follow-up inquiries.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  VetssagerNotes: {
+    mainTitle: "Vetssager Notes",
+    mainDescription: `
+      Vetssager notes are a convenient way to document important information during your telehealth consultations. These notes are automatically generated and can be easily accessed for future reference.
+    `,
+    sections: [
+      {
+        id: "howToAccessNotes",
+        title: "How to Access Vetssager Notes",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Open the latest case note",
+                lines: [
+                  `Within a Vetssager thread, click the Medical Note on the banner.`,
+                ],
+              },
+              {
+                heading: "Navigate to Specific Note",
+                lines: [
+                  "Each case note is shown at the end of the conversation.",
+                  "Or you can press three dots (⋯) at the top-right corner of the chat to navigate to the case and then press its Meical note",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  MedicalRecords: {
+    mainTitle: "Viewing Medical Records",
+    mainDescription: `
+      Vetssager allows you to easily access medical history for each patient to support informed, ongoing care.
+    `,
+    sections: [
+      {
+        id: "howToViewMedicalRecords",
+        title: "How to View Medical Records",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Navigate to Medical Records",
+                lines: [
+                  `Within a Vetssager thread, click the "View Medical Records" button located on the top banner.`,
+                  `You’ll be taken to a detailed history of the patient’s past medical records and summaries.`,
+                ],
+              },
+              {
+                heading: "Privacy and Access Control",
+                lines: [
+                  "Medical records are securely stored under your virtual clinic's account.",
+                  "Only you (the assigned veterinarian) and the pet owner have access to this data—no other parties can view these records.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   // Similarly for the other topNav items...
 };
 

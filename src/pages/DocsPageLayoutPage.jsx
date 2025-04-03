@@ -204,15 +204,15 @@ const sideNavData = {
         },
         {
           id: "InquiryBasedMessager",
-          label: "Inquiry-Based Messager",
+          label: "Vetssager",
           subItems: [
             {
               id: "InquiryBasedMessagerOverView",
-              label: "Overview",
+              label: "Vetssager Overview",
             },
             {
-              id: "VCPRStatus",
-              label: "VCPR Status",
+              id: "VetssagerVCPRStatus",
+              label: "Vetssager VCPR Status",
             },
             {
               id: "StartNewCase",
@@ -231,8 +231,12 @@ const sideNavData = {
               label: "View Case History",
             },
             {
-              id: "MedicalNotes",
-              label: "Medical Notes",
+              id: "VetssagerNotes",
+              label: "Vetssager Notes",
+            },
+            {
+              id: "MedicalRecords",
+              label: "Medical Records",
             },
           ],
         },
