@@ -1698,26 +1698,26 @@ const contentData = {
   },
 
   InquiryBasedMessagerOverView: {
-    mainTitle: "Vetssager Overview",
+    mainTitle: "Vetssenger Overview",
     mainDescription: `
-      Vetssager is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build lasting relationships with your clients.
+      Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build lasting relationships with your clients.
       
-      Each <span class="highlight">Vetssager thread</span> is dedicated to one veterinarian, one pet owner, and one patient (pet). <span class="highlight">Messaging through Vetssager becomes available only after a valid VCPR has been established</span> (via an in-person or synchronous video visit per AB 1399).
+      Each <span class="highlight">Vetssenger thread</span> is dedicated to one veterinarian, one pet owner, and one patient (pet). <span class="highlight">Messaging through Vetssenger becomes available only after a valid VCPR has been established</span> (via an in-person or synchronous video visit per AB 1399).
       
       With a valid VCPR in place, either party can initiate a new <span class="highlight">case</span> (chat session) within the thread. Veterinarians can freely start cases, while pet owners pay a fee (set by you) to start a new inquiry—provided you are open to accepting questions.
       
-      Click “Close the Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssager thread, ensuring easy reference and seamless continuity of care.
+      Click “Close the Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.
       `,
     sections: [
       {
         id: "howToInitiateChat",
-        title: "How to Start a Vetssager Chat",
+        title: "How to Start a Vetssenger Chat",
         blocks: [
           {
             type: "bulletList",
             items: [
               {
-                heading: "Open Vetssager",
+                heading: "Open Vetssenger",
                 lines: [
                   "Navigate to the chat tab at the bottom.",
                   `Click the "+" icon at the bottom right to start a new chat.`,
@@ -1748,10 +1748,10 @@ const contentData = {
       },
     ],
   },
-  VetssagerVCPRStatus: {
-    mainTitle: "Vetssager VCPR Status",
+  VetssengerVCPRStatus: {
+    mainTitle: "Vetssenger VCPR Status",
     mainDescription: `
-      Vetssager helps you deliver continuous care and maintain lasting relationships with your clients. To comply with California law (AB 1399), Vetssager can only be used after establishing a valid VCPR through an in-person visit or synchronous video consultation. Pet owners will be unable to initiate new cases until this requirement is fulfilled.
+      Vetssenger helps you deliver continuous care and maintain lasting relationships with your clients. To comply with California law (AB 1399), Vetssenger can only be used after establishing a valid VCPR through an in-person visit or synchronous video consultation. Pet owners will be unable to initiate new cases until this requirement is fulfilled.
     `,
     sections: [
       {
@@ -1775,6 +1775,7 @@ const contentData = {
             imageSrcs: [
               // Replace with your actual screenshot URL
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8387.PNG?alt=media&token=5a1d8b4c-6f4b-4f4e-8d3c-0a3e8e8f6c0c",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8393.PNG?alt=media&token=c717d3ad-b5f0-4a64-9248-ef3bcfb61628",
             ],
           },
         ],
@@ -1785,7 +1786,7 @@ const contentData = {
   StartNewCase: {
     mainTitle: "Start a New Case",
     mainDescription: `
-      Starting a new case in Vetssager is easy and straightforward. Follow the steps below to initiate a new inquiry-based chat session with your client.
+      Starting a new case in Vetssenger is easy and straightforward. Follow the steps below to initiate a new inquiry-based chat session with your client.
     `,
     sections: [
       {
@@ -1796,7 +1797,7 @@ const contentData = {
             type: "bulletList",
             items: [
               {
-                heading: "Open Vetssager",
+                heading: "Open Vetssenger",
                 lines: [
                   `Navigate to the chat tab at the bottom.`,
                   `Click the "+" icon at the bottom right to start a new chat.`,
@@ -1829,9 +1830,9 @@ const contentData = {
   },
 
   RespondToCase: {
-    mainTitle: "Responding to a Vetssager Case",
+    mainTitle: "Responding to a Vetssenger Case",
     mainDescription: `
-      Responding to a case on Vetssager indicates that you've agreed to handle the client's inquiry. Once you join a case, the pet owner is immediately charged the fee you set. Pet owners have the option to withdraw their inquiry before you join, in which case they won't be charged.
+      Responding to a case on Vetssenger indicates that you've agreed to handle the client's inquiry. Once you join a case, the pet owner is immediately charged the fee you set. Pet owners have the option to withdraw their inquiry before you join, in which case they won't be charged.
     `,
     sections: [
       {
@@ -1844,7 +1845,7 @@ const contentData = {
               {
                 heading: "View Pending Cases",
                 lines: [
-                  "Go to your Vetssager inbox to view new or pending inquiries.",
+                  "Go to your Vetssenger inbox to view new or pending inquiries.",
                   "Cases awaiting your response will clearly indicate their status.",
                 ],
               },
@@ -1889,9 +1890,9 @@ const contentData = {
   },
 
   CloseCase: {
-    mainTitle: "Closing a Vetssager Case",
+    mainTitle: "Closing a Vetssenger Case",
     mainDescription: `
-      Once you've fully addressed a client's inquiry in Vetssager, you can close the case. Vetssager will automatically generate an AI summary of the conversation to help streamline your documentation process. You also have the flexibility to reopen a case if additional follow-up is needed.
+      Once you've fully addressed a client's inquiry in Vetssenger, you can close the case. Vetssenger will automatically generate an AI summary of the conversation to help streamline your documentation process. You also have the flexibility to reopen a case if additional follow-up is needed.
     `,
     sections: [
       {
@@ -1911,7 +1912,7 @@ const contentData = {
               {
                 heading: "AI-Generated Summary",
                 lines: [
-                  "Upon closing the case, Vetssager automatically generates a concise summary based on your conversation.",
+                  "Upon closing the case, Vetssenger automatically generates a concise summary based on your conversation.",
                   `To access this summary, click the "Medical Note" button. The AI-generated summary will appear below the note input field.`,
                   "You can copy this summary into your notes and edit as necessary to ensure accuracy.",
                 ],
@@ -1952,7 +1953,7 @@ const contentData = {
   ViewCaseHistory: {
     mainTitle: "Viewing Case History",
     mainDescription: `
-      Vetssager makes it easy to review past cases with your clients. Quickly access and revisit previous inquiries for comprehensive and continuous care.
+      Vetssenger makes it easy to review past cases with your clients. Quickly access and revisit previous inquiries for comprehensive and continuous care.
     `,
     sections: [
       {
@@ -1965,7 +1966,7 @@ const contentData = {
               {
                 heading: "Open Case History",
                 lines: [
-                  `Within a Vetssager thread, click the three-dot icon (⋯) located at the top-right corner of the chat.`,
+                  `Within a Vetssenger thread, click the three-dot icon (⋯) located at the top-right corner of the chat.`,
                   `Select "View All Requests" from the dropdown menu to see a list of all previous cases related to this pet owner and patient.`,
                 ],
               },
@@ -1984,15 +1985,15 @@ const contentData = {
     ],
   },
 
-  VetssagerNotes: {
-    mainTitle: "Vetssager Notes",
+  VetssengerNotes: {
+    mainTitle: "Vetssenger Notes",
     mainDescription: `
-      Vetssager notes are a convenient way to document important information during your telehealth consultations. These notes are automatically generated and can be easily accessed for future reference.
+      Vetssenger notes are a convenient way to document important information during your telehealth consultations. These notes are automatically generated and can be easily accessed for future reference.
     `,
     sections: [
       {
         id: "howToAccessNotes",
-        title: "How to Access Vetssager Notes",
+        title: "How to Access Vetssenger Notes",
         blocks: [
           {
             type: "bulletList",
@@ -2000,7 +2001,7 @@ const contentData = {
               {
                 heading: "Open the latest case note",
                 lines: [
-                  `Within a Vetssager thread, click the Medical Note on the banner.`,
+                  `Within a Vetssenger thread, click the Medical Note on the banner.`,
                 ],
               },
               {
@@ -2020,7 +2021,7 @@ const contentData = {
   MedicalRecords: {
     mainTitle: "Viewing Medical Records",
     mainDescription: `
-      Vetssager allows you to easily access medical history for each patient to support informed, ongoing care.
+      Vetssenger allows you to easily access medical history for each patient to support informed, ongoing care.
     `,
     sections: [
       {
@@ -2033,7 +2034,7 @@ const contentData = {
               {
                 heading: "Navigate to Medical Records",
                 lines: [
-                  `Within a Vetssager thread, click the "View Medical Records" button located on the top banner.`,
+                  `Within a Vetssenger thread, click the "View Medical Records" button located on the top banner.`,
                   `You’ll be taken to a detailed history of the patient’s past medical records and summaries.`,
                 ],
               },
