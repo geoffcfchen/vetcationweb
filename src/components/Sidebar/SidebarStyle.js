@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 
 /** Outer container for the entire sidebar. */
 export const SidebarContainer = styled.div`
-  width: 240px; /* adjust as needed */
+  width: 100%;
+  max-width: 100%;
   background-color: #0d0d0d;
   color: #fff;
   padding: 16px;

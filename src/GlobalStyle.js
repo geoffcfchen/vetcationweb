@@ -9,6 +9,13 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f2f4f7; // Example background color
 
   }
+
+  .highlight {
+    color: #fff;
+    font-weight: bold;
+
+    border-radius: 4px;
+  }
 `;
 
 export default GlobalStyle;
