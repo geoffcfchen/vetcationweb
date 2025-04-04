@@ -1707,31 +1707,29 @@ const contentData = {
       With a valid VCPR in place, either party can initiate a new <span class="highlight">case</span> (chat session) within the thread. Veterinarians can freely start cases, while pet owners pay a fee (set by you) to start a new inquiry—provided you are open to accepting questions.
       
       Click “Close the Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.
-      `,
+    `,
     sections: [
       {
-        id: "howToInitiateChat",
-        title: "How to Start a Vetssenger Chat",
+        id: "vetssengerTabs",
+        title: "Navigating the Vetssenger Tabs",
         blocks: [
           {
             type: "bulletList",
             items: [
               {
-                heading: "Open Vetssenger",
+                heading: "Active Tab",
                 lines: [
-                  "Navigate to the chat tab at the bottom.",
-                  `Click the "+" icon at the bottom right to start a new chat.`,
+                  "Shows all on-going cases that are still open.",
+                  "These include any chat sessions that are awaiting your response or action.",
+                  "Your goal is to review, respond to, and close all open cases in this tab to ensure timely communication and maintain your clients' satisfaction.",
                 ],
               },
               {
-                heading: "Initiate a New Case (Chat Session)",
+                heading: "Archived Tab",
                 lines: [
-                  "Select the client (if the client doesn't appear, it means you haven't established a valid VCPR with them yet).",
-                  "After selecting the client, choose the patient (pet) with whom you've established the VCPR.",
-                  "(Optional) Select a licensed technician who partners with you to join this chat session.",
-                  "Enter a topic, title, and your initial message.",
-                  "Press the Send button to submit your message and officially start the case.",
-                  `If you click "X," your current input will be saved as a draft.`,
+                  "Displays all closed cases from past conversations.",
+                  "You can revisit any previous case here to review history or context.",
+                  `If further follow-up is needed, simply initiate a new case within the same thread from the Archived tab or use "+" to start a new case.`,
                 ],
               },
             ],
@@ -1739,9 +1737,8 @@ const contentData = {
           {
             type: "framedImage",
             imageSrcs: [
-              // Replace with your actual screenshot URLs
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8385.PNG?alt=media&token=f9c22fd2-a04a-4d73-bc6e-682c51c59800",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8395.PNG?alt=media&token=fe15ea39-bc48-43c8-9d77-32a1dc3972a9",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8410.PNG?alt=media&token=5f0af2fc-83b8-4bf6-900a-cce62614318e",
             ],
           },
         ],
@@ -1820,8 +1817,9 @@ const contentData = {
             type: "framedImage",
             imageSrcs: [
               // Replace with your actual screenshot URLs
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8385.PNG?alt=media&token=f9c22fd2-a04a-4d73-bc6e-682c51c59800",
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8398.PNG?alt=media&token=2ce475e1-24e7-48ab-a35e-996944cdc2ad",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8397.PNG?alt=media&token=f0091f31-9b64-41af-8372-a022ca38f7d1",
             ],
           },
         ],
@@ -1845,10 +1843,25 @@ const contentData = {
               {
                 heading: "View Pending Cases",
                 lines: [
-                  "Go to your Vetssenger inbox to view new or pending inquiries.",
-                  "Cases awaiting your response will clearly indicate their status.",
+                  "You’ll receive a notification when a new message arrives.",
+                  "Go to your Vetssager inbox to review incoming inquiries.",
+                  "Any case awaiting your response will display a small dot next to the message box — just like on Facebook Messenger.",
+                  `All active unclosed cases will be listed in the Vetssenger "Active" inbox.`,
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8404-min.PNG?alt=media&token=6774e90a-ad3a-4f00-96b9-0c5e218dcfbb",
+            ],
+          },
+
+          {
+            type: "bulletList",
+            items: [
               {
                 heading: "Review the Inquiry",
                 lines: [
@@ -1856,6 +1869,18 @@ const contentData = {
                   "You can see the topic, the initial message, and any related patient information.",
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8401-min.PNG?alt=media&token=8a2a1939-8f27-49b3-afcf-1c706f11cf91",
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
               {
                 heading: "Join the Case",
                 lines: [
@@ -1863,15 +1888,57 @@ const contentData = {
                   "Once you join, the pet owner will be automatically charged the inquiry fee you've set.",
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8402-min.PNG?alt=media&token=bb4671da-9d5f-47ea-b1bf-812d2a967ffe",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8403-min.PNG?alt=media&token=d41a0732-c294-4f1c-89c4-235adc66d0f7",
+            ],
+          },
+
+          //   {
+          //     type: "bulletList",
+          //     items: [
+          //       {
+          //         heading: "Close the Case",
+          //         lines: [
+          //           `After fully addressing the client's concerns, click "Close the Case" to mark the inquiry complete.`,
+          //           "The chat history will remain accessible for future reference and ongoing care.",
+          //         ],
+          //       },
+          //     ],
+          //   },
+          //   {
+          //     type: "framedImage",
+          //     imageSrcs: [
+          //       // Replace with your actual screenshot URLs
+          //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8406-min.PNG?alt=media&token=f60d50fc-c3ed-4371-a691-5297eee83119",
+          //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+          //     ],
+          //   },
+          {
+            type: "bulletList",
+            items: [
               {
-                heading: "Close the Case",
+                heading: "Access closed Cases",
                 lines: [
-                  `After fully addressing the client's concerns, click "Close the Case" to mark the inquiry complete.`,
-                  "The chat history will remain accessible for future reference and ongoing care.",
+                  "To view closed cases, go to the Vetssenger inbox and select the 'Archived' tab.",
+                  "This allows you to review past inquiries and maintain continuity of care.",
                 ],
               },
             ],
           },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8411-min.PNG?alt=media&token=09b1a50e-c47d-4d01-85ae-034ab96662bb",
+            ],
+          },
+
           {
             type: "bulletList",
             items: [
@@ -1909,6 +1976,20 @@ const contentData = {
                   "After closing, the conversation will remain accessible for future reference.",
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8406-min.PNG?alt=media&token=f60d50fc-c3ed-4371-a691-5297eee83119",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+            ],
+          },
+
+          {
+            type: "bulletList",
+            items: [
               {
                 heading: "AI-Generated Summary",
                 lines: [
@@ -1926,6 +2007,15 @@ const contentData = {
               },
             ],
           },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
+            ],
+          },
         ],
       },
       {
@@ -1940,9 +2030,37 @@ const contentData = {
                 lines: [
                   "If you need to add more information or ask additional questions after closing, you can reopen the same case.",
                   "Pet owners can respond freely without incurring an additional charge when a case is reopened.",
-                  `Once you've addressed any follow-up questions, click "Close the Case" again to finalize the conversation.`,
+                  `Once you've addressed any follow-up questions, click "Close Case" again to finalize the conversation.`,
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8412-min.PNG?alt=media&token=d5d4d4b5-0cb1-438d-838b-892667b474ae",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8415-min.PNG?alt=media&token=fea08018-3fa2-475f-952e-879ccb76b258",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8416-min.PNG?alt=media&token=3aaa8771-bd38-4a76-816e-cfefca88acd0",
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Updated AI-Generated Summary",
+                lines: [
+                  "After reclosing, Vetssenger will generate a new AI summary based on the updated conversation.",
+                  "You can review and edit this new AI summary and copy it into your notes as needed.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8417-min.PNG?alt=media&token=358f6f35-f270-49de-a507-cc7803e9e1f2",
             ],
           },
         ],
@@ -1978,6 +2096,25 @@ const contentData = {
                   "Easily reference past interactions to support ongoing care and follow-up inquiries.",
                 ],
               },
+            ],
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Access closed Cases",
+                lines: [
+                  "To view closed cases, go to the Vetssenger inbox and select the 'Archived' tab.",
+                  "This allows you to review past inquiries and maintain continuity of care.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8411-min.PNG?alt=media&token=09b1a50e-c47d-4d01-85ae-034ab96662bb",
             ],
           },
         ],

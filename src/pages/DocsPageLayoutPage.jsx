@@ -224,7 +224,7 @@ const sideNavData = {
             },
             {
               id: "CloseCase",
-              label: "Close a Case",
+              label: "Close/Reopen a Case",
             },
             {
               id: "ViewCaseHistory",
