@@ -163,8 +163,8 @@ const sideNavData = {
           label: "Scheduling", // label shown in sidebar
           subItems: [
             {
-              id: "setMinimumNoticeTime",
-              label: "Set Minimum Notice Time",
+              id: "scheduleOverview",
+              label: "Scheduling Overview",
             },
             {
               id: "regularAvailability",
@@ -173,6 +173,10 @@ const sideNavData = {
             {
               id: "specificAvailability",
               label: "Specific Availability",
+            },
+            {
+              id: "setMinimumNoticeTime",
+              label: "Set Minimum Notice Time",
             },
             {
               id: "pauseAvailability",

@@ -426,6 +426,54 @@ const contentData = {
     ],
   },
 
+  scheduleOverview: {
+    mainTitle: "Scheduling Overview",
+    mainDescription: `Welcome to your scheduling hub! This section provides a high-level view of all the tools available for managing your appointments—from setting your regular weekly schedule and adding specific time slots to pausing your availability and viewing your calendar. Whether you’re a first-time user or looking to optimize your current setup, this overview helps you understand how all the pieces fit together.`,
+    sections: [
+      {
+        id: "schedulingIntro",
+        title: "How the Scheduling System Works",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Regular Availability:",
+                lines: [
+                  "Set the days and times you’re generally available. The system automatically creates recurring 30-minute appointment slots for up to 30 days in advance.",
+                ],
+              },
+              {
+                heading: "Specific Availability:",
+                lines: [
+                  "Add extra availability on specific days and times, perfect for accommodating special requests or busy periods.",
+                ],
+              },
+              {
+                heading: "Minimum Booking Notice Time:",
+                lines: [
+                  "Define how much advance notice you need for a client to book an appointment, balancing preparation time with optimal visibility.",
+                ],
+              },
+              {
+                heading: "Pause Availability:",
+                lines: [
+                  "Temporarily hide your profile and stop new bookings without affecting existing appointments.",
+                ],
+              },
+              {
+                heading: "Manage My Schedule:",
+                lines: [
+                  "View all your upcoming appointments in a calendar view—by day, week, or month—and easily join or cancel sessions.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   setMinimumNoticeTime: {
     // mainTitle: "Build Your Virtual Clinic with Vetcation",
     //     mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice.
