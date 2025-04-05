@@ -1706,7 +1706,7 @@ const contentData = {
       
       With a valid VCPR in place, either party can initiate a new <span class="highlight">case</span> (chat session) within the thread. Veterinarians can freely start cases, while pet owners pay a fee (set by you) to start a new inquiry—provided you are open to accepting questions.
       
-      Click “Close the Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.
+      Click “Close Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.
     `,
     sections: [
       {
@@ -1762,7 +1762,7 @@ const contentData = {
                 heading: "Check VCPR Status",
                 lines: [
                   `If a valid VCPR is established, you'll see "Connected" displayed on the right side of the banner.`,
-                  `If a valid VCPR has not yet been established, you'll see "Connected?" displayed instead.`,
+                  `If a valid VCPR has expired, you'll see "Connected?" displayed instead.`,
                 ],
               },
             ],
@@ -1803,18 +1803,22 @@ const contentData = {
               {
                 heading: "Initiate a New Case (Chat Session)",
                 lines: [
-                  "Select the client (if the client doesn't appear, it means you haven't established a valid VCPR with them yet).",
-                  "After selecting the client, choose the patient (pet) with whom you've established the VCPR.",
-                  "(Optional) Select a licensed technician who partners with you to join this chat session.",
-                  "Enter a topic, title, and your initial message.",
-                  "Press the Send button to submit your message and officially start the case.",
-                  `If you click "X," your current input will be saved as a draft.`,
+                  "On the left screen, you'll see all the fields required to start a new case. The first field is for selecting the client, and the second asks which pet the case is for.",
+                  "When you tap the client input field, the middle screen appears—allowing you to choose from clients who have previously built a valid VCPR with you.",
+                  "After selecting the client, the right screen displays all pets owned by that client.",
+                  `Pets labeled with "Connected" indicate a valid VCPR has been established and can be selected.`,
+                  `"Connect?" means you have not yet established a valid VCPR with that pet, and they cannot be selected.`,
+                  "(Optional) You may also select a licensed technician who partners with you to join the session.",
+                  "Enter the topic, title, and your initial message to begin the case.",
+                  "Press the Send button to officially start the case.",
+                  `If you click "X," your input will be saved as a draft.`,
                 ],
               },
             ],
           },
           {
             type: "framedImage",
+
             imageSrcs: [
               // Replace with your actual screenshot URLs
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
@@ -2098,23 +2102,14 @@ const contentData = {
               },
             ],
           },
-          {
-            type: "bulletList",
-            items: [
-              {
-                heading: "Access closed Cases",
-                lines: [
-                  "To view closed cases, go to the Vetssenger inbox and select the 'Archived' tab.",
-                  "This allows you to review past inquiries and maintain continuity of care.",
-                ],
-              },
-            ],
-          },
+
           {
             type: "framedImage",
             imageSrcs: [
               // Replace with your actual screenshot URLs
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8411-min.PNG?alt=media&token=09b1a50e-c47d-4d01-85ae-034ab96662bb",
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8425-min.PNG?alt=media&token=06c970fc-6595-45d7-82ba-a19aea03fec5",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8426-min.PNG?alt=media&token=822aa65e-26d3-4687-bb8a-3301aca443c0",
             ],
           },
         ],
@@ -2125,8 +2120,11 @@ const contentData = {
   VetssengerNotes: {
     mainTitle: "Vetssenger Notes",
     mainDescription: `
-      Vetssenger notes are a convenient way to document important information during your telehealth consultations. These notes are automatically generated and can be easily accessed for future reference.
-    `,
+    Vetssenger Notes help you conveniently document key details from your telehealth consultations. 
+    When you open the Medical Note screen, you’ll see an <span class="highlight">AI-generated summary</span> displayed just below the input field. 
+    You can review, copy, and edit this draft to create your official note. 
+    Once saved, your note will be stored for future reference, while the AI summary will not be saved.
+  `,
     sections: [
       {
         id: "howToAccessNotes",
@@ -2136,18 +2134,27 @@ const contentData = {
             type: "bulletList",
             items: [
               {
-                heading: "Open the latest case note",
+                heading: "Open the Latest Case Note",
                 lines: [
-                  `Within a Vetssenger thread, click the Medical Note on the banner.`,
+                  `Within a Vetssenger thread, tap "Medical Note" in the top banner to view the latest note for that case.`,
                 ],
               },
               {
-                heading: "Navigate to Specific Note",
+                heading: "Navigate to a Specific Note",
                 lines: [
-                  "Each case note is shown at the end of the conversation.",
-                  "Or you can press three dots (⋯) at the top-right corner of the chat to navigate to the case and then press its Meical note",
+                  "Each case note appears at the end of the corresponding conversation thread.",
+                  `Alternatively, tap the three-dot menu (⋯) in the top-right corner of the chat, select the desired case, and then tap "Medical Note" to view it.`,
                 ],
               },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
             ],
           },
         ],
@@ -2172,7 +2179,7 @@ const contentData = {
                 heading: "Navigate to Medical Records",
                 lines: [
                   `Within a Vetssenger thread, click the "View Medical Records" button located on the top banner.`,
-                  `You’ll be taken to a detailed history of the patient’s past medical records and summaries.`,
+                  `You’ll be taken to a detailed history of the patient’s past medical records.`,
                 ],
               },
               {
@@ -2183,6 +2190,341 @@ const contentData = {
                 ],
               },
             ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  MedicalHistoryOverview: {
+    mainTitle: "Medical History Overview",
+    mainDescription: `
+      The Medical History section gives you and the pet owner access to important health information in one place. 
+      You can view patient details such as <span class="highlight">breed, color, sex, date of birth, spayed/neutered status, and weight history</span>. 
+      You may also export the full medical history, which pet owners can take to their home clinic when needed.
+    `,
+    sections: [
+      {
+        id: "visits",
+        title: "Visits",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "All Appointments in One Place",
+                lines: [
+                  "See all past and upcoming visits with your virtual clinic.",
+                  "Each entry includes the date, time, and reason for the visit, helping you track the patient’s care timeline.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
+            ],
+          },
+        ],
+      },
+      {
+        id: "records",
+        title: "Records",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Comprehensive Visit Records",
+                lines: [
+                  `Press "+" to add a new record including <span class="highlight">Data, Assessment, and Plan</span>, <span class="highlight">prescriptions</span>, and <span class="highlight">general notes.</span>`,
+                  "This section is designed to keep all DAP, prescriptions, and notes organized and easily accessible.",
+                  "Owners can upload medical records from their in-clinic visits, which will appear here for unified documentation.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8437-min.PNG?alt=media&token=fcca1ddc-be16-4cd1-8048-7783eba869e3",
+            ],
+          },
+        ],
+      },
+      {
+        id: "weightChart",
+        title: "Weight Chart",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Track Growth and Health Trends",
+                lines: [
+                  `Press "see chart" to view the pet's weight chart.`,
+                  "See the pet’s weight trends over time in a visual chart.",
+                  "Useful for monitoring young pets, managing chronic conditions, or evaluating treatment progress.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8433-min.PNG?alt=media&token=51cecb79-1400-4852-9f35-51d6e5085b1d",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  DAP: {
+    mainTitle: "Data, Assessment, Plan (DAP)",
+    mainDescription:
+      "Vetcation’s DAP template is designed to empower your virtual clinic by streamlining record-keeping while enhancing client communication. Tailored for California-licensed veterinarians, it captures every detail of your telehealth sessions—from a thorough history and live observations to clear, actionable next steps. With a format that mirrors the high standards of in-person care, you can deliver flexible, legally compliant care from anywhere while keeping your practice audit-ready.",
+    sections: [
+      {
+        id: "data",
+        title: "Data",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Subjective Data",
+                lines: [
+                  "Gather a comprehensive history by asking open-ended questions and truly listening to the pet owner’s concerns.",
+                  "Document the chief complaint, noting when it started, how it has evolved, and any prior interventions.",
+                  "Cover key areas such as changes in eating, drinking, bathroom habits, and overall energy levels, along with past medical history and lifestyle details.",
+                ],
+              },
+              {
+                heading: "Objective Data",
+                lines: [
+                  "Perform a detailed virtual assessment, guiding the pet owner to help you observe physical signs such as gum color, capillary refill time, and skin turgor.",
+                  "Record both normal and abnormal findings to create a well-rounded picture of the pet's current health.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "assessment",
+        title: "Assessment",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Diagnosis or Differential Diagnoses",
+                lines: [
+                  "Summarize your clinical impressions or list differential diagnoses based on the data gathered.",
+                  "For telemedicine consultations, provide suspected conditions in a way that aligns with legal guidelines and your professional standards.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "plan",
+        title: "Plan",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Actionable Next Steps",
+                lines: [
+                  "Provide clear treatment recommendations, prescriptions, or general care advice tailored to your telehealth service type.",
+                  "Outline follow-up instructions, including when to monitor symptoms and when to seek in-person care.",
+                  "For teletriage, specify the urgency of care needed while reminding clients they can opt for sooner in-person care if necessary.",
+                ],
+              },
+              {
+                heading: "Communication Pro Tips",
+                lines: [
+                  "Complete your records promptly after the appointment to ensure accuracy.",
+                  "Draft your plan in a personal yet professional message to the client, then seamlessly integrate it into the record.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8436-min.PNG?alt=media&token=411c4e80-0574-45db-8b51-861347869779",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  noteforclient: {
+    mainTitle: "Note for Client",
+    mainDescription:
+      "The Note function on Vetcation allows you to add extra details that don't fit into the standard medical record. Keep in mind that clients are not notified when notes are added, so if you want them to be aware, make sure to send a direct message.",
+    sections: [
+      {
+        id: "noteForClient",
+
+        blocks: [
+          {
+            type: "framedImage",
+            imageSrcs: [
+              // Replace with your actual screenshot URLs
+
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8435-min.PNG?alt=media&token=165ef6a5-66ff-4422-ba0f-abec6e0abadc",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  addprescription: {
+    mainTitle: "Add Prescription",
+    mainDescription:
+      "At Vetcation, we believe in giving veterinarians and pet parents the freedom to choose how and where prescriptions are filled—without hidden fees or forced pharmacy markups. In California, under AB 1399, veterinarians must offer clients a written prescription and inform them they may fill it at a pharmacy of their choice or directly through the prescriber. Our goal is to ensure you provide convenient, affordable care while remaining fully compliant with these regulations.",
+    sections: [
+      {
+        id: "ourApproach",
+        title: "Our Approach",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Unlike some platforms that limit medication choices or charge additional fees for sending prescriptions, Vetcation stands out by prioritizing transparency and flexibility. We want to ensure vets can prescribe the most suitable medication at the best price possible—no strings attached.",
+          },
+        ],
+      },
+      {
+        id: "pharmacyOptions",
+        title: "Pharmacy Options",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Vetcation lets you send prescriptions to any accredited pharmacy—whether it’s a local store, a well-known chain, or an online service like Chewy—so you can easily pick the most convenient or cost-effective option for your client. There are no additional platform fees for choosing a particular pharmacy.",
+          },
+        ],
+      },
+      {
+        id: "howItWorks",
+        title: "How It Works",
+        blocks: [
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Step 1: Create a Freeform Prescription",
+                lines: [
+                  "Fill in all necessary medication details directly in medical record.",
+                  "Specify dosage, administration instructions, and any pertinent notes.",
+                  "Once completed, the prescription will be visible to the client as a reference.",
+                ],
+              },
+              {
+                heading: "Step 2: Pharmacy Selection",
+                lines: [
+                  "During the virtual visit, ask your client which pharmacy or online pharmacy they prefer for filling the prescription.",
+                  "After the appointment, add the prescription in our system so that it becomes visible to the client as a reference.",
+                  "Call or email the pharmacy or online pharmacy that the client chooses.",
+                  "For urgent cases, we recommend calling or emailing the selected pharmacy to confirm immediate availability.",
+                ],
+              },
+              {
+                heading: "Step 3: Finalize the Prescription",
+                lines: [
+                  "Once the prescription is visible to the client in our system, call or email the selected pharmacy to finalize the order.",
+                  "Vetcation does not intercept or inflate any pharmacy fees—your client’s cost is strictly between them and the pharmacy.",
+                ],
+              },
+            ],
+          },
+          {
+            type: "framedImage",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8438-min.PNG?alt=media&token=fb4405bd-0ad5-4fc5-842d-f0964cbc6d0d",
+            ],
+          },
+        ],
+      },
+      {
+        id: "additionalTips",
+        title: "Additional Tips for a Smooth Process",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "When communicating prescription details, confirm contact and delivery information during the virtual visit. This helps reduce delays and surprises, especially for urgent medications. If your client opts for online fulfillment, remind them to set up an account and request the prescription so you can easily confirm it with the pharmacy. By keeping your workflow transparent and flexible, you can offer more affordable medication options without compromising care.",
+          },
+        ],
+      },
+    ],
+  },
+
+  pharmacys: {
+    mainTitle: "Pharmacy Options for California",
+    mainDescription:
+      "If you are licensed in California and operating under a virtual VCPR, you may wish to prescribe for your patient following the appointment. While we continue to enhance our platform, here are some effective routes to ensure smooth and efficient prescription fulfillment for both you and your client:",
+    sections: [
+      {
+        id: "humanPharmacy",
+        title: "Human Pharmacy (including Costco and Walmart)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "If your prescription can be filled through a human pharmacy and the pet owner is able to pick it up in person, this is ideal for urgent medications. Confirm the client’s pharmacy details during the call, then after the appointment, call or email the pharmacy using the Rx template provided in our system. (Note: If you email the prescription, your contact information will be shared with the pharmacy for verification.)",
+          },
+        ],
+      },
+      {
+        id: "mixlab",
+        title: "Mixlab",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mixlab is a user-friendly option for prescribing veterinary-labeled drugs or compounded medications in California. You can call— which is the fastest option— or email the prescription. Once received, Mixlab will contact the pet owner directly to arrange for payment and delivery, typically within 24-36 hours. Mixlab phone number: +1 (888) 901-4480 Mixlab email: rx@mixlabrx.com",
+          },
+        ],
+      },
+      {
+        id: "internetPharmacy",
+        title: "Online Pharmacy (e.g., Chewy)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "If your client opts to use an online pharmacy such as Chewy or VetSource, note that this process can be more cumbersome. The pet owner must create an account and request the prescription, after which you must contact the pharmacy to verify it. This route may be less efficient, particularly for urgent medications.",
+          },
+        ],
+      },
+      {
+        id: "additionalConsiderations",
+        title: "Additional Prescribing Considerations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "After your California appointment, clearly communicate the next steps to the pet owner to ensure smooth fulfillment of the prescription. Do not email the prescription pad PDF to the client, as it contains your personal contact information and cannot be used by a pharmacist if downloaded.",
           },
         ],
       },

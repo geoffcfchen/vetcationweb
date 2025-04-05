@@ -249,9 +249,20 @@ const sideNavData = {
               id: "MedicalHistoryOverview",
               label: "Medical History Overview",
             },
-            { id: "eprescribing", label: "E-prescribing basics" },
             {
-              id: "pharmacyIntegrations",
+              id: "DAP",
+              label: "Data, Assessment, Plan (DAP)",
+            },
+            {
+              id: "noteforclient",
+              label: "Note for Client",
+            },
+            {
+              id: "addprescription",
+              label: "Add Prescription",
+            },
+            {
+              id: "pharmacys",
               label: "Pharmacy / client’s choice",
             },
           ],
@@ -328,6 +339,15 @@ const InnerFrame = styled.div`
   overflow: hidden;
   border-radius: 20px; /* Adjust as needed */
 `;
+
+const ParagraphBlock = ({ block }) => {
+  return (
+    <p
+      style={{ marginBottom: "1.5rem", color: "#ccc" }}
+      dangerouslySetInnerHTML={{ __html: block.text }}
+    />
+  );
+};
 
 // Define the block component
 function FramedImageBlock({ block }) {
@@ -704,6 +724,8 @@ export default function DocsPageLayoutPage() {
                               return (
                                 <TrendPointsBlock key={key} block={block} />
                               );
+                            case "paragraph":
+                              return <ParagraphBlock key={key} block={block} />;
                             case "framedImage":
                               return (
                                 <FramedImageBlock key={key} block={block} />
