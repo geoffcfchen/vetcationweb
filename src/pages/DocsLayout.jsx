@@ -126,6 +126,7 @@ export default function DocsLayout() {
         show={showOffcanvas}
         onHide={() => setShowOffcanvas(false)}
         placement="start"
+        style={{ width: "240px", backgroundColor: "#0d0d0d" }}
       >
         <Offcanvas.Header closeButton closeVariant="white" />
         <Offcanvas.Body>
