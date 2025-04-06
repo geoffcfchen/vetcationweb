@@ -426,6 +426,94 @@ const contentData = {
     ],
   },
 
+  ViewingYourUpcomingAppointments: {
+    mainTitle: "Viewing Your Upcoming Appointments",
+    mainDescription: `Vetcation’s scheduling system is designed to make managing your appointments as easy as possible.
+    You can view all your upcoming appointments in a calendar format, allowing you to see your schedule at a glance.
+    You can choose to view your appointments by day, week, or month, depending on your preference. This flexibility allows you to plan your time effectively and ensure you never miss a virtual consult.`,
+    sections: [
+      {
+        id: "viewingUpcomingAppointments",
+        title: "Viewing Your Upcoming Appointments",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I view my upcoming appointments in the calendar?",
+            answer:
+              "You can access your calendar from the dashboard. The calendar displays all your upcoming appointments, and you can switch between day, week, and month views to see your schedule in the format that works best for you.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  Telemedicine: {
+    mainTitle: "Telemedicine",
+    mainDescription: `Vetcation’s telemedicine system is designed to help you provide high-quality virtual consultations with ease.
+    The platform allows you to conduct video calls with clients, share medical records, and manage prescriptions—all in a secure and compliant environment. You can also use the system to document your consultations, ensuring that you have a complete record of each appointment. This feature is essential for maintaining compliance with California’s telemedicine regulations and providing the best possible care to your patients.`,
+    sections: [
+      {
+        id: "telemedicineOverview",
+        title: "Telemedicine Overview",
+        blocks: [
+          {
+            type: "qa",
+            question: "How does Vetcation’s telemedicine system work?",
+            answer:
+              "Vetcation’s telemedicine system allows you to conduct video calls with clients, share medical records, and manage prescriptions in a secure and compliant environment. You can document your consultations, ensuring that you have a complete record of each appointment.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  earnings: {
+    mainTitle: "Earnings & Wallet",
+    mainDescription: `Vetcation’s earnings and wallet system is designed to help you manage your income from virtual consultations effectively.
+    You can view your earnings in real-time, track your transactions, and manage your wallet balance. The system provides a clear overview of your earnings, including completed consultations, pending payments, and any fees associated with your transactions. This transparency allows you to stay on top of your finances and make informed decisions about your virtual practice.`,
+    sections: [
+      {
+        id: "earningsOverview",
+        title: "Earnings Overview",
+        blocks: [
+          {
+            type: "qa",
+            question: "How do I view my earnings and wallet balance?",
+            answer:
+              "You can access your earnings overview from the dashboard. This section provides a detailed breakdown of your earnings, including completed consultations, pending payments, and any fees associated with your transactions.",
+          },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   scheduleOverview: {
     mainTitle: "Scheduling Overview",
     mainDescription: `Welcome to your scheduling hub! This section provides a high-level view of all the tools available for managing your appointments—from setting your regular weekly schedule and adding specific time slots to pausing your availability and viewing your calendar. Whether you’re a first-time user or looking to optimize your current setup, this overview helps you understand how all the pieces fit together.`,

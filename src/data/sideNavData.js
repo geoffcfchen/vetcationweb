@@ -11,6 +11,15 @@ const sideNavData = {
           id: "VirtualClinic",
           label: "Setting Up Your Virtual Clinic",
         },
+        {
+          id: "ViewingYourUpcomingAppointments",
+          label: "View Upcoming Appointments",
+        },
+        {
+          id: "Telemedicine",
+          label: "Telemedicine",
+        },
+        { id: "earnings", label: "Earnings & Wallet" },
       ],
     },
     {
