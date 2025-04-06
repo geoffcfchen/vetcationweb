@@ -8,6 +8,13 @@ import RightSideBar from "../components/Sidebar/RightSideBar";
 import iPhoneFrame from "../images/iphone-frame_15pro.png"; // same frame image as in Feature.jsx
 import { motion } from "framer-motion";
 import contentData from "../data/docsContentData";
+import TrendPointsBlock from "../components/TrendPointsBlock";
+import BulletListBlock from "../components/BulletListBlock";
+import QAContentBlock from "../components/QAContentBlock";
+import ParagraphBlock from "../components/ParagraphBlock";
+import FramedImageBlock from "../components/FramedImageBlock";
+import TopNavBar from "../components/TopNavBar";
+import topNavData from "../data/topNavData";
 
 // ===================== STYLED COMPONENTS ===================== //
 
@@ -26,24 +33,24 @@ const PageWrapper = styled.div`
 `;
 
 // Top navigation bar (Home, AI Agents, Telephony, etc.)
-const TopNavBar = styled.nav`
-  background-color: #111;
-  padding: 1rem;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-`;
+// const TopNavBar = styled.nav`
+//   background-color: #111;
+//   padding: 1rem;
+//   display: flex;
+//   gap: 2rem;
+//   align-items: center;
+// `;
 
-// Each link in the top nav
-const TopNavLink = styled.span`
-  cursor: pointer;
-  color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
-  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
+// // Each link in the top nav
+// const TopNavLink = styled.span`
+//   cursor: pointer;
+//   color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
+//   font-weight: ${(props) => (props.$active ? "bold" : "normal")};
 
-  &:hover {
-    color: #fff;
-  }
-`;
+//   &:hover {
+//     color: #fff;
+//   }
+// `;
 
 // Middle content area
 const MainContent = styled.div`
@@ -105,36 +112,19 @@ export const AccordionBody = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 
-const BulletList = styled.ul`
-  list-style: disc;
-  margin: 1rem 0;
-  padding-left: 1.5rem;
-  color: #ccc;
-
-  .highlight {
-    font-weight: bold;
-    color: #fff;
-  }
-`;
-
-const BulletListItem = styled.li`
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-`;
-
 // =============== MOCK DATA STRUCTURES =============== //
 
 /**
  * topNavData - array of top-level sections in the top nav bar
  * Each item has an `id` plus a display `label`.
  */
-const topNavData = [
-  { id: "home", label: "For veterinarians" },
-  //   { id: "aiAgents", label: "AI Agents" },
-  //   { id: "telephony", label: "Telephony" },
-  //   { id: "recipes", label: "Recipes" },
-  //   { id: "reference", label: "Reference" },
-];
+// const topNavData = [
+//   { id: "home", label: "For veterinarians" },
+//   //   { id: "aiAgents", label: "AI Agents" },
+//   //   { id: "telephony", label: "Telephony" },
+//   //   { id: "recipes", label: "Recipes" },
+//   //   { id: "reference", label: "Reference" },
+// ];
 
 /**
  * sideNavData - For each topNav "id", we store an array of "groups".
@@ -310,220 +300,6 @@ const sideNavData = {
   ],
 };
 
-// Reuse exactly the same styles you used in Feature.jsx:
-const VideoFrameContainer = styled.div`
-  position: relative;
-  width: 300px; /* match your iPhoneFrame's width */
-  height: 600px; /* match your iPhoneFrame's height */
-  margin: 2rem auto; /* center it horizontally, with some spacing */
-`;
-
-const FrameImage = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none; // so the frame doesn't block interactions
-`;
-
-const FramedImage = styled.img`
-  position: absolute;
-  top: 1.5%;
-  left: 1.5%;
-  width: 97%;
-  height: 97%;
-  object-fit: contain;
-  border-radius: 30px; /* Adjust this value to match your iPhone frame’s rounded corners */
-`;
-
-const InnerFrame = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 20px; /* Adjust as needed */
-`;
-
-const ParagraphBlock = ({ block }) => {
-  return (
-    <p
-      style={{ marginBottom: "1.5rem", color: "#ccc" }}
-      dangerouslySetInnerHTML={{ __html: block.text }}
-    />
-  );
-};
-
-// Define the block component
-function FramedImageBlock({ block }) {
-  // block will contain something like:
-  // {
-  //   type: "framedImage",
-  //   heading: "Screenshots",
-  //   imageSrcs: [ ...array of image URLs... ]
-  // }
-  const { heading, imageSrcs = [] } = block;
-
-  // optional: define framer variants if you want an animation
-  const imageVariants = {
-    hidden: { scale: 0.5, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { type: "spring", duration: 0.8 },
-    },
-  };
-
-  // If you do not want animations at all, either remove `motion` or
-  // just pass a regular <img />. For now, let's keep them in.
-  return (
-    <div style={{ marginTop: "2rem" }}>
-      {heading && (
-        <h3 style={{ marginBottom: "1rem", color: "#fff" }}>{heading}</h3>
-      )}
-
-      {/* Container for multiple frames side-by-side (or wrapping) */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0rem",
-          justifyContent: "space-evenly",
-        }}
-      >
-        {imageSrcs.map((src, idx) => (
-          <VideoFrameContainer key={idx}>
-            <InnerFrame>
-              <FramedImage
-                variants={imageVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                src={src}
-                alt={`framed-screenshot-${idx}`}
-              />
-            </InnerFrame>
-            <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
-          </VideoFrameContainer>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const QAContentBlock = ({ block }) => {
-  return (
-    <div style={{ marginBottom: "1.5rem" }}>
-      <p style={{ fontWeight: "bold", color: "#00bcd4" }}>{block.question}</p>
-      <p style={{ marginLeft: "1rem", color: "#ccc" }}>{block.answer}</p>
-      {block.example && (
-        <p style={{ marginLeft: "1rem", fontStyle: "italic", color: "#ccc" }}>
-          <strong>Example:</strong> {block.example}
-        </p>
-      )}
-      {block.helpText && (
-        <div
-          style={{
-            backgroundColor: "#111", // darker background
-            border: "1px solid #b1dbe3", // accent border
-            borderRadius: "6px",
-            padding: "1rem",
-            marginTop: "1rem",
-            marginLeft: "1rem",
-            color: "#ccc",
-          }}
-        >
-          <strong style={{ color: "#00bcd4" }}>How Vetcation Helps:</strong>{" "}
-          {block.helpText}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const BulletListBlock = ({ block }) => {
-  return (
-    <BulletList>
-      {block.items.map((item, index) => {
-        const { heading = "", lines = [] } = item;
-
-        return (
-          <BulletListItem key={index}>
-            {heading && (
-              <span style={{ fontWeight: "bold", color: "#fff" }}>
-                {heading}
-              </span>
-            )}
-
-            {lines.length > 0 && (
-              <ul style={{ marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
-                {lines.map((line, lineIdx) => (
-                  <li
-                    key={`line-${lineIdx}`}
-                    dangerouslySetInnerHTML={{ __html: line }}
-                    style={{ marginBottom: "0.25rem" }}
-                  />
-                ))}
-              </ul>
-            )}
-          </BulletListItem>
-        );
-      })}
-    </BulletList>
-  );
-};
-
-const TrendContainer = styled.div`
-  margin-bottom: 1.5rem;
-  color: #ccc;
-  line-height: 1.6;
-
-  /* Highlight style now only makes text bold */
-  .highlight {
-    font-weight: bold;
-    color: #fff;
-  }
-`;
-
-const TrendHeading = styled.span`
-  font-weight: bold;
-  color: #fff;
-`;
-
-const TrendPointsBlock = ({ block }) => {
-  const { introParagraphs = [], items = [] } = block;
-
-  return (
-    <TrendContainer>
-      {introParagraphs.map((para, i) => (
-        <p key={`intro-${i}`} style={{ marginBottom: "1rem" }}>
-          {para}
-        </p>
-      ))}
-
-      <ul style={{ paddingLeft: "1.2rem" }}>
-        {items.map((item, idx) => (
-          <li key={`item-${idx}`} style={{ marginBottom: "1rem" }}>
-            {item.heading && <TrendHeading>{item.heading}</TrendHeading>}
-
-            {item.lines && item.lines.length > 0 && (
-              <ul style={{ marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
-                {item.lines.map((line, lineIdx) => (
-                  <li
-                    key={`line-${lineIdx}`}
-                    style={{ marginBottom: "0.5rem" }}
-                    // Render HTML in each line
-                    dangerouslySetInnerHTML={{ __html: line }}
-                  />
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </TrendContainer>
-  );
-};
-
 export default function DocsPageLayoutPage() {
   // Offcanvas state
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -634,7 +410,7 @@ export default function DocsPageLayoutPage() {
   return (
     <PageWrapper>
       {/* ============== TOP NAVIGATION ============== */}
-      <TopNavBar>
+      {/* <TopNavBar>
         {topNavData.map((navItem) => (
           <TopNavLink
             key={navItem.id}
@@ -645,7 +421,7 @@ export default function DocsPageLayoutPage() {
           </TopNavLink>
         ))}
 
-        {/* Hamburger button: only visible below md */}
+
         <Button
           variant="primary"
           className="d-md-none ms-auto" // d-md-none = hide at md+, ms-auto = push to right
@@ -653,7 +429,13 @@ export default function DocsPageLayoutPage() {
         >
           ☰ Menu
         </Button>
-      </TopNavBar>
+      </TopNavBar> */}
+      <TopNavBar
+        topNavData={topNavData}
+        activeTopNav={activeTopNav}
+        handleTopNavClick={handleTopNavClick}
+        onBurgerClick={() => setShowOffcanvas(true)}
+      />
 
       {/* ============== BODY: 3-COLUMN LAYOUT ============== */}
       <Container fluid style={{ flex: 1 }}>
