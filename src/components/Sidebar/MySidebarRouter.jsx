@@ -9,20 +9,21 @@ import {
   SidebarItemRow,
   ArrowIcon,
 } from "./SidebarStyle";
+import sideNavData from "../../data/sideNavData";
 
 // Example sideNavData
-const sideNavData = {
-  home: [
-    {
-      groupTitle: "GET STARTED",
-      items: [
-        { id: "intro-to-vetcation", label: "Intro to Vetcation" },
-        { id: "virtual-clinic", label: "Setting Up Your Virtual Clinic" },
-      ],
-    },
-    // ...
-  ],
-};
+// const sideNavData = {
+//   home: [
+//     {
+//       groupTitle: "GET STARTED",
+//       items: [
+//         { id: "intro-to-vetcation", label: "Intro to Vetcation" },
+//         { id: "virtual-clinic", label: "Setting Up Your Virtual Clinic" },
+//       ],
+//     },
+//     // ...
+//   ],
+// };
 
 export default function MySidebarRouter({
   activeTopNav = "home", // default if none passed

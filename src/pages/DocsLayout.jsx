@@ -1,5 +1,5 @@
 // DocsLayout.jsx
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
@@ -8,6 +8,8 @@ import MySidebarRouter from "../components/Sidebar/MySidebarRouter";
 import RightSideBar from "../components/Sidebar/RightSideBar";
 import topNavData from "../data/topNavData";
 import RightSideBarRouter from "../components/Sidebar/RightSideBarRouter";
+import TopNavBarRounter from "../components/TopNavBarRouter";
+import ScrollToTop from "../components/ScrollToTop";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -20,40 +22,20 @@ const PageWrapper = styled.div`
 export default function DocsLayout() {
   const [activeTopNav, setActiveTopNav] = useState("home");
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-
-  // 1) docSections for the right sidebar
   const [docSections, setDocSections] = useState([]);
-  // 2) activeSection ID for highlighting
   const [activeSectionId, setActiveSectionId] = useState(null);
-
-  // We'll keep a ref to the main content container so we can scroll
   const mainContentRef = useRef(null);
 
-  // Called by the doc page to set the sections it has
-  function registerSections(sectionsArray) {
+  // Wrap registerSections in useCallback so its identity is stable
+  const registerSections = useCallback((sectionsArray) => {
     setDocSections(sectionsArray || []);
-  }
+  }, []);
 
-  // Called by the doc page's intersection observer to update which section is active
-  function setActiveSection(sectionId) {
+  // Similarly, wrap setActiveSection
+  const setActiveSection = useCallback((sectionId) => {
     setActiveSectionId(sectionId);
-  }
+  }, []);
 
-  // Called by the right sidebar when the user clicks a section
-  function scrollToSection(sectionId) {
-    // We dispatch a custom event or we can store a map of refs in the layout
-    // But simplest: We'll rely on the doc page to handle a "scrollToSection"
-    // approach using a custom event or something similar.
-    // Or see "Approach B" below for a more integrated solution.
-
-    // For now, let's just do a quick hack:
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
-
-  // If your docs use multiple top nav items
   const handleTopNavClick = (navId) => {
     setActiveTopNav(navId);
   };
@@ -61,7 +43,7 @@ export default function DocsLayout() {
   return (
     <PageWrapper>
       {/* Top Nav Bar */}
-      <TopNavBar
+      <TopNavBarRounter
         topNavData={topNavData}
         activeTopNav={activeTopNav}
         handleTopNavClick={handleTopNavClick}
@@ -70,7 +52,7 @@ export default function DocsLayout() {
 
       <Container fluid style={{ flex: 1 }}>
         <Row style={{ height: "100%" }}>
-          {/* LEFT SIDEBAR (desktop) */}
+          {/* LEFT SIDEBAR */}
           <Col
             xs={12}
             md={3}
@@ -87,7 +69,7 @@ export default function DocsLayout() {
 
           {/* MIDDLE CONTENT */}
           <Col
-            ref={mainContentRef} // store a ref
+            ref={mainContentRef}
             xs={12}
             md={6}
             lg={8}
@@ -98,22 +80,22 @@ export default function DocsLayout() {
               overflowY: "auto",
             }}
           >
-            {/*
-              Provide a context object to child routes:
-              - registerSections so they can set docSections
-              - setActiveSection so they can set activeSectionId
-              - Possibly scrollToSection, if we want the doc page to handle it. 
-            */}
+            <ScrollToTop containerRef={mainContentRef} />
             <Outlet
               context={{
                 registerSections,
                 setActiveSection,
-                scrollToSection,
+                scrollToSection: (sectionId) => {
+                  const el = document.getElementById(sectionId);
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                },
               }}
             />
           </Col>
 
-          {/* RIGHT SIDEBAR (desktop) */}
+          {/* RIGHT SIDEBAR */}
           <Col
             xs={12}
             md={3}
@@ -128,13 +110,18 @@ export default function DocsLayout() {
             <RightSideBarRouter
               docSections={docSections}
               activeSectionId={activeSectionId}
-              onSectionClick={scrollToSection}
+              onSectionClick={(sectionId) => {
+                const el = document.getElementById(sectionId);
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
             />
           </Col>
         </Row>
       </Container>
 
-      {/* OFFCANVAS (mobile) */}
+      {/* OFFCANVAS */}
       <Offcanvas
         show={showOffcanvas}
         onHide={() => setShowOffcanvas(false)}

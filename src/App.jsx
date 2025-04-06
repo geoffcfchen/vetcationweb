@@ -20,6 +20,7 @@ import TelemedicineInfo from "./pages/TelemedicineInfo";
 import DocsPageLayoutPage from "./pages/DocsPageLayoutPage";
 import DocsLayout from "./pages/DocsLayout";
 import IntroToVetcation from "./pages/docs/IntroToVetcation";
+import DocsContent from "./data/docs/DocsContent";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -97,22 +98,26 @@ function App() {
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
         <Route path="/vets" element={<ForVetPage />} />
-        <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} />
+        {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}
         {/* The layout route for docs */}
-        {/* <Route path="/telemedicine-info" element={<DocsLayout />}> */}
-        {/* Each child route is the middle content. */}
+        <Route path="/telemedicine-info" element={<DocsLayout />}>
+          {/* Each child route is the middle content. */}
 
-        {/* index: the default if user visits /telemedicine-info with no sub-path */}
-        {/* <Route index element={<IntroToVetcation />} /> */}
+          {/* index: the default if user visits /telemedicine-info with no sub-path */}
+          <Route index element={<IntroToVetcation />} />
 
-        {/* Nested paths (these appear in the URL) */}
-        {/* <Route
+          {/* Nested paths (these appear in the URL) */}
+          {/* <Route
             path="home/intro-to-vetcation"
             element={<IntroToVetcation />}
           /> */}
-        {/* <Route path="home/virtual-clinic" element={<VirtualClinic />} /> */}
-        {/* <Route path="home/scheduling/*" element={<Scheduling />} /> */}
-        {/* </Route> */}
+          <Route path=":topNavId/:docId" element={<DocsContent />} />
+          {/* <Route path="home/virtual-clinic" element={<VirtualClinic />} />
+          <Route
+            path="clinic/intro-to-vetcation"
+            element={<ClinicIntroToVetcation />}
+          /> */}
+        </Route>
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect" element={<RedirectPage />} />
