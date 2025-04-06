@@ -106,17 +106,7 @@ function App() {
           {/* index: the default if user visits /telemedicine-info with no sub-path */}
           <Route index element={<IntroToVetcation />} />
 
-          {/* Nested paths (these appear in the URL) */}
-          {/* <Route
-            path="home/intro-to-vetcation"
-            element={<IntroToVetcation />}
-          /> */}
           <Route path=":topNavId/:docId" element={<DocsContent />} />
-          {/* <Route path="home/virtual-clinic" element={<VirtualClinic />} />
-          <Route
-            path="clinic/intro-to-vetcation"
-            element={<ClinicIntroToVetcation />}
-          /> */}
         </Route>
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}

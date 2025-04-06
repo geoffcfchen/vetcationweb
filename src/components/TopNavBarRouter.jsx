@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import logo from "../images/plain_icon_600.png"; // Adjust the path as necessary
 
 const TopNavBarContainer = styled.nav`
   background-color: #111;
@@ -20,6 +21,24 @@ const TopNavLink = styled.span`
   &:hover {
     color: #fff;
   }
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  /* You can add hover effects here if needed */
+`;
+
+const Logo = styled.img`
+  width: 25px; /* adjust as needed */
+`;
+
+const LogoText = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
 `;
 
 export default function TopNavBarRounter({
@@ -41,6 +60,11 @@ export default function TopNavBarRounter({
 
   return (
     <TopNavBarContainer>
+      {/* Logo and Logo Text */}
+      <LogoContainer onClick={() => navigate("/")}>
+        <Logo src={logo} alt="Vetcation Logo" />
+        <LogoText>Vetcation</LogoText>
+      </LogoContainer>
       {topNavData.map((navItem) => (
         <TopNavLink
           key={navItem.id}
