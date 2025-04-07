@@ -15,7 +15,7 @@ const BulletList = styled.ul`
 `;
 
 const BulletListItem = styled.li`
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   line-height: 1.6;
 `;
 
@@ -29,10 +29,20 @@ const BulletListBlock = ({ block }) => {
             {heading && (
               <span style={{ fontWeight: "bold", color: "#fff" }}>
                 {heading}
+                {lines.length === 1 && (
+                  <span
+                    style={{
+                      fontWeight: "normal",
+                      color: "#ccc",
+                      marginLeft: "0.3rem",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: lines[0] }}
+                  />
+                )}
               </span>
             )}
 
-            {lines.length > 0 && (
+            {lines.length > 1 && (
               <ul style={{ marginTop: "0.5rem", paddingLeft: "1.2rem" }}>
                 {lines.map((line, lineIdx) => (
                   <li

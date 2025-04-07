@@ -9,14 +9,7 @@
 const contentData = {
   introToVetcation: {
     mainTitle: "Introduction to Vetcation",
-    mainDescription: `
-        Vetcation is an all-in-one telemedicine and virtual clinic platform tailored 
-        for licensed veterinarians in California. Whether you’re looking to bolster 
-        your existing practice with flexible virtual care or launch a fully remote 
-        clinic, Vetcation streamlines everything from scheduling and record-keeping 
-        to legal compliance under AB 1399. Below you'll see how our platform empowers 
-        you to work from anywhere, enhance client relationships, and keep more of 
-        the revenue you earn—all while remaining audit-ready and legally protected.`,
+    mainDescription: `Vetcation is an open, flexible, and legally compliant platform that empowers California-licensed veterinarians to launch or expand their own virtual clinic while retaining full ownership of their clients, patient records, and revenue. Whether you're building your own client base or collaborating with brick-and-mortar clinics to provide telemedicine services to their clients, Vetcation gives you the confidence and freedom to practice the way you want. From scheduling and documentation to compliance with AB 1399, our platform supports your preferred model of care—so you can work on your own terms, strengthen client relationships, and remain fully audit-ready and legally protected.`,
     sections: [
       {
         id: "achieveWithVetcation",
@@ -44,7 +37,7 @@ const contentData = {
                 ],
               },
               {
-                heading: "AI-Powered Workflows:",
+                heading: "Maximize Your Time & Efficiency:",
                 lines: [
                   "Streamline administrative tasks and elevate efficiency with robust AI assistance, from automated record creation to simplified client follow-ups.",
                 ],
@@ -66,12 +59,12 @@ const contentData = {
           {
             type: "bulletList",
             items: [
-              {
-                heading: "All-Inclusive Virtual Clinic Tools:",
-                lines: [
-                  "Go beyond simple video calls with scheduling, billing, secure records, pharmacy integrations, and robust telemedicine features to run a complete remote practice.",
-                ],
-              },
+              // {
+              //   heading: "All-Inclusive Virtual Clinic Tools:",
+              //   lines: [
+              //     "Go beyond simple video calls with scheduling, billing, secure records, pharmacy integrations, and robust telemedicine features to run a complete remote practice.",
+              //   ],
+              // },
               {
                 heading: "Decentralized Medical Records:",
                 lines: [
@@ -439,8 +432,7 @@ const contentData = {
           {
             type: "qa",
             question: "How do I view my upcoming appointments in the calendar?",
-            answer:
-              "You can access your calendar from the dashboard. The calendar displays all your upcoming appointments, and you can switch between day, week, and month views to see your schedule in the format that works best for you.",
+            answer: `You can access "My calendar" from the drawer. The calendar displays all your upcoming appointments.`,
           },
           {
             type: "framedImage",
@@ -456,8 +448,8 @@ const contentData = {
     ],
   },
 
-  Telemedicine: {
-    mainTitle: "Telemedicine",
+  VideoCall: {
+    mainTitle: "Video Call",
     mainDescription: `Vetcation’s telemedicine system is designed to help you provide high-quality virtual consultations with ease.
     The platform allows you to conduct video calls with clients, share medical records, and manage prescriptions—all in a secure and compliant environment. You can also use the system to document your consultations, ensuring that you have a complete record of each appointment. This feature is essential for maintaining compliance with California’s telemedicine regulations and providing the best possible care to your patients.`,
     sections: [
@@ -475,9 +467,8 @@ const contentData = {
             type: "framedImage",
             // heading: "Sample: Updating Your Legal Profile",
             imageSrcs: [
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
             ],
           },
         ],
@@ -505,8 +496,8 @@ const contentData = {
             // heading: "Sample: Updating Your Legal Profile",
             imageSrcs: [
               "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
-              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8476-min.PNG?alt=media&token=fe1da7ed-ded0-49c2-bbfe-c4e09972c62d",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8477-min.PNG?alt=media&token=e0367cc8-4898-4d55-82ae-202a23bff1e5",
             ],
           },
         ],

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 
 import Header from "./components/Header";
 // import HeroSection from "./components/HeroSection";
@@ -104,7 +104,12 @@ function App() {
           {/* Each child route is the middle content. */}
 
           {/* index: the default if user visits /telemedicine-info with no sub-path */}
-          <Route index element={<IntroToVetcation />} />
+          <Route
+            index
+            element={
+              <Navigate to="/telemedicine-info/home/introToVetcation" replace />
+            }
+          />
 
           <Route path=":topNavId/:docId" element={<DocsContent />} />
         </Route>

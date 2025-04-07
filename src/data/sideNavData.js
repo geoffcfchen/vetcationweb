@@ -16,8 +16,8 @@ const sideNavData = {
           label: "View Upcoming Appointments",
         },
         {
-          id: "Telemedicine",
-          label: "Telemedicine",
+          id: "VideoCall",
+          label: "Video Call",
         },
         { id: "earnings", label: "Earnings & Wallet" },
       ],
