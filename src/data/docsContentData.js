@@ -9,43 +9,53 @@
 const contentData = {
   introToVetcation: {
     mainTitle: "Introduction to Vetcation",
-    mainDescription: `Vetcation is an open, flexible, and legally compliant platform that empowers California-licensed veterinarians to launch their own virtual clinic—retaining full ownership of their clients, patient records, and revenue—or to collaborate with existing clinics by providing telemedicine services to the clinic’s clients.`,
+    mainDescription: `Vetcation is an open, flexible platform built for California-licensed veterinarians who want to launch or grow their virtual presence. Whether you’re starting a fully virtual clinic, integrating telemedicine into your existing practice, or collaborating with brick-and-mortar clinics to serve their clients remotely—Vetcation gives you the tools and freedom to practice on your own terms.`,
     sections: [
       {
         id: "achieveWithVetcation",
         title: "What Can You Achieve with Vetcation?",
         blocks: [
           {
+            type: "paragraph",
+            text: "Vetcation empowers you to redefine your career in veterinary medicine:",
+          },
+          {
             type: "bulletList",
             items: [
               {
-                heading: "Maximize Your Earning Potential:",
+                heading: "Build your own virtual clinic and brand:",
                 lines: [
-                  "Retain up to 70% of the revenue from your virtual services, potentially exceeding $300,000 per year if you choose to work about 40 hours per week.",
+                  "Start a digital practice under your name and nurture strong, lasting client relationships—your clients, your records, your revenue.",
                 ],
               },
               {
-                heading: "Build Your Own Virtual Clinic & Client Base:",
+                heading: "Maximize your earning potential:",
                 lines: [
-                  "Establish and grow your digital practice on your terms—nurture strong, long-term client relationships, fully under your brand.",
+                  "Retain up to 70% of your service fees. A full-time schedule can bring in $265,000+/year—all while cutting overhead costs.",
                 ],
               },
               {
-                heading: "Practice from Anywhere, Anytime:",
+                heading: "Work on your terms, from anywhere:",
                 lines: [
-                  "Enjoy the freedom to work wherever you have an internet connection—be it your home office or a beach on the other side of the world—while maintaining total control over your schedule.",
+                  "Whether it's from a clinic, your home, or across the globe, Vetcation lets you practice whenever and wherever you want.",
                 ],
               },
               {
-                heading: "Maximize Your Time & Efficiency:",
+                heading: "Partner with existing clinics:",
                 lines: [
-                  "Streamline administrative tasks and elevate efficiency with robust AI assistance, from automated record creation to simplified client follow-ups.",
+                  "Collaborate with brick-and-mortar practices to provide virtual coverage, follow-ups, or specialty care under your own identity.",
                 ],
               },
               {
-                heading: "Stay Legally Protected Under AB 1399:",
+                heading: "Streamline your workflow with AI:",
                 lines: [
-                  "Vetcation’s automated workflows help you maintain compliance with California’s evolving telehealth regulations, so you can focus on patient care instead of worrying about the fine print.",
+                  "Save hours every week using AI-powered tools that generate documentation, simplify follow-ups, and support AB 1399 compliance.",
+                ],
+              },
+              {
+                heading: "Ensure compliance with AB 1399:",
+                lines: [
+                  "Vetcation’s infrastructure is designed to align with California’s telehealth law, AB 1399, offering automated support to help maintain full legal compliance and audit readiness.",
                 ],
               },
             ],
@@ -59,52 +69,34 @@ const contentData = {
           {
             type: "bulletList",
             items: [
-              // {
-              //   heading: "All-Inclusive Virtual Clinic Tools:",
-              //   lines: [
-              //     "Go beyond simple video calls with scheduling, billing, secure records, pharmacy integrations, and robust telemedicine features to run a complete remote practice.",
-              //   ],
-              // },
               {
-                heading: "Decentralized Medical Records:",
+                heading: "Build Your Own Brand, Not Someone Else’s:",
                 lines: [
-                  "Manage your clinic’s patient files in a centralized, encrypted environment. Your records stay compliant, secure, and instantly accessible—mirroring in-person best practices.",
+                  "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules—no hidden corporate branding or control.",
                 ],
               },
               {
-                heading: "Flexible Scheduling Made Easy:",
+                heading: "Full Ownership of Medical Records:",
                 lines: [
-                  "Set your own hours, enable last-minute booking or preplanned availability, and adjust as needed—so your virtual clinic runs on your schedule, not the other way around.",
+                  "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records—securely stored and fully compliant.",
                 ],
               },
               {
-                heading: "Messaging & Asynchronous Follow-Ups:",
+                heading: "Chargeable, Inquiry-Based Messaging:",
                 lines: [
-                  "Chargeable chat or messaging consultations let you handle non-urgent queries and follow-up care on your terms, without requiring full appointments for every question.",
+                  "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
                 ],
               },
               {
-                heading: "Pharmacy Freedom:",
+                heading: "Complete Pharmacy Freedom:",
                 lines: [
-                  "Offer prescription pick-up at virtually any pharmacy—including big-box chains, local independents, or mail-order options—giving your clients choice and convenience.",
+                  "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy—whether it’s a big chain, independent shop, or mail-order.",
                 ],
               },
               {
-                heading: "Confident Compliance:",
+                heading: "Built-In AI, No 3rd-Party Dependence:",
                 lines: [
-                  "Our platform incorporates AB 1399 rules and BPC guidance at every step, ensuring that forming a VCPR, prescribing meds, and documenting are all done correctly.",
-                ],
-              },
-              {
-                heading: "AI-Assisted Documentation:",
-                lines: [
-                  "Accelerate note-taking with auto-generated appointment summaries and medical records based on the live video session—saving time while maintaining accuracy.",
-                ],
-              },
-              {
-                heading: "Dedicated Technical & Regulatory Support:",
-                lines: [
-                  "Our support team is here to help you optimize your practice and stay updated on any new legal developments affecting veterinary telemedicine.",
+                  "Our AI-powered features like auto-generated summaries are built natively into Vetcation—keeping your data private and your workflow seamless, without relying on third-party integrations.",
                 ],
               },
             ],
@@ -124,8 +116,8 @@ const contentData = {
               {
                 heading: "Critical Shortages in Veterinary Services:",
                 lines: [
-                  `Over 22% of U.S. counties have <span class="highlight">no veterinary employees</span>, leaving millions of companion animals in <span class="highlight">underserved areas</span> (VVCA Report 2024, p. 7).`,
-                  `The country faces a deficit of <span class="highlight">12,000 veterinarians</span> and <span class="highlight">48,000 support staff</span>, demanding innovative solutions like telemedicine (VVCA Report 2024, p. 7).`,
+                  `Over 22% of U.S. counties have no veterinary employees, leaving millions of companion animals in underserved areas (VVCA Report 2024, p. 7).`,
+                  `The country faces a deficit of 12,000 veterinarians and 48,000 support staff, demanding innovative solutions like telemedicine (VVCA Report 2024, p. 7).`,
                 ],
               },
               {
