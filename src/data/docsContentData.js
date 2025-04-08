@@ -25,13 +25,13 @@ const contentData = {
               {
                 heading: "Build your own virtual clinic and brand:",
                 lines: [
-                  "Start a digital practice under your name and nurture strong, lasting client relationships—your clients, your records, your revenue.",
+                  "Start a digital practice under your name and nurture strong, lasting client relationships - your clients, your records, your revenue.",
                 ],
               },
               {
                 heading: "Maximize your earning potential:",
                 lines: [
-                  "Retain up to 70% of your service fees. A full-time schedule can bring in $265,000+/year—all while cutting overhead costs.",
+                  "Retain up to 70% of your service fees. A full-time schedule can bring in $265,000+/year — all while cutting overhead costs.",
                 ],
               },
               {
@@ -76,13 +76,13 @@ const contentData = {
               {
                 heading: "Build Your Own Brand, Not Someone Else’s:",
                 lines: [
-                  "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules—no hidden corporate branding or control.",
+                  "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
                 ],
               },
               {
                 heading: "Full Ownership of Medical Records:",
                 lines: [
-                  "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records—securely stored and fully compliant.",
+                  "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
                 ],
               },
               {
@@ -94,13 +94,13 @@ const contentData = {
               {
                 heading: "Complete Pharmacy Freedom:",
                 lines: [
-                  "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy—whether it’s a big chain, independent shop, or mail-order.",
+                  "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it’s a big chain, independent shop, or mail-order.",
                 ],
               },
               {
                 heading: "Built-In AI, No 3rd-Party Dependence:",
                 lines: [
-                  "Our AI-powered features like auto-generated summaries are built natively into Vetcation—keeping your data private and your workflow seamless, without relying on third-party integrations.",
+                  "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
                 ],
               },
               {
@@ -117,7 +117,7 @@ const contentData = {
       },
       {
         id: "whyVirtualCareTrend",
-        title: "Why Virtual Care Is Growing—And Why It Matters",
+        title: "Why Virtual Care Is Growing — And Why It Matters",
         blocks: [
           {
             type: "trendPoints",
@@ -135,7 +135,7 @@ const contentData = {
               {
                 heading: "Rapid Consumer Adoption:",
                 lines: [
-                  "Telehealth has become a key access point for pet owners seeking immediate answers—50% of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10).",
+                  "Telehealth has become a key access point for pet owners seeking immediate answers — 50% of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10).",
                   "High demand and convenience are fueling telehealth’s growth, with pet owners embracing virtual visits to save travel time and reduce stress on their animals.",
                 ],
               },
@@ -155,7 +155,7 @@ const contentData = {
               {
                 heading: "High Client Satisfaction:",
                 lines: [
-                  "Virtual interactions garner an average 98.4% satisfaction rate—pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
+                  "Virtual interactions garner an average 98.4% satisfaction rate — pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
                 ],
               },
             ],
