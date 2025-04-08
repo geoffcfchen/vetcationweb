@@ -552,6 +552,14 @@ const contentData = {
               },
             ],
           },
+          {
+            type: "framedImage",
+            // heading: "Sample: Updating Your Legal Profile",
+            imageSrcs: [
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+              "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+            ],
+          },
         ],
       },
     ],
