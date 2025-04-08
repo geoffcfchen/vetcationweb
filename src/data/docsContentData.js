@@ -67,6 +67,10 @@ const contentData = {
         title: "Why Choose Vetcation?",
         blocks: [
           {
+            type: "paragraph",
+            text: "The Only Platform Designed for Independent Veterinary Practice:",
+          },
+          {
             type: "bulletList",
             items: [
               {
@@ -97,6 +101,14 @@ const contentData = {
                 heading: "Built-In AI, No 3rd-Party Dependence:",
                 lines: [
                   "Our AI-powered features like auto-generated summaries are built natively into Vetcation—keeping your data private and your workflow seamless, without relying on third-party integrations.",
+                ],
+              },
+              {
+                heading: "Dedicated Technical & Regulatory Support:",
+                lines: [
+                  "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
+                  "📧 Email: gcfchen@vetcation.com",
+                  "📞 Call or text: (530) 400-6227",
                 ],
               },
             ],
