@@ -41,9 +41,9 @@ const contentData = {
                 ],
               },
               {
-                heading: "Partner with existing clinics:",
+                heading: "Partner with Existing Clinics:",
                 lines: [
-                  "Collaborate with brick-and-mortar practices to provide virtual coverage, follow-ups, or specialty care under your own identity.",
+                  "With one click, collaborate with brick-and-mortar clinics to offer virtual care under your own identity and schedule. Their clients see your availability, and medical records are shared to support continuity of care.",
                 ],
               },
               {
@@ -493,7 +493,7 @@ const contentData = {
             type: "qa",
             question: "How do I view my earnings and wallet balance?",
             answer:
-              "You can access your earnings overview from the dashboard. This section provides a detailed breakdown of your earnings, including completed consultations, pending payments, and any fees associated with your transactions.",
+              "You can access your earnings overview from Wallet. This section provides a detailed breakdown of your income, including completed consultations and follow-up charges from Vetssenger — our inquiry-based messaging tool.",
           },
           {
             type: "framedImage",
@@ -511,7 +511,7 @@ const contentData = {
 
   scheduleOverview: {
     mainTitle: "Scheduling Overview",
-    mainDescription: `Welcome to your scheduling hub! This section provides a high-level view of all the tools available for managing your appointments—from setting your regular weekly schedule and adding specific time slots to pausing your availability and viewing your calendar. Whether you’re a first-time user or looking to optimize your current setup, this overview helps you understand how all the pieces fit together.`,
+    mainDescription: `Welcome to your scheduling hub! This section provides a high-level view of all the tools available for managing your appointments — from setting your regular weekly schedule and adding specific time slots to pausing your availability and viewing your calendar. Whether you’re a first-time user or looking to optimize your current setup, this overview helps you understand how all the pieces fit together.`,
     sections: [
       {
         id: "schedulingIntro",
@@ -547,7 +547,7 @@ const contentData = {
               {
                 heading: "Manage My Schedule:",
                 lines: [
-                  "View all your upcoming appointments in a calendar view—by day, week, or month—and easily join or cancel sessions.",
+                  "View all your upcoming appointments in a calendar view and easily join or cancel sessions.",
                 ],
               },
             ],
@@ -589,7 +589,7 @@ const contentData = {
 
   regularAvailability: {
     mainTitle: "Regular Availability",
-    mainDescription: `Regular Availability puts you in control of your schedule. You can set the times you’re available for appointments, and the system will automatically generate 30-minute appointment slots for the next 30 days based on your preferences. Once your regular availability is set, the system will continuously maintain this 30-day window by creating new slots each day. Clients can instantly book available times, and any updates you make will immediately reflect in future open slots—no manual adjustments needed.`,
+    mainDescription: `Regular Availability puts you in control of your schedule. You can set the times you’re available for appointments, and the system will automatically generate 30-minute appointment slots for the next 30 days based on your preferences. Once your regular availability is set, the system will continuously maintain this 30-day window by creating new slots each day. Clients can instantly book available times, and any updates you make will immediately reflect in future open slots — no manual adjustments needed.`,
 
     sections: [
       {
@@ -600,7 +600,7 @@ const contentData = {
             type: "qa",
             question: "How do I set my Regular Availability?",
             answer:
-              "From your availability settings, you can customize your weekly schedule—Monday through Sunday. Choose one or more time slots per day and assign different rates as needed. It's flexible, and you're in charge.",
+              "From your availability settings, you can customize your weekly schedule — Monday through Sunday. Choose one or more time slots per day and assign different rates as needed. It's flexible, and you're in charge.",
           },
           {
             type: "framedImage",
@@ -665,7 +665,7 @@ const contentData = {
 
   pauseAvailability: {
     mainTitle: "Pause Availability",
-    mainDescription: `Pause Availability lets you temporarily hide your profile and stop new appointments from being booked. Whether you need an hour, a day, a week, or time off until a specific date, you can pause your availability quickly from this feature. This is perfect for handling last-minute conflicts, planned time off, or unexpected changes. Pausing only affects new bookings—any appointments already scheduled during the pause period will remain on your calendar and will not be canceled. The system will automatically reopen your schedule when the pause ends.`,
+    mainDescription: `Pause Availability lets you temporarily hide your profile and stop new appointments from being booked. Whether you need an hour, a day, a week, or time off until a specific date, you can pause your availability quickly from this feature. This is perfect for handling last-minute conflicts, planned time off, or unexpected changes. Pausing only affects new bookings — any appointments already scheduled during the pause period will remain on your calendar and will not be canceled. The system will automatically reopen your schedule when the pause ends.`,
 
     sections: [
       {
@@ -832,7 +832,7 @@ const contentData = {
             question:
               "Can a California-licensed veterinarian prescribe a new medication for the same diagnosis if the animal is currently out of state?",
             answer:
-              "No. Under AB 1399, prescribing any new medication while the animal is physically outside of California is considered telehealth and is not permitted—even if the diagnosis (such as gastroenteritis) was previously established. The only exception is authorizing a refill of an existing prescription. Initiating a new treatment plan, even under the same diagnosis, is not allowed if the animal is not in California.",
+              "No. Under AB 1399, prescribing any new medication while the animal is physically outside of California is considered telehealth and is not permitted — even if the diagnosis (such as gastroenteritis) was previously established. The only exception is authorizing a refill of an existing prescription. Initiating a new treatment plan, even under the same diagnosis, is not allowed if the animal is not in California.",
             example:
               "If a dog was diagnosed with gastroenteritis during an in-state visit and was prescribed anti-nausea medication for vomiting, but later develops diarrhea while in another state, the vet cannot prescribe a new anti-diarrheal unless it was already included as a PRN medication during the original consult.",
             helpText:
@@ -866,7 +866,7 @@ const contentData = {
             question:
               "Can a California-licensed veterinarian provide telemedicine if they are physically located outside of California?",
             answer:
-              "Yes. Under AB 1399, veterinary telehealth is legally considered to occur at the location of the animal patient—not the veterinarian. As long as the animal is physically in California at the time of the telemedicine consult, a California-licensed veterinarian may practice via telehealth even if they are located outside of California or outside the United States.",
+              "Yes. Under AB 1399, veterinary telehealth is legally considered to occur at the location of the animal patient — not the veterinarian. As long as the animal is physically in California at the time of the telemedicine consult, a California-licensed veterinarian may practice via telehealth even if they are located outside of California or outside the United States.",
             example:
               "If you are a California-licensed veterinarian traveling in New York or abroad and a pet located in California needs a telemedicine consult, you may provide care as long as a valid VCPR is established and all requirements of AB 1399 are followed.",
             helpText:
@@ -919,7 +919,7 @@ const contentData = {
               "Yes. The veterinarian must provide the client with a written disclosure that the client may obtain the prescription either from the veterinarian or from a pharmacy of the client’s choice. (BPC, § 4170, subd. (a)(7).) Furthermore, before prescribing, the veterinarian must offer to provide a written prescription that the client may choose to have filled by the prescriber or by any pharmacy. (BPC, § 4170, subd. (a)(6).)",
             example: "",
             helpText:
-              "Our platform allows clients to select their preferred pharmacy—whether a physical location like Costco, Walmart, or CVS, or an online pharmacy such as Mixlab or Chewy. Vets can confirm the client’s choice directly in the Vetcation interface before finalizing a prescription, ensuring compliance with AB 1399 and other state regulations.",
+              "Our platform allows clients to select their preferred pharmacy — whether a physical location like Costco, Walmart, or CVS, or an online pharmacy such as Mixlab or Chewy. Vets can confirm the client’s choice directly in the Vetcation interface before finalizing a prescription, ensuring compliance with AB 1399 and other state regulations.",
           },
         ],
       },
@@ -935,7 +935,7 @@ const contentData = {
               "Under California law (BPC section 4857), veterinarians must maintain the confidentiality of all client and patient information, just as they would for in-person care. If a veterinarian negligently releases this information, they could face a civil lawsuit (outside of the Veterinary Medical Board’s jurisdiction). In other words, even though the Board may not prosecute you for a privacy breach, a client could sue you in civil court for mishandling confidential data. That’s why it’s crucial to understand and follow privacy laws that apply to veterinary practice, both in person and via telehealth.",
             example: "",
             helpText:
-              "Our platform is designed with secure data handling and encrypted communication to protect confidential information during telehealth sessions. Vetcation also provides access controls so that only authorized users can view client records, reducing the risk of accidental disclosure. We recommend veterinarians familiarize themselves with all relevant privacy regulations and use best practices—such as password protection, secure networks, and careful record-sharing protocols—to minimize liability.",
+              "Our platform is designed with secure data handling and encrypted communication to protect confidential information during telehealth sessions. Vetcation also provides access controls so that only authorized users can view client records, reducing the risk of accidental disclosure. We recommend veterinarians familiarize themselves with all relevant privacy regulations and use best practices — such as password protection, secure networks, and careful record-sharing protocols—to minimize liability.",
           },
         ],
       },
@@ -948,7 +948,7 @@ const contentData = {
             question:
               "If the client does not provide the veterinarian with the animal patient’s relevant medical history or medical records, can the veterinarian provide veterinary telehealth for the animal patient?",
             answer:
-              "Telehealth cannot be used if the veterinarian does not obtain and review the relevant medical history for the animal. However, actual medical records are not strictly required—if the client can relay the pet’s relevant history verbally or via written form, that may suffice. If official medical records are available, the veterinarian must obtain and review them before proceeding. (BPC, § 4826.6, subd. (h)(2).)",
+              "Telehealth cannot be used if the veterinarian does not obtain and review the relevant medical history for the animal. However, actual medical records are not strictly required — if the client can relay the pet’s relevant history verbally or via written form, that may suffice. If official medical records are available, the veterinarian must obtain and review them before proceeding. (BPC, § 4826.6, subd. (h)(2).)",
             example: "",
             helpText:
               "Our platform prompts the client to provide a thorough history of the animal’s condition before the telehealth appointment. If past records exist, we encourage clients to upload them. This ensures the veterinarian has enough background information to make an informed assessment, keeping the telehealth process compliant with AB 1399 and other state regulations.",
@@ -1015,7 +1015,7 @@ const contentData = {
               "Before prescribing any drug or medication via telehealth, the veterinarian must confirm with the client that the horse is not engaged in racing or training at a facility under CHRB jurisdiction. If the horse is engaged in racing or training under the CHRB, telehealth prescribing is prohibited. (BPC, § 4826.6, subd. (i)(8).) The veterinarian’s lack of knowledge is not considered a defense if the horse is later found to be racing or training. Therefore, you should document your inquiry and the client’s response in the medical record to demonstrate due diligence in verifying the horse’s status.",
             example: "",
             helpText:
-              "Our platform includes a pre-consultation form where clients must disclose whether the horse is involved in racing or training under the CHRB. Vetcation automatically stores this information in the patient’s record, providing written proof that the veterinarian asked—and the client answered—before issuing any telehealth prescriptions.",
+              "Our platform includes a pre-consultation form where clients must disclose whether the horse is involved in racing or training under the CHRB. Vetcation automatically stores this information in the patient’s record, providing written proof that the veterinarian asked — and the client answered — before issuing any telehealth prescriptions.",
           },
         ],
       },
@@ -1091,7 +1091,7 @@ const contentData = {
             answer:
               "A VCPR exists when a veterinarian takes responsibility for making medical judgments regarding an animal patient, and the client agrees to follow the vet’s instructions. The veterinarian must be sufficiently familiar with the animal’s condition (via in-person exam, synchronous audio-video exam, or timely premises visits), and must communicate a treatment or diagnostic plan to the client. (BPC, § 4826.6, subds. (a), (b).)",
             example:
-              "If you have recently examined the animal—either in person or by a live video consult—and discussed a treatment plan with the client, you’ve established a VCPR, provided the client has consented to your guidance.",
+              "If you have recently examined the animal — either in person or by a live video consult — and discussed a treatment plan with the client, you’ve established a VCPR, provided the client has consented to your guidance.",
             helpText:
               "Vetcation logs each exam (in-person or video), ensuring you have a clear record of how and when the VCPR was formed. This audit trail demonstrates compliance if questions arise.",
           },
@@ -1142,7 +1142,7 @@ const contentData = {
             answer:
               "A premises visit means you go to the location where the animal is kept (e.g., a client’s home, ranch, farm, or stable) to evaluate the patient. This direct observation of the animal’s condition and environment is legally recognized as a valid way to establish a VCPR. (BPC, § 4826.6, subd. (b)(3).)",
             example:
-              "You regularly visit a farm to check on a herd of goats. Because you’ve observed them on-site, you can later offer telemedicine consults for those goats without needing another in-person exam—so long as your premises visits are considered medically appropriate and timely.",
+              "You regularly visit a farm to check on a herd of goats. Because you’ve observed them on-site, you can later offer telemedicine consults for those goats without needing another in-person exam — so long as your premises visits are considered medically appropriate and timely.",
             helpText:
               "Our platform stores documentation of each premises visit. When you do a follow-up video consult, Vetcation sees that you’ve already established a valid VCPR through an on-site exam, ensuring compliance with California law.",
           },
@@ -1154,7 +1154,7 @@ const contentData = {
 
   PrescriptionLimits: {
     mainTitle: "Prescription Time Limits under AB 1399",
-    mainDescription: `Once a valid VCPR is established—whether in person or via telehealth—there are 
+    mainDescription: `Once a valid VCPR is established — whether in person or via telehealth — there are 
   important time limits on how long you can continue prescribing medications before 
   another exam is required. California’s AB 1399 (BPC, § 4826.6) and related statutes 
   lay out different rules depending on the type of exam and the type of drug. Below 
@@ -1171,7 +1171,7 @@ const contentData = {
             answer:
               "California law distinguishes between an in-person exam and a telehealth-based exam. If you establish the VCPR in person, you can typically prescribe for up to one year. But if you establish it via synchronous audio-video, you can only prescribe for up to six months for most drugs, and only up to 14 days for antimicrobials. (BPC, § 4826.6, subds. (i)(2)–(5).)",
             example:
-              "You examine a dog in person at your clinic. Six months later, the dog needs a refill on its heart medication. Because you established the VCPR in person, you can still legally prescribe without another exam—assuming you haven’t exceeded one year since the last in-person visit.",
+              "You examine a dog in person at your clinic. Six months later, the dog needs a refill on its heart medication. Because you established the VCPR in person, you can still legally prescribe without another exam — assuming you haven’t exceeded one year since the last in-person visit.",
             helpText:
               "Our platform checks the date and method of the last exam. If you try to prescribe beyond the legal time limit, Vetcation will flag it or block it, helping you avoid noncompliance.",
           },
@@ -1203,7 +1203,7 @@ const contentData = {
             question:
               "What if I established the VCPR using a synchronous audio-video exam? How long can I prescribe then?",
             answer:
-              "If the VCPR was formed solely via live video (no prior in-person exam), you may only prescribe most drugs for up to six months from the date of that exam. After six months, you need another exam—either another video consult or an in-person exam—before continuing to prescribe. (BPC, § 4826.6, subd. (i)(4).)",
+              "If the VCPR was formed solely via live video (no prior in-person exam), you may only prescribe most drugs for up to six months from the date of that exam. After six months, you need another exam — either another video consult or an in-person exam — before continuing to prescribe. (BPC, § 4826.6, subd. (i)(4).)",
             example:
               "On February 1, 2025, you conduct a video consult for a dog’s skin condition and prescribe a topical medication. By August 1, 2025, you must re-examine the dog (via video or in person) if they need more medication.",
             helpText:
@@ -1268,7 +1268,7 @@ const contentData = {
             answer:
               "Under BPC § 4826.6(h)(1), veterinarians must use technology and methods that protect confidential client and patient information during telehealth. Additionally, you must follow the same privacy and recordkeeping standards that apply to in-person care. If medical records exist, you must maintain their confidentiality and ensure they’re only accessed by authorized personnel. (BPC § 4857.)",
             example:
-              "If you store telemedicine session videos or chat logs, you must keep them secure—just like paper records in a physical clinic. This means using encrypted storage, limiting who can view them, and retaining them for the legally required duration.",
+              "If you store telemedicine session videos or chat logs, you must keep them secure — just like paper records in a physical clinic. This means using encrypted storage, limiting who can view them, and retaining them for the legally required duration.",
             helpText:
               "Our platform uses end-to-end encryption for live video sessions and secure data storage for patient records. Only the assigned veterinarian and authorized team members can access these files, reducing the risk of accidental disclosure.",
           },
@@ -1304,7 +1304,7 @@ const contentData = {
             example:
               "If you plan to record the audio from a live consult and use AI to generate a medical record, you must notify the client that their session is being recorded and processed. If they decline, you cannot record or process their session. Consent is essential, and all data must remain encrypted and access-controlled.",
             helpText:
-              "Our AI operates on secure, internal servers—no third-party cloud providers. We encrypt audio files and transcripts, then generate two separate documents: (1) a detailed medical record for the veterinarian’s files, and (2) a concise appointment summary for the client’s portal. Before the AI feature is enabled, Vetcation prompts you to confirm that the client has agreed to have their session recorded and processed, preventing any inadvertent privacy violations.",
+              "Our AI operates on secure, internal servers — no third-party cloud providers. We encrypt audio files and transcripts, then generate two separate documents: (1) a detailed medical record for the veterinarian’s files, and (2) a concise appointment summary for the client’s portal. Before the AI feature is enabled, Vetcation prompts you to confirm that the client has agreed to have their session recorded and processed, preventing any inadvertent privacy violations.",
           },
         ],
       },
@@ -1453,9 +1453,9 @@ const contentData = {
             answer:
               "You must comply with the telehealth laws of whichever state the animal is physically located in at the time of the consult. If the patient is in California, you can proceed under your California license, following AB 1399. If the patient travels to your other licensed state, you can switch to practicing under that state’s rules, but you cannot rely on your California license alone in a jurisdiction where you aren’t licensed. Always verify you’re operating within the local telehealth statutes to avoid unlicensed practice.",
             example:
-              "You have licenses in both California and Oregon. When the pet is physically in California, AB 1399 applies. The moment they cross into Oregon, you must follow Oregon’s telemedicine requirements—your California telehealth VCPR doesn’t automatically extend across state lines unless Oregon law allows it.",
+              "You have licenses in both California and Oregon. When the pet is physically in California, AB 1399 applies. The moment they cross into Oregon, you must follow Oregon’s telemedicine requirements — your California telehealth VCPR doesn’t automatically extend across state lines unless Oregon law allows it.",
             helpText:
-              "Vetcation’s scheduling prompts can help identify the pet’s current location. If it’s out of California, Vetcation will warn you that California’s AB 1399 rules may not apply. You can then choose to proceed under your Oregon license—assuming you hold one and Oregon’s laws permit telehealth for that scenario.",
+              "Vetcation’s scheduling prompts can help identify the pet’s current location. If it’s out of California, Vetcation will warn you that California’s AB 1399 rules may not apply. You can then choose to proceed under your Oregon license — assuming you hold one and Oregon’s laws permit telehealth for that scenario.",
           },
         ],
       },
@@ -1470,7 +1470,7 @@ const contentData = {
             answer:
               "Yes, these communications can still be considered telehealth, but you cannot establish a valid VCPR solely through non-visual means (phone, email, or text). Under AB 1399, the veterinarian must use synchronous audio-video to perform an exam if the VCPR hasn’t already been established in person. Phone calls, emails, or text messages may supplement an existing VCPR, but they cannot replace the initial real-time video or in-person exam requirements. (BPC, § 4826.6, subds. (b)(2), (d).)",
             example:
-              "A client calls you about their dog’s cough but you’ve never met the animal. Messaging guidance alone cannot establish a new VCPR—you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
+              "A client calls you about their dog’s cough but you’ve never met the animal. Messaging guidance alone cannot establish a new VCPR — you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
             helpText:
               "Vetcation supports text or chat-based follow-ups for minor adjustments once the VCPR is formed (via in-person or synchronous video). Our interface keeps a clear record of these communications, ensuring continuity of care without violating AB 1399.",
           },
@@ -1485,7 +1485,7 @@ const contentData = {
             question:
               "What if I attempt a telehealth exam via live video but find I cannot accurately diagnose or assess the animal’s condition? Am I required to refer them for an in-person exam?",
             answer:
-              "Yes. If, at any point, you determine that a telehealth exam (even synchronous audio-video) is insufficient to meet the standard of care, you must advise the client to schedule an in-person visit. Telehealth is only permissible when it allows you to gather enough information to make safe, informed medical decisions. If that isn’t possible, continuing solely via telehealth would be inappropriate—and could subject you to disciplinary action if an error occurs. (BPC, § 4826.6, subd. (c).)",
+              "Yes. If, at any point, you determine that a telehealth exam (even synchronous audio-video) is insufficient to meet the standard of care, you must advise the client to schedule an in-person visit. Telehealth is only permissible when it allows you to gather enough information to make safe, informed medical decisions. If that isn’t possible, continuing solely via telehealth would be inappropriate — and could subject you to disciplinary action if an error occurs. (BPC, § 4826.6, subd. (c).)",
             example:
               "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
             helpText:
@@ -2645,7 +2645,7 @@ const contentData = {
         blocks: [
           {
             type: "paragraph",
-            text: "If your client opts to use an online pharmacy such as Chewy or VetSource, note that this process can be more cumbersome. The pet owner must create an account and request the prescription, after which you must contact the pharmacy to verify it. This route may be less efficient, particularly for urgent medications.",
+            text: "If your client opts to use an online pharmacy such as Chewy, note that this process can be more cumbersome. The pet owner must create an account and request the prescription, after which you must contact the pharmacy to verify it. This route may be less efficient, particularly for urgent medications.",
           },
         ],
       },
