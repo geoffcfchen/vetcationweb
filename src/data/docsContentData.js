@@ -2703,7 +2703,7 @@ const contentData = {
                 },
                 {
                   name: "Mingli Lee",
-                  title: "UX Design",
+                  title: "UX Designer",
                   description:
                     "Mingli Lee made significant contributions to the UX design during the early stages of the Vetcation product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
                 },
