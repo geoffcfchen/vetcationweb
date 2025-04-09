@@ -1,6 +1,6 @@
 // MySidebarRouter.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   SidebarContainer,
   SidebarGroupTitle,
@@ -12,10 +12,12 @@ import {
 import sideNavData from "../../data/sideNavData";
 
 export default function MySidebarRouter({
-  activeTopNav = "home", // default if none passed
+  activeTopNav = "home",
   closeOffcanvas = () => {},
 }) {
   const [expandedItems, setExpandedItems] = useState([]);
+  // Use React Router's useLocation to get current path
+  const location = useLocation();
 
   // Expand/collapse logic
   function handleExpandCollapse(itemId) {
@@ -38,13 +40,15 @@ export default function MySidebarRouter({
               const hasSubItems = parentItem.subItems?.length > 0;
               const isExpanded = expandedItems.includes(parentItem.id);
 
-              // For the route path, we do: /telemedicine-info/<activeTopNav>/<parentItem.id>
-              // e.g. /telemedicine-info/home/intro-to-vetcation
+              // The path to this item
               const routePath = `/telemedicine-info/${activeTopNav}/${parentItem.id}`;
 
               if (!hasSubItems) {
+                // Check if it's active
+                const isActive = location.pathname === routePath;
+
                 return (
-                  <SidebarItemRow key={parentItem.id}>
+                  <SidebarItemRow key={parentItem.id} $active={isActive}>
                     <Link
                       to={routePath}
                       onClick={closeOffcanvas}
@@ -55,7 +59,6 @@ export default function MySidebarRouter({
                   </SidebarItemRow>
                 );
               } else {
-                // If subItems exist
                 return (
                   <div key={parentItem.id}>
                     <SidebarItemRow
@@ -68,8 +71,11 @@ export default function MySidebarRouter({
                       <SecondLevelContainer>
                         {parentItem.subItems.map((child) => {
                           const subRoute = `/telemedicine-info/${activeTopNav}/${child.id}`;
+                          // Check if sub-item is active
+                          const isActive = location.pathname === subRoute;
+
                           return (
-                            <SidebarItemRow key={child.id}>
+                            <SidebarItemRow key={child.id} $active={isActive}>
                               <Link
                                 to={subRoute}
                                 onClick={closeOffcanvas}

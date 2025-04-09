@@ -53,6 +53,7 @@ export default function DocsLayout() {
       <Container fluid style={{ flex: 1 }}>
         <Row style={{ height: "100%" }}>
           {/* LEFT SIDEBAR */}
+
           <Col
             xs={12}
             md={3}
@@ -96,6 +97,7 @@ export default function DocsLayout() {
           </Col>
 
           {/* RIGHT SIDEBAR */}
+
           <Col
             xs={12}
             md={3}

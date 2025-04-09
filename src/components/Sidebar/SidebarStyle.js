@@ -71,7 +71,7 @@ export const SecondLevelContainer = styled.div`
 export const SidebarItemRow = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; /* arrow on the right */
+  justify-content: space-between;
   cursor: pointer;
   padding: 6px 0;
   font-size: 0.875rem;
@@ -82,11 +82,13 @@ export const SidebarItemRow = styled.div`
     color: #fff;
   }
 
-  /* Optional: highlight the active item with a small colored bar or bold text */
   ${(props) =>
     props.$active &&
     css`
       font-weight: 500;
+      /* Optionally add a small highlight bar or a different background color, e.g.: */
+      /* border-left: 2px solid #4caf50; */
+      /* background-color: #222; */
     `}
 `;
 

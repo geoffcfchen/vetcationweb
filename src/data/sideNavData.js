@@ -175,6 +175,17 @@ const sideNavData = {
       ],
     },
   ],
+  contributors: [
+    {
+      groupTitle: "Vetcation Contributors",
+      items: [
+        {
+          id: "ourContributors",
+          label: "Our Contributors",
+        },
+      ],
+    },
+  ],
 };
 
 export default sideNavData;

@@ -21,6 +21,7 @@ import DocsPageLayoutPage from "./pages/DocsPageLayoutPage";
 import DocsLayout from "./pages/DocsLayout";
 import IntroToVetcation from "./pages/docs/IntroToVetcation";
 import DocsContent from "./data/docs/DocsContent";
+import ContributorsPage from "./pages/ContributorsPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -112,6 +113,7 @@ function App() {
           />
 
           <Route path=":topNavId/:docId" element={<DocsContent />} />
+          {/* <Route path="contributors" element={<ContributorsPage />} /> */}
         </Route>
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}

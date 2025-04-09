@@ -8,14 +8,16 @@ import QAContentBlock from "../../components/QAContentBlock";
 import ParagraphBlock from "../../components/ParagraphBlock";
 import FramedImageBlock from "../../components/FramedImageBlock";
 import contentData from "../docsContentData";
+import CustomContributorListBlock from "../../components/CustomContributorListBlock";
 // Import other block components as needed
 
 function DocsContent() {
   // Get route parameters (e.g. topNavId and docId)
   const { topNavId, docId } = useParams();
   console.log("docId:", docId);
+  console.log("topNavId:", topNavId);
   // Use docId as the key to load the correct document data.
-  const doc = contentData[docId];
+  const doc = contentData[topNavId]?.[docId];
 
   // Get layout callbacks from Outlet context
   const { registerSections, setActiveSection } = useOutletContext();
@@ -87,6 +89,10 @@ function DocsContent() {
                 return <ParagraphBlock key={blockKey} block={block} />;
               case "framedImage":
                 return <FramedImageBlock key={blockKey} block={block} />;
+              case "customContributorList":
+                return (
+                  <CustomContributorListBlock key={blockKey} block={block} />
+                );
               default:
                 return (
                   <p key={blockKey} style={{ color: "#ccc" }}>
