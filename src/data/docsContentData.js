@@ -2709,7 +2709,7 @@ const contentData = {
                   name: "Dr. Jeremy Prupas",
                   title: "Chief Veterinarian at City of Los Angeles",
                   description:
-                    "Dr. Jeremy Prupas offers strategic guidance and expert insight that help shape the direction of Vetcation. Through his efforts in building relationships with key organizations such as AlignCare and SCVMA, he has played a pivotal role in advancing telemedicine within the veterinary field.",
+                    "Dr. Jeremy Prupas has contributed significant strategic guidance and expert insight that help shape the direction of Vetcation. Through his efforts in building relationships with key organizations such as AlignCare and SCVMA, he has played a pivotal role in advancing telemedicine within the veterinary field.",
                 },
                 {
                   name: "Emily Schmieder",
