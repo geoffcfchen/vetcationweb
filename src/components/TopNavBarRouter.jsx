@@ -52,17 +52,6 @@ export default function TopNavBarRounter({
   // When a top nav item is clicked, update state and navigate to a default doc route
   const handleClick = (navItem) => {
     handleTopNavClick(navItem.id);
-    console.log(`Navigating to ${navItem.id}`);
-    // Navigate to a default route for that category. For example,
-    // if "clinic" is clicked, navigate to "/telemedicine-info/clinic/intro-to-vetcation".
-    // You can adjust this default as needed.
-    if (navItem.id === "home") {
-      navigate(`/telemedicine-info/${navItem.id}/introToVetcation`);
-    }
-
-    if (navItem.id === "contributors") {
-      navigate(`/telemedicine-info/${navItem.id}/ourContributors`);
-    }
   };
 
   return (

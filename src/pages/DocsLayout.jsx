@@ -2,7 +2,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import TopNavBar from "../components/TopNavBar";
 import MySidebarRouter from "../components/Sidebar/MySidebarRouter";
 import RightSideBar from "../components/Sidebar/RightSideBar";
@@ -22,6 +22,7 @@ const PageWrapper = styled.div`
 export default function DocsLayout() {
   const { topNavId = "home" } = useParams();
   console.log("topNavId", topNavId);
+  const navigate = useNavigate();
   // const [activeTopNav, setActiveTopNav] = useState("home");
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [docSections, setDocSections] = useState([]);
@@ -40,7 +41,13 @@ export default function DocsLayout() {
 
   const handleTopNavClick = (navId) => {
     // setActiveTopNav(navId);
-    console.log(`Navigating to ${navId}`);
+    if (navId === "home") {
+      navigate(`/telemedicine-info/${navId}/introToVetcation`);
+    }
+
+    if (navId === "contributors") {
+      navigate(`/telemedicine-info/${navId}/ourContributors`);
+    }
   };
 
   return (
