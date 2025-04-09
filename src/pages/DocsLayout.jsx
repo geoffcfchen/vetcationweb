@@ -2,7 +2,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import TopNavBar from "../components/TopNavBar";
 import MySidebarRouter from "../components/Sidebar/MySidebarRouter";
 import RightSideBar from "../components/Sidebar/RightSideBar";
@@ -20,7 +20,9 @@ const PageWrapper = styled.div`
 `;
 
 export default function DocsLayout() {
-  const [activeTopNav, setActiveTopNav] = useState("home");
+  const { topNavId = "home" } = useParams();
+  console.log("topNavId", topNavId);
+  // const [activeTopNav, setActiveTopNav] = useState("home");
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [docSections, setDocSections] = useState([]);
   const [activeSectionId, setActiveSectionId] = useState(null);
@@ -37,7 +39,8 @@ export default function DocsLayout() {
   }, []);
 
   const handleTopNavClick = (navId) => {
-    setActiveTopNav(navId);
+    // setActiveTopNav(navId);
+    console.log(`Navigating to ${navId}`);
   };
 
   return (
@@ -45,7 +48,7 @@ export default function DocsLayout() {
       {/* Top Nav Bar */}
       <TopNavBarRounter
         topNavData={topNavData}
-        activeTopNav={activeTopNav}
+        activeTopNav={topNavId}
         handleTopNavClick={handleTopNavClick}
         onBurgerClick={() => setShowOffcanvas(true)}
       />
@@ -65,7 +68,7 @@ export default function DocsLayout() {
               overflowY: "auto",
             }}
           >
-            <MySidebarRouter activeTopNav={activeTopNav} />
+            <MySidebarRouter activeTopNav={topNavId} />
           </Col>
 
           {/* MIDDLE CONTENT */}
@@ -133,7 +136,7 @@ export default function DocsLayout() {
         <Offcanvas.Header closeButton closeVariant="white" />
         <Offcanvas.Body>
           <MySidebarRouter
-            activeTopNav={activeTopNav}
+            activeTopNav={topNavId}
             closeOffcanvas={() => setShowOffcanvas(false)}
           />
         </Offcanvas.Body>

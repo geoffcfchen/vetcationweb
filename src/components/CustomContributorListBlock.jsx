@@ -13,7 +13,7 @@ const CustomContributorListBlock = ({ block }) => {
   // Style for each contributor card
   const cardStyle = {
     display: "flex",
-    alignItems: "center",
+
     padding: "1rem",
     border: "1px solid #444",
     borderRadius: "8px",
