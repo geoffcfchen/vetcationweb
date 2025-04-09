@@ -1845,14 +1845,30 @@ const contentData = {
       mainTitle: "Vetssenger Overview",
       mainDescription: `
         Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build lasting relationships with your clients.
-        
-        Each <span class="highlight">Vetssenger thread</span> is dedicated to one veterinarian, one pet owner, and one patient (pet). <span class="highlight">Messaging through Vetssenger becomes available only after a valid VCPR has been established</span> (via an in-person or synchronous video visit per AB 1399).
-        
-        With a valid VCPR in place, either party can initiate a new <span class="highlight">case</span> (chat session) within the thread. Veterinarians can freely start cases, while pet owners pay a fee (set by you) to start a new inquiry—provided you are open to accepting questions.
-        
-        Click “Close Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.
       `,
       sections: [
+        // NEW SECTION to hold the text previously in mainDescription
+        {
+          id: "vcprAndCases",
+          title: "VCPR and Case Handling",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Vetssenger Threads",
+                  lines: [
+                    `Each <span class="highlight">Vetssenger thread</span> is dedicated to one veterinarian, one pet owner, and one patient (pet). <span class="highlight">Messaging through Vetssenger becomes available only after a valid VCPR has been established</span> (via an in-person or synchronous video visit per AB 1399).`,
+                    `With a valid VCPR in place, either party can initiate a new <span class="highlight">case</span> (chat session) within the thread. Veterinarians can freely start cases, while pet owners pay a fee (set by you) to start a new inquiry—provided you are open to accepting questions.`,
+                    `Click “Close Case” once the inquiry is fully addressed. All cases remain neatly organized in a single Vetssenger thread, ensuring easy reference and seamless continuity of care.`,
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        // Existing section about navigating the tabs
         {
           id: "vetssengerTabs",
           title: "Navigating the Vetssenger Tabs",
