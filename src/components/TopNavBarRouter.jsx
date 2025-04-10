@@ -1,9 +1,9 @@
 // TopNavBar.jsx
 import React from "react";
 import styled from "styled-components";
-import { Button } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import logo from "../images/plain_icon_600.png"; // Adjust the path as necessary
+import logo from "../images/plain_icon_600.png";
 
 const TopNavBarContainer = styled.nav`
   background-color: #111;
@@ -17,7 +17,6 @@ const TopNavLink = styled.span`
   cursor: pointer;
   color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
   font-weight: ${(props) => (props.$active ? "bold" : "normal")};
-
   &:hover {
     color: #fff;
   }
@@ -28,11 +27,10 @@ const LogoContainer = styled.div`
   align-items: center;
   gap: 15px;
   cursor: pointer;
-  /* You can add hover effects here if needed */
 `;
 
 const Logo = styled.img`
-  width: 25px; /* adjust as needed */
+  width: 25px;
 `;
 
 const LogoText = styled.span`
@@ -49,36 +47,64 @@ export default function TopNavBarRounter({
 }) {
   const navigate = useNavigate();
 
-  // When a top nav item is clicked, update state and navigate to a default doc route
+  // Derive the label of the currently active topNav item.
+  // If none is active, show a fallback label.
+  const activeItem = topNavData.find((item) => item.id === activeTopNav);
+  const activeLabel = activeItem ? activeItem.label : "Select...";
+
   const handleClick = (navItem) => {
     handleTopNavClick(navItem.id);
   };
 
   return (
     <TopNavBarContainer>
-      {/* Logo and Logo Text */}
+      {/* Logo & Text (always visible) */}
       <LogoContainer onClick={() => navigate("/")}>
         <Logo src={logo} alt="Vetcation Logo" />
         <LogoText>Vetcation</LogoText>
       </LogoContainer>
-      {topNavData.map((navItem) => (
-        <TopNavLink
-          key={navItem.id}
-          $active={activeTopNav === navItem.id}
-          onClick={() => handleClick(navItem)}
-        >
-          {navItem.label}
-        </TopNavLink>
-      ))}
 
-      {/* Hamburger button: only visible on smaller screens */}
-      <Button
-        variant="primary"
+      {/* Inline nav links (desktop only) */}
+      <div className="d-none d-md-flex" style={{ gap: "2rem" }}>
+        {topNavData.map((navItem) => (
+          <TopNavLink
+            key={navItem.id}
+            $active={activeTopNav === navItem.id}
+            onClick={() => handleClick(navItem)}
+          >
+            {navItem.label}
+          </TopNavLink>
+        ))}
+      </div>
+
+      {/* Mobile-only: Hamburger + Dropdown */}
+      <div
         className="d-md-none ms-auto"
-        onClick={onBurgerClick}
+        style={{ display: "flex", gap: "1rem" }}
       >
-        ☰ Menu
-      </Button>
+        {/* Hamburger Button for the mobile drawer */}
+        <Button variant="primary" onClick={onBurgerClick}>
+          ☰ Menu
+        </Button>
+
+        {/* Dropdown for topNavData, showing active label on Toggle */}
+        <Dropdown>
+          <Dropdown.Menu>
+            {topNavData.map((navItem) => (
+              <Dropdown.Item
+                key={navItem.id}
+                active={activeTopNav === navItem.id}
+                onClick={() => handleClick(navItem)}
+              >
+                {navItem.label}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+          <Dropdown.Toggle variant="secondary" id="topNavDataDropdown">
+            {activeLabel}
+          </Dropdown.Toggle>
+        </Dropdown>
+      </div>
     </TopNavBarContainer>
   );
 }
