@@ -95,7 +95,7 @@ const contentData = {
                 {
                   heading: "Complete Pharmacy Freedom:",
                   lines: [
-                    "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it’s a big chain, independent shop, or mail-order.",
+                    "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
                   ],
                 },
                 {
@@ -813,7 +813,7 @@ const contentData = {
               example:
                 "If your long-time client and their pet travel to Oregon, you cannot initiate a new telemedicine consult while the pet is out of state. However, if the pet already has an active prescription on file, you can authorize a refill without it being classified as a “telehealth” service.",
               helpText:
-                "Our platform automatically checks the patient's reported location at scheduling. If an out-of-state address is detected, Vetcation alerts you that a new telemedicine consult may not be permissible. For existing prescriptions, you can still process refills to maintain continuity of care without violating telehealth regulations.",
+                "Our platform automatically checks the patient's reported location at the time of scheduling. If an out-of-state location is detected, Vetcation will block the client from booking a new telemedicine appointment to ensure compliance with state regulations. However, if there is an existing prescription on file, you may still authorize refills without it being classified as a telehealth service.",
             },
           ],
         },
@@ -979,7 +979,7 @@ const contentData = {
                 "If the Board inquires whether you were familiar with the medical resources available near the patient’s location (including emergency care), you must be able to explain your familiarity and, if necessary, submit documentation that supports your claim. (BPC, § 4826.6, subd. (h)(4).) This might involve showing references or notes about nearby emergency clinics, urgent care facilities, or specialized hospitals within the pet’s region.",
               example: "",
               helpText:
-                "Our platform allows veterinarians to document local emergency contact information in the patient’s file. You can log the name, address, and phone number of nearby clinics or hospitals, ensuring you have a record of your due diligence. If the Board requests validation, you can easily provide evidence of your familiarity with local resources, demonstrating compliance with AB 1399.",
+                "Our platform automatically provides veterinarians with local emergency contact information based on the client’s reported location. This includes the name, address, and phone number of nearby clinics or hospitals. You can still choose to add notes or reference other resources, but the system helps ensure you are equipped with key information. If the Board requests validation, you’ll have easy access to records demonstrating your familiarity with local medical resources, supporting compliance with AB 1399.",
             },
           ],
         },
@@ -995,7 +995,7 @@ const contentData = {
                 "No. To establish a valid VCPR via telehealth, the veterinarian must gain sufficient knowledge of the animal patient by examining the patient using synchronous audio-video communication. (BPC, § 4826.6, subd. (b)(2).) Once a VCPR is established, ongoing care may continue via other telehealth methods, unless the veterinarian determines that synchronous audio-video is necessary for proper treatment. (BPC, § 4826.6, subd. (d).)",
               example: "",
               helpText:
-                "Our platform prioritizes a stable audio-video connection, allowing vets to meet the synchronous requirement. If a technical interruption occurs, Vetcation enables quick reconnection or rescheduling so that you can complete the real-time exam. Once the VCPR is established, Vetcation also supports asynchronous follow-ups, letting you and the client communicate through chat or messaging if that meets the standard of care.",
+                "Our platform prioritizes a stable audio-video connection, allowing vets to meet the synchronous requirement. If a technical interruption occurs, Vetcation enables quick reconnection or rescheduling so that you can complete the real-time exam.",
             },
           ],
         },
