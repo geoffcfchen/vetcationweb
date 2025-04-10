@@ -1,6 +1,6 @@
 const topNavData = [
-  { id: "home", label: "For veterinarians" },
-  { id: "contributors", label: "Vetcation Contributors" },
+  { id: "home", label: "For vets" },
+  { id: "contributors", label: "Contributors" },
 ];
 
 export default topNavData;
