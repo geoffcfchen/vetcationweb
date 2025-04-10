@@ -104,11 +104,6 @@ export default function TopNavBarRounter({
         className="d-md-none ms-auto"
         style={{ display: "flex", gap: "1rem" }}
       >
-        {/* Hamburger Button for the mobile drawer */}
-        <Button variant="primary" onClick={onBurgerClick}>
-          ☰
-        </Button>
-
         {/* Dropdown for topNavData, showing active label on Toggle */}
         <Dropdown>
           <Dropdown.Menu>
@@ -126,6 +121,10 @@ export default function TopNavBarRounter({
             {activeLabel}
           </Dropdown.Toggle>
         </Dropdown>
+        {/* Hamburger Button for the mobile drawer */}
+        <Button variant="primary" onClick={onBurgerClick}>
+          ☰
+        </Button>
       </div>
     </TopNavBarContainer>
   );
