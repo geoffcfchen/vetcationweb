@@ -19,13 +19,15 @@ const PageWrapper = styled.div`
 
 const MiddleColumn = styled.div`
   padding: 0;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 60px); /* For desktop */
   background: #1c1c1c;
   overflow-y: auto;
 
   @media (max-width: 768px) {
-    height: 100vh; /* ✅ Reset height for mobile */
-    padding-top: 60px; /* match the fixed TopNavBar height */
+    /* Let the page flow naturally on mobile: */
+    height: auto;
+    overflow-y: visible;
+    padding-top: 60px; /* still offset the content for the fixed navbar */
   }
 `;
 
@@ -63,31 +65,37 @@ export default function DocsLayout() {
 
   // NEW: useEffect for scroll detection on mobile
   useEffect(() => {
-    const container = mainContentRef.current;
-    if (!container) return;
-
-    let lastScrollY = 0;
-
-    function handleScroll() {
-      // Only do the hide/show logic if screen is mobile sized
+    // For mobile, listen to window's scroll; desktop you can still use container scroll if needed
+    const handleScroll = () => {
       if (window.innerWidth <= 768) {
-        const currentScrollY = container.scrollTop;
-
-        // If we scrolled down more than 5px from last time => hide
+        const currentScrollY = window.scrollY;
+        // Using a hysteresis: scroll down > 50px triggers hide; scroll up > 30px triggers show
         if (currentScrollY - lastScrollY > 50) {
           setHideNav(true);
-        }
-        // If we scrolled up => show
-        else if (lastScrollY - currentScrollY > 30) {
+        } else if (lastScrollY - currentScrollY > 30) {
           setHideNav(false);
         }
-
         lastScrollY = currentScrollY;
       }
-    }
+    };
 
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    let lastScrollY = window.scrollY;
+    if (window.innerWidth <= 768) {
+      window.addEventListener("scroll", handleScroll);
+    } else {
+      // For desktop you might still use mainContentRef if needed
+      const container = mainContentRef.current;
+      if (container) {
+        container.addEventListener("scroll", handleScroll);
+      }
+    }
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      const container = mainContentRef.current;
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   return (
