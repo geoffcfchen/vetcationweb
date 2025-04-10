@@ -70,9 +70,9 @@ export default function DocsLayout() {
       if (window.innerWidth <= 768) {
         const currentScrollY = window.scrollY;
         // Using a hysteresis: scroll down > 50px triggers hide; scroll up > 30px triggers show
-        if (currentScrollY - lastScrollY > 50) {
+        if (currentScrollY - lastScrollY > 30) {
           setHideNav(true);
-        } else if (lastScrollY - currentScrollY > 30) {
+        } else if (lastScrollY - currentScrollY > 20) {
           setHideNav(false);
         }
         lastScrollY = currentScrollY;
