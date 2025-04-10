@@ -101,7 +101,9 @@ export default function TopNavBarRounter({
             ))}
           </Dropdown.Menu>
           <Dropdown.Toggle variant="secondary" id="topNavDataDropdown">
-            {activeLabel}
+            {activeLabel.length > 10
+              ? `${activeLabel.slice(0, 10)}…`
+              : activeLabel}
           </Dropdown.Toggle>
         </Dropdown>
       </div>
