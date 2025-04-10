@@ -48,9 +48,9 @@ const contentData = {
                   ],
                 },
                 {
-                  heading: "Streamline your workflow with AI:",
+                  heading: "Your personal AI assistant:",
                   lines: [
-                    "Save hours every week using AI-powered tools that generate documentation, simplify follow-ups, and support AB 1399 compliance.",
+                    "Save time with a native AI that drafts Vetssenger notes and creates personalized DAPs after each consultation.",
                   ],
                 },
                 {
