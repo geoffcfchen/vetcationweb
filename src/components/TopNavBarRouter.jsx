@@ -106,7 +106,7 @@ export default function TopNavBarRounter({
       >
         {/* Hamburger Button for the mobile drawer */}
         <Button variant="primary" onClick={onBurgerClick}>
-          ☰ Menu
+          ☰
         </Button>
 
         {/* Dropdown for topNavData, showing active label on Toggle */}
@@ -123,9 +123,7 @@ export default function TopNavBarRounter({
             ))}
           </Dropdown.Menu>
           <Dropdown.Toggle variant="secondary" id="topNavDataDropdown">
-            {activeLabel.length > 8
-              ? `${activeLabel.slice(0, 8)}...`
-              : activeLabel}
+            {activeLabel}
           </Dropdown.Toggle>
         </Dropdown>
       </div>
