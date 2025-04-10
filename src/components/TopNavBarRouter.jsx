@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../images/plain_icon_600.png";
 
 const TopNavBarContainer = styled.nav`
-  background-color: #111;
+  background-color: transparent; /* 👈 changed from #111 to transparent */
   padding: 1rem;
   display: flex;
   gap: 2rem;

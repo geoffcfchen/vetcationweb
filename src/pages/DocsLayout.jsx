@@ -21,7 +21,7 @@ const PageWrapper = styled.div`
 
 export default function DocsLayout() {
   const { topNavId = "home" } = useParams();
-  console.log("topNavId", topNavId);
+
   const navigate = useNavigate();
   // const [activeTopNav, setActiveTopNav] = useState("home");
   const [showOffcanvas, setShowOffcanvas] = useState(false);
