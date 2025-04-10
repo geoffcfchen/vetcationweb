@@ -13,6 +13,15 @@ const TopNavBarContainer = styled.nav`
   align-items: center;
 `;
 
+const FixedWidthToggle = styled(Dropdown.Toggle)`
+  width: 120px; /* or whatever fits your design */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  text-align: left;
+`;
+
 const TopNavLink = styled.span`
   cursor: pointer;
   color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
@@ -101,8 +110,8 @@ export default function TopNavBarRounter({
             ))}
           </Dropdown.Menu>
           <Dropdown.Toggle variant="secondary" id="topNavDataDropdown">
-            {activeLabel.length > 10
-              ? `${activeLabel.slice(0, 10)}…`
+            {activeLabel.length > 8
+              ? `${activeLabel.slice(0, 8)}...`
               : activeLabel}
           </Dropdown.Toggle>
         </Dropdown>
