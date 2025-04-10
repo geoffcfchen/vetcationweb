@@ -74,11 +74,11 @@ export default function DocsLayout() {
         const currentScrollY = container.scrollTop;
 
         // If we scrolled down more than 5px from last time => hide
-        if (currentScrollY - lastScrollY > 30) {
+        if (currentScrollY - lastScrollY > 50) {
           setHideNav(true);
         }
         // If we scrolled up => show
-        else if (lastScrollY - currentScrollY > 20) {
+        else if (lastScrollY - currentScrollY > 30) {
           setHideNav(false);
         }
 
