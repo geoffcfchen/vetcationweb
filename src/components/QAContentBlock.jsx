@@ -4,7 +4,7 @@ import React from "react";
 const QAContentBlock = ({ block }) => {
   return (
     <div style={{ marginBottom: "1.5rem" }}>
-      <p style={{ fontWeight: "bold", color: "#00bcd4" }}>{block.question}</p>
+      <p style={{ fontWeight: "bold", color: "#1cd0b0" }}>{block.question}</p>
       <p style={{ marginLeft: "1rem", color: "#ccc" }}>{block.answer}</p>
       {block.example && (
         <p style={{ marginLeft: "1rem", fontStyle: "italic", color: "#ccc" }}>
@@ -23,7 +23,7 @@ const QAContentBlock = ({ block }) => {
             color: "#ccc",
           }}
         >
-          <strong style={{ color: "#00bcd4" }}>How Vetcation Helps:</strong>{" "}
+          <strong style={{ color: "#1cd0b0" }}>How Vetcation Helps:</strong>{" "}
           {block.helpText}
         </div>
       )}

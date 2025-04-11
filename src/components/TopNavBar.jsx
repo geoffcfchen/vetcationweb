@@ -16,7 +16,7 @@ const TopNavBarContainer = styled.nav`
 // Each link in the top nav
 const TopNavLink = styled.span`
   cursor: pointer;
-  color: ${(props) => (props.$active ? "#00bcd4" : "#ccc")};
+  color: ${(props) => (props.$active ? "#1cd0b0" : "#ccc")};
   font-weight: ${(props) => (props.$active ? "bold" : "normal")};
 
   &:hover {

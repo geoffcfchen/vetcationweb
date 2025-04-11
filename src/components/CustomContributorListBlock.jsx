@@ -28,7 +28,7 @@ const CustomContributorListBlock = ({ block }) => {
     borderRadius: "50%",
     objectFit: "cover",
     marginRight: "1rem",
-    border: "2px solid #00bcd4",
+    border: "2px solid #1cd0b0",
   };
 
   // Styling for the text container on the right side of the avatar

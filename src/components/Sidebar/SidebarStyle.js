@@ -75,7 +75,7 @@ export const SidebarItemRow = styled.div`
   cursor: pointer;
   padding: 6px 0;
   font-size: 0.875rem;
-  color: ${(props) => (props.$active ? "#fff" : "#ccc")};
+  color: ${(props) => (props.$active ? "#1cd0b0" : "#ccc")};
   transition: color 0.2s ease;
 
   &:hover {
