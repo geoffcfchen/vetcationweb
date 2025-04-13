@@ -2711,7 +2711,7 @@ const contentData = {
               contributors: [
                 {
                   name: "Geoff Chih-Fan Chen",
-                  title: "CEO and Founder of Vetcation",
+                  title: "Founder of Vetcation",
                   description:
                     "Geoff Chih-Fan Chen, a former astrophysicist at UCLA, leveraged his expertise to build the core infrastructure of the Vetcation platform. Inspired by Dr. Fuchi Yu, he combined advanced technology with clinical insight to help advance telemedicine in the veterinary field.",
                 },
