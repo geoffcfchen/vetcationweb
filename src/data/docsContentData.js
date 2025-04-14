@@ -2535,6 +2535,7 @@ const contentData = {
                 // Replace with your actual screenshot URLs
 
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8436-min.PNG?alt=media&token=411c4e80-0574-45db-8b51-861347869779",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8610-min.PNG?alt=media&token=d6d72496-acd5-482c-b536-5473434f2404",
               ],
             },
           ],
@@ -2557,6 +2558,7 @@ const contentData = {
                 // Replace with your actual screenshot URLs
 
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8435-min.PNG?alt=media&token=165ef6a5-66ff-4422-ba0f-abec6e0abadc",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8611-min.PNG?alt=media&token=ac48a8f1-033f-42e0-b0a5-7dc6909e4a2e",
               ],
             },
           ],
@@ -2591,41 +2593,40 @@ const contentData = {
         },
         {
           id: "howItWorks",
-          title: "How It Works",
+          title: "How It Works (we use Mixlab as an example)",
           blocks: [
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 1: Create a Freeform Prescription",
+                  heading: "Step 1: Search the Mixlab Catalog",
                   lines: [
-                    "Fill in all necessary medication details directly in medical record.",
-                    "Specify dosage, administration instructions, and any pertinent notes.",
-                    "Once completed, the prescription will be visible to the client as a reference.",
+                    "Use the ProductSearchScreen to search and select medications from Mixlab's full product catalog.",
+                    "The screen filters out controlled substances for telemedicine to ensure compliance with AB 1399.",
                   ],
                 },
                 {
-                  heading: "Step 2: Pharmacy Selection",
+                  heading: "Step 2: Customize Your Prescription",
                   lines: [
-                    "During the virtual visit, ask your client which pharmacy or online pharmacy they prefer for filling the prescription.",
-                    "After the appointment, add the prescription in our system so that it becomes visible to the client as a reference.",
-                    "Call or email the pharmacy or online pharmacy that the client chooses.",
-                    "For urgent cases, we recommend calling or emailing the selected pharmacy to confirm immediate availability.",
+                    "Once selected, use the PrescriptionDetailsScreen to modify key values such as the prescribed quantity.",
+                    "For compound medications, you can also edit the strength if a custom dosage is needed.",
                   ],
                 },
                 {
-                  heading: "Step 3: Finalize the Prescription",
+                  heading: "Step 3: Submit to Mixlab",
                   lines: [
-                    "Once the prescription is visible to the client in our system, call or email the selected pharmacy to finalize the order.",
-                    "Vetcation does not intercept or inflate any pharmacy fees—your client’s cost is strictly between them and the pharmacy.",
+                    "After reviewing the details, submit your prescription directly to Mixlab.",
+                    "Mixlab processes the order and, if needed, may re-price the prescription during the Pharmacist Review step.",
                   ],
                 },
               ],
             },
+
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8438-min.PNG?alt=media&token=fb4405bd-0ad5-4fc5-842d-f0964cbc6d0d",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8607-min.PNG?alt=media&token=58dfd464-ceb6-4ae6-a57d-a611b1b2f1b3",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8608-min.PNG?alt=media&token=1f921da1-4099-4007-8600-f6f7ab94ef3d",
               ],
             },
           ],
