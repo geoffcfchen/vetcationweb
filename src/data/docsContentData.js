@@ -2701,6 +2701,31 @@ const contentData = {
         },
       ],
     },
+    CommunityMarketing: {
+      mainTitle: "Community Marketing",
+      mainDescription:
+        "For veterinarians looking to market their expertise without establishing a formal VCPR, Vetcation’s community platform empowers you to provide general advice (information on symptoms, diagnostics, treatment expectations, and outcomes) that educates pet parents without offering specific diagnoses or treatment plans. This approach allows you to share valuable veterinary insights and coaching in a non-clinical context, helping pet owners manage their pets' health in the short and long term while showcasing your expertise and ultimately driving appointments.",
+      sections: [
+        {
+          id: "generaladvice",
+          title: "General advice",
+          blocks: [
+            {
+              type: "qa",
+              question: "What is general advice?",
+              answer:
+                "General advice doesn’t provide a specific diagnosis or treatment plan. Instead, it consists of educational information about symptoms, diagnostics, treatment expectations, and outcomes that is shared outside of a formal veterinarian-client-patient relationship. This approach allows you to offer valuable, timely guidance and coaching to pet parents, empowering them to care for their pets immediately and over the long term — all while showcasing your expertise to drive appointments.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
 
   contributors: {
