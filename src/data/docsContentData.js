@@ -2685,7 +2685,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "We are actively working on integrating Vetsource into the Vetcation platform to provide an additional trusted option for fulfilling prescriptions. This will further expand your ability to serve clients through the pharmacy of their choice.",
+              text: "We are currently exploring the possibility of integrating Vetsource into the Vetcation platform. If added, it would offer another trusted option for fulfilling prescriptions and further support your ability to serve clients through the pharmacy of your choice.",
             },
           ],
         },
