@@ -2569,7 +2569,7 @@ const contentData = {
     addprescription: {
       mainTitle: "Add Prescription",
       mainDescription:
-        "At Vetcation, we believe in giving veterinarians and pet parents the freedom to choose how and where prescriptions are filled—without hidden fees or forced pharmacy markups. In California, under AB 1399, veterinarians must offer clients a written prescription and inform them they may fill it at a pharmacy of their choice or directly through the prescriber. Our goal is to ensure you provide convenient, affordable care while remaining fully compliant with these regulations.",
+        "At Vetcation, we believe veterinarians and pet parents should have the freedom to choose how and where prescriptions are filled — without hidden fees or restrictive pharmacy policies. In California, AB 1399 requires veterinarians to offer written prescriptions and inform clients they may fill them at a pharmacy of their choice or directly through the prescriber. Our platform fully supports this by integrating with a wide range of online and local pharmacies, helping you deliver affordable, convenient care while staying compliant.",
       sections: [
         {
           id: "ourApproach",
@@ -2577,7 +2577,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Unlike some platforms that limit medication choices or charge additional fees for sending prescriptions, Vetcation stands out by prioritizing transparency and flexibility. We want to ensure vets can prescribe the most suitable medication at the best price possible—no strings attached.",
+              text: "While some platforms steer prescriptions toward specific pharmacies or tack on extra fees, Vetcation takes a different path. We focus on transparency and flexibility, giving you full control to choose the most appropriate pharmacy, whether it’s online or local, so your clients always get the best value and care.",
             },
           ],
         },
@@ -2587,7 +2587,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation lets you send prescriptions to any accredited pharmacy—whether it’s a local store, a well-known chain, or an online service like Chewy—so you can easily pick the most convenient or cost-effective option for your client. There are no additional platform fees for choosing a particular pharmacy.",
+              text: "Vetcation is designed to give you and your clients complete pharmacy freedom. We integrate with a growing network of online and local pharmacies, including Mixlab, Chewy, Vetsource, and neighborhood pharmacies, so you can easily choose the most convenient, affordable, or trusted option for each prescription. There are no additional platform fees, and you're always free to select what works best for your client.",
             },
           ],
         },
@@ -2616,8 +2616,7 @@ const contentData = {
                   heading: "Step 3: Submit to Mixlab",
                   lines: [
                     "After reviewing the details, submit your prescription directly to Mixlab.",
-                    "Mixlab processes the order and, if needed, may re-price the prescription during the Pharmacist Review step.",
-                    "Mixlab will handle the rest, including contacting the pet owner for payment and delivery.",
+                    "Mixlab processes the order and handle the rest, including contacting the pet owner for payment and delivery.",
                   ],
                 },
               ],
@@ -2648,7 +2647,7 @@ const contentData = {
     pharmacys: {
       mainTitle: "Pharmacy Options for California",
       mainDescription:
-        "If you are licensed in California and operating under a virtual VCPR, you may wish to prescribe for your patient following the appointment. While we continue to enhance our platform, here are some effective routes to ensure smooth and efficient prescription fulfillment for both you and your client:",
+        "If you are licensed in California and operating under a virtual VCPR, you may wish to prescribe for your patient following the appointment. While we continue to enhance our platform, here are some effective options to help ensure smooth and efficient prescription fulfillment for both you and your client:",
       sections: [
         {
           id: "humanPharmacy",
@@ -2656,7 +2655,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "If your prescription can be filled through a human pharmacy and the pet owner is able to pick it up in person, this is ideal for urgent medications. Confirm the client’s pharmacy details during the call, then after the appointment, call or email the pharmacy using the Rx template provided in our system. (Note: If you email the prescription, your contact information will be shared with the pharmacy for verification.)",
+              text: "If the medication can be filled by a human pharmacy and the pet owner prefers to pick it up in person, this is often the fastest option for urgent care. After the appointment, you can send a digital prescription to the pet owner, who may visit a local pharmacy (such as Costco or Walmart) to check availability. If the pharmacy confirms they have the medication, the pet owner can enter the pharmacy’s email address into our system. We’ll then email the prescription directly to the pharmacy—including your license, contact info, and professional details—ensuring that your personal information is only shared with the pharmacy, not the pet owner.",
             },
           ],
         },
@@ -2666,17 +2665,27 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Mixlab is a user-friendly option for prescribing veterinary-labeled drugs or compounded medications in California. You can call— which is the fastest option— or email the prescription. Once received, Mixlab will contact the pet owner directly to arrange for payment and delivery, typically within 24-36 hours. Mixlab phone number: +1 (888) 901-4480 Mixlab email: rx@mixlabrx.com",
+              text: "Mixlab is fully integrated into the Vetcation platform, allowing you to search their product catalog and prescribe directly through our system—no phone calls or emails needed. Once you submit a prescription, Mixlab will automatically contact the pet owner to confirm payment and arrange delivery. In most cases, delivery is completed within 24–36 hours, and same-day delivery is available in the Los Angeles area. This streamlined workflow saves time and ensures fast, reliable access to veterinary-labeled and compounded medications.",
             },
           ],
         },
         {
-          id: "internetPharmacy",
-          title: "Online Pharmacy (e.g., Chewy)",
+          id: "chewy",
+          title: "Chewy",
           blocks: [
             {
               type: "paragraph",
-              text: "If your client opts to use an online pharmacy such as Chewy, note that this process can be more cumbersome. The pet owner must create an account and request the prescription, after which you must contact the pharmacy to verify it. This route may be less efficient, particularly for urgent medications.",
+              text: "We are currently working with Chewy to integrate direct prescribing into our platform, expected to be available in the coming month. Until then, if a client prefers to use Chewy, they must first request the medication through their Chewy account. You would then be required to contact Chewy to verify the prescription. This process can be more manual and may delay fulfillment, making it less ideal for urgent needs.",
+            },
+          ],
+        },
+        {
+          id: "vetsource",
+          title: "Vetsource (Coming Soon)",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "We are actively working on integrating Vetsource into the Vetcation platform to provide an additional trusted option for fulfilling prescriptions. This will further expand your ability to serve clients through the pharmacy of their choice.",
             },
           ],
         },
@@ -2686,7 +2695,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "After your California appointment, clearly communicate the next steps to the pet owner to ensure smooth fulfillment of the prescription. Do not email the prescription pad PDF to the client, as it contains your personal contact information and cannot be used by a pharmacist if downloaded.",
+              text: "After your California appointment, clearly communicate the next steps to the pet owner to ensure smooth prescription fulfillment. Do not email the prescription pad PDF directly to the client, as it includes your personal information and cannot be used by pharmacists for verification.",
             },
           ],
         },
