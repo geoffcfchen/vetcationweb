@@ -2655,7 +2655,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "If the medication can be filled by a human pharmacy and the pet owner prefers to pick it up in person, this is often the fastest option for urgent care. After the appointment, you can send a digital prescription to the pet owner, who may visit a local pharmacy (such as Costco or Walmart) to check availability. If the pharmacy confirms they have the medication, the pet owner can enter the pharmacy’s email address into our system. We’ll then email the prescription directly to the pharmacy—including your license, contact info, and professional details—ensuring that your personal information is only shared with the pharmacy, not the pet owner.",
+              text: "If the medication can be filled by a human pharmacy and the pet owner prefers to pick it up in person, this is often the fastest option for urgent care. After the appointment, you can send a digital prescription to the pet owner, who may visit a local pharmacy (such as Costco or Walmart) to check availability. If the pharmacy confirms they have the medication, the pet owner can enter the pharmacy’s email address into our system. The Vetcation platform will then immediately email the prescription directly to the pharmacy—along with your license, contact information, and professional details—ensuring your personal information is only shared with the pharmacy, not the pet owner.",
             },
           ],
         },
