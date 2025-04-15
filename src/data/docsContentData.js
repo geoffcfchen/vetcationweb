@@ -2697,16 +2697,12 @@ const contentData = {
     ourContributors: {
       mainTitle: "Vetcation Contributors",
       mainDescription:
-        "Vetcation is shaped by the passion, expertise, and collaboration of dedicated individuals from across the veterinary and technology fields. This section highlights the contributors who have helped bring our vision to life.",
+        "Vetcation is shaped by the passion, expertise, and collaboration of dedicated individuals from across the veterinary and technology fields. This section highlights the contributors who have helped bring our vision to life. We list our contributors in alphabetical order to honor their unique contributions and the diverse backgrounds they bring to Vetcation.",
       sections: [
         {
-          id: "contribList",
-          title: "Our Contributors",
+          id: "coreTeam",
+          title: "Team",
           blocks: [
-            {
-              type: "paragraph",
-              text: "We list our contributors in alphabetical order to honor their unique contributions and the diverse backgrounds they bring to Vetcation.",
-            },
             {
               type: "customContributorList",
               contributors: [
@@ -2722,23 +2718,57 @@ const contentData = {
                   description:
                     "Mingli Lee made significant contributions to the UX design during the early stages of the Vetcation product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
                 },
+
+                {
+                  name: "Dr. Fuchi Yu",
+                  title: "Veterinarian at Overland Veterinary Clinic",
+                  description:
+                    "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the Vetcation platform. Her clinical insights and frontline experience have been instrumental in shaping Vetcation’s telemedicine services.",
+                },
+
+                // More contributors...
+              ],
+            },
+          ],
+        },
+        {
+          id: "advisors",
+          title: "Advisors",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
                 {
                   name: "Dr. Jeremy Prupas",
                   title: "Chief Veterinarian at City of Los Angeles",
                   description:
                     "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare and SCVMA helped align the platform with broader efforts to advance virtual care in the veterinary field.",
                 },
+
+                // More contributors...
+              ],
+            },
+          ],
+        },
+        {
+          id: "contributors",
+          title: "Contributors",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
                 {
-                  name: "Emily Schmieder",
-                  title: "Licensed Veterinary Technician",
+                  name: "Dr. Ross Massimiano",
+                  title: "Veterinarian at Veterinary Emergency Group (VEG)",
                   description:
-                    "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—Vetcation’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
+                    "Dr. Ross Massimiano has helped check the workflow of the Vetcation platform and provided valuable feedback on the features. His insights have been crucial in ensuring that the platform meets the needs of both veterinary professionals and pet owners.",
                 },
                 {
-                  name: "Dr. Fuchi Yu",
-                  title: "Veterinarian at Overland Veterinary Clinic",
+                  name: "Emily Schmieder",
+                  title:
+                    "Licensed Veterinary Technician at Benfield Animal Hospital",
                   description:
-                    "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the Vetcation platform. Her clinical insights and frontline experience have been instrumental in shaping Vetcation’s telemedicine services.",
+                    "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—Vetcation’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
                 },
 
                 // More contributors...
