@@ -2617,6 +2617,7 @@ const contentData = {
                   lines: [
                     "After reviewing the details, submit your prescription directly to Mixlab.",
                     "Mixlab processes the order and, if needed, may re-price the prescription during the Pharmacist Review step.",
+                    "Mixlab will handle the rest, including contacting the pet owner for payment and delivery.",
                   ],
                 },
               ],
