@@ -2787,8 +2787,8 @@ const contentData = {
                   heading: "Visibility to Clients:",
                   lines: [
                     "When a clinic's client searches for a telemedicine doctor, your profile will display the name of the partnered clinic that matches the client’s designated home clinic. This ensures proper visibility and medical record sharing.",
-                    "The following screen shows an example where a client's home clinic (LA Veterinary Center) is partnered with a telemedicine doctor.",
-                    "Vetcation system will prioritize the partnered clinic's doctor over other telemedicine doctors.",
+                    "The following screen shows an example from a client's view, where their home clinic (LA Veterinary Center) is partnered with a telemedicine doctor.",
+                    "The Vetcation system prioritizes doctors partnered with the client’s home clinic over other telemedicine doctors.",
                     "After the appointment, the medical records will be shared with the partnered clinic.",
                   ],
                 },
