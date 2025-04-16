@@ -2704,11 +2704,11 @@ const contentData = {
     CommunityMarketing: {
       mainTitle: "Community Marketing",
       mainDescription:
-        "For veterinarians looking to market their expertise without establishing a formal VCPR, Vetcation’s community platform empowers you to voluntarily provide general advice and teletriage. Through general advice, you can publicly share valuable educational insights about common pet health topics without specific diagnoses or treatment plans. With teletriage, you can remotely help pet owners determine the urgency of their pets' conditions and guide appropriate next steps. This flexible, non-clinical approach allows you to showcase your expertise, build trust with pet owners, and ultimately encourage direct appointments.",
+        "For veterinarians looking to market their expertise, Vetcation’s community Q&A section provides a space to connect with pet owners who have questions about their pets and to share your professional knowledge. Through general advice or teletriage, you can offer valuable educational insights about common pet health topics or help pet owners assess the urgency of their pets' conditions by commenting on their questions. The information you share will be seen by many other pet owners who care deeply about their pets, helping you increase your visibility and ultimately drive more appointments.",
       sections: [
         {
           id: "generaladvice",
-          title: "General advice",
+          title: "General advice & teletriage",
           blocks: [
             {
               type: "qa",
@@ -2726,6 +2726,78 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    partnerWithClinic: {
+      mainTitle: "Partner with a Clinic",
+      mainDescription:
+        "The Vetcation platform enables you to collaborate with brick-and-mortar clinics to offer virtual care under your own name and schedule. Their clients can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.",
+      sections: [
+        {
+          id: "partnerWithClinic",
+          title: "How to Partner with a Clinic",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Search for a Clinic & Request Partnership",
+                  lines: [
+                    "Search the clinic you want to partner with in the Vetcation app.",
+                    "Once you find the clinic, request to partner with them.",
+                    "The clinic will receive a notification and can approve or deny your request.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8644-min.PNG?alt=media&token=13e52f49-7c58-49b2-95f6-89a828cb0f03",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8645-min.PNG?alt=media&token=8e3a0af7-cbfc-4ed1-8d60-0157fface6f6",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Approval Process",
+                  lines: [
+                    "Once the clinic approves your request, you will receive a notification.",
+                    "You will see your profile listed under the clinic's profile.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8647-min.PNG?alt=media&token=c24c7a21-f9be-49cd-910e-474443eef671",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8648-min.PNG?alt=media&token=95228e62-767b-448a-828c-308c19f6e775",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Visibility to Clients:",
+                  lines: [
+                    "When a clinic's client searches for a telemedicine doctor, your profile will display the name of the partnered clinic that matches the client’s designated home clinic. This ensures proper visibility and medical record sharing.",
+                    "The following screen shows an example where a client's home clinic (LA Veterinary Center) is partnered with a telemedicine doctor.",
+                    "Vetcation system will prioritize the partnered clinic's doctor over other telemedicine doctors.",
+                    "After the appointment, the medical records will be shared with the partnered clinic.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8649-min.PNG?alt=media&token=07bb5e7a-bf85-440f-ab0c-da7c178b78d1",
               ],
             },
           ],

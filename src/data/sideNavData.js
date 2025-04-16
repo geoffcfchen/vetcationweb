@@ -142,16 +142,16 @@ const sideNavData = {
           id: "marketing",
           label: "Marketing",
           subItems: [
-            {
-              id: "MarketingOverview",
-              label: "Marketing Overview",
-            },
+            // {
+            //   id: "MarketingOverview",
+            //   label: "Marketing Overview",
+            // },
             {
               id: "CommunityMarketing",
               label: "Community Marketing",
             },
             {
-              id: "PatnerwithClinic",
+              id: "partnerWithClinic",
               label: "Partner with a Clinic",
             },
           ],
