@@ -2704,7 +2704,7 @@ const contentData = {
     CommunityMarketing: {
       mainTitle: "Community Marketing",
       mainDescription:
-        "For veterinarians looking to market their expertise without establishing a formal VCPR, Vetcation’s community platform empowers you to provide general advice (information on symptoms, diagnostics, treatment expectations, and outcomes) that educates pet parents without offering specific diagnoses or treatment plans. This approach allows you to share valuable veterinary insights and coaching in a non-clinical context, helping pet owners manage their pets' health in the short and long term while showcasing your expertise and ultimately driving appointments.",
+        "For veterinarians looking to market their expertise without establishing a formal VCPR, Vetcation’s community platform empowers you to voluntarily provide general advice and teletriage. Through general advice, you can publicly share valuable educational insights about common pet health topics without specific diagnoses or treatment plans. With teletriage, you can remotely help pet owners determine the urgency of their pets' conditions and guide appropriate next steps. This flexible, non-clinical approach allows you to showcase your expertise, build trust with pet owners, and ultimately encourage direct appointments.",
       sections: [
         {
           id: "generaladvice",
@@ -2714,7 +2714,13 @@ const contentData = {
               type: "qa",
               question: "What is general advice?",
               answer:
-                "General advice doesn’t provide a specific diagnosis or treatment plan. Instead, it consists of educational information about symptoms, diagnostics, treatment expectations, and outcomes that is shared outside of a formal veterinarian-client-patient relationship. This approach allows you to offer valuable, timely guidance and coaching to pet parents, empowering them to care for their pets immediately and over the long term — all while showcasing your expertise to drive appointments.",
+                "General advice means sharing educational guidance and insights about pet health topics publicly, without providing a specific diagnosis or treatment plan. When answering questions in the Vetcation Community Q&A, veterinarians can offer valuable information about common symptoms, diagnostic possibilities, typical treatment expectations, outcomes, and general recommendations. This approach allows you to share your veterinary knowledge freely, help pet parents become more informed and proactive caregivers, and showcase your expertise publicly—effectively marketing your professional services without establishing a formal Veterinary-Client-Patient Relationship (VCPR).",
+            },
+            {
+              type: "qa",
+              question: "What is teletriage?",
+              answer:
+                "Teletriage involves remotely assessing the urgency of a pet's condition to help pet parents determine the most appropriate next steps, such as immediate emergency care, scheduling a veterinary visit, or monitoring at home. On Vetcation's Community Q&A, teletriage means providing general guidance on urgency and potential next steps without diagnosing or prescribing treatments. By offering teletriage, veterinarians can quickly assist pet parents in decision-making, build trust, and demonstrate their expertise, all without establishing a formal Veterinary-Client-Patient Relationship (VCPR).",
             },
             {
               type: "framedImage",
