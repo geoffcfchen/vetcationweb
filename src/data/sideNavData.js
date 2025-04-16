@@ -19,6 +19,10 @@ const sideNavData = {
           id: "VideoCall",
           label: "Video Call",
         },
+        {
+          id: "postAppointment",
+          label: "Post-Appointment",
+        },
         { id: "earnings", label: "Earnings & Wallet" },
       ],
     },

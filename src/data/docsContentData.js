@@ -482,6 +482,48 @@ const contentData = {
       ],
     },
 
+    postAppointment: {
+      mainTitle: "Post-Appointment",
+      mainDescription: `After the video call, you should finish and submit the DAP (Data, Assessment, Plan) note and prescribe any medications if needed.`,
+      sections: [
+        {
+          id: "postAppointmentOverview",
+          title: "Post-Appointment Overview",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "What should I do after the video call with the client?",
+              answer:
+                "After the video call, you should finish and submit the DAP (Data, Assessment, Plan) note by law.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8436-min.PNG?alt=media&token=411c4e80-0574-45db-8b51-861347869779",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8610-min.PNG?alt=media&token=d6d72496-acd5-482c-b536-5473434f2404",
+              ],
+            },
+            {
+              type: "qa",
+              question: "What if I need to prescribe medications?",
+              answer:
+                "If you need to prescribe medications, you can do so directly through the Vetcation platform. The system allows you to send prescriptions electronically to the pharmacy of your choice, ensuring that your clients receive their medications promptly. In the following screens, we use Mixlab as an example, but you can choose any pharmacy you prefer.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8607-min.PNG?alt=media&token=58dfd464-ceb6-4ae6-a57d-a611b1b2f1b3",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8608-min.PNG?alt=media&token=1f921da1-4099-4007-8600-f6f7ab94ef3d",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
     earnings: {
       mainTitle: "Earnings & Wallet",
       mainDescription: `Vetcation’s earnings and wallet system is designed to help you manage your income from virtual consultations effectively.
