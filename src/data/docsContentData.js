@@ -208,6 +208,13 @@ const contentData = {
           title: "Update Legal Profile",
           blocks: [
             {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8359.PNG?alt=media&token=e9c21e33-85ba-4bb6-9ac9-5354259e197b",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -242,13 +249,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8359.PNG?alt=media&token=e9c21e33-85ba-4bb6-9ac9-5354259e197b",
-              ],
-            },
           ],
         },
         // NEW FRAMED IMAGE BLOCK:
@@ -257,6 +257,13 @@ const contentData = {
           id: "updatePublicProfile",
           title: "Update Public Profile",
           blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8360.PNG?alt=media&token=deec5ee2-d232-488e-a8c1-e8dd9d953677",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -292,19 +299,19 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8360.PNG?alt=media&token=deec5ee2-d232-488e-a8c1-e8dd9d953677",
-              ],
-            },
           ],
         },
         {
           id: "setRate",
           title: "Set Rate",
           blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8361.PNG?alt=media&token=b40f0ccd-b0f5-4b3f-b7f6-de905f6cd258",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -328,19 +335,19 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8361.PNG?alt=media&token=b40f0ccd-b0f5-4b3f-b7f6-de905f6cd258",
-              ],
-            },
           ],
         },
         {
           id: "setMinimumNotice",
           title: "Set Minimum Notice Time",
           blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -358,19 +365,19 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
-              ],
-            },
           ],
         },
         {
           id: "setAvailability",
           title: "Regular Availability",
           blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -392,13 +399,6 @@ const contentData = {
                     "Our platform auto-adjusts for time zone differences so clients always see your availability correctly.",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
               ],
             },
           ],
@@ -560,6 +560,14 @@ const contentData = {
           title: "How the Scheduling System Works",
           blocks: [
             {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -594,14 +602,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
-              ],
-            },
           ],
         },
       ],
@@ -619,18 +619,18 @@ const contentData = {
           title: "Minimum Notice Time",
           blocks: [
             {
-              type: "qa",
-              question:
-                "What is the minimum booking notice time, and why is it important for telemedicine appointments?",
-              answer:
-                "Minimum booking notice time is the shortest amount of advance notice you require from clients when scheduling telemedicine appointments. For example, you might set a minimum notice of 15 minutes, meaning clients must book at least 15 minutes ahead. Choosing a shorter minimum booking notice can significantly improve your visibility and ranking with potential clients, especially those who need acute care quickly. Many clients seek appointments within a 30-minute window, making your responsiveness and availability critical to attracting new clients. Selecting a minimum booking notice time that suits your schedule ensures you have adequate preparation time, while also optimizing your opportunity to assist clients promptly.",
-            },
-            {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
               ],
+            },
+            {
+              type: "qa",
+              question:
+                "What is the minimum booking notice time, and why is it important for telemedicine appointments?",
+              answer:
+                "Minimum booking notice time is the shortest amount of advance notice you require from clients when scheduling telemedicine appointments. For example, you might set a minimum notice of 15 minutes, meaning clients must book at least 15 minutes ahead. Choosing a shorter minimum booking notice can significantly improve your visibility and ranking with potential clients, especially those who need acute care quickly. Many clients seek appointments within a 30-minute window, making your responsiveness and availability critical to attracting new clients. Selecting a minimum booking notice time that suits your schedule ensures you have adequate preparation time, while also optimizing your opportunity to assist clients promptly.",
             },
           ],
         },
@@ -751,6 +751,14 @@ const contentData = {
           title: "My Schedule Overview",
           blocks: [
             {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8363.PNG?alt=media&token=f9ab1141-b8e7-4050-9ae0-68cc533fb4a5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8364.PNG?alt=media&token=bda8ae8f-b822-441c-83cd-f1e81063058e",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -771,19 +779,20 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8363.PNG?alt=media&token=f9ab1141-b8e7-4050-9ae0-68cc533fb4a5",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8364.PNG?alt=media&token=bda8ae8f-b822-441c-83cd-f1e81063058e",
-              ],
-            },
+
             {
               type: "qa",
               question: "How do I view my upcoming appointments?",
               answer:
                 "You can press any of the appointment in the calendar to view the details of the appointment.",
+            },
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+              ],
             },
             {
               type: "bulletList",
@@ -808,14 +817,6 @@ const contentData = {
                     "You can cancel the appointment. (see detail cancellation explanation in the next section)",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
               ],
             },
           ],
@@ -1614,6 +1615,15 @@ const contentData = {
           title: "How to Join",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -1650,15 +1660,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
-              ],
-            },
           ],
         },
       ],
@@ -1678,6 +1679,14 @@ const contentData = {
           id: "featureOverview",
           title: "Features Overview",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -1713,8 +1722,8 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.13.19%20PM.png?alt=media&token=086e22cd-ffcc-4028-a467-5e8b8b777788",
               ],
             },
             {
@@ -1735,8 +1744,8 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.13.19%20PM.png?alt=media&token=086e22cd-ffcc-4028-a467-5e8b8b777788",
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
               ],
             },
             {
@@ -1752,14 +1761,6 @@ const contentData = {
                     "For more details, see the 'Inquiry-Based Messager' section.",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
               ],
             },
           ],
@@ -1914,6 +1915,13 @@ const contentData = {
           title: "Navigating the Vetssenger Tabs",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8395.PNG?alt=media&token=fe15ea39-bc48-43c8-9d77-32a1dc3972a9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8410.PNG?alt=media&token=5f0af2fc-83b8-4bf6-900a-cce62614318e",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -1934,13 +1942,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8395.PNG?alt=media&token=fe15ea39-bc48-43c8-9d77-32a1dc3972a9",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8410.PNG?alt=media&token=5f0af2fc-83b8-4bf6-900a-cce62614318e",
-              ],
-            },
           ],
         },
       ],
@@ -1956,6 +1957,14 @@ const contentData = {
           title: "Understanding VCPR Status",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URL
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8387.PNG?alt=media&token=5a1d8b4c-6f4b-4f4e-8d3c-0a3e8e8f6c0c",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8393.PNG?alt=media&token=c717d3ad-b5f0-4a64-9248-ef3bcfb61628",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -1965,14 +1974,6 @@ const contentData = {
                     `If a valid VCPR has expired, you'll see "Connected?" displayed instead.`,
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URL
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8387.PNG?alt=media&token=5a1d8b4c-6f4b-4f4e-8d3c-0a3e8e8f6c0c",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8393.PNG?alt=media&token=c717d3ad-b5f0-4a64-9248-ef3bcfb61628",
               ],
             },
           ],
@@ -1990,6 +1991,16 @@ const contentData = {
           id: "startNewCase",
           title: "How to Start a New Case",
           blocks: [
+            {
+              type: "framedImage",
+
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8398.PNG?alt=media&token=2ce475e1-24e7-48ab-a35e-996944cdc2ad",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8397.PNG?alt=media&token=f0091f31-9b64-41af-8372-a022ca38f7d1",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2016,16 +2027,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8386.PNG?alt=media&token=94c4eadf-538b-4d87-8322-606be6306b55",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8398.PNG?alt=media&token=2ce475e1-24e7-48ab-a35e-996944cdc2ad",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8397.PNG?alt=media&token=f0091f31-9b64-41af-8372-a022ca38f7d1",
-              ],
-            },
           ],
         },
       ],
@@ -2041,6 +2042,13 @@ const contentData = {
           id: "respondToCase",
           title: "How to Respond to a Case",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8404-min.PNG?alt=media&token=6774e90a-ad3a-4f00-96b9-0c5e218dcfbb",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2059,10 +2067,9 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8404-min.PNG?alt=media&token=6774e90a-ad3a-4f00-96b9-0c5e218dcfbb",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8401-min.PNG?alt=media&token=8a2a1939-8f27-49b3-afcf-1c706f11cf91",
               ],
             },
-
             {
               type: "bulletList",
               items: [
@@ -2079,9 +2086,11 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8401-min.PNG?alt=media&token=8a2a1939-8f27-49b3-afcf-1c706f11cf91",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8402-min.PNG?alt=media&token=bb4671da-9d5f-47ea-b1bf-812d2a967ffe",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8403-min.PNG?alt=media&token=d41a0732-c294-4f1c-89c4-235adc66d0f7",
               ],
             },
+
             {
               type: "bulletList",
               items: [
@@ -2098,31 +2107,9 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8402-min.PNG?alt=media&token=bb4671da-9d5f-47ea-b1bf-812d2a967ffe",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8403-min.PNG?alt=media&token=d41a0732-c294-4f1c-89c4-235adc66d0f7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8411-min.PNG?alt=media&token=09b1a50e-c47d-4d01-85ae-034ab96662bb",
               ],
             },
-
-            //   {
-            //     type: "bulletList",
-            //     items: [
-            //       {
-            //         heading: "Close the Case",
-            //         lines: [
-            //           `After fully addressing the client's concerns, click "Close the Case" to mark the inquiry complete.`,
-            //           "The chat history will remain accessible for future reference and ongoing care.",
-            //         ],
-            //       },
-            //     ],
-            //   },
-            //   {
-            //     type: "framedImage",
-            //     imageSrcs: [
-            //       // Replace with your actual screenshot URLs
-            //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8406-min.PNG?alt=media&token=f60d50fc-c3ed-4371-a691-5297eee83119",
-            //       "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
-            //     ],
-            //   },
             {
               type: "bulletList",
               items: [
@@ -2133,13 +2120,6 @@ const contentData = {
                     "This allows you to review past inquiries and maintain continuity of care.",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8411-min.PNG?alt=media&token=09b1a50e-c47d-4d01-85ae-034ab96662bb",
               ],
             },
 
@@ -2171,6 +2151,14 @@ const contentData = {
           title: "How to Close a Case",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8406-min.PNG?alt=media&token=f60d50fc-c3ed-4371-a691-5297eee83119",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -2186,11 +2174,11 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8406-min.PNG?alt=media&token=f60d50fc-c3ed-4371-a691-5297eee83119",
+
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
               ],
             },
-
             {
               type: "bulletList",
               items: [
@@ -2211,21 +2199,21 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
-              ],
-            },
           ],
         },
         {
           id: "reopeningCases",
           title: "Reopening a Closed Case",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8412-min.PNG?alt=media&token=d5d4d4b5-0cb1-438d-838b-892667b474ae",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8415-min.PNG?alt=media&token=fea08018-3fa2-475f-952e-879ccb76b258",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8416-min.PNG?alt=media&token=3aaa8771-bd38-4a76-816e-cfefca88acd0",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2243,9 +2231,7 @@ const contentData = {
               type: "framedImage",
               imageSrcs: [
                 // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8412-min.PNG?alt=media&token=d5d4d4b5-0cb1-438d-838b-892667b474ae",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8415-min.PNG?alt=media&token=fea08018-3fa2-475f-952e-879ccb76b258",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8416-min.PNG?alt=media&token=3aaa8771-bd38-4a76-816e-cfefca88acd0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8417-min.PNG?alt=media&token=358f6f35-f270-49de-a507-cc7803e9e1f2",
               ],
             },
             {
@@ -2258,13 +2244,6 @@ const contentData = {
                     "You can review and edit this new AI summary and copy it into your notes as needed.",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8417-min.PNG?alt=media&token=358f6f35-f270-49de-a507-cc7803e9e1f2",
               ],
             },
           ],
@@ -2283,6 +2262,15 @@ const contentData = {
           title: "How to View Case History",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8425-min.PNG?alt=media&token=06c970fc-6595-45d7-82ba-a19aea03fec5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8426-min.PNG?alt=media&token=822aa65e-26d3-4687-bb8a-3301aca443c0",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -2300,16 +2288,6 @@ const contentData = {
                     "Easily reference past interactions to support ongoing care and follow-up inquiries.",
                   ],
                 },
-              ],
-            },
-
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8425-min.PNG?alt=media&token=06c970fc-6595-45d7-82ba-a19aea03fec5",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8426-min.PNG?alt=media&token=822aa65e-26d3-4687-bb8a-3301aca443c0",
               ],
             },
           ],
@@ -2331,6 +2309,15 @@ const contentData = {
           title: "How to Access Vetssenger Notes",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -2348,15 +2335,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8409-min.PNG?alt=media&token=1029e7c5-cfad-40bb-9211-c5953e2c2218",
-              ],
-            },
           ],
         },
       ],
@@ -2372,6 +2350,15 @@ const contentData = {
           id: "howToViewMedicalRecords",
           title: "How to View Medical Records",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2391,15 +2378,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8408-min.PNG?alt=media&token=2e2c2a99-dc04-4665-9c66-9ab39a98fb04",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
-              ],
-            },
           ],
         },
       ],
@@ -2417,6 +2395,14 @@ const contentData = {
           title: "Visits",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -2428,20 +2414,21 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
-              ],
-            },
           ],
         },
         {
           id: "records",
           title: "Records",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8437-min.PNG?alt=media&token=fcca1ddc-be16-4cd1-8048-7783eba869e3",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2455,21 +2442,21 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8437-min.PNG?alt=media&token=fcca1ddc-be16-4cd1-8048-7783eba869e3",
-              ],
-            },
           ],
         },
         {
           id: "weightChart",
           title: "Weight Chart",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8433-min.PNG?alt=media&token=51cecb79-1400-4852-9f35-51d6e5085b1d",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2483,15 +2470,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8433-min.PNG?alt=media&token=51cecb79-1400-4852-9f35-51d6e5085b1d",
-              ],
-            },
           ],
         },
       ],
@@ -2501,6 +2479,20 @@ const contentData = {
       mainDescription:
         "Vetcation’s DAP template is designed to empower your virtual clinic by streamlining record-keeping while enhancing client communication. Tailored for California-licensed veterinarians, it captures every detail of your telehealth sessions—from a thorough history and live observations to clear, actionable next steps. With a format that mirrors the high standards of in-person care, you can deliver flexible, legally compliant care from anywhere while keeping your practice audit-ready.",
       sections: [
+        {
+          id: "dapTemplate",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8436-min.PNG?alt=media&token=411c4e80-0574-45db-8b51-861347869779",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8610-min.PNG?alt=media&token=d6d72496-acd5-482c-b536-5473434f2404",
+              ],
+            },
+          ],
+        },
         {
           id: "data",
           title: "Data",
@@ -2569,15 +2561,6 @@ const contentData = {
                 },
               ],
             },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8436-min.PNG?alt=media&token=411c4e80-0574-45db-8b51-861347869779",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8610-min.PNG?alt=media&token=d6d72496-acd5-482c-b536-5473434f2404",
-              ],
-            },
           ],
         },
       ],
@@ -2636,6 +2619,13 @@ const contentData = {
           title: "How It Works (we use Mixlab as an example)",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8607-min.PNG?alt=media&token=58dfd464-ceb6-4ae6-a57d-a611b1b2f1b3",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8608-min.PNG?alt=media&token=1f921da1-4099-4007-8600-f6f7ab94ef3d",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -2659,14 +2649,6 @@ const contentData = {
                     "Mixlab processes the order and handle the rest, including contacting the pet owner for payment and delivery.",
                   ],
                 },
-              ],
-            },
-
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8607-min.PNG?alt=media&token=58dfd464-ceb6-4ae6-a57d-a611b1b2f1b3",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8608-min.PNG?alt=media&token=1f921da1-4099-4007-8600-f6f7ab94ef3d",
               ],
             },
           ],
@@ -2751,6 +2733,12 @@ const contentData = {
           title: "General advice & teletriage",
           blocks: [
             {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+              ],
+            },
+            {
               type: "qa",
               question: "What is general advice?",
               answer:
@@ -2761,12 +2749,6 @@ const contentData = {
               question: "What is teletriage?",
               answer:
                 "Teletriage involves remotely assessing the urgency of a pet's condition to help pet parents determine the most appropriate next steps, such as immediate emergency care, scheduling a veterinary visit, or monitoring at home. On Vetcation's Community Q&A, teletriage means providing general guidance on urgency and potential next steps without diagnosing or prescribing treatments. By offering teletriage, veterinarians can quickly assist pet parents in decision-making, build trust, and demonstrate their expertise, all without establishing a formal Veterinary-Client-Patient Relationship (VCPR).",
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
-              ],
             },
           ],
         },
@@ -2781,6 +2763,13 @@ const contentData = {
           id: "partnerWithClinic",
           title: "How to Partner with a Clinic",
           blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8644-min.PNG?alt=media&token=13e52f49-7c58-49b2-95f6-89a828cb0f03",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8645-min.PNG?alt=media&token=8e3a0af7-cbfc-4ed1-8d60-0157fface6f6",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -2797,8 +2786,8 @@ const contentData = {
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8644-min.PNG?alt=media&token=13e52f49-7c58-49b2-95f6-89a828cb0f03",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8645-min.PNG?alt=media&token=8e3a0af7-cbfc-4ed1-8d60-0157fface6f6",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8647-min.PNG?alt=media&token=c24c7a21-f9be-49cd-910e-474443eef671",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8648-min.PNG?alt=media&token=95228e62-767b-448a-828c-308c19f6e775",
               ],
             },
             {
@@ -2816,8 +2805,7 @@ const contentData = {
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8647-min.PNG?alt=media&token=c24c7a21-f9be-49cd-910e-474443eef671",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8648-min.PNG?alt=media&token=95228e62-767b-448a-828c-308c19f6e775",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8649-min.PNG?alt=media&token=07bb5e7a-bf85-440f-ab0c-da7c178b78d1",
               ],
             },
             {
@@ -2832,12 +2820,6 @@ const contentData = {
                     "After the appointment, the medical records will be shared with the partnered clinic.",
                   ],
                 },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8649-min.PNG?alt=media&token=07bb5e7a-bf85-440f-ab0c-da7c178b78d1",
               ],
             },
           ],

@@ -196,7 +196,7 @@ export default function Feature({
         <h3
           style={{
             fontSize: 60,
-            color: "#316FF6",
+            color: "#000000",
             fontFamily: "inherit",
             marginBottom: 0,
           }}
