@@ -208,6 +208,17 @@ const sideNavData = {
       ],
     },
   ],
+  clinics: [
+    {
+      groupTitle: "Vetcation Clinics",
+      items: [
+        {
+          id: "PlatformForClinic",
+          label: "Platform For Clinic",
+        },
+      ],
+    },
+  ],
 };
 
 export default sideNavData;

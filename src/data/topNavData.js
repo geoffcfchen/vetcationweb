@@ -1,6 +1,6 @@
 const topNavData = [
   { id: "home", label: "For vets" },
-  { id: "clinic", label: "For Clinic" },
+  { id: "clinics", label: "For clinics" },
   { id: "contributors", label: "Contributors" },
 ];
 

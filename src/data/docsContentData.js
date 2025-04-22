@@ -2915,6 +2915,44 @@ const contentData = {
     },
   },
 
+  clinics: {
+    PlatformForClinic: {
+      mainTitle: "Vetcation Platform for Clinics",
+      mainDescription:
+        "Vetcation is a flexible, open, and legally compliant telemedicine platform that helps every clinic expand into telemedicine, automatically extend your veterinary capacity beyond in-house staff, and reach more clients. With our partnership agreement feature, California-licensed veterinarians can directly request to partner with your clinic, providing telemedicine services under your clinic’s name while sharing both revenue and medical records—ensuring continuity of care.",
+      sections: [
+        {
+          id: "howToPartnerWithVetcation",
+          title: "How to Partner with Vetcation",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8644-min.PNG?alt=media&token=13e52f49-7c58-49b2-95f6-89a828cb0f03",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8645-min.PNG?alt=media&token=8e3a0af7-cbfc-4ed1-8d60-0157fface6f6",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Search for a Clinic & Request Partnership",
+                  lines: [
+                    "Search the clinic you want to partner with in the Vetcation app.",
+                    "Once you find the clinic, request to partner with them.",
+                    "The clinic will receive a notification and can approve or deny your request.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   // Similarly for the other topNav items...
 };
 

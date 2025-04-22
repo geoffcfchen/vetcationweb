@@ -61,6 +61,9 @@ export default function DocsLayout() {
     if (navId === "contributors") {
       navigate(`/telemedicine-info/${navId}/ourContributors`);
     }
+    if (navId === "clinics") {
+      navigate(`/telemedicine-info/${navId}/PlatformForClinic`);
+    }
   };
 
   // NEW: useEffect for scroll detection on mobile
