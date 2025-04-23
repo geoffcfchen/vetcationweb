@@ -75,6 +75,7 @@ const FramedImageBlock = ({ block }) => {
           <VideoFrameContainer key={idx}>
             <InnerFrame>
               <FramedImage
+                loading="lazy" // <-- this line!
                 variants={imageVariants}
                 initial="hidden"
                 whileInView="visible"
