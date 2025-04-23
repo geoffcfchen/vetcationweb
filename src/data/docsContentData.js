@@ -2914,8 +2914,8 @@ const contentData = {
 
   clinics: {
     ReferralClinic: {
-      mainTitle: "Telemedicine Referral Clinic Overview",
-      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. As a Telemedicine Referral Clinic, your clinic may be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
+      mainTitle: "Telemedicine Referral Clinic Network Overview",
+      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic may be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
       sections: [
         {
           id: "whatIsReferralClinic",
@@ -2963,25 +2963,25 @@ const contentData = {
               type: "bulletList",
               items: [
                 {
-                  heading: "Receive local patient referrals",
+                  heading: "Receive local patient referrals:",
                   lines: [
                     "Your clinic becomes visible to telemedicine veterinarians when a nearby patient requires in-person diagnostics or treatment. No extra promotion or listing fees are required.",
                   ],
                 },
                 {
-                  heading: "Provide in-person care with full context",
+                  heading: "Provide in-person care with full context:",
                   lines: [
                     "You’ll receive the virtual visit summary and relevant records so your team can confidently continue the patient’s care with clear background information.",
                   ],
                 },
                 {
-                  heading: "Open the door to new professional relationships",
+                  heading: "Open the door to new professional relationships:",
                   lines: [
                     "Referral interactions often lead to ongoing partnerships with virtual veterinarians looking for trusted in-person support.",
                   ],
                 },
                 {
-                  heading: "No fees, no system integration required",
+                  heading: "No fees, no system integration required:",
                   lines: [
                     "Joining is simple. Just confirm by email and your clinic will be eligible to receive referrals when applicable. There’s no obligation, and you can opt out at any time.",
                   ],
