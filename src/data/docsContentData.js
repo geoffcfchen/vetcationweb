@@ -2914,8 +2914,8 @@ const contentData = {
 
   clinics: {
     ReferralClinic: {
-      mainTitle: "Referral Clinic Overview",
-      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care after a virtual consultation. As a Referral Clinic, your clinic may be selected by telemedicine veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the virtual visit and relevant medical records to guide your team’s in-person care.`,
+      mainTitle: "Telemedicine Referral Clinic Overview",
+      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. As a Telemedicine Referral Clinic, your clinic may be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
       sections: [
         {
           id: "whatIsReferralClinic",
