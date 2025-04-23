@@ -210,14 +210,44 @@ const sideNavData = {
   ],
   clinics: [
     {
-      groupTitle: "Vetcation Clinics",
+      groupTitle: "Referral Clinic",
       items: [
         {
-          id: "PlatformForClinic",
-          label: "Platform For Clinic",
+          id: "ReferralClinic",
+          label: "Referral Clinic Overview",
         },
+        // {
+        //   id: "ReferralClinicSteps",
+        //   label: "Step-by-Step Setup",
+        // },
       ],
     },
+    // {
+    //   groupTitle: "Partnering Clinic",
+    //   items: [
+    //     {
+    //       id: "PartneringClinic",
+    //       label: "Partnering Clinic Overview",
+    //     },
+    //     {
+    //       id: "PartneringClinicSteps",
+    //       label: "Step-by-Step Setup",
+    //     },
+    //   ],
+    // },
+    // {
+    //   groupTitle: "Full Clinic",
+    //   items: [
+    //     {
+    //       id: "FullClinic",
+    //       label: "Full Platform Clinic Overview",
+    //     },
+    //     {
+    //       id: "FullClinicSteps",
+    //       label: "Step-by-Step Setup",
+    //     },
+    //   ],
+    // },
   ],
 };
 

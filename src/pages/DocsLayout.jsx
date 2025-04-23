@@ -62,7 +62,7 @@ export default function DocsLayout() {
       navigate(`/telemedicine-info/${navId}/ourContributors`);
     }
     if (navId === "clinics") {
-      navigate(`/telemedicine-info/${navId}/PlatformForClinic`);
+      navigate(`/telemedicine-info/${navId}/ReferralClinic`);
     }
   };
 

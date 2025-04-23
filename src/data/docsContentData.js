@@ -167,10 +167,7 @@ const contentData = {
     },
     VirtualClinic: {
       mainTitle: "Build Your Virtual Clinic with Vetcation",
-      mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. 
-    Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic—complete with secure recordkeeping, 
-    automated scheduling, and client management—all while staying fully compliant with AB 1399. Learn the difference between telemedicine 
-    and a virtual clinic, the legal Compliance, and follow simple steps to set up your own clinic from anywhere.`,
+      mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic, complete with secure recordkeeping, automated scheduling, and client management, all while staying fully compliant with AB 1399. Learn the difference between telemedicine and a virtual clinic, the legal compliance, and follow simple steps to set up your own clinic from anywhere.`,
       sections: [
         {
           id: "diffTelemedVirtualClinic",
@@ -2916,33 +2913,229 @@ const contentData = {
   },
 
   clinics: {
-    PlatformForClinic: {
-      mainTitle: "Vetcation Platform for Clinics",
-      mainDescription:
-        "Vetcation is a flexible, open, and legally compliant telemedicine platform that helps every clinic expand into telemedicine, automatically extend your veterinary capacity beyond in-house staff, and reach more clients. With our partnership agreement feature, California-licensed veterinarians can directly request to partner with your clinic, providing telemedicine services under your clinic’s name while sharing both revenue and medical records—ensuring continuity of care.",
+    ReferralClinic: {
+      mainTitle: "Referral Clinic Overview",
+      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care after a virtual consultation. As a Referral Clinic, your clinic may be selected by telemedicine veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the virtual visit and relevant medical records to guide your team’s in-person care.`,
       sections: [
         {
-          id: "howToPartnerWithVetcation",
-          title: "How to Partner with Vetcation",
+          id: "whatIsReferralClinic",
+          title: "What Is a Referral Clinic?",
           blocks: [
+            {
+              type: "paragraph",
+              text: "A Referral Clinic is a local in-person clinic that can receive patients after a virtual consultation through the Vetcation platform. When a virtual veterinarian determines that a patient requires hands-on care, our system shows a list of nearby clinics based on the pet owner's location. If your clinic is selected, you will receive a secure email with the visit summary and medical record to guide your team’s follow-up care.",
+            },
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8644-min.PNG?alt=media&token=13e52f49-7c58-49b2-95f6-89a828cb0f03",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8645-min.PNG?alt=media&token=8e3a0af7-cbfc-4ed1-8d60-0157fface6f6",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8973.webp?alt=media&token=2362f8ae-6eb1-40f9-83a7-b2e95cbabd8d",
               ],
+            },
+
+            {
+              type: "paragraph",
+              text: "The image above shows how clinics are displayed to veterinarians when choosing a referral location:",
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Search for a Clinic & Request Partnership",
+                  heading: "Black:",
                   lines: [
-                    "Search the clinic you want to partner with in the Vetcation app.",
-                    "Once you find the clinic, request to partner with them.",
-                    "The clinic will receive a notification and can approve or deny your request.",
+                    "Clinics that have joined the referral network and are eligible to receive referrals.",
+                  ],
+                },
+                {
+                  heading: "Grey:",
+                  lines: [
+                    "Clinics that have not yet joined and are not selectable by the vet.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "referralBenefits",
+          title: "Why Join as a Referral Clinic?",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Receive local patient referrals",
+                  lines: [
+                    "Your clinic becomes visible to telemedicine veterinarians when a nearby patient requires in-person diagnostics or treatment. No extra promotion or listing fees are required.",
+                  ],
+                },
+                {
+                  heading: "Provide in-person care with full context",
+                  lines: [
+                    "You’ll receive the virtual visit summary and relevant records so your team can confidently continue the patient’s care with clear background information.",
+                  ],
+                },
+                {
+                  heading: "Open the door to new professional relationships",
+                  lines: [
+                    "Referral interactions often lead to ongoing partnerships with virtual veterinarians looking for trusted in-person support.",
+                  ],
+                },
+                {
+                  heading: "No fees, no system integration required",
+                  lines: [
+                    "Joining is simple. Just confirm by email and your clinic will be eligible to receive referrals when applicable. There’s no obligation, and you can opt out at any time.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "howToJoin",
+          title: "How to Join?",
+          blocks: [
+            {
+              type: "qa",
+              question: "How do I join as a Referral Clinic?",
+              answer: `It’s simple. If you received an email invitation from Vetcation, just reply with your preferred email address for receiving referral records. If you haven’t received an invitation but would like to participate, contact us at <span class="highlight">gcfchen@vetcation.com</span>. There are no fees, no tech setup, and no obligation. You’re simply agreeing to be available as an in-person option for local pet owners when needed.`,
+            },
+          ],
+        },
+      ],
+    },
+    PartneringClinic: {
+      mainTitle: "Telemedicine Platform for Partnering Clinics",
+      mainDescription: `Vetcation is a flexible, open, and legally compliant telemedicine platform that helps every clinic in California expand into telemedicine, extend veterinary capacity beyond in‑house staff, and reach more clients. With our partnership agreement feature, California‑licensed veterinarians can request to collaborate with your clinic, providing virtual care under your clinic’s name while sharing both revenue and medical records to ensure continuity of care.`,
+      sections: [
+        /* 1. Business impact for clinics */
+        {
+          id: "clinicBenefits",
+          title: "What Can Your Clinic Achieve with Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Scale services, protect your brand, and improve patient outcomes without extra payroll or infrastructure:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Expand veterinary capacity without hiring:",
+                  lines: [
+                    "Partner with licensed vets who work remotely under your clinic’s name during evenings, weekends, or peak periods.",
+                  ],
+                },
+                {
+                  heading: "Retain full ownership of brand and records:",
+                  lines: [
+                    "All medical records and client relationships stay with your clinic — stored securely and AB 1399‑compliant.",
+                  ],
+                },
+                {
+                  heading: "Add revenue with zero upfront cost:",
+                  lines: [
+                    "Virtual visits generate new income streams for your clinic. For each full-time virtual vet you partner with, your clinic can earn up to **$75,000+ per year** without hiring new staff or adding overhead.",
+                  ],
+                },
+                {
+                  heading: "Seamless continuity of care:",
+                  lines: [
+                    "Telemedicine notes flow straight into your workflow, so in‑person follow‑ups are informed and efficient.",
+                  ],
+                },
+                {
+                  heading: "Built‑in legal safeguards:",
+                  lines: [
+                    "Vetcation’s workflows align with California’s telehealth rules — reducing audit risk and paperwork.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        /* 2. Differentiators */
+        {
+          id: "whyChooseVetcationClinic",
+          title: "Why Choose Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Designed specifically for brick‑and‑mortar clinics — not a competing marketplace:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "One‑click vet onboarding & scheduling control:",
+                  lines: [
+                    "Approve or deny partnership requests, set hours, and cap daily telemedicine slots in seconds.",
+                  ],
+                },
+                {
+                  heading: "Shared medical records, no data silos:",
+                  lines: [
+                    "Every virtual visit automatically syncs with your clinic’s record — ready for follow‑up, lab work, or radiology.",
+                  ],
+                },
+                {
+                  heading: "Higher client retention & satisfaction:",
+                  lines: [
+                    "Offer after‑hours triage and convenient rechecks that keep pet owners loyal to your clinic.",
+                  ],
+                },
+                {
+                  heading: "Dedicated regulatory & tech support:",
+                  lines: [
+                    "Questions on AB 1399 audits or EMR integration? Our in‑house team is on call.",
+                    "📧 gcfchen@vetcation.com",
+                    "📞 (530) 400‑6227",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        /* 3. Market data & trend points for clinics */
+        {
+          id: "whyVirtualCareTrendClinic",
+          title: "Why Clinics Are Embracing Telemedicine",
+          blocks: [
+            {
+              type: "trendPoints",
+              introParagraphs: [
+                "VVCA’s 2024 State of Virtual Care Report highlights urgent shortages and soaring demand — telemedicine is now a strategic necessity:",
+              ],
+              items: [
+                {
+                  heading: "Severe workforce gaps:",
+                  lines: [
+                    "The U.S. needs **12,000 more veterinarians** and **48,000 support staff** to meet baseline demand; **22% of counties have zero veterinary employees**.",
+                  ],
+                },
+                {
+                  heading: "Demand from underserved pet owners:",
+                  lines: [
+                    "**25 million companion animals** live in counties with the lowest access scores. Virtual care lets your clinic reach them without opening a new location.",
+                  ],
+                },
+                {
+                  heading: "High‑satisfaction service channel:",
+                  lines: [
+                    "Virtual consults achieve a **98.4% consumer satisfaction rate** across the U.S., U.K., and Canada — higher than many in‑person benchmarks.",
+                  ],
+                },
+                {
+                  heading: "Efficiency & revenue benefits:",
+                  lines: [
+                    "**58%** of treatment‑oriented virtual cases are resolved remotely, freeing onsite appointments for higher‑value procedures and reducing no‑shows.",
+                  ],
+                },
+                {
+                  heading: "Competitive differentiation:",
+                  lines: [
+                    "Early‑adopter clinics position themselves as modern, convenient, and tech‑forward — key factors in attracting both clients and new hires.",
                   ],
                 },
               ],
