@@ -2915,12 +2915,29 @@ const contentData = {
   clinics: {
     ReferralClinic: {
       mainTitle: "Telemedicine Referral Clinic Network Overview",
-      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic may be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
+      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic can be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
       sections: [
         {
           id: "whatIsReferralClinic",
           title: "What Is a Referral Clinic?",
           blocks: [
+            {
+              type: "map",
+              center: { lat: 34.05, lng: -118.25 },
+              zoom: 10,
+              markers: [
+                {
+                  position: { lat: 34.061, lng: -118.308 },
+                  name: "Sunset Animal Clinic",
+                  website: "https://sunsetvet.com",
+                },
+                {
+                  position: { lat: 34.115, lng: -118.352 },
+                  name: "Laurel Pet Hospital",
+                  website: "https://laurelpethospital.com",
+                },
+              ],
+            },
             {
               type: "paragraph",
               text: "A Referral Clinic is a local in-person clinic that can receive patients after a virtual consultation through the Vetcation platform. When a virtual veterinarian determines that a patient requires hands-on care, our system shows a list of nearby clinics based on the pet owner's location. If your clinic is selected, you will receive a secure email with the visit summary and medical record to guide your team’s follow-up care.",

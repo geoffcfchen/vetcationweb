@@ -9,6 +9,7 @@ import ParagraphBlock from "../../components/ParagraphBlock";
 import FramedImageBlock from "../../components/FramedImageBlock";
 import contentData from "../docsContentData";
 import CustomContributorListBlock from "../../components/CustomContributorListBlock";
+import InteractiveMapBlock from "../../components/InteractiveMapBlock";
 // Import other block components as needed
 
 function DocsContent() {
@@ -89,6 +90,8 @@ function DocsContent() {
                 return <ParagraphBlock key={blockKey} block={block} />;
               case "framedImage":
                 return <FramedImageBlock key={blockKey} block={block} />;
+              case "map":
+                return <InteractiveMapBlock key={blockKey} block={block} />;
               case "customContributorList":
                 return (
                   <CustomContributorListBlock key={blockKey} block={block} />

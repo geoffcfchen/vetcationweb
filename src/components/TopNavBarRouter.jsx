@@ -22,8 +22,8 @@ const TopNavBarContainer = styled.nav`
     background-color: #111;
 
     /* If hideNav is true, slide up. Otherwise, slide down to 0. */
-    transform: ${(props) =>
-      props.hideNav ? "translateY(-100%)" : "translateY(0)"};
+    transform: ${({ $hideNav }) =>
+      $hideNav ? "translateY(-100%)" : "translateY(0)"};
   }
 `;
 
@@ -79,7 +79,7 @@ export default function TopNavBarRounter({
   };
 
   return (
-    <TopNavBarContainer hideNav={hideNav}>
+    <TopNavBarContainer $hideNav={hideNav}>
       {/* Logo & Text (always visible) */}
       <LogoContainer onClick={() => navigate("/")}>
         <Logo src={logo} alt="Vetcation Logo" />
