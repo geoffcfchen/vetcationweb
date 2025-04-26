@@ -11,6 +11,13 @@ import { darkMapStyle } from "../data/darkMapStyle";
 
 const containerStyle = { width: "100%", height: "400px", borderRadius: "12px" };
 
+const pinSvg = encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="40" viewBox="0 0 24 40">
+      <path fill="#00E676" d="M12,0C7.037,0,3,4.037,3,9c0,6.75,7.5,17.667,8.002,18.294C11.502,26.667,19,15.75,19,9
+        C19,4.037,14.963,0,12,0z"/>
+    </svg>
+  `);
+
 const IWContent = styled.div`
   cursor: pointer;
   display: flex;
@@ -63,11 +70,9 @@ function InteractiveMapBlock({ block }) {
           onMouseOver={() => setActive(i)}
           onClick={() => window.open(m.website, "_blank")}
           //   icon={{
-          //     path: window.google.maps.SymbolPath.CIRCLE,
-          //     scale: 6, // size of the circle
-          //     fillColor: "#00E676", // your brand color
-          //     fillOpacity: 1,
-          //     strokeWeight: 0,
+          //     url: `data:image/svg+xml;charset=UTF-8,${pinSvg}`,
+          //     anchor: new window.google.maps.Point(12, 40),
+          //     scaledSize: new window.google.maps.Size(24, 40),
           //   }}
         />
       ))}

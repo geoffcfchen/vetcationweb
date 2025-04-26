@@ -2918,26 +2918,107 @@ const contentData = {
       mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic can be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
       sections: [
         {
-          id: "whatIsReferralClinic",
-          title: "What Is a Referral Clinic?",
+          id: "referralNetwork",
+          title: "Vetcation’s Referral Clinic Network",
           blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation’s Referral Clinic Network is designed to connect virtual veterinarians with local clinics that can provide in-person care. This network allows pet owners to receive timely and appropriate care while ensuring that clinics have the opportunity to support their community.",
+            },
             {
               type: "map",
               center: { lat: 34.05, lng: -118.25 },
               zoom: 10,
               markers: [
                 {
-                  position: { lat: 34.061, lng: -118.308 },
-                  name: "Sunset Animal Clinic",
-                  website: "https://sunsetvet.com",
+                  position: { lat: 34.0047158996568, lng: -118.41651441472911 },
+                  name: "Culver Palms Animal Hospital",
+                  website: "https://culverpalmsanimalhospital.com/",
                 },
                 {
-                  position: { lat: 34.115, lng: -118.352 },
-                  name: "Laurel Pet Hospital",
-                  website: "https://laurelpethospital.com",
+                  position: {
+                    lat: 33.96333911352371,
+                    lng: -118.42021727331638,
+                  },
+                  name: "Marina Veterinary Center",
+                  website: "https://www.marinavet.com/",
+                },
+                {
+                  position: { lat: 34.04207, lng: -118.33172 },
+                  name: "Olympic Pet Hospital",
+                  website: "http://www.olympicpetclinic.com",
+                },
+                {
+                  position: {
+                    lat: 34.05483791731315,
+                    lng: -118.32258513242628,
+                  },
+                  name: "LA Central Animal Hospital",
+                  website: "https://lacentralanimalhospital.com/",
+                },
+                {
+                  position: { lat: 34.01207, lng: -118.46049 },
+                  name: "Bay Cities Veterinary Hospital",
+                  website: "https://baycitiesvet.com/",
+                },
+                {
+                  position: { lat: 34.0103, lng: -118.4307 },
+                  name: "Westchester Veterinary Center and Cat Clinic",
+                  website: "http://www.westchestervet.com",
+                },
+                {
+                  position: { lat: 34.0227, lng: -118.4071 },
+                  name: "Animal Imaging",
+                  website: "https://www.animalimaginglv.com",
+                },
+                {
+                  position: { lat: 34.0204, lng: -118.4595 },
+                  name: "Advanced Veterinary Services",
+                  website: "https://advvetservices.com",
+                },
+                {
+                  position: { lat: 34.0191, lng: -118.4937 },
+                  name: "Banfield Pet Hospital",
+                  website: "https://www.banfield.com",
+                },
+                {
+                  position: { lat: 34.032, lng: -118.4525 },
+                  name: "Brent-Air Animal Hospital",
+                  website: "http://www.brentairanimalhospital.com",
+                },
+                {
+                  position: { lat: 34.0102, lng: -118.4348 },
+                  name: "Carlsen Animal Hospital",
+                  website: "https://www.carlshadvet.com",
+                },
+                {
+                  position: { lat: 34.0198, lng: -118.4456 },
+                  name: "Emerald Animal Hospital",
+                  website: "https://emeraldanimal.com",
+                },
+                {
+                  position: { lat: 34.0165, lng: -118.4521 },
+                  name: "VCA West Los Angeles Animal Hospital",
+                  website: "https://vcahospitals.com/west-los-angeles",
+                },
+                {
+                  position: { lat: 34.0084, lng: -118.4329 },
+                  name: "The Veterinary Care Center",
+                  website: "https://tvc-clinic.com",
+                },
+                {
+                  position: { lat: 34.0182, lng: -118.4107 },
+                  name: "Valley Village Animal Hospital",
+                  website: "https://valleyvillageanimalhospital.com",
                 },
               ],
             },
+          ],
+        },
+        {
+          id: "whatIsReferralClinic",
+          title: "What Is a Referral Clinic?",
+          blocks: [
             {
               type: "paragraph",
               text: "A Referral Clinic is a local in-person clinic that can receive patients after a virtual consultation through the Vetcation platform. When a virtual veterinarian determines that a patient requires hands-on care, our system shows a list of nearby clinics based on the pet owner's location. If your clinic is selected, you will receive a secure email with the visit summary and medical record to guide your team’s follow-up care.",
