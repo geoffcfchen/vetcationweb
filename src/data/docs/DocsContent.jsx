@@ -15,8 +15,6 @@ import InteractiveMapBlock from "../../components/InteractiveMapBlock";
 function DocsContent() {
   // Get route parameters (e.g. topNavId and docId)
   const { topNavId, docId } = useParams();
-  console.log("docId:", docId);
-  console.log("topNavId:", topNavId);
   // Use docId as the key to load the correct document data.
   const doc = contentData[topNavId]?.[docId];
 
