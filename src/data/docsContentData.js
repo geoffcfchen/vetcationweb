@@ -2928,7 +2928,7 @@ const contentData = {
             {
               type: "map",
               center: { lat: 34.05, lng: -118.25 },
-              zoom: 10,
+              zoom: 11,
               markers: [
                 {
                   position: { lat: 34.0047158996568, lng: -118.41651441472911 },
@@ -2943,11 +2943,7 @@ const contentData = {
                   name: "Marina Veterinary Center",
                   website: "https://www.marinavet.com/",
                 },
-                {
-                  position: { lat: 34.04207, lng: -118.33172 },
-                  name: "Olympic Pet Hospital",
-                  website: "http://www.olympicpetclinic.com",
-                },
+
                 {
                   position: {
                     lat: 34.05483791731315,
@@ -2966,50 +2962,34 @@ const contentData = {
                   name: "Westchester Veterinary Center and Cat Clinic",
                   website: "http://www.westchestervet.com",
                 },
-                {
-                  position: { lat: 34.0227, lng: -118.4071 },
-                  name: "Animal Imaging",
-                  website: "https://www.animalimaginglv.com",
-                },
-                {
-                  position: { lat: 34.0204, lng: -118.4595 },
-                  name: "Advanced Veterinary Services",
-                  website: "https://advvetservices.com",
-                },
+
                 {
                   position: { lat: 34.0191, lng: -118.4937 },
                   name: "Banfield Pet Hospital",
                   website: "https://www.banfield.com",
                 },
                 {
-                  position: { lat: 34.032, lng: -118.4525 },
+                  position: { lat: 34.0023209494312, lng: -118.40581963058001 },
                   name: "Brent-Air Animal Hospital",
-                  website: "http://www.brentairanimalhospital.com",
+                  website: "https://brentairanimalhospital.com/",
                 },
+
                 {
-                  position: { lat: 34.0102, lng: -118.4348 },
-                  name: "Carlsen Animal Hospital",
-                  website: "https://www.carlshadvet.com",
-                },
-                {
-                  position: { lat: 34.0198, lng: -118.4456 },
+                  position: {
+                    lat: 34.03888017270116,
+                    lng: -118.44495454472874,
+                  },
                   name: "Emerald Animal Hospital",
-                  website: "https://emeraldanimal.com",
+                  website: "https://emeraldanimal.com/",
                 },
+
                 {
-                  position: { lat: 34.0165, lng: -118.4521 },
-                  name: "VCA West Los Angeles Animal Hospital",
-                  website: "https://vcahospitals.com/west-los-angeles",
-                },
-                {
-                  position: { lat: 34.0084, lng: -118.4329 },
+                  position: {
+                    lat: 34.09163764875563,
+                    lng: -118.33075520174093,
+                  },
                   name: "The Veterinary Care Center",
-                  website: "https://tvc-clinic.com",
-                },
-                {
-                  position: { lat: 34.0182, lng: -118.4107 },
-                  name: "Valley Village Animal Hospital",
-                  website: "https://valleyvillageanimalhospital.com",
+                  website: "https://veterinarycarecenter.com/",
                 },
               ],
             },
