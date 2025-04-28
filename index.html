@@ -35,11 +35,12 @@
     <script>
       (function () {
         const h = window.location.hash;
-        // if the hash starts with "#/…" (old HashRouter path)
+        // Old HashRouter links start with "#/…"
         if (h.startsWith("#/")) {
-          // build the new path: current pathname + the fragment after "#"
-          const newUrl =
-            window.location.pathname + h.slice(1) + window.location.search;
+          // Remove trailing slash from the current path (so "/" becomes "")
+          const base = window.location.pathname.replace(/\/$/, "");
+          // h.slice(1) => "/telemedicine-info/clinics/ReferralClinic"
+          const newUrl = base + h.slice(1) + window.location.search;
           window.history.replaceState(null, "", newUrl);
         }
       })();
