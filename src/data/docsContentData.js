@@ -2927,7 +2927,7 @@ const contentData = {
             },
             {
               type: "map",
-              center: { lat: 34.05, lng: -118.25 },
+              center: { lat: 34.0023209494312, lng: -118.40581963058001 },
               zoom: 11,
               markers: [
                 {
