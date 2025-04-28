@@ -2991,6 +2991,14 @@ const contentData = {
                   name: "The Veterinary Care Center",
                   website: "https://veterinarycarecenter.com/",
                 },
+                {
+                  position: {
+                    lat: 33.97935402449685,
+                    lng: -118.43628711342294,
+                  },
+                  name: "Shane Veterinary Medical Center",
+                  website: "https://www.shanevet.com/site/home",
+                },
               ],
             },
           ],
