@@ -2983,6 +2983,7 @@ const contentData = {
                   name: "Emerald Animal Hospital",
                   email: "info@emeraldanimal.com",
                   website: "https://emeraldanimal.com/",
+                  note: "general care and has sent email",
                 },
 
                 {
@@ -2992,6 +2993,7 @@ const contentData = {
                   },
                   name: "The Veterinary Care Center",
                   website: "https://veterinarycarecenter.com/",
+                  note: "sent the invitation email",
                 },
                 {
                   position: {
