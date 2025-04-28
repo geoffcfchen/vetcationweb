@@ -2,7 +2,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams, useLocation } from "react-router-dom";
 import TopNavBarRounter from "../components/TopNavBarRouter"; // note: "TopNavBarRounter" name
 import MySidebarRouter from "../components/Sidebar/MySidebarRouter";
 import RightSideBarRouter from "../components/Sidebar/RightSideBarRouter";
@@ -33,6 +33,7 @@ const MiddleColumn = styled.div`
 
 export default function DocsLayout() {
   const { topNavId = "home" } = useParams();
+  const location = useLocation(); // ← new
 
   const navigate = useNavigate();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -65,6 +66,31 @@ export default function DocsLayout() {
       navigate(`/telemedicine-info/${navId}/ReferralClinic`);
     }
   };
+
+  // useEffect(() => {
+  //   if (activeSectionId) {
+  //     navigate(`#${activeSectionId}`, { replace: true });
+  //   }
+  // }, [activeSectionId, navigate]);
+  useEffect(() => {
+    if (activeSectionId) {
+      navigate(
+        { pathname: location.pathname, hash: activeSectionId },
+        { replace: true }
+      );
+    }
+  }, [activeSectionId, navigate, location.pathname]);
+
+  // 2️⃣ On first render, scroll to any existing hash
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.slice(1);
+      setActiveSectionId(id);
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, []); // run only once
 
   // NEW: useEffect for scroll detection on mobile
   useEffect(() => {

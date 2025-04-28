@@ -88,7 +88,7 @@ const SMSTermsPage = () => (
         <Paragraph>
           Our SMS notifications are subject to our Privacy Policy. By opting in
           to receive SMS notifications, you acknowledge that you have read and
-          agree to our <Link href="#/privacy-policy">Privacy Policy</Link>.
+          agree to our <Link href="/privacy-policy">Privacy Policy</Link>.
         </Paragraph>
 
         <SectionTitle>Contacting Us</SectionTitle>

@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./App.jsx";
 import ContextWrapper from "./context/ContextWrapper.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
+    <BrowserRouter basename="/">
       <ContextWrapper>
         <App />
       </ContextWrapper>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>
 );

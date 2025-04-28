@@ -103,7 +103,7 @@ function ClinicHeroSection() {
                 Transform Your Clinic Operations with Vetcation’s All-in-One
                 Platform
               </HeroTagline>
-              <HeroButton href="#/register">Get Started</HeroButton>
+              <HeroButton href="/register">Get Started</HeroButton>
             </div>
           </Col>
           <Col md={6}>

@@ -102,7 +102,7 @@ function VetHeroSection() {
               <HeroTagline>
                 Connect, Earn, and Grow in a Community of Esteemed Veterinarians
               </HeroTagline>
-              <HeroButton href="#/register">Get Started</HeroButton>
+              <HeroButton href="/register">Get Started</HeroButton>
             </div>
           </Col>
           <Col md={6}>

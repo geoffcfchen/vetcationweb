@@ -99,7 +99,7 @@ function HomeHeroSection() {
                 Connect with vets and make the right decision for your pets
               </HeroHeader>
               <HeroTagline>Build strong connections with your vets</HeroTagline>
-              <HeroButton href="#/register">Get Started</HeroButton>
+              <HeroButton href="/register">Get Started</HeroButton>
             </div>
           </Col>
           <Col md={6}>

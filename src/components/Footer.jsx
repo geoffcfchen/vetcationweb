@@ -169,10 +169,10 @@ const Footer = () => {
     {
       title: "Legal",
       links: [
-        { text: "Privacy Policy", url: "#/privacy-policy" },
+        { text: "Privacy Policy", url: "/privacy-policy" },
         {
           text: "SMS Terms & Conditions",
-          url: "#/SMSTerms",
+          url: "/SMSTerms",
         },
       ],
     },

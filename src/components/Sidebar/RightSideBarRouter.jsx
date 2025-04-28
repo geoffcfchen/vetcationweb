@@ -1,12 +1,16 @@
 // RightSideBarRouter.jsx
 import React from "react";
 import { VerticalLineContainer, SidebarItemRow } from "./SidebarStyle";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function RightSideBarRouter({
   docSections = [],
   activeSectionId,
   onSectionClick,
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div style={{ padding: "1rem" }}>
       <h6 style={{ marginBottom: "1rem" }}>On this page</h6>
@@ -18,7 +22,17 @@ function RightSideBarRouter({
             <SidebarItemRow
               key={sec.id}
               $active={isActive}
-              onClick={() => onSectionClick(sec.id)}
+              // onClick={() => onSectionClick(sec.id)}
+
+              onClick={() => {
+                // update the URL hash
+                navigate(
+                  { pathname: location.pathname, hash: sec.id },
+                  { replace: false }
+                );
+                // then smooth-scroll
+                onSectionClick(sec.id);
+              }}
               style={{
                 cursor: "pointer",
                 fontWeight: isActive ? "bold" : "normal",

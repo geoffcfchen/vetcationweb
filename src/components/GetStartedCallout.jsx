@@ -50,7 +50,7 @@ const GetStartedCallout = () => {
         <CalloutContent>
           <CalloutHeading>Ready to Get Started?</CalloutHeading>
         </CalloutContent>
-        <Button href="#/register">Get Started</Button>
+        <Button href="/register">Get Started</Button>
       </Callout>
     </Container>
   );
