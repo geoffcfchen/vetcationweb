@@ -2999,6 +2999,17 @@ const contentData = {
                   name: "Shane Veterinary Medical Center",
                   website: "https://www.shanevet.com/site/home",
                 },
+                {
+                  position: {
+                    lat: 34.00520332658537,
+
+                    lng: -118.42997269603164,
+                  },
+
+                  name: "VCA Animal Hospitals Urgent Care - Mar Vista",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
               ],
             },
           ],
