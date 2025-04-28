@@ -3009,6 +3009,16 @@ const contentData = {
                   website:
                     "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
                 },
+                {
+                  position: {
+                    lat: 34.0046488706125,
+                    lng: -118.40954258107686,
+                  },
+
+                  name: "Sepulveda Animal Hospital",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
               ],
             },
           ],
