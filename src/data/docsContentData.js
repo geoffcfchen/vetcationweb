@@ -2946,8 +2946,8 @@ const contentData = {
 
                 {
                   position: {
-                    lat: 34.05483791731315,
-                    lng: -118.32258513242628,
+                    lat: 34.078809436743406,
+                    lng: -118.2179621116925,
                   },
                   name: "LA Central Animal Hospital",
                   website: "https://lacentralanimalhospital.com/",
