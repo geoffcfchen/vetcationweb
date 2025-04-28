@@ -2952,11 +2952,7 @@ const contentData = {
                   name: "LA Central Animal Hospital",
                   website: "https://lacentralanimalhospital.com/",
                 },
-                {
-                  position: { lat: 34.01207, lng: -118.46049 },
-                  name: "Bay Cities Veterinary Hospital",
-                  website: "https://baycitiesvet.com/",
-                },
+
                 {
                   position: { lat: 34.0103, lng: -118.4307 },
                   name: "Westchester Veterinary Center and Cat Clinic",
