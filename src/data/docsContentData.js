@@ -2954,9 +2954,13 @@ const contentData = {
                 },
 
                 {
-                  position: { lat: 34.0103, lng: -118.4307 },
+                  position: {
+                    lat: 33.95556427616801,
+                    lng: -118.39659333243026,
+                  },
                   name: "Westchester Veterinary Center and Cat Clinic",
                   website: "http://www.westchestervet.com",
+                  status: "pendings",
                 },
 
                 {
@@ -2973,10 +2977,11 @@ const contentData = {
 
                 {
                   position: {
-                    lat: 34.03888017270116,
-                    lng: -118.44495454472874,
+                    lat: 34.035602154921776,
+                    lng: -118.44509587290779,
                   },
                   name: "Emerald Animal Hospital",
+                  email: "info@emeraldanimal.com",
                   website: "https://emeraldanimal.com/",
                 },
 
