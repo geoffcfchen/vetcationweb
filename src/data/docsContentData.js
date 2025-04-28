@@ -3002,7 +3002,6 @@ const contentData = {
                 {
                   position: {
                     lat: 34.00520332658537,
-
                     lng: -118.42997269603164,
                   },
 
