@@ -2972,6 +2972,7 @@ const contentData = {
                   position: { lat: 34.0023209494312, lng: -118.40581963058001 },
                   name: "Brent-Air Animal Hospital",
                   website: "https://brentairanimalhospital.com/",
+                  note: "curside service only",
                 },
 
                 {
