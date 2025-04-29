@@ -3055,6 +3055,14 @@ const contentData = {
                   },
                   website: "https://valleyviewah.com/",
                 },
+                {
+                  name: "Belmont Shore Veterinary Hospital",
+                  position: {
+                    lat: 33.76642657504627,
+                    lng: -118.11757368650653,
+                  },
+                  website: "https://www.belmontshorevet.com/",
+                },
               ],
             },
           ],
