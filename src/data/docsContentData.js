@@ -3023,14 +3023,14 @@ const contentData = {
                   website:
                     "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
                 },
-                {
-                  position: {
-                    lat: 33.987750515597284,
-                    lng: -118.4446426666371,
-                  },
-                  name: "Animal Wellness Centers",
-                  website: "https://www.animalwellnesscenters.com/",
-                },
+                // {
+                //   position: {
+                //     lat: 33.987750515597284,
+                //     lng: -118.4446426666371,
+                //   },
+                //   name: "Animal Wellness Centers",
+                //   website: "https://www.animalwellnesscenters.com/",
+                // },
               ],
             },
           ],
