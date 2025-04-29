@@ -3047,6 +3047,14 @@ const contentData = {
                   },
                   website: "https://laveterinarycenter.com/",
                 },
+                {
+                  name: "Valley View Animal Hospital",
+                  position: {
+                    lat: 33.84752791176592,
+                    lng: -118.02939471435792,
+                  },
+                  website: "https://valleyviewah.com/",
+                },
               ],
             },
           ],
