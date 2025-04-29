@@ -3038,6 +3038,14 @@ const contentData = {
                     lng: -118.40813929680246,
                   },
                   website: "https://centersinaianimalhospital.com/",
+                }, // 34.04786164165459, -118.21992410000105
+                {
+                  name: "Los Angeles Veterinary Center (Boyle Heights)",
+                  position: {
+                    lat: 34.047843862460994,
+                    lng: -118.2198919135183,
+                  },
+                  website: "https://laveterinarycenter.com/",
                 },
               ],
             },
