@@ -3031,6 +3031,14 @@ const contentData = {
                 //   name: "Animal Wellness Centers",
                 //   website: "https://www.animalwellnesscenters.com/",
                 // },
+                {
+                  name: "Center Sinai Animal Hospital",
+                  position: {
+                    lat: 34.01833118738013,
+                    lng: -118.40813929680246,
+                  },
+                  website: "https://centersinaianimalhospital.com/",
+                },
               ],
             },
           ],
