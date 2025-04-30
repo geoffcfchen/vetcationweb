@@ -3063,6 +3063,16 @@ const contentData = {
                   },
                   website: "https://www.belmontshorevet.com/",
                 },
+                // reception@nmah.vet
+                {
+                  name: "Newport Mesa Animal Hospital",
+                  position: {
+                    lat: 33.631458508390274,
+                    lng: -117.9236859136573,
+                  },
+                  website: "https://nmah.vet/",
+                  email: "reception@nmah.vet",
+                },
               ],
             },
           ],
