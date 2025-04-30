@@ -2928,7 +2928,7 @@ const contentData = {
             {
               type: "map",
               center: { lat: 33.938469117159684, lng: -118.2679399959647 },
-              zoom: 10,
+              zoom: 9,
               markers: [
                 {
                   position: { lat: 34.0047158996568, lng: -118.41651441472911 },
@@ -3072,6 +3072,15 @@ const contentData = {
                   },
                   website: "https://nmah.vet/",
                   email: "reception@nmah.vet",
+                },
+                {
+                  name: "Animal Clinic of Tustin Ranch Irvine",
+                  position: {
+                    lat: 33.73099233577863,
+                    lng: -117.78865419406277,
+                  },
+                  website: "https://www.actri.net/",
+                  email: "actristaff@actri.net",
                 },
               ],
             },
