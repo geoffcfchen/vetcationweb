@@ -847,6 +847,40 @@ const contentData = {
     statutes in detail to ensure full compliance.`,
       sections: [
         {
+          id: "telehealthClientConsent",
+          title: "Telemedicine Holds the Same Standard of Care",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Telemedicine must meet the same standard of care as in-person veterinary services. Under AB 1399, before delivering veterinary medicine via telehealth, the veterinarian shall inform the client about the use and potential limitations of telehealth and obtain their consent:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Same standards of care apply:",
+                  lines: [
+                    "The same standards of care apply to veterinary medicine services via telehealth and in-person veterinary medical services.",
+                  ],
+                },
+                {
+                  heading: "In-person visit option:",
+                  lines: [
+                    "The client has the option to choose an in-person visit from a veterinarian at any time.",
+                  ],
+                },
+                {
+                  heading: "Follow-up and tech-failure guidance:",
+                  lines: [
+                    "The client has been advised how to receive follow-up care or assistance in the event of an adverse reaction to the treatment or in the event of an inability to communicate resulting from technological or equipment failure.",
+                    "Vetcation provides Vetssenger (inquiry-based messaging tool; see vetssenger section in user manual) to facilitate timely follow-up communication and support, helping you comply with AB 1399 and deliver the same standard of care as in-person visits.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
           id: "faqOutOfState",
           title: "Out-of-state Telemedicine",
           blocks: [
