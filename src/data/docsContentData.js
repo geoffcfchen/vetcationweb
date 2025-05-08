@@ -852,7 +852,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Telemedicine must meet the same standard of care as in-person veterinary services. Under AB 1399, before delivering veterinary medicine via telehealth, the veterinarian shall inform the client about the use and potential limitations of telehealth and obtain their consent:",
+              text: "Telemedicine must meet the same standard of care as in-person veterinary services. Under AB 1399, before delivering veterinary medicine via telehealth, the veterinarian shall inform the client about the use and potential limitations of telehealth and obtain their consent. (Business and Professions Code (BPC), § 4826.6, subd. (g).)",
             },
             {
               type: "bulletList",
