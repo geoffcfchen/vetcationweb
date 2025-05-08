@@ -847,7 +847,7 @@ const contentData = {
     statutes in detail to ensure full compliance.`,
       sections: [
         {
-          id: "telehealthClientConsent",
+          id: "telehealthStandardOfCare",
           title: "Telemedicine Holds the Same Standard of Care",
           blocks: [
             {
