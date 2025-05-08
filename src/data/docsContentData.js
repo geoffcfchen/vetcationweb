@@ -1121,7 +1121,7 @@ const contentData = {
                 "Under California law, a veterinary assistant may administer a prescribed vaccine at a registered veterinary premises if and only if the vaccine is not a controlled substance or otherwise “restricted” (BPC § 4836.1(a)). In that scenario, the assistant may work either under the indirect supervision of a veterinarian who ordered the vaccine—even if that vet performed the exam via telemedicine—or under the direct supervision of a Registered Veterinary Technician (RVT) physically on-site (BPC, § 4836.1, subds. (a), (b); CCR, tit. 16, §§ 2034, subs. (f), 2036.5, subs. (b).).",
               example: "",
               helpText:
-                "Our platform documents each step of the telemedicine visit, clarifying when the veterinarian is providing indirect supervision. It also prompts you to confirm whether an RVT is physically present for tasks requiring direct supervision. This ensures everyone’s role is clear and meets California’s legal requirements for administering vaccines.",
+                "Our platform timestamps and documents every step of a telemedicine visit and enforces that only non-controlled vaccines are used. At the point of administration, it prompts you to confirm “Indirect Vet Supervision,” so the assistant can proceed under the remote veterinarian’s orders, ensuring clear roles and full compliance with California law.",
             },
           ],
         },
