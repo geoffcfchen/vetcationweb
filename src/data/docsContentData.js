@@ -416,6 +416,14 @@ const contentData = {
                 },
               ],
             },
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9191.webp?alt=media&token=abe5569d-ea87-42b6-8191-96d9ec4953d9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9192.webp?alt=media&token=ff3107a0-9b94-4130-ad46-c17241e8ab8f",
+              ],
+            },
           ],
         },
       ],
@@ -1882,7 +1890,7 @@ const contentData = {
     InquiryBasedMessagerOverView: {
       mainTitle: "Vetssenger Overview",
       mainDescription: `
-        Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build lasting relationships with your clients.
+        Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
       `,
       sections: [
         // NEW SECTION to hold the text previously in mainDescription
