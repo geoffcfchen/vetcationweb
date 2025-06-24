@@ -1165,12 +1165,17 @@ const contentData = {
     // ====== NEW VCPR SECTION ======
     VCPR: {
       mainTitle: "Veterinarian-Client-Patient Relationship (VCPR)",
-      mainDescription: `A valid VCPR is the cornerstone of providing veterinary care, whether 
-    in-person or via telehealth. California law (BPC, § 4826.6) allows three primary methods 
-    to establish a VCPR: (1) synchronous audio-video examination, (2) in-person examination 
-    of the animal, or (3) making medically appropriate and timely visits to the premises 
-    where the animal is kept. Below are FAQs explaining each method, plus general info 
-    on what a VCPR entails and how Vetcation helps you remain compliant.`,
+      mainDescription: `A valid, condition-specific VCPR is the cornerstone of providing
+veterinary care, whether in person or via telehealth. Under California law
+(BPC § 4826.6) a separate VCPR must be formed for each new clinical
+condition. A VCPR may be established by:  
+(1) synchronous audio-video examination,  
+(2) in-person examination of the animal, or  
+(3) medically appropriate, timely visits to the premises where a herd,
+flock, or other group of animals is kept (not routine house-calls for
+individual pets).  
+The FAQs below explain each pathway and how Vetcation helps you remain
+compliant.`,
       sections: [
         {
           id: "definingVCPR",
@@ -1181,11 +1186,23 @@ const contentData = {
               question:
                 "What exactly is a Veterinarian-Client-Patient Relationship (VCPR)?",
               answer:
-                "A VCPR exists when a veterinarian takes responsibility for making medical judgments regarding an animal patient, and the client agrees to follow the vet’s instructions. The veterinarian must be sufficiently familiar with the animal’s condition (via in-person exam, synchronous audio-video exam, or timely premises visits), and must communicate a treatment or diagnostic plan to the client. (BPC, § 4826.6, subds. (a), (b).)",
+                "A VCPR exists when a veterinarian (1) assumes responsibility for medical" +
+                " judgments regarding a specific condition of an animal patient, and" +
+                " (2) the client agrees to follow the veterinarian’s instructions. The" +
+                " veterinarian must be sufficiently familiar with the animal’s present" +
+                " condition (via in-person exam, synchronous audio-video exam, or" +
+                " timely premises visits) and must communicate a treatment or" +
+                " diagnostic plan to the client. Each new condition (e.g., otitis vs." +
+                " dermatitis) requires a new VCPR. (BPC § 4826.6(a), (b)).",
               example:
-                "If you have recently examined the animal — either in person or by a live video consult — and discussed a treatment plan with the client, you’ve established a VCPR, provided the client has consented to your guidance.",
+                "You perform a live video exam for a dog’s skin infection and advise a" +
+                " treatment plan. Two months later the same dog injures its leg; that" +
+                " orthopedic issue requires establishing a *new* VCPR before you may" +
+                " diagnose or prescribe for that condition.",
               helpText:
-                "Vetcation logs each exam (in-person or video), ensuring you have a clear record of how and when the VCPR was formed. This audit trail demonstrates compliance if questions arise.",
+                "Vetcation logs every exam (in-person or video) with its associated" +
+                " condition, giving you an audit trail that demonstrates compliance" +
+                " if questions arise.",
             },
           ],
         },
@@ -1198,11 +1215,16 @@ const contentData = {
               question:
                 "How does a synchronous audio-video exam establish a VCPR?",
               answer:
-                "Under AB 1399, a veterinarian may establish a valid VCPR by examining the animal patient in real time using two-way audio-video communication. This allows the vet to visually assess the animal’s condition, just as they would in person, and form a preliminary diagnosis or treatment plan. (BPC, § 4826.6, subds. (b)(2).)",
+                "AB 1399 allows a veterinarian to establish a condition-specific VCPR by" +
+                " examining the patient in real time using two-way audio-video." +
+                " (BPC § 4826.6(b)(2)).",
               example:
-                "A client schedules a live video call through Vetcation. You observe the pet’s physical condition, movement, or visible symptoms via the camera, and discuss the pet’s history and environment. After the session, you have enough information to advise on treatment.",
+                "During a Vetcation video call, you observe a dog’s pruritic skin," +
+                " discuss history, and develop a treatment plan—thereby forming a" +
+                " VCPR for that dermatologic condition.",
               helpText:
-                "We provide a stable video platform that records the date and duration of each live session, prompting you to document findings in the patient’s record. This ensures proof that the exam was truly synchronous audio-video and meets the legal standard.",
+                "The platform records the date, duration, and condition so you can" +
+                " verify that the exam met the synchronous requirement.",
             },
           ],
         },
@@ -1215,28 +1237,39 @@ const contentData = {
               question:
                 "How does an in-person examination factor into establishing a VCPR?",
               answer:
-                "In-person exams remain the traditional method for forming a VCPR. You physically examine the animal at your clinic or a registered veterinary premises. If you’ve recently examined the animal in person, you can continue providing telehealth services based on that in-person VCPR for up to a certain duration, depending on the type of drug or treatment needed. (BPC, § 4826.6, subds. (b)(1).)",
+                "An in-person exam remains the traditional pathway. Once you have" +
+                " physically examined the animal for a given condition, you may" +
+                " deliver follow-up telehealth services for that same condition—up to" +
+                " the prescription time limits outlined below. (BPC § 4826.6(b)(1)).",
               example:
-                "A client brings their cat to your clinic for an annual checkup. Two weeks later, the cat develops new symptoms. You can conduct a telemedicine consult because you’ve already established a VCPR in person.",
+                "A cat seen in clinic for chronic kidney disease on 1 Jan 2025 may" +
+                " receive telehealth management of *that* disease thereafter—subject" +
+                " to drug-specific renewal limits.",
               helpText:
-                "Our system tracks in-person visits and syncs them to the patient’s record. This way, if you switch to telehealth later, Vetcation recognizes that a valid VCPR already exists and won’t block you from prescribing or advising the client (within legal time limits).",
+                "Vetcation links the in-person visit to its condition so later" +
+                " telehealth encounters reflect a valid VCPR.",
             },
           ],
         },
         {
           id: "faqPremisesVisit",
-          title: "Premises Visits",
+          title: "Premises Visits (Herd / Stable)",
           blocks: [
             {
               type: "qa",
               question:
                 "What is a premises visit, and how does it establish a VCPR?",
               answer:
-                "A premises visit means you go to the location where the animal is kept (e.g., a client’s home, ranch, farm, or stable) to evaluate the patient. This direct observation of the animal’s condition and environment is legally recognized as a valid way to establish a VCPR. (BPC, § 4826.6, subd. (b)(3).)",
+                "A premises visit is an on-site evaluation of animals kept as a herd," +
+                " flock, or stable group. Home visits for individual companion" +
+                " animals do *not* qualify. (BPC § 4826.6(b)(3)).",
               example:
-                "You regularly visit a farm to check on a herd of goats. Because you’ve observed them on-site, you can later offer telemedicine consults for those goats without needing another in-person exam — so long as your premises visits are considered medically appropriate and timely.",
+                "You inspect a goat herd at a ranch—creating a VCPR for herd health" +
+                " conditions you assessed. Future telemedicine consults for that herd" +
+                " can rely on the premises-based VCPR, within prescription limits.",
               helpText:
-                "Our platform stores documentation of each premises visit. When you do a follow-up video consult, Vetcation sees that you’ve already established a valid VCPR through an on-site exam, ensuring compliance with California law.",
+                "Each premises visit is time-stamped and condition-tagged in" +
+                " Vetcation’s records to demonstrate compliance.",
             },
           ],
         },
@@ -1246,11 +1279,11 @@ const contentData = {
 
     PrescriptionLimits: {
       mainTitle: "Prescription Time Limits under AB 1399",
-      mainDescription: `Once a valid VCPR is established — whether in person or via telehealth — there are 
-    important time limits on how long you can continue prescribing medications before 
-    another exam is required. California’s AB 1399 (BPC, § 4826.6) and related statutes 
-    lay out different rules depending on the type of exam and the type of drug. Below 
-    are some FAQs to clarify these limits and how Vetcation helps you stay compliant.`,
+      mainDescription: `Once a valid, condition-specific VCPR is established, California law
+(BPC § 4826.6(i)) imposes <span class="highlight">drug-specific</span> renewal limits. The one-year
+and six-month clocks apply only to <span class="highlight">the same drug</span> originally
+prescribed for that condition; switching to a different medication
+requires clinical reassessment regardless of time elapsed.`,
       sections: [
         {
           id: "faqGeneralOverview",
@@ -1258,48 +1291,58 @@ const contentData = {
           blocks: [
             {
               type: "qa",
-              question:
-                "Why do different prescription time limits apply, depending on how the VCPR was established?",
+              question: "Why do different prescription time limits apply?",
               answer:
-                "California law distinguishes between an in-person exam and a telehealth-based exam. If you establish the VCPR in person, you can typically prescribe for up to one year. But if you establish it via synchronous audio-video, you can only prescribe for up to six months for most drugs, and only up to 14 days for antimicrobials. (BPC, § 4826.6, subds. (i)(2)–(5).)",
+                "California distinguishes between VCPRs formed in person versus by" +
+                " synchronous video. For a drug first prescribed after an in-person" +
+                " exam, you may refill that *same* drug for up to one year. If the" +
+                " VCPR was formed solely via video, refills of that same drug are" +
+                " limited to six months—or 14 days for antimicrobials.",
               example:
-                "You examine a dog in person at your clinic. Six months later, the dog needs a refill on its heart medication. Because you established the VCPR in person, you can still legally prescribe without another exam — assuming you haven’t exceeded one year since the last in-person visit.",
+                "You examine a dog in clinic on 1 Mar 2025 and start carprofen. Carprofen refills are allowed until 1 Mar 2026. If the same dog’s allergy flare is managed by a video VCPR on 1 Apr 2025 with apoquel, apoquel refills can continue only until 1 Oct 2025 unless you re-examine first.",
               helpText:
-                "Our platform checks the date and method of the last exam. If you try to prescribe beyond the legal time limit, Vetcation will flag it or block it, helping you avoid noncompliance.",
+                "Vetcation tracks the drug name, exam type, and prescription date. If you attempt to refill beyond the one-year, six-month, or 14-day window, the system flags it and prompts a new exam.",
             },
           ],
         },
         {
           id: "faqOneYearLimit",
-          title: "1-Year Limit After In-Person Exam",
+          title: "1-Year Limit (After In-Person Exam)",
           blocks: [
             {
               type: "qa",
               question:
-                "If I established the VCPR by examining the animal in person, how long can I prescribe medications?",
+                "How long can I refill a medication after an in-person exam?",
               answer:
-                "You can prescribe for up to one year from the date you last examined the patient in person. After one year, you must conduct another exam (either in person or via telehealth, depending on the drug type) before continuing to prescribe. (BPC, § 4826.6, subd. (i)(2).)",
+                "For the *same medication* and condition, up to one year from the exam" +
+                " date. New medications or new conditions require a fresh exam." +
+                " (BPC § 4826.6(i)(2)).",
               example:
-                "You see a cat in person on January 1, 2025. You can legally prescribe medication until January 1, 2026, without needing a new exam—unless it’s a controlled substance or other restricted category that requires more frequent checks.",
+                "You examine a cat in person on 1 Jan 2025 and start benazepril." +
+                " Benazepril may be refilled until 1 Jan 2026. Initiating amlodipine" +
+                " for a new hypertension diagnosis would first require a new exam.",
               helpText:
-                "We track the date of your last in-person exam and automatically notify you as you approach the one-year mark, ensuring you don’t inadvertently prescribe beyond the allowed duration.",
+                "Vetcation automatically tracks the date and type of the last in-person exam for each condition. As the one-year mark approaches, the system alerts you and, if you attempt a refill past the deadline, blocks the prescription until a new exam is logged.",
             },
           ],
         },
         {
           id: "faqSixMonthLimit",
-          title: "6-Month Limit After Synchronous Audio-Video Exam",
+          title: "6-Month Limit (Video-Only VCPR)",
           blocks: [
             {
               type: "qa",
-              question:
-                "What if I established the VCPR using a synchronous audio-video exam? How long can I prescribe then?",
+              question: "What if the VCPR was formed via synchronous video?",
               answer:
-                "If the VCPR was formed solely via live video (no prior in-person exam), you may only prescribe most drugs for up to six months from the date of that exam. After six months, you need another exam — either another video consult or an in-person exam — before continuing to prescribe. (BPC, § 4826.6, subd. (i)(4).)",
+                "The *same drug* may be refilled for up to six months from that video" +
+                " exam. After six months—or for a different drug—you must re-examine" +
+                " the patient. (BPC § 4826.6(i)(4)).",
               example:
-                "On February 1, 2025, you conduct a video consult for a dog’s skin condition and prescribe a topical medication. By August 1, 2025, you must re-examine the dog (via video or in person) if they need more medication.",
+                "A 1 Feb 2025 video consult leads to gabapentin for chronic pain." +
+                " Gabapentin refills are permissible until 1 Aug 2025 provided the" +
+                " condition remains stable.",
               helpText:
-                "Vetcation automatically calculates the six-month window from the video exam date. When a refill request arrives, our system checks if you’re still within the valid timeframe. If not, it reminds you to conduct another exam first.",
+                "Vetcation time-stamps each video exam and tags the prescribed drug. If you try to refill that drug after the six-month window, the platform blocks the order and prompts you to schedule a new exam.",
             },
           ],
         },
@@ -1451,60 +1494,57 @@ const contentData = {
     },
     RecordKeepingDocumentation: {
       mainTitle: "Record Keeping & Documentation",
-      mainDescription: `In California, veterinarians must maintain comprehensive records of each 
-    animal patient for a minimum period, ensure those records are kept confidential, 
-    and provide copies to clients upon request. (BPC §§ 4855, 4856.) The FAQs below 
-    clarify these obligations and highlight how Vetcation helps you stay organized 
-    and compliant, both for in-person visits and telehealth consultations.`,
+      mainDescription: `California veterinarians must keep comprehensive medical records for
+<span class="highlight">three years after the animal’s last visit or consultation</span>.
+(BPC §§ 4855–4856; 16 CCR § 2032.3). The FAQs below reflect those
+requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "faqBasicRetention",
-          title: "Basic Retention Requirements",
+          title: "Retention Period",
           blocks: [
             {
               type: "qa",
-              question:
-                "How long must I keep medical records for my veterinary patients?",
-              answer:
-                "Under California law, you must maintain medical records for each animal patient for at least three years. (BPC § 4856.) These records must include identification of the animal, relevant clinical information, diagnostic tests performed, treatments administered or prescribed, and any pertinent communication with the client.",
+              question: "How long must I retain medical records?",
+              answer: `You must retain records for three years <span class="highlight">after the patient’s last visit. (BPC § 4856).</span>`,
+
               example:
-                "If you treat a dog in January 2025, you need to retain the medical records until at least January 2028, even if the client moves away or no longer seeks services.",
+                "If you treat a dog in Jan 2025 and never see it again, you may discard" +
+                " the record in Jan 2028.",
               helpText:
-                "Our platform automatically stores and timestamps all telehealth session notes, diagnostic data, and treatment plans. These are securely archived in our system for the required retention period, so you don’t need separate manual filing.",
-            },
-          ],
-        },
-        {
-          id: "faqProvidingRecords",
-          title: "Providing Records to Clients",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Am I required to give clients a copy of their pet’s medical records if they ask?",
-              answer:
-                "Yes. Per BPC § 4855, veterinarians must provide or make records available to the client upon request, including any diagnostic data. You cannot withhold records solely due to an unpaid bill, although you may charge a reasonable fee for copying or transferring them.",
-              example:
-                "A client switches clinics and asks for their cat’s lab results and treatment notes. You must furnish these promptly, whether the appointment was in person or via telehealth.",
-              helpText:
-                "Vetcation stores all session notes and diagnostic files in one place. If a client requests a copy, you can quickly export or print the records from our system, ensuring timely compliance with the law.",
+                "Vetcation automatically tracks the last-visit date and tags records" +
+                " for destruction reminders.",
             },
           ],
         },
         {
           id: "faqContentOfRecords",
-          title: "Required Content in Records",
+          title: "Required Content (16 CCR § 2032.3)",
           blocks: [
             {
               type: "qa",
-              question:
-                "What specific details must be included in a veterinary medical record?",
+              question: "What details must be included?",
               answer:
-                "Each record should identify the patient (species, breed, and, if applicable, name), document the presenting complaint, diagnostic tests, findings, treatments, prescribed medications (with dosages), and any follow-up instructions given to the client. Additionally, you must note the date of each visit or telehealth session, as well as who performed each procedure. (BPC § 4855.)",
+                "Under 16 CCR § 2032.3, each medical record must contain: patient identification (species, breed, name/ID), presenting complaint, history, physical findings, diagnostic tests ordered and results, treatments or procedures performed, medications prescribed or dispensed (name, strength, dosage, quantity, directions), and follow-up instructions or recommendations.",
               example:
-                "For a telehealth consult regarding a dog’s skin infection, you’d note the video call date, symptoms observed, medication dosage, and any advice about follow-up or rechecks.",
+                "For a 5 Apr 2025 telehealth visit about a dog’s otitis externa, your record would note: (1) canine, Labrador, “Buddy”; (2) ear discharge and pruritus; (3) otoscopic findings; (4) cytology results; (5) ear flush performed; (6) gentamicin-betamethasone drops 2 gtt BID × 7 days; and (7) re-check in one week.",
               helpText:
-                "Our telehealth interface prompts you to enter these details before closing a consult. This ensures no required fields are missed, and you have a thorough, legally compliant record for each encounter.",
+                "Vetcation’s note template mirrors § 2032.3. Required fields can’t be closed out blank, and drop-downs for drugs auto-populate strength and directions to reduce omissions.",
+            },
+          ],
+        },
+        {
+          id: "faqProvidingRecords",
+          title: "Providing Records / Summaries",
+          blocks: [
+            {
+              type: "qa",
+              question: "Can I give a summary instead of the full record?",
+              answer:
+                "Yes. Under 16 CCR § 2032.3(b), a compliant, veterinarian-signed summary may be provided to the client in lieu of the entire record.",
+              example:
+                "A client requests records from a 10 May 2025 dermatology visit. You can supply a one-page summary listing signalment, diagnosis (atopic dermatitis), diagnostics (skin cytology), medications (apoquel 16 mg SID × 30 d), and follow-up plan, instead of the full multi-page SOAP notes and lab attachments.",
+              helpText: `In Vetcation, <span class="highlight">click Export → Generate Summary</span>; the platform auto-pulls the required data fields, applies your e-signature, and produces a PDF you can email or print, ensuring the summary meets § 2032.3(b) requirements.`,
             },
           ],
         },
@@ -1592,13 +1632,13 @@ const contentData = {
             {
               type: "qa",
               question:
-                "Can I provide a telehealth-based second opinion if another veterinarian has already established a VCPR with the animal in person?",
+                "Can I provide a telehealth-based second opinion directly to the client when another veterinarian already has a VCPR?",
               answer:
-                "Yes, but to prescribe or diagnose independently, you must form your own VCPR under AB 1399. Often, a second opinion is advisory, with the primary veterinarian retaining responsibility for prescriptions. If you plan to take over care or write new prescriptions yourself, you must either perform a synchronous video exam or see the animal in person. Alternatively, you could rely on the existing in-person VCPR if you are part of the same practice and have access to all the relevant medical records. (BPC, § 4826.6, subd. (b); 16 CCR § 2032.1.)",
+                "No—unless you fall within the limited shared-practice exception in 16 CCR § 2032.15 (e.g., you and the primary veterinarian work at the same physical location and you have full access to the chart). A veterinarian-to-veterinarian consult is always allowed, but giving advice or prescriptions directly to the owner requires you to establish your own VCPR.",
               example:
-                "A client wants your telehealth opinion about their dog’s complex heart condition. If they share full medical records from the primary vet (and you do a synchronous video exam), you might decide you can advise on additional treatment. But if you plan to prescribe medication yourself, you must ensure you meet AB 1399’s VCPR requirements.",
+                "The primary vet emails you radiographs for input. You may discuss findings with that vet, but you may not video-chat with the owner or prescribe medication unless you first establish your own VCPR or the § 2032.15 exception applies.",
               helpText:
-                "Vetcation makes it easy to upload or request existing records. If the first veterinarian’s records are complete and the video exam is sufficient, you might lawfully proceed with a second-opinion prescription. Otherwise, you can limit your role to offering an opinion that the primary vet implements.",
+                "Vetcation supports true peer-to-peer consults by limiting direct client access until you open a compliant VCPR encounter.",
             },
           ],
         },
@@ -1609,13 +1649,13 @@ const contentData = {
             {
               type: "qa",
               question:
-                "Is it legal to perform euthanasia via telehealth, or to guide a client through euthanasia remotely?",
+                "Is it legal to perform euthanasia or guide a client through it via telehealth?",
               answer:
-                "No. California law requires in-person administration or supervision for euthanasia. Telehealth cannot substitute for the physical presence needed to ensure humane and legally compliant euthanasia. Even if a veterinarian gives verbal instructions, a controlled substance is typically involved, and prescribing or administering it remotely without an in-person exam and direct supervision is prohibited. (BPC, § 4826.6, subds. (i)(6).)",
+                "No. Because controlled substances are involved and a VCPR formed solely by telehealth cannot support prescribing or administering those drugs, euthanasia must be performed in person under a valid in-person VCPR. (BPC § 4826.6(i)(6)).",
               example:
-                "A client in a remote area asks you to guide them through the euthanasia process by video. This is not allowed because it involves controlled substances and direct supervision requirements that can’t be met via telehealth.",
+                "A rural client requests video guidance to administer pentobarbital. You must decline and refer them to an in-person service.",
               helpText:
-                "If a client inquires about end-of-life options through Vetcation, you should advise them that California law mandates an in-person procedure. Provide resources for mobile in-person euthanasia services if travel is an obstacle.",
+                "If a client raises the request inside Vetcation, the system displays a canned message explaining that euthanasia requires an on-site veterinarian.",
             },
           ],
         },
@@ -1626,13 +1666,13 @@ const contentData = {
             {
               type: "qa",
               question:
-                "Do I need to register my physical location or maintain a brick-and-mortar facility in California if I’m providing all services through telehealth?",
+                "Do I need a registered veterinary premises if I practice only by telehealth?",
               answer:
-                "Under AB 1399, there’s no requirement to maintain a permanent facility in California solely for telehealth practice—provided you hold a valid, active California DVM license. However, you must still adhere to all Veterinary Medical Board regulations for recordkeeping and potential inspections. If you occasionally perform in-person services or store controlled substances in-state, you might need to register a veterinary premise license. Check Board regulations (BPC, §§ 4853–4854) to confirm whether a premise permit is required for your specific practice model.",
+                "Yes, unless you meet one of the narrow exceptions in B&P § 4853(h) (e.g., you practice exclusively as an employee of a registered premises or a public agency). Most independent telehealth practices must register a premises so the Veterinary Medical Board can inspect records and verify compliance.",
               example:
-                "If you’re a fully remote vet living in Nevada but licensed in California, you can conduct telehealth consults for pets located in California without a California brick-and-mortar. But if you decide to offer limited in-person services in California (vaccination clinics, etc.), you’d likely need a registered premise.",
+                "You operate remotely from Nevada under your own CA DVM license. Because you are not an employee of a registered CA premises and you control records, you must obtain a premises registration—even if you never see animals in person.",
               helpText:
-                "Vetcation’s software is designed so you can fully operate virtually without a physical clinic, as long as your license is in good standing and you meet AB 1399’s telehealth requirements. Always check with the Board if you expand into any in-person services that might trigger premise permit obligations.",
+                "Vetcation’s onboarding wizard includes a checklist of § 4853(h) exemptions. If none apply, it links to the Board’s premises-registration application.",
             },
           ],
         },
@@ -3245,7 +3285,7 @@ const contentData = {
                 {
                   heading: "Add revenue with zero upfront cost:",
                   lines: [
-                    "Virtual visits generate new income streams for your clinic. For each full-time virtual vet you partner with, your clinic can earn up to **$75,000+ per year** without hiring new staff or adding overhead.",
+                    `Virtual visits generate new income streams for your clinic. For each full-time virtual vet you partner with, your clinic can earn up to <span class="highlight">$75,000+ per year</span> without hiring new staff or adding overhead.`,
                   ],
                 },
                 {
