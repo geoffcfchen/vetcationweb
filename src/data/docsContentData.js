@@ -1165,14 +1165,14 @@ const contentData = {
     // ====== NEW VCPR SECTION ======
     VCPR: {
       mainTitle: "Veterinarian-Client-Patient Relationship (VCPR)",
-      mainDescription: `A valid, condition-specific VCPR is the cornerstone of providing
+      mainDescription: `A valid, <span class="highlight">condition-specific</span> VCPR is the cornerstone of providing
 veterinary care, whether in person or via telehealth. Under California law
 (BPC § 4826.6) a separate VCPR must be formed for each new clinical
 condition. A VCPR may be established by:  
 (1) synchronous audio-video examination,  
 (2) in-person examination of the animal, or  
-(3) medically appropriate, timely visits to the premises where a herd,
-flock, or other group of animals is kept (not routine house-calls for
+(3) medically appropriate, timely visits to the <span class="highlight">premises where a herd,
+flock, or other group of animals is kept</span> (not routine house-calls for
 individual pets).  
 The FAQs below explain each pathway and how Vetcation helps you remain
 compliant.`,
@@ -1197,7 +1197,7 @@ compliant.`,
               example:
                 "You perform a live video exam for a dog’s skin infection and advise a" +
                 " treatment plan. Two months later the same dog injures its leg; that" +
-                " orthopedic issue requires establishing a *new* VCPR before you may" +
+                " orthopedic issue requires establishing a new VCPR before you may" +
                 " diagnose or prescribe for that condition.",
               helpText:
                 "Vetcation logs every exam (in-person or video) with its associated" +
@@ -1544,7 +1544,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 "Yes. Under 16 CCR § 2032.3(b), a compliant, veterinarian-signed summary may be provided to the client in lieu of the entire record.",
               example:
                 "A client requests records from a 10 May 2025 dermatology visit. You can supply a one-page summary listing signalment, diagnosis (atopic dermatitis), diagnostics (skin cytology), medications (apoquel 16 mg SID × 30 d), and follow-up plan, instead of the full multi-page SOAP notes and lab attachments.",
-              helpText: `In Vetcation, <span class="highlight">click Export → Generate Summary</span>; the platform auto-pulls the required data fields, applies your e-signature, and produces a PDF you can email or print, ensuring the summary meets § 2032.3(b) requirements.`,
+              helpText: `In Vetcation, click Export → Generate Summary; the platform auto-pulls the required data fields, applies your e-signature, and produces a PDF you can email or print, ensuring the summary meets § 2032.3(b) requirements.`,
             },
           ],
         },
