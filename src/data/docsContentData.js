@@ -1525,11 +1525,38 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "qa",
               question: "What details must be included?",
               answer:
-                "Under 16 CCR § 2032.3, each medical record must contain: patient identification (species, breed, name/ID), presenting complaint, history, physical findings, diagnostic tests ordered and results, treatments or procedures performed, medications prescribed or dispensed (name, strength, dosage, quantity, directions), and follow-up instructions or recommendations.",
-              example:
-                "For a 5 Apr 2025 telehealth visit about a dog’s otitis externa, your record would note: (1) canine, Labrador, “Buddy”; (2) ear discharge and pruritus; (3) otoscopic findings; (4) cytology results; (5) ear flush performed; (6) gentamicin-betamethasone drops 2 gtt BID × 7 days; and (7) re-check in one week.",
+                "Per 16 CCR § 2032.3(a), each medical record must include:<br>" +
+                "<strong>1. Person responsible:</strong> name or initials<br>" +
+                "<strong>2. Client info:</strong> name, address, phone number<br>" +
+                "<strong>3. Patient ID:</strong> animal name or herd/flock identity<br>" +
+                "<strong>4. Signalment:</strong> age, sex, breed, species, color<br>" +
+                "<strong>5. Dates of custody:</strong> if applicable<br>" +
+                "<strong>6. Pertinent history</strong><br>" +
+                "<strong>7. Physical-exam data</strong><br>" +
+                "<strong>8. Diagnostics:</strong> tests ordered & results<br>" +
+                "<strong>9. Plan:</strong> treatments/procedures, diagnosis, prognosis<br>" +
+                "<strong>10. Medications:</strong> name, strength, dosage, quantity, <br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;route of administration, frequency of use<br>" +
+                "<strong>11. Progress notes:</strong> daily progress entries<br>" +
+                "All entries must be complete, legible, and dated.",
+              example: `
+<ul>
+  <li><strong>Telehealth consult – 5 Apr 2025</strong></li>
+  <li>Dr. G. Chen (GC)</li>
+  <li>Client: Jane Smith, 123 Maple Ave, Los Angeles, CA 90001; (310) 555-1234</li>
+  <li>Patient: “Buddy,” Labrador, M/N, 4 yrs, yellow coat</li>
+  <li>History: 3-day left-ear discharge & scratching</li>
+  <li>Exam: otoscopic — erythema, brown exudate; T = 101.4 °F</li>
+  <li>Diagnostics: cytology — cocci ++, Malassezia +</li>
+  <li>Plan: ear flush; <strong>gentamicin-betamethasone drops</strong> 2 gtt aurally <strong>BID × 7 d</strong></li>
+  <li>Diagnosis: otitis externa</li>
+  <li>Prognosis: good</li>
+  <li>Progress (Day 1): mild pruritus; no side effects</li>
+</ul>
+`,
+
               helpText:
-                "Vetcation’s note template mirrors § 2032.3. Required fields can’t be closed out blank, and drop-downs for drugs auto-populate strength and directions to reduce omissions.",
+                "Vetcation’s note template enforces each field. Medication pick-lists auto-fill strength, route, and frequency; daily progress entries are required before closing a consult.",
             },
           ],
         },
@@ -1541,10 +1568,26 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "qa",
               question: "Can I give a summary instead of the full record?",
               answer:
-                "Yes. Under 16 CCR § 2032.3(b), a compliant, veterinarian-signed summary may be provided to the client in lieu of the entire record.",
+                "Yes. Under 16 CCR § 2032.3(b), upon request you may provide a veterinarian-signed summary that includes all of the following:<br>" +
+                "1. Name and address of client and animal;<br>" +
+                "2. Age, sex, breed, species, and color of animal;<br>" +
+                "3. History or pertinent information as it pertains to each animal’s medical status;<br>" +
+                "4. Data, including that obtained by instrumentation, from physical examination;<br>" +
+                "5. Treatment and intended treatment plan, including medications, their dosage and frequency of use;<br>" +
+                "6. All medications and treatments prescribed and dispensed, including strength, dosage, quantity, and frequency;<br>" +
+                "7. Daily progress, if relevant, and disposition of case.<br>" +
+                "All summary elements must mirror the full record-content requirements in § 2032.3(a).",
               example:
-                "A client requests records from a 10 May 2025 dermatology visit. You can supply a one-page summary listing signalment, diagnosis (atopic dermatitis), diagnostics (skin cytology), medications (apoquel 16 mg SID × 30 d), and follow-up plan, instead of the full multi-page SOAP notes and lab attachments.",
-              helpText: `In Vetcation, click Export → Generate Summary; the platform auto-pulls the required data fields, applies your e-signature, and produces a PDF you can email or print, ensuring the summary meets § 2032.3(b) requirements.`,
+                "<ul>" +
+                "<li><strong>Client/Animal:</strong> Jane Smith, 123 Maple Ave, LA CA 90001 / “Buddy,” Labrador, M/N, 4 yrs, yellow</li>" +
+                "<li><strong>History:</strong> 3-day left-ear discharge & scratching</li>" +
+                "<li><strong>Exam data:</strong> Otoscopic—erythema, brown exudate; T = 101.4 °F</li>" +
+                "<li><strong>Treatment plan:</strong> Ear flush; gentamicin-betamethasone drops 2 gtt aurally BID × 7 d</li>" +
+                "<li><strong>Diagnosis:</strong> Otitis externa</li>" +
+                "<li><strong>Progress:</strong> Day 1—mild pruritus; no adverse effects</li>" +
+                "</ul>",
+              helpText:
+                "Vetcation’s summary generator pulls each § 2032.3(b) element into a single, signed PDF—ensuring your summary is complete, legible, and fully compliant.",
             },
           ],
         },
@@ -1581,13 +1624,17 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "qa",
               question:
-                "What if I hold licenses in both California and another state, and my client (with the same pet) travels back and forth between those states? Can I legally provide telemedicine for them in each location?",
+                "Can a California-licensed veterinarian continue providing telehealth to a pet that travels out of California?",
               answer:
-                "You must comply with the telehealth laws of whichever state the animal is physically located in at the time of the consult. If the patient is in California, you can proceed under your California license, following AB 1399. If the patient travels to your other licensed state, you can switch to practicing under that state’s rules, but you cannot rely on your California license alone in a jurisdiction where you aren’t licensed. Always verify you’re operating within the local telehealth statutes to avoid unlicensed practice.",
+                "No. A California license only authorizes telehealth services when the animal is physically in California. If the pet leaves California, only a veterinarian licensed in the state where the pet is located may provide telehealth— and only if that state’s laws permit it.",
               example:
-                "You have licenses in both California and Oregon. When the pet is physically in California, AB 1399 applies. The moment they cross into Oregon, you must follow Oregon’s telemedicine requirements — your California telehealth VCPR doesn’t automatically extend across state lines unless Oregon law allows it.",
+                "<ul>" +
+                "<li><strong>Scenario:</strong> Buddy travels with his owner from Los Angeles to Portland.</li>" +
+                "<li><strong>CA Vet:</strong> Cannot continue telehealth consults while Buddy is in Oregon.</li>" +
+                "<li><strong>OR Vet:</strong> May provide telehealth only if licensed in Oregon and if Oregon telehealth rules allow it.</li>" +
+                "</ul>",
               helpText:
-                "Vetcation’s scheduling prompts can help identify the pet’s current location. If it’s out of California, Vetcation will warn you that California’s AB 1399 rules may not apply. You can then choose to proceed under your Oregon license — assuming you hold one and Oregon’s laws permit telehealth for that scenario.",
+                "Vetcation’s scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
             },
           ],
         },
@@ -1668,11 +1715,24 @@ requirements and explain how Vetcation keeps you compliant.`,
               question:
                 "Do I need a registered veterinary premises if I practice only by telehealth?",
               answer:
-                "Yes, unless you meet one of the narrow exceptions in B&P § 4853(h) (e.g., you practice exclusively as an employee of a registered premises or a public agency). Most independent telehealth practices must register a premises so the Veterinary Medical Board can inspect records and verify compliance.",
-              example:
-                "You operate remotely from Nevada under your own CA DVM license. Because you are not an employee of a registered CA premises and you control records, you must obtain a premises registration—even if you never see animals in person.",
+                `Under B&P § 4853(h), the location where you practice telehealth is exempt from the registration requirement <span class="highlight">only if</span> you satisfy <span class="highlight">all</span> of the following:<br>` +
+                `1. You do <span class="highlight">not</span> perform any in-person examinations or treatments at that location;<br>` +
+                `2. You keep <span class="highlight">no</span> veterinary drugs, medicines, appliances, or medical equipment there;<br>` +
+                "3. You create, maintain, and store all medical records (per §§ 4855 & 4856) so they’re protected from unauthorized access, damage, or loss;<br>" +
+                "4. Any electronic publication (e.g. your website) where you offer services must prominently display:<br>" +
+                "&nbsp;&nbsp;&nbsp;a. Your name, contact information, and California license number;<br>" +
+                "&nbsp;&nbsp;&nbsp;b. Instructions for clients to obtain copies of their medical records;<br>" +
+                "&nbsp;&nbsp;&nbsp;c. A statement that clients may contact the Veterinary Medical Board with questions or complaints.<br>" +
+                `If <span class="highlight">any</span> of these conditions aren’t met, you must register the location as a veterinary premises under §§ 4853(a)–(c).`,
+              example: `<ul>
+           <li><strong>Scenario:</strong> You consult exclusively via video from your home office.</li>
+           <li>You never see patients in person there.</li>
+           <li>You store no drugs or equipment on-site.</li>
+           <li>All records are encrypted and access-controlled off-site.</li>
+           <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 555-1234 for questions.”</li>
+         </ul>`,
               helpText:
-                "Vetcation’s onboarding wizard includes a checklist of § 4853(h) exemptions. If none apply, it links to the Board’s premises-registration application.",
+                "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
             },
           ],
         },

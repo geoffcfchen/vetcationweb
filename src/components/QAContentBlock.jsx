@@ -4,15 +4,25 @@ const QAContentBlock = ({ block }) => {
   return (
     <div style={{ marginBottom: "1.5rem" }}>
       <p style={{ fontWeight: "bold", color: "#1cd0b0" }}>{block.question}</p>
+
       <p
         style={{ marginLeft: "1rem", color: "#ccc" }}
         dangerouslySetInnerHTML={{ __html: block.answer }}
       />
+
       {block.example && (
-        <p style={{ marginLeft: "1rem", fontStyle: "italic", color: "#ccc" }}>
-          <strong>Example:</strong> {block.example}
-        </p>
+        <div
+          style={{
+            marginLeft: "1rem",
+            fontStyle: "italic",
+            color: "#ccc",
+          }}
+          dangerouslySetInnerHTML={{
+            __html: `<strong>Example:</strong> ${block.example}`,
+          }}
+        />
       )}
+
       {block.helpText && (
         <div
           style={{
