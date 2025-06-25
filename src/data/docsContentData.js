@@ -1729,7 +1729,7 @@ requirements and explain how Vetcation keeps you compliant.`,
            <li>You never see patients in person there.</li>
            <li>You store no drugs or equipment on-site.</li>
            <li>All records are encrypted and access-controlled off-site.</li>
-           <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 555-1234 for questions.”</li>
+           <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 515-5220 for questions.”</li>
          </ul>`,
               helpText:
                 "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
