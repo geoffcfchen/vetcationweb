@@ -1714,7 +1714,7 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
         {
           id: "faqVetLocationRegistration",
-          title: "Veterinarian Physical Location & Facility Registration",
+          title: "Telehealth From an Unregistered Home Office",
           blocks: [
             {
               type: "qa",
@@ -1739,6 +1739,45 @@ requirements and explain how Vetcation keeps you compliant.`,
          </ul>`,
               helpText:
                 "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
+            },
+          ],
+        },
+        {
+          id: "faqClinicPremises",
+          title: "Telehealth From a Registered Clinic",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "Our clinic already has a California Premises Permit. Do our veterinarians need a separate registration to use Vetcation for telehealth?",
+              answer: `No. When telehealth is delivered <span class="highlight">from an address that already holds a valid Veterinary Premises Permit</span>, the location is \u003cstrong\u003ealready\u003c/strong\u003e registered under B&P §§ 4853 (a)–(c). The § 4853(h) exemption is irrelevant because the clinic is not an unregistered site.`,
+              example: `<ul>
+        <li><strong>Scenario:</strong> Maple Veterinary Hospital (Premises #VET-1234) adds video visits via Vetcation.</li>
+        <li>All telehealth sessions originate from the clinic building.</li>
+        <li>No extra premises paperwork is required—the existing permit covers on-site, mobile, and telehealth care.</li>
+      </ul>`,
+              helpText:
+                "During onboarding, clinic admins simply enter the existing Premises Permit number. Vetcation records the permit and allows all associated vets to begin video consults immediately.",
+            },
+          ],
+        },
+        {
+          id: "faqMixedWorkflows",
+          title: "Mixed Workflows: Clinic & Home Office",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "What if I sometimes consult from the clinic and sometimes from my home office?",
+              answer: `When you consult <span class="highlight">inside the registered clinic</span>, you are covered by that premises permit. When you consult <span class="highlight">from home</span>, your home office must either meet <strong>all</strong> four conditions in B&P § 4853(h) <em>or</em> be registered as a separate premises.`,
+              example: `<ul>
+        <li>Clinic shift   →  video visit from Maple Veterinary Hospital (covered under Premises #VET-1234).</li>
+        <li>Evening shift  →  video visit from your home office.</li>
+        <li>Home office complies with § 4853(h): no in-person exams, no drugs on site, cloud-based records, required footer posted.</li>
+        <li>If you ever stock medications at home, the exemption is lost and a home-office premises registration is mandatory.</li>
+      </ul>`,
+              helpText:
+                "Vetcation lets you tag each telehealth session with its originating location. If you select “Home Office,” the platform runs the § 4853(h) checklist; if any item fails, it warns you to register the site before scheduling new sessions.",
             },
           ],
         },
