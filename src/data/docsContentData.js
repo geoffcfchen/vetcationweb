@@ -1525,38 +1525,40 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "qa",
               question: "What details must be included?",
               answer:
-                "Per 16 CCR § 2032.3(a), each medical record must include:<br>" +
-                "<strong>1. Person responsible:</strong> name or initials<br>" +
-                "<strong>2. Client info:</strong> name, address, phone number<br>" +
-                "<strong>3. Patient ID:</strong> animal name or herd/flock identity<br>" +
-                "<strong>4. Signalment:</strong> age, sex, breed, species, color<br>" +
-                "<strong>5. Dates of custody:</strong> if applicable<br>" +
-                "<strong>6. Pertinent history</strong><br>" +
-                "<strong>7. Physical-exam data</strong><br>" +
-                "<strong>8. Diagnostics:</strong> tests ordered & results<br>" +
-                "<strong>9. Plan:</strong> treatments/procedures, diagnosis, prognosis<br>" +
-                "<strong>10. Medications:</strong> name, strength, dosage, quantity, <br>" +
-                "&nbsp;&nbsp;&nbsp;&nbsp;route of administration, frequency of use<br>" +
-                "<strong>11. Progress notes:</strong> daily progress entries<br>" +
-                "All entries must be complete, legible, and dated.",
+                "Per <strong>Cal. Code Regs., tit. 16, § 2032.3(a)</strong>, every medical record must be legible and contain:<br>" +
+                "(1) Name or initials of the person responsible for entries.<br>" +
+                "(2) Name, address and phone number of the client.<br>" +
+                "(3) Name or identity of the animal, herd or flock.<br>" +
+                "(4) (Except for herds or flocks) age, sex, breed, species, and color of the animal.<br>" +
+                "(5) Dates (beginning and ending) of custody of the animal, if applicable.<br>" +
+                "(6) A history or pertinent information as it pertains to each animal, herd, or flock’s medical status.<br>" +
+                "(7) Data, including that obtained by instrumentation, from the physical examination.<br>" +
+                "(8) Treatment and intended treatment plan, including medications, dosages, <em>route of administration</em>, and <em>frequency of use</em>.<br>" +
+                "(9) For surgical procedures: description of the procedure, name of the surgeon, sedative/anesthetic agents used, their route of administration, and strength if available in more than one strength.<br>" +
+                "(10) Diagnosis or assessment prior to performing a treatment or procedure.<br>" +
+                "(11) If relevant, a prognosis of the animal’s condition.<br>" +
+                "(12) All medications and treatments prescribed and dispensed, including strength, dosage, route of administration, quantity, and frequency of use.<br>" +
+                "(13) Daily progress, if relevant, and disposition of the case.",
               example: `
-<ul>
-  <li><strong>Telehealth consult – 5 Apr 2025</strong></li>
-  <li>Dr. G. Chen (GC)</li>
-  <li>Client: Jane Smith, 123 Maple Ave, Los Angeles, CA 90001; (310) 555-1234</li>
-  <li>Patient: “Buddy,” Labrador, M/N, 4 yrs, yellow coat</li>
-  <li>History: 3-day left-ear discharge & scratching</li>
-  <li>Exam: otoscopic — erythema, brown exudate; T = 101.4 °F</li>
-  <li>Diagnostics: cytology — cocci ++, Malassezia +</li>
-  <li>Plan: ear flush; <strong>gentamicin-betamethasone drops</strong> 2 gtt aurally <strong>BID × 7 d</strong></li>
-  <li>Diagnosis: otitis externa</li>
-  <li>Prognosis: good</li>
-  <li>Progress (Day 1): mild pruritus; no side effects</li>
-</ul>
-`,
-
+        <ul>
+          <li><strong>Telehealth consult – 5 Apr 2025</strong></li>
+          <li>(1) Entry by Dr. G. Chen (GC)</li>
+          <li>(2) Client: Jane Smith, 123 Maple Ave, Los Angeles CA 90001; (310) 555-1234</li>
+          <li>(3) Patient: “Buddy,” individual dog</li>
+          <li>(4) Labrador Retriever, male/neutered, 4 yrs, yellow coat</li>
+          <li>(5) Custody dates: 5 Apr 2025 – ongoing</li>
+          <li>(6) History: 3-day left-ear discharge & scratching</li>
+          <li>(7) Exam data: Otoscopic – erythematous canal, brown exudate; Temp 101.4 °F</li>
+          <li>(8) Plan: Ear flush today; <strong>gentamicin-betamethasone otic drops</strong> 2 gtt AU <em>BID</em> × 7 d</li>
+          <li>(9) N/A – no surgery performed</li>
+          <li>(10) Diagnosis: Otitis externa (bacterial/yeast)</li>
+          <li>(11) Prognosis: Good</li>
+          <li>(12) Medication dispensed: gentamicin-betamethasone 5 mL; strength 3 mg/mL; 2 gtt AU BID × 7 d</li>
+          <li>(13) Daily progress (Day 1): Owner reports mild pruritus; no adverse effects</li>
+        </ul>
+      `,
               helpText:
-                "Vetcation’s note template enforces each field. Medication pick-lists auto-fill strength, route, and frequency; daily progress entries are required before closing a consult.",
+                "Vetcation’s note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
             },
           ],
         },
@@ -1568,26 +1570,30 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "qa",
               question: "Can I give a summary instead of the full record?",
               answer:
-                "Yes. Under 16 CCR § 2032.3(b), upon request you may provide a veterinarian-signed summary that includes all of the following:<br>" +
-                "1. Name and address of client and animal;<br>" +
-                "2. Age, sex, breed, species, and color of animal;<br>" +
-                "3. History or pertinent information as it pertains to each animal’s medical status;<br>" +
-                "4. Data, including that obtained by instrumentation, from physical examination;<br>" +
-                "5. Treatment and intended treatment plan, including medications, their dosage and frequency of use;<br>" +
-                "6. All medications and treatments prescribed and dispensed, including strength, dosage, quantity, and frequency;<br>" +
-                "7. Daily progress, if relevant, and disposition of case.<br>" +
-                "All summary elements must mirror the full record-content requirements in § 2032.3(a).",
-              example:
-                "<ul>" +
-                "<li><strong>Client/Animal:</strong> Jane Smith, 123 Maple Ave, LA CA 90001 / “Buddy,” Labrador, M/N, 4 yrs, yellow</li>" +
-                "<li><strong>History:</strong> 3-day left-ear discharge & scratching</li>" +
-                "<li><strong>Exam data:</strong> Otoscopic—erythema, brown exudate; T = 101.4 °F</li>" +
-                "<li><strong>Treatment plan:</strong> Ear flush; gentamicin-betamethasone drops 2 gtt aurally BID × 7 d</li>" +
-                "<li><strong>Diagnosis:</strong> Otitis externa</li>" +
-                "<li><strong>Progress:</strong> Day 1—mild pruritus; no adverse effects</li>" +
-                "</ul>",
+                "Yes. <strong>Cal. Code Regs., tit. 16, § 2032.3(b)</strong> states:<br>" +
+                "• Records must be kept for <em>three years after the animal’s last visit</em>.<br>" +
+                "• A summary of an animal’s medical records shall be made available to the client <em>within five (5) days</em>—or sooner if the animal is critical—upon request.<br>" +
+                "The summary must include:<br>" +
+                "(1) Name and address of client and animal.<br>" +
+                "(2) Age, sex, breed, species, and color of the animal.<br>" +
+                "(3) History or pertinent information as it pertains to the animal’s medical status.<br>" +
+                "(4) Data, including that obtained by instrumentation, from the physical examination.<br>" +
+                "(5) Treatment and intended treatment plan, including medications, their dosage and frequency of use.<br>" +
+                "(6) All medications and treatments prescribed and dispensed, including strength, dosage, <em>route of administration</em>, quantity, and frequency of use.<br>" +
+                "(7) Daily progress, if relevant, and disposition of the case.",
+              example: `
+        <ul>
+          <li><strong>Client/Animal:</strong> Jane Smith, 123 Maple Ave, LA CA 90001 / “Buddy,” Labrador, M/N, 4 yrs, yellow</li>
+          <li><strong>History:</strong> Three-day left-ear discharge & scratching</li>
+          <li><strong>Exam data:</strong> Otoscopic—erythema, brown exudate; Temp 101.4 °F</li>
+          <li><strong>Treatment plan:</strong> Ear flush today; <em>gentamicin-betamethasone drops</em>—strength 3 mg/mL; 2 gtt AU <em>BID × 7 d</em></li>
+          <li><strong>Medications dispensed:</strong> Gentamicin-betamethasone 5 mL bottle; 2 gtt AU BID × 7 d (route: otic; quantity: 1 bottle)</li>
+          <li><strong>Progress:</strong> Day 1—mild pruritus, no adverse effects</li>
+          <li><strong>Disposition:</strong> Re-check video call in 1 week</li>
+        </ul>
+      `,
               helpText:
-                "Vetcation’s summary generator pulls each § 2032.3(b) element into a single, signed PDF—ensuring your summary is complete, legible, and fully compliant.",
+                "Vetcation’s >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
             },
           ],
         },
