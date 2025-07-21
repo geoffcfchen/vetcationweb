@@ -65,6 +65,9 @@ export default function DocsLayout() {
     if (navId === "clinics") {
       navigate(`/telemedicine-info/${navId}/ReferralClinic`);
     }
+    if (navId === "rvts") {
+      navigate(`/telemedicine-info/${navId}/introToRVT`);
+    }
   };
 
   // useEffect(() => {

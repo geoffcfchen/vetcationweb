@@ -249,6 +249,18 @@ const sideNavData = {
     //   ],
     // },
   ],
+
+  rvts: [
+    {
+      groupTitle: "RVT",
+      items: [
+        {
+          id: "introToRVT",
+          label: "Intro to RVT",
+        },
+      ],
+    },
+  ],
 };
 
 export default sideNavData;

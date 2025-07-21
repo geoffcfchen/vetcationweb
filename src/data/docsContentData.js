@@ -3502,6 +3502,197 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
   },
 
+  rvts: {
+    introToRVT: {
+      mainTitle: "Registered Veterinary Technicians (RVTs)",
+      mainDescription: `SB 669 (B&P Code § 4826.7) took effect on January 1, 2024, expanding the scope of practice for California RVTs. Under written protocols from a supervising veterinarian, an RVT may now establish a veterinarian–client–patient relationship (VCPR), perform wellness exams, and administer core vaccines and parasite preventives off-site—helping close critical preventive-care gaps across the state.`,
+      sections: [
+        {
+          id: "legalFramework",
+          title: "1 Legal Framework",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "SB 669 scope",
+                  lines: [
+                    "Permits an RVT, acting as the veterinarian’s agent, to perform wellness exams and administer vaccines or parasite preventives when the supervising veterinarian is easily and quickly available by phone or video.",
+                  ],
+                },
+                {
+                  heading: "Preventive care only",
+                  lines: [
+                    "Applies exclusively to preventive services; diagnosis, surgery, and controlled-drug administration remain reserved for veterinarians.",
+                  ],
+                },
+                {
+                  heading: "Written delegation",
+                  lines: [
+                    "Requires a signed Delegation & Agency Agreement between the veterinarian and RVT before any clinic session.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "preClinicRequirements",
+          title: "2 Pre-Clinic Requirements",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Written protocols",
+                  lines: [
+                    "The supervising DVM supplies step-by-step instructions covering patient triage, drug handling, dosage charts, and emergency response.",
+                  ],
+                },
+                {
+                  heading: "Emergency readiness",
+                  lines: [
+                    "When operating off a registered premises, the RVT must carry epinephrine, diphenhydramine, IV fluids, and the equipment listed in the SF SPCA checklist.",
+                  ],
+                },
+                {
+                  heading: "Client disclosure & consent",
+                  lines: [
+                    "The RVT must state their role, provide the supervising veterinarian’s name and license number, and record the client’s consent in the medical record before treatment begins.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "onSiteWorkflow",
+          title: "3 On-Site Workflow",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Patient assessment",
+                  lines: [
+                    "Use the SB 669 suitability checklist (e.g., temperature ≤ 102.5 °F, no severe illness signs).",
+                  ],
+                },
+                {
+                  heading: "VCPR establishment",
+                  lines: [
+                    "Automatically established once the RVT completes the exam on the veterinarian’s behalf.",
+                  ],
+                },
+                {
+                  heading: "Vaccine/medication administration",
+                  lines: [
+                    "Administer exactly as per protocol (species-specific dose, limb/site rotation, sterile technique).",
+                  ],
+                },
+                {
+                  heading: "Post-injection observation",
+                  lines: [
+                    "Observe for 15 minutes, manage any reactions per the emergency algorithm, then discharge with written after-care instructions.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "platformSupport",
+          title: "4 Vetcation Platform Support",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Digital delegation forms",
+                  lines: [
+                    "Collected and stored with cryptographic signatures for audit readiness.",
+                  ],
+                },
+                {
+                  heading: "Protocol-embedded checklists",
+                  lines: [
+                    "Guide the RVT through each legal checkpoint in real time.",
+                  ],
+                },
+                {
+                  heading: "Telehealth bridge",
+                  lines: [
+                    "AB 1399-compliant video/phone consult access keeps the supervising DVM one tap away.",
+                  ],
+                },
+                {
+                  heading: "Instant record-sync",
+                  lines: [
+                    "SOAP notes, consent confirmations, and lot numbers upload automatically to the veterinarian’s dashboard.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "useCases",
+          title: "5 Use-Cases We Enable",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Shelter vaccine clinics",
+                  lines: [
+                    "RVT-led events boosting herd immunity without an on-site veterinarian.",
+                  ],
+                },
+                {
+                  heading: "House-call wellness visits",
+                  lines: [
+                    "Core vaccines and monthly preventives delivered in-home.",
+                  ],
+                },
+                {
+                  heading: "Community pop-ups",
+                  lines: [
+                    "Pairing RVT services with virtual vet oversight in underserved neighborhoods.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "references",
+          title: "6 Reference Materials",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "SF SPCA Vaccine Clinic Protocols & Procedures (March 2024)",
+                  lines: [],
+                },
+                {
+                  heading:
+                    "California Business & Professions Code § 4826.7 (SB 669, 2023)",
+                  lines: [],
+                },
+                {
+                  heading: "Vetcation Emergency Drug & Equipment List v2.0",
+                  lines: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   // Similarly for the other topNav items...
 };
 
