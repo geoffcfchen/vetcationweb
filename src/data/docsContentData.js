@@ -3051,6 +3051,23 @@ requirements and explain how Vetcation keeps you compliant.`,
           ],
         },
         {
+          id: "interns",
+          title: "Interns",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
+                {
+                  name: "Jackson Konkle",
+                  title: "Marketing Intern",
+                  description:
+                    "Jackson Konkle is a Marketing Intern at Vetcation, bringing a passion for storytelling and experience in content creation, social media strategy, and community outreach. Currently studying Business Information Management at UC Irvine, Jackson is helping Vetcation grow its community and expand access to veterinary knowledge and care.",
+                },
+              ],
+            },
+          ],
+        },
+        {
           id: "advisors",
           title: "Advisors",
           blocks: [
