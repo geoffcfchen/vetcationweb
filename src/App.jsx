@@ -22,6 +22,7 @@ import DocsLayout from "./pages/DocsLayout";
 import IntroToVetcation from "./pages/docs/IntroToVetcation";
 import DocsContent from "./data/docs/DocsContent";
 import ContributorsPage from "./pages/ContributorsPage";
+import SupportPage from "./pages/SupportPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -121,6 +122,7 @@ function App() {
         <Route path="/app" element={<RedirectPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/SMSTerms" element={<SMSTermsPage />} />
+        <Route path="/support" element={<SupportPage />} />
       </Routes>
     </>
   );

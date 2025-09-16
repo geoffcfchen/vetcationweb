@@ -150,14 +150,15 @@ const Footer = () => {
     //     { text: "Blog", url: "#" },
     //   ],
     // },
-    // {
-    //   title: "Support",
-    //   links: [
-    //     { text: "Contact", url: "#" },
-    //     { text: "Knowledge Base", url: "#" },
-    //     { text: "FAQ", url: "#" },
-    //   ],
-    // },
+    {
+      title: "Support",
+      links: [
+        { text: "Support Center", url: "/support" },
+        { text: "Email Support", url: "mailto:support@vetcation.com" },
+        // Optional placeholder if you add a page later:
+        // { text: "Known Issues & Updates", url: "/status" },
+      ],
+    },
     // {
     //   title: "Domains",
     //   links: [
