@@ -1,5 +1,5 @@
 // MySidebarRouter.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   SidebarContainer,
@@ -16,16 +16,39 @@ export default function MySidebarRouter({
   closeOffcanvas = () => {},
 }) {
   const [expandedItems, setExpandedItems] = useState([]);
-  // Use React Router's useLocation to get current path
   const location = useLocation();
 
-  // Expand/collapse logic
-  function handleExpandCollapse(itemId) {
-    if (expandedItems.includes(itemId)) {
-      setExpandedItems(expandedItems.filter((id) => id !== itemId));
-    } else {
-      setExpandedItems([...expandedItems, itemId]);
+  // NEW: auto-expand the parent that owns the current route
+  useEffect(() => {
+    const groups = sideNavData[activeTopNav] || [];
+    const currentPath = location.pathname.replace(/\/$/, ""); // normalize
+    const parentsToExpand = [];
+
+    for (const group of groups) {
+      for (const parent of group.items || []) {
+        if (
+          parent.subItems?.some(
+            (child) =>
+              `/telemedicine-info/${activeTopNav}/${child.id}` === currentPath
+          )
+        ) {
+          parentsToExpand.push(parent.id);
+        }
+      }
     }
+
+    // Merge with any user-toggled expands so we don’t forcibly collapse others
+    setExpandedItems((prev) =>
+      Array.from(new Set([...prev, ...parentsToExpand]))
+    );
+  }, [location.pathname, activeTopNav]);
+
+  function handleExpandCollapse(itemId) {
+    setExpandedItems((prev) =>
+      prev.includes(itemId)
+        ? prev.filter((id) => id !== itemId)
+        : [...prev, itemId]
+    );
   }
 
   const groups = sideNavData[activeTopNav] || [];
@@ -39,14 +62,10 @@ export default function MySidebarRouter({
             {group.items.map((parentItem) => {
               const hasSubItems = parentItem.subItems?.length > 0;
               const isExpanded = expandedItems.includes(parentItem.id);
-
-              // The path to this item
               const routePath = `/telemedicine-info/${activeTopNav}/${parentItem.id}`;
 
               if (!hasSubItems) {
-                // Check if it's active
                 const isActive = location.pathname === routePath;
-
                 return (
                   <SidebarItemRow key={parentItem.id} $active={isActive}>
                     <Link
@@ -59,19 +78,27 @@ export default function MySidebarRouter({
                   </SidebarItemRow>
                 );
               } else {
+                // NEW: highlight parent when any child is the active route
+                const isChildActive = parentItem.subItems.some(
+                  (child) =>
+                    location.pathname ===
+                    `/telemedicine-info/${activeTopNav}/${child.id}`
+                );
+
                 return (
                   <div key={parentItem.id}>
                     <SidebarItemRow
                       onClick={() => handleExpandCollapse(parentItem.id)}
+                      $active={isChildActive}
                     >
                       <span>{parentItem.label}</span>
                       <ArrowIcon $isExpanded={isExpanded}>▸</ArrowIcon>
                     </SidebarItemRow>
+
                     {isExpanded && (
                       <SecondLevelContainer>
                         {parentItem.subItems.map((child) => {
                           const subRoute = `/telemedicine-info/${activeTopNav}/${child.id}`;
-                          // Check if sub-item is active
                           const isActive = location.pathname === subRoute;
 
                           return (
