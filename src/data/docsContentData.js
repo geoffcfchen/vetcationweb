@@ -18,7 +18,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets encounter clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
+              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets have experienced clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
             },
             {
               type: "root",
