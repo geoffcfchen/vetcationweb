@@ -22,7 +22,7 @@ const contentData = {
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. Follow-up communication builds trust, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
             },
           ],
         },
