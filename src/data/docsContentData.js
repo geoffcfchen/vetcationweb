@@ -16,61 +16,24 @@ const contentData = {
           id: "mission",
           title: "Our Mission",
           blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation platform is designed to address three root problems in veterinary field: mental health and burnout, decentralized medical records, and loss of autonomy under certain compensation and contract models.",
+            },
+            {
+              type: "qa",
+              question:
+                "1) Burnout: Many vets have experienced clients who are rude or accusatory, and some demanding owners call repeatedly and expect hour-long callbacks, often with unrealistic expectations, distrust, skepticism, and argumentativeness. Although we provide professional advice and want the best for our patients, these pressures are a primary driver of burnout and contribute to higher suicide rates in the veterinary field.",
+              // answer: ``,
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing connection. Communication builds trust and lasting relationships, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the better the connection, the better the patient outcomes.`,
+            },
             // {
             //   type: "qa",
             //   question:
-            //     "How do I view my upcoming appointments in the calendar?",
-            //   answer: `You can access "My calendar" from the drawer. The calendar displays all your upcoming appointments.`,
+            //     "1) Burnout: Many vets have experienced clients who are rude or accusatory, and some demanding owners call repeatedly and expect hour-long callbacks, often with unrealistic expectations, distrust, skepticism, and argumentativeness. Although we provide professional advice and want the best for our patients, these pressures are a primary driver of burnout and contribute to higher suicide rates in the veterinary field.",
+            //   // answer: ``,
+            //   helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing connection. Communication builds trust and lasting relationships, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the better the connection, the better the patient outcomes.`,
             // },
-
-            {
-              type: "paragraph",
-              text: "We are building a healthier profession by addressing three root problems that vets talk about most: mental health and burnout, client conflict, and loss of autonomy under certain compensation and contract models.",
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "1) Reduce mental health strain and burnout",
-                  lines: [
-                    "Protected scheduling tools that support daily caps, true buffers, and time-off without penalty.",
-                    "Workflow that shortens after-hours admin: AI note drafts and visit summaries; structured follow-ups that prevent inbox overload.",
-                    "Case escalation paths that remove moral distress when a case needs in-person care.",
-                  ],
-                },
-                {
-                  heading:
-                    "2) Improve client relationships and reduce conflict",
-                  lines: [
-                    "Clear pre-visit expectations and clinic house rules shown to clients at booking.",
-                    "Plain-language care plans and shareable summaries that set next steps and costs.",
-                    "Education-first communication, with asynchronous Q and A that does not require a live appointment for every question.",
-                  ],
-                },
-                {
-                  heading:
-                    "3) Restore professional autonomy and fair practice models",
-                  lines: [
-                    "Build your own brand. Your clients, your records, your revenue.",
-                    "Partnerships with brick-and-mortar clinics that keep roles clear and compliant under AB 1399.",
-                    "Contract literacy resources and compensation tools that avoid negative accrual and support transparent production targets.",
-                  ],
-                },
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "How we measure progress",
-                  lines: [
-                    "Lower average after-hours charting time per visit.",
-                    "Fewer escalations caused by misaligned expectations.",
-                    "Higher provider-reported autonomy, lower burnout scores, and stable retention.",
-                  ],
-                },
-              ],
-            },
           ],
         },
         {
