@@ -21,7 +21,7 @@ function RegisterSection() {
       <Feature
         // iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Vetcation"
-        text="Our mission is to reduce burnout in veterinary medicine and build respectful, lasting connections with clients. When vets thrive, animals and communities thrive."
+        text="A platform to end burnout in veterinary medicine and build professional, lasting connections with pet owners."
         // linkText="Learn More"
         qrCodeLink={qrCodeImage}
         linkHref="#"

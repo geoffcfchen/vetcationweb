@@ -23,6 +23,7 @@ import IntroToVetcation from "./pages/docs/IntroToVetcation";
 import DocsContent from "./data/docs/DocsContent";
 import ContributorsPage from "./pages/ContributorsPage";
 import SupportPage from "./pages/SupportPage";
+import MissionsPage from "./pages/MissionsPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -100,6 +101,7 @@ function App() {
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
         <Route path="/vets" element={<ForVetPage />} />
+        {/* <Route path="/mission" element={<MissionsPage />} /> */}
         {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}
         {/* The layout route for docs */}
         <Route path="/telemedicine-info" element={<DocsLayout />}>

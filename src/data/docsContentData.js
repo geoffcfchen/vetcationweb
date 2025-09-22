@@ -10,8 +10,69 @@ const contentData = {
   home: {
     introToVetcation: {
       mainTitle: "Introduction to Vetcation",
-      mainDescription: `Vetcation is an open, flexible, and legally compliant platform empowering California-licensed veterinarians to launch your own virtual clinic, retaining full ownership of your clients, patient records, and revenue, or collaborate with existing clinics to provide telemedicine services to their clients.`,
+      mainDescription: `Vetcation is an open, flexible, and legally compliant platform that empowers California-licensed veterinarians to launch their own virtual clinic, retain full ownership of clients, patient records, and revenue, and collaborate with clinics to provide telemedicine services. Our mission is to end burnout, build professional and lasting relationships with pet owners, and restore professional autonomy for veterinarians.`,
       sections: [
+        {
+          id: "mission",
+          title: "Our Mission",
+          blocks: [
+            // {
+            //   type: "qa",
+            //   question:
+            //     "How do I view my upcoming appointments in the calendar?",
+            //   answer: `You can access "My calendar" from the drawer. The calendar displays all your upcoming appointments.`,
+            // },
+
+            {
+              type: "paragraph",
+              text: "We are building a healthier profession by addressing three root problems that vets talk about most: mental health and burnout, client conflict, and loss of autonomy under certain compensation and contract models.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "1) Reduce mental health strain and burnout",
+                  lines: [
+                    "Protected scheduling tools that support daily caps, true buffers, and time-off without penalty.",
+                    "Workflow that shortens after-hours admin: AI note drafts and visit summaries; structured follow-ups that prevent inbox overload.",
+                    "Case escalation paths that remove moral distress when a case needs in-person care.",
+                  ],
+                },
+                {
+                  heading:
+                    "2) Improve client relationships and reduce conflict",
+                  lines: [
+                    "Clear pre-visit expectations and clinic house rules shown to clients at booking.",
+                    "Plain-language care plans and shareable summaries that set next steps and costs.",
+                    "Education-first communication, with asynchronous Q and A that does not require a live appointment for every question.",
+                  ],
+                },
+                {
+                  heading:
+                    "3) Restore professional autonomy and fair practice models",
+                  lines: [
+                    "Build your own brand. Your clients, your records, your revenue.",
+                    "Partnerships with brick-and-mortar clinics that keep roles clear and compliant under AB 1399.",
+                    "Contract literacy resources and compensation tools that avoid negative accrual and support transparent production targets.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "How we measure progress",
+                  lines: [
+                    "Lower average after-hours charting time per visit.",
+                    "Fewer escalations caused by misaligned expectations.",
+                    "Higher provider-reported autonomy, lower burnout scores, and stable retention.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           id: "achieveWithVetcation",
           title: "What Can You Achieve with Vetcation?",
@@ -63,59 +124,59 @@ const contentData = {
             },
           ],
         },
-        {
-          id: "whyChooseVetcation",
-          title: "Why Choose Vetcation?",
-          blocks: [
-            {
-              type: "paragraph",
-              text: "The Only Platform Designed for Independent Veterinary Practice:",
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Build Your Own Brand, Not Someone Else’s:",
-                  lines: [
-                    "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
-                  ],
-                },
-                {
-                  heading: "Full Ownership of Medical Records:",
-                  lines: [
-                    "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
-                  ],
-                },
-                {
-                  heading: "Chargeable, Inquiry-Based Messaging:",
-                  lines: [
-                    "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
-                  ],
-                },
-                {
-                  heading: "Complete Pharmacy Freedom:",
-                  lines: [
-                    "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
-                  ],
-                },
-                {
-                  heading: "Built-In AI, No 3rd-Party Dependence:",
-                  lines: [
-                    "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
-                  ],
-                },
-                {
-                  heading: "Dedicated Technical & Regulatory Support:",
-                  lines: [
-                    "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
-                    "📧 Email: gcfchen@vetcation.com",
-                    "📞 Call or text: (530) 400-6227",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   id: "whyChooseVetcation",
+        //   title: "Why Choose Vetcation?",
+        //   blocks: [
+        //     {
+        //       type: "paragraph",
+        //       text: "The Only Platform Designed for Independent Veterinary Practice:",
+        //     },
+        //     {
+        //       type: "bulletList",
+        //       items: [
+        //         {
+        //           heading: "Build Your Own Brand, Not Someone Else’s:",
+        //           lines: [
+        //             "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Full Ownership of Medical Records:",
+        //           lines: [
+        //             "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Chargeable, Inquiry-Based Messaging:",
+        //           lines: [
+        //             "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Complete Pharmacy Freedom:",
+        //           lines: [
+        //             "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Built-In AI, No 3rd-Party Dependence:",
+        //           lines: [
+        //             "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Dedicated Technical & Regulatory Support:",
+        //           lines: [
+        //             "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
+        //             "📧 Email: gcfchen@vetcation.com",
+        //             "📞 Call or text: (530) 400-6227",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
         {
           id: "whyVirtualCareTrend",
           title: "Why Virtual Care Is Growing — And Why It Matters",

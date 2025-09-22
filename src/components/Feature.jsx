@@ -205,7 +205,7 @@ export default function Feature({
         </h3>
         <p
           style={{
-            fontSize: 30,
+            fontSize: 28,
             marginTop: 5,
             lineHeight: 1.2,
             fontFamily: "inherit",

@@ -18,16 +18,23 @@ const PageWrapper = styled.div`
 `;
 
 const MiddleColumn = styled.div`
-  padding: 0;
-  height: calc(100vh - 60px); /* For desktop */
+  /* spacing inside the scroll container */
+  padding: 16px clamp(12px, 2.5vw, 28px) 24px; /* top, horizontal, bottom */
+
+  /* keeps content below the fixed 60px navbar on desktop */
+  height: calc(100vh - 60px);
   background: #1c1c1c;
   overflow-y: auto;
 
+  /* makes scrollIntoView() stop with a little headroom */
+  scroll-padding-top: 16px;
+
   @media (max-width: 768px) {
-    /* Let the page flow naturally on mobile: */
+    /* mobile uses window scroll; give room for fixed navbar + a little gap */
     height: auto;
     overflow-y: visible;
-    padding-top: 60px; /* still offset the content for the fixed navbar */
+    padding: 76px 16px 24px; /* 60px navbar + 16px breathing space */
+    scroll-padding-top: 76px;
   }
 `;
 
