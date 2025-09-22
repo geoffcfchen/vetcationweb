@@ -14,16 +14,14 @@ import GlobalStyle from "./GlobalStyle";
 import RedirectPage from "./pages/RedirectPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import SMSTermsPage from "./pages/SMSTermsPage";
-import Footer from "./components/Footer";
+
 import ForVetPage from "./pages/ForVetPage";
-import TelemedicineInfo from "./pages/TelemedicineInfo";
-import DocsPageLayoutPage from "./pages/DocsPageLayoutPage";
+
 import DocsLayout from "./pages/DocsLayout";
-import IntroToVetcation from "./pages/docs/IntroToVetcation";
+
 import DocsContent from "./data/docs/DocsContent";
-import ContributorsPage from "./pages/ContributorsPage";
+
 import SupportPage from "./pages/SupportPage";
-import MissionsPage from "./pages/MissionsPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";

@@ -18,22 +18,12 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation platform is designed to address three root problems in veterinary field: mental health and burnout, decentralized medical records, and loss of autonomy under certain compensation and contract models.",
+              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets encounter clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
             },
             {
-              type: "qa",
-              question:
-                "1) Burnout: Many vets have experienced clients who are rude or accusatory, and some demanding owners call repeatedly and expect hour-long callbacks, often with unrealistic expectations, distrust, skepticism, and argumentativeness. Although we provide professional advice and want the best for our patients, these pressures are a primary driver of burnout and contribute to higher suicide rates in the veterinary field.",
-              // answer: ``,
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing connection. Communication builds trust and lasting relationships, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the better the connection, the better the patient outcomes.`,
+              type: "root",
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. Follow-up communication builds trust, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
             },
-            // {
-            //   type: "qa",
-            //   question:
-            //     "1) Burnout: Many vets have experienced clients who are rude or accusatory, and some demanding owners call repeatedly and expect hour-long callbacks, often with unrealistic expectations, distrust, skepticism, and argumentativeness. Although we provide professional advice and want the best for our patients, these pressures are a primary driver of burnout and contribute to higher suicide rates in the veterinary field.",
-            //   // answer: ``,
-            //   helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing connection. Communication builds trust and lasting relationships, but it takes time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the better the connection, the better the patient outcomes.`,
-            // },
           ],
         },
         {

@@ -10,6 +10,7 @@ import FramedImageBlock from "../../components/FramedImageBlock";
 import contentData from "../docsContentData";
 import CustomContributorListBlock from "../../components/CustomContributorListBlock";
 import InteractiveMapBlock from "../../components/InteractiveMapBlock";
+import MissionContentBlock from "../../components/MissionContentBlock";
 // Import other block components as needed
 
 function DocsContent() {
@@ -84,6 +85,8 @@ function DocsContent() {
                 return <TrendPointsBlock key={blockKey} block={block} />;
               case "qa":
                 return <QAContentBlock key={blockKey} block={block} />;
+              case "root":
+                return <MissionContentBlock key={blockKey} block={block} />;
               case "paragraph":
                 return <ParagraphBlock key={blockKey} block={block} />;
               case "framedImage":
