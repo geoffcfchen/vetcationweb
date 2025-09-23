@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import sprite from "../images/sprite.svg"; // Import the sprite path
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa"; // Importing from Font Awesome
-import iPhoneFrame from "../images/iphone-frame_15pro.png"; // Make sure to have the correct path to your iPhone frame image
+import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // ⬅️ add this
+import sprite from "../images/sprite.svg";
+import iPhoneFrame from "../images/iphone-frame_15pro.png";
 
 const ContributionNote = styled.div`
   margin-top: 2rem;
@@ -28,15 +28,16 @@ const ContributionNote = styled.div`
 const QRCodeImage = styled.img`
   margin-top: 10px;
   width: 430px;
-  height: 210px; // Maintain aspect ratio
+  height: 210px;
   max-width: 430px;
   max-height: 210px;
+  cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   @media (max-width: 768px) {
     width: 320px;
-    height: 160px; // Maintain aspect ratio
+    height: 160px;
     margin-left: auto;
-    margin-right: auto; // Center QRCodeImage for smaller screens
+    margin-right: auto;
   }
 `;
 
@@ -44,13 +45,15 @@ const FeatureBlock = styled(motion.article)`
   display: grid;
   gap: 4rem;
   margin: 12rem 0;
+  outline: none; /* for custom focus when clickable */
+  cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   &:first-of-type {
     margin-top: 6rem;
   }
 
   &:last-of-type {
-    margin-bottom: 6rem; // Reduce or remove bottom margin for the last feature block
+    margin-bottom: 6rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -71,31 +74,32 @@ const FeatureContent = styled(motion.div)`
   h3 {
     color: var(--color-headings);
     margin-bottom: 1rem;
-    font-size: 30px; // Ensuring consistency with inline styles
+    font-size: 30px;
     font-weight: 600;
     line-height: 1.3;
   }
 
   p {
     color: var(--color-body);
-    font-size: 20px; // Ensuring consistency with inline styles
+    font-size: 20px;
     line-height: 1.5;
     margin-top: 0;
   }
 
   a {
-    color: red; // Ensuring consistency with inline styles
+    color: red;
     text-transform: uppercase;
-    font-size: 15px; // Ensuring consistency with inline styles
+    font-size: 15px;
     font-weight: bold;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    position: relative; // Relative positioning for pseudoelements
+    position: relative;
   }
+
   @media (max-width: 768px) {
-    align-items: center; // Center the items in the middle
-    text-align: center; // Center-align text for smaller screens
+    align-items: center;
+    text-align: center;
   }
 `;
 
@@ -107,9 +111,10 @@ const IconContainer = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+
   svg {
-    width: 40px; // Reduced from 40px to 30px
-    height: 40px; // Reduced from 40px to 30px
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -119,9 +124,9 @@ const FeatureImage = styled(motion.img)`
 
 const VideoFrameContainer = styled.div`
   position: relative;
-  width: 300px; // Set this to the width of your iPhone frame image
-  height: 600px; // Set this to the height of your iPhone frame image
-  margin: 0 auto; // Center the container
+  width: 300px;
+  height: 600px;
+  margin: 0 auto;
 `;
 
 const FrameImage = styled.img`
@@ -130,25 +135,24 @@ const FrameImage = styled.img`
   height: 100%;
   top: 0;
   left: 0;
-  pointer-events: none; // This ensures that the frame does not interfere with video controls
+  pointer-events: none;
 `;
 
 const StyledVideo = styled(motion.video)`
   position: absolute;
-  top: 1.69%; // Center vertically in the frame, adjust as necessary
-  height: 96.3%; // Increased to make the video larger
-  left: 0%; // Center horizontally in the frame, adjust as necessary
-  width: 100%; // Increased to make the video larger
+  top: 1.69%;
+  height: 96.3%;
+  left: 0%;
+  width: 100%;
 `;
 
-// NEW: Image that occupies the same position as the video
 const FramedImage = styled(motion.img)`
   position: absolute;
-  top: 1.5%; // Move down from the top
-  left: 1.5%; // Move in from the left
-  width: 97%; // Now only occupy 90% of the frame’s width
+  top: 1.5%;
+  left: 1.5%;
+  width: 97%;
   height: 97%;
-  object-fit: contain; // or "contain", depending on your preference
+  object-fit: contain;
 `;
 
 // Animation variants
@@ -172,20 +176,43 @@ export default function Feature({
   text,
   linkText,
   linkHref,
-  qrCodeLink, // New prop for the QR code link
+  qrCodeLink,
   image,
   videoSrc,
-  imageSrc, // NEW: a prop for the framed image
+  imageSrc,
+  to, // ⬅️ NEW: route to navigate on click (e.g., "/telemedicine-info")
 }) {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
+
+  const clickable = Boolean(to);
+
+  const go = () => {
+    if (to) navigate(to);
+  };
+
+  const onKeyDown = (e) => {
+    if (!clickable) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      go();
+    }
+  };
 
   return (
     <FeatureBlock
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
+      variants={contentVariants}
+      onClick={clickable ? go : undefined}
+      onKeyDown={onKeyDown}
+      role={clickable ? "link" : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      aria-label={clickable ? `Open ${heading}` : undefined}
+      $clickable={clickable}
     >
-      <FeatureContent variants={contentVariants}>
+      <FeatureContent>
         {iconId && (
           <IconContainer>
             <svg>
@@ -193,6 +220,7 @@ export default function Feature({
             </svg>
           </IconContainer>
         )}
+
         <h3
           style={{
             fontSize: 60,
@@ -203,6 +231,7 @@ export default function Feature({
         >
           {heading}
         </h3>
+
         <p
           style={{
             fontSize: 28,
@@ -213,20 +242,28 @@ export default function Feature({
         >
           {text}
         </p>
-        <a
-          href={linkHref}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          style={{
-            fontSize: "15px",
-            color: "red",
-            display: "inline-flex",
-            alignItems: "center",
-            textDecoration: "none",
-          }}
-        >
-          {linkText}
-          {linkText && (
+
+        {/* If we have a specific linkText button, make it route with SPA navigation */}
+        {linkText && (
+          <a
+            href={to || linkHref || "#"}
+            onClick={(e) => {
+              if (to) {
+                e.preventDefault();
+                go();
+              }
+            }}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={{
+              fontSize: "15px",
+              color: "red",
+              display: "inline-flex",
+              alignItems: "center",
+              textDecoration: "none",
+            }}
+          >
+            {linkText}
             <FaArrowRight
               style={{
                 marginLeft: "5px",
@@ -234,17 +271,29 @@ export default function Feature({
                 transform: hover ? "translateX(5px)" : "translateX(0)",
               }}
             />
-          )}
-        </a>
-        {qrCodeLink && <QRCodeImage src={qrCodeLink} alt="QR Code" />}
+          </a>
+        )}
+
+        {qrCodeLink && (
+          <QRCodeImage
+            src={qrCodeLink}
+            alt="QR Code"
+            $clickable={clickable}
+            onClick={clickable ? go : undefined}
+          />
+        )}
       </FeatureContent>
-      {/**
-       * 1) If "videoSrc" is provided, show the video in the iPhone frame
-       * 2) Else if "imageSrc" is provided, show the "FramedImage" in the iPhone frame
-       * 3) Otherwise, just fall back to the standard FeatureImage <picture>
-       */}
+
+      {/* Media side */}
       {videoSrc ? (
-        <VideoFrameContainer>
+        <VideoFrameContainer
+          onClick={clickable ? go : undefined}
+          role={clickable ? "img" : undefined}
+          aria-label={clickable ? `${heading} demo` : undefined}
+          tabIndex={clickable ? 0 : undefined}
+          onKeyDown={onKeyDown}
+          style={{ cursor: clickable ? "pointer" : "default" }}
+        >
           <StyledVideo
             variants={imageVariants}
             src={videoSrc}
@@ -257,30 +306,35 @@ export default function Feature({
           <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
         </VideoFrameContainer>
       ) : imageSrc ? (
-        <VideoFrameContainer>
+        <VideoFrameContainer
+          onClick={clickable ? go : undefined}
+          role={clickable ? "img" : undefined}
+          aria-label={clickable ? `${heading} image` : undefined}
+          tabIndex={clickable ? 0 : undefined}
+          onKeyDown={onKeyDown}
+          style={{ cursor: clickable ? "pointer" : "default" }}
+        >
           <FramedImage variants={imageVariants} src={imageSrc} alt={heading} />
           <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
         </VideoFrameContainer>
       ) : (
-        <picture>
+        <picture
+          onClick={clickable ? go : undefined}
+          role={clickable ? "img" : undefined}
+          aria-label={clickable ? `${heading} image` : undefined}
+          tabIndex={clickable ? 0 : undefined}
+          onKeyDown={onKeyDown}
+          style={{ cursor: clickable ? "pointer" : "default" }}
+        >
           <FeatureImage
             variants={imageVariants}
-            src={image.png}
+            src={image?.png}
             alt={heading}
           />
         </picture>
       )}
 
-      {/* <ContributionNote>
-        If you want to contribute to this project, visit:{" "}
-        <a
-          href="https://gofund.me/45d8a14d"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GoFundMe
-        </a>
-      </ContributionNote> */}
+      {/* <ContributionNote> ... </ContributionNote> */}
     </FeatureBlock>
   );
 }

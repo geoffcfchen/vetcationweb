@@ -23,6 +23,7 @@ function RegisterSection() {
         heading="Vetcation"
         text="A platform to end burnout in veterinary medicine and build professional, lasting connections with pet owners."
         // linkText="Learn More"
+        to="/telemedicine-info" // ⬅️ makes the whole block pressible
         qrCodeLink={qrCodeImage}
         linkHref="#"
         image={{

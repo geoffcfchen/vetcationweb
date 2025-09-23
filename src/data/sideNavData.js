@@ -210,6 +210,19 @@ const sideNavData = {
   ],
   clinics: [
     {
+      groupTitle: "GET STARTED",
+      items: [
+        {
+          id: "clinicIntroToVetcation",
+          label: "Intro to Vetcation",
+        },
+        // {
+        //   id: "ReferralClinicSteps",
+        //   label: "Step-by-Step Setup",
+        // },
+      ],
+    },
+    {
       groupTitle: "Referral Clinic",
       items: [
         {

@@ -18,11 +18,11 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets have experienced clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
+              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger system is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
             },
           ],
         },
@@ -3131,6 +3131,177 @@ requirements and explain how Vetcation keeps you compliant.`,
   },
 
   clinics: {
+    clinicIntroToVetcation: {
+      mainTitle: "Introduction to Vetcation",
+      mainDescription: `Vetcation is an open, flexible, and legally compliant platform that empowers California-licensed veterinarians to launch their own virtual clinic, retain full ownership of clients, patient records, and revenue, and collaborate with clinics to provide telemedicine services. Our mission is to end burnout, build professional and lasting relationships with pet owners, and restore professional autonomy for veterinarians.`,
+      sections: [
+        {
+          id: "mission",
+          title: "Our Mission",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets have experienced clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
+            },
+            {
+              type: "root",
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+            },
+          ],
+        },
+        {
+          id: "achieveWithVetcation",
+          title: "What Can You Achieve with Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation empowers you to redefine your career in veterinary medicine:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Build your own virtual clinic and brand:",
+                  lines: [
+                    "Start a digital practice under your name and nurture strong, lasting client relationships - your clients, your records, your revenue.",
+                  ],
+                },
+                {
+                  heading: "Maximize your earning potential:",
+                  lines: [
+                    "Retain up to 70% of your service fees. A full-time schedule (40 hours/week) can bring in $265,000+/year — all while cutting overhead costs.",
+                  ],
+                },
+                {
+                  heading: "Work on your terms, from anywhere:",
+                  lines: [
+                    "Whether it's from a clinic, your home, or across the globe, Vetcation lets you practice whenever and wherever you want.",
+                  ],
+                },
+                {
+                  heading: "Partner with Existing Clinics:",
+                  lines: [
+                    "With one click, collaborate with brick-and-mortar clinics to offer virtual care under your own identity and schedule. Their clients see your availability, and medical records are shared to support continuity of care.",
+                  ],
+                },
+                {
+                  heading: "Your personal AI assistant:",
+                  lines: [
+                    "Save time with a native AI that drafts Vetssenger notes and creates personalized DAPs after each consultation.",
+                  ],
+                },
+                {
+                  heading: "Ensure compliance with AB 1399:",
+                  lines: [
+                    "Vetcation’s infrastructure is designed to align with California’s telehealth law, AB 1399, offering automated support to help maintain full legal compliance and audit readiness.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // {
+        //   id: "whyChooseVetcation",
+        //   title: "Why Choose Vetcation?",
+        //   blocks: [
+        //     {
+        //       type: "paragraph",
+        //       text: "The Only Platform Designed for Independent Veterinary Practice:",
+        //     },
+        //     {
+        //       type: "bulletList",
+        //       items: [
+        //         {
+        //           heading: "Build Your Own Brand, Not Someone Else’s:",
+        //           lines: [
+        //             "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Full Ownership of Medical Records:",
+        //           lines: [
+        //             "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Chargeable, Inquiry-Based Messaging:",
+        //           lines: [
+        //             "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Complete Pharmacy Freedom:",
+        //           lines: [
+        //             "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Built-In AI, No 3rd-Party Dependence:",
+        //           lines: [
+        //             "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Dedicated Technical & Regulatory Support:",
+        //           lines: [
+        //             "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
+        //             "📧 Email: gcfchen@vetcation.com",
+        //             "📞 Call or text: (530) 400-6227",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
+        {
+          id: "whyVirtualCareTrend",
+          title: "Why Virtual Care Is Growing — And Why It Matters",
+          blocks: [
+            {
+              type: "trendPoints",
+              introParagraphs: [
+                "Veterinary medicine is experiencing a dynamic shift, driven by the rising demand for convenient, accessible care. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights why veterinarians should embrace telehealth sooner than later:",
+              ],
+              items: [
+                {
+                  heading: "Critical Shortages in Veterinary Services:",
+                  lines: [
+                    `Over 22% of U.S. counties have no veterinary employees, leaving millions of companion animals in underserved areas (VVCA Report 2024, p. 7).`,
+                    `The country faces a deficit of 12,000 veterinarians and 48,000 support staff, demanding innovative solutions like telemedicine (VVCA Report 2024, p. 7).`,
+                  ],
+                },
+                {
+                  heading: "Rapid Consumer Adoption:",
+                  lines: [
+                    "Telehealth has become a key access point for pet owners seeking immediate answers — 50% of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10).",
+                    "High demand and convenience are fueling telehealth’s growth, with pet owners embracing virtual visits to save travel time and reduce stress on their animals.",
+                  ],
+                },
+                {
+                  heading: "Synergy with In-Person Care:",
+                  lines: [
+                    "Telemedicine consultations supplement physical visits, allowing continuous follow-up for chronic or non-emergency conditions, while maximizing clinic efficiency.",
+                    "Over half of treatment consultations (58.4%) effectively resolved the issue without an immediate clinic visit, reducing in-person congestion (VVCA Report 2024, p. 21).",
+                  ],
+                },
+                {
+                  heading: "Greater Efficiency & Cost Savings:",
+                  lines: [
+                    "Practices that adopt telehealth often see reduced no-shows, more organized scheduling, and operational savings, boosting both profit and patient satisfaction (VVCA Report 2024).",
+                  ],
+                },
+                {
+                  heading: "High Client Satisfaction:",
+                  lines: [
+                    "Virtual interactions garner an average 98.4% satisfaction rate — pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     ReferralClinic: {
       mainTitle: "Telemedicine Referral Clinic Network Overview",
       mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic can be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
