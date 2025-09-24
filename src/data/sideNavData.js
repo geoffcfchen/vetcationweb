@@ -216,10 +216,10 @@ const sideNavData = {
           id: "clinicIntroToVetcation",
           label: "Intro to Vetcation",
         },
-        {
-          id: "VirtualBranch",
-          label: "Setting Up Your Virtual Branch",
-        },
+        // {
+        //   id: "VirtualBranch",
+        //   label: "Setting Up Your Virtual Branch",
+        // },
 
         // {
         //   id: "ReferralClinicSteps",
