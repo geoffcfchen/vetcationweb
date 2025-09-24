@@ -1,7 +1,7 @@
 const topNavData = [
   { id: "home", label: "For vets" },
   // { id: "rvts", label: "For RVTs" },
-  { id: "clinics", label: "For clinics" },
+  { id: "clinics", label: "For Hospitals" },
   { id: "contributors", label: "Contributors" },
 ];
 
