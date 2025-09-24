@@ -32,7 +32,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation enable vets to compound your work into assets you own: a growing client book, a trusted reputation, and data that travels with you through every stage of your career.",
+              text: "Vetcation enables vets to compound your work into assets you own: a growing client book, a trusted reputation, and data that travels with you through every stage of your career.",
             },
             {
               type: "bulletList",
@@ -40,37 +40,37 @@ const contentData = {
                 {
                   heading: "Build your own virtual clinic and brand:",
                   lines: [
-                    "Start a digital practice under your name and nurture strong, lasting client relationships - your clients, your records, your revenue.",
+                    "Start a digital practice under your name and nurture strong, lasting client relationships. Your clients, your records, and your revenue stay with you.",
                   ],
                 },
                 {
                   heading: "Maximize your earning potential:",
                   lines: [
-                    "Retain up to 70% of your service fees. A full-time schedule (40 hours/week) can bring in $265,000+/year — all while cutting overhead costs.",
+                    "Retain up to 70% of your service fees. A full-time schedule (40 hours a week) can bring in $265,000 or more per year while reducing overhead and growing your independent practice.",
                   ],
                 },
                 {
                   heading: "Work on your terms, from anywhere:",
                   lines: [
-                    "Whether it's from a clinic, your home, or across the globe, Vetcation lets you practice whenever and wherever you want.",
+                    "Practice from a clinic, your home, or across the globe. Your client book and medical records travel with you, giving you true career mobility.",
                   ],
                 },
                 {
-                  heading: "Partner with Existing Clinics:",
+                  heading: "Partner with existing clinics:",
                   lines: [
-                    "With one click, collaborate with brick-and-mortar clinics to offer virtual care under your own identity and schedule. Their clients see your availability, and medical records are shared to support continuity of care.",
+                    "With one click, collaborate with brick-and-mortar clinics to extend your reach. Their clients see your availability, while records and relationships remain part of your professional portfolio.",
                   ],
                 },
                 {
                   heading: "Your personal AI assistant:",
                   lines: [
-                    "Save time with a native AI that drafts Vetssenger notes and creates personalized DAPs after each consultation.",
+                    "Save time with a native AI that drafts Vetssenger notes and generates personalized DAPs. Deliver consistent, high-quality care while protecting your time.",
                   ],
                 },
                 {
                   heading: "Ensure compliance with AB 1399:",
                   lines: [
-                    "Vetcation’s infrastructure is designed to align with California’s telehealth law, AB 1399, offering automated support to help maintain full legal compliance and audit readiness.",
+                    "Vetcation’s infrastructure aligns with California’s telehealth law, AB 1399, providing automated documentation and audit readiness so your practice stays compliant as it grows.",
                   ],
                 },
               ],
