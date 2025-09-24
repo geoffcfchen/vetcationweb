@@ -3145,7 +3145,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "root",
-              helpText: `We believe the solution is to expand teams without additional payroll to handle appropriate cases, create a new revenue stream to fund competitive wages, and focus in-house teams on high-value cases that truly require hands-on care, including imaging, lab diagnostics, dentistry, and surgery. The Vetcation platform enables clinics to achieve this by partnering with trusted relief veterinarians to expand capacity without extra payroll. The added revenue supports more competitive compensation for in-house staff and improves service for in-person clients, which ultimately reduces burnout across the team and dramatically lowers turnover. We believe the higher the staff satisfaction, the better the patient outcomes.`,
+              helpText: `We believe the solution is to expand teams without additional payroll to handle appropriate cases, create a new revenue stream to fund competitive wages, and focus in-house teams on high-value cases that truly require hands-on care, including imaging, lab diagnostics, dentistry, and surgery. The Vetcation platform enables clinics to achieve this by partnering with your trusted relief veterinarians to expand capacity. The added revenue supports more competitive compensation for in-house staff and improves service for in-person clients, which ultimately reduces burnout across the team and dramatically lowers turnover. We believe the higher the staff satisfaction, the better the patient outcomes.`,
             },
           ],
         },
