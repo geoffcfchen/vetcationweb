@@ -3184,12 +3184,12 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "Reserve on-site time for cases that truly need in-person care, including imaging, ultrasound, bloodwork, dentistry under anesthesia, and surgery.",
                   ],
                 },
-                {
-                  heading: "Reduce callback overload:",
-                  lines: [
-                    "Move follow-ups into compensated, time-boxed messaging and video so clinicians are protected from endless phone tag.",
-                  ],
-                },
+                // {
+                //   heading: "Reduce callback overload:",
+                //   lines: [
+                //     "Move follow-ups into compensated, time-boxed messaging and video so clinicians are protected from endless phone tag.",
+                //   ],
+                // },
                 {
                   heading: "Keep ownership and continuity:",
                   lines: [
