@@ -3203,9 +3203,9 @@ requirements and explain how Vetcation keeps you compliant.`,
                   ],
                 },
                 {
-                  heading: "Compliance by design (California):",
+                  heading: "Ensure compliance with AB 1399:",
                   lines: [
-                    "Aligned with AB 1399 requirements for live video telemedicine, documentation, and audit readiness.",
+                    "Vetcation’s infrastructure aligns with California’s telehealth law, AB 1399, providing automated documentation and audit readiness so your practice stays compliant as it grows.",
                   ],
                 },
               ],
