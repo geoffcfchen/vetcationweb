@@ -3315,115 +3315,96 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
     VirtualBranch: {
-      mainTitle: "Build Your Virtual Clinic with Vetcation",
-      mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic, complete with secure recordkeeping, automated scheduling, and client management, all while staying fully compliant with AB 1399. Learn the difference between telemedicine and a virtual clinic, the legal compliance, and follow simple steps to set up your own clinic from anywhere.`,
+      mainTitle: "Set Up Your Virtual Branch with Vetcation",
+      mainDescription: `The following steps explain how your hospital or clinic can join the Vetcation platform as an organization, claim your hospital, sign the required legal documents, and manage partnerships with relief veterinarians. We also cover how your account can view visit outcomes and how to handle escalated cases that require in-person follow-up care.`,
       sections: [
         {
-          id: "legalCompliance",
-          title: "Legal Compliance",
+          id: "claimHospital",
+          title: "Claim Your Hospital or Clinic",
+          blocks: [
+            {
+              type: "qa",
+              question: "How does a hospital join the platform?",
+              answer:
+                "You begin by creating an organizational account and claiming your hospital profile on Vetcation. This verifies your hospital’s identity and allows you to manage partnerships, view visit activity, and align with relief veterinarians.",
+              helpText:
+                "Only authorized representatives should claim the hospital profile to ensure proper access and compliance.",
+            },
+          ],
+        },
+        {
+          id: "legalDocs",
+          title: "Sign Legal Documents",
+          blocks: [
+            {
+              type: "qa",
+              question: "What agreements does the hospital need to sign?",
+              answer:
+                "The hospital must review and sign the Vetcation Hospital Agreement, which includes terms on facilitation fees, compliance with California law (AB 1399), and liability allocation. This ensures your hospital is fully protected and compliant.",
+            },
+          ],
+        },
+        {
+          id: "partnerReliefVets",
+          title: "Partner with Relief Veterinarians",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fhospital_partner.png?alt=media",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Approve partnership requests",
+                  lines: [
+                    "Relief vets may send requests to partner with your hospital.",
+                    "You can review, approve, or decline requests from your dashboard.",
+                  ],
+                },
+                {
+                  heading: "Invite trusted vets",
+                  lines: [
+                    "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "viewOutcomes",
+          title: "View Visit Outcomes",
           blocks: [
             {
               type: "qa",
               question:
-                "Are telehealth-only locations exempt from premises registration in California?",
+                "Can my hospital see the medical records from virtual appointments?",
               answer:
-                "Under California law, a telehealth-only location (like your home office) is exempt from premises registration if you do not conduct in-person exams, do not store or dispense medications, and securely maintain medical records. (BPC, § 4853(h).) Vetcation’s platform is designed to help you create a virtual clinic that meets these requirements.",
+                "Yes. For any telemedicine visit connected to your hospital, you can view the consult records, notes, and recommendations. These remain part of your client’s official medical record.",
             },
           ],
         },
-
         {
-          id: "updateLegalProfile",
-          title: "Update Legal Profile",
+          id: "handleEscalations",
+          title: "Handle Escalated Cases",
           blocks: [
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8359.PNG?alt=media&token=e9c21e33-85ba-4bb6-9ac9-5354259e197b",
-              ],
-            },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Legal first and last name",
+                  heading: "When a case needs in-person care",
                   lines: [
-                    "Make sure this matches your California license records.",
+                    "If a relief vet escalates a case, your hospital takes over immediately.",
+                    "You then schedule the in-person appointment and continue with your standard workflows.",
                   ],
                 },
                 {
-                  heading: "Phone number",
+                  heading: "Seamless handoff",
                   lines: [
-                    "Used for secure pharmacy contact and client support if needed.",
-                  ],
-                },
-                {
-                  heading: "Address",
-                  lines: [
-                    "List your legal business address. This can be your home if you do not conduct in-person exams.",
-                  ],
-                },
-                {
-                  heading: "Licenses",
-                  lines: [
-                    "Upload a current California veterinary license. Ensure expiration dates are accurate.",
-                  ],
-                },
-                {
-                  heading: "Your signature",
-                  lines: [
-                    "Provide a digital signature to appear on records and prescriptions, where required.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        // NEW FRAMED IMAGE BLOCK:
-
-        {
-          id: "updatePublicProfile",
-          title: "Update Public Profile",
-          blocks: [
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8360.PNG?alt=media&token=deec5ee2-d232-488e-a8c1-e8dd9d953677",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "About me",
-                  lines: [
-                    "Write a short, friendly introduction to help pet owners get to know you.",
-                  ],
-                },
-                {
-                  heading: "Which animals can you treat",
-                  lines: [
-                    "Specify if you treat dogs, cats, exotics, livestock, etc.",
-                  ],
-                },
-                {
-                  heading: "Languages",
-                  lines: [
-                    "List any languages you speak to make care accessible to diverse pet owners.",
-                  ],
-                },
-                {
-                  heading: "Specialized in",
-                  lines: [
-                    "Mention any specialties such as dermatology, behavior, nutrition, etc.",
-                  ],
-                },
-                {
-                  heading: "Interested in",
-                  lines: [
-                    "Optional: Share your clinical interests to help match with ideal cases.",
+                    "Clients remain within your hospital’s care, ensuring continuity and full record ownership.",
                   ],
                 },
               ],
@@ -3431,109 +3412,7 @@ requirements and explain how Vetcation keeps you compliant.`,
           ],
         },
         {
-          id: "setRate",
-          title: "Set Rate",
-          blocks: [
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8361.PNG?alt=media&token=b40f0ccd-b0f5-4b3f-b7f6-de905f6cd258",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Choose your consultation rate",
-                  lines: [
-                    "Set the price clients will pay for each virtual visit.",
-                  ],
-                },
-                {
-                  heading: "Stay competitive",
-                  lines: [
-                    "Vetcation can provide benchmarks to help you find the sweet spot for pricing.",
-                  ],
-                },
-                {
-                  heading: "Change anytime",
-                  lines: [
-                    "You can update your rate anytime through your dashboard.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "setMinimumNotice",
-          title: "Set Minimum Notice Time",
-          blocks: [
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Define how far in advance clients can book",
-                  lines: [
-                    "Choose a minimum notice period to help manage your time effectively—e.g., 1 hour, 24 hours, etc.",
-                  ],
-                },
-                {
-                  heading: "Balance flexibility and control",
-                  lines: [
-                    "Shorter notice = more spontaneous bookings. Longer notice = better planning.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "setAvailability",
-          title: "Regular Availability",
-          blocks: [
-            {
-              type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Create a recurring weekly schedule",
-                  lines: [
-                    "Block out hours when you are available to accept virtual appointments.",
-                  ],
-                },
-                {
-                  heading: "Update anytime",
-                  lines: [
-                    "Modify your schedule as often as you like—daily, weekly, or seasonally.",
-                  ],
-                },
-                {
-                  heading: "Time zone aware",
-                  lines: [
-                    "Our platform auto-adjusts for time zone differences so clients always see your availability correctly.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "done",
+          id: "doneHospital",
           title: "Done!",
           blocks: [
             {
@@ -3541,19 +3420,14 @@ requirements and explain how Vetcation keeps you compliant.`,
               items: [
                 {
                   heading:
-                    "You’re all set! You can now start accepting virtual appointments through your clinic.",
-                  // lines: [
-                  //   "You can now start accepting virtual appointments through your clinic.",
-                  // ],
+                    "Your hospital is now live with its own virtual branch and can start supporting clients with relief vet coverage instantly.",
                 },
               ],
             },
             {
               type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9191.webp?alt=media&token=abe5569d-ea87-42b6-8191-96d9ec4953d9",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9192.webp?alt=media&token=ff3107a0-9b94-4130-ad46-c17241e8ab8f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fhospital_done.png?alt=media",
               ],
             },
           ],
