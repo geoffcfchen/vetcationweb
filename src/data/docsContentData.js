@@ -18,7 +18,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: `Vetcation is designed to address one main problem in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
+              text: `Vetcation is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
             },
             {
               type: "root",
@@ -3141,7 +3141,7 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: 'Vetcation is designed to address one main problem in veterinary hospitals: <span class="highlight">high turnover</span>. Most teams are overworked and understaffed, and when client conflict and an overload of callbacks pile up, these pressures become primary drivers of burnout and contribute to high turnover. Reducing client volume to ease pressure sacrifices already thin margins, making it harder to pay competitive wages and keep good employees, which in turn leads to underpayment and makes hiring and retention more difficult.',
+              text: 'Vetcation is designed to address one of the biggest problems in veterinary hospitals: <span class="highlight">high turnover</span>. Most teams are overworked and understaffed, and when client conflict and an overload of callbacks pile up, these pressures become primary drivers of burnout and contribute to high turnover. Reducing client volume to ease pressure sacrifices already thin margins, making it harder to pay competitive wages and keep good employees, which in turn leads to underpayment and makes hiring and retention more difficult.',
             },
             {
               type: "root",
@@ -3308,6 +3308,252 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "Virtual interactions garner an average 98.4% satisfaction rate — pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
                   ],
                 },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    VirtualBranch: {
+      mainTitle: "Build Your Virtual Clinic with Vetcation",
+      mainDescription: `Vetcation empowers California-licensed veterinarians to transform remote care into a complete digital practice. Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic, complete with secure recordkeeping, automated scheduling, and client management, all while staying fully compliant with AB 1399. Learn the difference between telemedicine and a virtual clinic, the legal compliance, and follow simple steps to set up your own clinic from anywhere.`,
+      sections: [
+        {
+          id: "legalCompliance",
+          title: "Legal Compliance",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "Are telehealth-only locations exempt from premises registration in California?",
+              answer:
+                "Under California law, a telehealth-only location (like your home office) is exempt from premises registration if you do not conduct in-person exams, do not store or dispense medications, and securely maintain medical records. (BPC, § 4853(h).) Vetcation’s platform is designed to help you create a virtual clinic that meets these requirements.",
+            },
+          ],
+        },
+
+        {
+          id: "updateLegalProfile",
+          title: "Update Legal Profile",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8359.PNG?alt=media&token=e9c21e33-85ba-4bb6-9ac9-5354259e197b",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Legal first and last name",
+                  lines: [
+                    "Make sure this matches your California license records.",
+                  ],
+                },
+                {
+                  heading: "Phone number",
+                  lines: [
+                    "Used for secure pharmacy contact and client support if needed.",
+                  ],
+                },
+                {
+                  heading: "Address",
+                  lines: [
+                    "List your legal business address. This can be your home if you do not conduct in-person exams.",
+                  ],
+                },
+                {
+                  heading: "Licenses",
+                  lines: [
+                    "Upload a current California veterinary license. Ensure expiration dates are accurate.",
+                  ],
+                },
+                {
+                  heading: "Your signature",
+                  lines: [
+                    "Provide a digital signature to appear on records and prescriptions, where required.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        // NEW FRAMED IMAGE BLOCK:
+
+        {
+          id: "updatePublicProfile",
+          title: "Update Public Profile",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8360.PNG?alt=media&token=deec5ee2-d232-488e-a8c1-e8dd9d953677",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "About me",
+                  lines: [
+                    "Write a short, friendly introduction to help pet owners get to know you.",
+                  ],
+                },
+                {
+                  heading: "Which animals can you treat",
+                  lines: [
+                    "Specify if you treat dogs, cats, exotics, livestock, etc.",
+                  ],
+                },
+                {
+                  heading: "Languages",
+                  lines: [
+                    "List any languages you speak to make care accessible to diverse pet owners.",
+                  ],
+                },
+                {
+                  heading: "Specialized in",
+                  lines: [
+                    "Mention any specialties such as dermatology, behavior, nutrition, etc.",
+                  ],
+                },
+                {
+                  heading: "Interested in",
+                  lines: [
+                    "Optional: Share your clinical interests to help match with ideal cases.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "setRate",
+          title: "Set Rate",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8361.PNG?alt=media&token=b40f0ccd-b0f5-4b3f-b7f6-de905f6cd258",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Choose your consultation rate",
+                  lines: [
+                    "Set the price clients will pay for each virtual visit.",
+                  ],
+                },
+                {
+                  heading: "Stay competitive",
+                  lines: [
+                    "Vetcation can provide benchmarks to help you find the sweet spot for pricing.",
+                  ],
+                },
+                {
+                  heading: "Change anytime",
+                  lines: [
+                    "You can update your rate anytime through your dashboard.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "setMinimumNotice",
+          title: "Set Minimum Notice Time",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_8347.PNG?alt=media&token=afa7a1d0-fd76-4c70-b9ff-603396f2d151",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Define how far in advance clients can book",
+                  lines: [
+                    "Choose a minimum notice period to help manage your time effectively—e.g., 1 hour, 24 hours, etc.",
+                  ],
+                },
+                {
+                  heading: "Balance flexibility and control",
+                  lines: [
+                    "Shorter notice = more spontaneous bookings. Longer notice = better planning.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "setAvailability",
+          title: "Regular Availability",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8350.PNG?alt=media&token=2e99b72f-ac39-437d-a63e-e396b877046b",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Create a recurring weekly schedule",
+                  lines: [
+                    "Block out hours when you are available to accept virtual appointments.",
+                  ],
+                },
+                {
+                  heading: "Update anytime",
+                  lines: [
+                    "Modify your schedule as often as you like—daily, weekly, or seasonally.",
+                  ],
+                },
+                {
+                  heading: "Time zone aware",
+                  lines: [
+                    "Our platform auto-adjusts for time zone differences so clients always see your availability correctly.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "done",
+          title: "Done!",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "You’re all set! You can now start accepting virtual appointments through your clinic.",
+                  // lines: [
+                  //   "You can now start accepting virtual appointments through your clinic.",
+                  // ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9191.webp?alt=media&token=abe5569d-ea87-42b6-8191-96d9ec4953d9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_9192.webp?alt=media&token=ff3107a0-9b94-4130-ad46-c17241e8ab8f",
               ],
             },
           ],
