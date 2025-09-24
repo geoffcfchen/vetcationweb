@@ -3133,7 +3133,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   clinics: {
     clinicIntroToVetcation: {
       mainTitle: "Introduction to Vetcation",
-      mainDescription: `Vetcation enables California veterinary hospitals to launch a hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share—fully aligned with AB 1399. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
+      mainDescription: `Vetcation enables California veterinary hospitals to launch a legally compliant hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share. When escalation to in-person care is needed, your hospital takes over immediately using your standard workflows. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
       sections: [
         {
           id: "mission",
@@ -3145,7 +3145,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `We believe the solution is to expand teams without additional payroll to handle appropriate cases, create a new revenue stream to fund competitive wages, and focus in-house teams on high-value cases that truly require hands-on care, including imaging, lab diagnostics, dentistry, and surgery. The Vetcation platform enables clinics to achieve this by partnering with trusted relief veterinarians to expand capacity without extra payroll. The added revenue supports more competitive compensation for in-house staff and improves service for in-person clients, which ultimately reduces burnout across the team and dramatically lowers turnover. We believe the higher the staff satisfaction, the better the patient outcomes.`,
             },
           ],
         },
