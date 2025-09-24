@@ -18,11 +18,11 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
+              text: `Vetcation is designed to address one main problem in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem is the method we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem are the solution we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
             },
           ],
         },
@@ -3133,7 +3133,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   clinics: {
     clinicIntroToVetcation: {
       mainTitle: "Introduction to Vetcation",
-      mainDescription: `Vetcation is an open, flexible, and legally compliant platform that empowers California-licensed veterinarians to launch their own virtual clinic, retain full ownership of clients, patient records, and revenue, and collaborate with clinics to provide telemedicine services. Our mission is to end burnout, build professional and lasting relationships with pet owners, and restore professional autonomy for veterinarians.`,
+      mainDescription: `Vetcation enables California veterinary hospitals to launch a hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share—fully aligned with AB 1399. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
       sections: [
         {
           id: "mission",
@@ -3141,7 +3141,7 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation is designed to address two root problems in the veterinary field: mental health and burnout. Many vets have experienced clients who are rude or accusatory, and some owners call repeatedly and expect hour-long callbacks, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Although vets provide professional advice and want the best for their patients, these pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.",
+              text: 'Vetcation is designed to address one main problem in veterinary hospitals: <span class="highlight">high turnover</span>. Most teams are overworked and understaffed, and when client conflict and an overload of callbacks pile up, these pressures become primary drivers of burnout and contribute to high turnover. Reducing client volume to ease pressure sacrifices already thin margins, making it harder to pay competitive wages and keep good employees, which in turn leads to underpayment and makes hiring and retention more difficult.',
             },
             {
               type: "root",

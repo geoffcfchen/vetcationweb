@@ -70,7 +70,7 @@ export default function DocsLayout() {
       navigate(`/telemedicine-info/${navId}/ourContributors`);
     }
     if (navId === "clinics") {
-      navigate(`/telemedicine-info/${navId}/ReferralClinic`);
+      navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`);
     }
     if (navId === "rvts") {
       navigate(`/telemedicine-info/${navId}/introToRVT`);
