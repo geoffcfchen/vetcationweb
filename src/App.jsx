@@ -150,10 +150,20 @@ function App() {
           {/* Each child route is the middle content. */}
 
           {/* index: the default if user visits /telemedicine-info with no sub-path */}
-          <Route
+          {/* <Route
             index
             element={
               <Navigate to="/telemedicine-info/home/introToVetcation" replace />
+            }
+          /> */}
+          <Route
+            index
+            element={
+              <Navigate
+                to="/telemedicine-info/home/introToVetcation"
+                replace
+                state={{ suppressInitialHash: true }}
+              />
             }
           />
 

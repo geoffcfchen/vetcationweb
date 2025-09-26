@@ -69,7 +69,12 @@ export default function MySidebarRouter({
                 return (
                   <SidebarItemRow key={parentItem.id} $active={isActive}>
                     <Link
-                      to={routePath}
+                      // to={routePath}
+                      to={{
+                        pathname: routePath,
+                        state: { suppressInitialHash: true },
+                      }}
+                      state={{ suppressInitialHash: true }}
                       onClick={closeOffcanvas}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
@@ -104,7 +109,12 @@ export default function MySidebarRouter({
                           return (
                             <SidebarItemRow key={child.id} $active={isActive}>
                               <Link
-                                to={subRoute}
+                                // to={subRoute}
+                                to={{
+                                  pathname: subRoute,
+                                  state: { suppressInitialHash: true },
+                                }}
+                                state={{ suppressInitialHash: true }}
                                 onClick={closeOffcanvas}
                                 style={{
                                   textDecoration: "none",

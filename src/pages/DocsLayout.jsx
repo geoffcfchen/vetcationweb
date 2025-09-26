@@ -1,5 +1,11 @@
 // DocsLayout.jsx
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+} from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
 import { Outlet, useNavigate, useParams, useLocation } from "react-router-dom";
@@ -39,8 +45,11 @@ const MiddleColumn = styled.div`
 `;
 
 export default function DocsLayout() {
+  const suppressInitialHashRef = useRef(false);
   const { topNavId = "home" } = useParams();
   const location = useLocation(); // ← new
+
+  const prevKeyRef = useRef(location.key);
 
   const navigate = useNavigate();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -64,32 +73,52 @@ export default function DocsLayout() {
 
   const handleTopNavClick = (navId) => {
     if (navId === "home") {
-      navigate(`/telemedicine-info/${navId}/introToVetcation`);
+      navigate(`/telemedicine-info/${navId}/introToVetcation`, {
+        state: { suppressInitialHash: true },
+      });
     }
     if (navId === "contributors") {
-      navigate(`/telemedicine-info/${navId}/ourContributors`);
+      navigate(`/telemedicine-info/${navId}/ourContributors`, {
+        state: { suppressInitialHash: true },
+      });
     }
     if (navId === "clinics") {
-      navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`);
+      navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`, {
+        state: { suppressInitialHash: true },
+      });
     }
     if (navId === "rvts") {
-      navigate(`/telemedicine-info/${navId}/introToRVT`);
+      navigate(`/telemedicine-info/${navId}/introToRVT`, {
+        state: { suppressInitialHash: true },
+      });
     }
   };
 
-  // useEffect(() => {
-  //   if (activeSectionId) {
-  //     navigate(`#${activeSectionId}`, { replace: true });
-  //   }
-  // }, [activeSectionId, navigate]);
-  useEffect(() => {
-    if (activeSectionId) {
-      navigate(
-        { pathname: location.pathname, hash: activeSectionId },
-        { replace: true }
-      );
+  // When route changes, remember if this navigation asked us to suppress the first hash write
+  useLayoutEffect(() => {
+    if (prevKeyRef.current !== location.key) {
+      // Any route transition → suppress the very next hash write
+      suppressInitialHashRef.current = true;
+      prevKeyRef.current = location.key;
     }
-  }, [activeSectionId, navigate, location.pathname]);
+  }, [location.key]);
+
+  // ✅ Clear the section on route/path change (place this BEFORE the hash-writer)
+  useEffect(() => {
+    setActiveSectionId(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!activeSectionId) return;
+    if (suppressInitialHashRef.current) {
+      suppressInitialHashRef.current = false; // consume once
+      return;
+    }
+    navigate(
+      { pathname: location.pathname, hash: activeSectionId },
+      { replace: true }
+    );
+  }, [activeSectionId, location.pathname, navigate]);
   // useEffect(() => {
   //   if (activeSectionId) {
   //     navigate({ hash: activeSectionId }, { replace: true });
@@ -97,6 +126,7 @@ export default function DocsLayout() {
   // }, [activeSectionId, navigate]);
 
   // 2️⃣ On first render, scroll to any existing hash
+
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.slice(1);
