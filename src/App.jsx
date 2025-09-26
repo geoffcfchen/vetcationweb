@@ -22,10 +22,53 @@ import DocsLayout from "./pages/DocsLayout";
 import DocsContent from "./data/docs/DocsContent";
 
 import SupportPage from "./pages/SupportPage";
+import { createGlobalStyle } from "styled-components";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
 // import { auth, firestore } from "./firebase";
+
+const PrintStyles = createGlobalStyle`
+@media print {
+  /* Paper-friendly colors */
+  html, body, #root { background:#fff !important; color:#000 !important; }
+  * {
+    color:#000 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+    filter:none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a, a:visited { color:#000 !important; text-decoration: underline; }
+  svg, svg * { fill:#000 !important; stroke:#000 !important; }
+
+  /* Neutralize sticky/fixed and transforms so headers don’t overlap pages */
+  [style*="position: sticky"], [style*="position: fixed"],
+  nav, header, .navbar, .TopNavBarContainer {
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  /* Remove layout offset added for sticky headers */
+  main, .content, .page-content, #mainContent, #docsMain {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Keep page breaks tidy */
+  h1, h2, h3 { break-after: avoid-page; }
+  p, li { break-inside: avoid; }
+
+  /* Hide elements you don’t want to print */
+  .no-print { display: none !important; }
+
+  /* Page margins */
+  @page { margin: 12mm; }
+}
+`;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -94,6 +137,7 @@ function App() {
 
   return (
     <>
+      <PrintStyles />
       <GlobalStyle />
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
