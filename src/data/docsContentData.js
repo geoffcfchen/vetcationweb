@@ -3133,7 +3133,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   clinics: {
     clinicIntroToVetcation: {
       mainTitle: "Introduction to Vetcation",
-      mainDescription: `Vetcation enables California veterinary hospitals to launch a legally compliant hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share. When escalation to in-person care is needed, your hospital takes over immediately using your standard workflows. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
+      mainDescription: `Vetcation enables California veterinary hospitals to launch a legally compliant hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share. When escalation to in-person care is needed, your hospital takes over using your standard workflows. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
       sections: [
         {
           id: "mission",
@@ -3155,7 +3155,7 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation enables hospitals to add a clinic-branded virtual branch without new payroll or workflow changes. Partner with trusted relief veterinarians, certified trainers, and board-certified specialists to expand capacity, offer new services, protect staff time, and keep ownership of client relationships and medical records.",
+              text: "Partner with trusted relief veterinarians, certified trainers, and board-certified specialists to expand capacity, offer new services, protect staff time, and keep ownership of client relationships and medical records.",
             },
             {
               type: "bulletList",
@@ -3212,59 +3212,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
           ],
         },
-        // {
-        //   id: "whyChooseVetcation",
-        //   title: "Why Choose Vetcation?",
-        //   blocks: [
-        //     {
-        //       type: "paragraph",
-        //       text: "The Only Platform Designed for Independent Veterinary Practice:",
-        //     },
-        //     {
-        //       type: "bulletList",
-        //       items: [
-        //         {
-        //           heading: "Build Your Own Brand, Not Someone Else’s:",
-        //           lines: [
-        //             "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Full Ownership of Medical Records:",
-        //           lines: [
-        //             "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Chargeable, Inquiry-Based Messaging:",
-        //           lines: [
-        //             "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Complete Pharmacy Freedom:",
-        //           lines: [
-        //             "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Built-In AI, No 3rd-Party Dependence:",
-        //           lines: [
-        //             "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Dedicated Technical & Regulatory Support:",
-        //           lines: [
-        //             "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
-        //             "📧 Email: gcfchen@vetcation.com",
-        //             "📞 Call or text: (530) 400-6227",
-        //           ],
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
+
         {
           id: "whyVirtualCareTrend",
           title: "Why Virtual Care Is Growing — And Why It Matters",
@@ -3316,19 +3264,68 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     VirtualBranch: {
       mainTitle: "Set Up Your Virtual Branch with Vetcation",
-      mainDescription: `The following steps explain how your hospital or clinic can join the Vetcation platform as an organization, claim your hospital, sign the required legal documents, and manage partnerships with relief veterinarians. We also cover how your account can view visit outcomes and how to handle escalated cases that require in-person follow-up care.`,
+      mainDescription: `The following steps explain how you can sign up as a hospital/organization account, claim your hospital, sign the required legal documents, and manage partnerships with relief veterinarians. We also cover how your account can view visit outcomes and how to handle escalated cases that require in-person follow-up care.`,
       sections: [
         {
-          id: "claimHospital",
-          title: "Claim Your Hospital or Clinic",
+          id: "SignUp",
+          title: "Sign Up as a Hospital/Organization Account",
           blocks: [
             {
-              type: "qa",
-              question: "How does a hospital join the platform?",
-              answer:
-                "You begin by creating an organizational account and claiming your hospital profile on Vetcation. This verifies your hospital’s identity and allows you to manage partnerships, view visit activity, and align with relief veterinarians.",
-              helpText:
-                "Only authorized representatives should claim the hospital profile to ensure proper access and compliance.",
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0828.webp?alt=media&token=6c2de185-8eb8-4f19-afc2-168dbec6810b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0830.webp?alt=media&token=d0e41069-a189-4084-9f3c-8d69473aafbb",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Legal first and last name",
+                  lines: [
+                    "Make sure this matches your California license records.",
+                  ],
+                },
+                {
+                  heading: "Phone number",
+                  lines: [
+                    "Used for secure pharmacy contact and client support if needed.",
+                  ],
+                },
+                {
+                  heading: "Address",
+                  lines: [
+                    "List your legal business address. This can be your home if you do not conduct in-person exams.",
+                  ],
+                },
+                {
+                  heading: "Licenses",
+                  lines: [
+                    "Upload a current California veterinary license. Ensure expiration dates are accurate.",
+                  ],
+                },
+                {
+                  heading: "Your signature",
+                  lines: [
+                    "Provide a digital signature to appear on records and prescriptions, where required.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "claimHospital",
+          title: "Claim Your Hospital and Set Up Your Profile",
+          blocks: [
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0832.webp?alt=media&token=85deb6e8-028a-4517-b89a-6822eda65a1d",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0834.webp?alt=media&token=2a07b279-cbab-4a21-b70f-1ed35e465af7",
+              ],
             },
           ],
         },
@@ -3337,21 +3334,25 @@ requirements and explain how Vetcation keeps you compliant.`,
           title: "Sign Legal Documents",
           blocks: [
             {
-              type: "qa",
-              question: "What agreements does the hospital need to sign?",
-              answer:
-                "The hospital must review and sign the Vetcation Hospital Agreement, which includes terms on facilitation fees, compliance with California law (AB 1399), and liability allocation. This ensures your hospital is fully protected and compliant.",
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0838.webp?alt=media&token=a5db0d17-48f7-4bd3-bdaf-a5a64fdd8bb7",
+              ],
             },
           ],
         },
         {
           id: "partnerReliefVets",
-          title: "Partner with Relief Veterinarians",
+          title: "Manage requested Partner with Relief Veterinarians",
           blocks: [
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fhospital_partner.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0841.webp?alt=media&token=56d65d8d-1b38-4358-9fdd-a0009239d335",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0840.webp?alt=media&token=bca0f0fa-6590-4492-888f-e1a5893477cf",
               ],
             },
             {
@@ -3375,42 +3376,74 @@ requirements and explain how Vetcation keeps you compliant.`,
           ],
         },
         {
-          id: "viewOutcomes",
-          title: "View Visit Outcomes",
+          id: "partnerReliefVets",
+          title: "Send Partnership Requests to Relief Veterinarians",
           blocks: [
             {
-              type: "qa",
-              question:
-                "Can my hospital see the medical records from virtual appointments?",
-              answer:
-                "Yes. For any telemedicine visit connected to your hospital, you can view the consult records, notes, and recommendations. These remain part of your client’s official medical record.",
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0847.webp?alt=media&token=007fd8c3-a56c-4545-aba8-76649f22b4c2",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0845.webp?alt=media&token=ebd22e27-7272-41a7-aea0-6e74698394e7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0846.webp?alt=media&token=8387fb7a-5c63-4c09-8564-a6ee375e554e",
+              ],
             },
-          ],
-        },
-        {
-          id: "handleEscalations",
-          title: "Handle Escalated Cases",
-          blocks: [
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "When a case needs in-person care",
+                  heading: "Approve partnership requests",
                   lines: [
-                    "If a relief vet escalates a case, your hospital takes over immediately.",
-                    "You then schedule the in-person appointment and continue with your standard workflows.",
+                    "Relief vets may send requests to partner with your hospital.",
+                    "You can review, approve, or decline requests from your dashboard.",
                   ],
                 },
                 {
-                  heading: "Seamless handoff",
+                  heading: "Invite trusted vets",
                   lines: [
-                    "Clients remain within your hospital’s care, ensuring continuity and full record ownership.",
+                    "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
                   ],
                 },
               ],
             },
           ],
         },
+        // {
+        //   id: "viewOutcomes",
+        //   title: "View Visit Outcomes",
+        //   blocks: [
+        //     {
+        //       type: "qa",
+        //       question:
+        //         "Can my hospital see the medical records from virtual appointments?",
+        //       answer:
+        //         "Yes. For any telemedicine visit connected to your hospital, you can view the consult records, notes, and recommendations. These remain part of your client’s official medical record.",
+        //     },
+        //   ],
+        // },
+        // {
+        //   id: "handleEscalations",
+        //   title: "Handle Escalated Cases",
+        //   blocks: [
+        //     {
+        //       type: "bulletList",
+        //       items: [
+        //         {
+        //           heading: "When a case needs in-person care",
+        //           lines: [
+        //             "If a relief vet escalates a case, your hospital takes over immediately.",
+        //             "You then schedule the in-person appointment and continue with your standard workflows.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Seamless handoff",
+        //           lines: [
+        //             "Clients remain within your hospital’s care, ensuring continuity and full record ownership.",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
         {
           id: "doneHospital",
           title: "Done!",
@@ -3427,7 +3460,8 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fhospital_done.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
               ],
             },
           ],

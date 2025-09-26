@@ -90,6 +90,11 @@ export default function DocsLayout() {
       );
     }
   }, [activeSectionId, navigate, location.pathname]);
+  // useEffect(() => {
+  //   if (activeSectionId) {
+  //     navigate({ hash: activeSectionId }, { replace: true });
+  //   }
+  // }, [activeSectionId, navigate]);
 
   // 2️⃣ On first render, scroll to any existing hash
   useEffect(() => {
