@@ -3340,6 +3340,24 @@ requirements and explain how Vetcation keeps you compliant.`,
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0838.webp?alt=media&token=a5db0d17-48f7-4bd3-bdaf-a5a64fdd8bb7",
               ],
             },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Find Legal Documents:",
+                  lines: [
+                    "Slide right to open the drawer menu and press 'Telemedicine settings' to access the required inputs for telemedicine services.",
+                  ],
+                },
+                {
+                  heading: "Complete Required Inputs:",
+                  lines: [
+                    "Fill out all required fields, including authorized representative name, phone number, and hospital address.",
+                    "Carefully read through the EULA. Electronically sign the documents to complete the process.",
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -3361,13 +3379,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading: "Approve partnership requests",
                   lines: [
                     "Relief vets may send requests to partner with your hospital.",
-                    "You can review, approve, or decline requests from your dashboard.",
-                  ],
-                },
-                {
-                  heading: "Invite trusted vets",
-                  lines: [
-                    "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
+                    "You can review, approve, or decline requests from your hospital account on the map.",
                   ],
                 },
               ],
@@ -3390,16 +3402,11 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Approve partnership requests",
-                  lines: [
-                    "Relief vets may send requests to partner with your hospital.",
-                    "You can review, approve, or decline requests from your dashboard.",
-                  ],
-                },
-                {
                   heading: "Invite trusted vets",
                   lines: [
+                    "Search for relief veterinarians by name.",
                     "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
+                    "Once they accept, they will be listed as a telemedicine vet under your hospital’s profile.",
                   ],
                 },
               ],
