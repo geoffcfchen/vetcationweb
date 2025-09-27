@@ -9,13 +9,21 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicon variants, meta tags, etc. -->
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="shortcut icon" href="/favicon.ico" />
 
+    <!-- Canonical + robots -->
+    <link rel="canonical" href="https://vetcation.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Primary SEO -->
+    <title>
+      Vetcation | Ask Questions for Vets, Telemedicine in California
+    </title>
     <meta
       name="description"
       content="Vetcation is a professional community where veterinarians and professionals share expert insights to help pet owners and build lasting relationships."
@@ -28,8 +36,63 @@
       property="og:description"
       content="Join our community where pet owners can ask questions and learn from licensed veterinary professionals."
     />
-    <meta property="og:url" content="https://vetcation.com" />
-    <title>Vetcation</title>
+    <meta property="og:url" content="https://vetcation.com/" />
+    <meta property="og:image" content="https://vetcation.com/og-image.png" />
+    <meta property="og:site_name" content="Vetcation" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Vetcation - Learn from Vets & Professionals"
+    />
+    <meta
+      name="twitter:description"
+      content="Access California-wide veterinary telemedicine and ask questions and learn from professional community."
+    />
+    <meta name="twitter:image" content="https://vetcation.com/og-image.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Vetcation",
+            "url": "https://vetcation.com/",
+            "logo": "https://vetcation.com/icon_96.png",
+            "sameAs": [
+              "https://x.com/VetcationApp",
+              "https://www.linkedin.com/company/vetcation"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Vetcation",
+            "url": "https://vetcation.com/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://vetcation.com/search?q={query}",
+              "query-input": "required name=query"
+            }
+          },
+          {
+            "@type": "MedicalOrganization",
+            "@id": "https://vetcation.com/#vetcare",
+            "name": "Vetcation Veterinary Telemedicine",
+            "url": "https://vetcation.com/",
+            "medicalSpecialty": "VeterinaryCare",
+            "areaServed": {
+              "@type": "AdministrativeArea",
+              "name": "California",
+              "identifier": "US-CA"
+            }
+          }
+        ]
+      }
+    </script>
     <script type="module" crossorigin src="/assets/index-Dg5kkg19.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DUEfxN0n.css">
   </head>
