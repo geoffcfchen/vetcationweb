@@ -18,7 +18,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: `Vetcation is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. Even one such interaction can ruin a good day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
+              text: `Vetcation is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. It only takes one difficult interaction to derail the day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
             },
             {
               type: "root",
@@ -3282,33 +3282,15 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Legal first and last name",
+                  heading: "Select 'Hospital/Organization' Account Type",
                   lines: [
-                    "Make sure this matches your California license records.",
+                    "Choose the 'Hospital/Organization' option during sign-up to create your clinic's account. Make sure you are are the authorized representative to set up the account.",
                   ],
                 },
                 {
-                  heading: "Phone number",
+                  heading: "Scan provided QR Code",
                   lines: [
-                    "Used for secure pharmacy contact and client support if needed.",
-                  ],
-                },
-                {
-                  heading: "Address",
-                  lines: [
-                    "List your legal business address. This can be your home if you do not conduct in-person exams.",
-                  ],
-                },
-                {
-                  heading: "Licenses",
-                  lines: [
-                    "Upload a current California veterinary license. Ensure expiration dates are accurate.",
-                  ],
-                },
-                {
-                  heading: "Your signature",
-                  lines: [
-                    "Provide a digital signature to appear on records and prescriptions, where required.",
+                    "Scan the QR code provided or email to gcfchen@vetcation.com to request a QR code.",
                   ],
                 },
               ],
