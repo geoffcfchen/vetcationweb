@@ -220,6 +220,7 @@ const sideNavData = {
           id: "VirtualBranch",
           label: "Setting Up Your Virtual Branch",
         },
+        { id: "clinicOutcomeAnalysis", label: "Outcome Analysis" },
 
         // {
         //   id: "ReferralClinicSteps",

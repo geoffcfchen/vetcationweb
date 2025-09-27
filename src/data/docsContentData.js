@@ -3733,6 +3733,125 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
       ],
     },
+    clinicOutcomeAnalysis: {
+      mainTitle: "Clinic Outcome Analytics",
+      mainDescription: `See how telemedicine is performing across your account and by doctor. Track client growth, outcome distribution, and drill down to the exact visits behind each outcome.`,
+      sections: [
+        {
+          id: "clientGrowth",
+          title: "Client growth (last 4 weeks)",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0850.webp?alt=media&token=2b09333e-b495-4f1a-9597-0cab3594b7ec",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0854.webp?alt=media&token=3362662c-1b60-4138-8f84-ccefacf04994",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Total clients:",
+                  lines: ["Count of unique pet owners linked to your account."],
+                },
+                {
+                  heading: "New (4W):",
+                  lines: ["New clients who joined in the last 4 weeks."],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "telemedOutcomesAll",
+          title: "Telemedicine outcomes — account",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Prescribed meds:",
+                  lines: ["Visit resulted in a prescription."],
+                },
+                {
+                  heading: "Escalate to in-person:",
+                  lines: ["Telemed triage recommended in-clinic exam."],
+                },
+                {
+                  heading: "Refer other doctors:",
+                  lines: ["Directed to a different clinician/specialist."],
+                },
+                {
+                  heading: "ER:",
+                  lines: ["Advised emergency care based on triage."],
+                },
+                {
+                  heading: "Monitor:",
+                  lines: ["No immediate intervention; monitor with guidance."],
+                },
+                {
+                  heading: "Resolved:",
+                  lines: ["Issue addressed within the telemedicine visit."],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "telemedOutcomesByDoctor",
+          title: "Telemedicine outcomes — by doctor",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0852.webp?alt=media&token=06d6f20c-0002-4600-a57c-8c8f8b8f9187",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0853.webp?alt=media&token=420b61b1-454e-48da-a1c0-0bbc98b2ac20",
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "outcomeDrilldowns",
+          title: "Drill down to visits behind each outcome",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0855.webp?alt=media&token=17eeca01-c874-42a3-a442-a764402bee96",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Audit trail:",
+                  lines: [
+                    "Every outcome links to the visit card for QA and follow-up.",
+                  ],
+                },
+                {
+                  heading: "Operational handoffs:",
+                  lines: [
+                    "Escalations hand back to your clinic’s standard workflow.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     TelemedicineClinics: {
       mainTitle: "Telemedicine-Enabled Clinics on Vetcation",
       mainDescription: `These clinics offer virtual care through Vetcation and can seamlessly transition cases to in-person visits when needed. Pet owners book a virtual appointment under your hospital’s brand; your team receives the consult summary and relevant records, and you maintain ownership of the client relationship and medical record.`,
