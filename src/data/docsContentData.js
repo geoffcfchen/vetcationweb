@@ -3282,13 +3282,13 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Select 'Hospital/Organization' Account Type",
+                  heading: "Select 'Hospital/Organization' Account Type:",
                   lines: [
-                    "Choose the 'Hospital/Organization' option during sign-up to create your clinic's account. Make sure you are are the authorized representative to set up the account.",
+                    "Choose the 'Hospital/Organization' option during sign-up to create your clinic's account. Make sure you are the authorized representative to set up the account.",
                   ],
                 },
                 {
-                  heading: "Scan provided QR Code",
+                  heading: "Scan the provided QR Code:",
                   lines: [
                     "Scan the QR code provided or email to gcfchen@vetcation.com to request a QR code.",
                   ],
@@ -3307,6 +3307,23 @@ requirements and explain how Vetcation keeps you compliant.`,
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0832.webp?alt=media&token=85deb6e8-028a-4517-b89a-6822eda65a1d",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0834.webp?alt=media&token=2a07b279-cbab-4a21-b70f-1ed35e465af7",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Search for Your Hospital:",
+                  lines: [
+                    "Use the search function to find your hospital by zip code. Select your hospital. If your hospital is not listed, contact gcfchen@vetcation.com for assistance.",
+                  ],
+                },
+                {
+                  heading: "Complete Hospital Profile:",
+                  lines: [
+                    "Fill out your hospital's profile with accurate information. This information will be visible to clients.",
+                  ],
+                },
               ],
             },
           ],
