@@ -227,19 +227,15 @@ const sideNavData = {
         // },
       ],
     },
-    {
-      groupTitle: "Referral Clinic",
-      items: [
-        {
-          id: "ReferralClinic",
-          label: "Referral Clinic Overview",
-        },
-        // {
-        //   id: "ReferralClinicSteps",
-        //   label: "Step-by-Step Setup",
-        // },
-      ],
-    },
+    // {
+    //   groupTitle: "Referral Clinic",
+    //   items: [
+    //     {
+    //       id: "TelemedicineClinics",
+    //       label: "Telemedicine Clinics",
+    //     },
+    //   ],
+    // },
     {
       groupTitle: "Regulatory Compliance",
       items: [
