@@ -21,7 +21,7 @@ function RegisterSection() {
       <Feature
         // iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Vetcation"
-        text="A platform to end burnout in veterinary medicine and build professional, lasting connections with pet owners."
+        text="A professional community where veterinarians and pet owners connect and build lasting relationships."
         // linkText="Learn More"
         to="/telemedicine-info" // ⬅️ makes the whole block pressible
         qrCodeLink={qrCodeImage}
