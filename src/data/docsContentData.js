@@ -18,7 +18,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: `Vetcation is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets experience owners who call repeatedly and expect hour-long callbacks, or clients who are rude or accusatory, often bringing unrealistic expectations, distrust, skepticism, and argumentativeness. It only takes one difficult interaction to derail the day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
+              text: `Vetcation is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets face a growing backlog of callbacks, owners who call repeatedly and expect hour-long return calls, or clients who are rude or accusatory, often bringing unrealistic expectations and distrustful, argumentative behavior. It only takes one difficult interaction to derail the day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
             },
             {
               type: "root",
