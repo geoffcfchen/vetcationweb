@@ -252,14 +252,12 @@ const contentData = {
                 },
                 {
                   heading: "Phone number:",
-                  lines: [
-                    "Used for secure pharmacy contact and client support if needed.",
-                  ],
+                  lines: ["Used for secure pharmacy contact."],
                 },
                 {
                   heading: "Address:",
                   lines: [
-                    "List your legal business address. This can be your home if you do not conduct in-person exams.",
+                    "List your legal business address. This can be your home address if you do not conduct in-person exams on-site.",
                   ],
                 },
                 {
@@ -582,7 +580,7 @@ const contentData = {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0889.webp?alt=media&token=e54cfd43-85fa-4235-a06b-c81509158953",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8366.PNG?alt=media&token=764e39fe-263f-4b6f-803e-946b2bd20c30",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
               ],
