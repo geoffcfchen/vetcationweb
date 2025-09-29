@@ -3130,6 +3130,384 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
   },
 
+  oneHealth: {
+    ourContributors: {
+      mainTitle: "Vetcation Contributors",
+      mainDescription:
+        "Vetcation is shaped by the passion, expertise, and collaboration of dedicated individuals from across the veterinary and technology fields. This section highlights the contributors who have helped bring our vision to life. We list our contributors in alphabetical order to honor their unique contributions and the diverse backgrounds they bring to Vetcation.",
+      sections: [
+        {
+          id: "coreTeam",
+          title: "Team",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
+                {
+                  name: "Geoff Chih-Fan Chen",
+                  title: "Founder of Vetcation",
+                  description:
+                    "Geoff Chih-Fan Chen, a former astrophysicist at UCLA, leveraged his expertise to build the core infrastructure of the Vetcation platform. Inspired by Dr. Fuchi Yu, he combined advanced technology with clinical insight to help advance telemedicine in the veterinary field.",
+                },
+                {
+                  name: "Mingli Lee",
+                  title: "UX Designer",
+                  description:
+                    "Mingli Lee made significant contributions to the UX design during the early stages of the Vetcation product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                },
+
+                {
+                  name: "Dr. Fuchi Yu",
+                  title: "Veterinarian at Overland Veterinary Clinic",
+                  description:
+                    "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the Vetcation platform. Her clinical insights and frontline experience have been instrumental in shaping Vetcation’s telemedicine services.",
+                },
+
+                // More contributors...
+              ],
+            },
+          ],
+        },
+        {
+          id: "interns",
+          title: "Interns",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
+                {
+                  name: "Jackson Konkle",
+                  title: "Marketing Intern",
+                  description:
+                    "Jackson Konkle is a Marketing Intern at Vetcation, bringing a passion for storytelling and experience in content creation, social media strategy, and community outreach. Currently studying Business Information Management at UC Irvine, Jackson is helping Vetcation grow its community and expand access to veterinary knowledge and care.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "advisors",
+          title: "Advisors",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
+                {
+                  name: "Dr. Jeremy Prupas",
+                  title: "Chief Veterinarian at City of Los Angeles",
+                  description:
+                    "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare and SCVMA helped align the platform with broader efforts to advance virtual care in the veterinary field.",
+                },
+
+                // More contributors...
+              ],
+            },
+          ],
+        },
+        {
+          id: "contributors",
+          title: "Contributors",
+          blocks: [
+            {
+              type: "customContributorList",
+              contributors: [
+                {
+                  name: "Dr. Ross Massimiano",
+                  title: "Veterinarian at Veterinary Emergency Group (VEG)",
+                  description:
+                    "Dr. Ross Massimiano has helped check the workflow of the Vetcation platform and provided valuable feedback on the features. His insights have been crucial in ensuring that the platform meets the needs of both veterinary professionals and pet owners.",
+                },
+                {
+                  name: "Emily Schmieder",
+                  title:
+                    "Licensed Veterinary Technician at Benfield Animal Hospital",
+                  description:
+                    "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—Vetcation’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
+                },
+
+                // More contributors...
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  test: {
+    mainTitle: "Collaborations for One Health Impact",
+    mainDescription: `We partner with public agencies, nonprofits, and community leaders to keep more pets with their people and strengthen veterinary teams. Our focus: expand access to care, reduce preventable surrenders, improve post-adoption outcomes, and protect clinician well-being. Each collaboration aligns with Vetcation’s platform strengths—virtual care, coordinated follow-ups, and transparent data—while honoring the missions of our partners.`,
+
+    sections: [
+      {
+        id: "ohvsPrupas",
+        title: "One Health Veterinary Solutions (Dr. Jeremy Prupas, VMD, MPH)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We’re working with Dr. Jeremy Prupas to co-design scalable, equity-driven One Health programs that integrate veterinary and public-health services. The goal: keep pets with families, reduce shelter intake, and build community resilience.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "One Health Veterinary Solutions (Founder: Dr. Jeremy Prupas, VMD, MPH; former Chief Veterinarian, LA City Animal Services).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Design and pilot integrated virtual-to-in-person care pathways that reduce preventable surrenders and improve access for underserved families.",
+                ],
+              },
+              {
+                heading: "Initial Joint Initiatives:",
+                lines: [
+                  "Map a shelter-to-community virtual care loop (triage → telemedicine → in-person handoff) with clear escalation rules.",
+                  "Use Vetcation’s time-boxed messaging and video visits for follow-ups to protect staff time and increase continuity.",
+                  "Define metrics: prevented surrenders, resolved cases without ER visits, clinician workload reduction, client satisfaction.",
+                ],
+              },
+              {
+                heading: "Why It Matters:",
+                lines: [
+                  "Two out of three surrenders could be prevented; 94% of assisted owners kept their pets (Hill’s 2024). Empathy plus coordination works.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "alignCare",
+        title: "AlignCare — Access to Care for Low-Income Families",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We are exploring an integration with AlignCare to combine financial assistance models with coordinated virtual care and clinic handoffs.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: ["AlignCare (Prospective Integration)."],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Increase access to timely veterinary advice and appropriate treatment pathways for families with financial constraints.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Virtual triage and follow-ups to avoid unnecessary ER visits.",
+                  "Structured handoffs for imaging, labs, dentistry, and surgery at participating hospitals.",
+                  "Transparent data for outcomes and funding impact.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "dvSafetyNet",
+        title: "Municipal Partnership — Domestic Violence Pet Safety-Net",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We support municipal efforts to protect the pets of survivors by building a fast, private, and reliable care pathway.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "City DV Programs and Community Partners (Prospective).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Ensure survivors’ pets receive immediate care, temporary housing support, and medical continuity without barriers.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Rapid telemedicine consults and documentation that travel with the pet.",
+                  "Coordinated referrals to partner hospitals and boarding programs.",
+                  "Privacy-preserving processes and clear points of contact.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "oneHealthCoordinator",
+        title: "One Health Coordinator Model — Cross-Agency Integration",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Inspired by Dr. Prupas’s framework, we support a city-level One Health Coordinator role that bridges Animal Services, Police, Fire, and Social Services.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "Municipal Agencies and Public-Health Departments (Prospective).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Create a single point of accountability for pet-and-people solutions: prevention, response, and follow-through.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Station social workers in shelters; coordinate outreach and case tracking.",
+                  "Hold One Health clinics for families and pets; expand reimbursements to recruit more hospitals.",
+                  "Use shared dashboards to monitor outcomes and funding needs.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "housingRetention",
+        title: "Housing & Pet Retention — Policy and Private Partnerships",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Housing insecurity is a leading cause of surrender. We aim to support policy partners and property stakeholders with pragmatic solutions.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "City Housing Offices, Property Networks, Advocacy Groups (Prospective).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Reduce pet-related evictions and surrenders via incentives, verification, and responsible-pet frameworks.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Pet-friendly incentives (stipends, tax benefits) tied to spay/neuter, licensing, and microchipping.",
+                  "Virtual behavior consults to stabilize tenancies and address complaints early.",
+                  "Clear documentation and data to demonstrate cost savings.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "shelterBehavior",
+        title: "Shelter Behavioral Support and Return-to-Home",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Behavior drives many relinquishment decisions. Early, expert guidance can keep pets home and improve adoptability.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "Certified Trainer Networks (IAABC, KPA), Shelter Partners (Prospective).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Offer low- or no-cost training touchpoints and train-the-trainer models to multiply reach.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Virtual intake and follow-ups post-adoption.",
+                  "RTH (Return-to-Home) systems with clear owner outreach and documentation.",
+                  "Outcome tracking to refine curricula.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "communityPrevention",
+        title: "Community Prevention Clinics and Reimbursement Expansion",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Prevention saves lives and budgets. We support vaccination, spay/neuter, and basic care access with a strong data backbone.",
+          },
+          {
+            type: "bulletList",
+            items: [
+              {
+                heading: "Collaborator:",
+                lines: [
+                  "Public-private Funders, Hospital Networks (Prospective).",
+                ],
+              },
+              {
+                heading: "Mission:",
+                lines: [
+                  "Scale preventive care while attracting more hospitals through better reimbursement and low-friction workflows.",
+                ],
+              },
+              {
+                heading: "Program Focus:",
+                lines: [
+                  "Virtual pre-screening, scheduling, and post-clinic follow-ups.",
+                  "Claims and outcomes transparency to sustain funding.",
+                  "Shared knowledge to reduce duplication across programs.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        id: "getInvolved",
+        title: "Get Involved",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "If you’re working in veterinary medicine, public health, animal welfare, housing, or social services, we’d love to connect. Together, we can align incentives, protect veterinary teams, and keep more pets with their people.",
+          },
+        ],
+      },
+    ],
+  },
+
   clinics: {
     clinicIntroToVetcation: {
       mainTitle: "Introduction to Vetcation",

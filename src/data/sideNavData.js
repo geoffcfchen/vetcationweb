@@ -208,6 +208,29 @@ const sideNavData = {
       ],
     },
   ],
+
+  Onehealth: [
+    {
+      groupTitle: "Overview",
+      items: [
+        { id: "collaborationsOverview", label: "Our Collaboration Mission" },
+      ],
+    },
+    {
+      groupTitle: "Initiatives",
+      items: [
+        { id: "ohvsPrupas", label: "One Health Veterinary Solutions" },
+        { id: "alignCare", label: "AlignCare (Access to Care)" },
+        { id: "dvSafetyNet", label: "Domestic Violence Pet Safety-Net" },
+        { id: "oneHealthCoordinator", label: "One Health Coordinator Model" },
+        { id: "housingRetention", label: "Housing & Pet Retention" },
+        { id: "shelterBehavior", label: "Shelter Behavioral Support" },
+        { id: "communityPrevention", label: "Community Prevention Clinics" },
+        { id: "getInvolved", label: "Get Involved" },
+      ],
+    },
+  ],
+
   clinics: [
     {
       groupTitle: "GET STARTED",
@@ -221,22 +244,9 @@ const sideNavData = {
           label: "Setting Up Your Virtual Branch",
         },
         { id: "clinicOutcomeAnalysis", label: "Outcome Analysis" },
-
-        // {
-        //   id: "ReferralClinicSteps",
-        //   label: "Step-by-Step Setup",
-        // },
       ],
     },
-    // {
-    //   groupTitle: "Referral Clinic",
-    //   items: [
-    //     {
-    //       id: "TelemedicineClinics",
-    //       label: "Telemedicine Clinics",
-    //     },
-    //   ],
-    // },
+
     {
       groupTitle: "Regulatory Compliance",
       items: [
@@ -270,32 +280,6 @@ const sideNavData = {
         },
       ],
     },
-    // {
-    //   groupTitle: "Partnering Clinic",
-    //   items: [
-    //     {
-    //       id: "PartneringClinic",
-    //       label: "Partnering Clinic Overview",
-    //     },
-    //     {
-    //       id: "PartneringClinicSteps",
-    //       label: "Step-by-Step Setup",
-    //     },
-    //   ],
-    // },
-    // {
-    //   groupTitle: "Full Clinic",
-    //   items: [
-    //     {
-    //       id: "FullClinic",
-    //       label: "Full Platform Clinic Overview",
-    //     },
-    //     {
-    //       id: "FullClinicSteps",
-    //       label: "Step-by-Step Setup",
-    //     },
-    //   ],
-    // },
   ],
 
   rvts: [

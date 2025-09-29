@@ -23,6 +23,7 @@ import DocsContent from "./data/docs/DocsContent";
 
 import SupportPage from "./pages/SupportPage";
 import { createGlobalStyle } from "styled-components";
+import topNavData from "./data/topNavData";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -69,6 +70,9 @@ const PrintStyles = createGlobalStyle`
   @page { margin: 12mm; }
 }
 `;
+
+const HOME_DEFAULT =
+  topNavData.find((i) => i.id === "home")?.defaultDocId || "introToVetcation";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -156,11 +160,21 @@ function App() {
               <Navigate to="/telemedicine-info/home/introToVetcation" replace />
             }
           /> */}
-          <Route
+          {/* <Route
             index
             element={
               <Navigate
                 to="/telemedicine-info/home/introToVetcation"
+                replace
+                state={{ suppressInitialHash: true }}
+              />
+            }
+          /> */}
+          <Route
+            index
+            element={
+              <Navigate
+                to={`/telemedicine-info/home/${HOME_DEFAULT}`}
                 replace
                 state={{ suppressInitialHash: true }}
               />

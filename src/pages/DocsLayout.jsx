@@ -71,27 +71,35 @@ export default function DocsLayout() {
     setActiveSectionId(sectionId);
   }, []);
 
+  // const handleTopNavClick = (navId) => {
+  //   if (navId === "home") {
+  //     navigate(`/telemedicine-info/${navId}/introToVetcation`, {
+  //       state: { suppressInitialHash: true },
+  //     });
+  //   }
+  //   if (navId === "contributors") {
+  //     navigate(`/telemedicine-info/${navId}/ourContributors`, {
+  //       state: { suppressInitialHash: true },
+  //     });
+  //   }
+  //   if (navId === "clinics") {
+  //     navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`, {
+  //       state: { suppressInitialHash: true },
+  //     });
+  //   }
+  //   if (navId === "rvts") {
+  //     navigate(`/telemedicine-info/${navId}/introToRVT`, {
+  //       state: { suppressInitialHash: true },
+  //     });
+  //   }
+  // };
+
   const handleTopNavClick = (navId) => {
-    if (navId === "home") {
-      navigate(`/telemedicine-info/${navId}/introToVetcation`, {
-        state: { suppressInitialHash: true },
-      });
-    }
-    if (navId === "contributors") {
-      navigate(`/telemedicine-info/${navId}/ourContributors`, {
-        state: { suppressInitialHash: true },
-      });
-    }
-    if (navId === "clinics") {
-      navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`, {
-        state: { suppressInitialHash: true },
-      });
-    }
-    if (navId === "rvts") {
-      navigate(`/telemedicine-info/${navId}/introToRVT`, {
-        state: { suppressInitialHash: true },
-      });
-    }
+    const item = topNavData.find((n) => n.id === navId);
+    const defaultDocId = item?.defaultDocId ?? "introToVetcation";
+    navigate(`/telemedicine-info/${navId}/${defaultDocId}`, {
+      state: { suppressInitialHash: true },
+    });
   };
 
   // When route changes, remember if this navigation asked us to suppress the first hash write
