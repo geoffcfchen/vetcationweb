@@ -678,8 +678,8 @@ const contentData = {
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8476-min.PNG?alt=media&token=fe1da7ed-ded0-49c2-bbfe-c4e09972c62d",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8477-min.PNG?alt=media&token=e0367cc8-4898-4d55-82ae-202a23bff1e5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0913.webp?alt=media&token=561430b0-4d31-495c-834f-2d4be226bb5b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0914.webp?alt=media&token=9812d8b6-0d91-4e59-a61e-0235b6d4dd4c",
               ],
             },
           ],
