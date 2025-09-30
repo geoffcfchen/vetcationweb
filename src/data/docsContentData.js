@@ -226,7 +226,7 @@ const contentData = {
             },
             {
               type: "paragraph",
-              text: `In telemedicine setting, here's a quick overview of the steps to set up your virtual clinic with Vetcation. Each step is explained in detail below. If icon is not red, you have completed the necessary information in that step!`,
+              text: `In telemedicine setting, here's a quick overview of the steps to set up your virtual clinic with Vetcation. Each step is explained in detail below. If the status icon in each item is not red, you have completed the necessary information in that step! Once you complete all steps, you can start setting up your regular availability and begin seeing clients.`,
             },
           ],
         },
@@ -274,7 +274,9 @@ const contentData = {
                 },
                 {
                   heading: "Specialist certifications (if applicable):",
-                  lines: ["Upload any relevant specialist certifications."],
+                  lines: [
+                    "Upload any relevant specialist certifications. If you are a general practitioner, you can skip this. Specialists will obtain different badges on your profile.",
+                  ],
                 },
                 {
                   heading: "Your signature:",
@@ -312,7 +314,7 @@ const contentData = {
                 {
                   heading: "Which animals can you treat:",
                   lines: [
-                    "Specify if you treat dogs, cats, exotics, livestock, etc.",
+                    "Specify if you treat dogs, cats, exotics, horses, etc.",
                   ],
                 },
                 {
@@ -324,7 +326,7 @@ const contentData = {
                 {
                   heading: "Specialized in:",
                   lines: [
-                    "Mention any specialties such as dermatology, behavior, nutrition, etc.",
+                    "Mention any specialties such as dermatology, behavior, nutrition, etc. You can select multiple specialties even if you are a general practitioner.",
                   ],
                 },
                 {
@@ -350,12 +352,16 @@ const contentData = {
               ],
             },
             {
+              type: "paragraph",
+              text: `Setting your consultation rate is a crucial step in establishing your virtual clinic. Your rate should reflect your expertise, the value of your time, and the quality of care you provide. Consider factors such as your years of experience, any specialties you offer, and the typical rates in your area. `,
+            },
+            {
               type: "bulletList",
               items: [
                 {
                   heading: "Choose your consultation rate",
                   lines: [
-                    "Set the price clients will pay for each virtual visit.",
+                    "Set the default price clients will pay for each virtual visit. This rate can be adjusted when setting up your availability.",
                   ],
                 },
 
@@ -381,12 +387,16 @@ const contentData = {
               ],
             },
             {
+              type: "paragraph",
+              text: `Some veterinarians only need about 15 minutes’ notice to get ready for an appointment, while others prefer a few hours in advance. Be sure to set your minimum booking notice in a way that fits your schedule, giving you enough time to prepare your space and get ready for each appointment.`,
+            },
+            {
               type: "bulletList",
               items: [
                 {
                   heading: "Define how far in advance clients can book",
                   lines: [
-                    "Choose a minimum notice period to help manage your time effectively—e.g., 1 hour, 24 hours, etc.",
+                    "Choose a minimum notice period to help manage your time effectively.",
                   ],
                 },
                 {
@@ -406,28 +416,47 @@ const contentData = {
           blocks: [
             {
               type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0899.webp?alt=media&token=2299fb00-7d12-40b8-a93d-2b685b4c25c4",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0900.webp?alt=media&token=3c6ab220-b311-4d0c-b636-dd8ad3d2c4ac",
               ],
             },
             {
+              type: "paragraph",
+              text: `What is a follow-up fee? It’s a small, per-case charge shown to the pet owner when they start a new Vetssenger case to ask post-visit questions that require your professional time. Vetssenger is available only after a valid VCPR is established (in-person or synchronous video per AB 1399). Each thread contains one veterinarian, one pet owner, and one patient. When a pet owner starts a case, they see the fee upfront and can withdraw anytime before you join—no charge is made until you join. When you start a case, it’s free for the client (ideal for proactive rechecks and progress check-ins), helping you build trust while keeping expectations clear and your time protected. For the full workflow, see the Vetssenger section.`,
+            },
+            {
               type: "bulletList",
               items: [
                 {
-                  heading: "Charge for follow-up messages",
+                  heading: "Charge for follow-up messages:",
                   lines: [
-                    "Set a fee for follow-up Vetssenger messages to ensure your time is valued.",
+                    "Set a fee for owner-initiated Vetssenger cases so your time is valued and protected.",
                   ],
                 },
                 {
-                  heading: "Encourage meaningful communication",
+                  heading: "Encourage meaningful communication:",
                   lines: [
-                    "A follow-up fee helps manage client expectations and encourages concise, relevant questions.",
+                    "A modest fee helps manage expectations and encourages concise, relevant questions.",
+                  ],
+                },
+                {
+                  heading: "Transparent & fair:",
+                  lines: [
+                    "Owners see the fee before sending; they aren’t charged unless you join the case. Vet-initiated cases are free to the client.",
+                  ],
+                },
+                {
+                  heading: "Aligned with VCPR:",
+                  lines: [
+                    "Follow-ups occur only within an established VCPR and focus on rechecks, clarifications, and progress updates.",
                   ],
                 },
               ],
+            },
+            {
+              type: "paragraph",
+              text: `See details in the “Vetssenger Overview” section for case states, tabs, and examples of when to use follow-ups vs. in-person care.`,
             },
           ],
         },
@@ -438,24 +467,54 @@ const contentData = {
           blocks: [
             {
               type: "framedImage",
-              // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0906.webp?alt=media&token=0a4b3be9-2482-4ab4-a603-366ca782fcba",
               ],
             },
             {
+              type: "paragraph",
+              text: `The follow-up window defines how long after a qualifying visit (in-person or synchronous video under a valid VCPR) a pet owner may start a Vetssenger case for free. Outside this window, owner-initiated cases show your follow-up fee upfront. Vet-initiated cases are always free to the client.`,
+            },
+            {
               type: "bulletList",
               items: [
                 {
-                  heading: "Define your follow-up period",
+                  heading: "Define your free period",
                   lines: [
-                    "Set how long clients can send follow-up Vetssenger messages after an appointment—e.g., 24 hours, 3 days, etc.",
+                    "Choose how many hours after the visit an owner can start a free case.",
+                    "Common choices: 48–72 hours for general visits.",
                   ],
                 },
                 {
-                  heading: "Balance support and boundaries",
+                  heading: "How eligibility works",
                   lines: [
-                    "A reasonable follow-up window ensures clients feel supported while protecting your time.",
+                    "Free vs. paid is determined at the time the owner starts the case.",
+                    "Within the window: free. After the window: your follow-up fee applies and is shown before they proceed.",
+                  ],
+                },
+                {
+                  heading: "Aligned with VCPR:",
+                  lines: [
+                    "Follow-ups are available only when a valid VCPR exists (AB 1399). Each thread is one vet, one owner, one patient.",
+                  ],
+                },
+                {
+                  heading: "Transparent & fair:",
+                  lines: [
+                    "Owners see the window status (e.g., “Free follow-ups until Oct 12”). No charge occurs unless you join a paid case.",
+                  ],
+                },
+
+                {
+                  heading: "Balance support and boundaries:",
+                  lines: [
+                    "Pick a window that encourages timely rechecks while protecting your time from unlimited open-ended messaging.",
+                  ],
+                },
+                {
+                  heading: "When to redirect:",
+                  lines: [
+                    "If a message suggests urgency or hands-on care, direct the client to an in-person visit or ER.",
                   ],
                 },
               ],
