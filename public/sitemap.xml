@@ -1,0 +1,21 @@
+cat > public/sitemap.xml<<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://vetcation.com/</loc>
+    </url>
+    <url>
+        <loc>https://vetcation.com/support/</loc>
+    </url>
+    <url>
+        <loc>https://vetcation.com/forvet/</loc>
+    </url>
+    <url>
+        <loc>https://vetcation.com/privacy/</loc>
+    </url>
+    <url>
+        <loc>https://vetcation.com/terms/</loc>
+    </url>
+    <!-- add more here as needed -->
+</urlset>
+EOF

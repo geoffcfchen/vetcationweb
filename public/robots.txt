@@ -1,0 +1,6 @@
+cat > public/robots.txt <<'EOF'
+User-agent: *
+Allow: /
+
+Sitemap: https://vetcation.com/sitemap.xml
+EOF
