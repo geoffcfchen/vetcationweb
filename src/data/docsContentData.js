@@ -32,7 +32,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation enables vets to compound your work into assets you own: a growing client book, a trusted reputation, and data that travels with you through every stage of your career.",
+              text: "Vetcation enables vets to compound your work into assets you own: a growing client book, a trusted reputation in the professional community, and data that travels with you through every stage of your career.",
             },
             {
               type: "bulletList",
