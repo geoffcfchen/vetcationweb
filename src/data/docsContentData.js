@@ -5941,7 +5941,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "missionForCorporations",
-          title: "Our Mission for Corporate Groups",
+          title: "Our Mission",
           blocks: [
             {
               type: "paragraph",
