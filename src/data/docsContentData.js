@@ -5949,7 +5949,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. Relief veterinarians already work inside your hospitals. Dog trainers and specialists are part of your extended community. Vetcation turns these real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
+              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. Relief veterinarians already work inside your hospitals and can staff a virtual front door. Board-certified specialists within your network — including those in your specialty hospitals — and certified dog trainers can be invited for defined services. Vetcation turns these real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
             },
           ],
         },
@@ -6011,7 +6011,8 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading: "Care delivery",
                   lines: [
                     "Relief veterinarians provide telemedicine and structured follow-ups in Vetssenger.",
-                    "Dog trainers and board-certified specialists can be invited for scoped services.",
+                    "Board-certified specialists and certified dog trainers can be invited for defined services under your brand.",
+                    "Relief veterinarians set their own schedules. Approving more trusted relief veterinarians, specialists, and trainers increases visible time slots and client choice.",
                   ],
                 },
                 {
