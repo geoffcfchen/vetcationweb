@@ -5966,22 +5966,22 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Leverage California scale:",
+                  heading: "Leverage California scale (PetVet example):",
                   lines: [
                     "PetVet operates ~100 hospitals in California, of which ~85 are GP.",
                     "At an average of 3 in-house doctors per hospital, that is ~300 employed DVMs.",
                     "California has ~7,690 employed veterinarians overall, and ~460–700 of them work as relief. Vetcation connects this workforce directly to your hospitals.",
                   ],
                 },
-{
-  heading: "Transparent economics:",
-  lines: [
-    "Per-visit split: provider 60%, clinic 25%, platform 15%.",
-    "At a $100 average visit fee and 20 virtual visits per week, each hospital earns ~$25,000 per year.",
-    "Across ~100 California hospitals, that’s ~$2.5M in new annual clinic income — without adding payroll.",
-    "Automatic payouts and audit-ready statements keep finance in control."
-  ],
-},
+                {
+                  heading: "Transparent economics:",
+                  lines: [
+                    "Per-visit split: provider 60%, clinic 25%, platform 15%.",
+                    "At a $100 average visit fee and 20 virtual visits per week, each hospital earns ~$25,000 per year.",
+                    "Across ~100 California hospitals, that’s ~$2.5M in new annual clinic income — without adding payroll.",
+                    "Automatic payouts and audit-ready statements keep finance in control.",
+                  ],
+                },
                 {
                   heading: "Expand capacity without payroll:",
                   lines: [
