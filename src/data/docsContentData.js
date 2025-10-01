@@ -6027,9 +6027,10 @@ requirements and explain how Vetcation keeps you compliant.`,
                 {
                   heading: "Care delivery",
                   lines: [
-                    "Relief veterinarians provide telemedicine and structured follow-ups in Vetssenger.",
-                    "Board-certified specialists and certified dog trainers can be invited for defined services under your brand.",
-                    "Relief veterinarians set their own schedules. Approving more trusted relief veterinarians, specialists, and trainers increases visible time slots and client choice.",
+                    "Licensed providers — relief DVMs and board-certified specialists — deliver telemedicine consults and structured follow-ups in Vetssenger under your hospital brand.",
+                    "Certified dog trainers can be invited for education and behavior coaching; no diagnosis or prescribing.",
+                    "Providers set their own schedules. Hospitals approve who is visible; adding trusted providers increases bookable time slots and client choice.",
+                    "All visit notes and summaries are shared with the hospital, and escalations return to standard in-person workflows.",
                   ],
                 },
                 {
