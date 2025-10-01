@@ -5966,29 +5966,44 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Launch fast with your existing community:",
+                  heading: "Leverage California scale:",
                   lines: [
-                    "Activate relief veterinarians already known by your hospitals. Invite trusted trainers and specialists for defined services.",
+                    "PetVet operates ~100 hospitals in California, of which ~85 are GP.",
+                    "At an average of 3 in-house doctors per hospital, that is ~300 employed DVMs.",
+                    "California has ~7,690 employed veterinarians overall, and ~460–700 of them work as relief. Vetcation connects this workforce directly to your hospitals.",
+                  ],
+                },
+{
+  heading: "Transparent economics:",
+  lines: [
+    "Per-visit split: provider 60%, clinic 25%, platform 15%.",
+    "At a $100 average visit fee and 20 virtual visits per week, each hospital earns ~$25,000 per year.",
+    "Across ~100 California hospitals, that’s ~$2.5M in new annual clinic income — without adding payroll.",
+    "Automatic payouts and audit-ready statements keep finance in control."
+  ],
+},
+                {
+                  heading: "Expand capacity without payroll:",
+                  lines: [
+                    "Relief veterinarians set their own schedules. Once partnered, their availability appears to clients under your hospital brand.",
+                    "This can effectively double available appointment slots without adding headcount.",
                   ],
                 },
                 {
-                  heading: "Expand capacity without headcount:",
+                  heading: "Add new services at scale:",
                   lines: [
-                    "Smooth peak demand and reduce callback backlog by staffing a virtual front door with relief veterinarians.",
+                    "Clinic-branded telemedicine, structured follow-ups through Vetssenger, and optional services from board-certified specialists and certified trainers.",
+                    "Follow-up fees are automatically shared with the partnered clinic, reinforcing client loyalty.",
                   ],
                 },
                 {
                   heading: "Keep ownership and continuity:",
                   lines: [
-                    "Clinics approve partnerships, share records on request, and receive escalations into standard in-person workflows.",
+                    "Clinics approve partnerships, records are shared on request, and escalations return into your in-person workflow.",
+                    "Clients remain tied to your brand with one-tap follow-up care.",
                   ],
                 },
-                {
-                  heading: "Add a new revenue stream:",
-                  lines: [
-                    "Per-visit clinic share with automatic payouts. Economics are transparent and repeatable.",
-                  ],
-                },
+
                 {
                   heading: "Ensure AB 1399 alignment:",
                   lines: [
@@ -6044,116 +6059,6 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
 
         {
-          id: "rolloutPlan",
-          title: "Rollout Plan",
-          blocks: [
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Phase 1. Pilot",
-                  lines: [
-                    "Select 3 to 5 hospitals and their known relief veterinarians.",
-                    "Measure capacity lift, client satisfaction, and outcome distribution.",
-                  ],
-                },
-                {
-                  heading: "Phase 2. Regional expansion",
-                  lines: [
-                    "Extend to a full region when KPIs are met.",
-                    "Provide enablement materials, short trainings, and standardized templates.",
-                  ],
-                },
-                {
-                  heading: "Phase 3. Corporate agreement",
-                  lines: [
-                    "Execute a Master Services Agreement covering legal, privacy, and payouts.",
-                    "Adopt standard partnership and announcement flows across hospitals.",
-                  ],
-                },
-              ],
-            },
-            {
-              type: "paragraph",
-              text: "Pilots can begin within weeks pending IT and legal review. Regional expansion typically follows within one to two quarters once KPIs are met.",
-            },
-          ],
-        },
-
-        {
-          id: "economicsAndKpis",
-          title: "Economics and KPIs",
-          blocks: [
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Per-visit split",
-                  lines: [
-                    "Provider 60 percent, clinic 25 percent, platform 15 percent.",
-                  ],
-                },
-                {
-                  heading: "Capacity lift",
-                  lines: [
-                    "Virtual slots added, time to first response, callback backlog reduction.",
-                  ],
-                },
-                {
-                  heading: "Outcome mix",
-                  lines: [
-                    "Resolved, monitor, prescribe, escalate to in-person, ER, refer to specialist.",
-                  ],
-                },
-                {
-                  heading: "Client loyalty",
-                  lines: [
-                    "Repeat virtual visits, escalations completed at the clinic, follow-up engagement in Vetssenger.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-
-        {
-          id: "compliancePrivacySecurity",
-          title: "Compliance, Privacy, and Security",
-          blocks: [
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "AB 1399 alignment",
-                  lines: [
-                    "Supports valid VCPR through in-person or synchronous video where applicable.",
-                    "Automated documentation for visits, follow-ups, and escalations.",
-                  ],
-                },
-                {
-                  heading: "Record continuity",
-                  lines: [
-                    "Shared records between relief vets and clinics maintain continuity of care.",
-                  ],
-                },
-                {
-                  heading: "Privacy controls",
-                  lines: [
-                    "Role-based access and owner consent flows for sharing and downloads.",
-                  ],
-                },
-                {
-                  heading: "Payments",
-                  lines: [
-                    "Stripe Connect with monthly statements and exports for reconciliation.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-
-        {
           id: "faqs",
           title: "FAQs for Corporate Teams",
           blocks: [
@@ -6190,27 +6095,8 @@ requirements and explain how Vetcation keeps you compliant.`,
           title: "Next Steps",
           blocks: [
             {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Schedule a pilot",
-                  lines: [
-                    "Select 3 to 5 hospitals and known relief veterinarians. We supply training and launch materials.",
-                  ],
-                },
-                {
-                  heading: "Review the MSA",
-                  lines: [
-                    "Standard corporate agreement covering legal, privacy, and payouts.",
-                  ],
-                },
-                {
-                  heading: "Go live and measure",
-                  lines: [
-                    "Announce availability to clients and begin tracking capacity lift, outcome mix, and clinic share.",
-                  ],
-                },
-              ],
+              type: "paragraph",
+              text: `Contact Geoff Chen, gcfchen@gmail.com, (530) 400-6227, to discuss collaboration.`,
             },
           ],
         },
