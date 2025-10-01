@@ -4685,958 +4685,958 @@ requirements and explain how Vetcation keeps you compliant.`,
     //     },
     //   ],
     // },
-    Bill1399: {
-      mainTitle: "Assembly Bill 1399",
-      mainDescription: `Assembly Bill (AB) 1399 (Friedman, Chapter 475, Statutes of 2023) took effect 
-    on January 1, 2024. This legislation sets out clear requirements for establishing a 
-    valid veterinarian-client-patient relationship (VCPR) before prescribing, dispensing, 
-    or administering any treatment for animal care. (Business and Professions Code (BPC), 
-    § 4826.6.) AB 1399 also clarifies how veterinary telehealth may be provided under 
-    California law. (BPC, §§ 4825.1, 4826.6, 4829.5, and 4853.)
-    
-    Below are frequently asked questions (FAQs) the Veterinary Medical Board (Board) has 
-    compiled in response to public inquiries about the new law. We’ve included notes on 
-    how Vetcation’s features help veterinary professionals comply with each requirement 
-    through our built-in workflows and technology tools. In the event of any differences 
-    between these FAQs and the statute itself, the statute is controlling, and the Board 
-    will enforce it accordingly. Veterinary professionals should review the official 
-    statutes in detail to ensure full compliance.`,
-      sections: [
-        {
-          id: "telehealthStandardOfCare",
-          title: "Telemedicine Holds the Same Standard of Care",
-          blocks: [
-            {
-              type: "paragraph",
-              text: "Telemedicine must meet the same standard of care as in-person veterinary services. Under AB 1399, before delivering veterinary medicine via telehealth, the veterinarian shall inform the client about the use and potential limitations of telehealth and obtain their consent. (Business and Professions Code (BPC), § 4826.6, subd. (g).)",
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Same standards of care apply:",
-                  lines: [
-                    "The same standards of care apply to veterinary medicine services via telehealth and in-person veterinary medical services.",
-                  ],
-                },
-                {
-                  heading: "In-person visit option:",
-                  lines: [
-                    "The client has the option to choose an in-person visit from a veterinarian at any time.",
-                  ],
-                },
-                {
-                  heading: "Follow-up and tech-failure guidance:",
-                  lines: [
-                    "The client has been advised how to receive follow-up care or assistance in the event of an adverse reaction to the treatment or in the event of an inability to communicate resulting from technological or equipment failure.",
-                    "Vetcation provides Vetssenger (inquiry-based messaging tool; see vetssenger section in user manual) to facilitate timely follow-up communication and support, helping you comply with AB 1399 and deliver the same standard of care as in-person visits.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "faqOutOfState",
-          title: "Out-of-state Telemedicine",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a California licensed veterinarian use telemedicine to establish or continue treatment within an existing VCPR if the animal patient is originally from California but is currently located outside of California?",
-              answer:
-                "No. Under AB 1399, for a California-licensed veterinarian to provide veterinary medical services via telehealth, the animal must be physically located in California. (BPC, § 4826.6, subd. (f).) However, authorizing a refill for an existing prescription (for an out-of-state pet) is not considered telehealth.",
-              example:
-                "If your long-time client and their pet travel to Oregon, you cannot initiate a new telemedicine consult while the pet is out of state. However, if the pet already has an active prescription on file, you can authorize a refill without it being classified as a “telehealth” service.",
-              helpText:
-                "Our platform automatically checks the patient's reported location at the time of scheduling. If an out-of-state location is detected, Vetcation will block the client from booking a new telemedicine appointment to ensure compliance with state regulations. However, if there is an existing prescription on file, you may still authorize refills without it being classified as a telehealth service.",
-            },
-          ],
-        },
-        {
-          id: "faqRefillOutOfStatePharmacy",
-          title: "Refilling Prescriptions at Out-of-State Pharmacies",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a California-licensed veterinarian authorize a prescription refill to an out-of-state pharmacy if the animal patient is currently located outside of California?",
-              answer:
-                "Yes. Under AB 1399, while a California-licensed veterinarian cannot initiate a new telemedicine consult for an animal patient located outside of California, they may authorize a refill for an existing prescription. This authorization can be directed to a pharmacy in the state where the animal is currently located. (BPC, § 4826.6, subd. (f).)",
-              example:
-                "If your client and their pet are traveling in Oregon and require a refill of an existing prescription, you can authorize the refill and direct it to a local pharmacy in Oregon. This action is permissible and does not constitute telehealth under California law.",
-              helpText:
-                "Vetcation facilitates the authorization of prescription refills to out-of-state pharmacies for existing prescriptions. Our platform ensures that such actions comply with AB 1399 by verifying the existence of a valid VCPR and restricting new telemedicine consults when the animal patient is out of state.",
-            },
-          ],
-        },
-        {
-          id: "faqSameDiagnosisNewMed",
-          title:
-            "New Medications for the Same Diagnosis While Pet Is Out of State",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a California-licensed veterinarian prescribe a new medication for the same diagnosis if the animal is currently out of state?",
-              answer:
-                "No. Under AB 1399, prescribing any new medication while the animal is physically outside of California is considered telehealth and is not permitted — even if the diagnosis (such as gastroenteritis) was previously established. The only exception is authorizing a refill of an existing prescription. Initiating a new treatment plan, even under the same diagnosis, is not allowed if the animal is not in California.",
-              example:
-                "If a dog was diagnosed with gastroenteritis during an in-state visit and was prescribed anti-nausea medication for vomiting, but later develops diarrhea while in another state, the vet cannot prescribe a new anti-diarrheal unless it was already included as a PRN medication during the original consult.",
-              helpText:
-                "Vetcation supports responsible use of PRN medications during the original in-state consult by allowing vets to proactively prescribe treatments for anticipated symptoms under a single diagnosis. However, if the pet is out of state and needs a new medication not already covered in the original care plan, our platform restricts new prescriptions to ensure compliance with AB 1399.",
-            },
-          ],
-        },
-        {
-          id: "faqConfirmLocation",
-          title: "Confirming Location",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Does the client providing a California address suffice to satisfy the requirement that the animal patient is located in this state?",
-              answer:
-                "No. It is recommended the veterinarian confirm with the client that the animal patient is physically in California at the time telehealth services are provided. (BPC, § 4826.6, subd. (f).)",
-              example:
-                "A client might list a California home address but could be traveling with their pet in Nevada. In this scenario, you cannot initiate a new telemedicine consult under California law because the pet is physically out of state.",
-              helpText:
-                "Our platform prompts the client to confirm their current location at the start of each telehealth appointment. If the address is outside California, Vetcation alerts you that proceeding with a new telemedicine consult may not be permissible. This ensures you remain compliant with AB 1399 while still allowing you to manage refills or follow-up actions for existing prescriptions.",
-            },
-          ],
-        },
-        {
-          id: "faqVetOutOfState",
-          title: "Veterinarian Location",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a California-licensed veterinarian provide telemedicine if they are physically located outside of California?",
-              answer:
-                "Yes. Under AB 1399, veterinary telehealth is legally considered to occur at the location of the animal patient — not the veterinarian. As long as the animal is physically in California at the time of the telemedicine consult, a California-licensed veterinarian may practice via telehealth even if they are located outside of California or outside the United States.",
-              example:
-                "If you are a California-licensed veterinarian traveling in New York or abroad and a pet located in California needs a telemedicine consult, you may provide care as long as a valid VCPR is established and all requirements of AB 1399 are followed.",
-              helpText:
-                "Vetcation allows licensed California veterinarians to log in and offer virtual care from anywhere. Our system ensures telehealth consults can only be initiated when the animal is reported to be in California, helping you stay compliant with the law while maintaining flexibility in how and where you practice.",
-            },
-          ],
-        },
-        {
-          id: "faqPrescriptionNotice",
-          title: "Posting Prescription Availability",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can the veterinarian notify the client that “some prescription drugs or medications may be available at a pharmacy” by posting a notice in a virtual lobby?",
-              answer:
-                "Yes. The requirement is to provide notice to the client that some prescription drugs or medications may be available at a pharmacy, but there is no specific method prescribed for doing so. (BPC, § 4826.6, subd. (i)(7).) However, the prescribing veterinarian must still comply with all statutes and regulations in the Veterinary Medicine Practice Act and Pharmacy Law. This includes, but is not limited to, prescriber dispensing requirements listed in BPC section 4170.",
-              example:
-                'You could display a banner in your virtual meeting room that reads: "Certain medications may be available at a pharmacy." As long as clients see this notice before or during the telehealth visit, you have met the requirement.',
-              helpText:
-                "Our platform will show the banner on the appointment card, automatically displaying it to all clients prior to the consultation. This ensures compliance with AB 1399 and helps track user acknowledgment of the notice in your records.",
-            },
-          ],
-        },
-        {
-          id: "faqOnePosting",
-          title: "Combining Disclosures",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If the prescription notice can be posted in the lobby, can it be incorporated into the existing notice requirement so that both disclosures are in one posting?",
-              answer:
-                "Yes. Both disclosures can be combined into a single posting, since the law does not require them to be displayed separately. Consolidating them ensures clients see all relevant information in one place, reducing confusion and improving compliance.",
-              example: "",
-              helpText:
-                'Our platform has helped you create a combined notice that includes important telemedicine disclaimers, such as pharmacy availability, professional standards (telemedicine follows the same regulations as in-person care), and emergency guidance (e.g., "Emergencies cannot be treated via telehealth"). All of these appear on the appointment card so clients see them before the telemedicine session begins. Vetcation also tracks user acknowledgment, giving you a record that they’ve viewed the notice.',
-            },
-          ],
-        },
-        {
-          id: "faqPharmacyChoice",
-          title: "Pharmacy Choice Disclosure",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Since AB 1399 only requires veterinarians to notify the client that “some prescription drugs or medications may be available at a pharmacy,” does the veterinarian have to notify the client that the veterinarian can submit a prescription to the pharmacy of the client’s choice?",
-              answer:
-                "Yes. The veterinarian must provide the client with a written disclosure that the client may obtain the prescription either from the veterinarian or from a pharmacy of the client’s choice. (BPC, § 4170, subd. (a)(7).) Furthermore, before prescribing, the veterinarian must offer to provide a written prescription that the client may choose to have filled by the prescriber or by any pharmacy. (BPC, § 4170, subd. (a)(6).)",
-              example: "",
-              helpText:
-                "Our platform allows clients to select their preferred pharmacy — whether a physical location like Costco, Walmart, or CVS, or an online pharmacy such as Mixlab or Chewy. Vets can confirm the client’s choice directly in the Vetcation interface before finalizing a prescription, ensuring compliance with AB 1399 and other state regulations.",
-            },
-          ],
-        },
-        {
-          id: "faqPrivacyLaws",
-          title: "Privacy and Confidentiality",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What are the privacy protection laws with which a veterinarian practicing veterinary medicine via telehealth must comply?",
-              answer:
-                "Under California law (BPC section 4857), veterinarians must maintain the confidentiality of all client and patient information, just as they would for in-person care. If a veterinarian negligently releases this information, they could face a civil lawsuit (outside of the Veterinary Medical Board’s jurisdiction). In other words, even though the Board may not prosecute you for a privacy breach, a client could sue you in civil court for mishandling confidential data. That’s why it’s crucial to understand and follow privacy laws that apply to veterinary practice, both in person and via telehealth.",
-              example: "",
-              helpText:
-                "Our platform is designed with secure data handling and encrypted communication to protect confidential information during telehealth sessions. Vetcation also provides access controls so that only authorized users can view client records, reducing the risk of accidental disclosure. We recommend veterinarians familiarize themselves with all relevant privacy regulations and use best practices — such as password protection, secure networks, and careful record-sharing protocols—to minimize liability.",
-            },
-          ],
-        },
-        {
-          id: "faqMedicalHistory",
-          title: "Obtaining Relevant Medical History",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If the client does not provide the veterinarian with the animal patient’s relevant medical history or medical records, can the veterinarian provide veterinary telehealth for the animal patient?",
-              answer:
-                "Telehealth cannot be used if the veterinarian does not obtain and review the relevant medical history for the animal. However, actual medical records are not strictly required — if the client can relay the pet’s relevant history verbally or via written form, that may suffice. If official medical records are available, the veterinarian must obtain and review them before proceeding. (BPC, § 4826.6, subd. (h)(2).)",
-              example: "",
-              helpText:
-                "Our platform prompts the client to provide a thorough history of the animal’s condition before the telehealth appointment. If past records exist, we encourage clients to upload them. This ensures the veterinarian has enough background information to make an informed assessment, keeping the telehealth process compliant with AB 1399 and other state regulations.",
-            },
-          ],
-        },
-        {
-          id: "faqLocalResources",
-          title: "Local Medical Resources Familiarity",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "How will the Board verify that the veterinarian providing telehealth was familiar with available medical resources, including emergency resources, near the animal patient’s location?",
-              answer:
-                "If the Board inquires whether you were familiar with the medical resources available near the patient’s location (including emergency care), you must be able to explain your familiarity and, if necessary, submit documentation that supports your claim. (BPC, § 4826.6, subd. (h)(4).) This might involve showing references or notes about nearby emergency clinics, urgent care facilities, or specialized hospitals within the pet’s region.",
-              example: "",
-              helpText:
-                "Our platform automatically provides veterinarians with local emergency contact information based on the client’s reported location. This includes the name, address, and phone number of nearby clinics or hospitals. You can still choose to add notes or reference other resources, but the system helps ensure you are equipped with key information. If the Board requests validation, you’ll have easy access to records demonstrating your familiarity with local medical resources, supporting compliance with AB 1399.",
-            },
-          ],
-        },
-        {
-          id: "faqMidwayInterruption",
-          title: "Mid-Appointment Interruption",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If midway through an appointment the synchronous audio-visual communication is interrupted, can a VCPR be established solely by another form of electronic communication?",
-              answer:
-                "No. To establish a valid VCPR via telehealth, the veterinarian must gain sufficient knowledge of the animal patient by examining the patient using synchronous audio-video communication. (BPC, § 4826.6, subd. (b)(2).) Once a VCPR is established, ongoing care may continue via other telehealth methods, unless the veterinarian determines that synchronous audio-video is necessary for proper treatment. (BPC, § 4826.6, subd. (d).)",
-              example: "",
-              helpText:
-                "Our platform prioritizes a stable audio-video connection, allowing vets to meet the synchronous requirement. If a technical interruption occurs, Vetcation enables quick reconnection or rescheduling so that you can complete the real-time exam.",
-            },
-          ],
-        },
-        {
-          id: "faqAntimicrobialDefinition",
-          title: "Definition of 'Antimicrobial'",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Which definition of “antimicrobial” will the Board use to enforce the antimicrobial prescription by telehealth provision?",
-              answer:
-                "The Board will follow the definition provided in Appendix A of the federal Food and Drug Administration’s Guidance for Industry #152. This includes “critically important,” “highly important,” and “important” antimicrobial drugs, as Appendix A may be amended over time.",
-              example: "",
-              helpText:
-                "Our platform flags prescriptions that fall under these categories, ensuring veterinarians recognize when an antimicrobial is being prescribed. We also offer quick reference links to the FDA’s updated lists, so you can confirm a drug’s classification before finalizing a telehealth prescription.",
-            },
-          ],
-        },
-        {
-          id: "faqRacehorsePrescribing",
-          title: "Prescribing for Racehorses via Telehealth",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If a veterinarian prescribes medication via telehealth unknowingly to a racehorse or to a trainer registered with the California Horse Racing Board (CHRB), what documentation would the Board require to show that the vet was unaware of these circumstances?",
-              answer:
-                "Before prescribing any drug or medication via telehealth, the veterinarian must confirm with the client that the horse is not engaged in racing or training at a facility under CHRB jurisdiction. If the horse is engaged in racing or training under the CHRB, telehealth prescribing is prohibited. (BPC, § 4826.6, subd. (i)(8).) The veterinarian’s lack of knowledge is not considered a defense if the horse is later found to be racing or training. Therefore, you should document your inquiry and the client’s response in the medical record to demonstrate due diligence in verifying the horse’s status.",
-              example: "",
-              helpText:
-                "Our platform includes a pre-consultation form where clients must disclose whether the horse is involved in racing or training under the CHRB. Vetcation automatically stores this information in the patient’s record, providing written proof that the veterinarian asked — and the client answered — before issuing any telehealth prescriptions.",
-            },
-          ],
-        },
-        {
-          id: "faqChangeDosage",
-          title: "Changing Dosage for Racehorses via Telehealth",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a veterinarian via telehealth change the dosage of a previously prescribed drug or medication for a horse engaged in racing or training at a facility under the jurisdiction of the California Horse Racing Board (CHRB)?",
-              answer:
-                "No. Any change to a previously prescribed drug or medication is treated as a new prescription and cannot be issued via telehealth for a horse engaged in racing or training under CHRB jurisdiction. (BPC, § 4826.6, subd. (i)(8).)",
-              example: "",
-              helpText:
-                "Vetcation automatically prompts veterinarians to confirm the horse’s racing status before modifying any prescription. If the horse is under CHRB jurisdiction, the system will flag the dosage change as prohibited for telehealth, helping you avoid regulatory violations.",
-            },
-          ],
-        },
-        {
-          id: "faqRemoteExamAssistant",
-          title: "Remote Examination with a Veterinary Assistant",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If a veterinary assistant and client are in a room located within a registered veterinary premises, can a veterinarian remotely perform an examination and ask the veterinary assistant to perform diagnostic tests as needed?",
-              answer:
-                "Yes. If the veterinarian determines that a VCPR can be established via telehealth, a veterinary assistant may carry out certain diagnostic tests under the veterinarian’s indirect supervision. However, the assistant cannot obtain or administer anesthesia or controlled substances for these tests. (BPC, § 4836.1.) Additionally, any use of radiographic equipment must be performed by an individual trained in radiation safety and techniques, under the direct supervision of a registered veterinary technician (RVT) or licensed veterinarian. (BPC, § 4840.7, subd. (b).)",
-              example: "",
-              helpText:
-                "Our platform supports real-time video oversight, enabling the veterinarian to guide the assistant’s tasks remotely. Vetcation also logs each procedure, ensuring compliance with supervision requirements. If radiographs or other specialized diagnostics are needed, the system can prompt for an RVT or licensed vet to be present, helping you maintain compliance with California law.",
-            },
-          ],
-        },
-        {
-          id: "faqAssistantVaccinations",
-          title: "Vaccinations by Veterinary Assistant via Telemedicine",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a veterinary assistant give vaccinations under the direct supervision of the remote veterinarian performing the telemedicine examination?",
-              answer:
-                "Under California law, a veterinary assistant may administer a prescribed vaccine at a registered veterinary premises if and only if the vaccine is not a controlled substance or otherwise “restricted” (BPC § 4836.1(a)). In that scenario, the assistant may work either under the indirect supervision of a veterinarian who ordered the vaccine—even if that vet performed the exam via telemedicine—or under the direct supervision of a Registered Veterinary Technician (RVT) physically on-site (BPC, § 4836.1, subds. (a), (b); CCR, tit. 16, §§ 2034, subs. (f), 2036.5, subs. (b).).",
-              example: "",
-              helpText:
-                "Our platform timestamps and documents every step of a telemedicine visit and enforces that only non-controlled vaccines are used. At the point of administration, it prompts you to confirm “Indirect Vet Supervision,” so the assistant can proceed under the remote veterinarian’s orders, ensuring clear roles and full compliance with California law.",
-            },
-          ],
-        },
-      ],
-    },
-    VCPR: {
-      mainTitle: "Veterinarian-Client-Patient Relationship (VCPR)",
-      mainDescription: `A valid, <span class="highlight">condition-specific</span> VCPR is the cornerstone of providing
-veterinary care, whether in person or via telehealth. Under California law
-(BPC § 4826.6) a separate VCPR must be formed for each new clinical
-condition. A VCPR may be established by:  
-(1) synchronous audio-video examination,  
-(2) in-person examination of the animal, or  
-(3) medically appropriate, timely visits to the <span class="highlight">premises where a herd,
-flock, or other group of animals is kept</span> (not routine house-calls for
-individual pets).  
-The FAQs below explain each pathway and how Vetcation helps you remain
-compliant.`,
-      sections: [
-        {
-          id: "definingVCPR",
-          title: "Defining VCPR",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What exactly is a Veterinarian-Client-Patient Relationship (VCPR)?",
-              answer:
-                "A VCPR exists when a veterinarian (1) assumes responsibility for medical" +
-                " judgments regarding a specific condition of an animal patient, and" +
-                " (2) the client agrees to follow the veterinarian’s instructions. The" +
-                " veterinarian must be sufficiently familiar with the animal’s present" +
-                " condition (via in-person exam, synchronous audio-video exam, or" +
-                " timely premises visits) and must communicate a treatment or" +
-                " diagnostic plan to the client. Each new condition (e.g., otitis vs." +
-                " dermatitis) requires a new VCPR. (BPC § 4826.6(a), (b)).",
-              example:
-                "You perform a live video exam for a dog’s skin infection and advise a" +
-                " treatment plan. Two months later the same dog injures its leg; that" +
-                " orthopedic issue requires establishing a new VCPR before you may" +
-                " diagnose or prescribe for that condition.",
-              helpText:
-                "Vetcation logs every exam (in-person or video) with its associated" +
-                " condition, giving you an audit trail that demonstrates compliance" +
-                " if questions arise.",
-            },
-          ],
-        },
-        {
-          id: "faqSynchronousAV",
-          title: "Synchronous Audio-Video Examination",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "How does a synchronous audio-video exam establish a VCPR?",
-              answer:
-                "AB 1399 allows a veterinarian to establish a condition-specific VCPR by" +
-                " examining the patient in real time using two-way audio-video." +
-                " (BPC § 4826.6(b)(2)).",
-              example:
-                "During a Vetcation video call, you observe a dog’s pruritic skin," +
-                " discuss history, and develop a treatment plan—thereby forming a" +
-                " VCPR for that dermatologic condition.",
-              helpText:
-                "The platform records the date, duration, and condition so you can" +
-                " verify that the exam met the synchronous requirement.",
-            },
-          ],
-        },
-        {
-          id: "faqInPersonExam",
-          title: "In-Person Examination",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "How does an in-person examination factor into establishing a VCPR?",
-              answer:
-                "An in-person exam remains the traditional pathway. Once you have" +
-                " physically examined the animal for a given condition, you may" +
-                " deliver follow-up telehealth services for that same condition—up to" +
-                " the prescription time limits outlined below. (BPC § 4826.6(b)(1)).",
-              example:
-                "A cat seen in clinic for chronic kidney disease on 1 Jan 2025 may" +
-                " receive telehealth management of *that* disease thereafter—subject" +
-                " to drug-specific renewal limits.",
-              helpText:
-                "Vetcation links the in-person visit to its condition so later" +
-                " telehealth encounters reflect a valid VCPR.",
-            },
-          ],
-        },
-        {
-          id: "faqPremisesVisit",
-          title: "Premises Visits (Herd / Stable)",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What is a premises visit, and how does it establish a VCPR?",
-              answer:
-                "A premises visit is an on-site evaluation of animals kept as a herd," +
-                " flock, or stable group. Home visits for individual companion" +
-                " animals do *not* qualify. (BPC § 4826.6(b)(3)).",
-              example:
-                "You inspect a goat herd at a ranch—creating a VCPR for herd health" +
-                " conditions you assessed. Future telemedicine consults for that herd" +
-                " can rely on the premises-based VCPR, within prescription limits.",
-              helpText:
-                "Each premises visit is time-stamped and condition-tagged in" +
-                " Vetcation’s records to demonstrate compliance.",
-            },
-          ],
-        },
-        // ...Add more FAQs about VCPR as needed...
-      ],
-    },
+    //     Bill1399: {
+    //       mainTitle: "Assembly Bill 1399",
+    //       mainDescription: `Assembly Bill (AB) 1399 (Friedman, Chapter 475, Statutes of 2023) took effect
+    //     on January 1, 2024. This legislation sets out clear requirements for establishing a
+    //     valid veterinarian-client-patient relationship (VCPR) before prescribing, dispensing,
+    //     or administering any treatment for animal care. (Business and Professions Code (BPC),
+    //     § 4826.6.) AB 1399 also clarifies how veterinary telehealth may be provided under
+    //     California law. (BPC, §§ 4825.1, 4826.6, 4829.5, and 4853.)
 
-    PrescriptionLimits: {
-      mainTitle: "Prescription Time Limits under AB 1399",
-      mainDescription: `Once a valid, condition-specific VCPR is established, California law
-(BPC § 4826.6(i)) imposes <span class="highlight">drug-specific</span> renewal limits. The one-year
-and six-month clocks apply only to <span class="highlight">the same drug</span> originally
-prescribed for that condition; switching to a different medication
-requires clinical reassessment regardless of time elapsed.`,
-      sections: [
-        {
-          id: "faqGeneralOverview",
-          title: "General Overview",
-          blocks: [
-            {
-              type: "qa",
-              question: "Why do different prescription time limits apply?",
-              answer:
-                "California distinguishes between VCPRs formed in person versus by" +
-                " synchronous video. For a drug first prescribed after an in-person" +
-                " exam, you may refill that *same* drug for up to one year. If the" +
-                " VCPR was formed solely via video, refills of that same drug are" +
-                " limited to six months—or 14 days for antimicrobials.",
-              example:
-                "You examine a dog in clinic on 1 Mar 2025 and start carprofen. Carprofen refills are allowed until 1 Mar 2026. If the same dog’s allergy flare is managed by a video VCPR on 1 Apr 2025 with apoquel, apoquel refills can continue only until 1 Oct 2025 unless you re-examine first.",
-              helpText:
-                "Vetcation tracks the drug name, exam type, and prescription date. If you attempt to refill beyond the one-year, six-month, or 14-day window, the system flags it and prompts a new exam.",
-            },
-          ],
-        },
-        {
-          id: "faqOneYearLimit",
-          title: "1-Year Limit (After In-Person Exam)",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "How long can I refill a medication after an in-person exam?",
-              answer:
-                "For the *same medication* and condition, up to one year from the exam" +
-                " date. New medications or new conditions require a fresh exam." +
-                " (BPC § 4826.6(i)(2)).",
-              example:
-                "You examine a cat in person on 1 Jan 2025 and start benazepril." +
-                " Benazepril may be refilled until 1 Jan 2026. Initiating amlodipine" +
-                " for a new hypertension diagnosis would first require a new exam.",
-              helpText:
-                "Vetcation automatically tracks the date and type of the last in-person exam for each condition. As the one-year mark approaches, the system alerts you and, if you attempt a refill past the deadline, blocks the prescription until a new exam is logged.",
-            },
-          ],
-        },
-        {
-          id: "faqSixMonthLimit",
-          title: "6-Month Limit (Video-Only VCPR)",
-          blocks: [
-            {
-              type: "qa",
-              question: "What if the VCPR was formed via synchronous video?",
-              answer:
-                "The *same drug* may be refilled for up to six months from that video" +
-                " exam. After six months—or for a different drug—you must re-examine" +
-                " the patient. (BPC § 4826.6(i)(4)).",
-              example:
-                "A 1 Feb 2025 video consult leads to gabapentin for chronic pain." +
-                " Gabapentin refills are permissible until 1 Aug 2025 provided the" +
-                " condition remains stable.",
-              helpText:
-                "Vetcation time-stamps each video exam and tags the prescribed drug. If you try to refill that drug after the six-month window, the platform blocks the order and prompts you to schedule a new exam.",
-            },
-          ],
-        },
-        {
-          id: "faqFourteenDayLimit",
-          title: "14-Day Limit for Antimicrobials",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Is it true that antibiotics (and other antimicrobials) are limited to 14 days if the VCPR is established via telehealth?",
-              answer:
-                "Yes. If you established the VCPR using synchronous audio-video, you can only prescribe an antimicrobial drug for up to 14 days of treatment. Any refill or extension beyond 14 days requires an in-person exam. (BPC, § 4826.6, subd. (i)(5).)",
-              example:
-                "You diagnose a dog with a skin infection via video consult and prescribe a 10-day course of antibiotics. If the dog needs more than 10 days total, you can extend up to 14 days. But if the condition isn’t resolved by then, you must see the dog in person before prescribing more antibiotics.",
-              helpText:
-                "We tag certain medications as 'antimicrobials' in our drug database. If you attempt to prescribe beyond 14 days of treatment via telehealth-only VCPR, the system will block it and prompt you to schedule an in-person follow-up.",
-            },
-          ],
-        },
-        {
-          id: "faqControlledSubstances",
-          title: "Controlled Substances, Xylazine, and Racehorses",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Are there additional restrictions on controlled substances, xylazine, or prescriptions for racehorses?",
-              answer:
-                "Yes. If you have not performed an in-person exam, California law prohibits prescribing controlled substances or xylazine via telehealth. Also, you cannot prescribe any drug via telehealth for a horse engaged in racing or training at a CHRB-regulated facility. (BPC, § 4826.6, subds. (i)(6), (i)(8).)",
-              example:
-                "A trainer of a racehorse calls you for a telehealth consult. Because the horse is in training at a CHRB facility, you’re not allowed to prescribe any medication via telehealth. Similarly, if a cat needs a controlled pain medication, you must have performed an in-person exam first.",
-              helpText:
-                "We flag attempts to prescribe controlled substances or xylazine if the patient’s record only shows a telehealth exam. We also prompt the user to confirm if the horse is under CHRB jurisdiction, blocking telehealth prescriptions if it is.",
-            },
-          ],
-        },
-      ],
-    },
+    //     Below are frequently asked questions (FAQs) the Veterinary Medical Board (Board) has
+    //     compiled in response to public inquiries about the new law. We’ve included notes on
+    //     how Vetcation’s features help veterinary professionals comply with each requirement
+    //     through our built-in workflows and technology tools. In the event of any differences
+    //     between these FAQs and the statute itself, the statute is controlling, and the Board
+    //     will enforce it accordingly. Veterinary professionals should review the official
+    //     statutes in detail to ensure full compliance.`,
+    //       sections: [
+    //         {
+    //           id: "telehealthStandardOfCare",
+    //           title: "Telemedicine Holds the Same Standard of Care",
+    //           blocks: [
+    //             {
+    //               type: "paragraph",
+    //               text: "Telemedicine must meet the same standard of care as in-person veterinary services. Under AB 1399, before delivering veterinary medicine via telehealth, the veterinarian shall inform the client about the use and potential limitations of telehealth and obtain their consent. (Business and Professions Code (BPC), § 4826.6, subd. (g).)",
+    //             },
+    //             {
+    //               type: "bulletList",
+    //               items: [
+    //                 {
+    //                   heading: "Same standards of care apply:",
+    //                   lines: [
+    //                     "The same standards of care apply to veterinary medicine services via telehealth and in-person veterinary medical services.",
+    //                   ],
+    //                 },
+    //                 {
+    //                   heading: "In-person visit option:",
+    //                   lines: [
+    //                     "The client has the option to choose an in-person visit from a veterinarian at any time.",
+    //                   ],
+    //                 },
+    //                 {
+    //                   heading: "Follow-up and tech-failure guidance:",
+    //                   lines: [
+    //                     "The client has been advised how to receive follow-up care or assistance in the event of an adverse reaction to the treatment or in the event of an inability to communicate resulting from technological or equipment failure.",
+    //                     "Vetcation provides Vetssenger (inquiry-based messaging tool; see vetssenger section in user manual) to facilitate timely follow-up communication and support, helping you comply with AB 1399 and deliver the same standard of care as in-person visits.",
+    //                   ],
+    //                 },
+    //               ],
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqOutOfState",
+    //           title: "Out-of-state Telemedicine",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a California licensed veterinarian use telemedicine to establish or continue treatment within an existing VCPR if the animal patient is originally from California but is currently located outside of California?",
+    //               answer:
+    //                 "No. Under AB 1399, for a California-licensed veterinarian to provide veterinary medical services via telehealth, the animal must be physically located in California. (BPC, § 4826.6, subd. (f).) However, authorizing a refill for an existing prescription (for an out-of-state pet) is not considered telehealth.",
+    //               example:
+    //                 "If your long-time client and their pet travel to Oregon, you cannot initiate a new telemedicine consult while the pet is out of state. However, if the pet already has an active prescription on file, you can authorize a refill without it being classified as a “telehealth” service.",
+    //               helpText:
+    //                 "Our platform automatically checks the patient's reported location at the time of scheduling. If an out-of-state location is detected, Vetcation will block the client from booking a new telemedicine appointment to ensure compliance with state regulations. However, if there is an existing prescription on file, you may still authorize refills without it being classified as a telehealth service.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqRefillOutOfStatePharmacy",
+    //           title: "Refilling Prescriptions at Out-of-State Pharmacies",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a California-licensed veterinarian authorize a prescription refill to an out-of-state pharmacy if the animal patient is currently located outside of California?",
+    //               answer:
+    //                 "Yes. Under AB 1399, while a California-licensed veterinarian cannot initiate a new telemedicine consult for an animal patient located outside of California, they may authorize a refill for an existing prescription. This authorization can be directed to a pharmacy in the state where the animal is currently located. (BPC, § 4826.6, subd. (f).)",
+    //               example:
+    //                 "If your client and their pet are traveling in Oregon and require a refill of an existing prescription, you can authorize the refill and direct it to a local pharmacy in Oregon. This action is permissible and does not constitute telehealth under California law.",
+    //               helpText:
+    //                 "Vetcation facilitates the authorization of prescription refills to out-of-state pharmacies for existing prescriptions. Our platform ensures that such actions comply with AB 1399 by verifying the existence of a valid VCPR and restricting new telemedicine consults when the animal patient is out of state.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqSameDiagnosisNewMed",
+    //           title:
+    //             "New Medications for the Same Diagnosis While Pet Is Out of State",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a California-licensed veterinarian prescribe a new medication for the same diagnosis if the animal is currently out of state?",
+    //               answer:
+    //                 "No. Under AB 1399, prescribing any new medication while the animal is physically outside of California is considered telehealth and is not permitted — even if the diagnosis (such as gastroenteritis) was previously established. The only exception is authorizing a refill of an existing prescription. Initiating a new treatment plan, even under the same diagnosis, is not allowed if the animal is not in California.",
+    //               example:
+    //                 "If a dog was diagnosed with gastroenteritis during an in-state visit and was prescribed anti-nausea medication for vomiting, but later develops diarrhea while in another state, the vet cannot prescribe a new anti-diarrheal unless it was already included as a PRN medication during the original consult.",
+    //               helpText:
+    //                 "Vetcation supports responsible use of PRN medications during the original in-state consult by allowing vets to proactively prescribe treatments for anticipated symptoms under a single diagnosis. However, if the pet is out of state and needs a new medication not already covered in the original care plan, our platform restricts new prescriptions to ensure compliance with AB 1399.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqConfirmLocation",
+    //           title: "Confirming Location",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Does the client providing a California address suffice to satisfy the requirement that the animal patient is located in this state?",
+    //               answer:
+    //                 "No. It is recommended the veterinarian confirm with the client that the animal patient is physically in California at the time telehealth services are provided. (BPC, § 4826.6, subd. (f).)",
+    //               example:
+    //                 "A client might list a California home address but could be traveling with their pet in Nevada. In this scenario, you cannot initiate a new telemedicine consult under California law because the pet is physically out of state.",
+    //               helpText:
+    //                 "Our platform prompts the client to confirm their current location at the start of each telehealth appointment. If the address is outside California, Vetcation alerts you that proceeding with a new telemedicine consult may not be permissible. This ensures you remain compliant with AB 1399 while still allowing you to manage refills or follow-up actions for existing prescriptions.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqVetOutOfState",
+    //           title: "Veterinarian Location",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a California-licensed veterinarian provide telemedicine if they are physically located outside of California?",
+    //               answer:
+    //                 "Yes. Under AB 1399, veterinary telehealth is legally considered to occur at the location of the animal patient — not the veterinarian. As long as the animal is physically in California at the time of the telemedicine consult, a California-licensed veterinarian may practice via telehealth even if they are located outside of California or outside the United States.",
+    //               example:
+    //                 "If you are a California-licensed veterinarian traveling in New York or abroad and a pet located in California needs a telemedicine consult, you may provide care as long as a valid VCPR is established and all requirements of AB 1399 are followed.",
+    //               helpText:
+    //                 "Vetcation allows licensed California veterinarians to log in and offer virtual care from anywhere. Our system ensures telehealth consults can only be initiated when the animal is reported to be in California, helping you stay compliant with the law while maintaining flexibility in how and where you practice.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqPrescriptionNotice",
+    //           title: "Posting Prescription Availability",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can the veterinarian notify the client that “some prescription drugs or medications may be available at a pharmacy” by posting a notice in a virtual lobby?",
+    //               answer:
+    //                 "Yes. The requirement is to provide notice to the client that some prescription drugs or medications may be available at a pharmacy, but there is no specific method prescribed for doing so. (BPC, § 4826.6, subd. (i)(7).) However, the prescribing veterinarian must still comply with all statutes and regulations in the Veterinary Medicine Practice Act and Pharmacy Law. This includes, but is not limited to, prescriber dispensing requirements listed in BPC section 4170.",
+    //               example:
+    //                 'You could display a banner in your virtual meeting room that reads: "Certain medications may be available at a pharmacy." As long as clients see this notice before or during the telehealth visit, you have met the requirement.',
+    //               helpText:
+    //                 "Our platform will show the banner on the appointment card, automatically displaying it to all clients prior to the consultation. This ensures compliance with AB 1399 and helps track user acknowledgment of the notice in your records.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqOnePosting",
+    //           title: "Combining Disclosures",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If the prescription notice can be posted in the lobby, can it be incorporated into the existing notice requirement so that both disclosures are in one posting?",
+    //               answer:
+    //                 "Yes. Both disclosures can be combined into a single posting, since the law does not require them to be displayed separately. Consolidating them ensures clients see all relevant information in one place, reducing confusion and improving compliance.",
+    //               example: "",
+    //               helpText:
+    //                 'Our platform has helped you create a combined notice that includes important telemedicine disclaimers, such as pharmacy availability, professional standards (telemedicine follows the same regulations as in-person care), and emergency guidance (e.g., "Emergencies cannot be treated via telehealth"). All of these appear on the appointment card so clients see them before the telemedicine session begins. Vetcation also tracks user acknowledgment, giving you a record that they’ve viewed the notice.',
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqPharmacyChoice",
+    //           title: "Pharmacy Choice Disclosure",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Since AB 1399 only requires veterinarians to notify the client that “some prescription drugs or medications may be available at a pharmacy,” does the veterinarian have to notify the client that the veterinarian can submit a prescription to the pharmacy of the client’s choice?",
+    //               answer:
+    //                 "Yes. The veterinarian must provide the client with a written disclosure that the client may obtain the prescription either from the veterinarian or from a pharmacy of the client’s choice. (BPC, § 4170, subd. (a)(7).) Furthermore, before prescribing, the veterinarian must offer to provide a written prescription that the client may choose to have filled by the prescriber or by any pharmacy. (BPC, § 4170, subd. (a)(6).)",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform allows clients to select their preferred pharmacy — whether a physical location like Costco, Walmart, or CVS, or an online pharmacy such as Mixlab or Chewy. Vets can confirm the client’s choice directly in the Vetcation interface before finalizing a prescription, ensuring compliance with AB 1399 and other state regulations.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqPrivacyLaws",
+    //           title: "Privacy and Confidentiality",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What are the privacy protection laws with which a veterinarian practicing veterinary medicine via telehealth must comply?",
+    //               answer:
+    //                 "Under California law (BPC section 4857), veterinarians must maintain the confidentiality of all client and patient information, just as they would for in-person care. If a veterinarian negligently releases this information, they could face a civil lawsuit (outside of the Veterinary Medical Board’s jurisdiction). In other words, even though the Board may not prosecute you for a privacy breach, a client could sue you in civil court for mishandling confidential data. That’s why it’s crucial to understand and follow privacy laws that apply to veterinary practice, both in person and via telehealth.",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform is designed with secure data handling and encrypted communication to protect confidential information during telehealth sessions. Vetcation also provides access controls so that only authorized users can view client records, reducing the risk of accidental disclosure. We recommend veterinarians familiarize themselves with all relevant privacy regulations and use best practices — such as password protection, secure networks, and careful record-sharing protocols—to minimize liability.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqMedicalHistory",
+    //           title: "Obtaining Relevant Medical History",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If the client does not provide the veterinarian with the animal patient’s relevant medical history or medical records, can the veterinarian provide veterinary telehealth for the animal patient?",
+    //               answer:
+    //                 "Telehealth cannot be used if the veterinarian does not obtain and review the relevant medical history for the animal. However, actual medical records are not strictly required — if the client can relay the pet’s relevant history verbally or via written form, that may suffice. If official medical records are available, the veterinarian must obtain and review them before proceeding. (BPC, § 4826.6, subd. (h)(2).)",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform prompts the client to provide a thorough history of the animal’s condition before the telehealth appointment. If past records exist, we encourage clients to upload them. This ensures the veterinarian has enough background information to make an informed assessment, keeping the telehealth process compliant with AB 1399 and other state regulations.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqLocalResources",
+    //           title: "Local Medical Resources Familiarity",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "How will the Board verify that the veterinarian providing telehealth was familiar with available medical resources, including emergency resources, near the animal patient’s location?",
+    //               answer:
+    //                 "If the Board inquires whether you were familiar with the medical resources available near the patient’s location (including emergency care), you must be able to explain your familiarity and, if necessary, submit documentation that supports your claim. (BPC, § 4826.6, subd. (h)(4).) This might involve showing references or notes about nearby emergency clinics, urgent care facilities, or specialized hospitals within the pet’s region.",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform automatically provides veterinarians with local emergency contact information based on the client’s reported location. This includes the name, address, and phone number of nearby clinics or hospitals. You can still choose to add notes or reference other resources, but the system helps ensure you are equipped with key information. If the Board requests validation, you’ll have easy access to records demonstrating your familiarity with local medical resources, supporting compliance with AB 1399.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqMidwayInterruption",
+    //           title: "Mid-Appointment Interruption",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If midway through an appointment the synchronous audio-visual communication is interrupted, can a VCPR be established solely by another form of electronic communication?",
+    //               answer:
+    //                 "No. To establish a valid VCPR via telehealth, the veterinarian must gain sufficient knowledge of the animal patient by examining the patient using synchronous audio-video communication. (BPC, § 4826.6, subd. (b)(2).) Once a VCPR is established, ongoing care may continue via other telehealth methods, unless the veterinarian determines that synchronous audio-video is necessary for proper treatment. (BPC, § 4826.6, subd. (d).)",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform prioritizes a stable audio-video connection, allowing vets to meet the synchronous requirement. If a technical interruption occurs, Vetcation enables quick reconnection or rescheduling so that you can complete the real-time exam.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqAntimicrobialDefinition",
+    //           title: "Definition of 'Antimicrobial'",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Which definition of “antimicrobial” will the Board use to enforce the antimicrobial prescription by telehealth provision?",
+    //               answer:
+    //                 "The Board will follow the definition provided in Appendix A of the federal Food and Drug Administration’s Guidance for Industry #152. This includes “critically important,” “highly important,” and “important” antimicrobial drugs, as Appendix A may be amended over time.",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform flags prescriptions that fall under these categories, ensuring veterinarians recognize when an antimicrobial is being prescribed. We also offer quick reference links to the FDA’s updated lists, so you can confirm a drug’s classification before finalizing a telehealth prescription.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqRacehorsePrescribing",
+    //           title: "Prescribing for Racehorses via Telehealth",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If a veterinarian prescribes medication via telehealth unknowingly to a racehorse or to a trainer registered with the California Horse Racing Board (CHRB), what documentation would the Board require to show that the vet was unaware of these circumstances?",
+    //               answer:
+    //                 "Before prescribing any drug or medication via telehealth, the veterinarian must confirm with the client that the horse is not engaged in racing or training at a facility under CHRB jurisdiction. If the horse is engaged in racing or training under the CHRB, telehealth prescribing is prohibited. (BPC, § 4826.6, subd. (i)(8).) The veterinarian’s lack of knowledge is not considered a defense if the horse is later found to be racing or training. Therefore, you should document your inquiry and the client’s response in the medical record to demonstrate due diligence in verifying the horse’s status.",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform includes a pre-consultation form where clients must disclose whether the horse is involved in racing or training under the CHRB. Vetcation automatically stores this information in the patient’s record, providing written proof that the veterinarian asked — and the client answered — before issuing any telehealth prescriptions.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqChangeDosage",
+    //           title: "Changing Dosage for Racehorses via Telehealth",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a veterinarian via telehealth change the dosage of a previously prescribed drug or medication for a horse engaged in racing or training at a facility under the jurisdiction of the California Horse Racing Board (CHRB)?",
+    //               answer:
+    //                 "No. Any change to a previously prescribed drug or medication is treated as a new prescription and cannot be issued via telehealth for a horse engaged in racing or training under CHRB jurisdiction. (BPC, § 4826.6, subd. (i)(8).)",
+    //               example: "",
+    //               helpText:
+    //                 "Vetcation automatically prompts veterinarians to confirm the horse’s racing status before modifying any prescription. If the horse is under CHRB jurisdiction, the system will flag the dosage change as prohibited for telehealth, helping you avoid regulatory violations.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqRemoteExamAssistant",
+    //           title: "Remote Examination with a Veterinary Assistant",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If a veterinary assistant and client are in a room located within a registered veterinary premises, can a veterinarian remotely perform an examination and ask the veterinary assistant to perform diagnostic tests as needed?",
+    //               answer:
+    //                 "Yes. If the veterinarian determines that a VCPR can be established via telehealth, a veterinary assistant may carry out certain diagnostic tests under the veterinarian’s indirect supervision. However, the assistant cannot obtain or administer anesthesia or controlled substances for these tests. (BPC, § 4836.1.) Additionally, any use of radiographic equipment must be performed by an individual trained in radiation safety and techniques, under the direct supervision of a registered veterinary technician (RVT) or licensed veterinarian. (BPC, § 4840.7, subd. (b).)",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform supports real-time video oversight, enabling the veterinarian to guide the assistant’s tasks remotely. Vetcation also logs each procedure, ensuring compliance with supervision requirements. If radiographs or other specialized diagnostics are needed, the system can prompt for an RVT or licensed vet to be present, helping you maintain compliance with California law.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqAssistantVaccinations",
+    //           title: "Vaccinations by Veterinary Assistant via Telemedicine",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a veterinary assistant give vaccinations under the direct supervision of the remote veterinarian performing the telemedicine examination?",
+    //               answer:
+    //                 "Under California law, a veterinary assistant may administer a prescribed vaccine at a registered veterinary premises if and only if the vaccine is not a controlled substance or otherwise “restricted” (BPC § 4836.1(a)). In that scenario, the assistant may work either under the indirect supervision of a veterinarian who ordered the vaccine—even if that vet performed the exam via telemedicine—or under the direct supervision of a Registered Veterinary Technician (RVT) physically on-site (BPC, § 4836.1, subds. (a), (b); CCR, tit. 16, §§ 2034, subs. (f), 2036.5, subs. (b).).",
+    //               example: "",
+    //               helpText:
+    //                 "Our platform timestamps and documents every step of a telemedicine visit and enforces that only non-controlled vaccines are used. At the point of administration, it prompts you to confirm “Indirect Vet Supervision,” so the assistant can proceed under the remote veterinarian’s orders, ensuring clear roles and full compliance with California law.",
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //     VCPR: {
+    //       mainTitle: "Veterinarian-Client-Patient Relationship (VCPR)",
+    //       mainDescription: `A valid, <span class="highlight">condition-specific</span> VCPR is the cornerstone of providing
+    // veterinary care, whether in person or via telehealth. Under California law
+    // (BPC § 4826.6) a separate VCPR must be formed for each new clinical
+    // condition. A VCPR may be established by:
+    // (1) synchronous audio-video examination,
+    // (2) in-person examination of the animal, or
+    // (3) medically appropriate, timely visits to the <span class="highlight">premises where a herd,
+    // flock, or other group of animals is kept</span> (not routine house-calls for
+    // individual pets).
+    // The FAQs below explain each pathway and how Vetcation helps you remain
+    // compliant.`,
+    //       sections: [
+    //         {
+    //           id: "definingVCPR",
+    //           title: "Defining VCPR",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What exactly is a Veterinarian-Client-Patient Relationship (VCPR)?",
+    //               answer:
+    //                 "A VCPR exists when a veterinarian (1) assumes responsibility for medical" +
+    //                 " judgments regarding a specific condition of an animal patient, and" +
+    //                 " (2) the client agrees to follow the veterinarian’s instructions. The" +
+    //                 " veterinarian must be sufficiently familiar with the animal’s present" +
+    //                 " condition (via in-person exam, synchronous audio-video exam, or" +
+    //                 " timely premises visits) and must communicate a treatment or" +
+    //                 " diagnostic plan to the client. Each new condition (e.g., otitis vs." +
+    //                 " dermatitis) requires a new VCPR. (BPC § 4826.6(a), (b)).",
+    //               example:
+    //                 "You perform a live video exam for a dog’s skin infection and advise a" +
+    //                 " treatment plan. Two months later the same dog injures its leg; that" +
+    //                 " orthopedic issue requires establishing a new VCPR before you may" +
+    //                 " diagnose or prescribe for that condition.",
+    //               helpText:
+    //                 "Vetcation logs every exam (in-person or video) with its associated" +
+    //                 " condition, giving you an audit trail that demonstrates compliance" +
+    //                 " if questions arise.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqSynchronousAV",
+    //           title: "Synchronous Audio-Video Examination",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "How does a synchronous audio-video exam establish a VCPR?",
+    //               answer:
+    //                 "AB 1399 allows a veterinarian to establish a condition-specific VCPR by" +
+    //                 " examining the patient in real time using two-way audio-video." +
+    //                 " (BPC § 4826.6(b)(2)).",
+    //               example:
+    //                 "During a Vetcation video call, you observe a dog’s pruritic skin," +
+    //                 " discuss history, and develop a treatment plan—thereby forming a" +
+    //                 " VCPR for that dermatologic condition.",
+    //               helpText:
+    //                 "The platform records the date, duration, and condition so you can" +
+    //                 " verify that the exam met the synchronous requirement.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqInPersonExam",
+    //           title: "In-Person Examination",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "How does an in-person examination factor into establishing a VCPR?",
+    //               answer:
+    //                 "An in-person exam remains the traditional pathway. Once you have" +
+    //                 " physically examined the animal for a given condition, you may" +
+    //                 " deliver follow-up telehealth services for that same condition—up to" +
+    //                 " the prescription time limits outlined below. (BPC § 4826.6(b)(1)).",
+    //               example:
+    //                 "A cat seen in clinic for chronic kidney disease on 1 Jan 2025 may" +
+    //                 " receive telehealth management of *that* disease thereafter—subject" +
+    //                 " to drug-specific renewal limits.",
+    //               helpText:
+    //                 "Vetcation links the in-person visit to its condition so later" +
+    //                 " telehealth encounters reflect a valid VCPR.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqPremisesVisit",
+    //           title: "Premises Visits (Herd / Stable)",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What is a premises visit, and how does it establish a VCPR?",
+    //               answer:
+    //                 "A premises visit is an on-site evaluation of animals kept as a herd," +
+    //                 " flock, or stable group. Home visits for individual companion" +
+    //                 " animals do *not* qualify. (BPC § 4826.6(b)(3)).",
+    //               example:
+    //                 "You inspect a goat herd at a ranch—creating a VCPR for herd health" +
+    //                 " conditions you assessed. Future telemedicine consults for that herd" +
+    //                 " can rely on the premises-based VCPR, within prescription limits.",
+    //               helpText:
+    //                 "Each premises visit is time-stamped and condition-tagged in" +
+    //                 " Vetcation’s records to demonstrate compliance.",
+    //             },
+    //           ],
+    //         },
+    //         // ...Add more FAQs about VCPR as needed...
+    //       ],
+    //     },
 
-    PrivacyConfidentiality: {
-      mainTitle: "Privacy & Confidentiality in Telemedicine",
-      mainDescription: `Under California law, veterinarians must ensure the privacy and confidentiality 
-    of all client and patient information, whether in-person or via telehealth. 
-    Business & Professions Code (BPC) § 4826.6(h)(1) requires secure technology for 
-    telehealth services, while BPC § 4857 addresses the release of confidential records 
-    and potential civil liability for negligence. The FAQs below clarify these obligations 
-    and explain how Vetcation helps you comply.`,
-      sections: [
-        {
-          id: "faqPrivacyOverview",
-          title: "General Privacy Requirements",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What are the main privacy rules for telemedicine under AB 1399?",
-              answer:
-                "Under BPC § 4826.6(h)(1), veterinarians must use technology and methods that protect confidential client and patient information during telehealth. Additionally, you must follow the same privacy and recordkeeping standards that apply to in-person care. If medical records exist, you must maintain their confidentiality and ensure they’re only accessed by authorized personnel. (BPC § 4857.)",
-              example:
-                "If you store telemedicine session videos or chat logs, you must keep them secure — just like paper records in a physical clinic. This means using encrypted storage, limiting who can view them, and retaining them for the legally required duration.",
-              helpText:
-                "Our platform uses end-to-end encryption for live video sessions and secure data storage for patient records. Only the assigned veterinarian and authorized team members can access these files, reducing the risk of accidental disclosure.",
-            },
-          ],
-        },
-        {
-          id: "faqCivilLiability",
-          title: "Civil Liability for Negligent Release",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What happens if a veterinarian accidentally discloses confidential information from a telemedicine session?",
-              answer:
-                "BPC § 4857 states that a veterinarian can face civil liability for the negligent release of confidential information, in addition to any potential disciplinary action. This means a client could sue you in civil court for damages if their data was mishandled. The Veterinary Medical Board may not prosecute a privacy breach directly, but a civil suit could still be brought against you if you fail to safeguard client or patient information.",
-              example:
-                "If a veterinarian’s unsecured laptop is stolen, revealing telemedicine session notes or client addresses, the vet could face a lawsuit if it’s proven they did not take reasonable steps to protect that data.",
-              helpText:
-                "We implement role-based access controls, meaning only verified staff can view sensitive records. Vetcation also provides secure sign-in and logs all user activity. This helps you prove you took proper precautions if a dispute arises.",
-            },
-          ],
-        },
-        {
-          id: "faqAIProcessing",
-          title: "AI-Assisted Medical Records & Appointment Summaries",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "How does using AI to process audio or video from telemedicine sessions affect privacy and confidentiality, especially if the platform also generates an appointment summary for the client?",
-              answer:
-                "Any AI feature that processes telemedicine audio or video must comply with the same confidentiality requirements as traditional recordkeeping. This includes creating both the official medical record (for the veterinarian) and a shareable appointment summary (for the client). You should obtain informed consent from both the client and any participating veterinary staff before capturing or processing any recordings. While California law does not prohibit AI usage, the veterinarian is still responsible for ensuring the data is stored securely, access is restricted to authorized personnel, and no unauthorized disclosures occur. (BPC §§ 4826.6(h)(1), 4857.)",
-              example:
-                "If you plan to record the audio from a live consult and use AI to generate a medical record, you must notify the client that their session is being recorded and processed. If they decline, you cannot record or process their session. Consent is essential, and all data must remain encrypted and access-controlled.",
-              helpText:
-                "Our AI operates on secure, internal servers — no third-party cloud providers. We encrypt audio files and transcripts, then generate two separate documents: (1) a detailed medical record for the veterinarian’s files, and (2) a concise appointment summary for the client’s portal. Before the AI feature is enabled, Vetcation prompts you to confirm that the client has agreed to have their session recorded and processed, preventing any inadvertent privacy violations.",
-            },
-          ],
-        },
-        // ...Add more FAQs if needed...
-      ],
-    },
+    //     PrescriptionLimits: {
+    //       mainTitle: "Prescription Time Limits under AB 1399",
+    //       mainDescription: `Once a valid, condition-specific VCPR is established, California law
+    // (BPC § 4826.6(i)) imposes <span class="highlight">drug-specific</span> renewal limits. The one-year
+    // and six-month clocks apply only to <span class="highlight">the same drug</span> originally
+    // prescribed for that condition; switching to a different medication
+    // requires clinical reassessment regardless of time elapsed.`,
+    //       sections: [
+    //         {
+    //           id: "faqGeneralOverview",
+    //           title: "General Overview",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question: "Why do different prescription time limits apply?",
+    //               answer:
+    //                 "California distinguishes between VCPRs formed in person versus by" +
+    //                 " synchronous video. For a drug first prescribed after an in-person" +
+    //                 " exam, you may refill that *same* drug for up to one year. If the" +
+    //                 " VCPR was formed solely via video, refills of that same drug are" +
+    //                 " limited to six months—or 14 days for antimicrobials.",
+    //               example:
+    //                 "You examine a dog in clinic on 1 Mar 2025 and start carprofen. Carprofen refills are allowed until 1 Mar 2026. If the same dog’s allergy flare is managed by a video VCPR on 1 Apr 2025 with apoquel, apoquel refills can continue only until 1 Oct 2025 unless you re-examine first.",
+    //               helpText:
+    //                 "Vetcation tracks the drug name, exam type, and prescription date. If you attempt to refill beyond the one-year, six-month, or 14-day window, the system flags it and prompts a new exam.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqOneYearLimit",
+    //           title: "1-Year Limit (After In-Person Exam)",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "How long can I refill a medication after an in-person exam?",
+    //               answer:
+    //                 "For the *same medication* and condition, up to one year from the exam" +
+    //                 " date. New medications or new conditions require a fresh exam." +
+    //                 " (BPC § 4826.6(i)(2)).",
+    //               example:
+    //                 "You examine a cat in person on 1 Jan 2025 and start benazepril." +
+    //                 " Benazepril may be refilled until 1 Jan 2026. Initiating amlodipine" +
+    //                 " for a new hypertension diagnosis would first require a new exam.",
+    //               helpText:
+    //                 "Vetcation automatically tracks the date and type of the last in-person exam for each condition. As the one-year mark approaches, the system alerts you and, if you attempt a refill past the deadline, blocks the prescription until a new exam is logged.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqSixMonthLimit",
+    //           title: "6-Month Limit (Video-Only VCPR)",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question: "What if the VCPR was formed via synchronous video?",
+    //               answer:
+    //                 "The *same drug* may be refilled for up to six months from that video" +
+    //                 " exam. After six months—or for a different drug—you must re-examine" +
+    //                 " the patient. (BPC § 4826.6(i)(4)).",
+    //               example:
+    //                 "A 1 Feb 2025 video consult leads to gabapentin for chronic pain." +
+    //                 " Gabapentin refills are permissible until 1 Aug 2025 provided the" +
+    //                 " condition remains stable.",
+    //               helpText:
+    //                 "Vetcation time-stamps each video exam and tags the prescribed drug. If you try to refill that drug after the six-month window, the platform blocks the order and prompts you to schedule a new exam.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqFourteenDayLimit",
+    //           title: "14-Day Limit for Antimicrobials",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Is it true that antibiotics (and other antimicrobials) are limited to 14 days if the VCPR is established via telehealth?",
+    //               answer:
+    //                 "Yes. If you established the VCPR using synchronous audio-video, you can only prescribe an antimicrobial drug for up to 14 days of treatment. Any refill or extension beyond 14 days requires an in-person exam. (BPC, § 4826.6, subd. (i)(5).)",
+    //               example:
+    //                 "You diagnose a dog with a skin infection via video consult and prescribe a 10-day course of antibiotics. If the dog needs more than 10 days total, you can extend up to 14 days. But if the condition isn’t resolved by then, you must see the dog in person before prescribing more antibiotics.",
+    //               helpText:
+    //                 "We tag certain medications as 'antimicrobials' in our drug database. If you attempt to prescribe beyond 14 days of treatment via telehealth-only VCPR, the system will block it and prompt you to schedule an in-person follow-up.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqControlledSubstances",
+    //           title: "Controlled Substances, Xylazine, and Racehorses",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Are there additional restrictions on controlled substances, xylazine, or prescriptions for racehorses?",
+    //               answer:
+    //                 "Yes. If you have not performed an in-person exam, California law prohibits prescribing controlled substances or xylazine via telehealth. Also, you cannot prescribe any drug via telehealth for a horse engaged in racing or training at a CHRB-regulated facility. (BPC, § 4826.6, subds. (i)(6), (i)(8).)",
+    //               example:
+    //                 "A trainer of a racehorse calls you for a telehealth consult. Because the horse is in training at a CHRB facility, you’re not allowed to prescribe any medication via telehealth. Similarly, if a cat needs a controlled pain medication, you must have performed an in-person exam first.",
+    //               helpText:
+    //                 "We flag attempts to prescribe controlled substances or xylazine if the patient’s record only shows a telehealth exam. We also prompt the user to confirm if the horse is under CHRB jurisdiction, blocking telehealth prescriptions if it is.",
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
 
-    RacehorseCHRBRestrictions: {
-      mainTitle: "Racehorse / CHRB Restrictions",
-      mainDescription: `California law places special restrictions on prescribing 
-    drugs for horses engaged in racing or training at facilities under the jurisdiction 
-    of the California Horse Racing Board (CHRB). (BPC, § 4826.6, subd. (i)(8).) Veterinarians 
-    providing telehealth services must confirm the horse’s status before prescribing 
-    any medication, as ignorance of the horse’s racing or training activities is 
-    not considered a valid defense.`,
-      sections: [
-        {
-          id: "faqCHRBNoTeleRx",
-          title: "No Telehealth Prescriptions for Racehorses",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a veterinarian prescribe medication via telehealth for a horse engaged in racing or training at a CHRB-regulated facility?",
-              answer:
-                "No. Under AB 1399 (BPC, § 4826.6, subd. (i)(8)), a veterinarian is prohibited from prescribing any drug or medication via telehealth if the horse is actively racing or training at a CHRB facility. This restriction applies even if you have an established VCPR through synchronous audio-video. An in-person examination is required for any prescription in these cases.",
-              example:
-                "A trainer requests medication for a racehorse that races at Santa Anita Park. If the horse is currently in training at that CHRB-regulated track, you cannot lawfully prescribe via telemedicine. Instead, you must see the horse in person before prescribing any medication.",
-              helpText:
-                "Our platform prompts you to confirm the horse’s racing status at the start of a telehealth consult. If the client indicates the horse is under CHRB jurisdiction, Vetcation automatically blocks new telehealth prescriptions and advises an in-person exam.",
-            },
-          ],
-        },
-        {
-          id: "faqCHRBUnknownStatus",
-          title: "Verifying the Horse’s Status",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What if a veterinarian unknowingly prescribes medication via telehealth to a horse that is racing or training under the CHRB?",
-              answer:
-                "The law states that the veterinarian’s lack of knowledge is irrelevant if the horse is later found to be racing or training. You must confirm the horse’s status before prescribing. (BPC, § 4826.6, subd. (i)(8).) If you fail to do so, you could be found in violation of AB 1399 even if you were unaware of the horse’s actual training or racing activities.",
-              example:
-                "A client might not mention the horse’s status, or they may provide incomplete information. If you do not document your inquiry and they’re later discovered to be at a CHRB facility, you may face penalties for unlawful telehealth prescribing.",
-              helpText:
-                "We require the client to disclose whether the horse is involved in CHRB-regulated racing or training. This Q&A is recorded in the patient file, providing proof that you verified the horse’s status. If the client answers 'yes,' Vetcation prevents you from issuing a telehealth prescription, helping you avoid regulatory violations.",
-            },
-          ],
-        },
-      ],
-    },
-    RecordKeepingDocumentation: {
-      mainTitle: "Record Keeping & Documentation",
-      mainDescription: `California veterinarians must keep comprehensive medical records for
-<span class="highlight">three years after the animal’s last visit or consultation</span>.
-(BPC §§ 4855–4856; 16 CCR § 2032.3). The FAQs below reflect those
-requirements and explain how Vetcation keeps you compliant.`,
-      sections: [
-        {
-          id: "faqBasicRetention",
-          title: "Retention Period",
-          blocks: [
-            {
-              type: "qa",
-              question: "How long must I retain medical records?",
-              answer: `You must retain records for three years <span class="highlight">after the patient’s last visit. (BPC § 4856).</span>`,
+    //     PrivacyConfidentiality: {
+    //       mainTitle: "Privacy & Confidentiality in Telemedicine",
+    //       mainDescription: `Under California law, veterinarians must ensure the privacy and confidentiality
+    //     of all client and patient information, whether in-person or via telehealth.
+    //     Business & Professions Code (BPC) § 4826.6(h)(1) requires secure technology for
+    //     telehealth services, while BPC § 4857 addresses the release of confidential records
+    //     and potential civil liability for negligence. The FAQs below clarify these obligations
+    //     and explain how Vetcation helps you comply.`,
+    //       sections: [
+    //         {
+    //           id: "faqPrivacyOverview",
+    //           title: "General Privacy Requirements",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What are the main privacy rules for telemedicine under AB 1399?",
+    //               answer:
+    //                 "Under BPC § 4826.6(h)(1), veterinarians must use technology and methods that protect confidential client and patient information during telehealth. Additionally, you must follow the same privacy and recordkeeping standards that apply to in-person care. If medical records exist, you must maintain their confidentiality and ensure they’re only accessed by authorized personnel. (BPC § 4857.)",
+    //               example:
+    //                 "If you store telemedicine session videos or chat logs, you must keep them secure — just like paper records in a physical clinic. This means using encrypted storage, limiting who can view them, and retaining them for the legally required duration.",
+    //               helpText:
+    //                 "Our platform uses end-to-end encryption for live video sessions and secure data storage for patient records. Only the assigned veterinarian and authorized team members can access these files, reducing the risk of accidental disclosure.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqCivilLiability",
+    //           title: "Civil Liability for Negligent Release",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What happens if a veterinarian accidentally discloses confidential information from a telemedicine session?",
+    //               answer:
+    //                 "BPC § 4857 states that a veterinarian can face civil liability for the negligent release of confidential information, in addition to any potential disciplinary action. This means a client could sue you in civil court for damages if their data was mishandled. The Veterinary Medical Board may not prosecute a privacy breach directly, but a civil suit could still be brought against you if you fail to safeguard client or patient information.",
+    //               example:
+    //                 "If a veterinarian’s unsecured laptop is stolen, revealing telemedicine session notes or client addresses, the vet could face a lawsuit if it’s proven they did not take reasonable steps to protect that data.",
+    //               helpText:
+    //                 "We implement role-based access controls, meaning only verified staff can view sensitive records. Vetcation also provides secure sign-in and logs all user activity. This helps you prove you took proper precautions if a dispute arises.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqAIProcessing",
+    //           title: "AI-Assisted Medical Records & Appointment Summaries",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "How does using AI to process audio or video from telemedicine sessions affect privacy and confidentiality, especially if the platform also generates an appointment summary for the client?",
+    //               answer:
+    //                 "Any AI feature that processes telemedicine audio or video must comply with the same confidentiality requirements as traditional recordkeeping. This includes creating both the official medical record (for the veterinarian) and a shareable appointment summary (for the client). You should obtain informed consent from both the client and any participating veterinary staff before capturing or processing any recordings. While California law does not prohibit AI usage, the veterinarian is still responsible for ensuring the data is stored securely, access is restricted to authorized personnel, and no unauthorized disclosures occur. (BPC §§ 4826.6(h)(1), 4857.)",
+    //               example:
+    //                 "If you plan to record the audio from a live consult and use AI to generate a medical record, you must notify the client that their session is being recorded and processed. If they decline, you cannot record or process their session. Consent is essential, and all data must remain encrypted and access-controlled.",
+    //               helpText:
+    //                 "Our AI operates on secure, internal servers — no third-party cloud providers. We encrypt audio files and transcripts, then generate two separate documents: (1) a detailed medical record for the veterinarian’s files, and (2) a concise appointment summary for the client’s portal. Before the AI feature is enabled, Vetcation prompts you to confirm that the client has agreed to have their session recorded and processed, preventing any inadvertent privacy violations.",
+    //             },
+    //           ],
+    //         },
+    //         // ...Add more FAQs if needed...
+    //       ],
+    //     },
 
-              example:
-                "If you treat a dog in Jan 2025 and never see it again, you may discard" +
-                " the record in Jan 2028.",
-              helpText:
-                "Vetcation automatically tracks the last-visit date and tags records" +
-                " for destruction reminders.",
-            },
-          ],
-        },
-        {
-          id: "faqContentOfRecords",
-          title: "Required Content (16 CCR § 2032.3)",
-          blocks: [
-            {
-              type: "qa",
-              question: "What details must be included?",
-              answer:
-                "Per <strong>Cal. Code Regs., tit. 16, § 2032.3(a)</strong>, every medical record must be legible and contain:<br>" +
-                "(1) Name or initials of the person responsible for entries.<br>" +
-                "(2) Name, address and phone number of the client.<br>" +
-                "(3) Name or identity of the animal, herd or flock.<br>" +
-                "(4) (Except for herds or flocks) age, sex, breed, species, and color of the animal.<br>" +
-                "(5) Dates (beginning and ending) of custody of the animal, if applicable.<br>" +
-                "(6) A history or pertinent information as it pertains to each animal, herd, or flock’s medical status.<br>" +
-                "(7) Data, including that obtained by instrumentation, from the physical examination.<br>" +
-                "(8) Treatment and intended treatment plan, including medications, dosages, <em>route of administration</em>, and <em>frequency of use</em>.<br>" +
-                "(9) For surgical procedures: description of the procedure, name of the surgeon, sedative/anesthetic agents used, their route of administration, and strength if available in more than one strength.<br>" +
-                "(10) Diagnosis or assessment prior to performing a treatment or procedure.<br>" +
-                "(11) If relevant, a prognosis of the animal’s condition.<br>" +
-                "(12) All medications and treatments prescribed and dispensed, including strength, dosage, route of administration, quantity, and frequency of use.<br>" +
-                "(13) Daily progress, if relevant, and disposition of the case.",
-              example: `
-        <ul>
-          <li><strong>Telehealth consult – 5 Apr 2025</strong></li>
-          <li>(1) Entry by Dr. G. Chen (GC)</li>
-          <li>(2) Client: Jane Smith, 123 Maple Ave, Los Angeles CA 90001; (310) 555-1234</li>
-          <li>(3) Patient: “Buddy,” individual dog</li>
-          <li>(4) Labrador Retriever, male/neutered, 4 yrs, yellow coat</li>
-          <li>(5) Custody dates: 5 Apr 2025 – ongoing</li>
-          <li>(6) History: 3-day left-ear discharge & scratching</li>
-          <li>(7) Exam data: Otoscopic – erythematous canal, brown exudate; Temp 101.4 °F</li>
-          <li>(8) Plan: Ear flush today; <strong>gentamicin-betamethasone otic drops</strong> 2 gtt AU <em>BID</em> × 7 d</li>
-          <li>(9) N/A – no surgery performed</li>
-          <li>(10) Diagnosis: Otitis externa (bacterial/yeast)</li>
-          <li>(11) Prognosis: Good</li>
-          <li>(12) Medication dispensed: gentamicin-betamethasone 5 mL; strength 3 mg/mL; 2 gtt AU BID × 7 d</li>
-          <li>(13) Daily progress (Day 1): Owner reports mild pruritus; no adverse effects</li>
-        </ul>
-      `,
-              helpText:
-                "Vetcation’s note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
-            },
-          ],
-        },
-        {
-          id: "faqProvidingRecords",
-          title: "Providing Records / Summaries",
-          blocks: [
-            {
-              type: "qa",
-              question: "Can I give a summary instead of the full record?",
-              answer:
-                "Yes. <strong>Cal. Code Regs., tit. 16, § 2032.3(b)</strong> states:<br>" +
-                "• Records must be kept for <em>three years after the animal’s last visit</em>.<br>" +
-                "• A summary of an animal’s medical records shall be made available to the client <em>within five (5) days</em>—or sooner if the animal is critical—upon request.<br>" +
-                "The summary must include:<br>" +
-                "(1) Name and address of client and animal.<br>" +
-                "(2) Age, sex, breed, species, and color of the animal.<br>" +
-                "(3) History or pertinent information as it pertains to the animal’s medical status.<br>" +
-                "(4) Data, including that obtained by instrumentation, from the physical examination.<br>" +
-                "(5) Treatment and intended treatment plan, including medications, their dosage and frequency of use.<br>" +
-                "(6) All medications and treatments prescribed and dispensed, including strength, dosage, <em>route of administration</em>, quantity, and frequency of use.<br>" +
-                "(7) Daily progress, if relevant, and disposition of the case.",
-              example: `
-        <ul>
-          <li><strong>Client/Animal:</strong> Jane Smith, 123 Maple Ave, LA CA 90001 / “Buddy,” Labrador, M/N, 4 yrs, yellow</li>
-          <li><strong>History:</strong> Three-day left-ear discharge & scratching</li>
-          <li><strong>Exam data:</strong> Otoscopic—erythema, brown exudate; Temp 101.4 °F</li>
-          <li><strong>Treatment plan:</strong> Ear flush today; <em>gentamicin-betamethasone drops</em>—strength 3 mg/mL; 2 gtt AU <em>BID × 7 d</em></li>
-          <li><strong>Medications dispensed:</strong> Gentamicin-betamethasone 5 mL bottle; 2 gtt AU BID × 7 d (route: otic; quantity: 1 bottle)</li>
-          <li><strong>Progress:</strong> Day 1—mild pruritus, no adverse effects</li>
-          <li><strong>Disposition:</strong> Re-check video call in 1 week</li>
-        </ul>
-      `,
-              helpText:
-                "Vetcation’s >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
-            },
-          ],
-        },
-        {
-          id: "faqTelehealthVsInPerson",
-          title: "Telehealth vs. In-Person Records",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Are the recordkeeping requirements different for telehealth appointments compared to in-person visits?",
-              answer:
-                "No. You must maintain the same standard of documentation regardless of how the VCPR was established or how the consultation took place. The law treats telehealth records the same as in-person records in terms of confidentiality, retention, and content. (BPC §§ 4855, 4856.)",
-              example:
-                "Whether you physically examine a cat at your clinic or diagnose it via synchronous audio-video, you must record your findings, treatment plan, and client communications in the same level of detail.",
-              helpText:
-                "Our platform seamlessly integrates telehealth records with any in-person data you upload, so your patient’s file remains complete and consistent.",
-            },
-          ],
-        },
-      ],
-    },
-    MiscellaneousClarifications: {
-      mainTitle: "Additional FAQs & Clarifications",
-      mainDescription: `Below are extra questions and answers addressing corner cases and nuanced
-      scenarios that may still be confusing under California’s AB 1399. While not
-      specifically addressed in the earlier sections, these clarifications can help
-      veterinarians navigate unique or evolving circumstances in telehealth practice.`,
-      sections: [
-        {
-          id: "faqMultiStateLicense",
-          title: "Multiple State Licenses & Traveling Patients",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can a California-licensed veterinarian continue providing telehealth to a pet that travels out of California?",
-              answer:
-                "No. A California license only authorizes telehealth services when the animal is physically in California. If the pet leaves California, only a veterinarian licensed in the state where the pet is located may provide telehealth— and only if that state’s laws permit it.",
-              example:
-                "<ul>" +
-                "<li><strong>Scenario:</strong> Buddy travels with his owner from Los Angeles to Portland.</li>" +
-                "<li><strong>CA Vet:</strong> Cannot continue telehealth consults while Buddy is in Oregon.</li>" +
-                "<li><strong>OR Vet:</strong> May provide telehealth only if licensed in Oregon and if Oregon telehealth rules allow it.</li>" +
-                "</ul>",
-              helpText:
-                "Vetcation’s scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
-            },
-          ],
-        },
-        {
-          id: "faqNoSynchronousVideo",
-          title: "Telehealth Without Video (Phone or Text Only)",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "If I only speak with a client on the phone (or by text/email) and never see the animal via video or in person, does that count as telehealth under AB 1399?",
-              answer:
-                "Yes, these communications can still be considered telehealth, but you cannot establish a valid VCPR solely through non-visual means (phone, email, or text). Under AB 1399, the veterinarian must use synchronous audio-video to perform an exam if the VCPR hasn’t already been established in person. Phone calls, emails, or text messages may supplement an existing VCPR, but they cannot replace the initial real-time video or in-person exam requirements. (BPC, § 4826.6, subds. (b)(2), (d).)",
-              example:
-                "A client calls you about their dog’s cough but you’ve never met the animal. Messaging guidance alone cannot establish a new VCPR — you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
-              helpText:
-                "Vetcation supports text or chat-based follow-ups for minor adjustments once the VCPR is formed (via in-person or synchronous video). Our interface keeps a clear record of these communications, ensuring continuity of care without violating AB 1399.",
-            },
-          ],
-        },
-        {
-          id: "faqInconclusiveExam",
-          title: "When Telehealth Exam Is Inconclusive",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What if I attempt a telehealth exam via live video but find I cannot accurately diagnose or assess the animal’s condition? Am I required to refer them for an in-person exam?",
-              answer:
-                "Yes. If, at any point, you determine that a telehealth exam (even synchronous audio-video) is insufficient to meet the standard of care, you must advise the client to schedule an in-person visit. Telehealth is only permissible when it allows you to gather enough information to make safe, informed medical decisions. If that isn’t possible, continuing solely via telehealth would be inappropriate — and could subject you to disciplinary action if an error occurs. (BPC, § 4826.6, subd. (c).)",
-              example:
-                "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
-              helpText:
-                "Vetcation’s platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
-            },
-          ],
-        },
-        {
-          id: "faqSecondOpinion",
-          title: "Second Opinions Via Telehealth",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Can I provide a telehealth-based second opinion directly to the client when another veterinarian already has a VCPR?",
-              answer:
-                "No—unless you fall within the limited shared-practice exception in 16 CCR § 2032.15 (e.g., you and the primary veterinarian work at the same physical location and you have full access to the chart). A veterinarian-to-veterinarian consult is always allowed, but giving advice or prescriptions directly to the owner requires you to establish your own VCPR.",
-              example:
-                "The primary vet emails you radiographs for input. You may discuss findings with that vet, but you may not video-chat with the owner or prescribe medication unless you first establish your own VCPR or the § 2032.15 exception applies.",
-              helpText:
-                "Vetcation supports true peer-to-peer consults by limiting direct client access until you open a compliant VCPR encounter.",
-            },
-          ],
-        },
-        {
-          id: "faqEuthanasia",
-          title: "Euthanasia Considerations via Telehealth",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Is it legal to perform euthanasia or guide a client through it via telehealth?",
-              answer:
-                "No. Because controlled substances are involved and a VCPR formed solely by telehealth cannot support prescribing or administering those drugs, euthanasia must be performed in person under a valid in-person VCPR. (BPC § 4826.6(i)(6)).",
-              example:
-                "A rural client requests video guidance to administer pentobarbital. You must decline and refer them to an in-person service.",
-              helpText:
-                "If a client raises the request inside Vetcation, the system displays a canned message explaining that euthanasia requires an on-site veterinarian.",
-            },
-          ],
-        },
-        {
-          id: "faqVetLocationRegistration",
-          title: "Telehealth From an Unregistered Home Office",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Do I need a registered veterinary premises if I practice only by telehealth?",
-              answer:
-                `Under B&P § 4853(h), the location where you practice telehealth is exempt from the registration requirement <span class="highlight">only if</span> you satisfy <span class="highlight">all</span> of the following:<br>` +
-                `1. You do <span class="highlight">not</span> perform any in-person examinations or treatments at that location;<br>` +
-                `2. You keep <span class="highlight">no</span> veterinary drugs, medicines, appliances, or medical equipment there;<br>` +
-                "3. You create, maintain, and store all medical records (per §§ 4855 & 4856) so they’re protected from unauthorized access, damage, or loss;<br>" +
-                "4. Any electronic publication (e.g. your website) where you offer services must prominently display:<br>" +
-                "&nbsp;&nbsp;&nbsp;a. Your name, contact information, and California license number;<br>" +
-                "&nbsp;&nbsp;&nbsp;b. Instructions for clients to obtain copies of their medical records;<br>" +
-                "&nbsp;&nbsp;&nbsp;c. A statement that clients may contact the Veterinary Medical Board with questions or complaints.<br>" +
-                `If <span class="highlight">any</span> of these conditions aren’t met, you must register the location as a veterinary premises under §§ 4853(a)–(c).`,
-              example: `<ul>
-           <li><strong>Scenario:</strong> You consult exclusively via video from your home office.</li>
-           <li>You never see patients in person there.</li>
-           <li>You store no drugs or equipment on-site.</li>
-           <li>All records are encrypted and access-controlled off-site.</li>
-           <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 515-5220 for questions.”</li>
-         </ul>`,
-              helpText:
-                "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
-            },
-          ],
-        },
-        {
-          id: "faqClinicPremises",
-          title: "Telehealth From a Registered Clinic",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "Our clinic already has a California Premises Permit. Do our veterinarians need a separate registration to use Vetcation for telehealth?",
-              answer: `No. When telehealth is delivered <span class="highlight">from an address that already holds a valid Veterinary Premises Permit</span>, the location is \u003cstrong\u003ealready\u003c/strong\u003e registered under B&P §§ 4853 (a)–(c). The § 4853(h) exemption is irrelevant because the clinic is not an unregistered site.`,
-              example: `<ul>
-        <li><strong>Scenario:</strong> Maple Veterinary Hospital (Premises #VET-1234) adds video visits via Vetcation.</li>
-        <li>All telehealth sessions originate from the clinic building.</li>
-        <li>No extra premises paperwork is required—the existing permit covers on-site, mobile, and telehealth care.</li>
-      </ul>`,
-              helpText:
-                "During onboarding, clinic admins simply enter the existing Premises Permit number. Vetcation records the permit and allows all associated vets to begin video consults immediately.",
-            },
-          ],
-        },
-        {
-          id: "faqMixedWorkflows",
-          title: "Mixed Workflows: Clinic & Home Office",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "What if I sometimes consult from the clinic and sometimes from my home office?",
-              answer: `When you consult <span class="highlight">inside the registered clinic</span>, you are covered by that premises permit. When you consult <span class="highlight">from home</span>, your home office must either meet <strong>all</strong> four conditions in B&P § 4853(h) <em>or</em> be registered as a separate premises.`,
-              example: `<ul>
-        <li>Clinic shift   →  video visit from Maple Veterinary Hospital (covered under Premises #VET-1234).</li>
-        <li>Evening shift  →  video visit from your home office.</li>
-        <li>Home office complies with § 4853(h): no in-person exams, no drugs on site, cloud-based records, required footer posted.</li>
-        <li>If you ever stock medications at home, the exemption is lost and a home-office premises registration is mandatory.</li>
-      </ul>`,
-              helpText:
-                "Vetcation lets you tag each telehealth session with its originating location. If you select “Home Office,” the platform runs the § 4853(h) checklist; if any item fails, it warns you to register the site before scheduling new sessions.",
-            },
-          ],
-        },
-      ],
-    },
+    //     RacehorseCHRBRestrictions: {
+    //       mainTitle: "Racehorse / CHRB Restrictions",
+    //       mainDescription: `California law places special restrictions on prescribing
+    //     drugs for horses engaged in racing or training at facilities under the jurisdiction
+    //     of the California Horse Racing Board (CHRB). (BPC, § 4826.6, subd. (i)(8).) Veterinarians
+    //     providing telehealth services must confirm the horse’s status before prescribing
+    //     any medication, as ignorance of the horse’s racing or training activities is
+    //     not considered a valid defense.`,
+    //       sections: [
+    //         {
+    //           id: "faqCHRBNoTeleRx",
+    //           title: "No Telehealth Prescriptions for Racehorses",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a veterinarian prescribe medication via telehealth for a horse engaged in racing or training at a CHRB-regulated facility?",
+    //               answer:
+    //                 "No. Under AB 1399 (BPC, § 4826.6, subd. (i)(8)), a veterinarian is prohibited from prescribing any drug or medication via telehealth if the horse is actively racing or training at a CHRB facility. This restriction applies even if you have an established VCPR through synchronous audio-video. An in-person examination is required for any prescription in these cases.",
+    //               example:
+    //                 "A trainer requests medication for a racehorse that races at Santa Anita Park. If the horse is currently in training at that CHRB-regulated track, you cannot lawfully prescribe via telemedicine. Instead, you must see the horse in person before prescribing any medication.",
+    //               helpText:
+    //                 "Our platform prompts you to confirm the horse’s racing status at the start of a telehealth consult. If the client indicates the horse is under CHRB jurisdiction, Vetcation automatically blocks new telehealth prescriptions and advises an in-person exam.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqCHRBUnknownStatus",
+    //           title: "Verifying the Horse’s Status",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What if a veterinarian unknowingly prescribes medication via telehealth to a horse that is racing or training under the CHRB?",
+    //               answer:
+    //                 "The law states that the veterinarian’s lack of knowledge is irrelevant if the horse is later found to be racing or training. You must confirm the horse’s status before prescribing. (BPC, § 4826.6, subd. (i)(8).) If you fail to do so, you could be found in violation of AB 1399 even if you were unaware of the horse’s actual training or racing activities.",
+    //               example:
+    //                 "A client might not mention the horse’s status, or they may provide incomplete information. If you do not document your inquiry and they’re later discovered to be at a CHRB facility, you may face penalties for unlawful telehealth prescribing.",
+    //               helpText:
+    //                 "We require the client to disclose whether the horse is involved in CHRB-regulated racing or training. This Q&A is recorded in the patient file, providing proof that you verified the horse’s status. If the client answers 'yes,' Vetcation prevents you from issuing a telehealth prescription, helping you avoid regulatory violations.",
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //     RecordKeepingDocumentation: {
+    //       mainTitle: "Record Keeping & Documentation",
+    //       mainDescription: `California veterinarians must keep comprehensive medical records for
+    // <span class="highlight">three years after the animal’s last visit or consultation</span>.
+    // (BPC §§ 4855–4856; 16 CCR § 2032.3). The FAQs below reflect those
+    // requirements and explain how Vetcation keeps you compliant.`,
+    //       sections: [
+    //         {
+    //           id: "faqBasicRetention",
+    //           title: "Retention Period",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question: "How long must I retain medical records?",
+    //               answer: `You must retain records for three years <span class="highlight">after the patient’s last visit. (BPC § 4856).</span>`,
+
+    //               example:
+    //                 "If you treat a dog in Jan 2025 and never see it again, you may discard" +
+    //                 " the record in Jan 2028.",
+    //               helpText:
+    //                 "Vetcation automatically tracks the last-visit date and tags records" +
+    //                 " for destruction reminders.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqContentOfRecords",
+    //           title: "Required Content (16 CCR § 2032.3)",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question: "What details must be included?",
+    //               answer:
+    //                 "Per <strong>Cal. Code Regs., tit. 16, § 2032.3(a)</strong>, every medical record must be legible and contain:<br>" +
+    //                 "(1) Name or initials of the person responsible for entries.<br>" +
+    //                 "(2) Name, address and phone number of the client.<br>" +
+    //                 "(3) Name or identity of the animal, herd or flock.<br>" +
+    //                 "(4) (Except for herds or flocks) age, sex, breed, species, and color of the animal.<br>" +
+    //                 "(5) Dates (beginning and ending) of custody of the animal, if applicable.<br>" +
+    //                 "(6) A history or pertinent information as it pertains to each animal, herd, or flock’s medical status.<br>" +
+    //                 "(7) Data, including that obtained by instrumentation, from the physical examination.<br>" +
+    //                 "(8) Treatment and intended treatment plan, including medications, dosages, <em>route of administration</em>, and <em>frequency of use</em>.<br>" +
+    //                 "(9) For surgical procedures: description of the procedure, name of the surgeon, sedative/anesthetic agents used, their route of administration, and strength if available in more than one strength.<br>" +
+    //                 "(10) Diagnosis or assessment prior to performing a treatment or procedure.<br>" +
+    //                 "(11) If relevant, a prognosis of the animal’s condition.<br>" +
+    //                 "(12) All medications and treatments prescribed and dispensed, including strength, dosage, route of administration, quantity, and frequency of use.<br>" +
+    //                 "(13) Daily progress, if relevant, and disposition of the case.",
+    //               example: `
+    //         <ul>
+    //           <li><strong>Telehealth consult – 5 Apr 2025</strong></li>
+    //           <li>(1) Entry by Dr. G. Chen (GC)</li>
+    //           <li>(2) Client: Jane Smith, 123 Maple Ave, Los Angeles CA 90001; (310) 555-1234</li>
+    //           <li>(3) Patient: “Buddy,” individual dog</li>
+    //           <li>(4) Labrador Retriever, male/neutered, 4 yrs, yellow coat</li>
+    //           <li>(5) Custody dates: 5 Apr 2025 – ongoing</li>
+    //           <li>(6) History: 3-day left-ear discharge & scratching</li>
+    //           <li>(7) Exam data: Otoscopic – erythematous canal, brown exudate; Temp 101.4 °F</li>
+    //           <li>(8) Plan: Ear flush today; <strong>gentamicin-betamethasone otic drops</strong> 2 gtt AU <em>BID</em> × 7 d</li>
+    //           <li>(9) N/A – no surgery performed</li>
+    //           <li>(10) Diagnosis: Otitis externa (bacterial/yeast)</li>
+    //           <li>(11) Prognosis: Good</li>
+    //           <li>(12) Medication dispensed: gentamicin-betamethasone 5 mL; strength 3 mg/mL; 2 gtt AU BID × 7 d</li>
+    //           <li>(13) Daily progress (Day 1): Owner reports mild pruritus; no adverse effects</li>
+    //         </ul>
+    //       `,
+    //               helpText:
+    //                 "Vetcation’s note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqProvidingRecords",
+    //           title: "Providing Records / Summaries",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question: "Can I give a summary instead of the full record?",
+    //               answer:
+    //                 "Yes. <strong>Cal. Code Regs., tit. 16, § 2032.3(b)</strong> states:<br>" +
+    //                 "• Records must be kept for <em>three years after the animal’s last visit</em>.<br>" +
+    //                 "• A summary of an animal’s medical records shall be made available to the client <em>within five (5) days</em>—or sooner if the animal is critical—upon request.<br>" +
+    //                 "The summary must include:<br>" +
+    //                 "(1) Name and address of client and animal.<br>" +
+    //                 "(2) Age, sex, breed, species, and color of the animal.<br>" +
+    //                 "(3) History or pertinent information as it pertains to the animal’s medical status.<br>" +
+    //                 "(4) Data, including that obtained by instrumentation, from the physical examination.<br>" +
+    //                 "(5) Treatment and intended treatment plan, including medications, their dosage and frequency of use.<br>" +
+    //                 "(6) All medications and treatments prescribed and dispensed, including strength, dosage, <em>route of administration</em>, quantity, and frequency of use.<br>" +
+    //                 "(7) Daily progress, if relevant, and disposition of the case.",
+    //               example: `
+    //         <ul>
+    //           <li><strong>Client/Animal:</strong> Jane Smith, 123 Maple Ave, LA CA 90001 / “Buddy,” Labrador, M/N, 4 yrs, yellow</li>
+    //           <li><strong>History:</strong> Three-day left-ear discharge & scratching</li>
+    //           <li><strong>Exam data:</strong> Otoscopic—erythema, brown exudate; Temp 101.4 °F</li>
+    //           <li><strong>Treatment plan:</strong> Ear flush today; <em>gentamicin-betamethasone drops</em>—strength 3 mg/mL; 2 gtt AU <em>BID × 7 d</em></li>
+    //           <li><strong>Medications dispensed:</strong> Gentamicin-betamethasone 5 mL bottle; 2 gtt AU BID × 7 d (route: otic; quantity: 1 bottle)</li>
+    //           <li><strong>Progress:</strong> Day 1—mild pruritus, no adverse effects</li>
+    //           <li><strong>Disposition:</strong> Re-check video call in 1 week</li>
+    //         </ul>
+    //       `,
+    //               helpText:
+    //                 "Vetcation’s >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqTelehealthVsInPerson",
+    //           title: "Telehealth vs. In-Person Records",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Are the recordkeeping requirements different for telehealth appointments compared to in-person visits?",
+    //               answer:
+    //                 "No. You must maintain the same standard of documentation regardless of how the VCPR was established or how the consultation took place. The law treats telehealth records the same as in-person records in terms of confidentiality, retention, and content. (BPC §§ 4855, 4856.)",
+    //               example:
+    //                 "Whether you physically examine a cat at your clinic or diagnose it via synchronous audio-video, you must record your findings, treatment plan, and client communications in the same level of detail.",
+    //               helpText:
+    //                 "Our platform seamlessly integrates telehealth records with any in-person data you upload, so your patient’s file remains complete and consistent.",
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //     MiscellaneousClarifications: {
+    //       mainTitle: "Additional FAQs & Clarifications",
+    //       mainDescription: `Below are extra questions and answers addressing corner cases and nuanced
+    //       scenarios that may still be confusing under California’s AB 1399. While not
+    //       specifically addressed in the earlier sections, these clarifications can help
+    //       veterinarians navigate unique or evolving circumstances in telehealth practice.`,
+    //       sections: [
+    //         {
+    //           id: "faqMultiStateLicense",
+    //           title: "Multiple State Licenses & Traveling Patients",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can a California-licensed veterinarian continue providing telehealth to a pet that travels out of California?",
+    //               answer:
+    //                 "No. A California license only authorizes telehealth services when the animal is physically in California. If the pet leaves California, only a veterinarian licensed in the state where the pet is located may provide telehealth— and only if that state’s laws permit it.",
+    //               example:
+    //                 "<ul>" +
+    //                 "<li><strong>Scenario:</strong> Buddy travels with his owner from Los Angeles to Portland.</li>" +
+    //                 "<li><strong>CA Vet:</strong> Cannot continue telehealth consults while Buddy is in Oregon.</li>" +
+    //                 "<li><strong>OR Vet:</strong> May provide telehealth only if licensed in Oregon and if Oregon telehealth rules allow it.</li>" +
+    //                 "</ul>",
+    //               helpText:
+    //                 "Vetcation’s scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqNoSynchronousVideo",
+    //           title: "Telehealth Without Video (Phone or Text Only)",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "If I only speak with a client on the phone (or by text/email) and never see the animal via video or in person, does that count as telehealth under AB 1399?",
+    //               answer:
+    //                 "Yes, these communications can still be considered telehealth, but you cannot establish a valid VCPR solely through non-visual means (phone, email, or text). Under AB 1399, the veterinarian must use synchronous audio-video to perform an exam if the VCPR hasn’t already been established in person. Phone calls, emails, or text messages may supplement an existing VCPR, but they cannot replace the initial real-time video or in-person exam requirements. (BPC, § 4826.6, subds. (b)(2), (d).)",
+    //               example:
+    //                 "A client calls you about their dog’s cough but you’ve never met the animal. Messaging guidance alone cannot establish a new VCPR — you’d either need to see the dog in person or conduct a live video exam before diagnosing or prescribing.",
+    //               helpText:
+    //                 "Vetcation supports text or chat-based follow-ups for minor adjustments once the VCPR is formed (via in-person or synchronous video). Our interface keeps a clear record of these communications, ensuring continuity of care without violating AB 1399.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqInconclusiveExam",
+    //           title: "When Telehealth Exam Is Inconclusive",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What if I attempt a telehealth exam via live video but find I cannot accurately diagnose or assess the animal’s condition? Am I required to refer them for an in-person exam?",
+    //               answer:
+    //                 "Yes. If, at any point, you determine that a telehealth exam (even synchronous audio-video) is insufficient to meet the standard of care, you must advise the client to schedule an in-person visit. Telehealth is only permissible when it allows you to gather enough information to make safe, informed medical decisions. If that isn’t possible, continuing solely via telehealth would be inappropriate — and could subject you to disciplinary action if an error occurs. (BPC, § 4826.6, subd. (c).)",
+    //               example:
+    //                 "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
+    //               helpText:
+    //                 "Vetcation’s platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqSecondOpinion",
+    //           title: "Second Opinions Via Telehealth",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Can I provide a telehealth-based second opinion directly to the client when another veterinarian already has a VCPR?",
+    //               answer:
+    //                 "No—unless you fall within the limited shared-practice exception in 16 CCR § 2032.15 (e.g., you and the primary veterinarian work at the same physical location and you have full access to the chart). A veterinarian-to-veterinarian consult is always allowed, but giving advice or prescriptions directly to the owner requires you to establish your own VCPR.",
+    //               example:
+    //                 "The primary vet emails you radiographs for input. You may discuss findings with that vet, but you may not video-chat with the owner or prescribe medication unless you first establish your own VCPR or the § 2032.15 exception applies.",
+    //               helpText:
+    //                 "Vetcation supports true peer-to-peer consults by limiting direct client access until you open a compliant VCPR encounter.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqEuthanasia",
+    //           title: "Euthanasia Considerations via Telehealth",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Is it legal to perform euthanasia or guide a client through it via telehealth?",
+    //               answer:
+    //                 "No. Because controlled substances are involved and a VCPR formed solely by telehealth cannot support prescribing or administering those drugs, euthanasia must be performed in person under a valid in-person VCPR. (BPC § 4826.6(i)(6)).",
+    //               example:
+    //                 "A rural client requests video guidance to administer pentobarbital. You must decline and refer them to an in-person service.",
+    //               helpText:
+    //                 "If a client raises the request inside Vetcation, the system displays a canned message explaining that euthanasia requires an on-site veterinarian.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqVetLocationRegistration",
+    //           title: "Telehealth From an Unregistered Home Office",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Do I need a registered veterinary premises if I practice only by telehealth?",
+    //               answer:
+    //                 `Under B&P § 4853(h), the location where you practice telehealth is exempt from the registration requirement <span class="highlight">only if</span> you satisfy <span class="highlight">all</span> of the following:<br>` +
+    //                 `1. You do <span class="highlight">not</span> perform any in-person examinations or treatments at that location;<br>` +
+    //                 `2. You keep <span class="highlight">no</span> veterinary drugs, medicines, appliances, or medical equipment there;<br>` +
+    //                 "3. You create, maintain, and store all medical records (per §§ 4855 & 4856) so they’re protected from unauthorized access, damage, or loss;<br>" +
+    //                 "4. Any electronic publication (e.g. your website) where you offer services must prominently display:<br>" +
+    //                 "&nbsp;&nbsp;&nbsp;a. Your name, contact information, and California license number;<br>" +
+    //                 "&nbsp;&nbsp;&nbsp;b. Instructions for clients to obtain copies of their medical records;<br>" +
+    //                 "&nbsp;&nbsp;&nbsp;c. A statement that clients may contact the Veterinary Medical Board with questions or complaints.<br>" +
+    //                 `If <span class="highlight">any</span> of these conditions aren’t met, you must register the location as a veterinary premises under §§ 4853(a)–(c).`,
+    //               example: `<ul>
+    //            <li><strong>Scenario:</strong> You consult exclusively via video from your home office.</li>
+    //            <li>You never see patients in person there.</li>
+    //            <li>You store no drugs or equipment on-site.</li>
+    //            <li>All records are encrypted and access-controlled off-site.</li>
+    //            <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 515-5220 for questions.”</li>
+    //          </ul>`,
+    //               helpText:
+    //                 "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqClinicPremises",
+    //           title: "Telehealth From a Registered Clinic",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "Our clinic already has a California Premises Permit. Do our veterinarians need a separate registration to use Vetcation for telehealth?",
+    //               answer: `No. When telehealth is delivered <span class="highlight">from an address that already holds a valid Veterinary Premises Permit</span>, the location is \u003cstrong\u003ealready\u003c/strong\u003e registered under B&P §§ 4853 (a)–(c). The § 4853(h) exemption is irrelevant because the clinic is not an unregistered site.`,
+    //               example: `<ul>
+    //         <li><strong>Scenario:</strong> Maple Veterinary Hospital (Premises #VET-1234) adds video visits via Vetcation.</li>
+    //         <li>All telehealth sessions originate from the clinic building.</li>
+    //         <li>No extra premises paperwork is required—the existing permit covers on-site, mobile, and telehealth care.</li>
+    //       </ul>`,
+    //               helpText:
+    //                 "During onboarding, clinic admins simply enter the existing Premises Permit number. Vetcation records the permit and allows all associated vets to begin video consults immediately.",
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           id: "faqMixedWorkflows",
+    //           title: "Mixed Workflows: Clinic & Home Office",
+    //           blocks: [
+    //             {
+    //               type: "qa",
+    //               question:
+    //                 "What if I sometimes consult from the clinic and sometimes from my home office?",
+    //               answer: `When you consult <span class="highlight">inside the registered clinic</span>, you are covered by that premises permit. When you consult <span class="highlight">from home</span>, your home office must either meet <strong>all</strong> four conditions in B&P § 4853(h) <em>or</em> be registered as a separate premises.`,
+    //               example: `<ul>
+    //         <li>Clinic shift   →  video visit from Maple Veterinary Hospital (covered under Premises #VET-1234).</li>
+    //         <li>Evening shift  →  video visit from your home office.</li>
+    //         <li>Home office complies with § 4853(h): no in-person exams, no drugs on site, cloud-based records, required footer posted.</li>
+    //         <li>If you ever stock medications at home, the exemption is lost and a home-office premises registration is mandatory.</li>
+    //       </ul>`,
+    //               helpText:
+    //                 "Vetcation lets you tag each telehealth session with its originating location. If you select “Home Office,” the platform runs the § 4853(h) checklist; if any item fails, it warns you to register the site before scheduling new sessions.",
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
   },
 
   // corporations: {
@@ -6409,5 +6409,20 @@ requirements and explain how Vetcation keeps you compliant.`,
 
   // Similarly for the other topNav items...
 };
+
+const sharedKeys = [
+  "Bill1399",
+  "VCPR",
+  "PrescriptionLimits",
+  "PrivacyConfidentiality",
+  "RacehorseCHRBRestrictions",
+  "RecordKeepingDocumentation",
+  "MiscellaneousClarifications",
+];
+
+sharedKeys.forEach((k) => {
+  contentData.corporations[k] = contentData.home[k];
+  contentData.clinics[k] = contentData.home[k];
+});
 
 export default contentData;
