@@ -9,7 +9,7 @@
 const contentData = {
   home: {
     introToVetcation: {
-      mainTitle: "Introduction to Vetcation",
+      mainTitle: "Introduction for Veterinarians",
       mainDescription: `Vetcation is a legally compliant platform that empowers California-licensed veterinarians to launch your own virtual clinic, retain full ownership of clients, patient records, and revenue, and collaborate with clinics to provide telemedicine services. Our mission is to end burnout, build professional and lasting relationships with pet owners, and restore professional autonomy for veterinarians.`,
       sections: [
         {
@@ -3585,7 +3585,7 @@ requirements and explain how Vetcation keeps you compliant.`,
 
   clinics: {
     clinicIntroToVetcation: {
-      mainTitle: "Introduction to Vetcation",
+      mainTitle: "Introduction for Clinics",
       mainDescription: `Vetcation enables California veterinary hospitals to launch a legally compliant hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share. When escalation to in-person care is needed, your hospital takes over using your standard workflows. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
       sections: [
         {

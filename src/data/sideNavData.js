@@ -5,7 +5,7 @@ const sideNavData = {
       items: [
         {
           id: "introToVetcation",
-          label: "Intro to Vetcation",
+          label: "Introduction for Veterinarians",
         },
         {
           id: "VirtualClinic",
@@ -209,7 +209,7 @@ const sideNavData = {
     },
   ],
 
-  Onehealth: [
+  onehealth: [
     {
       groupTitle: "Overview",
       items: [
@@ -237,7 +237,7 @@ const sideNavData = {
       items: [
         {
           id: "clinicIntroToVetcation",
-          label: "Intro to Vetcation",
+          label: "Introduction for Clinics",
         },
         {
           id: "VirtualBranch",
@@ -288,7 +288,7 @@ const sideNavData = {
       items: [
         {
           id: "corpIntroToVetcation",
-          label: "Intro to Vetcation",
+          label: "Introduction for Corporate Veterinary Groups",
         },
       ],
     },
