@@ -282,6 +282,18 @@ const sideNavData = {
     },
   ],
 
+  corporations: [
+    {
+      groupTitle: "GET STARTED",
+      items: [
+        {
+          id: "corpIntroToVetcation",
+          label: "Intro to Vetcation",
+        },
+      ],
+    },
+  ],
+
   rvts: [
     {
       groupTitle: "RVT",
