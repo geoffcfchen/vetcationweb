@@ -22,7 +22,7 @@ const contentData = {
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem are the solution we have built to solve this issue, protect vets’ time, and ultimately end burnout. We believe the stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the Vetcation ecosystem are the solution we have built to solve this issue, protect vets’ time, and ultimately end burnout. The stronger the healthy connection, the better the patient outcomes.`,
             },
           ],
         },
@@ -3598,7 +3598,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "root",
-              helpText: `We believe the solution is to expand teams without additional payroll to handle appropriate cases, create a new revenue stream to fund competitive wages, and focus in-house teams on high-value cases that truly require hands-on care, including imaging, lab diagnostics, dentistry, and surgery. The Vetcation platform enables clinics to achieve this by partnering with your trusted relief veterinarians to expand capacity. The added revenue supports more competitive compensation for in-house staff and improves service for in-person clients, which ultimately reduces burnout across the team and dramatically lowers turnover. We believe the higher the staff satisfaction, the better the patient outcomes.`,
+              helpText: `We believe the solution is to expand teams without additional payroll to handle appropriate cases, create a new revenue stream to fund competitive wages, and focus in-house teams on high-value cases that truly require hands-on care, including imaging, lab diagnostics, dentistry, and surgery. The Vetcation platform enables clinics to achieve this by partnering with your trusted relief veterinarians to expand capacity. The added revenue supports more competitive compensation for in-house staff and improves service for in-person clients, which ultimately reduces burnout across the team and dramatically lowers turnover. The higher the staff satisfaction, the better the patient outcomes.`,
             },
           ],
         },
@@ -5945,11 +5945,11 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: `Vetcation is designed to address a core challenge in multi-hospital operations: <span class="highlight">staff turnover and burnout</span>. Teams are stretched by callback overload, uneven demand, and limited appointment supply. Cutting volume to relieve pressure reduces already thin margins and makes it harder to retain talent. The answer is to expand capacity without adding payroll, protect in-hospital time for hands-on care, and keep clients connected to your brand even when your own doctors are not available.`,
+              text: `Vetcation is designed to address a core challenge in multi-hospital operations: <span class="highlight">staff turnover and hiring challenges</span>.  Most teams are overworked and understaffed. When client conflict and callback overload pile up, these pressures drive burnout and turnover. Hiring full-time doctors is hard amid a nationwide veterinarian shortage, and many veterinarians prefer flexible schedules. Clinics often rely on relief vets to cover staffing gaps, but that alone is hard to sustain—especially since clients value long-term relationships with preferred doctors.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. Relief veterinarians already work inside your hospitals and can staff a virtual front door. Board-certified specialists within your network — including those in your specialty hospitals — and certified dog trainers can be invited for defined services. Vetcation turns these real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
+              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. By partnering with trusted relief veterinarians to offer telemedicine services, each clinic can instantly expand capacity without adding payroll, create a new revenue stream to fund competitive wages, and focus in house teams on high-value care that truly requires hands on work (imaging, labs, dentistry, surgery). Clinics reduce callback overload, improve service for in-person clients, and build one tap away, lasting client relationships, which in turn reduces burnout and eases hiring challenges. Vetcation turns real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
             },
           ],
         },
