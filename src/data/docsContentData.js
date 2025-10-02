@@ -5722,6 +5722,45 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
           ],
         },
+        {
+          id: "earlyAdopterAdvantage",
+          title: "Early adopter advantage",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Early adopter advantage: clinics that join now lock in provider relationships and community visibility that are hard for late adopters to match.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Build your relief-vet network first:",
+                  lines: [
+                    "Connect with California ~ 700 relief DVMs and specialists before competitors do, converting trusted partners into your extended workforce.",
+                    "Late adopters will need to convince those same professionals to add another hospital relationship, which takes longer and costs more.",
+                  ],
+                },
+                {
+                  heading: "Own the community demand curve:",
+                  lines: [
+                    "As new pet owners post questions, your approved professionals appear in more threads and topics, continually marketing your brand without extra ad spend.",
+                  ],
+                },
+                {
+                  heading: "Statewide telemedicine under your brand:",
+                  lines: [
+                    "Turn on a hospital-branded virtual front door for all California pet owners immediately.",
+                    "The earlier you launch, the stronger and stickier your client relationships become, making you harder to displace.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "paragraph",
+              text: "For partnership discussions, contact Geoff Chen (gcfchen@gmail.com, (530) 400-6227).",
+            },
+          ],
+        },
 
         {
           id: "operatingModel",
@@ -5842,16 +5881,6 @@ requirements and explain how Vetcation keeps you compliant.`,
                   ],
                 },
               ],
-            },
-          ],
-        },
-        {
-          id: "nextSteps",
-          title: "Next Steps",
-          blocks: [
-            {
-              type: "paragraph",
-              text: "For partnership discussions, contact Geoff Chen (gcfchen@gmail.com, (530) 400-6227).",
             },
           ],
         },
