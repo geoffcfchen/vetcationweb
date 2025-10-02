@@ -5985,7 +5985,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading: "Transparent economics:",
                   lines: [
                     "Per-visit split: provider 60%, clinic 25%, platform 15%.",
-                    "At a $100 average visit fee and 20 virtual visits per week per doctor, the clinic’s 25% share ≈ $26,000 net income per doctor per year.",
+                    "At a $100 average visit fee and 20 virtual visits per week per doctor, the clinic’s 25% share ≈ $26,000 net income per doctor per year (52 weeks).",
                     "If a clinic partners with 3 virtual doctors, that’s ≈ $78,000 net income per clinic per year.",
                     'Across ~100 California hospitals, that’s <span class="highlight">~$7.8M in additional annual net income to clinics</span> — without adding payroll.',
                     "Automatic payouts and audit-ready statements keep finance in control.",
