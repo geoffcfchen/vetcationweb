@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import easyWebp from "../images/easy.webp";
-import easyPng from "../images/easy1@2x.png"; // Adjust the path
-import fast1Webp from "../images/fast1.webp";
-import fast1Png from "../images/fast1@2x.png"; // Adjust the path
-import wordpress1Webp from "../images/wordpress1.webp";
-import wordpress1Png from "../images/wordpress1@2x.png"; // Adjust the path
+import { useNavigate } from "react-router-dom";
 import Feature from "./Feature";
-import qrCodeImage from "../images/qrcode6.png"; // Adjust path as necessary
+import qrCodeImage from "../images/qrcode6.png";
+import wordpress1Webp from "../images/wordpress1.webp";
+import wordpress1Png from "../images/wordpress1@2x.png";
 
 const FeaturesContainer = styled.section`
   max-width: 1140px;
@@ -15,24 +12,97 @@ const FeaturesContainer = styled.section`
   padding: 0rem 2rem;
 `;
 
+const CTAGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 2.25rem 0 0rem;
+  flex-wrap: wrap;
+`;
+
+const CTAButton = styled.button`
+  /* light, subtle, unobtrusive */
+  --radius: 10px;
+  --pad-y: 8px;
+  --pad-x: 12px;
+
+  appearance: none;
+  border: 1px solid #e2e8f0; /* light border */
+  border-radius: var(--radius);
+  padding: var(--pad-y) var(--pad-x);
+  background: #f7f9fc; /* soft neutral */
+  color: #0f1217;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 120ms ease, border-color 120ms ease,
+    transform 120ms ease;
+
+  min-width: 132px;
+  text-align: center;
+
+  &:hover {
+    background: #eef2f7; /* slightly darker on hover */
+    border-color: #cbd5e1;
+    transform: translateY(-0.5px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+  &:focus-visible {
+    outline: 2px solid #9ec1ff;
+    outline-offset: 2px;
+  }
+`;
+
 function RegisterSection() {
+  const navigate = useNavigate();
+
   return (
     <FeaturesContainer>
+      {/* Top-centered, subtle CTA row */}
+      <CTAGroup aria-label="Audience quick links">
+        <CTAButton
+          onClick={() => navigate("/telemedicine-info/home/introToVetcation")}
+          aria-label="For Vets"
+        >
+          For Vets
+        </CTAButton>
+
+        <CTAButton
+          onClick={() =>
+            navigate("/telemedicine-info/clinics/clinicIntroToVetcation")
+          }
+          aria-label="For Clinics"
+        >
+          For Clinics
+        </CTAButton>
+
+        <CTAButton
+          onClick={() =>
+            navigate("/telemedicine-info/corporations/corpIntroToVetcation")
+          }
+          aria-label="For Corporations"
+        >
+          For Corporations
+        </CTAButton>
+      </CTAGroup>
+
+      {/* Hero/content below */}
       <Feature
-        // iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Vetcation"
         text="The professional community where veterinarians and pet owners connect and build lasting relationships."
-        // linkText="Learn More"
-        to="/telemedicine-info" // ⬅️ makes the whole block pressible
+        // to="/telemedicine-info"
         qrCodeLink={qrCodeImage}
-        linkHref="#"
         image={{
           webp: wordpress1Webp,
           webp2x: wordpress1Webp,
           png: wordpress1Png,
           png2x: wordpress1Png,
         }}
-        // videoSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/videos%2FScreenRecording_09-28-2024%2001-59-58_1_compress.mp4?alt=media&token=4ce6b9a5-4cbf-4102-ab6a-8ce4f99e36cd"
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad"
       />
     </FeaturesContainer>
