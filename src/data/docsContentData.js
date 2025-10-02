@@ -6092,7 +6092,53 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
           ],
         },
-
+        {
+          id: "whyVirtualCareTrend",
+          title: "Why Virtual Care Is Growing — And Why It Matters",
+          blocks: [
+            {
+              type: "trendPoints",
+              introParagraphs: [
+                "Veterinary medicine is experiencing a dynamic shift, driven by the rising demand for convenient, accessible care. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights why veterinarians should embrace telehealth sooner than later:",
+              ],
+              items: [
+                {
+                  heading: "Critical Shortages in Veterinary Services:",
+                  lines: [
+                    `Over 22% of U.S. counties have no veterinary employees, leaving millions of companion animals in underserved areas (VVCA Report 2024, p. 7).`,
+                    `The country faces a deficit of 12,000 veterinarians and 48,000 support staff, demanding innovative solutions like telemedicine (VVCA Report 2024, p. 7).`,
+                  ],
+                },
+                {
+                  heading: "Rapid Consumer Adoption:",
+                  lines: [
+                    "Telehealth has become a key access point for pet owners seeking immediate answers — 50% of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10).",
+                    "High demand and convenience are fueling telehealth’s growth, with pet owners embracing virtual visits to save travel time and reduce stress on their animals.",
+                  ],
+                },
+                {
+                  heading: "Synergy with In-Person Care:",
+                  lines: [
+                    "Telemedicine consultations supplement physical visits, allowing continuous follow-up for chronic or non-emergency conditions, while maximizing clinic efficiency.",
+                    "Over half of treatment consultations (58.4%) effectively resolved the issue without an immediate clinic visit, reducing in-person congestion (VVCA Report 2024, p. 21).",
+                  ],
+                },
+                {
+                  heading: "Greater Efficiency & Cost Savings:",
+                  lines: [
+                    "Practices that adopt telehealth often see reduced no-shows, more organized scheduling, and operational savings, boosting both profit and patient satisfaction (VVCA Report 2024).",
+                  ],
+                },
+                {
+                  heading: "High Client Satisfaction:",
+                  lines: [
+                    "Virtual interactions garner an average 98.4% satisfaction rate — pet owners appreciate the convenience and immediate access to professional advice (VVCA Report 2024, p. 14).",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         {
           id: "nextSteps",
           title: "Next Steps",
