@@ -61,6 +61,8 @@ export default function DocsLayout() {
 
   const mainContentRef = useRef(null);
 
+  const lastScrollYRef = useRef(0);
+
   // Wrap registerSections in useCallback so its identity is stable
   const registerSections = useCallback((sectionsArray) => {
     setDocSections(sectionsArray || []);
@@ -71,28 +73,25 @@ export default function DocsLayout() {
     setActiveSectionId(sectionId);
   }, []);
 
-  // const handleTopNavClick = (navId) => {
-  //   if (navId === "home") {
-  //     navigate(`/telemedicine-info/${navId}/introToVetcation`, {
-  //       state: { suppressInitialHash: true },
-  //     });
-  //   }
-  //   if (navId === "contributors") {
-  //     navigate(`/telemedicine-info/${navId}/ourContributors`, {
-  //       state: { suppressInitialHash: true },
-  //     });
-  //   }
-  //   if (navId === "clinics") {
-  //     navigate(`/telemedicine-info/${navId}/clinicIntroToVetcation`, {
-  //       state: { suppressInitialHash: true },
-  //     });
-  //   }
-  //   if (navId === "rvts") {
-  //     navigate(`/telemedicine-info/${navId}/introToRVT`, {
-  //       state: { suppressInitialHash: true },
-  //     });
-  //   }
-  // };
+  useLayoutEffect(() => {
+    if (location.hash) return;
+
+    const container = mainContentRef.current;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobile) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      // reset baseline + start visible
+      lastScrollYRef.current = 0;
+      setHideNav(false);
+    } else if (container) {
+      container.scrollTop = 0;
+      // (optional) reset any desktop baseline if you implement it
+    }
+  }, [location.pathname]);
 
   const handleTopNavClick = (navId) => {
     const item = topNavData.find((n) => n.id === navId);
@@ -146,38 +145,69 @@ export default function DocsLayout() {
   }, []); // run only once
 
   // NEW: useEffect for scroll detection on mobile
+  // useEffect(() => {
+  //   // For mobile, listen to window's scroll; desktop you can still use container scroll if needed
+  //   const handleScroll = () => {
+  //     if (window.innerWidth <= 768) {
+  //       const currentScrollY = window.scrollY;
+  //       // Using a hysteresis: scroll down > 50px triggers hide; scroll up > 30px triggers show
+  //       if (currentScrollY - lastScrollY > 30) {
+  //         setHideNav(true);
+  //       } else if (lastScrollY - currentScrollY > 20) {
+  //         setHideNav(false);
+  //       }
+  //       lastScrollY = currentScrollY;
+  //     }
+  //   };
+
+  //   let lastScrollY = window.scrollY;
+  //   if (window.innerWidth <= 768) {
+  //     window.addEventListener("scroll", handleScroll);
+  //   } else {
+  //     // For desktop you might still use mainContentRef if needed
+  //     const container = mainContentRef.current;
+  //     if (container) {
+  //       container.addEventListener("scroll", handleScroll);
+  //     }
+  //   }
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //     const container = mainContentRef.current;
+  //     if (container) {
+  //       container.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
+
   useEffect(() => {
-    // For mobile, listen to window's scroll; desktop you can still use container scroll if needed
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     const handleScroll = () => {
-      if (window.innerWidth <= 768) {
-        const currentScrollY = window.scrollY;
-        // Using a hysteresis: scroll down > 50px triggers hide; scroll up > 30px triggers show
-        if (currentScrollY - lastScrollY > 30) {
-          setHideNav(true);
-        } else if (lastScrollY - currentScrollY > 20) {
-          setHideNav(false);
-        }
-        lastScrollY = currentScrollY;
-      }
+      if (!isMobile) return;
+
+      const prev = lastScrollYRef.current;
+      const curr = window.scrollY;
+
+      // hysteresis: down > 30 → hide; up > 20 → show
+      if (curr - prev > 30) setHideNav(true);
+      else if (prev - curr > 20) setHideNav(false);
+
+      lastScrollYRef.current = curr; // update baseline
     };
 
-    let lastScrollY = window.scrollY;
-    if (window.innerWidth <= 768) {
-      window.addEventListener("scroll", handleScroll);
+    if (isMobile) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
     } else {
-      // For desktop you might still use mainContentRef if needed
+      // If you later support desktop hide/show via the container:
       const container = mainContentRef.current;
       if (container) {
-        container.addEventListener("scroll", handleScroll);
+        container.addEventListener("scroll", handleScroll, { passive: true });
       }
+      return () =>
+        container && container.removeEventListener("scroll", handleScroll);
     }
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      const container = mainContentRef.current;
-      if (container) {
-        container.removeEventListener("scroll", handleScroll);
-      }
-    };
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
