@@ -5937,7 +5937,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   corporations: {
     corpIntroToVetcation: {
       mainTitle: "Introduction for Corporate Veterinary Groups",
-      mainDescription: `Vetcation enables multi-hospital organizations to launch a hospital-branded virtual network in days with zero workflow changes. Partner with trusted relief veterinarians to expand capacity, add services, and strengthen client loyalty. Relief vets are responsible for all telemedicine outcomes and liability. Clinics keep ownership of client relationships and records and receive a clear clinic share on every visit. Vetcation aligns with California AB 1399 and provides audit-ready documentation for compliance teams.`,
+      mainDescription: `Vetcation enables multi-hospital organizations to launch a hospital-branded virtual network in days with zero workflow changes. Partner with your trusted relief veterinarians to expand capacity, add services, and strengthen client loyalty. Relief vets are responsible for all telemedicine outcomes and liability. Clinics keep ownership of client relationships and records and receive a clear clinic share on every visit. Vetcation aligns with California AB 1399 and provides audit-ready documentation for compliance teams.`,
       sections: [
         {
           id: "missionForCorporations",
@@ -5949,7 +5949,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. By partnering with trusted relief veterinarians to offer telemedicine services, each clinic can instantly expand capacity without adding payroll, create a new revenue stream to fund competitive wages, and focus in house teams on high-value care that truly requires hands on work (imaging, labs, dentistry, surgery). Clinics reduce callback overload, improve service for in-person clients, and build one tap away, lasting client relationships, which in turn reduces burnout and eases hiring challenges. Vetcation turns real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
+              helpText: `We believe the root cause is a gap in structured, incentive-aligned collaboration. By partnering with your trusted relief veterinarians to offer telemedicine services, each clinic can instantly expand capacity without adding payroll, create a new revenue stream to fund competitive wages, and focus in house teams on high-value care that truly requires hands on work (imaging, labs, dentistry, surgery). Clinics reduce callback overload, improve service for in-person clients, and build one tap away, lasting client relationships, which in turn reduces burnout and eases hiring challenges. Vetcation turns real-world relationships into a unified professional network with shared records, clear responsibility, and transparent economics. The stronger the professional connections, the better the outcomes for patients, teams, and the business.`,
             },
           ],
         },
