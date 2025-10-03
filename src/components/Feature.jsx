@@ -49,7 +49,7 @@ const FeatureBlock = styled(motion.article)`
   cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   &:first-of-type {
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 
   &:last-of-type {
