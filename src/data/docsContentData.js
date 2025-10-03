@@ -3296,6 +3296,12 @@ requirements and explain how Vetcation keeps you compliant.`,
                   description:
                     "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—Vetcation’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
                 },
+                {
+                  name: "Dr. Joseph Tsou",
+                  title: "Veterinarian at Norco Animal Hospital",
+                  description:
+                    "Dr. Joseph Tsou has provided valuable feedback on the telemedicine features of the Vetcation platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                },
 
                 // More contributors...
               ],
