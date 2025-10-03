@@ -237,7 +237,7 @@ const sideNavData = {
       items: [
         {
           id: "clinicIntroToVetcation",
-          label: "Introduction for Clinics",
+          label: "Introduction for Hospitals",
         },
         {
           id: "VirtualBranch",

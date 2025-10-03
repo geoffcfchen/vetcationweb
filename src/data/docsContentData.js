@@ -3585,7 +3585,7 @@ requirements and explain how Vetcation keeps you compliant.`,
 
   clinics: {
     clinicIntroToVetcation: {
-      mainTitle: "Introduction for Clinics",
+      mainTitle: "Introduction for Hospitals",
       mainDescription: `Vetcation enables California veterinary hospitals to launch a legally compliant hospital-branded virtual branch in days with zero workflow changes. Partner with your hospital’s relief veterinarians to expand capacity, keep full ownership of client relationships and medical records, and add a new revenue stream with a transparent per-visit clinic share. When escalation to in-person care is needed, your hospital takes over using your standard workflows. Our mission is to help clinics build one-tap-away, lasting client relationships, end burnout across the team, and dramatically decrease turnover.`,
       sections: [
         {
