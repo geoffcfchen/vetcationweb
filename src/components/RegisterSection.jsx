@@ -89,6 +89,12 @@ function RegisterSection() {
         >
           For Corporations
         </CTAButton>
+        <CTAButton
+          onClick={() => navigate("/telemedicine-info/home/Bill1399")}
+          aria-label="Compliance"
+        >
+          Compliance
+        </CTAButton>
       </CTAGroup>
 
       {/* Hero/content below */}
