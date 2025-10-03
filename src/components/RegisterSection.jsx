@@ -9,46 +9,48 @@ import wordpress1Png from "../images/wordpress1@2x.png";
 const FeaturesContainer = styled.section`
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 2rem;
-  @media (max-width: 420px) {
-    padding: 0 0.75rem;
-  }
+  padding: 0rem 2rem;
 `;
 
-// 2) Row: use a 3-column grid (no wrap)
 const CTAGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin: 0.75rem 0 1rem;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-items: stretch;
+  gap: 10px;
+  margin: 2.25rem 0 0rem;
+  flex-wrap: wrap;
 `;
 
-// 3) Buttons: tighter, no min-width, ellipsis if space is tight
 const CTAButton = styled.button`
+  /* light, subtle, unobtrusive */
   --radius: 10px;
+  --pad-y: 8px;
+  --pad-x: 12px;
 
   appearance: none;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e2e8f0; /* light border */
   border-radius: var(--radius);
-  padding: 6px 8px; /* tighter padding */
-  background: #f7f9fc;
+  padding: var(--pad-y) var(--pad-x);
+  background: #f7f9fc; /* soft neutral */
   color: #0f1217;
   font-weight: 600;
-  font-size: clamp(11px, 2.6vw, 14px); /* scales down on small screens */
-  line-height: 1.1;
+  font-size: 14px;
+  line-height: 1;
   cursor: pointer;
-  white-space: nowrap; /* keep on one line */
-  overflow: hidden; /* prevent overflow */
-  text-overflow: ellipsis; /* add … if needed */
-  width: 100%; /* fill grid cell */
-  min-width: 0; /* allow shrink inside grid */
-  transition: background 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+  transition: background 120ms ease, border-color 120ms ease,
+    transform 120ms ease;
+
+  min-width: 132px;
+  text-align: center;
 
   &:hover {
-    background: #eef2f7;
+    background: #eef2f7; /* slightly darker on hover */
     border-color: #cbd5e1;
+    transform: translateY(-0.5px);
+  }
+  &:active {
+    transform: translateY(0);
   }
   &:focus-visible {
     outline: 2px solid #9ec1ff;
