@@ -76,9 +76,9 @@ function RegisterSection() {
           onClick={() =>
             navigate("/telemedicine-info/clinics/clinicIntroToVetcation")
           }
-          aria-label="For Clinics"
+          aria-label="For Hospitals"
         >
-          For Clinics
+          For Hospitals
         </CTAButton>
 
         <CTAButton
