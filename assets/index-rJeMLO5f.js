@@ -1982,37 +1982,52 @@ SPDX-License-Identifier: Apache-2.0
   margin: 0 auto;
   padding: 0rem 2rem;
 `,h7=$.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns on wide screens */
   gap: 10px;
-  margin: 2.25rem 0 0rem;
-  flex-wrap: wrap;
+  margin: 2.25rem auto 0;
+  max-width: 600px; /* tweak as you like */
+  width: 100%;
+
+  /* Responsive: stack to 2x2, then 1x4 as space shrinks */
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 480px;
+  }
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
 `,Ou=$.button`
-  /* light, subtle, unobtrusive */
   --radius: 10px;
-  --pad-y: 8px;
+  --pad-y: 10px;
   --pad-x: 12px;
 
   appearance: none;
-  border: 1px solid #e2e8f0; /* light border */
+  border: 1px solid #e2e8f0;
   border-radius: var(--radius);
   padding: var(--pad-y) var(--pad-x);
-  background: #f7f9fc; /* soft neutral */
+  background: #f7f9fc;
   color: #0f1217;
   font-weight: 600;
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
-  white-space: nowrap;
   transition: background 120ms ease, border-color 120ms ease,
     transform 120ms ease;
 
-  min-width: 132px;
-  text-align: center;
+  /* Make each button fill its grid cell equally */
+  width: 100%;
+  justify-self: stretch;
+
+  /* Nice centering for text + (optional) icon */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 
   &:hover {
-    background: #eef2f7; /* slightly darker on hover */
+    background: #eef2f7;
     border-color: #cbd5e1;
     transform: translateY(-0.5px);
   }
