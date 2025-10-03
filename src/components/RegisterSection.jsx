@@ -18,18 +18,15 @@ const CTAGroup = styled.div`
   grid-template-columns: repeat(4, 1fr); /* 4 equal columns on wide screens */
   gap: 10px;
   margin: 2.25rem auto 0;
-  max-width: 600px; /* tweak as you like */
+  max-width: 600px;
   width: 100%;
 
-  /* Responsive: stack to 2x2, then 1x4 as space shrinks */
+  /* Downshift to 2 columns and stay there */
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 480px;
+    max-width: 480px; /* optional: adjust as you like */
   }
-  @media (max-width: 520px) {
-    grid-template-columns: 1fr;
-    max-width: 360px;
-  }
+  /* Removed the 1-column breakpoint */
 `;
 
 const CTAButton = styled.button`
