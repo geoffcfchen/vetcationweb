@@ -135,46 +135,76 @@ const FooterSection = ({ title, links }) => {
 
 const Footer = () => {
   const footerData = [
-    // {
-    //   title: "Products",
-    //   links: [
-    //     { text: "Website Hosting", url: "#" },
-    //     { text: "Free Automated Wordpress Migrations", url: "#" },
-    //   ],
-    // },
-    // {
-    //   title: "Company",
-    //   links: [
-    //     { text: "About", url: "#" },
-    //     { text: "Affiliates", url: "#" },
-    //     { text: "Blog", url: "#" },
-    //   ],
-    // },
+    {
+      title: "Guides",
+      links: [
+        { text: "For Vets", url: "/telemedicine-info/home/introToVetcation" },
+        {
+          text: "For Hospitals & Clinics",
+          url: "/telemedicine-info/clinics/clinicIntroToVetcation",
+        },
+        {
+          text: "For Corporations",
+          url: "/telemedicine-info/corporations/corpIntroToVetcation",
+        },
+        // {
+        //   text: "Virtual Clinic",
+        //   url: "/telemedicine-info/home/VirtualClinic",
+        // },
+        // {
+        //   text: "Scheduling",
+        //   url: "/telemedicine-info/home/scheduleOverview",
+        // },
+        // { text: "Video Calls", url: "/telemedicine-info/home/joinVideoCall" },
+      ],
+    },
+    {
+      title: "Compliance",
+      links: [
+        { text: "AB 1399 FAQ", url: "/telemedicine-info/home/Bill1399" },
+        { text: "VCPR", url: "/telemedicine-info/home/VCPR" },
+        {
+          text: "Prescription Limits",
+          url: "/telemedicine-info/home/PrescriptionLimits",
+        },
+        {
+          text: "Privacy & Confidentiality",
+          url: "/telemedicine-info/home/PrivacyConfidentiality",
+        },
+        {
+          text: "Record-Keeping",
+          url: "/telemedicine-info/home/RecordKeepingDocumentation",
+        },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        {
+          text: "Our Contributors",
+          url: "/telemedicine-info/contributors/ourContributors",
+        },
+        // Add more when you have them:
+        // { text: "About", url: "/about/" },
+        // { text: "Careers", url: "/careers/" },
+      ],
+    },
     {
       title: "Support",
       links: [
         { text: "Support Center", url: "/support" },
-        { text: "Email Support", url: "mailto:support@vetcation.com" },
-        // Optional placeholder if you add a page later:
-        // { text: "Known Issues & Updates", url: "/status" },
+        {
+          text: "Email Support",
+          url: "mailto:support@vetcation.com",
+          external: true,
+        },
       ],
     },
-    // {
-    //   title: "Domains",
-    //   links: [
-    //     { text: "Domain Checker", url: "#" },
-    //     { text: "Domain Transfer", url: "#" },
-    //     { text: "Free Domain", url: "#" },
-    //   ],
-    // },
     {
       title: "Legal",
       links: [
         { text: "Privacy Policy", url: "/privacy-policy" },
-        {
-          text: "SMS Terms & Conditions",
-          url: "/SMSTerms",
-        },
+        { text: "SMS Terms & Conditions", url: "/SMSTerms" },
       ],
     },
   ];
