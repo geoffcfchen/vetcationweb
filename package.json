@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp dist/index.html dist/404.html && bash -lc 'for p in support forvet privacy terms telemedicine-info telemedicine-info/corporations/corpIntroToVetcation telemedicine-info/clinics/clinicIntroToVetcation telemedicine-info/home/introToVetcation; do mkdir -p dist/$p && cp dist/index.html dist/$p/index.html; done'",
+    "build": "vite build && cp dist/index.html dist/404.html && bash -lc 'for p in support forvet privacy terms telemedicine-info telemedicine-info/home/introToVetcation telemedicine-info/home/VirtualClinic telemedicine-info/home/scheduleOverview telemedicine-info/home/joinVideoCall telemedicine-info/home/InquiryBasedMessagerOverView telemedicine-info/home/MedicalHistoryOverview telemedicine-info/home/CommunityMarketing telemedicine-info/home/partnerWithClinic telemedicine-info/home/Bill1399 telemedicine-info/home/VCPR telemedicine-info/home/PrescriptionLimits telemedicine-info/home/PrivacyConfidentiality telemedicine-info/home/RacehorseCHRBRestrictions telemedicine-info/home/RecordKeepingDocumentation telemedicine-info/home/MiscellaneousClarifications telemedicine-info/clinics/clinicIntroToVetcation telemedicine-info/clinics/VirtualBranch telemedicine-info/corporations/corpIntroToVetcation telemedicine-info/contributors/ourContributors; do mkdir -p dist/$p && cp dist/index.html dist/$p/index.html; done'",
     "preview": "vite preview"
   },
   "dependencies": {
