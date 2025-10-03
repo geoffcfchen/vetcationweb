@@ -5,6 +5,7 @@ import Feature from "./Feature";
 import qrCodeImage from "../images/qrcode6.png";
 import wordpress1Webp from "../images/wordpress1.webp";
 import wordpress1Png from "../images/wordpress1@2x.png";
+import { MdShield } from "react-icons/md";
 
 const FeaturesContainer = styled.section`
   max-width: 1140px;
@@ -58,6 +59,19 @@ const CTAButton = styled.button`
   }
 `;
 
+const ComplianceButton = styled(CTAButton)`
+  border-color: #1cd0b0;
+  background: #f7fcfb; /* tiny green tint */
+  &:hover {
+    background: #effaf7;
+    border-color: #12b89a;
+  }
+  &:focus-visible {
+    outline: 2px solid #7be8d3; /* accessible focus ring in same family */
+    outline-offset: 2px;
+  }
+`;
+
 function RegisterSection() {
   const navigate = useNavigate();
 
@@ -89,12 +103,13 @@ function RegisterSection() {
         >
           For Corporations
         </CTAButton>
-        <CTAButton
+        <ComplianceButton
           onClick={() => navigate("/telemedicine-info/home/Bill1399")}
           aria-label="Compliance"
         >
+          <MdShield style={{ marginRight: 6 }} aria-hidden="true" />
           Compliance
-        </CTAButton>
+        </ComplianceButton>
       </CTAGroup>
 
       {/* Hero/content below */}
