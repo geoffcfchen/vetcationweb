@@ -8,6 +8,7 @@ import logo from "../images/plain_icon_600.png";
 const TopNavBarContainer = styled.nav`
   background-color: transparent;
   padding: 1rem;
+  padding-left: 1.5rem;
   display: flex;
   gap: 2rem;
   align-items: center;

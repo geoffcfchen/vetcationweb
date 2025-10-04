@@ -13,9 +13,9 @@ const breakpoint = 900;
 // ——— size tokens so it’s easy to tweak ———
 const SIZES = {
   headerPaddingY: "1.15rem",
-  headerPaddingX: "1.0rem",
+  headerPaddingX: "1.5rem",
   logo: 25, // px
-  logoMobile: 22,
+  logoMobile: 25,
   text: 20, // px
   textMobile: 18,
   gap: 15, // px
