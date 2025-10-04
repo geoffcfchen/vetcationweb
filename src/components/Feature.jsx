@@ -27,14 +27,14 @@ const ContributionNote = styled.div`
 
 const QRCodeImage = styled.img`
   margin-top: 10px;
-  width: 430px;
+  width: 450px;
   height: 210px;
-  max-width: 430px;
+  max-width: 450px;
   max-height: 210px;
   cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   @media (max-width: 768px) {
-    width: 320px;
+    width: 340px;
     height: 160px;
     margin-left: auto;
     margin-right: auto;
