@@ -5689,7 +5689,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 {
                   heading: "Expand capacity without payroll:",
                   lines: [
-                    "Relief veterinarians set their own schedules. Once partnered, their availability appears to clients under your hospital brand.",
+                    "Relief veterinarians set their own schedules, fees, and handle liability. Once partnered, their availability appears to clients under your hospital brand.",
                     "This can effectively double available appointment slots without adding headcount.",
                   ],
                 },
