@@ -14,6 +14,8 @@ import MySidebarRouter from "../components/Sidebar/MySidebarRouter";
 import RightSideBarRouter from "../components/Sidebar/RightSideBarRouter";
 import topNavData from "../data/topNavData";
 import ScrollToTop from "../components/ScrollToTop";
+import ComplianceVettedBanner from "../components/ComplianceVettedBanner";
+import { doc } from "firebase/firestore";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -46,7 +48,7 @@ const MiddleColumn = styled.div`
 
 export default function DocsLayout() {
   const suppressInitialHashRef = useRef(false);
-  const { topNavId = "home" } = useParams();
+  const { topNavId = "home", docId } = useParams();
   const location = useLocation(); // ← new
 
   const prevKeyRef = useRef(location.key);
@@ -239,7 +241,20 @@ export default function DocsLayout() {
           </Col>
 
           {/* MIDDLE CONTENT */}
+          {/* <Col as={MiddleColumn} xs={12} md={6} lg={8} ref={mainContentRef}> */}
           <Col as={MiddleColumn} xs={12} md={6} lg={8} ref={mainContentRef}>
+            {/* Show only on Compliance → Bill1399 */}
+            {(docId === "Bill1399" ||
+              docId === "VCPR" ||
+              docId === "PrescriptionLimits" ||
+              docId === "PrivacyConfidentiality" ||
+              docId === "RecordKeepingDocumentation" ||
+              docId === "RacehorseCHRBRestrictions" ||
+              docId === "MiscellaneousClarifications") && (
+              <div style={{ marginBottom: 16 }}>
+                <ComplianceVettedBanner />
+              </div>
+            )}
             <ScrollToTop containerRef={mainContentRef} />
             <Outlet
               context={{
