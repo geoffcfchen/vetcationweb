@@ -6083,6 +6083,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
   },
+  compliance: {},
 
   // Similarly for the other topNav items...
 };
@@ -6100,6 +6101,7 @@ const sharedKeys = [
 sharedKeys.forEach((k) => {
   contentData.corporations[k] = contentData.home[k];
   contentData.clinics[k] = contentData.home[k];
+  contentData.compliance[k] = contentData.home[k];
 });
 
 export default contentData;

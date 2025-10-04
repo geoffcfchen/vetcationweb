@@ -117,7 +117,7 @@ function RegisterSection() {
           For Corporations
         </CTAButton>
         <ComplianceButton
-          onClick={() => navigate("/telemedicine-info/home/Bill1399/")}
+          onClick={() => navigate("/telemedicine-info/compliance/Bill1399/")}
           aria-label="Compliance"
         >
           <IoShieldCheckmarkSharp

@@ -13,6 +13,11 @@ const topNavData = [
   },
   // { id: "oneHealth", label: "One Health", defaultDocId: "introToOneHealth" }, // adjust if different
   {
+    id: "compliance",
+    label: "Compliance",
+    defaultDocId: "Bill1399",
+  },
+  {
     id: "contributors",
     label: "Contributors",
     defaultDocId: "ourContributors",

@@ -327,6 +327,42 @@ const sideNavData = {
     },
   ],
 
+  compliance: [
+    {
+      groupTitle: "Regulatory Compliance",
+      items: [
+        {
+          id: "Bill1399",
+          label: "AB 1399 FAQ",
+        },
+        {
+          id: "VCPR",
+          label: "VCPR",
+        },
+        {
+          id: "PrescriptionLimits",
+          label: "Prescription Limits",
+        },
+        {
+          id: "PrivacyConfidentiality",
+          label: "Privacy and Confidentiality",
+        },
+        {
+          id: "RacehorseCHRBRestrictions",
+          label: "Racehorse & CHRB Restrictions",
+        },
+        {
+          id: "RecordKeepingDocumentation",
+          label: "Record-Keeping & Documentation",
+        },
+        {
+          id: "MiscellaneousClarifications",
+          label: "Miscellaneous Clarifications",
+        },
+      ],
+    },
+  ],
+
   rvts: [
     {
       groupTitle: "RVT",
