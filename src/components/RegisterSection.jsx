@@ -5,7 +5,7 @@ import Feature from "./Feature";
 import qrCodeImage from "../images/qrcode6.png";
 import wordpress1Webp from "../images/wordpress1.webp";
 import wordpress1Png from "../images/wordpress1@2x.png";
-import { MdShield } from "react-icons/md";
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
 
 const FeaturesContainer = styled.section`
   max-width: 1140px;
@@ -71,14 +71,16 @@ const CTAButton = styled.button`
   }
 `;
 const ComplianceButton = styled(CTAButton)`
-  border-color: #1cd0b0;
-  background: #f7fcfb; /* tiny green tint */
+  border-color: #4d9fec;
+  background: #f5f9ff; /* subtle cool blue tint */
+
   &:hover {
-    background: #effaf7;
-    border-color: #12b89a;
+    background: #eaf3ff; /* slightly deeper tint on hover */
+    border-color: #3c91e6; /* darker hover border */
   }
+
   &:focus-visible {
-    outline: 2px solid #7be8d3; /* accessible focus ring in same family */
+    outline: 2px solid #a9d0ff; /* soft accessible focus ring */
     outline-offset: 2px;
   }
 `;
@@ -118,7 +120,10 @@ function RegisterSection() {
           onClick={() => navigate("/telemedicine-info/home/Bill1399")}
           aria-label="Compliance"
         >
-          <MdShield style={{ marginRight: 6 }} aria-hidden="true" />
+          <IoShieldCheckmarkSharp
+            style={{ marginRight: 6, color: "#4d9fec" }}
+            aria-hidden="true"
+          />
           Compliance
         </ComplianceButton>
       </CTAGroup>
