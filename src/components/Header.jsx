@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+// Header.jsx
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import styled from "styled-components";
-import logo from "../images/plain_icon_600.png"; // Adjust the path as necessary
-import { Dropdown, Button } from "react-bootstrap";
+import logo from "../images/plain_icon_600.png";
+import { Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -9,41 +10,60 @@ import { useNavigate } from "react-router-dom";
 
 const breakpoint = 900;
 
+// ——— size tokens so it’s easy to tweak ———
+const SIZES = {
+  headerPaddingY: "1.15rem",
+  headerPaddingX: "1.0rem",
+  logo: 25, // px
+  logoMobile: 22,
+  text: 20, // px
+  textMobile: 18,
+  gap: 15, // px
+};
+
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: black;
+  padding: ${SIZES.headerPaddingY} ${SIZES.headerPaddingX};
+  background-color: #000;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px; // Space between logo and text
-  cursor: pointer; // Makes the cursor look like a pointer when hovering over this container
+  gap: ${SIZES.gap}px;
+  cursor: pointer;
 
   &:hover {
-    opacity: 0.8; // Optionally, add some visual feedback like changing the opacity
+    opacity: 0.85;
   }
 `;
 
 const Logo = styled.img`
-  width: 30px; // Adjust as necessary
+  width: ${SIZES.logo}px;
+
+  @media (max-width: ${breakpoint}px) {
+    width: ${SIZES.logoMobile}px;
+  }
 `;
 
 const LogoText = styled.span`
-  font-size: 24px; // Adjust size as necessary
-  font-weight: bold; // Bold font
-  color: white; // Text color
+  font-size: ${SIZES.text}px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+
+  @media (max-width: ${breakpoint}px) {
+    font-size: ${SIZES.textMobile}px;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 1rem;
-  overflow: hidden; // Prevents overflow of the nav elements
-
+  gap: 0.875rem;
   align-items: center;
+  overflow: hidden;
 
   @media (max-width: ${breakpoint}px) {
     display: none;
@@ -52,71 +72,72 @@ const Nav = styled.nav`
 
 const MenuLink = styled.a`
   text-decoration: none;
-  color: white; // Adjust the color accordingly
-  white-space: nowrap; // Prevents text from wrapping
-  overflow: hidden; // Keeps the text from overflowing the nav area
-  text-overflow: ellipsis; // Adds an ellipsis if the text is too long to fit
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const BurgerWrap = styled.div`
+  display: none;
+
+  @media (max-width: ${breakpoint}px) {
+    display: block;
+    padding: 4px; /* slightly larger tap target */
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  let navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
+  const navigate = useNavigate();
 
-  const handleJoinClick = () => {
-    navigate("/register"); // Navigates to the register page
-  };
-
-  const handleLoginClick = () => {
-    navigate("/login"); // Navigates to the login page
-  };
-
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
-  function toggleDropdown() {
-    console.log("Toggling dropdown");
-    console.log("isOpen", isOpen);
-    setIsOpen(!isOpen);
-  }
+  useEffect(() => {
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  const toggleDropdown = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
   // Close the dropdown when clicking outside of it
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     if (event.target.closest("#dropdown-basic") === null) {
       setIsOpen(false);
     }
-  };
+  }, []);
 
-  // Add event listeners when dropdown opens and clean up on close or component unmount
+  // Stable handler for "resize → close"
+  const handleResizeClose = useCallback(() => setIsOpen(false), []);
+
   useEffect(() => {
     if (isOpen) {
       window.addEventListener("click", handleClickOutside);
-      window.addEventListener("resize", () => setIsOpen(false)); // Close on resize
-    } else {
-      window.removeEventListener("click", handleClickOutside);
-      window.removeEventListener("resize", () => setIsOpen(false));
+      window.addEventListener("resize", handleResizeClose);
     }
-
-    // Cleanup on component unmount
     return () => {
       window.removeEventListener("click", handleClickOutside);
-      window.removeEventListener("resize", () => setIsOpen(false));
+      window.removeEventListener("resize", handleResizeClose);
     };
-  }, [isOpen]); // Only re-run when isOpen changes
+  }, [isOpen, handleClickOutside, handleResizeClose]);
 
-  // Adjusted to handle boolean value directly
-  const handleToggle = (newOpenState) => {
-    setIsOpen(newOpenState);
-  };
+  const handleToggle = useCallback((nextOpen) => {
+    setIsOpen(nextOpen);
+  }, []);
 
   return (
     <HeaderContainer>
@@ -126,46 +147,22 @@ function Header() {
       </LogoContainer>
 
       <Nav>
-        {/* <MenuLink href="#/clients">for Pet Owners</MenuLink> */}
-        {/* <MenuLink href="#/vets">for Vets</MenuLink> */}
-        {/* <MenuLink href="#/clinics">for Hospitals</MenuLink> */}
-        {/* <MenuLink href="/mission">Mission</MenuLink> */}
         <MenuLink href="/telemedicine-info/">
           Telemedicine Documentation
         </MenuLink>
-
-        {/* <MenuLink href="/techs">for Techs</MenuLink> */}
-        {/* <MenuLink href="/hospitals">for Hospitals</MenuLink> */}
-        {/* <MenuLink href="/students">for Students</MenuLink> */}
-        {/* <MenuLink href="/about">About Us</MenuLink> */}
-        {/* <Button variant="primary" onClick={handleJoinClick}>
-          Join Vetcation
-        </Button> */}
-        {/* <Button variant="secondary" onClick={handleLoginClick}>
-          Log In
-        </Button> */}
       </Nav>
 
       {windowWidth <= breakpoint && (
-        <Dropdown show={isOpen} onToggle={handleToggle}>
+        <Dropdown show={isOpen} onToggle={handleToggle} align="end">
           <Dropdown.Toggle
-            as="div"
-            variant="success"
+            as={BurgerWrap}
             id="dropdown-basic"
             onClick={toggleDropdown}
           >
-            {windowWidth <= breakpoint && (
-              <FontAwesomeIcon icon={faBars} style={{ color: "white" }} />
-            )}
+            <FontAwesomeIcon icon={faBars} style={{ color: "#fff" }} />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {/* <Dropdown.Item href="#/clients">for Pet Owners</Dropdown.Item> */}
-            {/* <Dropdown.Item href="#/vets">for Vets</Dropdown.Item> */}
-            {/* <Dropdown.Item href="#/vets">for Techs</Dropdown.Item> */}
-            {/* <Dropdown.Item href="#/clinics">for Hospitals</Dropdown.Item> */}
-            {/* <Dropdown.Item onpres>Join Vetcation</Dropdown.Item> */}
-            {/* <Dropdown.Item href="/mission">Mission</Dropdown.Item> */}
             <Dropdown.Item href="/telemedicine-info">
               Telemedicine Documentation
             </Dropdown.Item>
