@@ -17,11 +17,14 @@ export default function MySidebarRouter({
 }) {
   const [expandedItems, setExpandedItems] = useState([]);
   const location = useLocation();
+  // Normalize once so all comparisons are consistent:
+  const normalizedPath = location.pathname.replace(/\/+$/, "");
 
   // NEW: auto-expand the parent that owns the current route
   useEffect(() => {
     const groups = sideNavData[activeTopNav] || [];
-    const currentPath = location.pathname.replace(/\/$/, ""); // normalize
+    // const currentPath = location.pathname.replace(/\/$/, ""); // normalize
+    const currentPath = normalizedPath; // already normalized (no trailing slash)
     const parentsToExpand = [];
 
     for (const group of groups) {
@@ -65,7 +68,8 @@ export default function MySidebarRouter({
               const routePath = `/telemedicine-info/${activeTopNav}/${parentItem.id}`;
 
               if (!hasSubItems) {
-                const isActive = location.pathname === routePath;
+                // const isActive = location.pathname === routePath;
+                const isActive = normalizedPath === routePath;
                 return (
                   <SidebarItemRow key={parentItem.id} $active={isActive}>
                     <Link
@@ -84,9 +88,14 @@ export default function MySidebarRouter({
                 );
               } else {
                 // NEW: highlight parent when any child is the active route
+                // const isChildActive = parentItem.subItems.some(
+                //   (child) =>
+                //     location.pathname ===
+                //     `/telemedicine-info/${activeTopNav}/${child.id}`
+                // );
                 const isChildActive = parentItem.subItems.some(
                   (child) =>
-                    location.pathname ===
+                    normalizedPath ===
                     `/telemedicine-info/${activeTopNav}/${child.id}`
                 );
 
@@ -104,7 +113,8 @@ export default function MySidebarRouter({
                       <SecondLevelContainer>
                         {parentItem.subItems.map((child) => {
                           const subRoute = `/telemedicine-info/${activeTopNav}/${child.id}`;
-                          const isActive = location.pathname === subRoute;
+                          // const isActive = location.pathname === subRoute;
+                          const isActive = normalizedPath === subRoute;
 
                           return (
                             <SidebarItemRow key={child.id} $active={isActive}>
