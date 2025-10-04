@@ -130,7 +130,7 @@ function Header() {
         {/* <MenuLink href="#/vets">for Vets</MenuLink> */}
         {/* <MenuLink href="#/clinics">for Hospitals</MenuLink> */}
         {/* <MenuLink href="/mission">Mission</MenuLink> */}
-        <MenuLink href="/telemedicine-info">
+        <MenuLink href="/telemedicine-info/">
           Telemedicine Documentation
         </MenuLink>
 

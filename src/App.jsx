@@ -329,7 +329,7 @@ function App() {
         {/* <Route path="/mission" element={<MissionsPage />} /> */}
         {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}
         {/* The layout route for docs */}
-        <Route path="/telemedicine-info" element={<DocsLayout />}>
+        <Route path="/telemedicine-info/" element={<DocsLayout />}>
           {/* Each child route is the middle content. */}
 
           {/* index: the default if user visits /telemedicine-info with no sub-path */}
@@ -353,23 +353,23 @@ function App() {
             index
             element={
               <Navigate
-                to={`/telemedicine-info/home/${HOME_DEFAULT}`}
+                to={`/telemedicine-info/home/${HOME_DEFAULT}/`}
                 replace
                 state={{ suppressInitialHash: true }}
               />
             }
           />
 
-          <Route path=":topNavId/:docId" element={<DocsContent />} />
+          <Route path=":topNavId/:docId/" element={<DocsContent />} />
           {/* <Route path="contributors" element={<ContributorsPage />} /> */}
         </Route>
         {/* <Route path="/" element={<LoginPage />} /> */}
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
-        <Route path="/redirect" element={<RedirectPage />} />
-        <Route path="/app" element={<RedirectPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/SMSTerms" element={<SMSTermsPage />} />
-        <Route path="/support" element={<SupportPage />} />
+        <Route path="/redirect/" element={<RedirectPage />} />
+        <Route path="/app/" element={<RedirectPage />} />
+        <Route path="/privacy-policy/" element={<PrivacyPolicyPage />} />
+        <Route path="/SMSTerms/" element={<SMSTermsPage />} />
+        <Route path="/support/" element={<SupportPage />} />
       </Routes>
     </HelmetProvider>
   );

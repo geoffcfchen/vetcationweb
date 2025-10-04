@@ -96,7 +96,7 @@ export default function DocsLayout() {
   const handleTopNavClick = (navId) => {
     const item = topNavData.find((n) => n.id === navId);
     const defaultDocId = item?.defaultDocId ?? "introToVetcation";
-    navigate(`/telemedicine-info/${navId}/${defaultDocId}`, {
+    navigate(`/telemedicine-info/${navId}/${defaultDocId}/`, {
       state: { suppressInitialHash: true },
     });
   };

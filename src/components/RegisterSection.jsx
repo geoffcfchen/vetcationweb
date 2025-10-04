@@ -93,7 +93,7 @@ function RegisterSection() {
       {/* Top-centered, subtle CTA row */}
       <CTAGroup aria-label="Audience quick links">
         <CTAButton
-          onClick={() => navigate("/telemedicine-info/home/introToVetcation")}
+          onClick={() => navigate("/telemedicine-info/home/introToVetcation/")}
           aria-label="For Vets"
         >
           For Vets
@@ -101,7 +101,7 @@ function RegisterSection() {
 
         <CTAButton
           onClick={() =>
-            navigate("/telemedicine-info/clinics/clinicIntroToVetcation")
+            navigate("/telemedicine-info/clinics/clinicIntroToVetcation/")
           }
           aria-label="For Hospitals"
         >
@@ -110,14 +110,14 @@ function RegisterSection() {
 
         <CTAButton
           onClick={() =>
-            navigate("/telemedicine-info/corporations/corpIntroToVetcation")
+            navigate("/telemedicine-info/corporations/corpIntroToVetcation/")
           }
           aria-label="For Corporations"
         >
           For Corporations
         </CTAButton>
         <ComplianceButton
-          onClick={() => navigate("/telemedicine-info/home/Bill1399")}
+          onClick={() => navigate("/telemedicine-info/home/Bill1399/")}
           aria-label="Compliance"
         >
           <IoShieldCheckmarkSharp

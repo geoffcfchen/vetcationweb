@@ -138,14 +138,14 @@ const Footer = () => {
     {
       title: "Guides",
       links: [
-        { text: "For Vets", url: "/telemedicine-info/home/introToVetcation" },
+        { text: "For Vets", url: "/telemedicine-info/home/introToVetcation/" },
         {
           text: "For Hospitals & Clinics",
-          url: "/telemedicine-info/clinics/clinicIntroToVetcation",
+          url: "/telemedicine-info/clinics/clinicIntroToVetcation/",
         },
         {
           text: "For Corporations",
-          url: "/telemedicine-info/corporations/corpIntroToVetcation",
+          url: "/telemedicine-info/corporations/corpIntroToVetcation/",
         },
         // {
         //   text: "Virtual Clinic",
@@ -161,19 +161,19 @@ const Footer = () => {
     {
       title: "Compliance",
       links: [
-        { text: "AB 1399 FAQ", url: "/telemedicine-info/home/Bill1399" },
-        { text: "VCPR", url: "/telemedicine-info/home/VCPR" },
+        { text: "AB 1399 FAQ", url: "/telemedicine-info/home/Bill1399/" },
+        { text: "VCPR", url: "/telemedicine-info/home/VCPR/" },
         {
           text: "Prescription Limits",
-          url: "/telemedicine-info/home/PrescriptionLimits",
+          url: "/telemedicine-info/home/PrescriptionLimits/",
         },
         {
           text: "Privacy & Confidentiality",
-          url: "/telemedicine-info/home/PrivacyConfidentiality",
+          url: "/telemedicine-info/home/PrivacyConfidentiality/",
         },
         {
           text: "Record-Keeping",
-          url: "/telemedicine-info/home/RecordKeepingDocumentation",
+          url: "/telemedicine-info/home/RecordKeepingDocumentation/",
         },
       ],
     },
@@ -182,7 +182,7 @@ const Footer = () => {
       links: [
         {
           text: "Our Contributors",
-          url: "/telemedicine-info/contributors/ourContributors",
+          url: "/telemedicine-info/contributors/ourContributors/",
         },
         // Add more when you have them:
         // { text: "About", url: "/about/" },
@@ -192,10 +192,10 @@ const Footer = () => {
     {
       title: "Support",
       links: [
-        { text: "Support Center", url: "/support" },
+        { text: "Support Center", url: "/support/" },
         {
           text: "Email Support",
-          url: "mailto:support@vetcation.com",
+          url: "mailto:gcfchen@vetcation.com",
           external: true,
         },
       ],
@@ -203,8 +203,8 @@ const Footer = () => {
     {
       title: "Legal",
       links: [
-        { text: "Privacy Policy", url: "/privacy-policy" },
-        { text: "SMS Terms & Conditions", url: "/SMSTerms" },
+        { text: "Privacy Policy", url: "/privacy-policy/" },
+        { text: "SMS Terms & Conditions", url: "/SMSTerms/" },
       ],
     },
   ];
