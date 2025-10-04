@@ -161,19 +161,19 @@ const Footer = () => {
     {
       title: "Compliance",
       links: [
-        { text: "AB 1399 FAQ", url: "/telemedicine-info/home/Bill1399/" },
-        { text: "VCPR", url: "/telemedicine-info/home/VCPR/" },
+        { text: "AB 1399 FAQ", url: "/telemedicine-info/compliance/Bill1399/" },
+        { text: "VCPR", url: "/telemedicine-info/compliance/VCPR/" },
         {
           text: "Prescription Limits",
-          url: "/telemedicine-info/home/PrescriptionLimits/",
+          url: "/telemedicine-info/compliance/PrescriptionLimits/",
         },
         {
           text: "Privacy & Confidentiality",
-          url: "/telemedicine-info/home/PrivacyConfidentiality/",
+          url: "/telemedicine-info/compliance/PrivacyConfidentiality/",
         },
         {
           text: "Record-Keeping",
-          url: "/telemedicine-info/home/RecordKeepingDocumentation/",
+          url: "/telemedicine-info/compliance/RecordKeepingDocumentation/",
         },
       ],
     },
