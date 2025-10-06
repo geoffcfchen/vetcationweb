@@ -5781,6 +5781,14 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "paragraph",
               text: "Stand up a hospital-branded virtual network that increases capacity, protects teams, and grows revenue while preserving control of client relationships and records.",
             },
+            //add image
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
+              ],
+            },
             {
               type: "bulletList",
               items: [
@@ -5800,6 +5808,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "This can effectively double available appointment slots without adding headcount.",
                   ],
                 },
+
                 {
                   heading: "Transparent economics:",
                   lines: [
@@ -5831,6 +5840,13 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "Document VCPR establishment where applicable and maintain audit-ready visit records and follow-ups.",
                   ],
                 },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0853.webp?alt=media&token=420b61b1-454e-48da-a1c0-0bbc98b2ac20",
               ],
             },
           ],
