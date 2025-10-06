@@ -650,7 +650,8 @@ const contentData = {
               type: "qa",
               question: "What if I need to prescribe medications?",
               answer:
-                "If medication is needed, you can prescribe directly through the Vetcation platform. Prescriptions can be sent electronically to the pharmacy of your choice, ensuring timely access for your clients. The following screens use Mixlab as an example, but you are free to select any pharmacy you and your client prefer.",
+                //focus on only use Mixlab for now.
+                "If medication is needed, you can prescribe directly through the Vetcation platform. The following screens shows how you use prescriptions with Mixlab. Vetcation has partnered with Mixlab to provide a seamless experience for prescribing and managing medications. You can select medications from Mixlab's formulary, send prescriptions electronically to the client's preferred pharmacy, and track the status of each prescription within the platform. This integration ensures that you can provide comprehensive care while maintaining compliance with legal requirements. We are working on integrating more pharmacy partners.",
             },
             {
               type: "framedImage",
