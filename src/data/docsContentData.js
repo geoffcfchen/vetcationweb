@@ -3375,7 +3375,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   name: "Dr. Jeremy Prupas",
                   title: "Chief Veterinarian at City of Los Angeles",
                   description:
-                    "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare and SCVMA helped align the platform with broader efforts to advance virtual care in the veterinary field.",
+                    "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare, SCVMA, and veterinary hospitals helped align the platform with broader efforts to advance virtual care in the veterinary field.",
                 },
 
                 // More contributors...
@@ -3408,6 +3408,18 @@ requirements and explain how Vetcation keeps you compliant.`,
                   title: "Veterinarian at Norco Animal Hospital",
                   description:
                     "Dr. Joseph Tsou has provided valuable feedback on the telemedicine features of the Vetcation platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                },
+                {
+                  name: "Tahnee Morris",
+                  title: "Hospital Manager at Animal Hospital of Redondo Beach",
+                  description:
+                    "Tahnee Morris suggested expanding Vetcation to include dog walkers alongside other non-DVM professional services like dog trainers. The app has been updated so these providers can join, request a connection with a clinic to signal credibility to clients, and participate in revenue sharing.",
+                },
+                {
+                  name: "Dr. Polly Chen",
+                  title: "Veterinarian",
+                  description:
+                    "Dr. Polly Chen recommended surfacing telemedicine outcomes analysis. Previously available only at the clinic level, the app now provides every doctor with their own outcomes dashboard and adds a metric showing how many patients they’ve connected with over their career.",
                 },
 
                 // More contributors...
