@@ -24,6 +24,7 @@ const sideNavData = {
           label: "Post-Appointment",
         },
         { id: "earnings", label: "Earnings & Wallet" },
+        { id: "telemedicineAnalysis", label: "Telemedicine Analysis" },
       ],
     },
     {

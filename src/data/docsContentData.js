@@ -77,59 +77,6 @@ const contentData = {
             },
           ],
         },
-        // {
-        //   id: "whyChooseVetcation",
-        //   title: "Why Choose Vetcation?",
-        //   blocks: [
-        //     {
-        //       type: "paragraph",
-        //       text: "The Only Platform Designed for Independent Veterinary Practice:",
-        //     },
-        //     {
-        //       type: "bulletList",
-        //       items: [
-        //         {
-        //           heading: "Build Your Own Brand, Not Someone Else’s:",
-        //           lines: [
-        //             "Vetcation is the only platform that empowers veterinarians to launch and grow their own branded virtual clinic. Your profile, your clients, your rules — no hidden corporate branding or control.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Full Ownership of Medical Records:",
-        //           lines: [
-        //             "Unlike other platforms, Vetcation mirrors traditional clinic operations. You retain full access and ownership of all medical records — securely stored and fully compliant.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Chargeable, Inquiry-Based Messaging:",
-        //           lines: [
-        //             "We’re the only platform offering structured, chargeable messaging and asynchronous follow-ups—enabling meaningful, ongoing client relationships without requiring live appointments for every question.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Complete Pharmacy Freedom:",
-        //           lines: [
-        //             "Prescribe confidently without limitations. Vetcation gives you and your clients the freedom to choose any pharmacy — whether it is Chewy, Mixlab, or a local pharmacy (including Costco and Walmart).",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Built-In AI, No 3rd-Party Dependence:",
-        //           lines: [
-        //             "Our AI-powered features like auto-generated summaries are built natively into Vetcation — keeping your data private and your workflow seamless, without relying on third-party integrations.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Dedicated Technical & Regulatory Support:",
-        //           lines: [
-        //             "Our dedicated regulatory and tech support team is always here to help, keeping your virtual practice smooth and compliant as laws evolve.",
-        //             "📧 Email: gcfchen@vetcation.com",
-        //             "📞 Call or text: (530) 400-6227",
-        //           ],
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
         {
           id: "whyVirtualCareTrend",
           title: "Why Virtual Care Is Growing — And Why It Matters",
@@ -739,6 +686,165 @@ const contentData = {
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0913.webp?alt=media&token=561430b0-4d31-495c-834f-2d4be226bb5b",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0914.webp?alt=media&token=9812d8b6-0d91-4e59-a61e-0235b6d4dd4c",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    telemedicineAnalysis: {
+      mainTitle: "Telemedicine Analysis",
+      mainDescription: `Understand your client growth and clinical outcomes at a glance. Use the time range chips (7D / 2W / 4W / 3M / 1Y) and the aggregation control (Daily / Weekly / Monthly) to switch views. Numbers update instantly as you filter by period and provider.`,
+      sections: [
+        {
+          id: "clientsAnalytics",
+          title: "Clients — Growth & Cohorts",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0901.webp?alt=media&token=44f2755d-5166-4732-8a7f-d1193377d8bf", // replace with your hosted URL
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Total clients",
+                  lines: [
+                    "Counts unique pet owners who have ever booked with you (lifetime within the selected scope).",
+                    "Card shows the current total; the chart shows counts over time by the chosen aggregation.",
+                  ],
+                },
+                {
+                  heading: "New (period)",
+                  lines: [
+                    "New, first-time clients added within the selected time window.",
+                    "Helps you see acquisition spikes after campaigns or clinic partnerships.",
+                  ],
+                },
+                {
+                  heading: "Time & aggregation",
+                  lines: [
+                    "Use 7D/2W/4W/3M/1Y to change the window.",
+                    "Switch Daily / Weekly / Monthly to smooth out volatility.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "primaryOutcomes",
+          title: "Telemedicine Outcomes — Primary Distribution",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0902.webp?alt=media&token=7e29f6c0-db47-411a-bd27-e048de78acd9", // replace with your hosted URL
+              ],
+            },
+            {
+              type: "paragraph",
+              text: `The donut shows one primary outcome per visit. Totals and percentages reflect the time range and any provider filter.`,
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Outcome types (examples)",
+                  lines: [
+                    "Resolved — Issue managed via telemedicine.",
+                    "Prescribed meds — Medication initiated.",
+                    "Recheck (telemed) — Scheduled follow-up via telemedicine.",
+                    "Escalate to in-person — Directed to in-clinic care.",
+                    "Refer other doctors — Referred to another veterinarian/specialist.",
+                    "ER — Referred to emergency care.",
+                    "Monitor — Observation with safety-net advice.",
+                  ],
+                },
+                {
+                  heading: "Provider selector",
+                  lines: [
+                    "Tap the avatar/badge to scope results to a single doctor (e.g., Dr. Yu) or to all providers.",
+                  ],
+                },
+                {
+                  heading: "Total visits",
+                  lines: [
+                    "Link shows the count of visits represented in the donut; tap to view the underlying visit list (if enabled in your UI).",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "allSelectedOutcomes",
+          title: "All Selected Outcomes — Secondary Tags",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0903.webp?alt=media&token=1a170d16-cff7-4176-b8c9-b925a689c014", // replace with your hosted URL
+              ],
+            },
+            {
+              type: "paragraph",
+              text: `This bar chart counts every outcome tag selected on a visit (not just the primary). One visit can contribute to multiple bars, so “Total selections” can exceed “Total visits.” Use this to see workflow patterns—for example, how often a visit includes both “Prescribed meds” and “Recheck (telemed).”`,
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Compare with donut",
+                  lines: [
+                    "Donut = one primary outcome per visit.",
+                    "Bars = all outcomes checked on that visit.",
+                  ],
+                },
+                {
+                  heading: "Quality & triage signals",
+                  lines: [
+                    "Rising ‘Escalate to in-person’ or ‘ER’ flags may indicate improved triage or case mix changes.",
+                    "Stable ‘Recheck (telemed)’ often reflects good continuity of care.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "definitionsNotes",
+          title: "Definitions & Notes",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Time range logic",
+                  lines: [
+                    "Charts and cards honor the active range and aggregation.",
+                    "Percentages are computed within that filtered set.",
+                  ],
+                },
+                {
+                  heading: "Primary vs. additional outcomes",
+                  lines: [
+                    "Primary outcome is required and mutually exclusive per visit.",
+                    "Additional outcomes are optional, many-to-one with the visit.",
+                  ],
+                },
+                {
+                  heading: "Data freshness",
+                  lines: [
+                    "Analytics update in near real-time after a visit is closed and outcomes are saved.",
+                  ],
+                },
               ],
             },
           ],
