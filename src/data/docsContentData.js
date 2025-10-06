@@ -5888,6 +5888,13 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "paragraph",
               text: "For partnership discussions, contact Geoff Chen (gcfchen@gmail.com, (530) 400-6227).",
             },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0850.webp?alt=media&token=2b09333e-b495-4f1a-9597-0cab3594b7ec",
+              ],
+            },
           ],
         },
 
