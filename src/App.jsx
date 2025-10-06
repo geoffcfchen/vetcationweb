@@ -95,35 +95,28 @@ function SeoForPath() {
   const metaMap = {
     "/": {
       title:
-        "Vetcation — Telemedicine & Community for Veterinary Professionals",
+        "Vetcation — The professional veterinary community & telemedicine platform",
       description:
-        "Launch a virtual clinic, collaborate with hospitals, and deliver compliant telemedicine under California AB 1399 with audit-ready documentation.",
+        "Vetcation is the professional community where veterinarians and pet owners connect.",
     },
     "/vets": {
       title: "For Veterinarians — Launch Your Virtual Clinic | Vetcation",
       description:
         "Set your schedule, keep client relationships and records, and earn through structured telemedicine and follow-ups using Vetssenger.",
     },
-    "/support": {
+    "/support/": {
       title: "Support | Vetcation",
       description:
         "Get help with your Vetcation account, billing, scheduling, video calls, and compliance questions.",
     },
-    "/privacy-policy": {
+    "/privacy-policy/": {
       title: "Privacy Policy | Vetcation",
       description:
         "Learn how Vetcation collects, uses, and protects your personal information.",
     },
-    "/SMSTerms": {
+    "/SMSTerms/": {
       title: "SMS Terms | Vetcation",
       description: "Read Vetcation’s SMS program terms and conditions.",
-    },
-
-    // Docs hub
-    "/telemedicine-info/": {
-      title: "Telemedicine Information & Guides | Vetcation",
-      description:
-        "Guides for veterinarians, clinics, and corporate groups: setup, compliance, and workflows.",
     },
 
     // HOME (vets) key pages
@@ -169,37 +162,37 @@ function SeoForPath() {
     },
 
     // Compliance pages (home)
-    "/telemedicine-info/home/Bill1399/": {
+    "/telemedicine-info/compliance/Bill1399/": {
       title: "AB 1399 FAQ — California Telemedicine for Vets | Vetcation",
       description:
         "Understand California AB 1399 telemedicine rules for veterinarians, including VCPR and documentation.",
     },
-    "/telemedicine-info/home/VCPR/": {
+    "/telemedicine-info/compliance/VCPR/": {
       title: "VCPR — Establishment & Requirements | Vetcation",
       description:
         "Learn how VCPR applies to telemedicine and how Vetcation supports compliant workflows.",
     },
-    "/telemedicine-info/home/PrescriptionLimits/": {
+    "/telemedicine-info/compliance/PrescriptionLimits/": {
       title: "Prescription Limits in Telemedicine | Vetcation",
       description:
         "Guidance on prescribing within telemedicine parameters and documentation best practices.",
     },
-    "/telemedicine-info/home/PrivacyConfidentiality/": {
+    "/telemedicine-info/compliance/PrivacyConfidentiality/": {
       title: "Privacy & Confidentiality | Vetcation",
       description:
         "How Vetcation protects client privacy and supports confidentiality in virtual care.",
     },
-    "/telemedicine-info/home/RacehorseCHRBRestrictions/": {
+    "/telemedicine-info/compliance/RacehorseCHRBRestrictions/": {
       title: "Racehorse & CHRB Restrictions | Vetcation",
       description:
         "Key restrictions and considerations for racehorse telemedicine under CHRB rules.",
     },
-    "/telemedicine-info/home/RecordKeepingDocumentation/": {
+    "/telemedicine-info/compliance/RecordKeepingDocumentation/": {
       title: "Record-Keeping & Documentation | Vetcation",
       description:
         "Audit-ready documentation, visit notes, and data retention practices for telemedicine.",
     },
-    "/telemedicine-info/home/MiscellaneousClarifications/": {
+    "/telemedicine-info/compliance/MiscellaneousClarifications/": {
       title: "Miscellaneous Clarifications | Vetcation",
       description:
         "Additional compliance clarifications and edge cases for California telemedicine.",
