@@ -99,11 +99,6 @@ function SeoForPath() {
       description:
         "Vetcation is the professional community where veterinarians and pet owners connect.",
     },
-    "/vets": {
-      title: "For Veterinarians — Launch Your Virtual Clinic | Vetcation",
-      description:
-        "Set your schedule, keep client relationships and records, and earn through structured telemedicine and follow-ups using Vetssenger.",
-    },
     "/support/": {
       title: "Support | Vetcation",
       description:
