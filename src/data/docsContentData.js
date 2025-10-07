@@ -3417,8 +3417,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 },
                 {
                   name: "Dr. Polly Chen",
-                  title:
-                    "Relief Veterinarian & Board-Certified Veterinary Pathologist",
+                  title: "Veterinarian",
                   description:
                     "Dr. Polly Chen recommended surfacing telemedicine outcomes analysis. Previously available only at the clinic level, the app now provides every doctor with their own outcomes dashboard and adds a metric showing how many patients they’ve connected with over their career.",
                 },
