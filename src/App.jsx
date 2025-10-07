@@ -94,10 +94,9 @@ function SeoForPath() {
   // Start with your priority pages; you can add more anytime.
   const metaMap = {
     "/": {
-      title:
-        "Vetcation — The professional veterinary community & telemedicine platform",
+      title: "Vetcation — The professional veterinary community",
       description:
-        "Vetcation is the professional community where veterinarians and pet owners connect.",
+        "Vetcation is the professional community for veterinarians and pet owners, with compliant telemedicine tools to build lasting relationships.",
     },
     "/support/": {
       title: "Support | Vetcation",
