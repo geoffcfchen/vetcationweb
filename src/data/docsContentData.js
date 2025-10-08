@@ -3738,7 +3738,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1039.webp?alt=media&token=0f3f8557-ca8e-4ba9-bd4b-6ebf3f797f88",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
               ],
             },
@@ -3961,7 +3961,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0841.webp?alt=media&token=56d65d8d-1b38-4358-9fdd-a0009239d335",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0840.webp?alt=media&token=bca0f0fa-6590-4492-888f-e1a5893477cf",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1039.webp?alt=media&token=0f3f8557-ca8e-4ba9-bd4b-6ebf3f797f88",
               ],
             },
             {
