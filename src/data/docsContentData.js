@@ -3407,7 +3407,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   name: "Dr. Ying Tsou",
                   title: "Veterinarian at Norco Animal Hospital",
                   description:
-                    "Dr. Joseph Tsou has provided valuable feedback on the telemedicine features of the Vetcation platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the Vetcation platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
                 },
                 {
                   name: "Tahnee Morris",
