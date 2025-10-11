@@ -1456,6 +1456,24 @@ const contentData = {
             },
           ],
         },
+        {
+          id: "faqNonVaccineInjectables",
+          title:
+            "Giving Non-vaccine Injections (for example Cytopoint) after a Tele-VCPR",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "After a video exam that recommends an injection at a partner clinic, does the pet need another in-person exam first? Can staff give the shot if the prescriber is remote?",
+              answer:
+                "If you established a valid VCPR by synchronous audio-video while the animal was in California, a second in-person exam is not automatically required to carry out that plan. At a registered premises, an RVT or a trained veterinary assistant may administer a prescribed, non-controlled injectable such as Cytopoint on your order under indirect supervision. Indirect means you are not on site but are quickly available and have provided instructions. If the clinic prefers to become the attending provider of record, their DVM may perform a brief exam and take over before administering.",
+              helpText:
+                "Legal anchors to cite in your handbook: BPC § 4826.6 for tele-VCPR, BPC § 4836.1 and 16 CCR § 2034 for supervision and task delegation. In Vetcation, include a written administration order with dose and route, a checkbox for Indirect Vet Supervision, and a field to record the RVT or assistant who administered the dose.",
+              example:
+                "Dermatology video visit on Monday. Order Cytopoint 20 mg SC at Partner Clinic A. Clinic logs Indirect supervision by Dr. Smith and RVT Jones administered. Administration record syncs back to your chart and to the client’s primary DVM.",
+            },
+          ],
+        },
       ],
     },
 
@@ -4186,644 +4204,645 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
       ],
     },
-    // ReferralClinic: {
-    //   mainTitle: "Telemedicine Referral Clinic Network Overview",
-    //   mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic can be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
-    //   sections: [
-    //     {
-    //       id: "referralNetwork",
-    //       title: "Vetcation’s Referral Clinic Network",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "Vetcation’s Referral Clinic Network is designed to connect virtual veterinarians with local clinics that can provide in-person care. This network allows pet owners to receive timely and appropriate care while ensuring that clinics have the opportunity to support their community.",
-    //         },
-    //         {
-    //           type: "map",
-    //           center: { lat: 33.938469117159684, lng: -118.2679399959647 },
-    //           zoom: 9,
-    //           markers: [
-    //             {
-    //               position: { lat: 34.0047158996568, lng: -118.41651441472911 },
-    //               name: "Culver Palms Animal Hospital",
-    //               website: "https://culverpalmsanimalhospital.com/",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 33.96333911352371,
-    //                 lng: -118.42021727331638,
-    //               },
-    //               name: "Marina Veterinary Center",
-    //               website: "https://www.marinavet.com/",
-    //             },
+    ReferralClinic: {
+      mainTitle: "Telemedicine Referral Clinic Network Overview",
+      mainDescription: `Vetcation makes it easy for your clinic to support pet owners who are referred for in-person care following a telemedicine consultation. By joining our Referral Clinic Network, your clinic can be selected by virtual veterinarians on our platform when a patient near your location requires physical examination, diagnostics, or treatment. You will receive a summary of the consultation along with relevant medical records to guide your team’s in-person care.`,
+      sections: [
+        {
+          id: "referralNetwork",
+          title: "Vetcation’s Referral Clinic Network",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation’s Referral Clinic Network is designed to connect virtual veterinarians with local clinics that can provide in-person care. This network allows pet owners to receive timely and appropriate care while ensuring that clinics have the opportunity to support their community.",
+            },
+            {
+              type: "map",
+              center: { lat: 33.938469117159684, lng: -118.2679399959647 },
+              zoom: 9,
+              markers: [
+                {
+                  position: { lat: 34.0047158996568, lng: -118.41651441472911 },
+                  name: "Culver Palms Animal Hospital",
+                  website: "https://culverpalmsanimalhospital.com/",
+                },
+                {
+                  position: {
+                    lat: 33.96333911352371,
+                    lng: -118.42021727331638,
+                  },
+                  name: "Marina Veterinary Center",
+                  website: "https://www.marinavet.com/",
+                },
 
-    //             {
-    //               position: {
-    //                 lat: 34.078809436743406,
-    //                 lng: -118.2179621116925,
-    //               },
-    //               name: "LA Central Animal Hospital",
-    //               website: "https://lacentralanimalhospital.com/",
-    //             },
+                {
+                  position: {
+                    lat: 34.078809436743406,
+                    lng: -118.2179621116925,
+                  },
+                  name: "LA Central Animal Hospital",
+                  website: "https://lacentralanimalhospital.com/",
+                },
 
-    //             {
-    //               position: {
-    //                 lat: 33.95556427616801,
-    //                 lng: -118.39659333243026,
-    //               },
-    //               name: "Westchester Veterinary Center and Cat Clinic",
-    //               website: "http://www.westchestervet.com",
-    //               status: "pendings",
-    //             },
+                {
+                  position: {
+                    lat: 33.95556427616801,
+                    lng: -118.39659333243026,
+                  },
+                  name: "Westchester Veterinary Center and Cat Clinic",
+                  website: "http://www.westchestervet.com",
+                  status: "pendings",
+                },
 
-    //             {
-    //               position: { lat: 34.0191, lng: -118.4937 },
-    //               name: "Banfield Pet Hospital",
-    //               website: "https://www.banfield.com",
-    //             },
-    //             {
-    //               position: { lat: 34.0023209494312, lng: -118.40581963058001 },
-    //               name: "Brent-Air Animal Hospital",
-    //               website: "https://brentairanimalhospital.com/",
-    //               note: "curside service only",
-    //             },
+                {
+                  position: { lat: 34.0191, lng: -118.4937 },
+                  name: "Banfield Pet Hospital",
+                  website: "https://www.banfield.com",
+                },
+                {
+                  position: { lat: 34.0023209494312, lng: -118.40581963058001 },
+                  name: "Brent-Air Animal Hospital",
+                  website: "https://brentairanimalhospital.com/",
+                  note: "curside service only",
+                },
 
-    //             {
-    //               position: {
-    //                 lat: 34.035602154921776,
-    //                 lng: -118.44509587290779,
-    //               },
-    //               name: "Emerald Animal Hospital",
-    //               email: "info@emeraldanimal.com",
-    //               website: "https://emeraldanimal.com/",
-    //               note: "general care and has sent email",
-    //             },
+                {
+                  position: {
+                    lat: 34.035602154921776,
+                    lng: -118.44509587290779,
+                  },
+                  name: "Emerald Animal Hospital",
+                  email: "info@emeraldanimal.com",
+                  website: "https://emeraldanimal.com/",
+                  note: "general care and has sent email",
+                },
 
-    //             {
-    //               position: {
-    //                 lat: 34.09163764875563,
-    //                 lng: -118.33075520174093,
-    //               },
-    //               name: "The Veterinary Care Center",
-    //               website: "https://veterinarycarecenter.com/",
-    //               note: "sent the invitation email",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 33.97935402449685,
-    //                 lng: -118.43628711342294,
-    //               },
-    //               name: "Shane Veterinary Medical Center",
-    //               website: "https://www.shanevet.com/site/home",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.00520332658537,
-    //                 lng: -118.42997269603164,
-    //               },
+                {
+                  position: {
+                    lat: 34.09163764875563,
+                    lng: -118.33075520174093,
+                  },
+                  name: "The Veterinary Care Center",
+                  website: "https://veterinarycarecenter.com/",
+                  note: "sent the invitation email",
+                },
+                {
+                  position: {
+                    lat: 33.97935402449685,
+                    lng: -118.43628711342294,
+                  },
+                  name: "Shane Veterinary Medical Center",
+                  website: "https://www.shanevet.com/site/home",
+                },
+                {
+                  position: {
+                    lat: 34.00520332658537,
+                    lng: -118.42997269603164,
+                  },
 
-    //               name: "VCA Animal Hospitals Urgent Care - Mar Vista",
-    //               website:
-    //                 "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.0046488706125,
-    //                 lng: -118.40954258107686,
-    //               },
+                  name: "VCA Animal Hospitals Urgent Care - Mar Vista",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
+                {
+                  position: {
+                    lat: 34.0046488706125,
+                    lng: -118.40954258107686,
+                  },
 
-    //               name: "Sepulveda Animal Hospital",
-    //               website:
-    //                 "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-    //             },
-    //             // {
-    //             //   position: {
-    //             //     lat: 33.987750515597284,
-    //             //     lng: -118.4446426666371,
-    //             //   },
-    //             //   name: "Animal Wellness Centers",
-    //             //   website: "https://www.animalwellnesscenters.com/",
-    //             // },
-    //             {
-    //               name: "Center Sinai Animal Hospital",
-    //               position: {
-    //                 lat: 34.01833118738013,
-    //                 lng: -118.40813929680246,
-    //               },
-    //               website: "https://centersinaianimalhospital.com/",
-    //             }, // 34.04786164165459, -118.21992410000105
-    //             {
-    //               name: "Los Angeles Veterinary Center (Boyle Heights)",
-    //               position: {
-    //                 lat: 34.047843862460994,
-    //                 lng: -118.2198919135183,
-    //               },
-    //               website: "https://laveterinarycenter.com/",
-    //             },
-    //             {
-    //               name: "Valley View Animal Hospital",
-    //               position: {
-    //                 lat: 33.84752791176592,
-    //                 lng: -118.02939471435792,
-    //               },
-    //               website: "https://valleyviewah.com/",
-    //             },
-    //             {
-    //               name: "Belmont Shore Veterinary Hospital",
-    //               position: {
-    //                 lat: 33.76642657504627,
-    //                 lng: -118.11757368650653,
-    //               },
-    //               website: "https://www.belmontshorevet.com/",
-    //             },
-    //             // reception@nmah.vet
-    //             {
-    //               name: "Newport Mesa Animal Hospital",
-    //               position: {
-    //                 lat: 33.631458508390274,
-    //                 lng: -117.9236859136573,
-    //               },
-    //               website: "https://nmah.vet/",
-    //               email: "reception@nmah.vet",
-    //             },
-    //             {
-    //               name: "Animal Clinic of Tustin Ranch Irvine",
-    //               position: {
-    //                 lat: 33.73099233577863,
-    //                 lng: -117.78865419406277,
-    //               },
-    //               website: "https://www.actri.net/",
-    //               email: "actristaff@actri.net",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "whatIsReferralClinic",
-    //       title: "What Is a Referral Clinic?",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "A Referral Clinic is a local in-person clinic that can receive patients after a virtual consultation through the Vetcation platform. When a virtual veterinarian determines that a patient requires hands-on care, our system shows a list of nearby clinics based on the pet owner's location. If your clinic is selected, you will receive a secure email with the visit summary and medical record to guide your team’s follow-up care.",
-    //         },
-    //         {
-    //           type: "framedImage",
-    //           imageSrcs: [
-    //             "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8973.webp?alt=media&token=2362f8ae-6eb1-40f9-83a7-b2e95cbabd8d",
-    //           ],
-    //         },
+                  name: "Sepulveda Animal Hospital",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
+                // {
+                //   position: {
+                //     lat: 33.987750515597284,
+                //     lng: -118.4446426666371,
+                //   },
+                //   name: "Animal Wellness Centers",
+                //   website: "https://www.animalwellnesscenters.com/",
+                // },
+                {
+                  name: "Center Sinai Animal Hospital",
+                  position: {
+                    lat: 34.01833118738013,
+                    lng: -118.40813929680246,
+                  },
+                  website: "https://centersinaianimalhospital.com/",
+                }, // 34.04786164165459, -118.21992410000105
+                {
+                  name: "Los Angeles Veterinary Center (Boyle Heights)",
+                  position: {
+                    lat: 34.047843862460994,
+                    lng: -118.2198919135183,
+                  },
+                  website: "https://laveterinarycenter.com/",
+                },
+                {
+                  name: "Valley View Animal Hospital",
+                  position: {
+                    lat: 33.84752791176592,
+                    lng: -118.02939471435792,
+                  },
+                  website: "https://valleyviewah.com/",
+                },
+                {
+                  name: "Belmont Shore Veterinary Hospital",
+                  position: {
+                    lat: 33.76642657504627,
+                    lng: -118.11757368650653,
+                  },
+                  website: "https://www.belmontshorevet.com/",
+                },
+                // reception@nmah.vet
+                {
+                  name: "Newport Mesa Animal Hospital",
+                  position: {
+                    lat: 33.631458508390274,
+                    lng: -117.9236859136573,
+                  },
+                  website: "https://nmah.vet/",
+                  email: "reception@nmah.vet",
+                },
+                {
+                  name: "Animal Clinic of Tustin Ranch Irvine",
+                  position: {
+                    lat: 33.73099233577863,
+                    lng: -117.78865419406277,
+                  },
+                  website: "https://www.actri.net/",
+                  email: "actristaff@actri.net",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "whatIsReferralClinic",
+          title: "What Is a Referral Clinic?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "A Referral Clinic is a local in-person clinic that can receive patients after a virtual consultation through the Vetcation platform. When a virtual veterinarian determines that a patient requires hands-on care, our system shows a list of nearby clinics based on the pet owner's location. If your clinic is selected, you will receive a secure email with the visit summary and medical record to guide your team’s follow-up care.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8973.webp?alt=media&token=2362f8ae-6eb1-40f9-83a7-b2e95cbabd8d",
+              ],
+            },
 
-    //         {
-    //           type: "paragraph",
-    //           text: "The image above shows how clinics are displayed to veterinarians when choosing a referral location:",
-    //         },
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "Black:",
-    //               lines: [
-    //                 "Clinics that have joined the referral network and are eligible to receive referrals.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Grey:",
-    //               lines: [
-    //                 "Clinics that have not yet joined and are not selectable by the vet.",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "referralBenefits",
-    //       title: "Why Join as a Referral Clinic?",
-    //       blocks: [
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "Receive local patient referrals:",
-    //               lines: [
-    //                 "Your clinic becomes visible to telemedicine veterinarians when a nearby patient requires in-person diagnostics or treatment. No extra promotion or listing fees are required.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Provide in-person care with full context:",
-    //               lines: [
-    //                 "You’ll receive the virtual visit summary and relevant records so your team can confidently continue the patient’s care with clear background information.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Open the door to new professional relationships:",
-    //               lines: [
-    //                 "Referral interactions often lead to ongoing partnerships with virtual veterinarians looking for trusted in-person support.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "No fees, no system integration required:",
-    //               lines: [
-    //                 "Joining is simple. Just confirm by email and your clinic will be eligible to receive referrals when applicable. There’s no obligation, and you can opt out at any time.",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "howToJoin",
-    //       title: "How to Join?",
-    //       blocks: [
-    //         {
-    //           type: "qa",
-    //           question: "How do I join as a Referral Clinic?",
-    //           answer: `It’s simple. If you received an email invitation from Vetcation, just reply with your preferred email address for receiving referral records. If you haven’t received an invitation but would like to participate, contact us at <span class="highlight">gcfchen@vetcation.com</span>. There are no fees, no tech setup, and no obligation. You’re simply agreeing to be available as an in-person option for local pet owners when needed.`,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // TelemedicineClinics: {
-    //   mainTitle: "Telemedicine-Enabled Clinics on Vetcation",
-    //   mainDescription: `These clinics offer virtual care through Vetcation and can seamlessly transition cases to in-person visits when needed. Pet owners book a virtual appointment under your hospital’s brand; your team receives the consult summary and relevant records, and you maintain ownership of the client relationship and medical record.`,
-    //   sections: [
-    //     {
-    //       id: "networkOverview",
-    //       title: "Vetcation Telemedicine Clinic Network",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "Our network highlights clinics that provide telemedicine directly through Vetcation. Clinics can add capacity, protect staff time, and serve nearby pet owners with same-day virtual appointments that escalate to on-site care when appropriate.",
-    //         },
-    //         {
-    //           type: "map",
-    //           center: { lat: 33.938469117159684, lng: -118.2679399959647 },
-    //           zoom: 9,
-    //           markers: [
-    //             {
-    //               position: { lat: 34.0047158996568, lng: -118.41651441472911 },
-    //               name: "Culver Palms Animal Hospital",
-    //               website: "https://culverpalmsanimalhospital.com/",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 33.96333911352371,
-    //                 lng: -118.42021727331638,
-    //               },
-    //               name: "Marina Veterinary Center",
-    //               website: "https://www.marinavet.com/",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.078809436743406,
-    //                 lng: -118.2179621116925,
-    //               },
-    //               name: "LA Central Animal Hospital",
-    //               website: "https://lacentralanimalhospital.com/",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 33.95556427616801,
-    //                 lng: -118.39659333243026,
-    //               },
-    //               name: "Westchester Veterinary Center and Cat Clinic",
-    //               website: "http://www.westchestervet.com",
-    //               status: "pending",
-    //             },
-    //             {
-    //               position: { lat: 34.0191, lng: -118.4937 },
-    //               name: "Banfield Pet Hospital",
-    //               website: "https://www.banfield.com",
-    //             },
-    //             {
-    //               position: { lat: 34.0023209494312, lng: -118.40581963058001 },
-    //               name: "Brent-Air Animal Hospital",
-    //               website: "https://brentairanimalhospital.com/",
-    //               note: "curbside service only",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.035602154921776,
-    //                 lng: -118.44509587290779,
-    //               },
-    //               name: "Emerald Animal Hospital",
-    //               email: "info@emeraldanimal.com",
-    //               website: "https://emeraldanimal.com/",
-    //               note: "general care; email sent",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.09163764875563,
-    //                 lng: -118.33075520174093,
-    //               },
-    //               name: "The Veterinary Care Center",
-    //               website: "https://veterinarycarecenter.com/",
-    //               note: "invitation sent",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 33.97935402449685,
-    //                 lng: -118.43628711342294,
-    //               },
-    //               name: "Shane Veterinary Medical Center",
-    //               website: "https://www.shanevet.com/site/home",
-    //             },
-    //             {
-    //               position: {
-    //                 lat: 34.00520332658537,
-    //                 lng: -118.42997269603164,
-    //               },
-    //               name: "VCA Animal Hospitals Urgent Care - Mar Vista",
-    //               website:
-    //                 "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-    //             },
-    //             {
-    //               position: { lat: 34.0046488706125, lng: -118.40954258107686 },
-    //               name: "Sepulveda Animal Hospital",
-    //               website:
-    //                 "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-    //             },
-    //             {
-    //               name: "Center Sinai Animal Hospital",
-    //               position: {
-    //                 lat: 34.01833118738013,
-    //                 lng: -118.40813929680246,
-    //               },
-    //               website: "https://centersinaianimalhospital.com/",
-    //             },
-    //             {
-    //               name: "Los Angeles Veterinary Center (Boyle Heights)",
-    //               position: {
-    //                 lat: 34.047843862460994,
-    //                 lng: -118.2198919135183,
-    //               },
-    //               website: "https://laveterinarycenter.com/",
-    //             },
-    //             {
-    //               name: "Valley View Animal Hospital",
-    //               position: {
-    //                 lat: 33.84752791176592,
-    //                 lng: -118.02939471435792,
-    //               },
-    //               website: "https://valleyviewah.com/",
-    //             },
-    //             {
-    //               name: "Belmont Shore Veterinary Hospital",
-    //               position: {
-    //                 lat: 33.76642657504627,
-    //                 lng: -118.11757368650653,
-    //               },
-    //               website: "https://www.belmontshorevet.com/",
-    //             },
-    //             {
-    //               name: "Newport Mesa Animal Hospital",
-    //               position: {
-    //                 lat: 33.631458508390274,
-    //                 lng: -117.9236859136573,
-    //               },
-    //               website: "https://nmah.vet/",
-    //               email: "reception@nmah.vet",
-    //             },
-    //             {
-    //               name: "Animal Clinic of Tustin Ranch Irvine",
-    //               position: {
-    //                 lat: 33.73099233577863,
-    //                 lng: -117.78865419406277,
-    //               },
-    //               website: "https://www.actri.net/",
-    //               email: "actristaff@actri.net",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "whatIsTelemedClinic",
-    //       title: "What Is a Telemedicine-Enabled Clinic?",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "A telemedicine-enabled clinic provides virtual appointments under its own brand using Vetcation. When a case requires hands-on care, your team schedules and completes the in-person visit using your standard workflows, ensuring continuity for the client and patient.",
-    //         },
-    //         {
-    //           type: "framedImage",
-    //           imageSrcs: [
-    //             "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8973.webp?alt=media&token=2362f8ae-6eb1-40f9-83a7-b2e95cbabd8d",
-    //           ],
-    //         },
-    //         {
-    //           type: "paragraph",
-    //           text: "How clinics appear to veterinarians when selecting a telemedicine clinic:",
-    //         },
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "Black:",
-    //               lines: [
-    //                 "Clinics offering telemedicine through Vetcation (selectable).",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Grey:",
-    //               lines: ["Clinics not yet onboarded (not selectable)."],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "clinicBenefits",
-    //       title: "Why Offer Telemedicine with Vetcation?",
-    //       blocks: [
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "Serve nearby pet owners instantly:",
-    //               lines: [
-    //                 "Be discoverable for same-day virtual care; escalate to on-site visits when needed.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Arrive prepared for in-person care:",
-    //               lines: [
-    //                 "Your team receives the virtual consult summary and relevant records for smooth follow-up.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Build lasting client relationships:",
-    //               lines: [
-    //                 "Keep ownership of the client relationship and medical record across virtual and on-site care.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Simple to start:",
-    //               lines: [
-    //                 "No new software integrations required to be listed. Opt in or out any time.",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: "howToList",
-    //       title: "How Do We Get Listed?",
-    //       blocks: [
-    //         {
-    //           type: "qa",
-    //           question:
-    //             "How can our clinic appear on this map as telemedicine-enabled?",
-    //           answer: `Reply to your Vetcation invitation email with the preferred address for receiving consult summaries, or contact <span class="highlight">gcfchen@vetcation.com</span>. Once verified, your clinic will appear as selectable for telemedicine on the map. There are no listing fees or obligations.`,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // PartneringClinic: {
-    //   mainTitle: "Telemedicine Platform for Partnering Clinics",
-    //   mainDescription: `Vetcation is a flexible, open, and legally compliant telemedicine platform that helps every clinic in California expand into telemedicine, extend veterinary capacity beyond in‑house staff, and reach more clients. With our partnership agreement feature, California‑licensed veterinarians can request to collaborate with your clinic, providing virtual care under your clinic’s name while sharing both revenue and medical records to ensure continuity of care.`,
-    //   sections: [
-    //     /* 1. Business impact for clinics */
-    //     {
-    //       id: "clinicBenefits",
-    //       title: "What Can Your Clinic Achieve with Vetcation?",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "Scale services, protect your brand, and improve patient outcomes without extra payroll or infrastructure:",
-    //         },
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "Expand veterinary capacity without hiring:",
-    //               lines: [
-    //                 "Partner with licensed vets who work remotely under your clinic’s name during evenings, weekends, or peak periods.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Retain full ownership of brand and records:",
-    //               lines: [
-    //                 "All medical records and client relationships stay with your clinic — stored securely and AB 1399‑compliant.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Add revenue with zero upfront cost:",
-    //               lines: [
-    //                 `Virtual visits generate new income streams for your clinic. For each full-time virtual vet you partner with, your clinic can earn up to <span class="highlight">$75,000+ per year</span> without hiring new staff or adding overhead.`,
-    //               ],
-    //             },
-    //             {
-    //               heading: "Seamless continuity of care:",
-    //               lines: [
-    //                 "Telemedicine notes flow straight into your workflow, so in‑person follow‑ups are informed and efficient.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Built‑in legal safeguards:",
-    //               lines: [
-    //                 "Vetcation’s workflows align with California’s telehealth rules — reducing audit risk and paperwork.",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
+            {
+              type: "paragraph",
+              text: "The image above shows how clinics are displayed to veterinarians when choosing a referral location:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Black:",
+                  lines: [
+                    "Clinics that have joined the referral network and are eligible to receive referrals.",
+                  ],
+                },
+                {
+                  heading: "Grey:",
+                  lines: [
+                    "Clinics that have not yet joined and are not selectable by the vet.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "referralBenefits",
+          title: "Why Join as a Referral Clinic?",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Receive local patient referrals:",
+                  lines: [
+                    "Your clinic becomes visible to telemedicine veterinarians when a nearby patient requires in-person diagnostics or treatment. No extra promotion or listing fees are required.",
+                  ],
+                },
+                {
+                  heading: "Provide in-person care with full context:",
+                  lines: [
+                    "You’ll receive the virtual visit summary and relevant records so your team can confidently continue the patient’s care with clear background information.",
+                  ],
+                },
+                {
+                  heading: "Open the door to new professional relationships:",
+                  lines: [
+                    "Referral interactions often lead to ongoing partnerships with virtual veterinarians looking for trusted in-person support.",
+                  ],
+                },
+                {
+                  heading: "No fees, no system integration required:",
+                  lines: [
+                    "Joining is simple. Just confirm by email and your clinic will be eligible to receive referrals when applicable. There’s no obligation, and you can opt out at any time.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "howToJoin",
+          title: "How to Join?",
+          blocks: [
+            {
+              type: "qa",
+              question: "How do I join as a Referral Clinic?",
+              answer: `It’s simple. If you received an email invitation from Vetcation, just reply with your preferred email address for receiving referral records. If you haven’t received an invitation but would like to participate, contact us at <span class="highlight">gcfchen@vetcation.com</span>. There are no fees, no tech setup, and no obligation. You’re simply agreeing to be available as an in-person option for local pet owners when needed.`,
+            },
+          ],
+        },
+      ],
+    },
+    TelemedicineClinics: {
+      mainTitle: "Telemedicine-Enabled Clinics on Vetcation",
+      mainDescription: `These clinics offer virtual care through Vetcation and can seamlessly transition cases to in-person visits when needed. Pet owners book a virtual appointment under your hospital’s brand; your team receives the consult summary and relevant records, and you maintain ownership of the client relationship and medical record.`,
+      sections: [
+        {
+          id: "networkOverview",
+          title: "Vetcation Telemedicine Clinic Network",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Our network highlights clinics that provide telemedicine directly through Vetcation. Clinics can add capacity, protect staff time, and serve nearby pet owners with same-day virtual appointments that escalate to on-site care when appropriate.",
+            },
+            {
+              type: "map",
+              center: { lat: 33.938469117159684, lng: -118.2679399959647 },
+              zoom: 9,
+              markers: [
+                {
+                  position: { lat: 34.0047158996568, lng: -118.41651441472911 },
+                  name: "Culver Palms Animal Hospital",
+                  website: "https://culverpalmsanimalhospital.com/",
+                },
+                {
+                  position: {
+                    lat: 33.96333911352371,
+                    lng: -118.42021727331638,
+                  },
+                  name: "Marina Veterinary Center",
+                  website: "https://www.marinavet.com/",
+                },
+                {
+                  position: {
+                    lat: 34.078809436743406,
+                    lng: -118.2179621116925,
+                  },
+                  name: "LA Central Animal Hospital",
+                  website: "https://lacentralanimalhospital.com/",
+                },
+                {
+                  position: {
+                    lat: 33.95556427616801,
+                    lng: -118.39659333243026,
+                  },
+                  name: "Westchester Veterinary Center and Cat Clinic",
+                  website: "http://www.westchestervet.com",
+                  status: "pending",
+                },
+                {
+                  position: { lat: 34.0191, lng: -118.4937 },
+                  name: "Banfield Pet Hospital",
+                  website: "https://www.banfield.com",
+                },
+                {
+                  position: { lat: 34.0023209494312, lng: -118.40581963058001 },
+                  name: "Brent-Air Animal Hospital",
+                  website: "https://brentairanimalhospital.com/",
+                  note: "curbside service only",
+                },
+                {
+                  position: {
+                    lat: 34.035602154921776,
+                    lng: -118.44509587290779,
+                  },
+                  name: "Emerald Animal Hospital",
+                  email: "info@emeraldanimal.com",
+                  website: "https://emeraldanimal.com/",
+                  note: "general care; email sent",
+                },
+                {
+                  position: {
+                    lat: 34.09163764875563,
+                    lng: -118.33075520174093,
+                  },
+                  name: "The Veterinary Care Center",
+                  website: "https://veterinarycarecenter.com/",
+                  note: "invitation sent",
+                },
+                {
+                  position: {
+                    lat: 33.97935402449685,
+                    lng: -118.43628711342294,
+                  },
+                  name: "Shane Veterinary Medical Center",
+                  website: "https://www.shanevet.com/site/home",
+                },
+                {
+                  position: {
+                    lat: 34.00520332658537,
+                    lng: -118.42997269603164,
+                  },
+                  name: "VCA Animal Hospitals Urgent Care - Mar Vista",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
+                {
+                  position: { lat: 34.0046488706125, lng: -118.40954258107686 },
+                  name: "Sepulveda Animal Hospital",
+                  website:
+                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+                },
+                {
+                  name: "Center Sinai Animal Hospital",
+                  position: {
+                    lat: 34.01833118738013,
+                    lng: -118.40813929680246,
+                  },
+                  website: "https://centersinaianimalhospital.com/",
+                },
+                {
+                  name: "Los Angeles Veterinary Center (Boyle Heights)",
+                  position: {
+                    lat: 34.047843862460994,
+                    lng: -118.2198919135183,
+                  },
+                  website: "https://laveterinarycenter.com/",
+                },
+                {
+                  name: "Valley View Animal Hospital",
+                  position: {
+                    lat: 33.84752791176592,
+                    lng: -118.02939471435792,
+                  },
+                  website: "https://valleyviewah.com/",
+                },
+                {
+                  name: "Belmont Shore Veterinary Hospital",
+                  position: {
+                    lat: 33.76642657504627,
+                    lng: -118.11757368650653,
+                  },
+                  website: "https://www.belmontshorevet.com/",
+                },
+                {
+                  name: "Newport Mesa Animal Hospital",
+                  position: {
+                    lat: 33.631458508390274,
+                    lng: -117.9236859136573,
+                  },
+                  website: "https://nmah.vet/",
+                  email: "reception@nmah.vet",
+                },
+                {
+                  name: "Animal Clinic of Tustin Ranch Irvine",
+                  position: {
+                    lat: 33.73099233577863,
+                    lng: -117.78865419406277,
+                  },
+                  website: "https://www.actri.net/",
+                  email: "actristaff@actri.net",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "whatIsTelemedClinic",
+          title: "What Is a Telemedicine-Enabled Clinic?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "A telemedicine-enabled clinic provides virtual appointments under its own brand using Vetcation. When a case requires hands-on care, your team schedules and completes the in-person visit using your standard workflows, ensuring continuity for the client and patient.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8973.webp?alt=media&token=2362f8ae-6eb1-40f9-83a7-b2e95cbabd8d",
+              ],
+            },
+            {
+              type: "paragraph",
+              text: "How clinics appear to veterinarians when selecting a telemedicine clinic:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Black:",
+                  lines: [
+                    "Clinics offering telemedicine through Vetcation (selectable).",
+                  ],
+                },
+                {
+                  heading: "Grey:",
+                  lines: ["Clinics not yet onboarded (not selectable)."],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "clinicBenefits",
+          title: "Why Offer Telemedicine with Vetcation?",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Serve nearby pet owners instantly:",
+                  lines: [
+                    "Be discoverable for same-day virtual care; escalate to on-site visits when needed.",
+                  ],
+                },
+                {
+                  heading: "Arrive prepared for in-person care:",
+                  lines: [
+                    "Your team receives the virtual consult summary and relevant records for smooth follow-up.",
+                  ],
+                },
+                {
+                  heading: "Build lasting client relationships:",
+                  lines: [
+                    "Keep ownership of the client relationship and medical record across virtual and on-site care.",
+                  ],
+                },
+                {
+                  heading: "Simple to start:",
+                  lines: [
+                    "No new software integrations required to be listed. Opt in or out any time.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "howToList",
+          title: "How Do We Get Listed?",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "How can our clinic appear on this map as telemedicine-enabled?",
+              answer: `Reply to your Vetcation invitation email with the preferred address for receiving consult summaries, or contact <span class="highlight">gcfchen@vetcation.com</span>. Once verified, your clinic will appear as selectable for telemedicine on the map. There are no listing fees or obligations.`,
+            },
+          ],
+        },
+      ],
+    },
+    PartneringClinic: {
+      mainTitle: "Telemedicine Platform for Partnering Clinics",
+      mainDescription: `Vetcation is a flexible, open, and legally compliant telemedicine platform that helps every clinic in California expand into telemedicine, extend veterinary capacity beyond in‑house staff, and reach more clients. With our partnership agreement feature, California‑licensed veterinarians can request to collaborate with your clinic, providing virtual care under your clinic’s name while sharing both revenue and medical records to ensure continuity of care.`,
+      sections: [
+        /* 1. Business impact for clinics */
+        {
+          id: "clinicBenefits",
+          title: "What Can Your Clinic Achieve with Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Scale services, protect your brand, and improve patient outcomes without extra payroll or infrastructure:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Expand veterinary capacity without hiring:",
+                  lines: [
+                    "Partner with licensed vets who work remotely under your clinic’s name during evenings, weekends, or peak periods.",
+                  ],
+                },
+                {
+                  heading: "Retain full ownership of brand and records:",
+                  lines: [
+                    "All medical records and client relationships stay with your clinic — stored securely and AB 1399‑compliant.",
+                  ],
+                },
+                {
+                  heading: "Add revenue with zero upfront cost:",
+                  lines: [
+                    `Virtual visits generate new income streams for your clinic. For each full-time virtual vet you partner with, your clinic can earn up to <span class="highlight">$75,000+ per year</span> without hiring new staff or adding overhead.`,
+                  ],
+                },
+                {
+                  heading: "Seamless continuity of care:",
+                  lines: [
+                    "Telemedicine notes flow straight into your workflow, so in‑person follow‑ups are informed and efficient.",
+                  ],
+                },
+                {
+                  heading: "Built‑in legal safeguards:",
+                  lines: [
+                    "Vetcation’s workflows align with California’s telehealth rules — reducing audit risk and paperwork.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
 
-    //     /* 2. Differentiators */
-    //     {
-    //       id: "whyChooseVetcationClinic",
-    //       title: "Why Choose Vetcation?",
-    //       blocks: [
-    //         {
-    //           type: "paragraph",
-    //           text: "Designed specifically for brick‑and‑mortar clinics — not a competing marketplace:",
-    //         },
-    //         {
-    //           type: "bulletList",
-    //           items: [
-    //             {
-    //               heading: "One‑click vet onboarding & scheduling control:",
-    //               lines: [
-    //                 "Approve or deny partnership requests, set hours, and cap daily telemedicine slots in seconds.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Shared medical records, no data silos:",
-    //               lines: [
-    //                 "Every virtual visit automatically syncs with your clinic’s record — ready for follow‑up, lab work, or radiology.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Higher client retention & satisfaction:",
-    //               lines: [
-    //                 "Offer after‑hours triage and convenient rechecks that keep pet owners loyal to your clinic.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Dedicated regulatory & tech support:",
-    //               lines: [
-    //                 "Questions on AB 1399 audits or EMR integration? Our in‑house team is on call.",
-    //                 "📧 gcfchen@vetcation.com",
-    //                 "📞 (530) 400‑6227",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
+        /* 2. Differentiators */
+        {
+          id: "whyChooseVetcationClinic",
+          title: "Why Choose Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Designed specifically for brick‑and‑mortar clinics — not a competing marketplace:",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "One‑click vet onboarding & scheduling control:",
+                  lines: [
+                    "Approve or deny partnership requests, set hours, and cap daily telemedicine slots in seconds.",
+                  ],
+                },
+                {
+                  heading: "Shared medical records, no data silos:",
+                  lines: [
+                    "Every virtual visit automatically syncs with your clinic’s record — ready for follow‑up, lab work, or radiology.",
+                  ],
+                },
+                {
+                  heading: "Higher client retention & satisfaction:",
+                  lines: [
+                    "Offer after‑hours triage and convenient rechecks that keep pet owners loyal to your clinic.",
+                  ],
+                },
+                {
+                  heading: "Dedicated regulatory & tech support:",
+                  lines: [
+                    "Questions on AB 1399 audits or EMR integration? Our in‑house team is on call.",
+                    "📧 gcfchen@vetcation.com",
+                    "📞 (530) 400‑6227",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
 
-    //     /* 3. Market data & trend points for clinics */
-    //     {
-    //       id: "whyVirtualCareTrendClinic",
-    //       title: "Why Clinics Are Embracing Telemedicine",
-    //       blocks: [
-    //         {
-    //           type: "trendPoints",
-    //           introParagraphs: [
-    //             "VVCA’s 2024 State of Virtual Care Report highlights urgent shortages and soaring demand — telemedicine is now a strategic necessity:",
-    //           ],
-    //           items: [
-    //             {
-    //               heading: "Severe workforce gaps:",
-    //               lines: [
-    //                 "The U.S. needs **12,000 more veterinarians** and **48,000 support staff** to meet baseline demand; **22% of counties have zero veterinary employees**.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Demand from underserved pet owners:",
-    //               lines: [
-    //                 "**25 million companion animals** live in counties with the lowest access scores. Virtual care lets your clinic reach them without opening a new location.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "High‑satisfaction service channel:",
-    //               lines: [
-    //                 "Virtual consults achieve a **98.4% consumer satisfaction rate** across the U.S., U.K., and Canada — higher than many in‑person benchmarks.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Efficiency & revenue benefits:",
-    //               lines: [
-    //                 "**58%** of treatment‑oriented virtual cases are resolved remotely, freeing onsite appointments for higher‑value procedures and reducing no‑shows.",
-    //               ],
-    //             },
-    //             {
-    //               heading: "Competitive differentiation:",
-    //               lines: [
-    //                 "Early‑adopter clinics position themselves as modern, convenient, and tech‑forward — key factors in attracting both clients and new hires.",
-    //               ],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+        /* 3. Market data & trend points for clinics */
+        {
+          id: "whyVirtualCareTrendClinic",
+          title: "Why Clinics Are Embracing Telemedicine",
+          blocks: [
+            {
+              type: "trendPoints",
+              introParagraphs: [
+                "VVCA’s 2024 State of Virtual Care Report highlights urgent shortages and soaring demand — telemedicine is now a strategic necessity:",
+              ],
+              items: [
+                {
+                  heading: "Severe workforce gaps:",
+                  lines: [
+                    "The U.S. needs **12,000 more veterinarians** and **48,000 support staff** to meet baseline demand; **22% of counties have zero veterinary employees**.",
+                  ],
+                },
+                {
+                  heading: "Demand from underserved pet owners:",
+                  lines: [
+                    "**25 million companion animals** live in counties with the lowest access scores. Virtual care lets your clinic reach them without opening a new location.",
+                  ],
+                },
+                {
+                  heading: "High‑satisfaction service channel:",
+                  lines: [
+                    "Virtual consults achieve a **98.4% consumer satisfaction rate** across the U.S., U.K., and Canada — higher than many in‑person benchmarks.",
+                  ],
+                },
+                {
+                  heading: "Efficiency & revenue benefits:",
+                  lines: [
+                    "**58%** of treatment‑oriented virtual cases are resolved remotely, freeing onsite appointments for higher‑value procedures and reducing no‑shows.",
+                  ],
+                },
+                {
+                  heading: "Competitive differentiation:",
+                  lines: [
+                    "Early‑adopter clinics position themselves as modern, convenient, and tech‑forward — key factors in attracting both clients and new hires.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
     //     Bill1399: {
     //       mainTitle: "Assembly Bill 1399",
     //       mainDescription: `Assembly Bill (AB) 1399 (Friedman, Chapter 475, Statutes of 2023) took effect

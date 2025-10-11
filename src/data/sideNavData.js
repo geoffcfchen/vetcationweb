@@ -248,6 +248,16 @@ const sideNavData = {
       ],
     },
 
+    // {
+    //   groupTitle: "Partnered clinics",
+    //   items: [
+    //     {
+    //       id: "ReferralClinic",
+    //       label: "Referral Clinics Overview",
+    //     },
+    //   ],
+    // },
+
     {
       groupTitle: "Regulatory Compliance",
       items: [
