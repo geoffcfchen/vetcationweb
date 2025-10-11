@@ -4218,6 +4218,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
             {
               type: "map",
+              collectionName: "clinics", // 👈 use this instead of markers
               center: { lat: 33.938469117159684, lng: -118.2679399959647 },
               zoom: 9,
               markers: [
@@ -4226,155 +4227,167 @@ requirements and explain how Vetcation keeps you compliant.`,
                   name: "Culver Palms Animal Hospital",
                   website: "https://culverpalmsanimalhospital.com/",
                 },
-                {
-                  position: {
-                    lat: 33.96333911352371,
-                    lng: -118.42021727331638,
-                  },
-                  name: "Marina Veterinary Center",
-                  website: "https://www.marinavet.com/",
-                },
-
-                {
-                  position: {
-                    lat: 34.078809436743406,
-                    lng: -118.2179621116925,
-                  },
-                  name: "LA Central Animal Hospital",
-                  website: "https://lacentralanimalhospital.com/",
-                },
-
-                {
-                  position: {
-                    lat: 33.95556427616801,
-                    lng: -118.39659333243026,
-                  },
-                  name: "Westchester Veterinary Center and Cat Clinic",
-                  website: "http://www.westchestervet.com",
-                  status: "pendings",
-                },
-
-                {
-                  position: { lat: 34.0191, lng: -118.4937 },
-                  name: "Banfield Pet Hospital",
-                  website: "https://www.banfield.com",
-                },
-                {
-                  position: { lat: 34.0023209494312, lng: -118.40581963058001 },
-                  name: "Brent-Air Animal Hospital",
-                  website: "https://brentairanimalhospital.com/",
-                  note: "curside service only",
-                },
-
-                {
-                  position: {
-                    lat: 34.035602154921776,
-                    lng: -118.44509587290779,
-                  },
-                  name: "Emerald Animal Hospital",
-                  email: "info@emeraldanimal.com",
-                  website: "https://emeraldanimal.com/",
-                  note: "general care and has sent email",
-                },
-
-                {
-                  position: {
-                    lat: 34.09163764875563,
-                    lng: -118.33075520174093,
-                  },
-                  name: "The Veterinary Care Center",
-                  website: "https://veterinarycarecenter.com/",
-                  note: "sent the invitation email",
-                },
-                {
-                  position: {
-                    lat: 33.97935402449685,
-                    lng: -118.43628711342294,
-                  },
-                  name: "Shane Veterinary Medical Center",
-                  website: "https://www.shanevet.com/site/home",
-                },
-                {
-                  position: {
-                    lat: 34.00520332658537,
-                    lng: -118.42997269603164,
-                  },
-
-                  name: "VCA Animal Hospitals Urgent Care - Mar Vista",
-                  website:
-                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-                },
-                {
-                  position: {
-                    lat: 34.0046488706125,
-                    lng: -118.40954258107686,
-                  },
-
-                  name: "Sepulveda Animal Hospital",
-                  website:
-                    "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
-                },
-                // {
-                //   position: {
-                //     lat: 33.987750515597284,
-                //     lng: -118.4446426666371,
-                //   },
-                //   name: "Animal Wellness Centers",
-                //   website: "https://www.animalwellnesscenters.com/",
-                // },
-                {
-                  name: "Center Sinai Animal Hospital",
-                  position: {
-                    lat: 34.01833118738013,
-                    lng: -118.40813929680246,
-                  },
-                  website: "https://centersinaianimalhospital.com/",
-                }, // 34.04786164165459, -118.21992410000105
-                {
-                  name: "Los Angeles Veterinary Center (Boyle Heights)",
-                  position: {
-                    lat: 34.047843862460994,
-                    lng: -118.2198919135183,
-                  },
-                  website: "https://laveterinarycenter.com/",
-                },
-                {
-                  name: "Valley View Animal Hospital",
-                  position: {
-                    lat: 33.84752791176592,
-                    lng: -118.02939471435792,
-                  },
-                  website: "https://valleyviewah.com/",
-                },
-                {
-                  name: "Belmont Shore Veterinary Hospital",
-                  position: {
-                    lat: 33.76642657504627,
-                    lng: -118.11757368650653,
-                  },
-                  website: "https://www.belmontshorevet.com/",
-                },
-                // reception@nmah.vet
-                {
-                  name: "Newport Mesa Animal Hospital",
-                  position: {
-                    lat: 33.631458508390274,
-                    lng: -117.9236859136573,
-                  },
-                  website: "https://nmah.vet/",
-                  email: "reception@nmah.vet",
-                },
-                {
-                  name: "Animal Clinic of Tustin Ranch Irvine",
-                  position: {
-                    lat: 33.73099233577863,
-                    lng: -117.78865419406277,
-                  },
-                  website: "https://www.actri.net/",
-                  email: "actristaff@actri.net",
-                },
               ],
             },
+            // {
+            //   type: "map",
+            //   center: { lat: 33.938469117159684, lng: -118.2679399959647 },
+            //   zoom: 9,
+            //   markers: [
+            //     {
+            //       position: { lat: 34.0047158996568, lng: -118.41651441472911 },
+            //       name: "Culver Palms Animal Hospital",
+            //       website: "https://culverpalmsanimalhospital.com/",
+            //     },
+            //     {
+            //       position: {
+            //         lat: 33.96333911352371,
+            //         lng: -118.42021727331638,
+            //       },
+            //       name: "Marina Veterinary Center",
+            //       website: "https://www.marinavet.com/",
+            //     },
+
+            //     {
+            //       position: {
+            //         lat: 34.078809436743406,
+            //         lng: -118.2179621116925,
+            //       },
+            //       name: "LA Central Animal Hospital",
+            //       website: "https://lacentralanimalhospital.com/",
+            //     },
+
+            //     {
+            //       position: {
+            //         lat: 33.95556427616801,
+            //         lng: -118.39659333243026,
+            //       },
+            //       name: "Westchester Veterinary Center and Cat Clinic",
+            //       website: "http://www.westchestervet.com",
+            //       status: "pendings",
+            //     },
+
+            //     {
+            //       position: { lat: 34.0191, lng: -118.4937 },
+            //       name: "Banfield Pet Hospital",
+            //       website: "https://www.banfield.com",
+            //     },
+            //     {
+            //       position: { lat: 34.0023209494312, lng: -118.40581963058001 },
+            //       name: "Brent-Air Animal Hospital",
+            //       website: "https://brentairanimalhospital.com/",
+            //       note: "curside service only",
+            //     },
+
+            //     {
+            //       position: {
+            //         lat: 34.035602154921776,
+            //         lng: -118.44509587290779,
+            //       },
+            //       name: "Emerald Animal Hospital",
+            //       email: "info@emeraldanimal.com",
+            //       website: "https://emeraldanimal.com/",
+            //       note: "general care and has sent email",
+            //     },
+
+            //     {
+            //       position: {
+            //         lat: 34.09163764875563,
+            //         lng: -118.33075520174093,
+            //       },
+            //       name: "The Veterinary Care Center",
+            //       website: "https://veterinarycarecenter.com/",
+            //       note: "sent the invitation email",
+            //     },
+            //     {
+            //       position: {
+            //         lat: 33.97935402449685,
+            //         lng: -118.43628711342294,
+            //       },
+            //       name: "Shane Veterinary Medical Center",
+            //       website: "https://www.shanevet.com/site/home",
+            //     },
+            //     {
+            //       position: {
+            //         lat: 34.00520332658537,
+            //         lng: -118.42997269603164,
+            //       },
+
+            //       name: "VCA Animal Hospitals Urgent Care - Mar Vista",
+            //       website:
+            //         "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+            //     },
+            //     {
+            //       position: {
+            //         lat: 34.0046488706125,
+            //         lng: -118.40954258107686,
+            //       },
+
+            //       name: "Sepulveda Animal Hospital",
+            //       website:
+            //         "https://vcahospitals.com/urgent-care-marvista?utm_source=maps&utm_medium=organic&utm_campaign=VCA_Animal_Hospitals_Urgent_Care_Mar_Vista",
+            //     },
+            //     // {
+            //     //   position: {
+            //     //     lat: 33.987750515597284,
+            //     //     lng: -118.4446426666371,
+            //     //   },
+            //     //   name: "Animal Wellness Centers",
+            //     //   website: "https://www.animalwellnesscenters.com/",
+            //     // },
+            //     {
+            //       name: "Center Sinai Animal Hospital",
+            //       position: {
+            //         lat: 34.01833118738013,
+            //         lng: -118.40813929680246,
+            //       },
+            //       website: "https://centersinaianimalhospital.com/",
+            //     }, // 34.04786164165459, -118.21992410000105
+            //     {
+            //       name: "Los Angeles Veterinary Center (Boyle Heights)",
+            //       position: {
+            //         lat: 34.047843862460994,
+            //         lng: -118.2198919135183,
+            //       },
+            //       website: "https://laveterinarycenter.com/",
+            //     },
+            //     {
+            //       name: "Valley View Animal Hospital",
+            //       position: {
+            //         lat: 33.84752791176592,
+            //         lng: -118.02939471435792,
+            //       },
+            //       website: "https://valleyviewah.com/",
+            //     },
+            //     {
+            //       name: "Belmont Shore Veterinary Hospital",
+            //       position: {
+            //         lat: 33.76642657504627,
+            //         lng: -118.11757368650653,
+            //       },
+            //       website: "https://www.belmontshorevet.com/",
+            //     },
+            //     // reception@nmah.vet
+            //     {
+            //       name: "Newport Mesa Animal Hospital",
+            //       position: {
+            //         lat: 33.631458508390274,
+            //         lng: -117.9236859136573,
+            //       },
+            //       website: "https://nmah.vet/",
+            //       email: "reception@nmah.vet",
+            //     },
+            //     {
+            //       name: "Animal Clinic of Tustin Ranch Irvine",
+            //       position: {
+            //         lat: 33.73099233577863,
+            //         lng: -117.78865419406277,
+            //       },
+            //       website: "https://www.actri.net/",
+            //       email: "actristaff@actri.net",
+            //     },
+            //   ],
+            // },
           ],
         },
         {
