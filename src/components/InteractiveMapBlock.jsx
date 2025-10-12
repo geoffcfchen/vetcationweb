@@ -8,7 +8,8 @@ import {
 } from "@react-google-maps/api";
 import styled from "styled-components";
 import { darkMapStyle } from "../data/darkMapStyle";
-import { firestore } from "../firebase";
+// import { firestore } from "../firebase";
+import { firestore } from "../lib/firebase";
 import {
   collection,
   getDocs,
