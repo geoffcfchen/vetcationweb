@@ -67,7 +67,9 @@ const Muted = styled.p`
   font-size: 14px;
 `;
 
-const FN_VERIFY = import.meta.env.VITE_FN_VERIFY;
+const FN_VERIFY =
+  import.meta.env.VITE_FN_VERIFY ||
+  "https://us-central1-vetcationapp.cloudfunctions.net/verifyClinicInvite";
 const FN_SUBMIT = import.meta.env.VITE_FN_SUBMIT;
 
 export default function InviteSurvey() {
