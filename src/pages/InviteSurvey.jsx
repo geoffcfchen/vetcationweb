@@ -105,6 +105,10 @@ export default function InviteSurvey() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ clinicId, token }),
         });
+        if (!resp.ok) {
+          const text = await resp.text().catch(() => "");
+          throw new Error(`HTTP ${resp.status} ${text}`.trim());
+        }
         const json = await resp.json();
         if (!alive) return;
 
@@ -125,8 +129,9 @@ export default function InviteSurvey() {
         }
       } catch (e) {
         if (!alive) return;
+        console.error("verifyClinicInvite failed:", e);
         setValid(false);
-        setInvalidReason("network error");
+        setInvalidReason(String(e?.message || e || "network error"));
       } finally {
         if (alive) setVerifying(false);
       }
