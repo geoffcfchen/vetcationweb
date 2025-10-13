@@ -31,6 +31,7 @@ import SupportPage from "./pages/SupportPage";
 import { createGlobalStyle } from "styled-components";
 import topNavData from "./data/topNavData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import InviteSurvey from "./pages/InviteSurvey";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -312,6 +313,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
+        <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
         {/* <Route path="/vets" element={<ForVetPage />} /> */}
         {/* <Route path="/mission" element={<MissionsPage />} /> */}
         {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}

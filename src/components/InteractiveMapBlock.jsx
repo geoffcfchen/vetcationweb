@@ -1,5 +1,5 @@
 // ./components/InteractiveMapBlock.jsx
-import React from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -17,7 +17,10 @@ import {
   where,
   orderBy,
   limit,
+  startAt,
+  endAt,
 } from "firebase/firestore";
+import { distanceBetween, geohashQueryBounds } from "geofire-common";
 
 const containerStyle = {
   width: "100%",
@@ -106,24 +109,24 @@ function radiusFromBounds(bounds) {
 // Hard cap on search radius
 const MAX_RADIUS_M = 5000;
 
-export default React.memo(function InteractiveMapBlock({ block }) {
+export default memo(function InteractiveMapBlock({ block }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_KEY,
   });
 
-  const mapRef = React.useRef(null);
+  const mapRef = useRef(null);
   const initialCenter = block.center ?? { lat: 34.0195, lng: -118.4912 }; // Santa Monica
   const initialZoom = block.zoom ?? 10;
 
-  const [markers, setMarkers] = React.useState([]);
-  const [active, setActive] = React.useState(null);
-  const [showSearchBtn, setShowSearchBtn] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [center, setCenter] = React.useState(initialCenter);
-  const [zoom] = React.useState(initialZoom); // keep constant to avoid controlled-loop
+  const [markers, setMarkers] = useState([]);
+  const [active, setActive] = useState(null);
+  const [showSearchBtn, setShowSearchBtn] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [center, setCenter] = useState(initialCenter);
+  const [zoom] = useState(initialZoom); // keep constant to avoid controlled-loop
 
   // Geolocate user; pan imperatively to avoid center/zoom feedback loops
-  React.useEffect(() => {
+  useEffect(() => {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -150,84 +153,179 @@ export default React.memo(function InteractiveMapBlock({ block }) {
   const handleDragEnd = () => setShowSearchBtn(true);
   const handleZoomChanged = () => setShowSearchBtn(true);
 
-  const fetchClinicsForCurrentBounds = React.useCallback(async () => {
+  // const fetchClinicsForCurrentBounds = useCallback(async () => {
+  //   if (!mapRef.current) return;
+
+  //   const bounds = mapRef.current.getBounds();
+  //   if (!bounds) return;
+
+  //   // compute radius and clamp
+  //   const approxRadius = radiusFromBounds(bounds) || MAX_RADIUS_M;
+  //   const radius = Math.min(approxRadius, MAX_RADIUS_M);
+
+  //   // derive a bounding box from current bounds
+  //   const ne = bounds.getNorthEast();
+  //   const sw = bounds.getSouthWest();
+
+  //   let minLat = Math.min(sw.lat(), ne.lat());
+  //   let maxLat = Math.max(sw.lat(), ne.lat());
+  //   let minLng = Math.min(sw.lng(), ne.lng());
+  //   let maxLng = Math.max(sw.lng(), ne.lng());
+
+  //   // shrink to max-radius box around map center if zoomed too far out
+  //   const c = mapRef.current.getCenter();
+  //   const centerLat = c.lat();
+  //   const centerLng = c.lng();
+
+  //   const degPerMeterLat = 1 / 111320;
+  //   const latPad = MAX_RADIUS_M * degPerMeterLat;
+  //   const degPerMeterLng = 1 / (111320 * Math.cos((centerLat * Math.PI) / 180));
+  //   const lngPad = MAX_RADIUS_M * degPerMeterLng;
+
+  //   minLat = Math.max(minLat, centerLat - latPad);
+  //   maxLat = Math.min(maxLat, centerLat + latPad);
+  //   minLng = Math.max(minLng, centerLng - lngPad);
+  //   maxLng = Math.min(maxLng, centerLng + lngPad);
+
+  //   setLoading(true);
+
+  //   try {
+  //     // Firestore can range on one field; use location.lat then filter lng client-side
+  //     const qRef = query(
+  //       collection(firestore, block.collectionName || "clinics"),
+  //       where("location.lat", ">=", minLat),
+  //       where("location.lat", "<=", maxLat),
+  //       orderBy("location.lat", "asc"),
+  //       limit(400)
+  //     );
+
+  //     const snap = await getDocs(qRef);
+  //     const rows = [];
+  //     snap.forEach((d) => {
+  //       const x = d.data();
+  //       const loc = x?.location || {};
+  //       if (
+  //         typeof loc.lat === "number" &&
+  //         typeof loc.lng === "number" &&
+  //         x?.name &&
+  //         loc.lng >= minLng &&
+  //         loc.lng <= maxLng
+  //       ) {
+  //         rows.push({
+  //           name: x.name,
+  //           position: { lat: loc.lat, lng: loc.lng },
+  //           website: x.website || x.site || undefined,
+  //           email: x.email || undefined,
+  //         });
+  //       }
+  //     });
+
+  //     setMarkers(rows);
+  //     setShowSearchBtn(false);
+  //   } catch (err) {
+  //     console.error("Firestore bounds fetch error:", err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [block.collectionName]);
+
+  // Initial fetch once map is idle the first time
+
+  const fetchClinicsForCurrentBounds = useCallback(async () => {
     if (!mapRef.current) return;
 
     const bounds = mapRef.current.getBounds();
     if (!bounds) return;
 
-    // compute radius and clamp
+    // compute an approximate radius from the visible bounds and clamp to 5 km
     const approxRadius = radiusFromBounds(bounds) || MAX_RADIUS_M;
     const radius = Math.min(approxRadius, MAX_RADIUS_M);
 
-    // derive a bounding box from current bounds
-    const ne = bounds.getNorthEast();
-    const sw = bounds.getSouthWest();
-
-    let minLat = Math.min(sw.lat(), ne.lat());
-    let maxLat = Math.max(sw.lat(), ne.lat());
-    let minLng = Math.min(sw.lng(), ne.lng());
-    let maxLng = Math.max(sw.lng(), ne.lng());
-
-    // shrink to max-radius box around map center if zoomed too far out
+    // center used for distance checks and geohash bounds
     const c = mapRef.current.getCenter();
     const centerLat = c.lat();
     const centerLng = c.lng();
 
-    const degPerMeterLat = 1 / 111320;
-    const latPad = MAX_RADIUS_M * degPerMeterLat;
-    const degPerMeterLng = 1 / (111320 * Math.cos((centerLat * Math.PI) / 180));
-    const lngPad = MAX_RADIUS_M * degPerMeterLng;
-
-    minLat = Math.max(minLat, centerLat - latPad);
-    maxLat = Math.min(maxLat, centerLat + latPad);
-    minLng = Math.max(minLng, centerLng - lngPad);
-    maxLng = Math.min(maxLng, centerLng + lngPad);
-
     setLoading(true);
-
     try {
-      // Firestore can range on one field; use location.lat then filter lng client-side
-      const qRef = query(
-        collection(firestore, block.collectionName || "clinics"),
-        where("location.lat", ">=", minLat),
-        where("location.lat", "<=", maxLat),
-        orderBy("location.lat", "asc"),
-        limit(400)
+      // Build ~4–8 geohash ranges that cover a circle around the center
+      const ranges = geohashQueryBounds([centerLat, centerLng], radius);
+
+      // Query each geohash range by ordering on 'geohash' and bounding with startAt/endAt
+      const colRef = collection(firestore, block.collectionName || "clinics");
+      const perRangeLimit = 100; // keep each range cheap; tweak as you like
+      const snaps = await Promise.all(
+        ranges.map(([start, end]) =>
+          getDocs(
+            query(
+              colRef,
+              orderBy("geohash"),
+              startAt(start),
+              endAt(end),
+              limit(perRangeLimit)
+            )
+          )
+        )
       );
 
-      const snap = await getDocs(qRef);
-      const rows = [];
-      snap.forEach((d) => {
-        const x = d.data();
-        const loc = x?.location || {};
-        if (
-          typeof loc.lat === "number" &&
-          typeof loc.lng === "number" &&
-          x?.name &&
-          loc.lng >= minLng &&
-          loc.lng <= maxLng
-        ) {
-          rows.push({
-            name: x.name,
-            position: { lat: loc.lat, lng: loc.lng },
-            website: x.website || x.site || undefined,
-            email: x.email || undefined,
-          });
-        }
-      });
+      // Merge results, de-duplicate docs that appear in multiple ranges,
+      // then do a precise distance filter using the stored lat/lng.
+      const dedup = new Map();
+
+      for (const snap of snaps) {
+        snap.forEach((doc) => {
+          if (dedup.has(doc.id)) return;
+          const x = doc.data();
+
+          // Support either GeoPoint or {lat, lng} shapes
+          const loc = x?.location;
+          const lat =
+            typeof loc?.latitude === "number"
+              ? loc.latitude
+              : typeof loc?.lat === "number"
+              ? loc.lat
+              : undefined;
+          const lng =
+            typeof loc?.longitude === "number"
+              ? loc.longitude
+              : typeof loc?.lng === "number"
+              ? loc.lng
+              : undefined;
+
+          if (typeof lat !== "number" || typeof lng !== "number") return;
+
+          const distKm = distanceBetween([centerLat, centerLng], [lat, lng]);
+          const distM = distKm * 1000;
+
+          if (distM <= radius) {
+            dedup.set(doc.id, {
+              id: doc.id,
+              name: x.name,
+              position: { lat, lng },
+              website: x.website || x.site || undefined,
+              email: x.email || undefined,
+              _distM: distM,
+            });
+          }
+        });
+      }
+
+      // Optional: sort by distance so nearer clinics render first
+      const rows = Array.from(dedup.values()).sort(
+        (a, b) => a._distM - b._distM
+      );
+      rows.forEach((r) => delete r._distM);
 
       setMarkers(rows);
       setShowSearchBtn(false);
     } catch (err) {
-      console.error("Firestore bounds fetch error:", err);
+      console.error("Firestore geohash fetch error:", err);
     } finally {
       setLoading(false);
     }
   }, [block.collectionName]);
 
-  // Initial fetch once map is idle the first time
-  const handleIdle = React.useCallback(() => {
+  const handleIdle = useCallback(() => {
     if (markers.length === 0) fetchClinicsForCurrentBounds();
   }, [markers.length, fetchClinicsForCurrentBounds]);
 
