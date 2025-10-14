@@ -16,6 +16,7 @@ import {
   FaStarHalfAlt,
   FaRegStar,
   FaExternalLinkAlt,
+  FaBullseye,
 } from "react-icons/fa";
 
 // Firestore (modular SDK)
@@ -605,6 +606,59 @@ function StarRating({ value = 0, outOf = 5 }) {
   );
 }
 
+const LegendWrap = styled.div`
+  position: absolute;
+  right: 12px;
+  bottom: 40px;
+  z-index: 6; /* above chips, still below modals */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px 12px 12px;
+  border-radius: 14px;
+  border: 1px solid #f5b6b6;
+  background: rgba(255, 245, 245, 0.96); /* subtle red tint */
+  box-shadow: 0 12px 32px rgba(211, 47, 47, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  pointer-events: none; /* allows map clicks through */
+  backdrop-filter: saturate(120%) blur(4px);
+  overflow: hidden;
+
+  /* vertical red accent bar on left */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #ef5350, #d32f2f);
+  }
+
+  @media (max-width: 480px) {
+    right: 8px;
+    bottom: 56px; /* avoid overlapping helper text */
+  }
+`;
+
+const LegendSwatch = styled.span`
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.15); /* same red fill */
+  box-shadow: inset 0 0 0 2px #d32f2f; /* solid outline */
+`;
+
+const LegendText = styled.span`
+  font-size: 13px;
+  color: #111827;
+  line-height: 1.25;
+  strong {
+    font-weight: 700;
+  }
+`;
+
 function shortDate(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return iso;
@@ -1139,6 +1193,8 @@ export default function InviteSurvey() {
     ? SERVICE_RADIUS_FULL_M
     : Math.floor(SERVICE_RADIUS_FULL_M / 2);
 
+  const serviceRadiusKm = Math.round(serviceRadius / 1000);
+
   const startDrag = (e) => {
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     dragRef.current = { startY: clientY, startH: sheetH, dragging: true };
@@ -1640,6 +1696,17 @@ export default function InviteSurvey() {
             </Helper>
           </GoogleMap>
         )}
+        {/* Red circle legend — explains what the circle means */}
+        <LegendWrap>
+          <LegendSwatch />
+          <LegendText>
+            <strong>Service area</strong> — customers you can serve
+            {typeof serviceRadiusKm === "number"
+              ? ` (≈ ${serviceRadiusKm} km radius)`
+              : ""}
+            {showDemoPartners ? "" : " — preview at half radius"}
+          </LegendText>
+        </LegendWrap>
       </BgMapWrap>
 
       {/* Desktop: left card. Mobile: draggable bottom sheet */}
