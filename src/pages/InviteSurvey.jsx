@@ -10,6 +10,12 @@ import {
 } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import { FaCheckSquare, FaRegSquare } from "react-icons/fa";
+import {
+  FaStar,
+  FaStarHalfAlt,
+  FaRegStar,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
 
 // Firestore (modular SDK)
 import { firestore } from "../lib/firebase";
@@ -27,6 +33,12 @@ import {
 
 // Geohash helpers
 import { distanceBetween, geohashQueryBounds } from "geofire-common";
+import {
+  IoCalendarOutline,
+  IoTimeOutline,
+  IoCallOutline,
+  IoLocationOutline,
+} from "react-icons/io5";
 
 const BREAKPOINT = 768; // <768 = mobile sheet, >=768 = left card
 const MAX_RADIUS_M = 10000;
@@ -166,6 +178,8 @@ const Helper = styled.p`
   pointer-events: none;
 `;
 
+// make the current clinic label stand out and zindex above others
+
 const LabelChip = styled.div`
   transform: translate(-50%, -30px); /* center horizontally, lift above dot */
   background: #fff;
@@ -184,7 +198,8 @@ const LabelChip = styled.div`
 
   &.current {
     border-color: #f3c4c4;
-    color: #b71c1c; /* deep red text for current */
+    background: #fff7f7;
+    color: #b71c1c;
     font-weight: 700;
   }
 
@@ -193,7 +208,759 @@ const LabelChip = styled.div`
   }
 `;
 
+// ====== Clinic panel for InfoWindow ======
+const PanelWrap = styled.div`
+  width: 320px;
+  max-width: 86vw;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+`;
+
+const PanelHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+`;
+
+const PanelTitle = styled.h3`
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0;
+  flex: 1;
+`;
+
+const PanelSubtitle = styled.div`
+  font-size: 12px;
+  color: #6b7280;
+`;
+
+const TabsRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 10px 0 12px;
+`;
+
+const TabBtn = styled.button`
+  border: 1px solid ${(p) => (p.$active ? "#4d9fec" : "#e5e7eb")};
+  background: ${(p) => (p.$active ? "#e9f3ff" : "#fff")};
+  color: ${(p) => (p.$active ? "#1f2937" : "#374151")};
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+const ListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow: auto;
+`;
+
+const UserCard = styled.div`
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: #fff;
+`;
+
+const Avatar = styled.div`
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #e5f1ff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #1e40af;
+`;
+
+const Meta = styled.div`
+  min-width: 0;
+`;
+
+const NameRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const Name = styled.span`
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+`;
+
+const Username = styled.span`
+  font-size: 12px;
+  color: #6b7280;
+`;
+
+const ClinicChip = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #4b5563;
+  background: #eef6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  margin-top: 4px;
+`;
+
+const Bio = styled.div`
+  margin-top: 4px;
+  font-size: 12px;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const StatusBtn = styled.button`
+  min-width: 110px;
+  justify-self: end;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid
+    ${({ $status }) =>
+      $status === "approved"
+        ? "#16a34a"
+        : $status === "pending"
+        ? "#f59e0b"
+        : "#d1d5db"};
+  color: ${({ $status }) =>
+    $status === "approved"
+      ? "#16a34a"
+      : $status === "pending"
+      ? "#92400e"
+      : "#374151"};
+  background: ${({ $status }) =>
+    $status === "approved"
+      ? "#ecfdf5"
+      : $status === "pending"
+      ? "#fffbeb"
+      : "#ffffff"};
+  cursor: pointer;
+`;
+
+const SmallLine = styled.div`
+  font-size: 11px;
+  color: #6b7280;
+`;
+
+const SlotRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+`;
+
+const SlotChip = styled.button`
+  display: grid;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+`;
+
+const SlotChipLine = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const SlotChipText = styled.span`
+  font-size: 14px;
+  color: #111827;
+`;
+
+// ---- Reviews UI ----
+const ReviewCard = styled.div`
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 10px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: #fff;
+`;
+
+const ReviewerAvatar = styled(Avatar)`
+  background: #f1f5f9;
+  color: #0f172a;
+`;
+
+const ReviewBody = styled.div`
+  min-width: 0;
+`;
+
+const ReviewHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+const ReviewerName = styled(Name)`
+  font-size: 14px;
+`;
+
+const ReviewMeta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b7280;
+`;
+
+const Stars = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: #f59e0b; /* amber */
+`;
+
+const SourceBadge = styled.span`
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 12px;
+`;
+
+const ReviewText = styled.p`
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #374151;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* clamp to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+const ReviewActions = styled.div`
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const TinyLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #2563eb;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const PendingBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #f59e0b;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+`;
+
+const EmptyWrap = styled.div`
+  border: 1px dashed #e5e7eb;
+  background: #fafafa;
+  color: #6b7280;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+`;
+
+// --- Helpers ---
+function domainFromUrl(url) {
+  try {
+    const u = new URL(url);
+    return u.hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+// --- Clinic meta rows under the title ---
+const InfoGrid = styled.div`
+  display: grid;
+  gap: 6px;
+  margin: 6px 0 10px;
+`;
+
+const InfoLine = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  a {
+    color: #1d4ed8;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+`;
+
+const RatingRow = styled(InfoLine)`
+  color: #111827;
+  ${Stars} {
+    transform: translateY(-1px);
+  }
+`;
+
+function StarRating({ value = 0, outOf = 5 }) {
+  const full = Math.floor(value);
+  const half = value - full >= 0.5 ? 1 : 0;
+  const empty = outOf - full - half;
+  return (
+    <Stars aria-label={`${value} out of ${outOf} stars`}>
+      {Array.from({ length: full }).map((_, i) => (
+        <FaStar key={`f${i}`} />
+      ))}
+      {half === 1 && <FaStarHalfAlt key="half" />}
+      {Array.from({ length: empty }).map((_, i) => (
+        <FaRegStar key={`e${i}`} />
+      ))}
+    </Stars>
+  );
+}
+
+function shortDate(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+const demoReviews = [
+  {
+    id: "r1",
+    reviewer: "Daniel N.",
+    rating: 5,
+    date: "2025-08-21",
+    snippet:
+      "Dr. Nova was incredibly thorough and kind. Our cat’s skin flare-up improved in days with the plan she outlined.",
+    source: "Google",
+    url: "https://example.com/reviews/1",
+  },
+  {
+    id: "r2",
+    reviewer: "Bella P.",
+    rating: 4.5,
+    date: "2025-07-03",
+    snippet:
+      "Behavior tips were practical and easy to follow. We already see progress with separation anxiety.",
+    source: "Yelp",
+    url: "https://example.com/reviews/2",
+  },
+  {
+    id: "r3",
+    reviewer: "Chris Y.",
+    rating: 5,
+    date: "2025-06-12",
+    snippet:
+      "Fast, professional tele-derm consult. Appreciated the clear instructions and follow-up window.",
+    source: "Google",
+    url: "https://example.com/reviews/3",
+  },
+];
+
+// Fake data to demo the look (you can fetch real people later)
+const demoVets = [
+  {
+    id: "v1",
+    name: "Dr. Jamie Lee",
+    username: "drjamie",
+    clinic: "Maple Animal Hospital",
+    bio: "Dermatology & GP",
+    slots: [
+      { appointmentId: "a1", date: "2025-10-16", time: "10:30 AM" },
+      { appointmentId: "a2", date: "2025-10-16", time: "2:00 PM" },
+    ],
+  },
+  {
+    id: "v2",
+    name: "Dr. Omar Patel",
+    username: "dromar",
+    clinic: "Sunset Pet Clinic",
+    bio: "Behavior—fear-free, separation anxiety",
+    slots: [
+      { appointmentId: "b1", date: "2025-10-17", time: "9:00 AM" },
+      { appointmentId: "b2", date: "2025-10-17", time: "1:30 PM" },
+    ],
+  },
+  {
+    id: "v3",
+    name: "Dr. Chen Yu",
+    username: "drchen",
+    clinic: "Seaside Veterinary",
+    bio: "Internal medicine & nutrition",
+    slots: [
+      { appointmentId: "c1", date: "2025-10-18", time: "11:15 AM" },
+      { appointmentId: "c2", date: "2025-10-18", time: "3:45 PM" },
+    ],
+  },
+];
+
+function initials(full) {
+  const parts = String(full || "")
+    .trim()
+    .split(/\s+/);
+  return (parts[0]?.[0] || "") + (parts[1]?.[0] || "");
+}
+
+function formatDateISO(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  } catch {
+    return iso;
+  }
+}
+
+function onSlotClick(slot, user) {
+  // Demo only — wire to your real navigation later
+  alert(
+    `Demo\nDoctor: ${user.name}\nDate: ${formatDateISO(slot.date)}\nTime: ${
+      slot.time
+    }`
+  );
+}
+
+// function VetRow({ user }) {
+//   const slots = Array.isArray(user.slots) ? user.slots.slice(0, 2) : [];
+
+//   return (
+//     <UserCard>
+//       <Avatar title={user.name}>{initials(user.name).toUpperCase()}</Avatar>
+
+//       <Meta>
+//         <NameRow>
+//           <Name title={user.name}>{user.name}</Name>
+//           <Username>@{user.username}</Username>
+//         </NameRow>
+//         {user.clinic && <ClinicChip>🏥 {user.clinic}</ClinicChip>}
+//         {user.bio && <Bio title={user.bio}>{user.bio}</Bio>}
+
+//         {/* Slots */}
+//         {slots.length > 0 && (
+//           <SlotRow>
+//             {slots.map((slot) => (
+//               <SlotChip
+//                 key={slot.appointmentId}
+//                 onClick={(e) => {
+//                   e.stopPropagation();
+//                   onSlotClick(slot, user);
+//                 }}
+//                 title={`${formatDateISO(slot.date)} • ${slot.time}`}
+//               >
+//                 <SlotChipLine>
+//                   <IoCalendarOutline size={14} />
+//                   <SlotChipText>{formatDateISO(slot.date)}</SlotChipText>
+//                 </SlotChipLine>
+//                 <SlotChipLine>
+//                   <IoTimeOutline size={14} />
+//                   <SlotChipText>{slot.time}</SlotChipText>
+//                 </SlotChipLine>
+//               </SlotChip>
+//             ))}
+//           </SlotRow>
+//         )}
+//       </Meta>
+
+//       {/* (Status button removed per request) */}
+//       <div />
+//     </UserCard>
+//   );
+// }
+
+// replace the existing VetRow with this version
+function VetRow({ user, clinicName }) {
+  const slots = Array.isArray(user.slots) ? user.slots.slice(0, 2) : [];
+
+  return (
+    <UserCard>
+      <Avatar title={user.name}>{initials(user.name).toUpperCase()}</Avatar>
+
+      <Meta>
+        <NameRow>
+          <Name title={user.name}>{user.name}</Name>
+          <Username>@{user.username}</Username>
+        </NameRow>
+
+        {/* Always show the current clinic's name here */}
+        {clinicName && (
+          <ClinicChip title={clinicName}>🏥 {clinicName}</ClinicChip>
+        )}
+
+        {user.bio && <Bio title={user.bio}>{user.bio}</Bio>}
+
+        {slots.length > 0 && (
+          <SlotRow>
+            {slots.map((slot) => (
+              <SlotChip
+                key={slot.appointmentId}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSlotClick(slot, user);
+                }}
+                title={`${formatDateISO(slot.date)} • ${slot.time}`}
+              >
+                <SlotChipLine>
+                  <IoCalendarOutline size={14} />
+                  <SlotChipText>{formatDateISO(slot.date)}</SlotChipText>
+                </SlotChipLine>
+                <SlotChipLine>
+                  <IoTimeOutline size={14} />
+                  <SlotChipText>{slot.time}</SlotChipText>
+                </SlotChipLine>
+              </SlotChip>
+            ))}
+          </SlotRow>
+        )}
+      </Meta>
+
+      <div />
+    </UserCard>
+  );
+}
+
+// function ClinicPanel({ clinicName }) {
+//   const [tab, setTab] = React.useState("vets"); // vets | trainers (future) | specialists (future)
+
+//   return (
+//     <PanelWrap>
+//       <PanelHeader>
+//         <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
+//       </PanelHeader>
+
+//       <SmallLine>Partner options under your brand:</SmallLine>
+
+//       <TabsRow>
+//         <TabBtn $active={tab === "vets"} onClick={() => setTab("vets")}>
+//           Partnered online Vets & Professionals
+//         </TabBtn>
+//         <TabBtn $active={tab === "reviews"} onClick={() => setTab("reviews")}>
+//           Reviews
+//         </TabBtn>
+//         {/* Example of adding more:
+//         <TabBtn $active={tab === "trainers"} onClick={() => setTab("trainers")}>
+//           Certified Dog Trainers
+//         </TabBtn> */}
+//       </TabsRow>
+
+//       <ListWrap>
+//         {tab === "vets" && demoVets.map((u) => <VetRow key={u.id} user={u} />)}
+
+//         {tab === "reviews" && (
+//           <>
+//             {demoReviews.map((rev) => (
+//               <ReviewCard key={rev.id}>
+//                 <ReviewerAvatar title={rev.reviewer}>
+//                   {initials(rev.reviewer).toUpperCase()}
+//                 </ReviewerAvatar>
+
+//                 <ReviewBody>
+//                   <ReviewHeaderRow>
+//                     <ReviewerName title={rev.reviewer}>
+//                       {rev.reviewer}
+//                     </ReviewerName>
+//                     <ReviewMeta>
+//                       <StarRating value={rev.rating} />
+//                       <span>· {shortDate(rev.date)}</span>
+//                       <SourceBadge>{rev.source}</SourceBadge>
+//                     </ReviewMeta>
+//                   </ReviewHeaderRow>
+
+//                   <ReviewText title={rev.snippet}>{rev.snippet}</ReviewText>
+//                 </ReviewBody>
+//               </ReviewCard>
+//             ))}
+//           </>
+//         )}
+//       </ListWrap>
+
+//       <PanelSubtitle style={{ marginTop: 10 }}>
+//         Demo data — for illustration only.
+//       </PanelSubtitle>
+//     </PanelWrap>
+//   );
+// }
+
 // Default map style: hide most POI labels/icons & transit
+
+// update signature to take isPrimary
+function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
+  const [tab, setTab] = React.useState("vets"); // vets | reviews
+  const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
+
+  return (
+    <PanelWrap>
+      <PanelHeader>
+        <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
+      </PanelHeader>
+
+      {(rating || phone || address || website) && (
+        <InfoGrid>
+          {typeof rating === "number" && (
+            <RatingRow>
+              <StarRating value={rating} />
+              <span>
+                {rating.toFixed(1)}
+                {typeof reviewsCount === "number" ? ` (${reviewsCount})` : ""}
+              </span>
+            </RatingRow>
+          )}
+          {phone && (
+            <InfoLine>
+              <IoCallOutline size={16} />
+              <a href={`tel:${phone}`} title={phone}>
+                {phone}
+              </a>
+            </InfoLine>
+          )}
+          {address && (
+            <InfoLine title={address}>
+              <IoLocationOutline size={16} />
+              <span
+                style={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {address}
+              </span>
+            </InfoLine>
+          )}
+          {website && (
+            <InfoLine>
+              <FaExternalLinkAlt size={12} />
+              <a href={website} target="_blank" rel="noopener noreferrer">
+                {domainFromUrl(website)}
+              </a>
+            </InfoLine>
+          )}
+        </InfoGrid>
+      )}
+
+      <SmallLine>Partner options under your brand:</SmallLine>
+
+      <TabsRow>
+        <TabBtn $active={tab === "vets"} onClick={() => setTab("vets")}>
+          Partnered online Vets & Professionals
+        </TabBtn>
+        <TabBtn $active={tab === "reviews"} onClick={() => setTab("reviews")}>
+          Reviews
+        </TabBtn>
+      </TabsRow>
+
+      <ListWrap>
+        {tab === "vets" && (
+          <>
+            {!isPrimary ? (
+              <>
+                <PendingBadge title="Awaiting partnership approval">
+                  Pending
+                </PendingBadge>
+                <EmptyWrap style={{ marginTop: 10 }}>
+                  This hospital hasn’t partnered online yet. Once approved,
+                  their partnered doctors and professionals will appear here.
+                </EmptyWrap>
+              </>
+            ) : (
+              <>
+                <PanelSubtitle style={{ marginTop: 10 }}>
+                  Demo reviews — style preview only.
+                </PanelSubtitle>
+                {demoVets.map((u) => (
+                  <VetRow key={u.id} user={u} clinicName={clinicName} />
+                ))}
+              </>
+            )}
+          </>
+        )}
+
+        {tab === "reviews" && (
+          <>
+            {demoReviews.map((rev) => (
+              <ReviewCard key={rev.id}>
+                <ReviewerAvatar title={rev.reviewer}>
+                  {initials(rev.reviewer).toUpperCase()}
+                </ReviewerAvatar>
+
+                <ReviewBody>
+                  <ReviewHeaderRow>
+                    <ReviewerName title={rev.reviewer}>
+                      {rev.reviewer}
+                    </ReviewerName>
+                    <ReviewMeta>
+                      <StarRating value={rev.rating} />
+                      <span>· {shortDate(rev.date)}</span>
+                      <SourceBadge>{rev.source}</SourceBadge>
+                    </ReviewMeta>
+                  </ReviewHeaderRow>
+
+                  <ReviewText title={rev.snippet}>{rev.snippet}</ReviewText>
+                </ReviewBody>
+
+                {/* <ReviewActions>
+                  {rev.url && (
+                    <TinyLink
+                      href={rev.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read full
+                    </TinyLink>
+                  )}
+                </ReviewActions> */}
+              </ReviewCard>
+            ))}
+
+            <PanelSubtitle style={{ marginTop: 10 }}>
+              Demo reviews — style preview only.
+            </PanelSubtitle>
+          </>
+        )}
+      </ListWrap>
+    </PanelWrap>
+  );
+}
+
 export const defaultCleanStyle = [
   { featureType: "poi.business", stylers: [{ visibility: "off" }] },
   {
@@ -529,6 +1296,28 @@ export default function InviteSurvey() {
               position: { lat, lng },
               website: x.website || x.site || undefined,
               email: x.email || undefined,
+              phone: x.phone || x.formatted_phone_number || x.tel || undefined,
+              address:
+                x.address ||
+                x.formatted_address ||
+                (x.addr &&
+                  [x.addr.line1, x.addr.line2, x.addr.city, x.addr.state]
+                    .filter(Boolean)
+                    .join(", ")) ||
+                undefined,
+              rating:
+                typeof x.rating === "number"
+                  ? x.rating
+                  : typeof x.avgRating === "number"
+                  ? x.avgRating
+                  : typeof x?.place?.rating === "number"
+                  ? x.place.rating
+                  : undefined,
+              reviewsCount:
+                x.reviewsCount ??
+                x.reviewCount ??
+                x?.place?.user_ratings_total ??
+                undefined,
               _distM: distM,
             });
           }
@@ -718,32 +1507,41 @@ export default function InviteSurvey() {
               );
             })}
 
+            {/* {active !== null && markers[active] && (
+              <InfoWindowF
+                position={markers[active].position}
+                onCloseClick={() => setActive(null)}
+                options={{
+                  pixelOffset: new window.google.maps.Size(0, -14),
+                  maxWidth: 360, // more room for the panel
+                  disableAutoPan: false,
+                }}
+              >
+                <div onClick={(e) => e.stopPropagation()}>
+                  <ClinicPanel clinicName={markers[active].name} />
+                </div>
+              </InfoWindowF>
+            )} */}
             {active !== null && markers[active] && (
               <InfoWindowF
                 position={markers[active].position}
                 onCloseClick={() => setActive(null)}
                 options={{
-                  pixelOffset: new window.google.maps.Size(0, -10),
-                  maxWidth: 220,
+                  pixelOffset: new window.google.maps.Size(0, -14),
+                  maxWidth: 360,
+                  disableAutoPan: false,
                 }}
               >
-                <div
-                  style={{
-                    cursor: markers[active].website ? "pointer" : "default",
-                  }}
-                  onClick={() =>
-                    markers[active].website &&
-                    window.open(markers[active].website, "_blank")
-                  }
-                >
-                  <strong style={{ fontSize: 14 }}>
-                    {markers[active].name}
-                  </strong>
-                  <div style={{ fontSize: 12, color: "#666", marginTop: 4 }}>
-                    {markers[active].website
-                      ? "Visit site ↗"
-                      : markers[active].email || "No link"}
-                  </div>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <ClinicPanel
+                    clinicName={markers[active].name}
+                    // primary if this marker corresponds to the invited clinic
+                    isPrimary={
+                      markers[active].id === clinicId ||
+                      markers[active].id === "__current"
+                    }
+                    clinicMeta={markers[active]}
+                  />
                 </div>
               </InfoWindowF>
             )}
