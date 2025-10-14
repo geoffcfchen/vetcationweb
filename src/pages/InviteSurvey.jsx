@@ -6,6 +6,7 @@ import {
   useLoadScript,
   MarkerF,
   InfoWindowF,
+  OverlayViewF,
 } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import { FaCheckSquare, FaRegSquare } from "react-icons/fa";
@@ -20,6 +21,8 @@ import {
   startAt,
   endAt,
   limit,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 
 // Geohash helpers
@@ -44,12 +47,16 @@ const DesktopCard = styled.div`
   position: fixed;
   top: 24px;
   left: 24px;
-  max-width: 520px;
-  width: calc(min(92vw, 520px));
+  width: clamp(320px, 26vw, 420px);
+  max-width: 90vw;
   background: rgba(255, 255, 255, 0.98);
   border-radius: 16px;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+
+  @media (min-width: 1600px) {
+    width: clamp(320px, 22vw, 380px);
+  }
 `;
 
 const MobileSheet = styled.div`
@@ -159,7 +166,34 @@ const Helper = styled.p`
   pointer-events: none;
 `;
 
-// Default look, just hide store/POI promos and transit
+const LabelChip = styled.div`
+  transform: translate(-50%, -30px); /* center horizontally, lift above dot */
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  color: #1a1a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+
+  &.current {
+    border-color: #f3c4c4;
+    color: #b71c1c; /* deep red text for current */
+    font-weight: 700;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  }
+`;
+
+// Default map style: hide most POI labels/icons & transit
 export const defaultCleanStyle = [
   { featureType: "poi.business", stylers: [{ visibility: "off" }] },
   {
@@ -179,13 +213,11 @@ export const defaultCleanStyle = [
     elementType: "labels.icon",
     stylers: [{ visibility: "off" }],
   },
-  //remove parks
   {
     featureType: "poi.park",
     elementType: "labels",
     stylers: [{ visibility: "off" }],
   },
-  //remove East Los Angeles Hobart, El Sereno, and Montecito Heights labels this kind of labels
   {
     featureType: "administrative.neighborhood",
     elementType: "labels",
@@ -198,7 +230,7 @@ const FN_VERIFY =
   "https://us-central1-vetcationapp.cloudfunctions.net/verifyClinicInvite";
 const FN_SUBMIT =
   import.meta.env.VITE_FN_SUBMIT ||
-  "https://us-central1-vetcationapp.cloudfunctions.net/submitClinicInterest"; // <- default
+  "https://us-central1-vetcationapp.cloudfunctions.net/submitClinicInterest";
 
 // Approximate radius from current map bounds half-diagonal (meters)
 function radiusFromBounds(bounds) {
@@ -217,6 +249,28 @@ function radiusFromBounds(bounds) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const diagonal = R * c;
   return diagonal / 2;
+}
+
+// Fallback if CF doesn't include basics (kept just in case)
+async function fetchClinicBasics(clinicId) {
+  try {
+    const snap = await getDoc(doc(firestore, "clinics", clinicId));
+    if (!snap.exists()) return null;
+    const data = snap.data() || {};
+    const loc = data.location || {};
+    const lat = loc.lat ?? loc.latitude;
+    const lng = loc.lng ?? loc.longitude;
+    return {
+      clinicName: data.name || "Clinic",
+      center:
+        typeof lat === "number" && typeof lng === "number"
+          ? { lat, lng }
+          : null,
+    };
+  } catch (e) {
+    console.error("fetchClinicBasics error:", e);
+    return null;
+  }
 }
 
 export default function InviteSurvey() {
@@ -286,7 +340,7 @@ export default function InviteSurvey() {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_KEY,
   });
 
-  // Verify token first. If invalid, do not show the survey.
+  // Verify token; even if invalid, use returned clinicName/center (or fallback) and keep map
   useEffect(() => {
     let alive = true;
     (async () => {
@@ -297,17 +351,16 @@ export default function InviteSurvey() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ clinicId, token }),
         });
-        if (!resp.ok) {
-          const text = await resp.text().catch(() => "");
-          throw new Error(`HTTP ${resp.status} ${text}`.trim());
+
+        let json = null;
+        try {
+          json = await resp.json();
+        } catch (e) {
+          // no-op
         }
-        const json = await resp.json();
         if (!alive) return;
 
-        if (!json.ok) {
-          setValid(false);
-          setInvalidReason(json.error || "invalid link");
-        } else {
+        if (resp.ok && json?.ok) {
           setValid(true);
           setClinicName(json.clinicName || "Your clinic");
           if (
@@ -317,13 +370,34 @@ export default function InviteSurvey() {
           ) {
             setCenter(json.center);
           }
-          setNonce(json.nonce);
+          setNonce(json.nonce || "");
+        } else {
+          // invalid/expired/used — still show map with clinic basics
+          setValid(false);
+          setInvalidReason(json?.error || `HTTP ${resp.status}`);
+          if (json?.clinicName) setClinicName(json.clinicName);
+          if (
+            json?.center &&
+            typeof json.center.lat === "number" &&
+            typeof json.center.lng === "number"
+          ) {
+            setCenter(json.center);
+          } else {
+            // fallback (if CF didn't include basics)
+            const basics = await fetchClinicBasics(clinicId);
+            if (basics?.clinicName) setClinicName(basics.clinicName);
+            if (basics?.center) setCenter(basics.center);
+          }
         }
       } catch (e) {
         if (!alive) return;
         console.error("verifyClinicInvite failed:", e);
         setValid(false);
         setInvalidReason(String(e?.message || e || "network error"));
+        // Last resort fallback
+        const basics = await fetchClinicBasics(clinicId);
+        if (basics?.clinicName) setClinicName(basics.clinicName);
+        if (basics?.center) setCenter(basics.center);
       } finally {
         if (alive) setVerifying(false);
       }
@@ -426,9 +500,9 @@ export default function InviteSurvey() {
 
       const dedup = new Map();
       for (const snap of snaps) {
-        snap.forEach((doc) => {
-          if (dedup.has(doc.id)) return;
-          const x = doc.data();
+        snap.forEach((docSnap) => {
+          if (dedup.has(docSnap.id)) return;
+          const x = docSnap.data();
 
           // location can be GeoPoint or {lat,lng}
           const loc = x?.location;
@@ -449,8 +523,8 @@ export default function InviteSurvey() {
           const distKm = distanceBetween([centerLat, centerLng], [lat, lng]);
           const distM = distKm * 1000;
           if (distM <= radius) {
-            dedup.set(doc.id, {
-              id: doc.id,
+            dedup.set(docSnap.id, {
+              id: docSnap.id,
               name: x.name || "Clinic",
               position: { lat, lng },
               website: x.website || x.site || undefined,
@@ -463,13 +537,21 @@ export default function InviteSurvey() {
 
       // ensure current clinic is visible and highlighted
       if (typeof center.lat === "number" && typeof center.lng === "number") {
-        dedup.set("__current", {
-          id: "__current",
-          name: clinicName || "Selected clinic",
-          position: { lat: center.lat, lng: center.lng },
-          highlight: true,
-          _distM: 0,
-        });
+        if (dedup.has(clinicId)) {
+          // highlight the real clinic doc instead of adding a duplicate
+          const row = dedup.get(clinicId);
+          row.highlight = true;
+          dedup.set(clinicId, row);
+        } else {
+          // only add a synthetic marker if the clinic isn't in Firestore results
+          dedup.set("__current", {
+            id: "__current",
+            name: clinicName || "Selected clinic",
+            position: { lat: center.lat, lng: center.lng },
+            highlight: true,
+            _distM: 0,
+          });
+        }
       }
 
       const rows = Array.from(dedup.values()).sort(
@@ -502,51 +584,64 @@ export default function InviteSurvey() {
     );
   }
 
-  if (!valid) {
-    return (
-      <Page>
-        <DesktopCard>
-          <H1>Link unavailable</H1>
-          <P>This invite link is invalid, expired, or already used.</P>
-          {invalidReason && <Muted>Reason: {invalidReason}</Muted>}
-        </DesktopCard>
-      </Page>
-    );
-  }
+  // Friendly message for invalid/expired/used links
+  const invalidDisplay = (() => {
+    const e = String(invalidReason || "").toLowerCase();
+    if (e.includes("expired")) return "This survey link has expired.";
+    if (e.includes("not active") || e.includes("used"))
+      return "This survey has already been submitted.";
+    if (e.includes("invalid")) return "This survey link is invalid.";
+    return "This survey is unavailable.";
+  })();
 
   const FormContent = (
     <>
       <H1>{clinicName}</H1>
-      {!done ? (
+      {valid ? (
+        !done ? (
+          <>
+            <P>
+              If you want to expand your service under your brand to your
+              clients, which of the following are you interested in
+              collaborating with? Select all that apply.
+            </P>
+            {choices.map((c) => {
+              const active = selected.has(c.key);
+              return (
+                <Choice
+                  key={c.key}
+                  onClick={() => toggle(c.key)}
+                  $active={active}
+                >
+                  {active ? <FaCheckSquare /> : <FaRegSquare />}{" "}
+                  <span>{c.label}</span>
+                </Choice>
+              );
+            })}
+            <Submit
+              onClick={submit}
+              disabled={submitting || selected.size === 0}
+            >
+              {submitting ? "Submitting..." : "Submit"}
+            </Submit>
+            <Muted style={{ marginTop: 8 }}>
+              Showing clinics near the visible area (max ~5 km radius). Your
+              response will be recorded for this clinic.
+            </Muted>
+          </>
+        ) : (
+          <P>Thank you. Your preferences have been saved.</P>
+        )
+      ) : (
         <>
-          <P>
-            If you want to expand your service under your brand to your clients,
-            which of the following are you interested in collaborating with?
-            Select all that apply.
-          </P>
-          {choices.map((c) => {
-            const active = selected.has(c.key);
-            return (
-              <Choice
-                key={c.key}
-                onClick={() => toggle(c.key)}
-                $active={active}
-              >
-                {active ? <FaCheckSquare /> : <FaRegSquare />}{" "}
-                <span>{c.label}</span>
-              </Choice>
-            );
-          })}
-          <Submit onClick={submit} disabled={submitting || selected.size === 0}>
-            {submitting ? "Submitting..." : "Submit"}
-          </Submit>
+          <P>{invalidDisplay}</P>
+          {invalidReason && (
+            <Muted style={{ marginTop: 2 }}>Reason: {invalidReason}</Muted>
+          )}
           <Muted style={{ marginTop: 8 }}>
-            Showing clinics near the visible area (max ~5 km radius). Your
-            response will be recorded for this clinic.
+            You can still browse nearby clinics on the map.
           </Muted>
         </>
-      ) : (
-        <P>Thank you. Your preferences have been saved.</P>
       )}
     </>
   );
@@ -582,33 +677,44 @@ export default function InviteSurvey() {
               </SearchButton>
             )}
 
-            {/* Nearby clinic markers */}
+            {/* Nearby clinic markers with modern chips */}
             {markers.map((m, i) => {
               const isCurrent = m.id === "__current" || m.highlight;
+
+              const icon = {
+                path: window.google?.maps?.SymbolPath?.CIRCLE,
+                scale: isCurrent ? 8 : 6,
+                fillColor: isCurrent ? "#d32f2f" : "#4D9FEC",
+                fillOpacity: 1,
+                strokeColor: "#ffffff",
+                strokeWeight: 2,
+              };
+
               return (
-                <MarkerF
-                  key={`${m.id}-${i}`}
-                  position={m.position}
-                  onClick={() => setActive(i)}
-                  label={
-                    isCurrent
-                      ? { text: m.name, color: "#d32f2f", fontWeight: "700" }
-                      : { text: m.name, color: "#1a1a1a", fontWeight: "500" }
-                  }
-                  // simple highlight: larger red-dot symbol for the selected clinic
-                  icon={
-                    isCurrent
-                      ? {
-                          path: window.google?.maps?.SymbolPath?.CIRCLE,
-                          scale: 8,
-                          fillColor: "#d32f2f",
-                          fillOpacity: 1,
-                          strokeColor: "#ffffff",
-                          strokeWeight: 2,
-                        }
-                      : undefined
-                  }
-                />
+                <React.Fragment key={`${m.id}-${i}`}>
+                  <MarkerF
+                    position={m.position}
+                    onClick={() => setActive(i)}
+                    icon={icon}
+                    zIndex={
+                      isCurrent
+                        ? window.google?.maps?.Marker?.MAX_ZINDEX
+                        : undefined
+                    }
+                  />
+                  <OverlayViewF
+                    position={m.position}
+                    mapPaneName="overlayMouseTarget"
+                  >
+                    <LabelChip
+                      className={isCurrent ? "current" : ""}
+                      onClick={() => setActive(i)}
+                      title={m.name}
+                    >
+                      {m.name}
+                    </LabelChip>
+                  </OverlayViewF>
+                </React.Fragment>
               );
             })}
 
