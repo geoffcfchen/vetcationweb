@@ -29,7 +29,7 @@ import {
 import { distanceBetween, geohashQueryBounds } from "geofire-common";
 
 const BREAKPOINT = 768; // <768 = mobile sheet, >=768 = left card
-const MAX_RADIUS_M = 5000;
+const MAX_RADIUS_M = 10000;
 
 const Page = styled.div`
   position: relative;
@@ -625,7 +625,7 @@ export default function InviteSurvey() {
               {submitting ? "Submitting..." : "Submit"}
             </Submit>
             <Muted style={{ marginTop: 8 }}>
-              Showing clinics near the visible area (max ~5 km radius). Your
+              Showing clinics near the visible area (max ~10 km radius). Your
               response will be recorded for this clinic.
             </Muted>
           </>
@@ -748,7 +748,7 @@ export default function InviteSurvey() {
               </InfoWindowF>
             )}
             <Helper>
-              Showing clinics near the visible area (max ~5 km radius).
+              Showing clinics near the visible area (max ~10 km radius).
             </Helper>
           </GoogleMap>
         )}
