@@ -499,6 +499,48 @@ const EmptyWrap = styled.div`
   font-size: 13px;
 `;
 
+const ToggleRow = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+  margin: 0 0 12px;
+`;
+
+const ToggleText = styled.span`
+  font-size: 14px;
+  color: #111827;
+  line-height: 1.3;
+`;
+
+const ToggleSwitch = styled.input.attrs({ type: "checkbox" })`
+  appearance: none;
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  background: ${(p) => (p.checked ? "#4d9fec" : "#e5e7eb")};
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: ${(p) => (p.checked ? "22px" : "3px")};
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: left 0.2s ease;
+  }
+`;
+
 // --- Helpers ---
 function domainFromUrl(url) {
   try {
@@ -1066,6 +1108,8 @@ export default function InviteSurvey() {
   const [selected, setSelected] = useState(new Set());
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  // demo/partner preview toggle (default ON)
+  const [showDemoPartners, setShowDemoPartners] = useState(true);
 
   // map + clinics state
   const mapRef = useRef(null);
@@ -1388,6 +1432,15 @@ export default function InviteSurvey() {
       {valid ? (
         !done ? (
           <>
+            <ToggleRow title="Preview how partnered doctors would appear under your brand">
+              <ToggleText>
+                Preview partnered view (demo professionals)
+              </ToggleText>
+              <ToggleSwitch
+                checked={showDemoPartners}
+                onChange={(e) => setShowDemoPartners(e.target.checked)}
+              />
+            </ToggleRow>
             <P>
               If you want to expand your service under your brand to your
               clients, which of the following are you interested in
@@ -1506,21 +1559,6 @@ export default function InviteSurvey() {
               );
             })}
 
-            {/* {active !== null && markers[active] && (
-              <InfoWindowF
-                position={markers[active].position}
-                onCloseClick={() => setActive(null)}
-                options={{
-                  pixelOffset: new window.google.maps.Size(0, -14),
-                  maxWidth: 360, // more room for the panel
-                  disableAutoPan: false,
-                }}
-              >
-                <div onClick={(e) => e.stopPropagation()}>
-                  <ClinicPanel clinicName={markers[active].name} />
-                </div>
-              </InfoWindowF>
-            )} */}
             {active !== null && markers[active] && (
               <InfoWindowF
                 position={markers[active].position}
@@ -1534,10 +1572,16 @@ export default function InviteSurvey() {
                 <div onClick={(e) => e.stopPropagation()}>
                   <ClinicPanel
                     clinicName={markers[active].name}
-                    // primary if this marker corresponds to the invited clinic
+                    // // primary if this marker corresponds to the invited clinic
+                    // isPrimary={
+                    //   markers[active].id === clinicId ||
+                    //   markers[active].id === "__current"
+                    // }
+                    // Treat as "primary (partnered)" only if it's the invited clinic AND the preview toggle is ON.
                     isPrimary={
-                      markers[active].id === clinicId ||
-                      markers[active].id === "__current"
+                      (markers[active].id === clinicId ||
+                        markers[active].id === "__current") &&
+                      showDemoPartners
                     }
                     clinicMeta={markers[active]}
                   />
