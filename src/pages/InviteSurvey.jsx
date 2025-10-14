@@ -181,7 +181,13 @@ export const defaultCleanStyle = [
   },
   //remove parks
   {
-    featureType: "park",
+    featureType: "poi.park",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  //remove East Los Angeles Hobart, El Sereno, and Montecito Heights labels this kind of labels
+  {
+    featureType: "administrative.neighborhood",
     elementType: "labels",
     stylers: [{ visibility: "off" }],
   },
