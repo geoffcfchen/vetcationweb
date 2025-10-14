@@ -1391,8 +1391,19 @@ export default function InviteSurvey() {
       );
       rows.forEach((r) => delete r._distM);
 
+      //   setMarkers(rows);
+      //   setShowSearchBtn(false);
       setMarkers(rows);
       setShowSearchBtn(false);
+
+      // Open the InfoWindow for the primary clinic on first load
+      setActive((prev) => {
+        if (prev !== null) return prev; // don't override if user already opened one
+        const idx = rows.findIndex(
+          (r) => r.id === clinicId || r.id === "__current"
+        );
+        return idx !== -1 ? idx : prev;
+      });
     } catch (err) {
       console.error("Firestore geohash fetch error:", err);
     } finally {
