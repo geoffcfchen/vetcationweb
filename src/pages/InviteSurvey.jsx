@@ -7,6 +7,7 @@ import {
   MarkerF,
   InfoWindowF,
   OverlayViewF,
+  CircleF,
 } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
 import { FaCheckSquare, FaRegSquare } from "react-icons/fa";
@@ -42,6 +43,7 @@ import {
 
 const BREAKPOINT = 768; // <768 = mobile sheet, >=768 = left card
 const MAX_RADIUS_M = 10000;
+const SERVICE_RADIUS_FULL_M = 10000; // 10 km service radius when toggle is ON
 
 const Page = styled.div`
   position: relative;
@@ -129,6 +131,12 @@ const Choice = styled.button`
   border: 1px solid #e6e6e6;
   background: ${(p) => (p.$active ? "#e9f3ff" : "white")};
   cursor: pointer;
+  /* normalize icon size even when text wraps */
+  svg {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const Submit = styled.button`
@@ -1126,6 +1134,11 @@ export default function InviteSurvey() {
   const [sheetH, setSheetH] = useState(Math.min(280, maxSheet));
   const dragRef = useRef({ startY: 0, startH: sheetH, dragging: false });
 
+  // Circle radius respects the preview toggle (ON=full, OFF=half)
+  const serviceRadius = showDemoPartners
+    ? SERVICE_RADIUS_FULL_M
+    : Math.floor(SERVICE_RADIUS_FULL_M / 2);
+
   const startDrag = (e) => {
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     dragRef.current = { startY: clientY, startH: sheetH, dragging: true };
@@ -1465,7 +1478,12 @@ export default function InviteSurvey() {
                   onClick={() => toggle(c.key)}
                   $active={active}
                 >
-                  {active ? <FaCheckSquare /> : <FaRegSquare />}{" "}
+                  {/* {active ? <FaCheckSquare /> : <FaRegSquare />}{" "} */}
+                  {active ? (
+                    <FaCheckSquare size={20} />
+                  ) : (
+                    <FaRegSquare size={20} />
+                  )}{" "}
                   <span>{c.label}</span>
                 </Choice>
               );
@@ -1519,6 +1537,24 @@ export default function InviteSurvey() {
               streetViewControl: false,
             }}
           >
+            {/* Service radius circle for the invited clinic; sits under labels/markers */}
+            {center &&
+              typeof center.lat === "number" &&
+              typeof center.lng === "number" && (
+                <CircleF
+                  center={center}
+                  radius={serviceRadius}
+                  options={{
+                    clickable: false, // ensure it doesn't block clicks on clinics
+                    zIndex: 0, // keep it underneath other overlays
+                    strokeColor: "#d32f2f", // red solid outline
+                    strokeOpacity: 1,
+                    strokeWeight: 2,
+                    fillColor: "#d32f2f", // red fill with light transparency
+                    fillOpacity: 0.15,
+                  }}
+                />
+              )}
             {/* Overlay "Search this area" button */}
             {showSearchBtn && (
               <SearchButton
