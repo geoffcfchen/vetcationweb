@@ -904,7 +904,7 @@ function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
             ) : (
               <>
                 <PanelSubtitle style={{ marginTop: 10 }}>
-                  Demo reviews — style preview only.
+                  Demo professionals — style preview only.
                 </PanelSubtitle>
                 {demoVets.map((u) => (
                   <VetRow key={u.id} user={u} clinicName={clinicName} />
@@ -916,6 +916,9 @@ function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
 
         {tab === "reviews" && (
           <>
+            <PanelSubtitle style={{ marginTop: 10 }}>
+              Demo reviews — style preview only.
+            </PanelSubtitle>
             {demoReviews.map((rev) => (
               <ReviewCard key={rev.id}>
                 <ReviewerAvatar title={rev.reviewer}>
@@ -950,10 +953,6 @@ function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
                 </ReviewActions> */}
               </ReviewCard>
             ))}
-
-            <PanelSubtitle style={{ marginTop: 10 }}>
-              Demo reviews — style preview only.
-            </PanelSubtitle>
           </>
         )}
       </ListWrap>
