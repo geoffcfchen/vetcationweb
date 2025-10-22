@@ -10,13 +10,14 @@ import {
   CircleF,
 } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
-import { FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import {
   FaStar,
   FaStarHalfAlt,
   FaRegStar,
   FaExternalLinkAlt,
   FaBullseye,
+  FaGraduationCap,
+  FaUserAlt,
 } from "react-icons/fa";
 
 // Firestore (modular SDK)
@@ -132,7 +133,6 @@ const Choice = styled.button`
   border: 1px solid #e6e6e6;
   background: ${(p) => (p.$active ? "#e9f3ff" : "white")};
   cursor: pointer;
-  /* normalize icon size even when text wraps */
   svg {
     flex: 0 0 20px;
     width: 20px;
@@ -187,10 +187,9 @@ const Helper = styled.p`
   pointer-events: none;
 `;
 
-// make the current clinic label stand out and zindex above others
-
+// ===== Label chip =====
 const LabelChip = styled.div`
-  transform: translate(-50%, -30px); /* center horizontally, lift above dot */
+  transform: translate(-50%, -30px);
   background: #fff;
   border: 1px solid #e6e6e6;
   border-radius: 999px;
@@ -273,7 +272,7 @@ const ListWrap = styled.div`
 const UserCard = styled.div`
   display: grid;
   grid-template-columns: 42px 1fr auto;
-  align-items: center;
+  align-items: start; /* 👈 top-align avatar instead of centering */
   gap: 10px;
   padding: 8px 8px;
   border: 1px solid #f1f5f9;
@@ -338,40 +337,12 @@ const Bio = styled.div`
   text-overflow: ellipsis;
 `;
 
-const StatusBtn = styled.button`
-  min-width: 110px;
-  justify-self: end;
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid
-    ${({ $status }) =>
-      $status === "approved"
-        ? "#16a34a"
-        : $status === "pending"
-        ? "#f59e0b"
-        : "#d1d5db"};
-  color: ${({ $status }) =>
-    $status === "approved"
-      ? "#16a34a"
-      : $status === "pending"
-      ? "#92400e"
-      : "#374151"};
-  background: ${({ $status }) =>
-    $status === "approved"
-      ? "#ecfdf5"
-      : $status === "pending"
-      ? "#fffbeb"
-      : "#ffffff"};
-  cursor: pointer;
-`;
-
 const SmallLine = styled.div`
   font-size: 11px;
   color: #6b7280;
 `;
 
+// (kept for demo vets)
 const SlotRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -401,7 +372,79 @@ const SlotChipText = styled.span`
   color: #111827;
 `;
 
-// ---- Reviews UI ----
+// --- In-house section styling ---
+const Section = styled.div`
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  background: #fbfdff;
+`;
+
+const SecHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+`;
+
+const SecIcon = styled.span`
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #e8f1ff;
+  color: #1e40af;
+  font-size: 12px;
+`;
+
+const SecTitle = styled.div`
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+`;
+
+const SecBody = styled.div`
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.45;
+`;
+
+// ---- Expandable text (used by in-house bios & reviews) ----
+const ExpandWrap = styled.div`
+  margin-top: 4px;
+`;
+
+const ExpandPara = styled.p`
+  margin: 0;
+  font-size: 12px;
+  color: #374151;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  ${(p) =>
+    p.$open
+      ? ""
+      : `
+  -webkit-line-clamp: ${p.$lines || 5};
+`}
+`;
+
+const ExpandToggle = styled.button`
+  margin-top: 6px;
+  border: 0;
+  background: transparent;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+`;
+
+// ---- Reviews UI (kept for demo vets) ----
 const ReviewCard = styled.div`
   display: grid;
   grid-template-columns: 42px 1fr auto;
@@ -445,7 +488,7 @@ const Stars = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  color: #f59e0b; /* amber */
+  color: #f59e0b;
 `;
 
 const SourceBadge = styled.span`
@@ -462,7 +505,7 @@ const ReviewText = styled.p`
   font-size: 13px;
   color: #374151;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* clamp to 3 lines */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -610,21 +653,20 @@ const LegendWrap = styled.div`
   position: absolute;
   right: 12px;
   bottom: 40px;
-  z-index: 6; /* above chips, still below modals */
+  z-index: 6;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 14px 12px 12px;
   border-radius: 14px;
   border: 1px solid #f5b6b6;
-  background: rgba(255, 245, 245, 0.96); /* subtle red tint */
+  background: rgba(255, 245, 245, 0.96);
   box-shadow: 0 12px 32px rgba(211, 47, 47, 0.18),
     0 4px 12px rgba(0, 0, 0, 0.08);
-  pointer-events: none; /* allows map clicks through */
+  pointer-events: none;
   backdrop-filter: saturate(120%) blur(4px);
   overflow: hidden;
 
-  /* vertical red accent bar on left */
   &::before {
     content: "";
     position: absolute;
@@ -637,7 +679,7 @@ const LegendWrap = styled.div`
 
   @media (max-width: 480px) {
     right: 8px;
-    bottom: 56px; /* avoid overlapping helper text */
+    bottom: 56px;
   }
 `;
 
@@ -646,8 +688,8 @@ const LegendSwatch = styled.span`
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(211, 47, 47, 0.15); /* same red fill */
-  box-shadow: inset 0 0 0 2px #d32f2f; /* solid outline */
+  background: rgba(211, 47, 47, 0.15);
+  box-shadow: inset 0 0 0 2px #d32f2f;
 `;
 
 const LegendText = styled.span`
@@ -702,7 +744,6 @@ const demoReviews = [
   },
 ];
 
-// Fake data to demo the look (you can fetch real people later)
 const demoVets = [
   {
     id: "v1",
@@ -756,7 +797,6 @@ function formatDateISO(iso) {
 }
 
 function onSlotClick(slot, user) {
-  // Demo only — wire to your real navigation later
   alert(
     `Demo\nDoctor: ${user.name}\nDate: ${formatDateISO(slot.date)}\nTime: ${
       slot.time
@@ -764,54 +804,7 @@ function onSlotClick(slot, user) {
   );
 }
 
-// function VetRow({ user }) {
-//   const slots = Array.isArray(user.slots) ? user.slots.slice(0, 2) : [];
-
-//   return (
-//     <UserCard>
-//       <Avatar title={user.name}>{initials(user.name).toUpperCase()}</Avatar>
-
-//       <Meta>
-//         <NameRow>
-//           <Name title={user.name}>{user.name}</Name>
-//           <Username>@{user.username}</Username>
-//         </NameRow>
-//         {user.clinic && <ClinicChip>🏥 {user.clinic}</ClinicChip>}
-//         {user.bio && <Bio title={user.bio}>{user.bio}</Bio>}
-
-//         {/* Slots */}
-//         {slots.length > 0 && (
-//           <SlotRow>
-//             {slots.map((slot) => (
-//               <SlotChip
-//                 key={slot.appointmentId}
-//                 onClick={(e) => {
-//                   e.stopPropagation();
-//                   onSlotClick(slot, user);
-//                 }}
-//                 title={`${formatDateISO(slot.date)} • ${slot.time}`}
-//               >
-//                 <SlotChipLine>
-//                   <IoCalendarOutline size={14} />
-//                   <SlotChipText>{formatDateISO(slot.date)}</SlotChipText>
-//                 </SlotChipLine>
-//                 <SlotChipLine>
-//                   <IoTimeOutline size={14} />
-//                   <SlotChipText>{slot.time}</SlotChipText>
-//                 </SlotChipLine>
-//               </SlotChip>
-//             ))}
-//           </SlotRow>
-//         )}
-//       </Meta>
-
-//       {/* (Status button removed per request) */}
-//       <div />
-//     </UserCard>
-//   );
-// }
-
-// replace the existing VetRow with this version
+// ===== Partnered vets row (unchanged appearance) =====
 function VetRow({ user, clinicName }) {
   const slots = Array.isArray(user.slots) ? user.slots.slice(0, 2) : [];
 
@@ -825,7 +818,6 @@ function VetRow({ user, clinicName }) {
           <Username>@{user.username}</Username>
         </NameRow>
 
-        {/* Always show the current clinic's name here */}
         {clinicName && (
           <ClinicChip title={clinicName}>🏥 {clinicName}</ClinicChip>
         )}
@@ -862,73 +854,153 @@ function VetRow({ user, clinicName }) {
   );
 }
 
-// function ClinicPanel({ clinicName }) {
-//   const [tab, setTab] = React.useState("vets"); // vets | trainers (future) | specialists (future)
+// ===== In-house vets components =====
+function Expandable({ text, lines = 5 }) {
+  const [open, setOpen] = useState(false);
+  if (!text || !String(text).trim()) return null;
+  return (
+    <ExpandWrap>
+      <ExpandPara $open={open} $lines={lines}>
+        {text}
+      </ExpandPara>
+      <ExpandToggle onClick={() => setOpen((v) => !v)}>
+        {open ? "Show less" : "Show more"}
+      </ExpandToggle>
+    </ExpandWrap>
+  );
+}
 
-//   return (
-//     <PanelWrap>
-//       <PanelHeader>
-//         <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
-//       </PanelHeader>
+function InHouseRow({ doc, clinicName }) {
+  const { name, education, bioSummary, reviewSummary } = doc || {};
+  const displayName = name || "Doctor";
 
-//       <SmallLine>Partner options under your brand:</SmallLine>
+  return (
+    <UserCard>
+      <Avatar title={displayName}>{initials(displayName).toUpperCase()}</Avatar>
 
-//       <TabsRow>
-//         <TabBtn $active={tab === "vets"} onClick={() => setTab("vets")}>
-//           Partnered online Vets & Professionals
-//         </TabBtn>
-//         <TabBtn $active={tab === "reviews"} onClick={() => setTab("reviews")}>
-//           Reviews
-//         </TabBtn>
-//         {/* Example of adding more:
-//         <TabBtn $active={tab === "trainers"} onClick={() => setTab("trainers")}>
-//           Certified Dog Trainers
-//         </TabBtn> */}
-//       </TabsRow>
+      <Meta>
+        <NameRow>
+          <Name title={displayName}>{displayName}</Name>
+          {/* no @username */}
+        </NameRow>
 
-//       <ListWrap>
-//         {tab === "vets" && demoVets.map((u) => <VetRow key={u.id} user={u} />)}
+        {clinicName && (
+          <ClinicChip title={clinicName}>🏥 {clinicName}</ClinicChip>
+        )}
 
-//         {tab === "reviews" && (
-//           <>
-//             {demoReviews.map((rev) => (
-//               <ReviewCard key={rev.id}>
-//                 <ReviewerAvatar title={rev.reviewer}>
-//                   {initials(rev.reviewer).toUpperCase()}
-//                 </ReviewerAvatar>
+        {/* Education */}
+        {education && (
+          <Section>
+            <SecHeader>
+              <SecIcon>
+                <FaGraduationCap size={12} />
+              </SecIcon>
+              <SecTitle>Education</SecTitle>
+            </SecHeader>
+            <SecBody title={education}>{education}</SecBody>
+          </Section>
+        )}
 
-//                 <ReviewBody>
-//                   <ReviewHeaderRow>
-//                     <ReviewerName title={rev.reviewer}>
-//                       {rev.reviewer}
-//                     </ReviewerName>
-//                     <ReviewMeta>
-//                       <StarRating value={rev.rating} />
-//                       <span>· {shortDate(rev.date)}</span>
-//                       <SourceBadge>{rev.source}</SourceBadge>
-//                     </ReviewMeta>
-//                   </ReviewHeaderRow>
+        {/* Bio (expandable to keep the card compact) */}
+        {bioSummary && (
+          <Section>
+            <SecHeader>
+              <SecIcon>
+                <FaUserAlt size={12} />
+              </SecIcon>
+              <SecTitle>Bio</SecTitle>
+            </SecHeader>
+            <SecBody>
+              <Expandable text={bioSummary} lines={5} />
+            </SecBody>
+          </Section>
+        )}
 
-//                   <ReviewText title={rev.snippet}>{rev.snippet}</ReviewText>
-//                 </ReviewBody>
-//               </ReviewCard>
-//             ))}
-//           </>
-//         )}
-//       </ListWrap>
+        {/* Review summary (expandable, only if present) */}
+        {reviewSummary && (
+          <Section>
+            <SecHeader>
+              <SecIcon>
+                <FaStar size={12} />
+              </SecIcon>
+              <SecTitle>Review summary</SecTitle>
+            </SecHeader>
+            <SecBody>
+              <Expandable text={reviewSummary} lines={5} />
+            </SecBody>
+          </Section>
+        )}
+      </Meta>
 
-//       <PanelSubtitle style={{ marginTop: 10 }}>
-//         Demo data — for illustration only.
-//       </PanelSubtitle>
-//     </PanelWrap>
-//   );
-// }
+      <div />
+    </UserCard>
+  );
+}
 
-// Default map style: hide most POI labels/icons & transit
+function InHouseList({ clinicId, clinicName }) {
+  const [loading, setLoading] = useState(true);
+  const [rows, setRows] = useState([]);
 
-// update signature to take isPrimary
-function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
-  const [tab, setTab] = React.useState("vets"); // vets | reviews
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        setLoading(true);
+        // Synthetic marker ("__current") cannot fetch roster; show empty gently
+        if (!clinicId || clinicId.startsWith("__")) {
+          if (alive) setRows([]);
+          return;
+        }
+        const snap = await getDoc(doc(firestore, "clinics", clinicId));
+        const data = snap.exists() ? snap.data() : {};
+        const doctors = data?.roster?.doctors || [];
+        // Only map fields we actually need
+        const mapped = doctors.map((d) => ({
+          name: d?.name || "",
+          education: d?.education || "",
+          bioSummary: typeof d?.bioSummary === "string" ? d.bioSummary : "",
+          reviewSummary:
+            typeof d?.reviewSummary === "string" ? d.reviewSummary : "",
+        }));
+        if (alive) setRows(mapped);
+      } catch (e) {
+        console.warn("InHouseList roster fetch failed:", e);
+        if (alive) setRows([]);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [clinicId]);
+
+  if (loading) {
+    return <SmallLine>Loading in-house roster…</SmallLine>;
+  }
+
+  if (!rows.length) {
+    return (
+      <EmptyWrap>
+        {clinicId && !clinicId.startsWith("__")
+          ? "No in-house veterinarians found for this clinic yet."
+          : "Roster unavailable for this marker."}
+      </EmptyWrap>
+    );
+  }
+
+  return (
+    <>
+      {rows.map((d, i) => (
+        <InHouseRow key={`${d.name}-${i}`} doc={d} clinicName={clinicName} />
+      ))}
+    </>
+  );
+}
+
+// ===== Clinic panel =====
+function ClinicPanel({ clinicName, isPrimary, clinicMeta = {}, clinicId }) {
+  const [tab, setTab] = React.useState("vets"); // 'vets' | 'inhouse'
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
 
   return (
@@ -987,8 +1059,12 @@ function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
         <TabBtn $active={tab === "vets"} onClick={() => setTab("vets")}>
           Partnered online Vets & Professionals
         </TabBtn>
-        <TabBtn $active={tab === "reviews"} onClick={() => setTab("reviews")}>
-          Reviews
+        <TabBtn
+          $active={tab === "inhouse"}
+          onClick={() => setTab("inhouse")}
+          title="In-house veterinarians"
+        >
+          In-house veterinarians
         </TabBtn>
       </TabsRow>
 
@@ -1018,45 +1094,9 @@ function ClinicPanel({ clinicName, isPrimary, clinicMeta = {} }) {
           </>
         )}
 
-        {tab === "reviews" && (
+        {tab === "inhouse" && (
           <>
-            <PanelSubtitle style={{ marginTop: 10 }}>
-              Demo reviews — style preview only.
-            </PanelSubtitle>
-            {demoReviews.map((rev) => (
-              <ReviewCard key={rev.id}>
-                <ReviewerAvatar title={rev.reviewer}>
-                  {initials(rev.reviewer).toUpperCase()}
-                </ReviewerAvatar>
-
-                <ReviewBody>
-                  <ReviewHeaderRow>
-                    <ReviewerName title={rev.reviewer}>
-                      {rev.reviewer}
-                    </ReviewerName>
-                    <ReviewMeta>
-                      <StarRating value={rev.rating} />
-                      <span>· {shortDate(rev.date)}</span>
-                      <SourceBadge>{rev.source}</SourceBadge>
-                    </ReviewMeta>
-                  </ReviewHeaderRow>
-
-                  <ReviewText title={rev.snippet}>{rev.snippet}</ReviewText>
-                </ReviewBody>
-
-                {/* <ReviewActions>
-                  {rev.url && (
-                    <TinyLink
-                      href={rev.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read full
-                    </TinyLink>
-                  )}
-                </ReviewActions> */}
-              </ReviewCard>
-            ))}
+            <InHouseList clinicId={clinicId} clinicName={clinicName} />
           </>
         )}
       </ListWrap>
@@ -1234,9 +1274,8 @@ export default function InviteSurvey() {
         let json = null;
         try {
           json = await resp.json();
-        } catch (e) {
-          // no-op
-        }
+        } catch (e) {}
+
         if (!alive) return;
 
         if (resp.ok && json?.ok) {
@@ -1251,7 +1290,6 @@ export default function InviteSurvey() {
           }
           setNonce(json.nonce || "");
         } else {
-          // invalid/expired/used — still show map with clinic basics
           setValid(false);
           setInvalidReason(json?.error || `HTTP ${resp.status}`);
           if (json?.clinicName) setClinicName(json.clinicName);
@@ -1262,7 +1300,6 @@ export default function InviteSurvey() {
           ) {
             setCenter(json.center);
           } else {
-            // fallback (if CF didn't include basics)
             const basics = await fetchClinicBasics(clinicId);
             if (basics?.clinicName) setClinicName(basics.clinicName);
             if (basics?.center) setCenter(basics.center);
@@ -1273,7 +1310,6 @@ export default function InviteSurvey() {
         console.error("verifyClinicInvite failed:", e);
         setValid(false);
         setInvalidReason(String(e?.message || e || "network error"));
-        // Last resort fallback
         const basics = await fetchClinicBasics(clinicId);
         if (basics?.clinicName) setClinicName(basics.clinicName);
         if (basics?.center) setCenter(basics.center);
@@ -1383,7 +1419,6 @@ export default function InviteSurvey() {
           if (dedup.has(docSnap.id)) return;
           const x = docSnap.data();
 
-          // location can be GeoPoint or {lat,lng}
           const loc = x?.location;
           const lat =
             typeof loc?.latitude === "number"
@@ -1436,15 +1471,13 @@ export default function InviteSurvey() {
         });
       }
 
-      // ensure current clinic is visible and highlighted
+      // ensure current clinic marker
       if (typeof center.lat === "number" && typeof center.lng === "number") {
         if (dedup.has(clinicId)) {
-          // highlight the real clinic doc instead of adding a duplicate
           const row = dedup.get(clinicId);
           row.highlight = true;
           dedup.set(clinicId, row);
         } else {
-          // only add a synthetic marker if the clinic isn't in Firestore results
           dedup.set("__current", {
             id: "__current",
             name: clinicName || "Selected clinic",
@@ -1460,14 +1493,12 @@ export default function InviteSurvey() {
       );
       rows.forEach((r) => delete r._distM);
 
-      //   setMarkers(rows);
-      //   setShowSearchBtn(false);
       setMarkers(rows);
       setShowSearchBtn(false);
 
       // Open the InfoWindow for the primary clinic on first load
       setActive((prev) => {
-        if (prev !== null) return prev; // don't override if user already opened one
+        if (prev !== null) return prev;
         const idx = rows.findIndex(
           (r) => r.id === clinicId || r.id === "__current"
         );
@@ -1480,7 +1511,6 @@ export default function InviteSurvey() {
     }
   };
 
-  // Initial fetch once map is idle the first time
   const handleIdle = () => {
     if (markers.length === 0) fetchClinicsForCurrentBounds();
   };
@@ -1496,7 +1526,6 @@ export default function InviteSurvey() {
     );
   }
 
-  // Friendly message for invalid/expired/used links
   const invalidDisplay = (() => {
     const e = String(invalidReason || "").toLowerCase();
     if (e.includes("expired")) return "This survey link has expired.";
@@ -1534,7 +1563,6 @@ export default function InviteSurvey() {
                   onClick={() => toggle(c.key)}
                   $active={active}
                 >
-                  {/* {active ? <FaCheckSquare /> : <FaRegSquare />}{" "} */}
                   {active ? (
                     <FaCheckSquare size={20} />
                   ) : (
@@ -1593,7 +1621,7 @@ export default function InviteSurvey() {
               streetViewControl: false,
             }}
           >
-            {/* Service radius circle for the invited clinic; sits under labels/markers */}
+            {/* Service radius circle */}
             {center &&
               typeof center.lat === "number" &&
               typeof center.lng === "number" && (
@@ -1601,17 +1629,17 @@ export default function InviteSurvey() {
                   center={center}
                   radius={serviceRadius}
                   options={{
-                    clickable: false, // ensure it doesn't block clicks on clinics
-                    zIndex: 0, // keep it underneath other overlays
-                    strokeColor: "#d32f2f", // red solid outline
+                    clickable: false,
+                    zIndex: 0,
+                    strokeColor: "#d32f2f",
                     strokeOpacity: 1,
                     strokeWeight: 2,
-                    fillColor: "#d32f2f", // red fill with light transparency
+                    fillColor: "#d32f2f",
                     fillOpacity: 0.15,
                   }}
                 />
               )}
-            {/* Overlay "Search this area" button */}
+
             {showSearchBtn && (
               <SearchButton
                 onClick={fetchClinicsForCurrentBounds}
@@ -1621,10 +1649,8 @@ export default function InviteSurvey() {
               </SearchButton>
             )}
 
-            {/* Nearby clinic markers with modern chips */}
             {markers.map((m, i) => {
               const isCurrent = m.id === "__current" || m.highlight;
-
               const icon = {
                 path: window.google?.maps?.SymbolPath?.CIRCLE,
                 scale: isCurrent ? 8 : 6,
@@ -1674,13 +1700,8 @@ export default function InviteSurvey() {
               >
                 <div onClick={(e) => e.stopPropagation()}>
                   <ClinicPanel
+                    clinicId={markers[active].id}
                     clinicName={markers[active].name}
-                    // // primary if this marker corresponds to the invited clinic
-                    // isPrimary={
-                    //   markers[active].id === clinicId ||
-                    //   markers[active].id === "__current"
-                    // }
-                    // Treat as "primary (partnered)" only if it's the invited clinic AND the preview toggle is ON.
                     isPrimary={
                       (markers[active].id === clinicId ||
                         markers[active].id === "__current") &&
@@ -1691,12 +1712,14 @@ export default function InviteSurvey() {
                 </div>
               </InfoWindowF>
             )}
+
             <Helper>
               Showing clinics near the visible area (max ~10 km radius).
             </Helper>
           </GoogleMap>
         )}
-        {/* Red circle legend — explains what the circle means */}
+
+        {/* Legend */}
         <LegendWrap>
           <LegendSwatch />
           <LegendText>
@@ -1709,7 +1732,7 @@ export default function InviteSurvey() {
         </LegendWrap>
       </BgMapWrap>
 
-      {/* Desktop: left card. Mobile: draggable bottom sheet */}
+      {/* Desktop vs Mobile container */}
       {isMobile ? (
         <MobileSheet
           $height={sheetH}
