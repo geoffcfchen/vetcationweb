@@ -18,6 +18,8 @@ import {
   FaBullseye,
   FaGraduationCap,
   FaUserAlt,
+  FaRegSquare,
+  FaCheckSquare,
 } from "react-icons/fa";
 
 // Firestore (modular SDK)
@@ -999,7 +1001,12 @@ function InHouseList({ clinicId, clinicName }) {
 }
 
 // ===== Clinic panel =====
-function ClinicPanel({ clinicName, isPrimary, clinicMeta = {}, clinicId }) {
+export function ClinicPanel({
+  clinicName,
+  isPrimary,
+  clinicMeta = {},
+  clinicId,
+}) {
   const [tab, setTab] = React.useState("vets"); // 'vets' | 'inhouse'
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
 
