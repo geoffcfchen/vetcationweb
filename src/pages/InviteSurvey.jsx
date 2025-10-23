@@ -1730,7 +1730,7 @@ export default function InviteSurvey() {
                 position={markers[active].position}
                 onCloseClick={() => setActive(null)}
                 options={{
-                  pixelOffset: new window.google.maps.Size(0, -14),
+                  pixelOffset: new window.google.maps.Size(0, -40),
                   maxWidth: 360,
                   disableAutoPan: false,
                 }}
