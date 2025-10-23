@@ -90,6 +90,16 @@ const LabelChip = styled.div`
     color: #1e3a8a;
     font-weight: 700;
   }
+
+  /* Selected (active) clinic label: bring forward & highlight */
+  &.active {
+    border-color: #4d9fec;
+    background: #e9f3ff;
+    box-shadow: 0 14px 28px rgba(77, 159, 236, 0.25),
+      0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -34px) scale(1.03);
+    font-weight: 700;
+  }
 `;
 
 function radiusFromBounds(bounds) {
@@ -312,9 +322,10 @@ export default function ClinicsMapSection({
           )}
 
           {markers.map((m, i) => {
+            const isActive = active === i;
             const icon = {
               path: window.google?.maps?.SymbolPath?.CIRCLE,
-              scale: 6,
+              scale: isActive ? 8 : 6, // subtle bump when active
               fillColor: "#4D9FEC",
               fillOpacity: 1,
               strokeColor: "#ffffff",
@@ -326,12 +337,23 @@ export default function ClinicsMapSection({
                   position={m.position}
                   onClick={() => setActive(i)}
                   icon={icon}
+                  // active marker sits on top
+                  zIndex={
+                    isActive
+                      ? window.google?.maps?.Marker?.MAX_ZINDEX
+                      : undefined
+                  }
                 />
                 <OverlayViewF
                   position={m.position}
-                  mapPaneName="overlayMouseTarget"
+                  // active label goes to highest pane so neighbors can't cover it
+                  mapPaneName={isActive ? "floatPane" : "overlayMouseTarget"}
                 >
-                  <LabelChip onClick={() => setActive(i)} title={m.name}>
+                  <LabelChip
+                    className={isActive ? "active" : ""}
+                    onClick={() => setActive(i)}
+                    title={m.name}
+                  >
                     {m.name}
                   </LabelChip>
                 </OverlayViewF>
