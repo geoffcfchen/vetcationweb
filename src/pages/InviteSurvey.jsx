@@ -213,6 +213,16 @@ const LabelChip = styled.div`
     font-weight: 700;
   }
 
+  &.active {
+    border-color: #4d9fec;
+    background: #e9f3ff;
+    box-shadow: 0 14px 28px rgba(77, 159, 236, 0.25),
+      0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -34px) scale(1.03);
+    font-weight: 700;
+    z-index: 9999; /* defensive, pane switch below does the real work */
+  }
+
   &:hover {
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
   }
@@ -1657,10 +1667,21 @@ export default function InviteSurvey() {
             )}
 
             {markers.map((m, i) => {
+              //   const isCurrent = m.id === "__current" || m.highlight;
+              //   const icon = {
+              //     path: window.google?.maps?.SymbolPath?.CIRCLE,
+              //     scale: isCurrent ? 8 : 6,
+              //     fillColor: isCurrent ? "#d32f2f" : "#4D9FEC",
+              //     fillOpacity: 1,
+              //     strokeColor: "#ffffff",
+              //     strokeWeight: 2,
+              //   };
               const isCurrent = m.id === "__current" || m.highlight;
+              const isActive = active === i;
               const icon = {
                 path: window.google?.maps?.SymbolPath?.CIRCLE,
-                scale: isCurrent ? 8 : 6,
+                // gently larger when selected
+                scale: isActive ? 9 : isCurrent ? 8 : 6,
                 fillColor: isCurrent ? "#d32f2f" : "#4D9FEC",
                 fillOpacity: 1,
                 strokeColor: "#ffffff",
@@ -1673,18 +1694,27 @@ export default function InviteSurvey() {
                     position={m.position}
                     onClick={() => setActive(i)}
                     icon={icon}
+                    // zIndex={
+                    //   isCurrent
+                    //     ? window.google?.maps?.Marker?.MAX_ZINDEX
+                    //     : undefined
+                    // }
+                    // selected OR highlighted clinic sits on top
                     zIndex={
-                      isCurrent
+                      isActive || isCurrent
                         ? window.google?.maps?.Marker?.MAX_ZINDEX
                         : undefined
                     }
                   />
                   <OverlayViewF
                     position={m.position}
-                    mapPaneName="overlayMouseTarget"
+                    // put the selected clinic’s name on the highest pane
+                    mapPaneName={isActive ? "floatPane" : "overlayMouseTarget"}
                   >
                     <LabelChip
-                      className={isCurrent ? "current" : ""}
+                      className={`${isCurrent ? "current" : ""} ${
+                        isActive ? "active" : ""
+                      }`}
                       onClick={() => setActive(i)}
                       title={m.name}
                     >
