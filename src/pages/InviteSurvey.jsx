@@ -230,10 +230,16 @@ const LabelChip = styled.div`
 
 // ====== Clinic panel for InfoWindow ======
 const PanelWrap = styled.div`
-  width: 320px;
-  max-width: 86vw;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
     Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  /* On wider viewports (e.g., InfoWindow desktop), gently cap width */
+  @media (min-width: 640px) {
+    max-width: 360px;
+  }
 `;
 
 const PanelHeader = styled.div`
@@ -1035,11 +1041,19 @@ function InHouseList({ clinicId, clinicName }) {
 }
 
 // ===== Clinic panel =====
+// export function ClinicPanel({
+//   clinicName,
+//   isPrimary,
+//   clinicMeta = {},
+//   clinicId,
+// }) {
 export function ClinicPanel({
   clinicName,
   isPrimary,
   clinicMeta = {},
   clinicId,
+  showDemoPartners,
+  onTogglePartners,
 }) {
   const [tab, setTab] = React.useState("vets"); // 'vets' | 'inhouse'
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
@@ -1112,6 +1126,17 @@ export function ClinicPanel({
       <ListWrap>
         {tab === "vets" && (
           <>
+            {/* Preview toggle goes above the subtitle for clarity */}
+            <ToggleRow title="Preview how partnered doctors would appear under your brand">
+              <ToggleText>
+                Preview partnered view (demo professionals)
+              </ToggleText>
+              <ToggleSwitch
+                checked={!!showDemoPartners}
+                onChange={(e) => onTogglePartners?.(e.target.checked)}
+              />
+            </ToggleRow>
+
             {!isPrimary ? (
               <>
                 <PendingBadge title="Awaiting partnership approval">
@@ -1124,7 +1149,7 @@ export function ClinicPanel({
               </>
             ) : (
               <>
-                <PanelSubtitle style={{ marginTop: 10 }}>
+                <PanelSubtitle style={{ marginTop: 6 }}>
                   Demo professionals — style preview only.
                 </PanelSubtitle>
                 {demoVets.map((u) => (
@@ -1605,7 +1630,7 @@ export default function InviteSurvey() {
       {valid ? (
         !done ? (
           <>
-            <ToggleRow title="Preview how partnered doctors would appear under your brand">
+            {/* <ToggleRow title="Preview how partnered doctors would appear under your brand">
               <ToggleText>
                 Preview partnered view (demo professionals)
               </ToggleText>
@@ -1613,7 +1638,7 @@ export default function InviteSurvey() {
                 checked={showDemoPartners}
                 onChange={(e) => setShowDemoPartners(e.target.checked)}
               />
-            </ToggleRow>
+            </ToggleRow> */}
             <P>
               If you want to expand your service under your brand to your
               clients, which of the following are you interested in
@@ -1780,6 +1805,8 @@ export default function InviteSurvey() {
                       showDemoPartners
                     }
                     clinicMeta={markers[active]}
+                    showDemoPartners={showDemoPartners}
+                    onTogglePartners={(checked) => setShowDemoPartners(checked)}
                   />
                 </div>
               </InfoWindowF>
@@ -1831,6 +1858,17 @@ export default function InviteSurvey() {
               </>
             ) : (
               <>
+                {/* Top CTA for survey — sits near the top for prominence */}
+                {valid && !done && (
+                  <PrimaryCTA
+                    style={{ marginTop: 0 }}
+                    onClick={() => setShowSurveyOnMobile(true)}
+                  >
+                    Open your clinic’s interest form.
+                  </PrimaryCTA>
+                )}
+
+                {/* Then the clinic panel (now full width on mobile) */}
                 {activeMarker ? (
                   <ClinicPanel
                     clinicId={activeMarker.id}
@@ -1841,6 +1879,8 @@ export default function InviteSurvey() {
                       showDemoPartners
                     }
                     clinicMeta={activeMarker}
+                    showDemoPartners={showDemoPartners}
+                    onTogglePartners={(checked) => setShowDemoPartners(checked)}
                   />
                 ) : (
                   <SmallLine>
