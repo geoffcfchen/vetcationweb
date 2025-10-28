@@ -110,8 +110,12 @@ const Grabber = styled.div`
 `;
 
 const SheetBody = styled.div`
+  flex: 1; /* <-- fill the sheet height */
+  min-height: 0; /* <-- allow shrinking so overflow works */
   padding: 16px;
   overflow: auto;
+  -webkit-overflow-scrolling: touch; /* smoother iOS scroll */
+  overscroll-behavior: contain; /* keep map from scrolling underneath */
 `;
 
 const H1 = styled.h1`
@@ -674,6 +678,64 @@ const RatingRow = styled(InfoLine)`
   }
 `;
 
+// New: two-column header+info with a right CTA (mobile only)
+const PanelTop = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 10px;
+`;
+
+// Replace previous InlineCTAWrap / InlineCTAButton with this:
+const InlineCTAWrap = styled.div`
+  display: none;
+  @media (max-width: 767px) {
+    display: flex;
+    justify-self: end;
+    align-items: flex-start;
+  }
+`;
+
+const InlineCTAButton = styled(PrimaryCTA)`
+  /* compact, centered pill */
+  width: auto;
+  min-height: 44px;
+  max-width: 180px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  white-space: normal; /* allow wrap */
+  display: inline-flex;
+  align-items: center; /* center vertically */
+  justify-content: center; /* center horizontally */
+  text-align: center; /* center multi-line text */
+  line-height: 1.2;
+  gap: 0;
+
+  font-size: 13px; /* single size */
+  font-weight: 800; /* single weight */
+
+  box-shadow: 0 8px 20px rgba(77, 159, 236, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.08s ease, box-shadow 0.12s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(77, 159, 236, 0.22),
+      0 1px 6px rgba(0, 0, 0, 0.08);
+  }
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(77, 159, 236, 0.35),
+      0 8px 20px rgba(77, 159, 236, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 360px) {
+    max-width: 150px;
+  }
+`;
+
 function StarRating({ value = 0, outOf = 5 }) {
   const full = Math.floor(value);
   const half = value - full >= 0.5 ? 1 : 0;
@@ -1041,12 +1103,7 @@ function InHouseList({ clinicId, clinicName }) {
 }
 
 // ===== Clinic panel =====
-// export function ClinicPanel({
-//   clinicName,
-//   isPrimary,
-//   clinicMeta = {},
-//   clinicId,
-// }) {
+
 export function ClinicPanel({
   clinicName,
   isPrimary,
@@ -1054,59 +1111,82 @@ export function ClinicPanel({
   clinicId,
   showDemoPartners,
   onTogglePartners,
+  showInlineCTA = false, // NEW
+  onOpenSurvey, // NEW
 }) {
-  const [tab, setTab] = React.useState("vets"); // 'vets' | 'inhouse'
+  const [tab, setTab] = useState("vets"); // 'vets' | 'inhouse'
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
 
   return (
     <PanelWrap>
-      <PanelHeader>
-        <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
-      </PanelHeader>
+      {/* NEW: two-column top area */}
+      <PanelTop>
+        <div>
+          <PanelHeader>
+            <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
+          </PanelHeader>
 
-      {(rating || phone || address || website) && (
-        <InfoGrid>
-          {typeof rating === "number" && (
-            <RatingRow>
-              <StarRating value={rating} />
-              <span>
-                {rating.toFixed(1)}
-                {typeof reviewsCount === "number" ? ` (${reviewsCount})` : ""}
-              </span>
-            </RatingRow>
+          {(rating || phone || address || website) && (
+            <InfoGrid>
+              {typeof rating === "number" && (
+                <RatingRow>
+                  <StarRating value={rating} />
+                  <span>
+                    {rating.toFixed(1)}
+                    {typeof reviewsCount === "number"
+                      ? ` (${reviewsCount})`
+                      : ""}
+                  </span>
+                </RatingRow>
+              )}
+              {phone && (
+                <InfoLine>
+                  <IoCallOutline size={16} />
+                  <a href={`tel:${phone}`} title={phone}>
+                    {phone}
+                  </a>
+                </InfoLine>
+              )}
+              {address && (
+                <InfoLine title={address}>
+                  <IoLocationOutline size={16} />
+                  <span
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {address}
+                  </span>
+                </InfoLine>
+              )}
+              {website && (
+                <InfoLine>
+                  <FaExternalLinkAlt size={12} />
+                  <a href={website} target="_blank" rel="noopener noreferrer">
+                    {domainFromUrl(website)}
+                  </a>
+                </InfoLine>
+              )}
+            </InfoGrid>
           )}
-          {phone && (
-            <InfoLine>
-              <IoCallOutline size={16} />
-              <a href={`tel:${phone}`} title={phone}>
-                {phone}
-              </a>
-            </InfoLine>
+        </div>
+
+        {/* NEW: inline CTA on the right (mobile only),
+            only for the primary clinic, only when survey is available */}
+        <InlineCTAWrap>
+          {showInlineCTA && isPrimary && (
+            <InlineCTAButton
+              onClick={onOpenSurvey}
+              aria-label="Open your clinic’s interest form"
+              title="Open your clinic’s interest form"
+            >
+              <span>Open your clinic’s interest form</span>
+            </InlineCTAButton>
           )}
-          {address && (
-            <InfoLine title={address}>
-              <IoLocationOutline size={16} />
-              <span
-                style={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {address}
-              </span>
-            </InfoLine>
-          )}
-          {website && (
-            <InfoLine>
-              <FaExternalLinkAlt size={12} />
-              <a href={website} target="_blank" rel="noopener noreferrer">
-                {domainFromUrl(website)}
-              </a>
-            </InfoLine>
-          )}
-        </InfoGrid>
-      )}
+        </InlineCTAWrap>
+      </PanelTop>
 
       <SmallLine>Partner options under your brand:</SmallLine>
 
@@ -1126,7 +1206,6 @@ export function ClinicPanel({
       <ListWrap>
         {tab === "vets" && (
           <>
-            {/* Toggle only for the primary clinic */}
             {isPrimary && (
               <ToggleRow title="Preview how partnered doctors would appear under your brand">
                 <ToggleText>
@@ -1139,9 +1218,6 @@ export function ClinicPanel({
               </ToggleRow>
             )}
 
-            {/* Show PENDING when:
-        - it's NOT the primary clinic, OR
-        - it IS the primary clinic but preview is OFF */}
             {!isPrimary || !showDemoPartners ? (
               <>
                 <PendingBadge title="Awaiting partnership approval">
@@ -1166,9 +1242,7 @@ export function ClinicPanel({
         )}
 
         {tab === "inhouse" && (
-          <>
-            <InHouseList clinicId={clinicId} clinicName={clinicName} />
-          </>
+          <InHouseList clinicId={clinicId} clinicName={clinicName} />
         )}
       </ListWrap>
     </PanelWrap>
@@ -1830,7 +1904,7 @@ export default function InviteSurvey() {
             {typeof serviceRadiusKm === "number"
               ? ` (≈ ${serviceRadiusKm} km radius)`
               : ""}
-            {showDemoPartners ? "" : " — preview at half radius"}
+            {showDemoPartners ? "" : ""}
           </LegendText>
         </LegendWrap>
       </BgMapWrap>
@@ -1863,14 +1937,14 @@ export default function InviteSurvey() {
             ) : (
               <>
                 {/* Top CTA for survey — sits near the top for prominence */}
-                {valid && !done && (
+                {/* {valid && !done && (
                   <PrimaryCTA
                     style={{ marginTop: 0 }}
                     onClick={() => setShowSurveyOnMobile(true)}
                   >
                     Open your clinic’s interest form.
                   </PrimaryCTA>
-                )}
+                )} */}
 
                 {/* Then the clinic panel (now full width on mobile) */}
                 {activeMarker ? (
@@ -1884,6 +1958,8 @@ export default function InviteSurvey() {
                     clinicMeta={activeMarker}
                     showDemoPartners={showDemoPartners}
                     onTogglePartners={(checked) => setShowDemoPartners(checked)}
+                    showInlineCTA={isMobile && valid && !done} // NEW
+                    onOpenSurvey={() => setShowSurveyOnMobile(true)} // NEW
                   />
                 ) : (
                   <SmallLine>
@@ -1892,11 +1968,11 @@ export default function InviteSurvey() {
                 )}
 
                 {/* If link is valid and not submitted yet, surface the survey CTA */}
-                {valid && !done && (
+                {/* {valid && !done && (
                   <PrimaryCTA onClick={() => setShowSurveyOnMobile(true)}>
                     Take the survey for {clinicName}
                   </PrimaryCTA>
-                )}
+                )} */}
                 {!valid && (
                   <Muted style={{ marginTop: 8 }}>
                     Survey unavailable for this link, but you can still browse
