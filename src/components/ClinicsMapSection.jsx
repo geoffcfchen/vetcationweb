@@ -355,12 +355,10 @@ export default function ClinicsMapSection({
                   <LabelChip
                     className={isActive ? "active" : ""}
                     onClick={() => setActive(i)}
-                    // title={m.name}
                     title={`${m.name} (${
                       Number.isFinite(m.inviteState) ? m.inviteState : 0
                     })`}
                   >
-                    {/* {m.name} */}
                     {m.name} (
                     {Number.isFinite(m.inviteState) ? m.inviteState : 0})
                   </LabelChip>
