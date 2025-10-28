@@ -916,7 +916,7 @@ function InHouseRow({ doc, clinicName }) {
 
       <Meta>
         <NameRow>
-          <Name title={displayName}>{displayName}</Name>
+          <Name title={displayName}>Dr. {displayName}</Name>
           {/* no @username */}
         </NameRow>
 
