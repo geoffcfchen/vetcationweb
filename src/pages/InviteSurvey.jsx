@@ -2032,12 +2032,12 @@ export default function InviteSurvey() {
                     Take the survey for {clinicName}
                   </PrimaryCTA>
                 )} */}
-                {!valid && (
+                {/* {!valid && (
                   <Muted style={{ marginTop: 8 }}>
                     Survey unavailable for this link, but you can still browse
                     clinics.
                   </Muted>
-                )}
+                )} */}
               </>
             )}
           </SheetBody>
