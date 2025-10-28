@@ -110,12 +110,13 @@ const Grabber = styled.div`
 `;
 
 const SheetBody = styled.div`
-  flex: 1; /* <-- fill the sheet height */
-  min-height: 0; /* <-- allow shrinking so overflow works */
+  flex: 1;
+  min-height: 0; /* critical */
+  display: flex; /* NEW */
+  flex-direction: column; /* NEW */
   padding: 16px;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch; /* smoother iOS scroll */
-  overscroll-behavior: contain; /* keep map from scrolling underneath */
+  overflow: auto; /* keep sheet scroll when showing the survey */
+  -webkit-overflow-scrolling: touch;
 `;
 
 const H1 = styled.h1`
@@ -238,6 +239,10 @@ const PanelWrap = styled.div`
   max-width: 100%;
   box-sizing: border-box;
 
+  display: flex; /* NEW */
+  flex-direction: column; /* NEW */
+  min-height: 0; /* NEW: enables inner overflow children */
+
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
     Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
   /* On wider viewports (e.g., InfoWindow desktop), gently cap width */
@@ -287,8 +292,19 @@ const ListWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 260px;
-  overflow: auto;
+
+  ${(p) =>
+    p.$fill
+      ? `
+    flex: 1;
+    min-height: 0;   /* critical for overflow */
+    overflow: auto;
+    max-height: none;
+  `
+      : `
+    max-height: 260px;  /* desktop InfoWindow stays compact */
+    overflow: auto;
+  `}
 `;
 
 const UserCard = styled.div`
@@ -1113,12 +1129,13 @@ export function ClinicPanel({
   onTogglePartners,
   showInlineCTA = false, // NEW
   onOpenSurvey, // NEW
+  fillScrollable = false, // NEW
 }) {
   const [tab, setTab] = useState("vets"); // 'vets' | 'inhouse'
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
 
   return (
-    <PanelWrap>
+    <PanelWrap $fill={fillScrollable}>
       {/* NEW: two-column top area */}
       <PanelTop>
         <div>
@@ -1203,7 +1220,7 @@ export function ClinicPanel({
         </TabBtn>
       </TabsRow>
 
-      <ListWrap>
+      <ListWrap $fill={fillScrollable}>
         {tab === "vets" && (
           <>
             {isPrimary && (
@@ -1960,6 +1977,7 @@ export default function InviteSurvey() {
                     onTogglePartners={(checked) => setShowDemoPartners(checked)}
                     showInlineCTA={isMobile && valid && !done} // NEW
                     onOpenSurvey={() => setShowSurveyOnMobile(true)} // NEW
+                    fillScrollable={true} // NEW: makes the list use full height
                   />
                 ) : (
                   <SmallLine>
