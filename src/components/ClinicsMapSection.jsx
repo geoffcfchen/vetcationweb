@@ -8,6 +8,7 @@ import {
   InfoWindowF,
   OverlayViewF,
 } from "@react-google-maps/api";
+import { IoLocationOutline } from "react-icons/io5";
 
 // Firestore
 import { firestore } from "../lib/firebase";
@@ -58,6 +59,31 @@ const SearchButton = styled.button`
   }
 `;
 
+const UseLocButton = styled.button`
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 5;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  &:hover {
+    background: #f8fafc;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+`;
+
 const Helper = styled.p`
   position: absolute;
   bottom: 8px;
@@ -90,8 +116,6 @@ const LabelChip = styled.div`
     color: #1e3a8a;
     font-weight: 700;
   }
-
-  /* Selected (active) clinic label: bring forward & highlight */
   &.active {
     border-color: #4d9fec;
     background: #e9f3ff;
@@ -131,30 +155,61 @@ export default function ClinicsMapSection({
 
   const mapRef = useRef(null);
   const [center, setCenter] = useState(initialCenter);
-  const [userPos, setUserPos] = useState(null); // for the blue dot
+  const [userPos, setUserPos] = useState(null); // set only when user opts in
   const [markers, setMarkers] = useState([]);
   const [active, setActive] = useState(null);
   const [showSearchBtn, setShowSearchBtn] = useState(false);
   const [loadingClinics, setLoadingClinics] = useState(false);
+  const [locating, setLocating] = useState(false);
 
-  // Ask for geolocation (HTTPS required). If granted, recenter and show blue dot.
+  // ✅ Do NOT prompt for location on load.
+  // Optional nicety: if permission was already granted before, center quietly.
   useEffect(() => {
     if (!isLoaded) return;
-    if (!("geolocation" in navigator)) return;
+    if (!("permissions" in navigator) || !("geolocation" in navigator)) return;
 
+    try {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((status) => {
+          if (status.state === "granted") {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                const next = {
+                  lat: pos.coords.latitude,
+                  lng: pos.coords.longitude,
+                };
+                setUserPos(next);
+                setCenter(next);
+                mapRef.current?.panTo(next);
+                mapRef.current?.setZoom(
+                  Math.max(mapRef.current?.getZoom() ?? 0, 13)
+                );
+              },
+              () => {} // ignore failures silently
+            );
+          }
+        })
+        .catch(() => {});
+    } catch {}
+  }, [isLoaded]);
+
+  const handleUseMyLocation = () => {
+    if (!("geolocation" in navigator)) return;
+    setLocating(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const { latitude, longitude } = pos.coords;
-        const next = { lat: latitude, lng: longitude };
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setUserPos(next);
-        setCenter(next); // this updates the map center and will trigger onIdle
+        setCenter(next);
+        mapRef.current?.panTo(next);
+        mapRef.current?.setZoom(Math.max(mapRef.current?.getZoom() ?? 0, 13));
+        setLocating(false);
       },
-      () => {
-        // user denied or unavailable — stay on Santa Monica
-      },
+      () => setLocating(false),
       { enableHighAccuracy: true, maximumAge: 60000, timeout: 8000 }
     );
-  }, [isLoaded]);
+  };
 
   const handleMapLoad = (map) => {
     mapRef.current = map;
@@ -169,7 +224,6 @@ export default function ClinicsMapSection({
 
     const approxRadius = radiusFromBounds(bounds) || MAX_RADIUS_M;
     const radius = Math.min(approxRadius, MAX_RADIUS_M);
-
     const c = mapRef.current.getCenter();
     const centerLat = c.lat();
     const centerLng = c.lng();
@@ -299,7 +353,7 @@ export default function ClinicsMapSection({
             streetViewControl: false,
           }}
         >
-          {/* Blue-dot user location (shown only if permission granted) */}
+          {/* Blue-dot user location (only after opt-in) */}
           {userPos && (
             <MarkerF
               position={userPos}
@@ -324,11 +378,23 @@ export default function ClinicsMapSection({
             </SearchButton>
           )}
 
+          {/* Opt-in geolocation control */}
+          <UseLocButton
+            type="button"
+            onClick={handleUseMyLocation}
+            disabled={locating}
+            aria-label="Use my location"
+            title="Use my location"
+          >
+            <IoLocationOutline aria-hidden="true" />
+            {locating ? "Locating…" : "Use my location"}
+          </UseLocButton>
+
           {markers.map((m, i) => {
             const isActive = active === i;
             const icon = {
               path: window.google?.maps?.SymbolPath?.CIRCLE,
-              scale: isActive ? 8 : 6, // subtle bump when active
+              scale: isActive ? 8 : 6,
               fillColor: "#4D9FEC",
               fillOpacity: 1,
               strokeColor: "#ffffff",
@@ -340,7 +406,6 @@ export default function ClinicsMapSection({
                   position={m.position}
                   onClick={() => setActive(i)}
                   icon={icon}
-                  // active marker sits on top
                   zIndex={
                     isActive
                       ? window.google?.maps?.Marker?.MAX_ZINDEX
@@ -349,7 +414,6 @@ export default function ClinicsMapSection({
                 />
                 <OverlayViewF
                   position={m.position}
-                  // active label goes to highest pane so neighbors can't cover it
                   mapPaneName={isActive ? "floatPane" : "overlayMouseTarget"}
                 >
                   <LabelChip
@@ -381,7 +445,7 @@ export default function ClinicsMapSection({
                 <ClinicPanel
                   clinicId={markers[active].id}
                   clinicName={markers[active].name}
-                  isPrimary={false} // homepage: no demo vets
+                  isPrimary={false}
                   clinicMeta={markers[active]}
                 />
               </div>
