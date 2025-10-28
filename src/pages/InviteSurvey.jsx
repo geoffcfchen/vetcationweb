@@ -641,6 +641,26 @@ function domainFromUrl(url) {
   }
 }
 
+function fitToServiceRadius(
+  center,
+  radiusMeters,
+  padding = { top: 48, right: 48, bottom: 48, left: 48 }
+) {
+  const map = mapRef.current;
+  if (!map || !center || !window.google) return;
+
+  const lat = center.lat;
+  const lng = center.lng;
+  const dLat = radiusMeters / 111320;
+  const dLng = radiusMeters / (111320 * Math.cos((lat * Math.PI) / 180));
+
+  const sw = new window.google.maps.LatLng(lat - dLat, lng - dLng);
+  const ne = new window.google.maps.LatLng(lat + dLat, lng + dLng);
+  const bounds = new window.google.maps.LatLngBounds(sw, ne);
+
+  map.fitBounds(bounds, padding);
+}
+
 // --- Clinic meta rows under the title ---
 const InfoGrid = styled.div`
   display: grid;
@@ -1397,6 +1417,7 @@ export default function InviteSurvey() {
   const ZOOM_MIN = 3;
   const ZOOM_MAX = 20;
   const zoomPulseTimersRef = useRef([]);
+  const didInitZoomRef = useRef(false);
 
   function animateZoomPulse(isOn) {
     const map = mapRef.current;
@@ -1825,7 +1846,23 @@ export default function InviteSurvey() {
       <BgMapWrap>
         {isLoaded && (
           <GoogleMap
-            onLoad={handleMapLoad}
+            onLoad={(map) => {
+              handleMapLoad(map);
+              if (!didInitZoomRef.current) {
+                if (isMobile) {
+                  // Give more space on the bottom so the circle isn’t hidden by the sheet
+                  fitToServiceRadius(center, serviceRadius, {
+                    top: 48,
+                    right: 48,
+                    bottom: 160,
+                    left: 48,
+                  });
+                } else {
+                  map.setZoom(13);
+                }
+                didInitZoomRef.current = true;
+              }
+            }}
             onIdle={handleIdle}
             onDragEnd={handleDragEnd}
             onZoomChanged={handleZoomChanged}
@@ -1991,16 +2028,6 @@ export default function InviteSurvey() {
               </>
             ) : (
               <>
-                {/* Top CTA for survey — sits near the top for prominence */}
-                {/* {valid && !done && (
-                  <PrimaryCTA
-                    style={{ marginTop: 0 }}
-                    onClick={() => setShowSurveyOnMobile(true)}
-                  >
-                    Open your clinic’s interest form.
-                  </PrimaryCTA>
-                )} */}
-
                 {/* Then the clinic panel (now full width on mobile) */}
                 {activeMarker ? (
                   <ClinicPanel
@@ -2025,19 +2052,6 @@ export default function InviteSurvey() {
                     No clinic selected yet. Tap a marker to view details.
                   </SmallLine>
                 )}
-
-                {/* If link is valid and not submitted yet, surface the survey CTA */}
-                {/* {valid && !done && (
-                  <PrimaryCTA onClick={() => setShowSurveyOnMobile(true)}>
-                    Take the survey for {clinicName}
-                  </PrimaryCTA>
-                )} */}
-                {/* {!valid && (
-                  <Muted style={{ marginTop: 8 }}>
-                    Survey unavailable for this link, but you can still browse
-                    clinics.
-                  </Muted>
-                )} */}
               </>
             )}
           </SheetBody>
