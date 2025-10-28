@@ -631,6 +631,22 @@ const ToggleSwitch = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
+const Spinner = styled.div`
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #4d9fec;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 12px;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 // --- Helpers ---
 function domainFromUrl(url) {
   try {
@@ -1863,9 +1879,10 @@ export default function InviteSurvey() {
   if (verifying) {
     return (
       <Page>
-        <DesktopCard>
-          <H1>Loading…</H1>
-          <Muted>Verifying your invite link.</Muted>
+        <DesktopCard style={{ textAlign: "center" }}>
+          <Spinner />
+          <H1>Loading</H1>
+          <Muted>Verifying your invite link…</Muted>
         </DesktopCard>
       </Page>
     );
