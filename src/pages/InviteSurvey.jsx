@@ -1393,6 +1393,41 @@ export default function InviteSurvey() {
   // Mobile: show clinic info by default; user can open survey
   const [showSurveyOnMobile, setShowSurveyOnMobile] = useState(false);
 
+  // Zoom pulse helper
+  const ZOOM_MIN = 3;
+  const ZOOM_MAX = 20;
+  const zoomPulseTimersRef = useRef([]);
+
+  function animateZoomPulse(isOn) {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // cancel any running timers
+    zoomPulseTimersRef.current.forEach(clearTimeout);
+    zoomPulseTimersRef.current = [];
+
+    const z0 = map.getZoom?.() ?? 13;
+    const zMid = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z0 + (isOn ? -1 : +1)));
+
+    // step 1: slight zoom change (animates)
+    map.setZoom(zMid);
+
+    // step 2: return to original after a short delay
+    // const t = setTimeout(() => {
+    //   // guard in case user manually changed zoom
+    //   const current = map.getZoom?.() ?? zMid;
+    //   // if we’re already near original, skip the bounce back
+    //   if (Math.abs(current - z0) >= 0.5) map.setZoom(z0);
+    // }, 260);
+
+    zoomPulseTimersRef.current.push(t);
+  }
+
+  // cleanup on unmount
+  useEffect(() => {
+    return () => zoomPulseTimersRef.current.forEach(clearTimeout);
+  }, []);
+
   // Circle radius respects the preview toggle (ON=full, OFF=half)
   const serviceRadius = showDemoPartners
     ? SERVICE_RADIUS_FULL_M
@@ -1901,7 +1936,10 @@ export default function InviteSurvey() {
                     }
                     clinicMeta={markers[active]}
                     showDemoPartners={showDemoPartners}
-                    onTogglePartners={(checked) => setShowDemoPartners(checked)}
+                    onTogglePartners={(checked) => {
+                      setShowDemoPartners(checked);
+                      animateZoomPulse(checked); // NEW
+                    }}
                   />
                 </div>
               </InfoWindowF>
@@ -1974,7 +2012,10 @@ export default function InviteSurvey() {
                     }
                     clinicMeta={activeMarker}
                     showDemoPartners={showDemoPartners}
-                    onTogglePartners={(checked) => setShowDemoPartners(checked)}
+                    onTogglePartners={(checked) => {
+                      setShowDemoPartners(checked);
+                      animateZoomPulse(checked); // NEW
+                    }}
                     showInlineCTA={isMobile && valid && !done} // NEW
                     onOpenSurvey={() => setShowSurveyOnMobile(true)} // NEW
                     fillScrollable={true} // NEW: makes the list use full height
