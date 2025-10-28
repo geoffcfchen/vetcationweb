@@ -245,6 +245,9 @@ export default function ClinicsMapSection({
                 x.reviewCount ??
                 x?.place?.user_ratings_total ??
                 undefined,
+              inviteState: Number.isFinite(x?.invite?.state)
+                ? x.invite.state
+                : 0,
               _distM: distM,
             });
           }
@@ -352,9 +355,14 @@ export default function ClinicsMapSection({
                   <LabelChip
                     className={isActive ? "active" : ""}
                     onClick={() => setActive(i)}
-                    title={m.name}
+                    // title={m.name}
+                    title={`${m.name} (${
+                      Number.isFinite(m.inviteState) ? m.inviteState : 0
+                    })`}
                   >
-                    {m.name}
+                    {/* {m.name} */}
+                    {m.name} (
+                    {Number.isFinite(m.inviteState) ? m.inviteState : 0})
                   </LabelChip>
                 </OverlayViewF>
               </React.Fragment>
