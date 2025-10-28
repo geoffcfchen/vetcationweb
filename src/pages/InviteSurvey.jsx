@@ -1124,6 +1124,69 @@ function InHouseList({ clinicId, clinicName }) {
   );
 }
 
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+function toYMD(d) {
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+}
+function makeTomorrowSlotsAt(times = ["10:30", "14:00"]) {
+  const base = new Date();
+  base.setDate(base.getDate() + 2); // ← force tomorrow
+
+  return times.map((t, i) => {
+    const [hh, mm] = t.split(":").map(Number);
+    const d = new Date(
+      base.getFullYear(),
+      base.getMonth(),
+      base.getDate(),
+      hh ?? 9,
+      mm ?? 0,
+      0,
+      0
+    );
+    return {
+      appointmentId: `demo_${d.getTime()}_${i}`,
+      date: toYMD(d), // e.g. "2025-10-29"
+      time: d.toLocaleTimeString(undefined, {
+        // e.g. "10:30 AM"
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }),
+    };
+  });
+}
+
+function buildDemoVets() {
+  return [
+    {
+      id: "v1",
+      name: "Dr. Jamie Lee",
+      username: "drjamie",
+      clinic: "Maple Animal Hospital",
+      bio: "Dermatology & GP",
+      slots: makeTomorrowSlotsAt(["10:30", "14:00"]),
+    },
+    {
+      id: "v2",
+      name: "Dr. Omar Patel",
+      username: "dromar",
+      clinic: "Sunset Pet Clinic",
+      bio: "Behavior—fear-free, separation anxiety",
+      slots: makeTomorrowSlotsAt(["09:00", "13:30"]),
+    },
+    {
+      id: "v3",
+      name: "Dr. Chen Yu",
+      username: "drchen",
+      clinic: "Seaside Veterinary",
+      bio: "Internal medicine & nutrition",
+      slots: makeTomorrowSlotsAt(["11:15", "15:45"]),
+    },
+  ];
+}
+
 // ===== Clinic panel =====
 
 export function ClinicPanel({
@@ -1138,6 +1201,7 @@ export function ClinicPanel({
   fillScrollable = false, // NEW
 }) {
   const [tab, setTab] = useState("vets"); // 'vets' | 'inhouse'
+  const demoVetsNow = useMemo(buildDemoVets, []); // ← always-future
   const { rating, reviewsCount, phone, address, website } = clinicMeta || {};
 
   return (
@@ -1253,10 +1317,10 @@ export function ClinicPanel({
               </>
             ) : (
               <>
-                <PanelSubtitle style={{ marginTop: 10 }}>
+                <PanelSubtitle style={{ marginTop: 0 }}>
                   Demo professionals — style preview only.
                 </PanelSubtitle>
-                {demoVets.map((u) => (
+                {demoVetsNow.map((u) => (
                   <VetRow key={u.id} user={u} clinicName={clinicName} />
                 ))}
               </>
