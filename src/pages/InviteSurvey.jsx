@@ -1615,11 +1615,11 @@ export default function InviteSurvey() {
 
   const choices = useMemo(
     () => [
-      { key: "gp", label: "GP" },
+      { key: "gp", label: "General Practice (GP)" },
       {
         key: "specialists",
         label:
-          "Specialists (dermatology for skin, behavior specialist, pathology for cancer consult)",
+          "Specialists (ex: dermatology, behavior, oncology, internal medicine, nutrition)",
       },
       { key: "dog_trainers", label: "Certified dog trainers" },
       { key: "none", label: "None of the above" },
