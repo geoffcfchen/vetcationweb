@@ -637,6 +637,30 @@ const InfoLine = styled.div`
   }
 `;
 
+const PrimaryCTA = styled.button`
+  margin-top: 12px;
+  background: #4d9fec;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+`;
+
+const BackLink = styled.button`
+  border: 0;
+  background: transparent;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+  text-align: left;
+`;
+
 const RatingRow = styled(InfoLine)`
   color: #111827;
   ${Stars} {
@@ -1245,6 +1269,9 @@ export default function InviteSurvey() {
   const [sheetH, setSheetH] = useState(Math.min(280, maxSheet));
   const dragRef = useRef({ startY: 0, startH: sheetH, dragging: false });
 
+  // Mobile: show clinic info by default; user can open survey
+  const [showSurveyOnMobile, setShowSurveyOnMobile] = useState(false);
+
   // Circle radius respects the preview toggle (ON=full, OFF=half)
   const serviceRadius = showDemoPartners
     ? SERVICE_RADIUS_FULL_M
@@ -1352,6 +1379,15 @@ export default function InviteSurvey() {
     ],
     []
   );
+
+  const activeMarker = useMemo(() => {
+    if (active !== null && markers[active]) return markers[active];
+    const idx = markers.findIndex(
+      (r) => r.id === clinicId || r.id === "__current"
+    );
+    if (idx !== -1) return markers[idx];
+    return markers[0] || null;
+  }, [active, markers, clinicId]);
 
   const toggle = (key) => {
     const next = new Set(selected);
@@ -1678,15 +1714,6 @@ export default function InviteSurvey() {
             )}
 
             {markers.map((m, i) => {
-              //   const isCurrent = m.id === "__current" || m.highlight;
-              //   const icon = {
-              //     path: window.google?.maps?.SymbolPath?.CIRCLE,
-              //     scale: isCurrent ? 8 : 6,
-              //     fillColor: isCurrent ? "#d32f2f" : "#4D9FEC",
-              //     fillOpacity: 1,
-              //     strokeColor: "#ffffff",
-              //     strokeWeight: 2,
-              //   };
               const isCurrent = m.id === "__current" || m.highlight;
               const isActive = active === i;
               const icon = {
@@ -1705,12 +1732,6 @@ export default function InviteSurvey() {
                     position={m.position}
                     onClick={() => setActive(i)}
                     icon={icon}
-                    // zIndex={
-                    //   isCurrent
-                    //     ? window.google?.maps?.Marker?.MAX_ZINDEX
-                    //     : undefined
-                    // }
-                    // selected OR highlighted clinic sits on top
                     zIndex={
                       isActive || isCurrent
                         ? window.google?.maps?.Marker?.MAX_ZINDEX
@@ -1739,7 +1760,7 @@ export default function InviteSurvey() {
               );
             })}
 
-            {active !== null && markers[active] && (
+            {!isMobile && active !== null && markers[active] && (
               <InfoWindowF
                 position={markers[active].position}
                 onCloseClick={() => setActive(null)}
@@ -1800,7 +1821,47 @@ export default function InviteSurvey() {
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
           >
-            {FormContent}
+            {/* {FormContent} */}
+            {showSurveyOnMobile ? (
+              <>
+                <BackLink onClick={() => setShowSurveyOnMobile(false)}>
+                  ← Back to clinic info
+                </BackLink>
+                {FormContent}
+              </>
+            ) : (
+              <>
+                {activeMarker ? (
+                  <ClinicPanel
+                    clinicId={activeMarker.id}
+                    clinicName={activeMarker.name}
+                    isPrimary={
+                      (activeMarker.id === clinicId ||
+                        activeMarker.id === "__current") &&
+                      showDemoPartners
+                    }
+                    clinicMeta={activeMarker}
+                  />
+                ) : (
+                  <SmallLine>
+                    No clinic selected yet. Tap a marker to view details.
+                  </SmallLine>
+                )}
+
+                {/* If link is valid and not submitted yet, surface the survey CTA */}
+                {valid && !done && (
+                  <PrimaryCTA onClick={() => setShowSurveyOnMobile(true)}>
+                    Take the survey for {clinicName}
+                  </PrimaryCTA>
+                )}
+                {!valid && (
+                  <Muted style={{ marginTop: 8 }}>
+                    Survey unavailable for this link, but you can still browse
+                    clinics.
+                  </Muted>
+                )}
+              </>
+            )}
           </SheetBody>
         </MobileSheet>
       ) : (
