@@ -1126,18 +1126,23 @@ export function ClinicPanel({
       <ListWrap>
         {tab === "vets" && (
           <>
-            {/* Preview toggle goes above the subtitle for clarity */}
-            <ToggleRow title="Preview how partnered doctors would appear under your brand">
-              <ToggleText>
-                Preview partnered view (demo professionals)
-              </ToggleText>
-              <ToggleSwitch
-                checked={!!showDemoPartners}
-                onChange={(e) => onTogglePartners?.(e.target.checked)}
-              />
-            </ToggleRow>
+            {/* Toggle only for the primary clinic */}
+            {isPrimary && (
+              <ToggleRow title="Preview how partnered doctors would appear under your brand">
+                <ToggleText>
+                  Preview partnered view (demo professionals)
+                </ToggleText>
+                <ToggleSwitch
+                  checked={!!showDemoPartners}
+                  onChange={(e) => onTogglePartners?.(e.target.checked)}
+                />
+              </ToggleRow>
+            )}
 
-            {!isPrimary ? (
+            {/* Show PENDING when:
+        - it's NOT the primary clinic, OR
+        - it IS the primary clinic but preview is OFF */}
+            {!isPrimary || !showDemoPartners ? (
               <>
                 <PendingBadge title="Awaiting partnership approval">
                   Pending
@@ -1149,7 +1154,7 @@ export function ClinicPanel({
               </>
             ) : (
               <>
-                <PanelSubtitle style={{ marginTop: 6 }}>
+                <PanelSubtitle style={{ marginTop: 10 }}>
                   Demo professionals — style preview only.
                 </PanelSubtitle>
                 {demoVets.map((u) => (
@@ -1800,9 +1805,8 @@ export default function InviteSurvey() {
                     clinicId={markers[active].id}
                     clinicName={markers[active].name}
                     isPrimary={
-                      (markers[active].id === clinicId ||
-                        markers[active].id === "__current") &&
-                      showDemoPartners
+                      markers[active].id === clinicId ||
+                      markers[active].id === "__current"
                     }
                     clinicMeta={markers[active]}
                     showDemoPartners={showDemoPartners}
@@ -1874,9 +1878,8 @@ export default function InviteSurvey() {
                     clinicId={activeMarker.id}
                     clinicName={activeMarker.name}
                     isPrimary={
-                      (activeMarker.id === clinicId ||
-                        activeMarker.id === "__current") &&
-                      showDemoPartners
+                      activeMarker.id === clinicId ||
+                      activeMarker.id === "__current"
                     }
                     clinicMeta={activeMarker}
                     showDemoPartners={showDemoPartners}
