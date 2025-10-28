@@ -136,7 +136,7 @@ function RegisterPage() {
           <MapCard>
             <ClinicsMapSection
               height="min(78vh, 780px)" // responsive height with a soft cap
-              initialCenter={{ lat: 34.0195, lng: -118.4912 }}
+              initialCenter={{ lat: 34.0522, lng: -118.2437 }} // Downtown LA
               initialZoom={13}
             />
           </MapCard>

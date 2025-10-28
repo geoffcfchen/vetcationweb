@@ -146,7 +146,7 @@ function radiusFromBounds(bounds) {
 
 export default function ClinicsMapSection({
   height = SECTION_HEIGHT,
-  initialCenter = { lat: 34.0195, lng: -118.4912 }, // Santa Monica
+  initialCenter = { lat: 34.04707440503318, lng: -118.23408222822691 }, // Downtown LA fallback
   initialZoom = 13,
 }) {
   const { isLoaded } = useLoadScript({
