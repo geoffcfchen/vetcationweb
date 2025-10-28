@@ -1452,16 +1452,51 @@ export default function InviteSurvey() {
   const [showSearchBtn, setShowSearchBtn] = useState(false);
   const [loadingClinics, setLoadingClinics] = useState(false);
 
+  // right under your other state near `minSheet`/`maxSheet`
+  const snapPercents = useRef([0.22, 0.45, 0.7, 0.85]); // 22%, 45%, 70%, 85%
+  const [snapHeights, setSnapHeights] = useState(() => {
+    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+    return snapPercents.current.map((p) => Math.round(vh * p));
+  });
+
   // bottom sheet drag state
-  const minSheet = 200;
-  const maxSheet = Math.floor(
-    typeof window !== "undefined" ? window.innerHeight * 0.85 : 640
-  );
-  const [sheetH, setSheetH] = useState(Math.min(350, maxSheet));
+  const minSheet = useMemo(() => Math.min(...snapHeights), [snapHeights]);
+  const maxSheet = useMemo(() => Math.max(...snapHeights), [snapHeights]);
+
+  // keep snapHeights fresh when viewport changes (rotation, address bar, etc.)
+  useEffect(() => {
+    const onResize = () => {
+      const vh = window.innerHeight;
+      setSnapHeights(snapPercents.current.map((p) => Math.round(vh * p)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const [sheetH, setSheetH] = useState(() => {
+    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+    const snaps = snapPercents.current.map((p) => Math.round(vh * p));
+    return snaps[1]; // initial = 0.45
+  });
+
   const dragRef = useRef({ startY: 0, startH: sheetH, dragging: false });
 
   // Mobile: show clinic info by default; user can open survey
   const [showSurveyOnMobile, setShowSurveyOnMobile] = useState(false);
+
+  const nearestSnap = (h) => {
+    if (!snapHeights.length) return h;
+    let best = snapHeights[0],
+      diff = Math.abs(h - snapHeights[0]);
+    for (let i = 1; i < snapHeights.length; i++) {
+      const d = Math.abs(h - snapHeights[i]);
+      if (d < diff) {
+        diff = d;
+        best = snapHeights[i];
+      }
+    }
+    return best;
+  };
 
   // Zoom pulse helper
   const ZOOM_MIN = 3;
@@ -1542,8 +1577,7 @@ export default function InviteSurvey() {
   };
   const endDrag = () => {
     dragRef.current.dragging = false;
-    const mid = (minSheet + maxSheet) / 2;
-    setSheetH((h) => (h < mid ? minSheet : maxSheet));
+    setSheetH((h) => nearestSnap(h)); // ← snap to nearest %
   };
 
   const { isLoaded } = useLoadScript({
