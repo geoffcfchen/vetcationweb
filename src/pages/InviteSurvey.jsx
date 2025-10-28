@@ -990,6 +990,11 @@ function Expandable({ text, lines = 5 }) {
   );
 }
 
+// helper (place near other small helpers)
+function hasDrPrefix(name = "") {
+  return /^dr\.?\s/i.test(name.trim());
+}
+
 function InHouseRow({ doc, clinicName }) {
   const { name, education, bioSummary, reviewSummary } = doc || {};
   const displayName = name || "Doctor";
@@ -1000,8 +1005,9 @@ function InHouseRow({ doc, clinicName }) {
 
       <Meta>
         <NameRow>
-          <Name title={displayName}>Dr. {displayName}</Name>
-          {/* no @username */}
+          <Name title={displayName}>
+            {hasDrPrefix(displayName) ? displayName : `Dr. ${displayName}`}
+          </Name>
         </NameRow>
 
         {clinicName && (
