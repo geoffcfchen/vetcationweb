@@ -105,7 +105,7 @@ const LabelChip = styled.div`
   color: #1a1a1a;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   white-space: nowrap;
-  max-width: 220px;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   user-select: none;
