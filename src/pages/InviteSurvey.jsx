@@ -1457,7 +1457,7 @@ export default function InviteSurvey() {
   const maxSheet = Math.floor(
     typeof window !== "undefined" ? window.innerHeight * 0.85 : 640
   );
-  const [sheetH, setSheetH] = useState(Math.min(330, maxSheet));
+  const [sheetH, setSheetH] = useState(Math.min(350, maxSheet));
   const dragRef = useRef({ startY: 0, startH: sheetH, dragging: false });
 
   // Mobile: show clinic info by default; user can open survey
