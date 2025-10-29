@@ -118,14 +118,14 @@ function RegisterPage() {
         <Max>
           <Eyebrow>
             <IoLocationOutline aria-hidden="true" />
-            Find a clinic near you
+            Find a hospital near you
           </Eyebrow>
-          <Title>Clinics offering telemedicine</Title>
+          <Title>Hospitals offering telemedicine</Title>
           <Subtitle>
-            This interactive map highlights participating clinics that provide
+            This interactive map highlights participating hospitals that provide
             telemedicine services through our community. Drag or zoom the map,
             then tap <strong>“Search this area”</strong> to discover more
-            clinics around you.
+            hospitals around you.
           </Subtitle>
 
           <LinkRow>
