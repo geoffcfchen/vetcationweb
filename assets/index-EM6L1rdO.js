@@ -4588,8 +4588,8 @@ ${this.customData.serverResponse}`:this.message=this._baseMessage}}var Gi;(funct
   line-height: 1.45;
 `,nte=N.div`
   margin-bottom: 5px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  /* font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace; */
   font-size: 10px;
   line-height: 1.2;
   color: #9ca3af; /* light grey */
