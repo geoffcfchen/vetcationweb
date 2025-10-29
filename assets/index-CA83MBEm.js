@@ -4905,7 +4905,7 @@ Time: ${n.time}`)}function _te({user:n,clinicName:e}){const i=Array.isArray(n.sl
 `,Dte=N.button`
   position: absolute;
   bottom: 16px;
-  left: 16px;
+  right: 16px;
   z-index: 5;
   background: #ffffff;
   color: #0f172a;
@@ -4981,14 +4981,16 @@ Time: ${n.time}`)}function _te({user:n,clinicName:e}){const i=Array.isArray(n.sl
   gap: 6px;
 `,zte=N.h2`
   margin: 8px 0 6px;
-  font-size: clamp(22px, 3.6vw, 28px);
+  /* font-size: clamp(28px, 3.6vw, 32px); */
+  font-size: 40px;
   line-height: 1.25;
-  color: #0f172a;
+  font-weight: 600;
+  color: #000000;
 `,Hte=N.p`
   margin: 0;
-  font-size: 15px;
+  font-size: 22px;
   line-height: 1.45;
-  color: #475569;
+  /* color: #475569; */
 `;N.div`
   display: flex;
   flex-wrap: wrap;
@@ -5039,7 +5041,7 @@ Time: ${n.time}`)}function _te({user:n,clinicName:e}){const i=Array.isArray(n.sl
   margin: 10px 2px 0;
   font-size: 12px;
   color: #6b7280;
-`;function Yte(){return g.jsxs(g.Fragment,{children:[g.jsx(j7,{}),g.jsx(WX,{}),g.jsx(Bte,{children:g.jsxs($te,{children:[g.jsxs(Ute,{children:[g.jsx(cx,{"aria-hidden":"true"}),"Find a clinic near you"]}),g.jsx(zte,{children:"Clinics offering telemedicine"}),g.jsxs(Hte,{children:["This interactive map highlights participating clinics that provide telemedicine services through our community. Drag or zoom the map, then tap ",g.jsx("strong",{children:"“Search this area”"})," to discover more clinics around you."]}),g.jsx(qte,{children:g.jsxs(Wte,{href:"/telemedicine-info/compliance/Bill1399/",children:[g.jsx(RD,{"aria-hidden":"true"}),"What is telemedicine? (AB 1399)"]})}),g.jsx(Gte,{children:g.jsx(Fte,{height:"min(78vh, 780px)",initialCenter:{lat:34.0522,lng:-118.2437},initialZoom:13})}),g.jsx(Kte,{children:"Telemedicine offerings and requirements are determined by each clinic and applicable law. Please check the clinic’s page for details."})]})}),g.jsx(sZ,{})]})}const Qte=GA`
+`;function Yte(){return g.jsxs(g.Fragment,{children:[g.jsx(j7,{}),g.jsx(WX,{}),g.jsx(Bte,{children:g.jsxs($te,{children:[g.jsxs(Ute,{children:[g.jsx(cx,{"aria-hidden":"true"}),"Find a clinic near you"]}),g.jsx(zte,{children:"Clinics offering telemedicine"}),g.jsxs(Hte,{children:["This interactive map highlights participating clinics that provide telemedicine services through our community. Drag or zoom the map, then tap ",g.jsx("strong",{children:"“Search this area”"})," to discover more clinics around you."]}),g.jsx(qte,{children:g.jsxs(Wte,{href:"/telemedicine-info/compliance/Bill1399/",children:[g.jsx(RD,{"aria-hidden":"true"}),"What is telemedicine? (AB 1399)"]})}),g.jsx(Gte,{children:g.jsx(Fte,{height:"min(78vh, 780px)",initialCenter:{lat:34.04786158834932,lng:-118.21994555902405},initialZoom:13})}),g.jsx(Kte,{children:"Telemedicine offerings and requirements are determined by each clinic and applicable law. Please check the clinic’s page for details."})]})}),g.jsx(sZ,{})]})}const Qte=GA`
   body {
     font-family: 'Arial', sans-serif; // You can customize this with any sans-serif font you prefer
     margin: 0;
