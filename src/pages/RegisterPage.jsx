@@ -123,9 +123,9 @@ function RegisterPage() {
           <Title>Hospitals offering telemedicine and more</Title>
           <Subtitle>
             This interactive map highlights participating hospitals that provide
-            telemedicine services through our community. Drag or zoom the map,
-            then tap <strong>“Search this area”</strong> to discover more
-            hospitals around you.
+            telemedicine services. Drag or zoom the map, then tap{" "}
+            <strong>“Search this area”</strong> to discover more hospitals
+            around you.
           </Subtitle>
 
           <LinkRow>
