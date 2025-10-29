@@ -62,7 +62,7 @@ const SearchButton = styled.button`
 const UseLocButton = styled.button`
   position: absolute;
   bottom: 16px;
-  left: 16px;
+  right: 16px;
   z-index: 5;
   background: #ffffff;
   color: #0f172a;

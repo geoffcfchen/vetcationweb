@@ -31,16 +31,18 @@ const Eyebrow = styled.div`
 
 const Title = styled.h2`
   margin: 8px 0 6px;
-  font-size: clamp(22px, 3.6vw, 28px);
+  /* font-size: clamp(28px, 3.6vw, 32px); */
+  font-size: 40px;
   line-height: 1.25;
-  color: #0f172a;
+  font-weight: 600;
+  color: #000000;
 `;
 
 const Subtitle = styled.p`
   margin: 0;
-  font-size: 15px;
+  font-size: 22px;
   line-height: 1.45;
-  color: #475569;
+  /* color: #475569; */
 `;
 
 const Pills = styled.div`
@@ -136,7 +138,10 @@ function RegisterPage() {
           <MapCard>
             <ClinicsMapSection
               height="min(78vh, 780px)" // responsive height with a soft cap
-              initialCenter={{ lat: 34.0522, lng: -118.2437 }} // Downtown LA
+              initialCenter={{
+                lat: 34.04786158834932,
+                lng: -118.21994555902405,
+              }} // Downtown LA 34.04786158834932, -118.21994555902405
               initialZoom={13}
             />
           </MapCard>
