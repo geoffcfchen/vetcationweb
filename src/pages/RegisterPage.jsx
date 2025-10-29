@@ -120,7 +120,7 @@ function RegisterPage() {
             <IoLocationOutline aria-hidden="true" />
             Find a hospital near you
           </Eyebrow>
-          <Title>Hospitals offering telemedicine</Title>
+          <Title>Hospitals offering telemedicine and more</Title>
           <Subtitle>
             This interactive map highlights participating hospitals that provide
             telemedicine services through our community. Drag or zoom the map,
