@@ -255,7 +255,7 @@ const PanelHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const PanelTitle = styled.h3`
@@ -449,6 +449,18 @@ const SecBody = styled.div`
   font-size: 12px;
   color: #374151;
   line-height: 1.45;
+`;
+
+const IdTag = styled.div`
+  margin-bottom: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #9ca3af; /* light grey */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 // ---- Expandable text (used by in-house bios & reviews) ----
@@ -1228,6 +1240,10 @@ export function ClinicPanel({
           <PanelHeader>
             <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
           </PanelHeader>
+          {/* NEW: tiny light-grey clinicId */}
+          {clinicId && (
+            <IdTag title={clinicId}>ID:{clinicId.slice(0, 8)}</IdTag>
+          )}
 
           {(rating || phone || address || website) && (
             <InfoGrid>
