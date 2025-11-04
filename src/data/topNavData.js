@@ -20,7 +20,7 @@ const topNavData = [
   {
     id: "telemedicineCases",
     label: "Telemedicine Cases",
-    defaultDocId: "telemedicineCases",
+    defaultDocId: "telemedicineCasesOverview",
   },
   {
     id: "contributors",
