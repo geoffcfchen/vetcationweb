@@ -11,6 +11,13 @@ const ScrollRegion = styled.div`
   position: relative;
 `;
 
+const Note = styled.p`
+  color: #aaa;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+`;
+
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -50,13 +57,22 @@ const StyledTable = styled.table`
     font-weight: 600;
     color: #fff;
   }
+  /* Add this block: link styling */
+  a {
+    color: #4db6c5; /* your chosen colour */
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    color: #81d4fa; /* hover/focus colour */
+  }
 `;
 
 export default function TableBlock({ block }) {
   const {
     columns = [],
     rows = [],
-
+    note, // ← add this
     minWidth,
     rowHeaders = false,
     responsive = "scroll", // "scroll" | "stack" | "auto"
@@ -117,6 +133,8 @@ export default function TableBlock({ block }) {
           </tbody>
         </StyledTable>
       </ScrollRegion>
+
+      {note ? <Note dangerouslySetInnerHTML={{ __html: note }} /> : null}
 
       {/* Optional stacked cards for narrow screens (CSS-only) */}
       {responsive !== "scroll" && (

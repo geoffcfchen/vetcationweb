@@ -94,8 +94,8 @@ const contentData = {
               columns: [
                 { key: "case", title: "Case" },
                 { key: "fit", title: "Fit for telemedicine?" },
-                { key: "help", title: "How we help" },
-                { key: "escalate", title: "When to go in-person" },
+                { key: "help", title: "How vets help" },
+                { key: "escalate", title: "When to escalate to in-person" },
               ],
               rows: [
                 {
@@ -3401,6 +3401,2012 @@ requirements and explain how Vetcation keeps you compliant.`,
                   ],
                 },
               ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  // the following is used for show what case examples are suituable for telemedicine, so that vets can understand the concept and benefit of telemedicine right away, we will start with general cases, then more specific example for GP, dermatology, behavior, oncology, internal medicine, nutrition
+  telemedicineCases: {
+    telemedicineCasesOverview: {
+      mainTitle: "Telemedicine Case Examples",
+      mainDescription:
+        "Telemedicine can be a valuable tool for a wide range of cases, allowing veterinarians to provide care remotely while maintaining high standards. Here are some common scenarios where telemedicine can be effectively utilized:",
+      sections: [
+        {
+          id: "generalCases",
+          title: "General Cases",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Telemedicine suitability by case type",
+            },
+            {
+              type: "table",
+              responsive: "auto", // "scroll" (default), "stack", or "auto"
+              stackBreakpoint: 640, // optional
+              rowHeaders: false, // set true if first column names the row
+              minWidth: "720px", // optional
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "fit", title: "Fit for telemedicine?" },
+                { key: "help", title: "How vets help" },
+                { key: "escalate", title: "When to escalate to in-person" },
+              ],
+              rows: [
+                {
+                  case: "Acute medical concerns",
+                  fit: "Often (triage first)",
+                  help: "Urgency check, first-aid guidance, next steps.",
+                  escalate:
+                    "Breathing trouble, collapse, uncontrolled pain/bleeding, suspected blockage → ER/clinic",
+                },
+                {
+                  case: "Behavior (aggression, litter box, etc.)",
+                  fit: "Strong fit",
+                  help: "Home-context review, behavior plan, trainer coordination.",
+                  escalate: "Immediate safety risks or neurologic red flags",
+                },
+                {
+                  case: "Skin issues (rashes, itchiness, redness)",
+                  fit: "Strong fit",
+                  help: "Photo/video review, topicals/meds, follow-ups.",
+                  escalate: "Deep/infected wounds needing procedures",
+                },
+                {
+                  case: "Allergies",
+                  fit: "Strong fit",
+                  help: "Flare control, diet trials, refills/adjustments (where permitted).",
+                  escalate: "Severe systemic reactions",
+                },
+                {
+                  case: "Minor cuts & wounds",
+                  fit: "Often",
+                  help: "Clean-care guidance, monitoring, refer if sutures likely.",
+                  escalate: "Large/deep wounds or bleeding that won’t stop",
+                },
+                {
+                  case: "Nutrition & weight",
+                  fit: "Strong fit",
+                  help: "Diet selection, weight-loss plans, chronic-care coaching.",
+                  escalate: "Rapid unexplained weight loss → diagnostics",
+                },
+                {
+                  case: "GI (vomiting/diarrhea)",
+                  fit: "Often (mild cases)",
+                  help: "Hydration/diet plan, warning signs to watch.",
+                  escalate: "Severe, persistent, bloody, painful, or lethargic",
+                },
+                {
+                  case: "Puppy/kitten wellness & training",
+                  fit: "Strong fit",
+                  help: "Preventive care counseling, schedules, training tips.",
+                  escalate: "Vaccines/exams themselves are in-person",
+                },
+                {
+                  case: "General health & wellness",
+                  fit: "Strong fit",
+                  help: "Q&A, routine follow-ups, care plans.",
+                  escalate: "Anything requiring hands-on exam/tests",
+                },
+              ],
+              note: "California quick constraints (vet-facing): patient must be in CA; VCPR can be established by live audio-video; after VCPR, use telehealth as clinically appropriate. Tele-VCPR prescriptions are limited to 6 months per exam; antimicrobials: max 14 days unless an in-person exam occurs; controlled substances/xylazine require an in-person exam; provide pharmacy-choice notice and submit to the client’s chosen pharmacy on request.",
+            },
+          ],
+        },
+      ],
+    },
+    generalPracticeTelemedicine: {
+      mainTitle: "Telemedicine Specific Considerations for General Practice",
+      mainDescription:
+        "When utilizing telemedicine in general practice, it's important to consider specific guidelines and best practices to ensure effective and compliant care. Here are some key considerations:",
+      sections: [
+        {
+          id: "gpTelemedComplete",
+          title: "General Practice: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These are primary-care problems that a California-licensed GP can typically diagnose and manage by live video under AB 1399, then e-prescribe to the client’s chosen pharmacy.",
+            },
+            {
+              type: "table",
+              caption:
+                "GP cases commonly completed via telemedicine (with e-pharmacy options)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (GP)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: `Allergic itch / atopic flare (no infection signs)
+                 <a href="https://ctajournal.biomedcentral.com/articles/10.1186/s40575-015-0014-5" target="_blank" rel="noopener">ICADA guideline</a>`,
+                  plan: "Photo review, itch scoring, environment control, pruritus plan.",
+                  rx: "Oclacitinib; short steroid taper when appropriate; topical antipruritics.",
+                  red: "Pustules/crusts, fever, otitis with discharge, spreading lesions.",
+                },
+                {
+                  case: `Flea allergy or gaps in parasite control
+                 <a href="https://capcvet.org/guidelines/general-guidelines/" target="_blank" rel="noopener">CAPC prevention</a>`,
+                  plan: "Exposure history, home vector-control coaching.",
+                  rx: "Isoxazolines (flea/tick prevention).",
+                  red: "Pale gums/anemia, heavy infestation in neonates or debilitated pets.",
+                },
+                {
+                  case: `Mild acute GI upset (bright/alert; no blood)
+                 <a href="https://wsava.org/wp-content/uploads/2025/01/Acute-Diarrhoea.pdf" target="_blank" rel="noopener">WSAVA acute diarrhea</a>`,
+                  plan: "Hydration + bland diet; anti-nausea/anti-diarrheal; clear return precautions.",
+                  rx: "Maropitant; GI protectants/probiotics; electrolytes.",
+                  red: "Repeated vomiting, blood, pain, lethargy, dehydration.",
+                },
+                {
+                  case: `Motion sickness / travel anxiety
+                 <a href="https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3bc065ce-09d6-4131-a5a0-dca3909e0bc8" target="_blank" rel="noopener">Cerenia label</a>
+                 <a href="https://www.merckvetmanual.com/multimedia/table/common-drugs-used-to-treat-behavior-problems-in-dogs" target="_blank" rel="noopener">Trazodone (Merck Vet Manual)</a>`,
+                  plan: "Trip plan, test-dose guidance, safety counseling.",
+                  rx: "Maropitant for motion sickness; trazodone (non-controlled) for situational anxiety as appropriate.",
+                  red: "Severe sedation, vomiting that persists despite therapy.",
+                },
+                {
+                  case: `Mild upper-airway signs (no distress)
+                 <a href="https://www.msdvetmanual.com/generalized-conditions/respiratory-diseases-of-dogs/overview-of-respiratory-diseases-in-dogs" target="_blank" rel="noopener">MSD: canine respiratory overview</a>`,
+                  plan: "History, home monitoring, humidification, supportive care.",
+                  rx: "Antihistamines; lubricating drops/nasal saline when appropriate.",
+                  red: "Dyspnea, cyanosis, progressive cough with distress.",
+                },
+                {
+                  case: `Osteoarthritis flare (stable patient)
+                 <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2022-pain-management/resources/2022-aaha-pain-management-guidelines-for-dog-and-cats_updated_060622.pdf" target="_blank" rel="noopener">AAHA pain guidelines</a>`,
+                  plan: "Pain scoring, activity plan, joint-support counseling.",
+                  rx: "NSAID refill/adjustment if recent labs available; joint nutraceuticals.",
+                  red: "Severe pain, non-weight-bearing, neuro deficits → imaging/exam.",
+                },
+                {
+                  case: `Behavior: separation-related distress / noise sensitivity
+                 <a href="https://www.merckvetmanual.com/multimedia/table/common-drugs-used-to-treat-behavior-problems-in-dogs" target="_blank" rel="noopener">Merck behavior meds</a>`,
+                  plan: "History-heavy consult, home video review, behavior plan; trainer referral.",
+                  rx: "Fluoxetine (SSRI) or trazodone as appropriate (non-controlled).",
+                  red: "Bite risk/aggression escalation; neuro red flags.",
+                },
+                {
+                  case: `Superficial hot spots (no deep infection)
+                 <a href="https://www.merckvetmanual.com/integumentary-system/pyoderma/pyoderma-in-dogs-and-cats" target="_blank" rel="noopener">MSD: pyoderma/hot spots</a>`,
+                  plan: "Clip/clean at-home instructions; close photo follow-up.",
+                  rx: "Topical antiseptic/steroid mousse/gel; short anti-pruritic course.",
+                  red: "Spreading cellulitis, purulent discharge, pain/fever.",
+                },
+                {
+                  case: `Nutrition & weight management
+                 <a href="https://wsava.org/wp-content/uploads/2020/01/Global-Nutrition-Guidelines-2013.pdf" target="_blank" rel="noopener">WSAVA nutrition</a>`,
+                  plan: "Dietary assessment, caloric plan, recheck schedule.",
+                  rx: "Therapeutic diet enrollment; omega-3 supplements.",
+                  red: "Rapid unexplained weight loss → diagnostics.",
+                },
+                {
+                  case: `Post-op or chronic condition check-ins (stable)
+                 <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA follow-up & monitoring</a>`,
+                  plan: "Photo/video wound checks; medication refills when appropriate; return precautions.",
+                  rx: "Non-controlled maintenance meds per plan; topical care supplies.",
+                  red: "Dehiscence, fever, uncontrolled pain, draining tracts.",
+                },
+              ],
+              note: "AB 1399 permits establishing a VCPR by real-time audio-video; prescriptions via telehealth are allowed in accordance with federal regulations and are limited to 6 months before re-examination. Clients must be told they may choose any pharmacy, and on request you must submit to their chosen pharmacy. See the California VMB FAQ and statute links below.",
+            },
+          ],
+        },
+        {
+          id: "gpTelemedHybrid",
+          title: "General Practice: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These are GP problems where a video exam can start the workup/plan, then a partner clinic completes a procedure or test. Vetcation routes orders and summaries so the clinic team documents supervision correctly and results sync back to the GP and the client’s primary DVM.",
+            },
+            {
+              type: "table",
+              caption: "Start via telemedicine; complete at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (GP)" },
+                { key: "clinic", title: "Clinic tasks & supervision" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: `Allergic dermatitis needing Cytopoint injection
+                 <a href="https://ctajournal.biomedcentral.com/articles/10.1186/s40575-015-0014-5" target="_blank" rel="noopener">ICADA guideline</a>`,
+                  tele: "Video exam, rule-in pruritus, document VCPR, place clinic order.",
+                  clinic:
+                    "RVT administers Cytopoint SC under indirect DVM supervision (on-premises).",
+                  notes:
+                    "Relief within 24–48h; record sync to GP and primary DVM.",
+                },
+                {
+                  case: `Suspected otitis externa (discharge/pain)
+                 <a href="https://www.merckvetmanual.com/ear-disorders/otitis-externa/otitis-externa-in-animals" target="_blank" rel="noopener">MSD: otitis externa</a>`,
+                  tele: "History; photo/video of pinna/ear canal; analgesia plan; schedule clinic cytology.",
+                  clinic:
+                    "Ear cytology + flush; RVT tasks as permitted; DVM finalizes Dx/Rx.",
+                  notes:
+                    "Targeted topical therapy after cytology; recheck by photo/video.",
+                },
+                {
+                  case: `Suspected UTI
+                 <a href="https://iscaid.org/iscaid-guidelines" target="_blank" rel="noopener">ISCAID UTI guidance</a>`,
+                  tele: "History, risk screen, analgesia/hydration plan, order urinalysis ± culture.",
+                  clinic:
+                    "Cystocentesis sample collection and lab submission; DVM reviews results.",
+                  notes:
+                    "If antibiotics indicated, Rx per results; antimicrobial stewardship applies.",
+                },
+                {
+                  case: `Endocrine monitoring (hypothyroid, stable diabetes)
+                 <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA monitoring</a>`,
+                  tele: "Dose/clinical review, lab order set, monitoring plan; schedule clinic bloodwork.",
+                  clinic:
+                    "Blood draw (RVT/assistant as permitted) and lab processing; DVM interprets.",
+                  notes: "Adjust dose based on labs; follow-up by video.",
+                },
+                {
+                  case: `Lameness needing radiographs
+                 <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA pain/lameness</a>`,
+                  tele: "Gait video review, pain plan, imaging order, sedation risk screen if needed.",
+                  clinic:
+                    "Radiographs performed per supervision requirements; DVM reads/plan.",
+                  notes:
+                    "Tele follow-up for medical management; in-person for procedures if indicated.",
+                },
+              ],
+              note: "Example workflow: Monday video visit → GP orders Cytopoint 20 mg SC at Partner Clinic A. Clinic logs indirect supervision by Dr. Smith; RVT Jones administers. Administration record syncs back to the tele-GP chart and the client’s primary DVM.",
+            },
+          ],
+        },
+      ],
+    },
+    dermatologyTelemedicine: {
+      mainTitle: "Telemedicine: Dermatology (California AB 1399)",
+      mainDescription:
+        "Common dermatologist-managed problems that are well-suited to live audio-video care, with examples of red flags that should prompt in-person evaluation. Links in each case point to an authoritative reference.",
+      sections: [
+        {
+          id: "dermTelemedComplete",
+          title: "Dermatology: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These are conditions a board-certified dermatologist (or dermatology-savvy DVM) can commonly manage by video with photo review, then e-prescribe to the client’s chosen pharmacy under AB 1399.",
+            },
+            {
+              type: "table",
+              caption:
+                "Dermatology cases commonly completed via telemedicine (with e-pharmacy options)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Derm DVM)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Atopic dermatitis (pruritic flare without infection signs) <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0514-6" target="_blank" rel="noopener">ICADA guideline</a>',
+                  plan: "Structured pruritus history (seasonality, distribution), flare-control plan, recheck cadence; discuss allergy testing only when planning immunotherapy.",
+                  rx: "Oclacitinib; short topical or oral glucocorticoid taper when appropriate; moisturizing/anti-itch topical adjuncts.",
+                  red: "Pustules/crusts/epidermal collarettes, erosions/ulcers, fever, otitis with discharge.",
+                },
+                {
+                  case: 'Flea allergy dermatitis & ectoparasite gap counseling <a href="https://www.msdvetmanual.com/integumentary-system/fleas-and-flea-allergy-dermatitis/flea-allergy-dermatitis-in-dogs-and-cats" target="_blank" rel="noopener">MSD Vet Manual</a>',
+                  plan: "Exposure review, home vector control, year-round prevention education.",
+                  rx: "Isoxazolines (flea/tick prevention); environmental control guidance.",
+                  red: "Pale mucous membranes/anemia, heavy infestations in neonates/debilitated pets; secondary infection.",
+                },
+                {
+                  case: 'Allergy education & maintenance (environmental/food) <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0513-7" target="_blank" rel="noopener">ICADA (diet trial)</a>',
+                  plan: "Diet trial roadmap (if indicated), trigger avoidance, bathing regimen coaching; set expectations for timelines.",
+                  rx: "Therapeutic diet enrollment (if doing elimination trial); antiseborrheic/conditioning shampoos; barrier sprays/wipes.",
+                  red: "Weight loss, GI blood, non-resolving lesions despite strict trial.",
+                },
+                {
+                  case: 'Contact/irritant dermatitis (mild, localized, known trigger) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2023-aaha-management-of-allergic-skin-diseases-in-dogs-and-cats-guidelines/resources/2023-aaha-management-of-allergic-skin-diseases-guidelines.pdf" target="_blank" rel="noopener">AAHA 2023</a>',
+                  plan: "Trigger identification, avoidance plan, adjunctive skin barrier support.",
+                  rx: "Short course topical corticosteroid; bland emollients; barrier creams.",
+                  red: "Rapid spread, ulceration, severe pain, systemic signs.",
+                },
+                {
+                  case: 'Maintenance rechecks after prior in-person workup (e.g., Malassezia dermatitis, pyoderma resolved) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5603939/" target="_blank" rel="noopener">Malassezia review</a>',
+                  plan: "Photo review to confirm remission/maintenance; reinforce bathing intervals and recheck triggers.",
+                  rx: "Topical antifungal/antiseptic shampoos/wipes per prior plan; omega-3; moisturizers.",
+                  red: "Recurrent lesions suggesting active infection → in-clinic cytology/culture.",
+                },
+                {
+                  case: 'Paw-care regimen for environmental exposure (interdigital irritation without infection signs) <a href="https://www.msdvetmanual.com/integumentary-system/interdigital-furunculosis/interdigital-furunculosis-in-dogs" target="_blank" rel="noopener">Interdigital furunculosis (MSD)</a>',
+                  plan: "Footbath protocol, after-walk rinse, drying routine; monitor with photos.",
+                  rx: "Antiseptic/soothing foot soaks; barrier sprays; booties during flares.",
+                  red: "Swelling, draining tracts, lameness → in-person exam (rule out furunculosis).",
+                },
+                {
+                  case: 'Seborrheic disorders (mild scaling/greasy coat without infection signs) <a href="https://www.msdvetmanual.com/integumentary-system/seborrhea/seborrhea-in-animals" target="_blank" rel="noopener">MSD Vet Manual</a>',
+                  plan: "Shampoo plan (antiseborrheic/keratolytic), rinse/condition routine; evaluate nutrition & environment.",
+                  rx: "Keratolytic/keratoplastic shampoos; humectants/emollients.",
+                  red: "Odor, pustules, erythema suggesting infection → cytology.",
+                },
+                {
+                  case: 'Otic maintenance recheck (post-cytology case now clinically quiet) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2023-aaha-management-of-allergic-skin-diseases-in-dogs-and-cats-guidelines/resources/2023-aaha-management-of-allergic-skin-diseases-guidelines.pdf" target="_blank" rel="noopener">AAHA 2023</a>',
+                  plan: "Owner-captured video/lighting tips; cleaner technique reinforcement; define relapse triggers.",
+                  rx: "Ear cleaners/drying agents; short anti-inflammatory otic steroid only if no discharge/pain.",
+                  red: "Discharge, pain, head tilt, neuro signs → in-clinic otoscopy/cytology.",
+                },
+                {
+                  case: 'Seasonal pre-emptive flare planning <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0514-6" target="_blank" rel="noopener">ICADA guideline</a>',
+                  plan: "Adjust meds before peak season; increase bathing, wipe-downs after outdoor exposure.",
+                  rx: "Short antipruritic courses per plan; focal topical steroids; antipruritic wipes.",
+                  red: "Failure of control or new lesion types → exam/cytology.",
+                },
+                {
+                  case: 'Client training: bathing & topical application technique <a href="https://www.msdvetmanual.com/integumentary-system/integumentary-system-introduction/principles-of-topical-treatment-in-animals" target="_blank" rel="noopener">MSD (topical therapy)</a>',
+                  plan: "Demonstrate lather/contact times, rinsing, drying; product rotation strategy.",
+                  rx: "Shampoo/conditioner refills; measured dosing plans; follow-up photos.",
+                  red: "Irritation/worsening after topical use → review ingredients & examine.",
+                },
+              ],
+              note: "Allergy testing is not used to diagnose atopic dermatitis; it is performed after clinical diagnosis to select allergens for immunotherapy (ICADA consensus).",
+            },
+          ],
+        },
+
+        {
+          id: "dermTelemedHybrid",
+          title: "Dermatology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Telemedicine establishes history, triage, photos, and an initial plan; then partner clinics complete procedures/diagnostics. Results sync back to the tele-dermatologist and the client’s primary DVM.",
+            },
+            {
+              type: "table",
+              caption: "Start via telemedicine; complete at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (Derm DVM)" },
+                { key: "clinic", title: "Clinic tasks & supervision" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'Otitis externa with discharge/pain (needs cytology) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2023-aaha-management-of-allergic-skin-diseases-in-dogs-and-cats-guidelines/resources/2023-aaha-management-of-allergic-skin-diseases-guidelines.pdf" target="_blank" rel="noopener">AAHA 2023</a>',
+                  tele: "History, photo/video of pinna/ear canal, analgesia plan; schedule clinic cytology.",
+                  clinic:
+                    "Ear cytology + flush; RVT may perform tasks per supervising DVM; DVM finalizes Dx/Rx.",
+                  notes:
+                    "Targeted topical therapy after cytology; recheck by photo/video.",
+                },
+                {
+                  case: 'Superficial pyoderma (suspicious recurrence) → confirm & culture as needed <a href="https://www.msdvetmanual.com/integumentary-system/pyoderma/pyoderma-in-dogs-and-cats" target="_blank" rel="noopener">MSD Vet Manual</a>',
+                  tele: "Lesion history & photos; antimicrobial stewardship counseling; schedule cytology ± culture.",
+                  clinic:
+                    "Skin cytology (impression/tape); culture when indicated; DVM selects therapy.",
+                  notes:
+                    "Topical + targeted systemic therapy; follow-up by video/photo.",
+                },
+                {
+                  case: 'Dermatophytosis suspected (ringworm) <a href="https://pubmed.ncbi.nlm.nih.gov/28494152/" target="_blank" rel="noopener">WAVD consensus</a>',
+                  tele: "Screen housemates; discuss decontamination; order Wood’s lamp & culture/PCR.",
+                  clinic:
+                    "Wood’s lamp, sample collection for culture/PCR; DVM initiates therapy.",
+                  notes:
+                    "Topical + (cats: often) systemic therapy; environmental control; tele-rechecks.",
+                },
+                {
+                  case: 'Demodicosis vs. sarcoptic mange (mite rule-out) <a href="https://www.msdvetmanual.com/integumentary-system/mange-and-mite-infestations/sarcoptic-mange-in-dogs" target="_blank" rel="noopener">MSD Vet Manual</a>',
+                  tele: "History/photos, contagion counseling; order scrapings/trichograms.",
+                  clinic:
+                    "Deep/superficial skin scrapings, trichogram; DVM interprets & treats.",
+                  notes:
+                    "Targeted acaricidal therapy; tele-follow-up for skin recovery/secondary infection.",
+                },
+                {
+                  case: 'Discussing allergy testing (for ASIT selection, not diagnosis) <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0515-5" target="_blank" rel="noopener">ICADA (ASIT)</a>',
+                  tele: "Confirm clinical Dx of AD; set expectations; discuss intradermal vs serum testing for ASIT planning.",
+                  clinic:
+                    "Perform IDT or serum IgE; formulate immunotherapy prescription.",
+                  notes:
+                    "Proceed with ASIT where appropriate; tele-rechecks for flare control and adherence.",
+                },
+              ],
+              note: "Example workflow: Monday video visit → Derm DVM orders ear cytology at Partner Clinic A. Clinic logs indirect supervision; RVT performs collection/flush. Results sync to the tele-Derm chart and the client’s primary DVM.",
+            },
+          ],
+        },
+      ],
+    },
+
+    oncologyTelemedicine: {
+      mainTitle: "Telemedicine: Oncology (California AB 1399)",
+      mainDescription:
+        "Tele-oncology excels at diagnosis reviews, treatment planning, toxicity monitoring, and hospice/QOL counseling. Procedures, chemotherapy infusions, imaging, and biopsies are performed in-clinic; telemedicine extends continuity of care and client education.",
+      sections: [
+        {
+          id: "oncologyTelemedComplete",
+          title: "Oncology: Consults Commonly Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These consults are routinely handled by a veterinary oncologist or oncology-focused GP over live audio-video with photo/PDF review, then e-prescribed to the client’s chosen pharmacy when appropriate.",
+            },
+            {
+              type: "table",
+              caption:
+                "Oncology consults commonly completed via telemedicine (with e-pharmacy options for supportive care)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Oncology DVM)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Confirmed multicentric lymphoma: staging & CHOP counseling <a href="https://www.merckvetmanual.com/circulatory-system/lymphoma-in-dogs/lymphoma-in-dogs" target="_blank" rel="noopener">ref</a> <a href="https://uwveterinarycare.wisc.edu/wp-content/uploads/2019/06/k9_chop.pdf" target="_blank" rel="noopener">protocol</a>',
+                  plan: "Review histopath/cytology, outline staging (minimum database, thoracic imaging ± abdominal US), discuss CHOP vs palliative steroid; VCOG toxicity expectations and recheck cadence.",
+                  rx: "Prednisone if palliative; antiemetics (maropitant/ondansetron), gastroprotectants if indicated.",
+                  red: "Inappetence >24–48h, repeated vomiting/diarrhea, fever, dyspnea, rapidly enlarging nodes.",
+                },
+                {
+                  case: 'Post-op mast cell tumor: margin/grade review & next steps <a href="https://pubmed.ncbi.nlm.nih.gov/22882486/" target="_blank" rel="noopener">ref</a> <a href="https://www.merckvetmanual.com/integumentary-system/tumors-of-the-skin-and-soft-tissues/lymphocytic-histiocytic-and-related-cutaneous-tumors-in-animals" target="_blank" rel="noopener">overview</a>',
+                  plan: "Explain grade/mitotic index/Ki-67 if reported; discuss re-excision vs radiation vs medical therapy; taper plan for pre-op steroids if used.",
+                  rx: "H1/H2 blockers (diphenhydramine, famotidine); short pred course if indicated; topical care guidance.",
+                  red: "Dehiscence, progressive swelling, signs of GI ulceration, new masses, systemic illness.",
+                },
+                {
+                  case: 'Urothelial (transitional cell) carcinoma: medical management counseling <a href="https://www.merckvetmanual.com/pharmacology/inflammation/nonsteroidal-anti-inflammatory-drugs-in-animals" target="_blank" rel="noopener">NSAIDs</a> <a href="https://pubmed.ncbi.nlm.nih.gov/7983623/" target="_blank" rel="noopener">piroxicam study</a> <a href="https://www.merckvetmanual.com/urinary-system/noninfectious-diseases-of-the-urinary-system-in-small-animals/neoplasia-of-the-urinary-system-in-dogs-and-cats" target="_blank" rel="noopener">overview</a>',
+                  plan: "Discuss role of COX-inhibiting NSAIDs ± chemo; home signs to monitor; schedule UA/urine culture & imaging locally; catheterization/obstruction risks explained.",
+                  rx: "Piroxicam or COX-2–selective NSAID when appropriate; antiemetics; urinary comfort measures.",
+                  red: "Straining without urine, gross hematuria with clots, obstruction signs, crashing patient.",
+                },
+                {
+                  case: 'Osteosarcoma: options review (amputation vs limb-sparing vs palliation) <a href="https://www.merckvetmanual.com/musculoskeletal-system/osteopathies-in-small-animals/bone-tumors-in-dogs-and-cats" target="_blank" rel="noopener">overview</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4330401/" target="_blank" rel="noopener">review</a>',
+                  plan: "Explain goals, expected survival with surgery±chemo, palliative radiation; home safety and fracture risk; analgesic ladder without controlleds via telehealth.",
+                  rx: "NSAID; adjuncts such as gabapentin; antiemetics PRN during therapy; GI protectants if indicated.",
+                  red: "Pathologic fracture, severe uncontrolled pain, respiratory distress, acute decline.",
+                },
+                {
+                  case: 'Soft-tissue sarcoma: post-op histopath margin consult ± radiation referral <a href="https://www.merckvetmanual.com/integumentary-system/tumors-of-the-skin-and-soft-tissues/connective-tissue-tumors-in-animals" target="_blank" rel="noopener">ref</a>',
+                  plan: "Clarify margins/grade; counsel on re-excision vs adjuvant radiation; wound/photo checks; schedule surveillance imaging plan.",
+                  rx: "NSAID for discomfort if appropriate; topical wound care supplies; activity modification guidance.",
+                  red: "Rapid local regrowth, wound failure/infection, limb dysfunction or neuro deficits.",
+                },
+                {
+                  case: 'Oral melanoma: pathology & local-control/adjuvant plan <a href="https://www.merckvetmanual.com/integumentary-system/tumors-of-the-skin-and-soft-tissues/tumors-of-melanocytic-origin-in-animals" target="_blank" rel="noopener">overview</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11026649/" target="_blank" rel="noopener">consensus</a>',
+                  plan: "Discuss surgery margins, role of radiation when incomplete, and immunotherapy options; outline staging and recheck cadence.",
+                  rx: "Analgesic adjuncts (non-controlled), antiseptic oral rinses, antiemetics if needed during therapy.",
+                  red: "Oral bleeding, dysphagia, airway compromise, rapidly enlarging mass, weight loss.",
+                },
+                {
+                  case: 'Hemangiosarcoma: prognosis setting & palliative/supportive roadmap <a href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/canine-health-information/hemangiosarcoma-dogs" target="_blank" rel="noopener">ref</a> <a href="https://www.merckvetmanual.com/special-pet-topics/cancer-and-tumors/caring-for-a-pet-with-cancer" target="_blank" rel="noopener">supportive care</a>',
+                  plan: "Explain typical course and staging; discuss doxorubicin-based plans to be performed in-clinic; set QOL monitoring and emergency signs.",
+                  rx: "Antiemetics, gastroprotectants, omega-3s; non-controlled analgesic adjuncts; iron support only if indicated.",
+                  red: "Collapse/weakness, abdominal distension, pale gums, respiratory distress → emergency care.",
+                },
+                {
+                  case: 'Chemotherapy toxicity check-in: AE grading & rescue meds <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8248125/" target="_blank" rel="noopener">VCOG-CTCAE v2</a>',
+                  plan: "Tele-review of appetite, GI signs, mucositis, lethargy; grade AEs using VCOG-CTCAE; adjust next-cycle plan with local CBCs.",
+                  rx: "Maropitant/ondansetron; metronidazole only if indicated and within stewardship rules; bland-diet plan; topical care for mild dermatitis.",
+                  red: "Profuse vomiting/diarrhea, hemorrhage, febrile neutropenia signs, inability to keep meds/fluids down.",
+                },
+                {
+                  case: 'Response assessment review (RECIST measurements) <a href="https://www.semanticscholar.org/paper/Response-evaluation-criteria-for-solid-tumours-in-a-Nguyen-Thamm/96f3ca171e7e9ac931e6321d5fac79565151e042" target="_blank" rel="noopener">VCOG-RECIST</a>',
+                  plan: "Compare serial imaging reports from partner clinic using v1.0 RECIST rules; document PR/SD/PD and adjust plan.",
+                  rx: "Supportive meds per case; schedule next imaging or switch therapy discussion.",
+                  red: "Rapid clinical decline, new painful lesions, suspected metastasis with clinical impact.",
+                },
+                {
+                  case: 'Hospice & quality-of-life planning (HHHHHMM scale) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/end-of-life-care/2016_aaha_iaahpc_eolc_guidelines.pdf" target="_blank" rel="noopener">AAHA/IAAHPC</a> <a href="https://caringpathways.com/wp-content/uploads/2018/02/QualityofLifeScale.pdf" target="_blank" rel="noopener">HHHHHMM</a>',
+                  plan: "Teach QOL scoring, comfort-first goals, anticipatory guidance; discuss home safety, nutrition, hydration, and caregiver support.",
+                  rx: "Mirtazapine/mirataz, maropitant/ondansetron, GI protectants, stool softeners; non-controlled analgesic adjuncts.",
+                  red: "Uncontrolled pain/dyspnea, refractory nausea, persistent anorexia/dehydration, more bad days than good.",
+                },
+              ],
+              note: "AB 1399 permits establishing VCPR by live audio-video. California prohibits prescribing controlled substances via telehealth without an in-person exam; arrange in-clinic care as needed. Use VCOG-CTCAE for AE grading, and RECIST conventions for response documentation when reviewing partner-clinic imaging.",
+            },
+          ],
+        },
+      ],
+    },
+    behaviorTelemedicine: {
+      mainTitle: "Telemedicine: Behavior (California AB 1399)",
+      mainDescription:
+        "Board-certified behaviorists (DACVB) use video + owner-supplied footage and structured histories to diagnose and treat many behavior disorders remotely. Telemedicine excels at assessment, coaching, and pharmacologic plans with close follow-ups; in-person care is reserved for safety issues and medical rule-outs.",
+      sections: [
+        {
+          id: "behaviorTelemedComplete",
+          title: "Behavior: Consults Commonly Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Live video + home videos often yield superior context for behavior cases versus clinic visits. Below are common tele-behavior cases with example plans, typical non-controlled eRx options, and red flags requiring in-person evaluation.",
+            },
+            {
+              type: "table",
+              caption:
+                "Behavior consults commonly completed via telemedicine (with e-pharmacy options for non-controlled meds)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                {
+                  key: "plan",
+                  title: "Telemedicine plan (DACVB/behavior DVM)",
+                },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Canine separation-related disorder (SRD) — confirm with home alone video <a href="https://avsab.org/separation-anxiety-the-great-imitator-part-1-2/" target="_blank" rel="noopener">AVSAB</a> <a href="https://www.merckvetmanual.com/behavior/behavior-of-dogs/behavior-problems-of-dogs" target="_blank" rel="noopener">Merck</a>',
+                  plan: "Structured history; obtain brief home-alone video; build DS/CC plan; environmental management; staged absences; caregiver coaching; recheck cadence.",
+                  rx: "Fluoxetine or clomipramine; trazodone/gabapentin PRN for practice sessions; enrichment plan.",
+                  red: "Self-injury, destructive escape that risks injury, severe anorexia/vomiting from distress, comorbid medical signs.",
+                },
+                {
+                  case: 'Noise aversion (storm/fireworks) <a href="https://www.msdvetmanual.com/pharmacology/systemic-pharmacotherapeutics-of-the-nervous-system/psychotropic-agents-for-treatment-of-animals" target="_blank" rel="noopener">Merck–imepitoin/Sileo</a> <a href="https://todaysveterinarypractice.com/behavior/noise-storm-phobias-anxiety-in-dogs/" target="_blank" rel="noopener">TVP review</a>',
+                  plan: "Trigger audit; safe-space setup; DS/CC with sound files; predict-and-prevent strategy; practice days before events.",
+                  rx: "Dexmedetomidine oromucosal gel (Sileo®); imepitoin (where labeled); SSRI/TCA maintenance when indicated; short-acting adjuncts PRN (non-controlled).",
+                  red: "Panic causing flight/escape risk, destructive chewing/eating foreign bodies, syncope-like episodes.",
+                },
+                {
+                  case: 'Puppy prevention & socialization plan (7–16 wks) <a href="https://avsab.org/wp-content/uploads/2018/03/Puppy_Socialization_Position_Statement_Download_-_10-3-14.pdf" target="_blank" rel="noopener">AVSAB</a>',
+                  plan: "Vaccination-aware socialization calendar; normalized handling; noise/husbandry plan; early problem prevention; owner training on reward-based methods.",
+                  rx: "Pheromone diffuser (DAP); treat-based training kit; printed/socialization checklists; follow-up coaching.",
+                  red: "Extreme fear or shutdown responses; puppy injuring others; medical concerns interfering with socialization.",
+                },
+                {
+                  case: 'Generalized fear/anxiety & reactivity (foundation plan) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/behavior-management/2015_aaha_canine_and_feline_behavior_management_guidelines_final.pdf" target="_blank" rel="noopener">AAHA</a> <a href="https://avsab.org/wp-content/uploads/2021/08/AVSAB-Humane-Dog-Training-Position-Statement-2021.pdf" target="_blank" rel="noopener">AVSAB</a>',
+                  plan: "Dx clarification; trigger hierarchy; DS/CC plan; relaxation protocol; trainer referral standards; safety/muzzle conditioning if needed.",
+                  rx: "Fluoxetine/sertraline or clomipramine; trazodone/gabapentin PRN for setups; nutraceuticals as adjuncts.",
+                  red: "Escalating bite history, unpredictable aggression, suspected pain/neurologic signs → physical exam, lab work, imaging as indicated.",
+                },
+                {
+                  case: 'Leash reactivity / stranger-directed fear (canine) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/behavior-management/2015_aaha_canine_and_feline_behavior_management_guidelines_final.pdf" target="_blank" rel="noopener">AAHA</a>',
+                  plan: "Event analysis; threshold management; parallel walks; DS/CC with controlled exposures; equipment fit; trainer collaboration.",
+                  rx: "SSRI/TCA baseline when generalized; trazodone or gabapentin PRN for training sessions.",
+                  red: "Bites or near-bites to people/dogs, handler not able to safely conduct setups → in-person team support.",
+                },
+                {
+                  case: 'Resource guarding / possessive aggression plan <a href="https://avsab.org/wp-content/uploads/2018/03/Dominance_Position_Statement_download-10-3-14.pdf" target="_blank" rel="noopener">AVSAB (Dominance)</a> <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/behavior-management/2015_aaha_canine_and_feline_behavior_management_guidelines_final.pdf" target="_blank" rel="noopener">AAHA</a>',
+                  plan: "Risk assessment; trade-up and conditioning protocols; management to prevent rehearsals; structured handling rules.",
+                  rx: "As indicated for fear/anxiety (SSRI/TCA); short-acting adjuncts for practice sessions.",
+                  red: "History of puncture/laceration, guarding of people/doorways, escalating threats → in-person behaviorist + safety gear fitting.",
+                },
+                {
+                  case: 'Feline house-soiling (toileting) — litter box optimization <a href="https://catvets.com/wp-content/uploads/2024/08/house-soiling-guidelines.pdf" target="_blank" rel="noopener">AAFP/ISFM</a>',
+                  plan: "History & mapping; box number/size/substrate/location; cleaning frequency; stress reduction (5 pillars).",
+                  rx: "Pheromones (F3), stool softeners if indicated, diet/fluids as appropriate; owner handouts.",
+                  red: "Stranguria/hematuria, obstruction risk (male cats), weight loss, systemic signs → same-day in-person care.",
+                },
+                {
+                  case: 'Feline urine marking vs toileting — differentiate first <a href="https://www.merckvetmanual.com/multimedia/table/distinguishing-urine-marking-from-undesirable-toileting-in-cats" target="_blank" rel="noopener">Merck table</a>',
+                  plan: "History + photo mapping; vertical vs horizontal, volume/posture; social stressors; environmental modifications.",
+                  rx: "Pheromones; SSRI/TCA when indicated; neutering if intact; multi-cat resource distribution.",
+                  red: "Pain on urination, obstruction signs, new aggression causing injury → in-person exam and labs.",
+                },
+                {
+                  case: 'Canine cognitive dysfunction (CDS) — senior care plan <a href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/canine-health-topics/cognitive-dysfunction-syndrome" target="_blank" rel="noopener">Cornell</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6582309/" target="_blank" rel="noopener">Review</a>',
+                  plan: "DISHA-A history; sleep-wake and enrichment plan; caregiver support; fall-risk/sundowning strategies; periodic labs via PCP.",
+                  rx: "Selegiline; omega-3s/MCT diets; melatonin PRN; anxiolytic adjuncts when appropriate.",
+                  red: "Acute neuro changes, severe disorientation/wandering risk, rapid weight loss → in-person workup.",
+                },
+                {
+                  case: 'Compulsive/ritualistic behaviors (rule-out pain/derm first) <a href="https://www.msdvetmanual.com/behavior/behavior-of-dogs/behavior-problems-of-dogs" target="_blank" rel="noopener">Merck</a>',
+                  plan: "Differentials (derm, neuropathic pain, GI); enrich/interrupt routines; DS/CC; trainer selection; video tracking.",
+                  rx: "SSRI/TCA baseline; adjuncts for arousal control; treat medical comorbidities first.",
+                  red: "Self-mutilation, suspected neuropathy/orthopedic pain, failure of environmental control → in-person diagnostics.",
+                },
+              ],
+              note: "Compliance notes (CA AB 1399): VCPR can be established via synchronous audio-video; you must know local emergency resources and document standard-of-care decision-making. **Controlled substances cannot be prescribed via telehealth without an in-person exam**—prefer non-controlled options and coordinate labs/physicals with a partner clinic when needed. (See CA VMB FAQs & AAHA/AVMA Telehealth Guidelines.)",
+            },
+          ],
+        },
+      ],
+    },
+    nutritionTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Nutrition (DACVN Perspective)",
+      mainDescription:
+        "Tele-nutrition excels for stable patients, longitudinal coaching, and individualized diet formulation. Labs, imaging, and procedures are routed to partner clinics as needed; results sync back to keep the primary DVM in the loop.",
+      sections: [
+        {
+          id: "nutritionTelemedComplete",
+          title: "Nutrition: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These cases are typically managed via live video by a board-certified veterinary nutritionist (or nutrition-focused DVM). Plans emphasize evidence-based diets, measured feeding, and monitoring. When diagnostics or hands-on care are needed, orders go to a partner clinic; follow-ups return to tele-nutrition.",
+            },
+            {
+              type: "table",
+              caption:
+                "Nutrition cases commonly completed via telemedicine (with e-pharmacy / therapeutic diet options)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (DACVN/DVM)" },
+                { key: "rx", title: "Typical eRx / diet" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Obesity / weight-management program <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2021-nutrition-and-weight-management/resourcepdfs/new-2021-aaha-nutrition-and-weight-management-guidelines-with-ref.pdf" target="_blank" rel="noopener">guideline</a>',
+                  plan: "Diet history, BCS/MCS scoring, target-weight math, kcal/day, meal plan, exercise plan, recheck cadence; owner coaching and barriers troubleshooting.",
+                  rx: "Therapeutic weight-management diet; measuring tools; omega-3 as indicated; goal: 0.5–2% BW loss/week.",
+                  red: "Rapid unintended weight loss, polyuria/polydipsia, weakness, suspected endocrine disease → labs and in-clinic exam.",
+                },
+                {
+                  case: 'Chronic kidney disease (stable) diet therapy <a href="https://www.idexx.com/files/iris-pocket-guide-2.pdf" target="_blank" rel="noopener">IRIS</a>',
+                  plan: "Stage-based nutrition (phosphorus restriction, appropriate protein), hydration strategies, appetite support, monitor weight/BCS/MCS; coordinate labs with partner clinic.",
+                  rx: "Renal therapeutic diet; omega-3 where appropriate; phosphate binders per labs; anti-nausea if indicated.",
+                  red: "Uremic signs, dehydration, inappetence >24–48h, progressive azotemia → in-clinic assessment; consider fluids/feeding tube.",
+                },
+                {
+                  case: 'Diabetes mellitus nutrition (dogs & cats) <a href="https://www.aaha.org/resources/2018-aaha-diabetes-management-guideline-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA</a>',
+                  plan: "Carb/fiber strategy (species-specific), timed meals with insulin plan (co-managed with GP/IM), weight goals, home logs.",
+                  rx: "Therapeutic diabetic diet; low-carb high-protein for most cats; high-fiber options for many dogs; appetite support if needed.",
+                  red: "Ketoacidosis signs, inappetence, vomiting, lethargy, hypoglycemia → urgent in-person care.",
+                },
+                {
+                  case: 'Food allergy / adverse food reaction: elimination diet trial <a href="https://www.merckvetmanual.com/integumentary-system/food-allergy/cutaneous-food-allergy-in-animals" target="_blank" rel="noopener">reference</a>',
+                  plan: "Strict 8–12-week elimination diet (hydrolyzed or truly novel), challenge/re-challenge plan, compliance coaching, treat/substance avoidance list.",
+                  rx: "Veterinary hydrolyzed or novel-protein diet; limited treats matching the trial; written rules for meds/flavored products.",
+                  red: "Secondary infection, otitis with discharge, weight loss, GI bleeding, non-response → in-clinic cytology/workup.",
+                },
+                {
+                  case: 'Chronic enteropathy: diet-responsive protocols <a href="https://todaysveterinarypractice.com/nutrition/diet-trials-for-chronic-enteropathy/" target="_blank" rel="noopener">overview</a>',
+                  plan: "Structured step-up diet trials (highly digestible → hydrolyzed/novel protein), fiber strategy, recheck timelines; coordinate fecal/labs with clinic.",
+                  rx: "Therapeutic GI diet; hydrolyzed/novel protein diet; adjunct probiotics where indicated; cobalamin if deficient.",
+                  red: "Hypoproteinemia, hematochezia/melena, dehydration, weight loss, abdominal pain → in-person diagnostics.",
+                },
+                {
+                  case: 'Pancreatitis (post-acute nutrition & relapse prevention) <a href="https://www.merckvetmanual.com/digestive-system/the-exocrine-pancreas/pancreatitis-in-dogs-and-cats" target="_blank" rel="noopener">Merck Vet Manual</a>',
+                  plan: "After stabilization, transition to appropriate diet and meal pattern; fat restriction for dogs when indicated; anti-nausea/pain plan with GP; relapse triggers review.",
+                  rx: "Low-fat canine GI diet when appropriate; highly digestible feline diet; antiemetics as GP prescribes; appetite support plan.",
+                  red: "Acute abdominal pain, persistent vomiting, anorexia, lethargy/dehydration → immediate in-clinic care.",
+                },
+                {
+                  case: 'Exocrine pancreatic insufficiency (EPI): diet & cobalamin plan <a href="https://www.merckvetmanual.com/digestive-system/the-exocrine-pancreas/exocrine-pancreatic-insufficiency-in-dogs-and-cats" target="_blank" rel="noopener">Merck Vet Manual</a>',
+                  plan: "Confirm dx via GP; design enzyme-with-meals protocol, diet selection, feeding schedule; monitor weight and stool quality; cobalamin strategy.",
+                  rx: "Pancreatic enzyme powder with every meal; highly digestible diet; cobalamin supplementation if deficient.",
+                  red: "Failure to gain weight despite therapy, persistent diarrhea, suspected comorbidities → in-clinic reassessment.",
+                },
+                {
+                  case: 'Urolithiasis nutrition: struvite dissolution & prevention <a href="https://urolithcenter.org/recommendations/34?locale=en" target="_blank" rel="noopener">Minnesota Urolith Center</a>',
+                  plan: "Diet selection and monitoring schedule; partner clinic imaging/urinalysis cadence; culture-guided antibiotic use for infection-induced struvite.",
+                  rx: "Therapeutic dissolution diet for struvite; increased water intake; prevention diet thereafter per stone type.",
+                  red: "Obstruction signs, dysuria/stranguria with distress, recurrent infections → urgent in-person evaluation.",
+                },
+                {
+                  case: 'Growth nutrition (esp. large-breed puppies) <a href="https://www.aaha.org/resources/2021-aaha-nutrition-and-weight-management-guidelines/home/" target="_blank" rel="noopener">AAHA</a>',
+                  plan: "Life-stage diet selection, calcium/phosphorus appropriateness for large breeds, measured feeding for steady growth, BCS tracking, transition timing.",
+                  rx: "Complete & balanced growth diet appropriate for large breeds; feeding plan with measured meals; owner education.",
+                  red: "Lameness, orthopedic pain, stunted or excessive growth, persistent GI issues → in-person exam and radiographs as indicated.",
+                },
+                {
+                  case: 'Home-prepared diet formulation (owner preference or multi-morbid cases) <a href="https://www.aaha.org/resources/2021-aaha-nutrition-and-weight-management-guidelines/home-prepared-diets/" target="_blank" rel="noopener">AAHA/ACVN</a>',
+                  plan: "Full medical and diet history, goals, recipe design or evaluation by a board-certified veterinary nutritionist, periodic re-checks and recipe updates.",
+                  rx: "Custom complete-and-balanced recipe; supplement plan; written prep instructions; follow-up schedule.",
+                  red: "Growing puppies/kittens without expert-formulated recipe, weight loss, nutrient deficiency signs → in-person workup and recipe revision.",
+                },
+              ],
+              note: "Tele-nutrition consults are ideal for stable patients. Diagnostics (labs, UA, imaging) and any procedures occur at partner clinics; results sync back. Always align diet choices with the pet’s diagnoses, meds, and life stage; use BCS/MCS and objective weight trends at each recheck.",
+            },
+          ],
+        },
+      ],
+    },
+    endocrinologyTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Endocrinology (SAIM/DACVIM Perspective)",
+      mainDescription:
+        "Tele-endocrinology is ideal for longitudinal management, dose titration, client coaching, and shared decision-making. Diagnostics (CBC/chem/UA, thyroid panels, ACTH stimulation, LDDST, fructosamine, blood pressure) are routed to partner clinics as needed; results sync back so the primary DVM stays in the loop.",
+      sections: [
+        {
+          id: "endoTelemedComplete",
+          title: "Endocrinology: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These conditions are typically managed by live video once diagnosis and essential baselines are established. Plans emphasize guideline-based monitoring with pharmacy or therapeutic-diet coordination and clear return precautions.",
+            },
+            {
+              type: "table",
+              caption:
+                "Endocrine cases commonly completed via telemedicine (with e-pharmacy / shared monitoring)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (SAIM/DACVIM)" },
+                { key: "rx", title: "Typical eRx / monitoring" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Canine diabetes mellitus: dose titration & home monitoring <a href="https://www.aaha.org/resources/2018-aaha-diabetes-management-guideline-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA Diabetes</a>',
+                  plan: "Review logs (app/glucose curves), adjust insulin per signs & curves; reinforce feeding/timing; set recheck cadence and fructosamine schedule.",
+                  rx: "Insulin & supplies; antiemetic PRN; written hypoglycemia plan; consider CGM/home curves per owner capability.",
+                  red: "Inappetence, vomiting, weakness, suspected DKA/HHS → urgent in-person care.",
+                },
+                {
+                  case: 'Feline diabetes: remission-oriented management <a href="https://www.aaha.org/resources/2018-aaha-diabetes-management-guideline-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA Diabetes</a>',
+                  plan: "Low-carb diet coaching, tight clinical monitoring, stepwise insulin adjustments, remission watch; owner video/photos of behavior and appetite.",
+                  rx: "Insulin & syringes/pen; diet plan; fructosamine at clinic per schedule.",
+                  red: "Anorexia, recurrent hypoglycemia, ketonuria/ketosis → in-person.",
+                },
+                {
+                  case: 'Feline hyperthyroidism under medical management (methimazole) <a href="https://catvets.com/resource/management-of-feline-hyperthyroidism-guidelines/" target="_blank" rel="noopener">AAFP 2016</a> <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/feline-hyperthyroidism/" target="_blank" rel="noopener">AAHA 2023</a>',
+                  plan: "Dose adjustment counseling, adverse-effect screening, diet/iodine discussion, BP/renal monitoring schedule coordinated with clinic.",
+                  rx: "Methimazole (oral/transdermal); monitor T4, CBC/chem, BP at set intervals.",
+                  red: "Lethargy, GI upset not resolving, azotemia progression, uncontrolled tachycardia/HTN → clinic diagnostics.",
+                },
+                {
+                  case: 'Canine hypothyroidism on L-T4: routine monitoring <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/canine-hypothyroidism/" target="_blank" rel="noopener">AAHA 2023</a> <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/therapy/" target="_blank" rel="noopener">AAHA Therapy</a>',
+                  plan: "Check clinical response; set post-pill TT4 timing; adjust dose per signs and labs; address adherence and drug interactions.",
+                  rx: "Levothyroxine; lab rechecks via partner clinic (post-pill TT4 4–6h).",
+                  red: "Signs of iatrogenic hyperthyroidism (PU/PD, panting, weight loss, restlessness) → exam and labs.",
+                },
+                {
+                  case: 'Canine hypoadrenocorticism (Addison’s): maintenance check-ins <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/canine-hypoadrenocorticism-addisons-disease/" target="_blank" rel="noopener">AAHA 2023</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6055912/" target="_blank" rel="noopener">Review</a>',
+                  plan: "Assess clinical control, stress-dose plan, interval electrolytes via clinic; reinforce owner crisis plan.",
+                  rx: "DOCP or fludrocortisone; low-dose prednisone; scheduled Na/K checks.",
+                  red: "Vomiting/diarrhea, collapse, weakness, hyperkalemic signs → emergency.",
+                },
+                {
+                  case: 'Canine hyperadrenocorticism (Cushing’s): between-test clinical monitoring <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/" target="_blank" rel="noopener">AAHA 2023</a> <a href="https://www.aaha.org/newstat/publications/monitoring-strategies-for-trilostane-therapy-in-dogs-with-cushings-syndrome/" target="_blank" rel="noopener">Monitoring</a>',
+                  plan: "Owner-reported signs/QOL, med timing, adverse-effect screen; coordinate ACTH stim rechecks with clinic.",
+                  rx: "Trilostane; targeted labs per protocol; adjust dose after clinic testing.",
+                  red: "Anorexia, vomiting, lethargy, suspected adrenal oversuppression → in-person.",
+                },
+                {
+                  case: 'Hypertension counseling in endocrine patients (esp. hyperthyroid cats) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6271319/" target="_blank" rel="noopener">ACVIM HTN 2018</a>',
+                  plan: "Explain risk, home monitoring feasibility, target ranges; schedule clinic BP and fundic exam cadence; adjust plan with DVM.",
+                  rx: "Antihypertensives per DVM where indicated; coordinate BP checks.",
+                  red: "Ocular/neuro signs, refractory BP elevation → immediate clinic care.",
+                },
+                {
+                  case: 'Owner training: home glucose curves / data capture <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/diabetes/2018-aaha-diabetes-management-guidelines-2022-update.pdf" target="_blank" rel="noopener">AAHA Diabetes PDF</a>',
+                  plan: "Coach technique, frequency, and data interpretation; build feedback loop; set triggers for contacting clinic.",
+                  rx: "Meters/CGM where appropriate; fructosamine via clinic at intervals.",
+                  red: "Symptomatic hypo/hyperglycemia, persistent vomiting, anorexia → clinic.",
+                },
+                {
+                  case: 'Post-I-131 discharge counseling & nutrition (cats) <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/feline-hyperthyroidism/" target="_blank" rel="noopener">AAHA 2023</a>',
+                  plan: "Discuss expected timeline, monitoring labs, renal watch, diet; set recheck plan with clinic.",
+                  rx: "No anti-thyroid meds if cured; anti-hypertensives PRN; renal diet if needed per labs.",
+                  red: "Progressive azotemia, uncontrolled hypertension, weight loss → clinic.",
+                },
+                {
+                  case: 'Client education for endocrine comorbidity (weight, diet, meds timing) <a href="https://www.aaha.org/resources/2018-aaha-diabetes-management-guideline-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA Diabetes</a>',
+                  plan: "Reinforce dosing windows, meal pairing, travel/boarding plans; document shared plan and return precautions.",
+                  rx: "Refills and supplies; written sick-day and dose-adjustment rules.",
+                  red: "Any acute decompensation or new systemic signs → in-person.",
+                },
+              ],
+              note: "Tele-endocrinology focuses on signs-based adjustments, owner training, and shared monitoring. Most dose changes are confirmed against scheduled clinic labs (fructosamine, TT4, electrolytes, ACTH stim, LDDST, blood pressure).",
+            },
+          ],
+        },
+        {
+          id: "endoTelemedHybrid",
+          title: "Endocrinology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates workup and plan, then a partner clinic performs tests/procedures; results flow back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (SAIM/DACVIM)" },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'New diabetes workup & initiation <a href="https://www.aaha.org/resources/2018-aaha-diabetes-management-guideline-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA Diabetes</a>',
+                  tele: "History, differentials, owner training overview, initial diet/insulin counseling, order baseline labs.",
+                  clinic:
+                    "CBC/chem/UA ± urine culture; fructosamine; nurse/RVT insulin demo; first recheck scheduling.",
+                  notes:
+                    "Tele follow-up for dose titration using curves; periodic clinic labs.",
+                },
+                {
+                  case: 'Suspected hyperadrenocorticism (Cushing’s) <a href="https://pubmed.ncbi.nlm.nih.gov/24112317/" target="_blank" rel="noopener">ACVIM HAC 2012</a>',
+                  tele: "Screen for compatible signs; discuss testing algorithms; place orders.",
+                  clinic:
+                    "LDDST or ACTH stimulation ± imaging; baseline electrolytes/chemistry.",
+                  notes:
+                    "If confirmed, start trilostane; clinical monitoring by tele + scheduled ACTH stim at clinic.",
+                },
+                {
+                  case: 'Suspected hypoadrenocorticism (Addison’s) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6055912/" target="_blank" rel="noopener">Review</a> <a href="https://www.aaha.org/resources/2023-aaha-selected-endocrinopathies-of-dogs-and-cats-guidelines/canine-hypoadrenocorticism-addisons-disease/" target="_blank" rel="noopener">AAHA 2023</a>',
+                  tele: "Triage, crisis plan, order screening labs; educate on emergency signs.",
+                  clinic:
+                    "Baseline cortisol ± ACTH stimulation; electrolytes; stabilization if needed.",
+                  notes:
+                    "Begin DOCP/fludrocortisone + prednisone; tele follow-ups; electrolytes at clinic per schedule.",
+                },
+                {
+                  case: 'Suspected feline hyperthyroidism (new) <a href="https://catvets.com/resource/management-of-feline-hyperthyroidism-guidelines/" target="_blank" rel="noopener">AAFP 2016</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6271319/" target="_blank" rel="noopener">ACVIM HTN 2018</a>',
+                  tele: "History, signs, therapy options (I-131, methimazole, diet); place lab/BP orders.",
+                  clinic:
+                    "Total T4 ± free T4, CBC/chem/UA; blood pressure & fundic exam; renal staging.",
+                  notes:
+                    "Choose therapy; subsequent dose adjustments & owner coaching via tele.",
+                },
+                {
+                  case: 'Refractory diabetic cat: rule-out acromegaly <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0127794" target="_blank" rel="noopener">Niessen 2015</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7995378/" target="_blank" rel="noopener">Fenn 2021</a>',
+                  tele: "Identify insulin resistance pattern; discuss advanced testing and options; refer if needed.",
+                  clinic:
+                    "Serum IGF-1; advanced imaging/referral (CT/MRI) for pituitary disease; consider radiation/surgery centers.",
+                  notes:
+                    "If HST confirmed, discuss definitive vs medical options; tele follow-ups coordinate with specialty center.",
+                },
+              ],
+              note: "Example workflow: video consult → place LDDST/ACTH stim orders → clinic completes testing → results sync back → tele follow-up to set dose/monitoring cadence.",
+            },
+          ],
+        },
+      ],
+    },
+    nephrologyUrologyTelemedicine: {
+      mainTitle:
+        "Nephrology & Urology: Telemedicine Use Cases (DACVIM-SAIM perspective)",
+      mainDescription:
+        "Stable medical management and owner coaching are highly telemedicine-friendly in nephrology/urology. Diagnostics requiring samples or imaging happen in-clinic, with follow-ups and care plans completed by video.",
+      sections: [
+        {
+          id: "nephroUroTelemedComplete",
+          title: "Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These are kidney/urinary problems that a board-certified internist (or GP with internal-medicine interest) can usually manage by live video, then e-prescribe to the client’s chosen pharmacy when appropriate. In-person care is needed if red-flags appear.",
+            },
+            {
+              type: "table",
+              caption:
+                "Nephrology/Urology cases commonly completed via telemedicine (with e-pharmacy options)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Nephro/Uro)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: `Chronic kidney disease (CKD) — staged maintenance <a href="https://www.idexx.com/files/iris-pocket-guide-2.pdf" target="_blank" rel="noopener">IRIS CKD guide</a>`,
+                  plan: "Review recent labs/UA/BP, confirm IRIS stage, adjust diet/hydration plan, phosphate control, nausea/appetite support, recheck cadence.",
+                  rx: "Therapeutic renal diet; phosphate binders when indicated; anti-nausea; gastric protectants; omega-3; SQ fluids if already taught.",
+                  red: "Anorexia >24–48h, vomiting, dehydration, melena/hematemesis, rapid weight loss, severe lethargy.",
+                },
+                {
+                  case: `Proteinuria / PLN on maintenance therapy <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.12230" target="_blank" rel="noopener">ACVIM proteinuria</a> &nbsp;|&nbsp; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4895689/" target="_blank" rel="noopener">Telmisartan (cats)</a>`,
+                  plan: "Confirm recent UPC & BP trends, optimize RAAS blockade, diet sodium review, plan monitoring (UPC/BP/chemistry).",
+                  rx: "ACE-i or ARB per species/response; renal diet; omega-3; consider dual therapy if guideline-supported and monitored.",
+                  red: "UPC rising, hypertension uncontrolled, hypoalbuminemia/edema, azotemia worsening, suspected UTI.",
+                },
+                {
+                  case: `Systemic hypertension in CKD cats/dogs (maintenance) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6271319/" target="_blank" rel="noopener">ACVIM HTN 2018</a>`,
+                  plan: "Home BP log if available, review target-organ signs, titrate anti-hypertensives, schedule periodic in-clinic BP/fundic checks.",
+                  rx: "Cats: amlodipine ± RAAS inhibitor; Dogs: RAAS inhibitor ± CCB per response; low-sodium diet guidance.",
+                  red: "SBP likely ≥180 or TOD signs (retinal changes, neuro events), collapse, acute vision loss.",
+                },
+                {
+                  case: `Feline idiopathic cystitis (FIC) — relapse prevention (MEMO) <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/feline-life-stage-2021/2021-aaha-aafp-feline-life-stage-guidelines.pdf" target="_blank" rel="noopener">AAHA/AAFP 2021</a>`,
+                  plan: "Detailed history, stress mapping, litter/environment optimization, water-intake plan, flare protocol, follow-up photos.",
+                  rx: "Diet/water strategies (fountains, wet food), pheromones, environmental enrichment; analgesia plans for flares as appropriate.",
+                  red: "Stranguria/anuria, severe hematuria with obstruction risk, marked pain → emergency exam.",
+                },
+                {
+                  case: `Urolithiasis recurrence prevention (CaOx history) <a href="https://urolithcenter.org/recommendations/16?locale=en" target="_blank" rel="noopener">MUC CaOx (feline)</a>`,
+                  plan: "Review prior analysis, set urine SG/pH targets, diet selection, citrate considerations, re-image cadence (scheduled at clinic).",
+                  rx: "Therapeutic urinary diet; water-intake optimization; potassium citrate when indicated.",
+                  red: "Pollakiuria/dysuria, pain, suspected obstruction, recurrent hematuria despite plan.",
+                },
+                {
+                  case: `Asymptomatic bacteriuria counseling (no antibiotics) <a href="https://www.vdl.ndsu.edu/wp-content/uploads/2022/02/ISCAID-Urinary-Guidelines-2019.pdf" target="_blank" rel="noopener">ISCAID 2019</a>`,
+                  plan: "Explain distinction from UTI, avoid unnecessary antimicrobials, plan surveillance and triggers for culture if signs develop.",
+                  rx: "None; address predisposing factors (urine dilution, hygiene, comorbidities) and monitoring.",
+                  red: "Onset of clinical signs (dysuria, pollakiuria, hematuria), pyrexia, systemic illness.",
+                },
+                {
+                  case: `CKD nutrition & phosphorus control coaching <a href="https://todaysveterinarypractice.com/urology-renal-medicine/treatment-chronic-kidney-disease-dogs-cats/" target="_blank" rel="noopener">CKD Tx overview</a>`,
+                  plan: "Refine diet acceptance, treat nausea, stool/constipation plan, set follow-up intervals for labs and BP.",
+                  rx: "Therapeutic renal diets; phosphate binders when indicated; anti-nausea ± appetite support per primary DVM.",
+                  red: "Refusal to eat, weight loss, suspected GI bleeding, progressive azotemia symptoms.",
+                },
+                {
+                  case: `Owner training & home hydration strategies <a href="https://www.iris-kidney.com/iris-guidelines-1" target="_blank" rel="noopener">IRIS resources</a>`,
+                  plan: "Water-intake optimization, SQ fluid technique review if already prescribed, environmental changes to support kidney health.",
+                  rx: "SQ fluid supplies when already part of care plan; water fountains, wet food transition.",
+                  red: "Owner unable to administer fluids safely, signs of fluid overload, weakness/syncope.",
+                },
+              ],
+              note: "Targets and thresholds follow IRIS/ACVIM consensus (e.g., CKD staging, proteinuria thresholds, and BP categories). Controlled substances generally require in-person exam per law.",
+            },
+          ],
+        },
+        {
+          id: "nephroUroTelemedHybrid",
+          title: "Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These start with a video consult (history, differentials, initial plan), then a partner clinic completes diagnostics/procedures. Results and administration records sync back to the tele-internist and the client’s primary DVM.",
+            },
+            {
+              type: "table",
+              caption: "Start via telemedicine; complete at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (Nephro/Uro)" },
+                { key: "clinic", title: "Clinic tasks & supervision" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: `Suspected UTI (avoid empiric antibiotics) <a href="https://www.vdl.ndsu.edu/wp-content/uploads/2022/02/ISCAID-Urinary-Guidelines-2019.pdf" target="_blank" rel="noopener">ISCAID 2019</a>`,
+                  tele: "History/signalment/risks; order UA and urine culture; analgesia/hydration guidance; schedule sample collection.",
+                  clinic:
+                    "Cystocentesis UA/culture; report MICs; clinician finalizes targeted therapy and duration.",
+                  notes:
+                    "Culture-guided Rx; stewardship plan and signs for relapse reviewed by video.",
+                },
+                {
+                  case: `Struvite urolith dissolution protocol (cats) <a href="https://urolithcenter.org/recommendations/53?locale=en" target="_blank" rel="noopener">MUC Struvite Dissolution</a>`,
+                  tele: "Confirm radiopaque struvite prediction and absence of obstruction; prescribe dissolution diet; plan re-imaging cadence.",
+                  clinic:
+                    "Follow-up radiographs every 2–3 weeks; culture if progress stalls; document outcomes.",
+                  notes:
+                    "Dietary dissolution in weeks; prevention counseling thereafter.",
+                },
+                {
+                  case: `New CKD workup & staging <a href="https://www.idexx.com/files/iris-pocket-guide-2.pdf" target="_blank" rel="noopener">IRIS CKD guide</a>`,
+                  tele: "Screening history and differentials; order chem/UA/SDMA ± imaging; set expectations and Q&A.",
+                  clinic:
+                    "Bloodwork, UA, BP, ± imaging; clinic uploads results; internist stages/substages, initiates plan.",
+                  notes:
+                    "Tele follow-up for diet/medication titration and owner training.",
+                },
+                {
+                  case: `Hypertension diagnosis & initiation <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6271319/" target="_blank" rel="noopener">ACVIM HTN 2018</a>`,
+                  tele: "Assess TOD risks, current meds; order in-clinic serial BP, fundic exam, baseline labs; discuss targets.",
+                  clinic:
+                    "Standardized BP measurement on multiple visits if needed; fundic exam; baseline labs.",
+                  notes:
+                    "Start amlodipine (cats) or RAAS inhibition ± CCB (dogs); tele follow-up for titration.",
+                },
+                {
+                  case: `Proteinuria confirmation & workup <a href="https://www.iris-kidney.com/iris-guidelines-1" target="_blank" rel="noopener">IRIS proteinuria</a>`,
+                  tele: "History, rule-outs; order UPC (×2–3), BP, UA/culture; plan diet and RAAS strategy once confirmed.",
+                  clinic:
+                    "Sample collection and BP; lab processing; clinician finalizes therapy and monitoring schedule.",
+                  notes:
+                    "Begin ACE-i/ARB per guidelines; UPC/BP rechecks planned; tele reviews results.",
+                },
+                {
+                  case: `AKI suspicion / obstructive LUTD triage <a href="https://pubmed.ncbi.nlm.nih.gov/38325516/" target="_blank" rel="noopener">IRIS AKI 2024</a> &nbsp;|&nbsp; <a href="https://journals.sagepub.com/doi/10.1177/1098612X241309176" target="_blank" rel="noopener">iCatCare LUTS 2025</a>`,
+                  tele: "Immediate red-flag screen; direct to ER for catheterization/IV care when indicated; provide stabilization guidance en route.",
+                  clinic:
+                    "Decompression, labs, imaging, in-hospital monitoring; upload records.",
+                  notes:
+                    "Tele follow-up after discharge for prevention plan and monitoring cadence.",
+                },
+              ],
+              note: "Example workflow: Monday video visit → Internist orders struvite-dissolution protocol and q2–3 week radiographs at Partner Clinic A; clinic imaging/results sync to the tele-internist and the client’s primary DVM.",
+            },
+          ],
+        },
+      ],
+    },
+    cardiologyTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Cardiology (ACVIM Perspective)",
+      mainDescription:
+        "Tele-cardiology is excellent for longitudinal monitoring, caregiver training (e.g., resting respiratory rate), medication counseling, and shared decision-making. Diagnostics (echocardiography, thoracic radiographs, ECG/Holter, bloodwork, BP) are performed at partner clinics; results sync back so the primary DVM remains in the loop.",
+
+      sections: [
+        {
+          id: "cardioTelemedComplete",
+          title: "Cardiology: Common Follow-ups Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These follow-ups are typically managed by live video once diagnosis and baselines exist. Plans emphasize ACVIM-guided monitoring, owner-measured resting respiratory rate (RRR), and clear return precautions.",
+            },
+            {
+              type: "table",
+              caption:
+                "Cardiology follow-ups commonly completed via telemedicine (education, med checks, RRR coaching)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Cardiology/GP)" },
+                { key: "rx", title: "Typical eRx / monitoring" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Chronic MMVD/CHF—stable patient: home RRR coaching & med review <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524084/" target="_blank" rel="noopener">ACVIM MMVD 2019</a> <a href="https://vcahospitals.com/know-your-pet/home-breathing-rate-evaluation" target="_blank" rel="noopener">RRR guide</a>',
+                  plan: "Review appetite/energy/cough; confirm pill timing; coach accurate RRR counting and thresholds; adjust plan per signs; schedule clinic labs/imaging when due.",
+                  rx: "Furosemide/torsemide per plan; pimobendan; ACE-i/spironolactone when indicated; owner RRR log/app.",
+                  red: "RRR persistently above baseline (e.g., >30–35/min), increased effort, restlessness at night, anorexia/vomiting → clinic/ER.",
+                },
+                {
+                  case: 'Preclinical MMVD Stage B1/B2—education & adherence check <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.15488" target="_blank" rel="noopener">ACVIM MMVD 2019</a> <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.14586" target="_blank" rel="noopener">EPIC (pimobendan)</a>',
+                  plan: "Explain staging and monitoring; if B2, discuss EPIC criteria and pimobendan benefits; set recheck cadence and home-observation goals.",
+                  rx: "Pimobendan for Stage B2; sodium-aware diet; RRR education; schedule next echo/rads with clinic.",
+                  red: "New cough, breathing changes, exercise intolerance → clinic imaging/labs.",
+                },
+                {
+                  case: 'Feline cardiomyopathy—stable outpatient counseling (HCM phenotype) <a href="https://pubmed.ncbi.nlm.nih.gov/32243654/" target="_blank" rel="noopener">ACVIM Feline CM 2020</a>',
+                  plan: "Discuss phenotype/risks (CHF/ATE), activity management, medication adherence, signs to watch, RRR technique; coordinate echo/BP/labs per plan.",
+                  rx: "Atenolol or clopidogrel if previously prescribed; diet/weight targets; home RRR diary.",
+                  red: "Tachypnea/dyspnea, hind-limb pain/paresis (ATE), collapse → emergency exam.",
+                },
+                {
+                  case: 'Pulmonary hypertension—tele check-in between echos <a href="https://pubmed.ncbi.nlm.nih.gov/32065428/" target="_blank" rel="noopener">ACVIM PH 2020</a>',
+                  plan: "Assess exercise tolerance/cough/syncope, review concurrent disease plan (e.g., airway, thromboembolic risks), confirm med timing; schedule next echo/BP as due.",
+                  rx: "Sildenafil or other PH-directed therapy per plan; adjust only against clinic data schedule.",
+                  red: "Syncope increase, respiratory distress, cyanosis → in-person/ER.",
+                },
+                {
+                  case: 'Owner training: accurate resting respiratory rate (RRR) <a href="https://veterinarypartner.vin.com/doc/?id=8401142&pid=19239" target="_blank" rel="noopener">VIN Client Handout</a> <a href="https://vhc.missouri.edu/small-animal-hospital/cardiology/at-home-monitoring-of-pets-with-heart-disease/" target="_blank" rel="noopener">University resource</a>',
+                  plan: "Demonstrate RRR technique (asleep/relaxed, count full breaths ×60s), set alert thresholds, set logging cadence, tie to action plan.",
+                  rx: "RRR tracker/app; written ‘call/ER’ thresholds; schedule next clinic recheck.",
+                  red: "Sustained RRR >30–35/min or >20–30% above pet’s baseline over several checks → clinic/ER.",
+                },
+              ],
+              note: "Tele-cardiology follow-ups rely on owner RRR tracking and symptom trend review; medication changes are confirmed against periodic clinic data (echocardiography, ECG, thoracic radiographs, renal/electrolytes, and blood pressure) per ACVIM guidance.",
+            },
+          ],
+        },
+
+        {
+          id: "cardioTelemedHybrid",
+          title: "Cardiology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates triage/education, then a partner clinic completes diagnostics/procedures; results flow back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (Cardiology/GP)" },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'New murmur (dog): staging & treatment planning <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524084/" target="_blank" rel="noopener">ACVIM MMVD 2019</a>',
+                  tele: "History, risk discussion, explain Stage B framework and potential therapy if B2; place orders.",
+                  clinic:
+                    "Echocardiography ± thoracic radiographs, BP, labs; confirm stage (B1/B2).",
+                  notes:
+                    "If B2, start pimobendan per EPIC; tele follow-ups for RRR/med adherence.",
+                },
+                {
+                  case: 'Preclinical MMVD Stage B2—confirm candidacy for pimobendan <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.14586" target="_blank" rel="noopener">EPIC trial</a>',
+                  tele: "Review signalment/signs; discuss EPIC inclusion (cardiomegaly criteria), benefits, and monitoring; place echo/rads orders if outdated.",
+                  clinic:
+                    "Echo/metrics to confirm cardiomegaly; baseline labs; initiate pimobendan.",
+                  notes:
+                    "Tele follow-up for adherence and home monitoring; clinic rechecks per protocol.",
+                },
+                {
+                  case: 'Suspected decompensated CHF—urgent triage <a href="https://vcahospitals.com/know-your-pet/home-breathing-rate-evaluation" target="_blank" rel="noopener">RRR guide</a>',
+                  tele: "Assess effort, RRR, posture; advise immediate ER if distress; provide stabilization guidance en route.",
+                  clinic:
+                    "Oxygen, furosemide, imaging, labs; admit if indicated.",
+                  notes:
+                    "Tele recheck post-discharge to adjust home plan and RRR thresholds.",
+                },
+                {
+                  case: 'Syncope/collapse—arrhythmia workup pathway <a href="https://www.vetmed.auburn.edu/wp-content/uploads/2018/09/AIVR-arrhythmia.pdf" target="_blank" rel="noopener">Holter/ECG note</a>',
+                  tele: "Event history and video review; rule-in exertional/positional triggers; order ECG/Holter and BP.",
+                  clinic:
+                    "12-lead ECG, 24-hr Holter/event monitor, echocardiography; labs as indicated.",
+                  notes:
+                    "Rate/rhythm control plan; tele follow-ups for signs and med tolerance.",
+                },
+                {
+                  case: 'Atrial fibrillation—rate control plan with objective monitoring <a href="https://pubmed.ncbi.nlm.nih.gov/19645836/" target="_blank" rel="noopener">Gelzer 2009</a> <a href="https://pubmed.ncbi.nlm.nih.gov/39591830/" target="_blank" rel="noopener">Romito 2025</a>',
+                  tele: "Discuss targets and side effects; coordinate ECG/Holter for dose titration; review exercise videos and syncopal signs.",
+                  clinic:
+                    "ECG/Holter to verify ventricular rate; chemistry/electrolytes; digoxin level when used.",
+                  notes:
+                    "Often diltiazem+digoxin combination for control; tele maintains adherence/QoL while clinic verifies rate.",
+                },
+                {
+                  case: 'Pulmonary hypertension—confirm and stage <a href="https://pubmed.ncbi.nlm.nih.gov/32065428/" target="_blank" rel="noopener">ACVIM PH 2020</a> <a href="https://todaysveterinarypractice.com/cardiology/pulmonary-hypertension-in-dogs/" target="_blank" rel="noopener">Review</a>',
+                  tele: "Screen for signs, discuss differential (airway, thromboembolic, cardiac), place echo order and comorbidity workup.",
+                  clinic:
+                    "Echocardiography (TR velocity + echo signs), thoracic imaging, heartworm/thromboembolic evaluation; BP.",
+                  notes:
+                    "Start PH-directed therapy when indicated; tele follow-ups for tolerance and symptom trends.",
+                },
+                {
+                  case: 'Feline murmur/tachycardia—rule-in cardiomyopathy <a href="https://pubmed.ncbi.nlm.nih.gov/32243654/" target="_blank" rel="noopener">ACVIM Feline CM 2020</a>',
+                  tele: "Explain phenotype-based approach, ATE risk, stress-minimizing tactics for clinic visits; order echo/BP and labs.",
+                  clinic:
+                    "Echocardiography; BP/fundic exam; chemistry/thyroid as indicated.",
+                  notes:
+                    "Tele rechecks for adherence and early-signs coaching (RRR, appetite, activity).",
+                },
+              ],
+              note: "Example workflow: tele consult → echo/ECG/rads/BP orders → clinic completes diagnostics and uploads results → tele follow-up to set RRR thresholds, med timing, and recheck cadence.",
+            },
+          ],
+        },
+      ],
+    },
+    gastroenterologyTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Gastroenterology (SAIM/DACVIM Perspective)",
+      mainDescription:
+        "Tele-GI excels at diet trials, owner coaching, medication titration, and longitudinal follow-ups. Diagnostics (CBC/chem/UA, fecal tests, cobalamin/folate, cPLI/fPLI, abdominal ultrasound, endoscopy/biopsy) are routed to partner clinics; results sync back so the primary DVM stays in the loop.",
+
+      sections: [
+        {
+          id: "giTelemedComplete",
+          title: "Gastroenterology: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Once baselines and differentials are set, many GI cases can be managed by live video with guideline-based diet plans, nutraceuticals, rational pharmacology, and clear red-flag instructions.",
+            },
+            {
+              type: "table",
+              caption:
+                "GI cases commonly completed via telemedicine (with e-pharmacy / shared monitoring)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (SAIM/DACVIM)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Diet-responsive chronic enteropathy (FRE) diet trial & coaching <a href="https://www.merckvetmanual.com/digestive-system/diseases-of-the-small-intestine-in-small-animals/chronic-enteropathies-in-small-animals" target="_blank" rel="noopener">Merck CE</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10931249/" target="_blank" rel="noopener">CIE classification 2024</a>',
+                  plan: "Select novel/hydrolyzed diet; strict 6–8 week trial; step-wise plan; photo/stool logs; set recheck cadence.",
+                  rx: "Therapeutic diet; probiotics where appropriate; fiber per stool type; anti-nausea PRN.",
+                  red: "Weight loss, hypoalbuminemia suspicion, melena/hematochezia, dehydration → clinic workup.",
+                },
+                {
+                  case: 'Fiber-responsive large-bowel diarrhea/colitis (stable) <a href="https://www.merckvetmanual.com/digestive-system/diseases-of-the-large-intestine-in-small-animals/colitis-in-small-animals" target="_blank" rel="noopener">Merck Colitis</a>',
+                  plan: "Differentiate small vs large bowel; add mixed soluble/insoluble fiber; eliminate triggers; set follow-up.",
+                  rx: "Fiber supplementation; targeted diet; probiotics; short symptomatic care as needed.",
+                  red: "Tenesmus with blood/mucus persisting, systemic illness, weight loss → in-clinic diagnostics ± colon workup.",
+                },
+                {
+                  case: 'Exocrine pancreatic insufficiency (EPI) maintenance & cobalamin plan <a href="https://pubmed.ncbi.nlm.nih.gov/37944252/" target="_blank" rel="noopener">JAVMA 2023 EPI</a> <a href="https://www.merckvetmanual.com/digestive-system/the-exocrine-pancreas/exocrine-pancreatic-insufficiency-in-dogs-and-cats" target="_blank" rel="noopener">Merck EPI</a>',
+                  plan: "Dose enzyme powder/granules; review body-weight trends and stool quality; plan cobalamin supplementation and rechecks.",
+                  rx: "Pancreatic enzymes with each meal; cobalamin supplementation when indicated; diet optimization.",
+                  red: "Poor response despite adherence, weight loss, suspected concurrent disease → clinic labs/US.",
+                },
+                {
+                  case: 'Chronic pancreatitis (stable outpatient) relapse prevention & nutrition <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16053" target="_blank" rel="noopener">ACVIM feline pancreatitis 2021</a> <a href="https://www.merckvetmanual.com/digestive-system/the-exocrine-pancreas/pancreatitis-in-dogs-and-cats" target="_blank" rel="noopener">Merck Pancreatitis</a>',
+                  plan: "Low-fat diet (dogs), small frequent meals, analgesia/anti-nausea counseling; monitor triggers; schedule periodic labs via clinic.",
+                  rx: "Dietary plan; anti-nausea; analgesia per primary DVM; +/- appetite support per protocol.",
+                  red: "Vomiting with dehydration, abdominal pain, anorexia >24–48h → clinic for labs ± imaging.",
+                },
+                {
+                  case: 'Post-diagnosis CE/IBD maintenance (immunomodulator step-down) <a href="https://onlinelibrary.wiley.com/doi/10.1111%2Fjvim.16690" target="_blank" rel="noopener">ACVIM feline CE 2023</a> <a href="https://wsava.org/global-guidelines/gastrointestinal-guidelines/" target="_blank" rel="noopener">WSAVA GI (histopath)</a>',
+                  plan: "Symptom scoring, adverse-effect check, taper strategy, diet adherence, cobalamin plan; schedule clinic labs per protocol.",
+                  rx: "Prednisolone/budesonide or alternative per prior plan; diet; B12 supplementation when indicated.",
+                  red: "Progressive weight loss, effusion/ascites, persistent vomiting/diarrhea → clinic restaging.",
+                },
+                {
+                  case: 'GERD/esophagitis-suspect: rational GI protectant use (short courses) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6271318/" target="_blank" rel="noopener">ACVIM GI-protectants 2018</a>',
+                  plan: "Assess triggers, meal timing/elevation, trial short-course acid suppression only when indicated; avoid indefinite therapy without diagnosis.",
+                  rx: "PPI/H2RA short course when appropriate; sucralfate for mucosal support; feeding strategy.",
+                  red: "Dysphagia, regurg with weight loss, aspiration risk → clinic imaging ± endoscopy.",
+                },
+                {
+                  case: 'Feline idiopathic constipation (non-obstructive) home plan <a href="https://todaysveterinarypractice.com/wp-content/uploads/sites/4/2021/12/TVP-2022-0102_Feline_Constipation_Nutrition.pdf" target="_blank" rel="noopener">TVP 2022</a>',
+                  plan: "Hydration, fiber vs osmotic laxative strategy, stool diary, litterbox optimization, activity plan; define when to escalate.",
+                  rx: "PEG 3350 or lactulose per DVM; fiber/diet adjustments; water-intake tactics (wet food/fountain).",
+                  red: "Pain/straining with no stool, anorexia or vomiting, suspected megacolon → clinic ± enemas/radiographs.",
+                },
+                {
+                  case: 'Giardiasis—post-diagnosis treatment & environment control <a href="https://capcvet.org/guidelines/giardia/" target="_blank" rel="noopener">CAPC Giardia</a> <a href="https://todaysveterinarypractice.com/wp-content/uploads/sites/4/2021/04/TVP-2021-0506_Parasitology_Giardia.pdf" target="_blank" rel="noopener">TVP Giardia</a>',
+                  plan: "Review positive test, treat pet(s) per guideline, bathe on treatment days, clean environment, retest only if signs persist.",
+                  rx: "Fenbendazole or metronidazole per CAPC; hygiene plan; manage co-pets as indicated.",
+                  red: "Persistent diarrhea/weight loss despite therapy → clinic for further workup.",
+                },
+                {
+                  case: 'Owner education: small- vs large-bowel pattern & when to worry <a href="https://www.merckvetmanual.com/digestive-system/diseases-of-the-small-intestine-in-small-animals/chronic-enteropathies-in-small-animals" target="_blank" rel="noopener">Merck CE</a>',
+                  plan: "Teach pattern recognition (frequency/urgency/mucus vs volume/weight loss), hydration checks, diet adherence; set return precautions.",
+                  rx: "Dietary and fiber guidance; probiotics where appropriate; written action plan.",
+                  red: "Any systemic illness, blood, dehydration, or poor response → in-clinic evaluation.",
+                },
+                {
+                  case: 'Chronic hepatitis (medical management follow-ups) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524396/" target="_blank" rel="noopener">ACVIM Canine CH 2019</a>',
+                  plan: "Review signs and labs trend (done at clinic), nutrition/copper strategy, hepatoprotectants; schedule lab cadence.",
+                  rx: "Ursodiol; SAMe/silybin; copper-restricted diet/chelator where indicated.",
+                  red: "Icterus progression, ascites, encephalopathy signs → in-person diagnostics.",
+                },
+              ],
+              note: "Antimicrobial stewardship: reserve antibiotics for documented indications; most chronic enteropathies are diet- or immune-mediated rather than infectious.",
+            },
+          ],
+        },
+
+        {
+          id: "giTelemedHybrid",
+          title: "Gastroenterology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates triage/differentials and owner coaching, then a partner clinic completes diagnostics or procedures; results flow back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (SAIM/DACVIM)" },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'Chronic vomiting/weight loss—rule-out IBD vs small-cell lymphoma <a href="https://onlinelibrary.wiley.com/doi/10.1111%2Fjvim.16690" target="_blank" rel="noopener">ACVIM feline CE 2023</a> <a href="https://wsava.org/global-guidelines/gastrointestinal-guidelines/" target="_blank" rel="noopener">WSAVA GI (histopath)</a>',
+                  tele: "Pattern history, diet review, shared decision on testing; order labs/fecal/cobalamin; discuss imaging/biopsy options.",
+                  clinic:
+                    "CBC/chem/UA, fecal tests, T4 (cats), abdominal ultrasound; endoscopy/biopsy if indicated with WSAVA scoring.",
+                  notes:
+                    "Tele follow-up to interpret results and set diet/immunomodulator plan.",
+                },
+                {
+                  case: 'Suspected pancreatitis (dog/cat) <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16053" target="_blank" rel="noopener">ACVIM feline pancreatitis 2021</a> <a href="https://www.merckvetmanual.com/digestive-system/the-exocrine-pancreas/pancreatitis-in-dogs-and-cats" target="_blank" rel="noopener">Merck Pancreatitis</a>',
+                  tele: "Triage severity; start anti-nausea/hydration advice; place orders for pancreatic lipase test and imaging.",
+                  clinic:
+                    "cPLI/fPLI, abdominal ultrasound, electrolytes; hospitalization if moderate/severe.",
+                  notes:
+                    "Tele rechecks for nutrition plan and relapse prevention.",
+                },
+                {
+                  case: 'Non-responsive chronic diarrhea—parasitology & stewardship pathway <a href="https://capcvet.org/guidelines/giardia/" target="_blank" rel="noopener">CAPC Giardia</a>',
+                  tele: "History, prior diet/empirics review; place multi-modal fecal testing; set diet/fiber plan until results.",
+                  clinic:
+                    "Fecal antigen/ELISA ± PCR, flotation; targeted therapy per results; consider further GI workup if persistent.",
+                  notes:
+                    "Tele follow-up for response monitoring and step-up plan.",
+                },
+                {
+                  case: 'Suspected protein-losing enteropathy (PLE) <a href="https://www.merckvetmanual.com/digestive-system/diseases-of-the-small-intestine-in-small-animals/chronic-enteropathies-in-small-animals" target="_blank" rel="noopener">Merck CE</a>',
+                  tele: "Screen red flags (effusion, edema, weight loss); place labs and imaging orders; review hospitalization triggers.",
+                  clinic:
+                    "Albumin/chemistry, ultrasound ± endoscopy/biopsy, fecal diagnostics; start appropriate therapy.",
+                  notes:
+                    "Tele to maintain diet/meds and plan albumin monitoring cadence.",
+                },
+                {
+                  case: 'Constipation/megacolon—failed home plan (cats) <a href="https://todaysveterinarypractice.com/wp-content/uploads/sites/4/2021/12/TVP-2022-0102_Feline_Constipation_Nutrition.pdf" target="_blank" rel="noopener">TVP 2022</a>',
+                  tele: "Confirm failure of laxatives/hydration; triage appetite/pain; arrange urgent in-clinic care.",
+                  clinic:
+                    "Enema/deobstipation under sedation, radiographs, +/- hospitalization; discuss long-term plan.",
+                  notes:
+                    "Tele follow-up for diet/medication strategy and relapse prevention.",
+                },
+                {
+                  case: 'Foreign body/obstruction suspicion—emergency pathway <a href="https://www.aaha.org/resources/2018-aaha-infection-control-prevention-and-biosecurity-guidelines/phone-triage/" target="_blank" rel="noopener">AAHA triage</a>',
+                  tele: "Red-flag screen (projectile vomiting, painful abdomen, no stool/gas); direct to ER; give stabilization guidance en route.",
+                  clinic:
+                    "Radiographs/US, labs, decompression/surgery as indicated.",
+                  notes:
+                    "Post-discharge tele check-in to set diet re-intro and complication watch.",
+                },
+              ],
+              note: "Example workflow: tele consult → order labs/fecal/US → clinic completes testing (± endoscopy) → results sync back → tele follow-up to set diet/immunomodulator plan and monitoring cadence.",
+            },
+          ],
+        },
+      ],
+    },
+    pulmonologyRespiratoryTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Pulmonology & Respiratory (DACVIM-SAIM Perspective)",
+      mainDescription:
+        "Tele-respiratory care is excellent for longitudinal management (owner coaching, medication titration, environment control) once a diagnosis and baseline have been established. Diagnostics that require hands-on acquisition (thoracic radiographs, echocardiography, ECG/Holter, airway sampling, bronchoscopy, oxygen therapy) are performed at partner clinics and then followed up by video.",
+
+      sections: [
+        {
+          id: "pulmoRespTelemedComplete",
+          title: "Respiratory: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These problems are typically managed by live video with guideline-based home plans and clear return precautions; e-prescribing to the client’s chosen pharmacy is used when appropriate.",
+            },
+            {
+              type: "table",
+              caption:
+                "Respiratory cases commonly completed via telemedicine (with e-pharmacy / shared monitoring)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Pulmonology/SAIM)" },
+                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Feline asthma—maintenance & inhaler technique coaching <a href="https://pubmed.ncbi.nlm.nih.gov/31812220/" target="_blank" rel="noopener">Review 2020</a> <a href="https://todaysveterinarypractice.com/wp-content/uploads/sites/4/2018/04/TVP-2018-0506_Asthmatic_Cat.pdf" target="_blank" rel="noopener">TVP Guideline</a>',
+                  plan: "Assess cough/wheeze frequency, trigger control, spacer/mask fit; set action plan for flares; cadence for clinic rechecks/rads.",
+                  rx: "Inhaled corticosteroid ± bronchodilator; short oral steroid taper only when indicated; environmental allergen/smoke control.",
+                  red: "Tachypnea/dyspnea, cyanosis, refractory flare, poor inhaler tolerance → clinic/ER.",
+                },
+                {
+                  case: 'Canine chronic bronchitis—stable maintenance <a href="https://www.merckvetmanual.com/dog-owners/lung-and-airway-disorders-of-dogs/bronchitis-in-dogs" target="_blank" rel="noopener">Merck Vet Manual</a>',
+                  plan: "Symptom scoring, weight & exercise plan, cough-suppressant timing, trigger avoidance; schedule periodic imaging/labs at clinic.",
+                  rx: "Anti-inflammatory plan per prior workup; antitussive for dry cough; airway humidification; weight loss when needed.",
+                  red: "Respiratory distress, fever/lethargy, suspected pneumonia, hemoptysis.",
+                },
+                {
+                  case: 'Mild, uncomplicated CIRDC (“kennel cough”)—home isolation & supportive care <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7132485/" target="_blank" rel="noopener">CIRDC review</a> <a href="https://www.merckvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/kennel-cough" target="_blank" rel="noopener">Merck</a>',
+                  plan: "Infectious precautions, rest, humidification; stewardship: avoid empiric antibiotics unless pneumonia suspected; define recheck triggers.",
+                  rx: "Antitussive for dry/nonproductive cough if appropriate; hydration, short work/leash walks only.",
+                  red: "Productive/wet cough with fever, tachypnea/dyspnea, anorexia/lethargy → clinic imaging and labs.",
+                },
+                {
+                  case: 'Tracheal/airway collapse—owner coaching (no acute distress) <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.17117" target="_blank" rel="noopener">JVIM 2024 meta-analysis</a> <a href="https://www.vetsmall.theclinics.com/article/S0195-5616%2819%2930170-6/abstract" target="_blank" rel="noopener">Review</a>',
+                  plan: "Harness (no neck collars), weight reduction, heat/excitement management, cough-suppression strategy; set imaging/fluoroscopy cadence via clinic.",
+                  rx: "Antitussive for nonproductive cough; anti-inflammatory plan per DVM; bronchodilator only if indicated; ± anxiolytic before triggers.",
+                  red: "Cyanosis, syncope, severe dyspnea, refractory cough → urgent in-person care.",
+                },
+                {
+                  case: 'Post-pneumonia convalescent follow-up—home plan & tapering <a href="https://www.msdvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/pneumonia-in-dogs-and-cats" target="_blank" rel="noopener">Merck</a> <a href="https://todaysveterinarypractice.com/respiratory-medicine/treating-bacterial-pneumonia-in-dogs-and-cats/" target="_blank" rel="noopener">TVP 2024</a>',
+                  plan: "Review appetite/energy/fever logs, exercise re-intro, cough trend; confirm timing for follow-up rads and culture per clinic plan.",
+                  rx: "Antimicrobials only per culture/duration plan; nebulization/coupage as taught; short leash activity; hydration.",
+                  red: "Relapsing fever, increased effort/tachypnea, anorexia, new productive cough → re-image and reassess.",
+                },
+                {
+                  case: 'Owner training: measure resting/sleeping respiratory rate (RRR/SRR) <a href="https://vcahospitals.com/know-your-pet/home-breathing-rate-evaluation" target="_blank" rel="noopener">VCA RRR</a>',
+                  plan: "Teach counting full breaths at rest/asleep; document baseline and alert thresholds; tie to action plan and when to call/ER.",
+                  rx: "RRR diary/app; written thresholds; pair with clinic recheck schedule.",
+                  red: "Sustained RRR above baseline (often >30–35/min) or labored breathing → clinic/ER.",
+                },
+                {
+                  case: 'Brachycephalic airway syndrome (BOAS)—non-urgent counseling <a href="https://www.merckvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/overview-of-respiratory-diseases-of-dogs-and-cats" target="_blank" rel="noopener">Merck overview</a>',
+                  plan: "Heat avoidance, weight targets, exercise modulation, stress control; discuss indications/timing for surgical evaluation at a partner clinic.",
+                  rx: "Lifestyle & environmental changes; reflux/anti-inflammatory support only if previously indicated by DVM.",
+                  red: "Collapse, cyanosis, heat stress, progressive stridor → immediate in-person care.",
+                },
+                {
+                  case: 'Post-tracheal stent long-term check-ins (stable) <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.17117" target="_blank" rel="noopener">JVIM 2024 meta-analysis</a>',
+                  plan: "Assess cough severity, exercise tolerance, complications screening; coordinate scheduled imaging/bronchoscopy with clinic.",
+                  rx: "Antitussives and anti-inflammatories as prescribed; airway hygiene; trigger avoidance.",
+                  red: "Granuloma/suspected infection, increased cough/dyspnea → in-person imaging and culture.",
+                },
+                {
+                  case: 'Chronic cough—owner trigger audit & environment plan <a href="https://www.msdvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/overview-of-respiratory-diseases-of-dogs-and-cats" target="_blank" rel="noopener">Merck overview</a>',
+                  plan: "Audit smoke/aerosols/dust/cleaners; humidification plan; schedule clinic diagnostics if cough persists beyond set window.",
+                  rx: "Environmental controls; antitussive or anti-inflammatory only when indicated by prior diagnosis.",
+                  red: "Worsening frequency, fever, weight loss, tachypnea/dyspnea → in-clinic workup.",
+                },
+              ],
+              note: "Stewardship: avoid routine empiric antibiotics for uncomplicated coughs; pursue imaging and diagnostics when red flags appear or signs persist (see CIRDC and pneumonia references below).",
+            },
+          ],
+        },
+
+        {
+          id: "pulmoRespTelemedHybrid",
+          title: "Respiratory: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates triage/education and orders; a partner clinic then completes diagnostics/procedures. Results sync back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                {
+                  key: "tele",
+                  title: "Telemedicine actions (Pulmonology/SAIM)",
+                },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'New-onset cough/dyspnea—rule-in cardiac vs respiratory <a href="https://www.msdvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/overview-of-respiratory-diseases-of-dogs-and-cats" target="_blank" rel="noopener">Merck overview</a>',
+                  tele: "History/video review; red-flag screen; order thoracic rads ± NT-proBNP/echo pathway; set isolation if infectious suspected.",
+                  clinic:
+                    "Thoracic radiographs, minimum database; echo/ECG if indicated; oxygen if distressed.",
+                  notes:
+                    "Tele follow-up to interpret results and set home plan; escalate if deterioration.",
+                },
+                {
+                  case: 'Suspected pneumonia (infectious or aspiration) <a href="https://www.msdvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/pneumonia-in-dogs-and-cats" target="_blank" rel="noopener">Merck</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7114575/" target="_blank" rel="noopener">Review</a>',
+                  tele: "Triage severity; hydration and nursing guidance; place orders for rads, CBC/chem, and airway sampling if needed.",
+                  clinic:
+                    "Thoracic rads; tracheal wash/BAL for culture when indicated; oxygen and hospitalization as needed.",
+                  notes:
+                    "Culture-guided therapy and duration; tele rechecks to monitor trend and taper plan.",
+                },
+                {
+                  case: 'Pulmonary hypertension—confirmation & staging <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.15725" target="_blank" rel="noopener">ACVIM PH 2020</a>',
+                  tele: "Screen for syncope/exercise intolerance and comorbidities; order echocardiography, thoracic imaging, BP, and infectious testing as indicated.",
+                  clinic:
+                    "Echo (TR velocity, ancillary echo signs), rads, BP; initiate PH-directed therapy when appropriate.",
+                  notes:
+                    "Tele follow-ups for symptom trend and med tolerance; periodic clinic echo per guideline.",
+                },
+                {
+                  case: 'Feline asthma—initial staging (diagnosis) <a href="https://pubmed.ncbi.nlm.nih.gov/31812220/" target="_blank" rel="noopener">Review 2020</a> <a href="https://todaysveterinarypractice.com/respiratory-medicine/asthma-in-cats-management-guidelines/" target="_blank" rel="noopener">TVP</a>',
+                  tele: "Pattern history, trigger mapping, spacer education; place orders for thoracic rads ± airway sampling based on severity.",
+                  clinic:
+                    "Thoracic radiographs; ± airway sampling and cytology; baseline labs.",
+                  notes:
+                    "Tele follow-up to start inhaled steroid plan, define flare protocol, and monitoring cadence.",
+                },
+                {
+                  case: 'Chronic cough—rule-in chronic bronchitis vs airway collapse <a href="https://www.vetsmall.theclinics.com/article/S0195-5616%2819%2930170-6/abstract" target="_blank" rel="noopener">Airway collapse review</a> <a href="https://www.merckvetmanual.com/dog-owners/lung-and-airway-disorders-of-dogs/bronchitis-in-dogs" target="_blank" rel="noopener">Bronchitis (Merck)</a>',
+                  tele: "Collar/harness audit, trigger inventory; place orders for rads ± fluoroscopy/bronchoscopy; set expectations.",
+                  clinic:
+                    "Thoracic rads; ± fluoroscopy, bronchoscopy/BAL; culture if indicated; initiate targeted plan.",
+                  notes:
+                    "Tele to fine-tune antitussive/anti-inflammatory strategy and lifestyle controls.",
+                },
+                {
+                  case: 'Recurrent CIRDC / multi-pet outbreak—diagnostic & biosecurity plan <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7132485/" target="_blank" rel="noopener">CIRDC review</a>',
+                  tele: "Isolation protocol and contact tracing; order respiratory PCR panel via clinic; define when to escalate.",
+                  clinic:
+                    "Swab collection for PCR; targeted therapy for severe/complicated cases; public-facing precautions if needed.",
+                  notes:
+                    "Tele to interpret panel results, adjust isolation window, and set return-to-normal plan.",
+                },
+              ],
+              note: "Example workflow: tele consult → thoracic radiographs + (when indicated) echo/PCR/BAL at Partner Clinic → results upload → tele follow-up for home plan, recheck cadence, and red-flag thresholds.",
+            },
+          ],
+        },
+      ],
+    },
+    neurologyTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Neurology (DACVIM-Neurology Perspective)",
+      mainDescription:
+        "Tele-neurology excels at longitudinal counseling (seizure diaries & action plans, cognitive dysfunction support, benign movement/vestibular follow-ups) and coordinated pathways where advanced diagnostics occur at partner clinics and results flow back for video follow-ups.",
+
+      sections: [
+        {
+          id: "neuroTelemedComplete",
+          title: "Neurology: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These problems are typically managed by live video once an initial diagnosis/baseline exists, with guideline-based home plans, owner logs, and clear red-flag instructions.",
+            },
+            {
+              type: "table",
+              caption:
+                "Neurology cases commonly completed via telemedicine (with e-pharmacy / shared monitoring)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (Neurology/GP)" },
+                { key: "rx", title: "Typical eRx / at-home tools" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Canine epilepsy—stable maintenance (owner seizure diary, action plan) <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0464-z" target="_blank" rel="noopener">IVETF AED consensus</a> <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0462-1" target="_blank" rel="noopener">IVETF Dx approach</a>',
+                  plan: "Review diary (frequency/cluster status), triggers, post-ictal changes; adjust antiseizure meds against periodic labs arranged through clinic; discuss emergency plan and home-safety.",
+                  rx: "Phenobarbital/levetiracetam/imepitoin etc. per prior plan; owner seizure log/app; written emergency thresholds.",
+                  red: "Status epilepticus, clusters, new neuro deficits, medication tox signs → ER/in-clinic evaluation.",
+                },
+                {
+                  case: 'Owner education: seizure detection & logging tech <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8711717/" target="_blank" rel="noopener">Owner perceptions study</a>',
+                  plan: "Teach reliable counting/recording; choose device/app; set “call/ER” thresholds; tie to dose-adjust and recheck schedule.",
+                  rx: "Seizure log/app; calendar reminders for trough levels; written action plan.",
+                  red: "Any increase in frequency/severity or trauma during events → clinic/ER.",
+                },
+                {
+                  case: 'Idiopathic vestibular disease—recovery coaching (after initial triage) <a href="https://www.frontiersin.org/articles/10.3389/fvets.2023.1263976/full" target="_blank" rel="noopener">IVS review 2023</a> <a href="https://veterinarypartner.vin.com/doc/?id=4951444&pid=19239" target="_blank" rel="noopener">VIN client handout</a>',
+                  plan: "Explain typical acute onset and improvement window; anti-nausea plan coordinated with clinic; home-safety and recheck cadence with photos/video.",
+                  rx: "Antiemetic/anti-nausea if prescribed; assisted feeding/hydration; floor-level confinement and sling support.",
+                  red: "Non-improving/worsening vestibular signs, severe anorexia, new neuro deficits → in-clinic imaging workup.",
+                },
+                {
+                  case: 'Canine cognitive dysfunction (CDS)—home environment & medical plan <a href="https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2023-aaha-senior-care-guidelines-for-dogs-and-cats/resources/2023-aaha-senior-care-guidelines-for-dogs-and-cats.pdf" target="_blank" rel="noopener">AAHA Senior 2023</a> <a href="https://www.nature.com/articles/s41598-022-15837-9" target="_blank" rel="noopener">DAP cognitive score</a>',
+                  plan: "Screen DISHA-A signs, sleep and anxiety; optimize enrichment, lighting, routines; discuss nutraceuticals/diets/meds; periodic tele follow-ups.",
+                  rx: "Dietary (MCT/antioxidants) & supplements; selegiline/trazodone or similar when indicated; enrichment & schedule.",
+                  red: "Rapid progression, daytime disorientation with accidents or unsafe behavior → in-clinic assessment for differentials.",
+                },
+                {
+                  case: 'Idiopathic head tremor syndrome (benign) counseling <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16880" target="_blank" rel="noopener">JVIM 2023</a> <a href="https://www.mspca.org/angell_services/idiopathic-head-tremor-syndrome/" target="_blank" rel="noopener">Angell explainer</a>',
+                  plan: "Review video to differentiate from focal seizures; reassure benign course; distraction techniques; avoid unnecessary AEDs.",
+                  rx: "None typically; train “distract with treat/name” during episodes; monitor with video diary.",
+                  red: "Change in pattern, other neuro deficits, persistent episodes → in-clinic workup.",
+                },
+                {
+                  case: 'Generalized tremor syndrome (steroid-responsive) long-term follow-up <a href="https://www.frontiersin.org/articles/10.3389/fvets.2024.1453698/full" target="_blank" rel="noopener">Frontiers 2024</a> <a href="https://vcahospitals.com/know-your-pet/shaker-syndrome-in-dogs" target="_blank" rel="noopener">VCA overview</a>',
+                  plan: "Assess relapse risk and taper plan set by clinic; review triggers and nursing care; tele check-ins during steroid weans.",
+                  rx: "Immunomodulatory plan per primary/neurologist; GI protectants if needed; exercise & stress modulation.",
+                  red: "Fever, pain, worsening tremors, steroid adverse effects → in-person evaluation & labs.",
+                },
+                {
+                  case: 'Post-op neuro or post-diagnosis stable rechecks (owner coaching) <a href="https://www.bsava.com/article/canine-intervertebral-disc-disease-how-much-do-we-really-know/" target="_blank" rel="noopener">BSAVA IVDD overview</a>',
+                  plan: "Medication adherence, sling/harness use, floor-plan modifications, bladder care coaching; set in-clinic suture removal/radiograph schedule.",
+                  rx: "Pain control per surgeon/primary; PT/home-exercise handouts; environmental safety adjustments.",
+                  red: "Acute deterioration (pain, paresis, incontinence), pressure sores, urinary issues → in-clinic check.",
+                },
+              ],
+              note: "For controlled drugs, follow state law: many jurisdictions require an in-person exam before prescribing or refilling controlled substances via telehealth.",
+            },
+          ],
+        },
+
+        {
+          id: "neuroTelemedHybrid",
+          title: "Neurology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates triage/education and orders; a partner clinic then completes diagnostics/procedures. Results sync back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (Neurology/GP)" },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'First seizure (adult dog/cat)—IVETF workup pathway <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0462-1" target="_blank" rel="noopener">IVETF Dx approach</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4552272/" target="_blank" rel="noopener">IVETF definitions</a>',
+                  tele: "History/video review; rule-out toxin/trauma triage; place orders for MDB (CBC/chem/UA), BP, bile acids (as indicated), and advanced imaging if structural disease suspected; seizure-safety counseling.",
+                  clinic:
+                    "Baseline labs, BP; ± MRI/CSF if indicated; AED initiation per findings; trough level schedule.",
+                  notes:
+                    "Tele follow-ups for diary review and dose titration against clinic labs.",
+                },
+                {
+                  case: 'Suspected steroid-responsive meningitis-arteritis (SRMA) <a href="https://pubmed.ncbi.nlm.nih.gov/37704169/" target="_blank" rel="noopener">SRMA review 2023</a> <a href="https://onlinelibrary.wiley.com/doi/10.1111/jsap.13775" target="_blank" rel="noopener">MRI features 2024</a>',
+                  tele: "Screen fever/neck pain/age; discuss differentials and risks; order CBC/CRP and referral for MRI±CSF; start analgesia plan per local protocol.",
+                  clinic:
+                    "MRI ± CSF (infectious rule-outs), inflammatory panel; initiate immunosuppressive regimen; schedule monitoring.",
+                  notes:
+                    "Tele taper checks, relapse education, and adverse-effect monitoring.",
+                },
+                {
+                  case: 'Myasthenia gravis (MG) suspicion—weakness/megaesophagus pathway <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12038433/" target="_blank" rel="noopener">AChR Ab test (gold standard)</a> <a href="https://vetneuromuscular.ucsd.edu/cases/2008/August.html" target="_blank" rel="noopener">UCSD NM case</a>',
+                  tele: "Video of exercise-induced weakness/regurg; aspiration-risk counseling; order AChR antibody test ± thoracic rads and thyroid panel; discuss pyridostigmine trial only when supervised.",
+                  clinic:
+                    "Blood draw for AChR Ab; radiographs for megaesophagus/aspiration; start therapy and monitor response.",
+                  notes:
+                    "Tele for dose-tuning and aspiration-prevention coaching; clinic for crises.",
+                },
+                {
+                  case: 'Acute spinal pain/paresis—IVDD triage & referral <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11946308/" target="_blank" rel="noopener">IVDD review 2025</a> <a href="https://www.bsava.com/article/canine-intervertebral-disc-disease-how-much-do-we-really-know/" target="_blank" rel="noopener">BSAVA overview</a>',
+                  tele: "Video gait review and pain history; strict rest instructions; place orders for neuro exam & advanced imaging at partner clinic; discuss surgical vs conservative.",
+                  clinic:
+                    "Hands-on neuro exam; MRI/CT-myelo; surgeon consult; bladder care as needed.",
+                  notes:
+                    "Tele follow-ups for home nursing, PT progression, and relapse prevention.",
+                },
+                {
+                  case: 'Idiopathic vestibular—initial diagnosis confirmation & anti-nausea plan <a href="https://www.frontiersin.org/articles/10.3389/fvets.2023.1263976/full" target="_blank" rel="noopener">IVS review 2023</a>',
+                  tele: "Pattern recognition & red-flag screen; order baseline labs and rads if atypical; coach supportive care; schedule recheck video.",
+                  clinic:
+                    "If atypical or non-improving: rads, labs, ± MRI/CSF; dispense anti-nausea meds; hydration support.",
+                  notes:
+                    "Most improve in days to weeks; tele monitors trajectory and safety.",
+                },
+              ],
+              note: "Example workflow: tele consult → orders for labs/MRI/CSF as indicated → clinic completes diagnostics and uploads results → tele follow-up for medication plan, owner coaching, and recheck cadence.",
+            },
+          ],
+        },
+      ],
+    },
+    hematologyImmunologyTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Hematology & Immunology (DACVIM-SAIM / AVHTM Perspective)",
+      mainDescription:
+        "Tele-hematology/immunology works well for longitudinal counseling, medication adherence/titration with clinic-based labs, transfusion reaction follow-ups, and client education on bleeding/thrombotic risk. Diagnostics that require samples, imaging, hospitalization, transfusion, or procedures occur at partner clinics; results then flow back for video follow-ups.",
+
+      sections: [
+        {
+          id: "hemoImmunoTelemedComplete",
+          title:
+            "Hematology & Immunology: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These problems are typically managed by live video once a diagnosis/baseline exists, with guideline-based home plans, scheduled clinic labs, and clear red-flag instructions.",
+            },
+            {
+              type: "table",
+              caption:
+                "Hematology/Immunology cases commonly completed via telemedicine (with e-pharmacy / shared monitoring)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                {
+                  key: "plan",
+                  title: "Telemedicine plan (SAIM/Heme-Immunology)",
+                },
+                { key: "rx", title: "Typical eRx / at-home tools" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Stable IMHA—maintenance & taper check-ins <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524099/" target="_blank" rel="noopener">ACVIM IMHA Tx 2019</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6430921/" target="_blank" rel="noopener">ACVIM IMHA Dx 2019</a>',
+                  plan: "Review gum color/energy/appetite logs; discuss steroid-sparing strategy; line up periodic CBC/chem via partner clinic; thrombosis risk review.",
+                  rx: "Glucocorticoid taper per protocol; consider cyclosporine/azathioprine (dogs) when indicated; antithrombotic per risk.",
+                  red: "Pale/icteric gums, tachypnea, collapse, melena/hematemesis, rapid drop in energy → clinic/ER.",
+                },
+                {
+                  case: 'Stable ITP—bleeding surveillance & taper plan <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16996" target="_blank" rel="noopener">ACVIM ITP Dx 2024</a> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jvim.17079" target="_blank" rel="noopener">ACVIM ITP Tx 2024</a>',
+                  plan: "Owner checks for petechiae, ecchymoses, epistaxis; schedule platelet rechecks at partner clinic; activity restriction coaching.",
+                  rx: "Glucocorticoid taper; add-on immunosuppressants when indicated; GI protection as needed.",
+                  red: "Mucosal bleeding, neuro signs, melena/hematuria, lethargy → immediate in-person care.",
+                },
+                {
+                  case: 'Thromboprophylaxis adherence in high-risk patients (e.g., PLE/PLN/heartworm, select IMHA) <a href="https://pubmed.ncbi.nlm.nih.gov/30654416/" target="_blank" rel="noopener">CURATIVE antithrombotics 2019</a>',
+                  plan: "Risk-tier review, side-effect screen, drug-drug interactions; ensure scheduled labs at clinic (renal, hepatic, CBC).",
+                  rx: "Clopidogrel or rivaroxaban per risk tier and comorbidities; written bleed-risk precautions.",
+                  red: "New dyspnea, limb pain/swelling, neuro deficits, bleeding signs → urgent evaluation.",
+                },
+                {
+                  case: 'FeLV/FIV-positive cat—long-term care & household counseling <a href="https://catvets.com/resource/feline-retrovirus-management-guidelines/" target="_blank" rel="noopener">AAFP Retrovirus 2020</a>',
+                  plan: "Discuss indoor-only living, testing of cohabiting cats, vaccine strategy, stress reduction, nutrition; schedule periodic clinic labs.",
+                  rx: "Preventives; supportive meds per comorbidities; client education handouts.",
+                  red: "Weight loss, fever, pallor/bleeding, respiratory distress → clinic assessment.",
+                },
+                {
+                  case: 'von Willebrand disease (vWD)—non-urgent counseling & surgical planning <a href="https://www.vet.cornell.edu/animal-health-diagnostic-center/laboratories/comparative-coagulation/clinical-topics/canine-von-willebrand-disease" target="_blank" rel="noopener">Cornell Coagulation</a> <a href="https://todaysveterinarynurse.com/hematology/a-veterinary-nurses-guide-to-von-willebrand-disease/" target="_blank" rel="noopener">TVN 2025</a>',
+                  plan: "Review subtype/testing, procedure risk planning, medication avoidance list; coordinate clinic blood typing/cross-match if needed.",
+                  rx: "Peri-procedural DDAVP for Type 1 when appropriate; plan for cryo/FFP availability via clinic.",
+                  red: "Active bleeding, trauma, planned invasive procedure without products → in-clinic care.",
+                },
+                {
+                  case: 'Post-transfusion at-home monitoring (delayed reactions) <a href="https://pubmed.ncbi.nlm.nih.gov/33792171/" target="_blank" rel="noopener">AVHTM TRACS 2021</a> <a href="https://www.merckvetmanual.com/circulatory-system/blood-groups-and-blood-transfusions-in-dogs-and-cats/blood-transfusions-in-dogs-and-cats" target="_blank" rel="noopener">Merck Transfusion</a>',
+                  plan: "Tele check-ins at 24–72h and 7–14d: appetite, attitude, urine color, breathing, temp; arrange clinic PCV/TS as scheduled.",
+                  rx: "Home monitoring diary; written signs of acute vs delayed reactions; meds only per DVM.",
+                  red: "Fever, pigmenturia, dyspnea, hives/facial swelling, rapid PCV drop → stop meds if advised and go to clinic/ER.",
+                },
+                {
+                  case: 'Owner education: bleeding signs & home logs (IMHA/ITP/antithrombotics) <a href="https://onlinelibrary.wiley.com/doi/10.1111/vec.13045" target="_blank" rel="noopener">TRACS prevention/monitoring</a>',
+                  plan: "Teach mucosal checks, stool/urine surveillance, bruise diary; set thresholds for calling/ER; align with clinic lab cadence.",
+                  rx: "Printed action plan; synchronized reminders for labs/med timing.",
+                  red: "Any new bleeding, collapse, severe lethargy → in-person evaluation.",
+                },
+                {
+                  case: 'Immunosuppressant side-effect surveillance (steroids/cyclosporine, etc.) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524099/" target="_blank" rel="noopener">ACVIM IMHA Tx 2019</a>',
+                  plan: "GI/PU-PD/behavior checks, infection vigilance; coordinate periodic CBC/chem/UA via clinic; taper discussions.",
+                  rx: "Dose adjustments per plan; GI protectants when indicated; infection precautions.",
+                  red: "Vomiting with blood, severe diarrhea, fever, profound lethargy → clinic/ER.",
+                },
+              ],
+              note: "Telemedicine is ideal for education, adherence, and safety monitoring; labs/imaging/transfusions occur at partner clinics with results routed back for tele follow-ups.",
+            },
+          ],
+        },
+
+        {
+          id: "hemoImmunoTelemedHybrid",
+          title:
+            "Hematology & Immunology: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Typical pathways where a video consult initiates triage/education and orders; a partner clinic then completes diagnostics/procedures. Results sync back for tele follow-up.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                {
+                  key: "tele",
+                  title: "Telemedicine actions (SAIM/Heme-Immunology)",
+                },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'Suspected IMHA (pallor/icterus, pigmenturia) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6430921/" target="_blank" rel="noopener">ACVIM IMHA Dx 2019</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6524099/" target="_blank" rel="noopener">ACVIM IMHA Tx 2019</a>',
+                  tele: "History/photos (mucous membranes/urine), red-flag screen; place orders for CBC/retic/smear, saline agglutination, biochem/UA; thrombosis-risk counsel.",
+                  clinic:
+                    "Vitals, MDB, imaging as indicated; transfusion readiness; immunosuppressive/antithrombotic initiation per protocol.",
+                  notes:
+                    "Tele follow-ups for taper plan, thrombosis monitoring; scheduled rechecks via clinic.",
+                },
+                {
+                  case: 'Suspected ITP (petechiae, mucosal bleeding) <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16996" target="_blank" rel="noopener">ACVIM ITP Dx 2024</a> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jvim.17079" target="_blank" rel="noopener">ACVIM ITP Tx 2024</a>',
+                  tele: "Bleeding inventory and activity restriction; orders for CBC ± imaging to exclude internal bleeding; discuss transfusion thresholds.",
+                  clinic:
+                    "CBC/coat/abdominal-thoracic imaging as indicated; immunosuppression initiation; product support if needed.",
+                  notes:
+                    "Tele to guide dose adjustments and bleeding surveillance once stable.",
+                },
+                {
+                  case: 'Suspected anticoagulant rodenticide coagulopathy <a href="https://www.merckvetmanual.com/toxicology/rodenticide-poisoning/anticoagulant-rodenticide-warfarin-and-congeners-poisoning-in-animals" target="_blank" rel="noopener">Merck Vets</a> <a href="https://www.vet.cornell.edu/animal-health-diagnostic-center/laboratories/comparative-coagulation/clinical-topics/vitamin-k-therapy" target="_blank" rel="noopener">Cornell Vit K</a>',
+                  tele: "Exposure history, bleeding screen, strict rest, household safety counsel; place orders for PT/INR and radiographs if dyspnea.",
+                  clinic:
+                    "Coag testing, vitamin K1 initiation and dosing, product support (FFP/whole blood) when indicated; recheck schedule.",
+                  notes:
+                    "Tele checks for adherence and late bleed after K1 stops; clinic re-test 48h after discontinuation.",
+                },
+                {
+                  case: 'Transfusion planning—anemia/coagulopathy <a href="https://journals.sagepub.com/doi/10.1177/1098612X211007071" target="_blank" rel="noopener">ISFM Feline Transfusion 2021</a> <a href="https://onlinelibrary.wiley.com/doi/10.1111/vec.13044" target="_blank" rel="noopener">TRACS Part 1</a>',
+                  tele: "Discuss indications/risks, obtain consent, home monitoring plan; coordinate timing with clinic.",
+                  clinic:
+                    "Type/cross-match, transfusion administration and monitoring per TRACS; immediate/24–48h post checks.",
+                  notes:
+                    "Tele follow-ups to review late signs and lab trends; update action plan.",
+                },
+                {
+                  case: 'FeLV/FIV initial testing & confirmation pathway <a href="https://catvets.com/resource/feline-retrovirus-management-guidelines/" target="_blank" rel="noopener">AAFP Retrovirus 2020</a> <a href="https://pubmed.ncbi.nlm.nih.gov/31916872/" target="_blank" rel="noopener">PubMed</a>',
+                  tele: "Pre-test counseling, risk audit, isolation advice for multi-cat homes; order ELISA and confirmatory testing.",
+                  clinic:
+                    "Sample collection, point-of-care testing, confirmatory assays; baseline staging labs.",
+                  notes:
+                    "Tele to interpret results, household plan, and set monitoring cadence.",
+                },
+              ],
+              note: "Example workflow: tele consult → orders for CBC/coags/type & cross or FeLV/FIV testing → partner clinic performs diagnostics/transfusion as needed → results upload → tele follow-up for meds, safety, and recheck cadence.",
+            },
+          ],
+        },
+      ],
+    },
+    infectiousDiseasesTelemedicine: {
+      mainTitle:
+        "Telemedicine Specific Considerations for Infectious Diseases (SAIM/ID Perspective)",
+      mainDescription:
+        "Tele-infectious disease is well suited to triage, prevention counseling, outbreak control, treatment adherence, and follow-ups tied to clinic-based diagnostics. Antibiotic stewardship applies: many canine/feline URI/CIRDC cases are viral and do not warrant antibiotics unless bacterial complications are evidenced by exam or tests.",
+
+      sections: [
+        {
+          id: "idTelemedComplete",
+          title: "Infectious Diseases: Common Cases Completed via Telemedicine",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "These scenarios are typically handled by live audio-video with client education, isolation/prevention advice, supportive care plans, and e-pharmacy where appropriate. Escalation triggers and recheck cadence are explicitly documented.",
+            },
+            {
+              type: "table",
+              caption:
+                "ID cases commonly completed via telemedicine (with e-pharmacy / prevention plans)",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "plan", title: "Telemedicine plan (SAIM/ID)" },
+                { key: "rx", title: "Typical home care / eRx" },
+                { key: "red", title: "Red flags → in-person" },
+              ],
+              rows: [
+                {
+                  case: 'Mild CIRDC (“kennel cough”)—uncomplicated, no distress <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5354050/" target="_blank" rel="noopener">ISCAID Resp 2017</a> <a href="https://catvets.com/wp-content/uploads/2024/01/2022-AAFP-AAHA-Antimicrobial-Guidelines.pdf" target="_blank" rel="noopener">AAHA/AAFP AMS 2022</a>',
+                  plan: "History, exposure map, isolation/hygiene, cough monitoring; avoid empiric antibiotics unless bacterial complications suspected.",
+                  rx: "Humidification, rest, harness use; antitussive only if appropriate and patient stable.",
+                  red: "Tachypnea/dyspnea, fever, lethargy, productive cough with distress → clinic imaging/labs.",
+                },
+                {
+                  case: 'Feline URI (mild; likely FHV/FCV) <a href="https://catvets.com/wp-content/uploads/2024/01/2022-AAFP-AAHA-Antimicrobial-Guidelines.pdf" target="_blank" rel="noopener">AAHA/AAFP AMS 2022</a>',
+                  plan: "Supportive care coaching (nutrition, hydration, nasal cleansing), stress reduction, eye monitoring; consider famciclovir when indicated.",
+                  rx: "Saline lubricants, appetite support; famciclovir if clinician deems appropriate.",
+                  red: "Marked anorexia/dehydration, dyspnea, corneal ulceration/purulent nasal discharge.",
+                },
+                {
+                  case: 'Parasite prevention & travel medicine (ticks/heartworm/geo-risks) <a href="https://capcvet.org/guidelines/general-guidelines/" target="_blank" rel="noopener">CAPC General 2025</a>',
+                  plan: "Risk-based prevention plan, product selection, testing cadence; travel destination tick/heartworm brief.",
+                  rx: "Year-round preventives (region-appropriate); client reminders and testing schedule.",
+                  red: "New fever/lameness/bleeding tendency post-tick exposure → clinic testing.",
+                },
+                {
+                  case: 'Household ringworm (dermatophytosis) decontamination coaching (post-Dx) <a href="https://wavd.org/wp-content/uploads/summary-of-clinical-consensus-guidelines-dermatophytosis.pdf" target="_blank" rel="noopener">WAVD Derm 2017</a> <a href="https://www.cdc.gov/ringworm/causes/index.html" target="_blank" rel="noopener">CDC Ringworm</a>',
+                  plan: "Zoonosis education, cleaning protocol, laundry and surface disinfection cadence; monitor lesions via photos.",
+                  rx: "Topical therapy refills per prior plan; environmental disinfectant guidance.",
+                  red: "Expanding lesions, folliculitis, immunocompromised household members becoming symptomatic.",
+                },
+                {
+                  case: 'Feeding-handling hygiene for GI pathogens (Giardia, etc.)—post-Dx maintenance <a href="https://capcvet.org/guidelines/giardia/" target="_blank" rel="noopener">CAPC Giardia</a>',
+                  plan: "Bathing after diarrhea episodes, prompt feces removal, yard sanitation; test-of-cure timing discussion.",
+                  rx: "Metronidazole or fenbendazole only if already prescribed/indicated; probiotic plan; recheck window.",
+                  red: "Persistent/worsening diarrhea, weight loss, hematochezia → clinic fecal panel.",
+                },
+                {
+                  case: 'Lyme prevention counseling in endemic/travel areas <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5980284/" target="_blank" rel="noopener">ACVIM Lyme 2018</a>',
+                  plan: "Tick avoidance, daily checks, prophylaxis selection; dog testing cadence; owner bite prevention.",
+                  rx: "Isoxazoline preventives; discuss regional vaccination policy where applicable.",
+                  red: "Acute shifting-leg lameness, fever, thrombocytopenia signs → clinic diagnostics.",
+                },
+                {
+                  case: 'Vaccine-preventable respiratory risks (Bordetella, CIV) counseling <a href="https://wsava.org/global-guidelines/vaccination-guidelines/" target="_blank" rel="noopener">WSAVA Vaccines 2024</a>',
+                  plan: "Facility/travel risk audit; boarding/daycare show-me list; update plan timing.",
+                  rx: "Book vaccine update at partner clinic; written isolation plan during outbreaks.",
+                  red: "Cough with distress, cyanosis, anorexia → in-person assessment.",
+                },
+                {
+                  case: 'Post-antibiotic stewardship check-ins (any infection) <a href="https://catvets.com/wp-content/uploads/2024/01/2022-AAFP-AAHA-Antimicrobial-Guidelines.pdf" target="_blank" rel="noopener">AAHA/AAFP AMS 2022</a>',
+                  plan: "Review course completion, adverse effects, culture-guided changes; reinforce narrow-spectrum use.",
+                  rx: "Documented stop dates; probiotic/supportive care if appropriate.",
+                  red: "Relapse, new fever, GI intolerance → clinic recheck/culture.",
+                },
+              ],
+              note: "Antibiotics are not indicated for most viral URIs/CIRDC without evidence of secondary bacterial infection. Use culture/point-of-care tests and clear return precautions.",
+            },
+          ],
+        },
+
+        {
+          id: "idTelemedHybrid",
+          title: "Infectious Diseases: Telemedicine Start → In-Clinic Finish",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Video consult initiates exposure triage, isolation measures, and orders. Partner clinic performs samples, imaging, and procedures. Results sync back for tele follow-ups.",
+            },
+            {
+              type: "table",
+              caption:
+                "Start via telemedicine; complete key diagnostics or procedures at partner clinic",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "tele", title: "Telemedicine actions (SAIM/ID)" },
+                { key: "clinic", title: "Clinic tasks & diagnostics" },
+                { key: "notes", title: "Typical outcome" },
+              ],
+              rows: [
+                {
+                  case: 'Suspected bacterial UTI (dysuria/hematuria) <a href="https://www.vdl.ndsu.edu/wp-content/uploads/2022/02/ISCAID-Urinary-Guidelines-2019.pdf" target="_blank" rel="noopener">ISCAID UTI 2019</a>',
+                  tele: "Symptom inventory, prior history, AMR/stewardship counsel, order UA + culture before antibiotics.",
+                  clinic:
+                    "Cystocentesis UA/culture, possible imaging if recurrent/complicated.",
+                  notes:
+                    "Targeted therapy based on culture; tele follow-up for response and stop date.",
+                },
+                {
+                  case: 'Suspected leptospirosis (PU/PD, fever, azotemia, myalgia) <a href="https://onlinelibrary.wiley.com/doi/10.1111/jvim.16903" target="_blank" rel="noopener">ACVIM Lepto 2023</a>',
+                  tele: "Immediate exposure counseling, household risk mitigation; order MAT/PCR + chem/UA; start appropriate precautions.",
+                  clinic:
+                    "Isolation, diagnostics, early antimicrobial therapy, fluid/supportive care.",
+                  notes:
+                    "Tele follow-up for renal recovery plan, household disinfection guidance.",
+                },
+                {
+                  case: 'Tick-borne disease suspicion (Lyme/ehrlichiosis/anaplasmosis) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5980284/" target="_blank" rel="noopener">ACVIM Lyme 2018</a>',
+                  tele: "Exposure map, clinical screen, order SNAP/serology + CBC/chem/UA; discuss co-infections.",
+                  clinic:
+                    "Bloodwork/serology; urine protein screen where indicated; treatment per guidelines.",
+                  notes:
+                    "Tele to monitor response/adverse effects; adjust plan with lab results.",
+                },
+                {
+                  case: 'Pneumonia vs. complicated CIRDC <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5354050/" target="_blank" rel="noopener">ISCAID Resp 2017</a>',
+                  tele: "Red-flag recognition, isolation, order thoracic rads/CBC; antimicrobial stewardship brief.",
+                  clinic:
+                    "Imaging, oxygen as needed, culture (e.g., BAL) when indicated; targeted therapy.",
+                  notes:
+                    "Tele follow-ups for taper timing and activity progression.",
+                },
+                {
+                  case: 'Dermatophytosis diagnosis/clearance testing pathway <a href="https://wavd.org/wp-content/uploads/summary-of-clinical-consensus-guidelines-dermatophytosis.pdf" target="_blank" rel="noopener">WAVD Derm 2017</a>',
+                  tele: "Household risk/cleaning protocol, clip/isolation advice; order fungal culture/PCR.",
+                  clinic:
+                    "Sampling (toothbrush technique), Wood’s lamp, culture/PCR; baseline photos.",
+                  notes:
+                    "Tele to review results, continue/stop therapy, and finalize environmental decontamination.",
+                },
+                {
+                  case: 'Parvoviral enteritis (canine/feline panleukopenia) suspected <a href="https://www.merckvetmanual.com/digestive-system/infectious-diseases-of-the-gastrointestinal-tract-in-small-animals/canine-parvovirus-infection-parvoviral-enteritis-in-dogs" target="_blank" rel="noopener">Merck Vet Parvo</a> <a href="https://wsava.org/global-guidelines/vaccination-guidelines/" target="_blank" rel="noopener">WSAVA Vaccines 2024</a>',
+                  tele: "Immediate isolation, sanitation coaching, order POC antigen test and baseline labs.",
+                  clinic:
+                    "POC testing, hospitalization with fluids/antiemetics/antibiotics as indicated; biosecurity.",
+                  notes:
+                    "Tele to counsel on prognosis and vaccine-preventable nature for contacts.",
+                },
+                {
+                  case: 'Rabies exposure triage (public health coordination) <a href="https://www.cdc.gov/rabies/hcp/veterinarians/index.html" target="_blank" rel="noopener">CDC—Vets & Rabies</a>',
+                  tele: "Exposure assessment, isolation of suspect animals, immediate public health contact and owner instructions.",
+                  clinic:
+                    "Report as required; quarantine/booster or testing per jurisdiction.",
+                  notes:
+                    "Tele follow-ups for quarantine compliance and symptom checks.",
+                },
+                {
+                  case: 'Suspected giardiasis (diarrhea) needing confirmation <a href="https://capcvet.org/guidelines/giardia/" target="_blank" rel="noopener">CAPC Giardia</a>',
+                  tele: "Diet/hydration support; order fecal flotation with centrifugation ± ELISA/PCR (multi-day sampling).",
+                  clinic:
+                    "Collect/submit fecal samples; dispense therapy after confirmation.",
+                  notes:
+                    "Tele to reinforce environmental control and test-of-cure timing.",
+                },
+              ],
+              note: "Example: tele triage → orders (UA/culture, MAT/PCR, rads, fecal tests) → partner clinic performs diagnostics/isolation/treatment → results sync → tele follow-up for adherence, adverse effects, and prevention.",
             },
           ],
         },

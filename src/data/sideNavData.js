@@ -209,6 +209,75 @@ const sideNavData = {
       ],
     },
   ],
+  telemedicineCases: [
+    {
+      groupTitle: "Telemedicine Cases",
+      items: [
+        {
+          id: "telemedicineCasesOverview",
+          label: "Telemedicine Cases Overview",
+        },
+        {
+          id: "generalPracticeTelemedicine",
+          label: "General Practice Telemedicine",
+        },
+        {
+          id: "dermatologyTelemedicine",
+          label: "Dermatology Telemedicine",
+        },
+        {
+          id: "oncologyTelemedicine",
+          label: "Oncology Telemedicine",
+        },
+        {
+          id: "behaviorTelemedicine",
+          label: "Behavior Telemedicine",
+        },
+        {
+          id: "nutritionTelemedicine",
+          label: "Nutrition Telemedicine",
+        },
+        {
+          id: "internalMedicineTelemedicine",
+          label: "Internal Medicine (SAIM)", // label shown in sidebar
+          subItems: [
+            {
+              id: "endocrinologyTelemedicine",
+              label: "Endocrinology Telemedicine",
+            },
+            {
+              id: "nephrologyUrologyTelemedicine",
+              label: "Nephrology/Urology Telemedicine",
+            },
+            {
+              id: "cardiologyTelemedicine",
+              label: "Cardiology Telemedicine",
+            },
+            {
+              id: "gastroenterologyTelemedicine",
+              label: "Gastroenterology Telemedicine",
+            },
+            {
+              id: "pulmonologyRespiratoryTelemedicine",
+              label: "Pulmonology/Respiratory Telemedicine",
+            },
+            {
+              id: "neurologyTelemedicine",
+              label: "Neurology Telemedicine",
+            },
+            {
+              id: "hematologyImmunologyTelemedicine",
+              label: "Hematology/Immunology Telemedicine",
+            },
+            {
+              id: "infectiousDiseasesTelemedicine",
+              label: "Infectious Diseases Telemedicine",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 
   onehealth: [
     {
