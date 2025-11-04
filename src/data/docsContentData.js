@@ -78,6 +78,87 @@ const contentData = {
           ],
         },
         {
+          id: "telemedicineCases",
+          title: "What Cases Are Right for Telemedicine?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Telemedicine suitability by case type",
+            },
+            {
+              type: "table",
+              responsive: "auto", // "scroll" (default), "stack", or "auto"
+              stackBreakpoint: 640, // optional
+              rowHeaders: false, // set true if first column names the row
+              minWidth: "720px", // optional
+              columns: [
+                { key: "case", title: "Case" },
+                { key: "fit", title: "Fit for telemedicine?" },
+                { key: "help", title: "How we help" },
+                { key: "escalate", title: "When to go in-person" },
+              ],
+              rows: [
+                {
+                  case: "Acute medical concerns",
+                  fit: "Often (triage first)",
+                  help: "Urgency check, first-aid guidance, next steps.",
+                  escalate:
+                    "Breathing trouble, collapse, uncontrolled pain/bleeding, suspected blockage → ER/clinic",
+                },
+                {
+                  case: "Behavior (aggression, litter box, etc.)",
+                  fit: "Strong fit",
+                  help: "Home-context review, behavior plan, trainer coordination.",
+                  escalate: "Immediate safety risks or neurologic red flags",
+                },
+                {
+                  case: "Skin issues (rashes, itchiness, redness)",
+                  fit: "Strong fit",
+                  help: "Photo/video review, topicals/meds, follow-ups.",
+                  escalate: "Deep/infected wounds needing procedures",
+                },
+                {
+                  case: "Allergies",
+                  fit: "Strong fit",
+                  help: "Flare control, diet trials, refills/adjustments (where permitted).",
+                  escalate: "Severe systemic reactions",
+                },
+                {
+                  case: "Minor cuts & wounds",
+                  fit: "Often",
+                  help: "Clean-care guidance, monitoring, refer if sutures likely.",
+                  escalate: "Large/deep wounds or bleeding that won’t stop",
+                },
+                {
+                  case: "Nutrition & weight",
+                  fit: "Strong fit",
+                  help: "Diet selection, weight-loss plans, chronic-care coaching.",
+                  escalate: "Rapid unexplained weight loss → diagnostics",
+                },
+                {
+                  case: "GI (vomiting/diarrhea)",
+                  fit: "Often (mild cases)",
+                  help: "Hydration/diet plan, warning signs to watch.",
+                  escalate: "Severe, persistent, bloody, painful, or lethargic",
+                },
+                {
+                  case: "Puppy/kitten wellness & training",
+                  fit: "Strong fit",
+                  help: "Preventive care counseling, schedules, training tips.",
+                  escalate: "Vaccines/exams themselves are in-person",
+                },
+                {
+                  case: "General health & wellness",
+                  fit: "Strong fit",
+                  help: "Q&A, routine follow-ups, care plans.",
+                  escalate: "Anything requiring hands-on exam/tests",
+                },
+              ],
+              note: "Telemedicine is subject to CA rules (live video to establish VCPR; some meds limited).",
+            },
+          ],
+        },
+        {
           id: "whyVirtualCareTrend",
           title: "Why Virtual Care Is Growing — And Why It Matters",
           blocks: [

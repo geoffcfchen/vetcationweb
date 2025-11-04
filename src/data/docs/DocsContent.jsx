@@ -11,6 +11,7 @@ import contentData from "../docsContentData";
 import CustomContributorListBlock from "../../components/CustomContributorListBlock";
 import InteractiveMapBlock from "../../components/InteractiveMapBlock";
 import MissionContentBlock from "../../components/MissionContentBlock";
+import TableBlock from "../../components/TableBlock";
 // Import other block components as needed
 
 function DocsContent() {
@@ -79,6 +80,8 @@ function DocsContent() {
           {sec.blocks.map((block, index) => {
             const blockKey = `${sec.id}-block-${index}`;
             switch (block.type) {
+              case "table":
+                return <TableBlock key={blockKey} block={block} />;
               case "bulletList":
                 return <BulletListBlock key={blockKey} block={block} />;
               case "trendPoints":
