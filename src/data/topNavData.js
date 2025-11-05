@@ -19,8 +19,8 @@ const topNavData = [
   },
   {
     id: "telemedicineCases",
-    //shorter
-    label: "Cases",
+    //shorter ex cases map
+    label: "Case Map",
     defaultDocId: "telemedicineCasesOverview",
   },
   {
