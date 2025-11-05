@@ -3543,7 +3543,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "gpTelemedComplete",
-          title: "General Practice: Common Cases Completed via Telemedicine",
+          title: "General Practice: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -3641,7 +3641,8 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
         {
           id: "gpTelemedHybrid",
-          title: "General Practice: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -3714,11 +3715,11 @@ requirements and explain how Vetcation keeps you compliant.`,
     dermatologyTelemedicine: {
       mainTitle: "Telemedicine: Dermatology — Clinical Considerations (DACVD)",
       mainDescription:
-        "Common dermatologist-managed problems that are well-suited to live audio-video care, with examples of red flags that should prompt in-person evaluation. Links in each case point to an authoritative reference.",
+        "Example dermatologist-managed problems that are well-suited to live audio-video care, with examples of red flags that should prompt in-person evaluation. Links in each case point to an authoritative reference.",
       sections: [
         {
           id: "dermTelemedComplete",
-          title: "Dermatology: Common Cases Completed via Telemedicine",
+          title: "Dermatology: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -3806,7 +3807,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "dermTelemedHybrid",
-          title: "Dermatology: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4073,7 +4075,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "nutritionTelemedComplete",
-          title: "Nutrition: Common Cases Completed via Telemedicine",
+          title: "Nutrition: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4168,7 +4170,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "endoTelemedComplete",
-          title: "Endocrinology: Common Cases Completed via Telemedicine",
+          title: "Endocrinology: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4255,7 +4257,8 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
         {
           id: "endoTelemedHybrid",
-          title: "Endocrinology: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4330,7 +4333,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "nephroUroTelemedComplete",
-          title: "Common Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4405,7 +4408,8 @@ requirements and explain how Vetcation keeps you compliant.`,
         },
         {
           id: "nephroUroTelemedHybrid",
-          title: "Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4546,7 +4550,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "cardioTelemedHybrid",
-          title: "Cardiology: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4638,7 +4643,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "giTelemedComplete",
-          title: "Gastroenterology: Common Cases Completed via Telemedicine",
+          title: "Gastroenterology: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4726,7 +4731,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "giTelemedHybrid",
-          title: "Gastroenterology: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4810,7 +4816,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "pulmoRespTelemedComplete",
-          title: "Respiratory: Common Cases Completed via Telemedicine",
+          title: "Respiratory: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4892,7 +4898,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "pulmoRespTelemedHybrid",
-          title: "Respiratory: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -4979,7 +4986,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "neuroTelemedComplete",
-          title: "Neurology: Common Cases Completed via Telemedicine",
+          title: "Neurology: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -5049,7 +5056,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "neuroTelemedHybrid",
-          title: "Neurology: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -5126,7 +5134,7 @@ requirements and explain how Vetcation keeps you compliant.`,
         {
           id: "hemoImmunoTelemedComplete",
           title:
-            "Hematology & Immunology: Common Cases Completed via Telemedicine",
+            "Hematology & Immunology: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -5206,7 +5214,7 @@ requirements and explain how Vetcation keeps you compliant.`,
         {
           id: "hemoImmunoTelemedHybrid",
           title:
-            "Hematology & Immunology: Telemedicine Start → In-Clinic Finish",
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
@@ -5285,7 +5293,8 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "idTelemedComplete",
-          title: "Infectious Diseases: Common Cases Completed via Telemedicine",
+          title:
+            "Infectious Diseases: Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -5361,7 +5370,8 @@ requirements and explain how Vetcation keeps you compliant.`,
 
         {
           id: "idTelemedHybrid",
-          title: "Infectious Diseases: Telemedicine Start → In-Clinic Finish",
+          title:
+            "Telemedicine consultation/plan with in-Clinic follow-up lab/treatments",
           blocks: [
             {
               type: "paragraph",
