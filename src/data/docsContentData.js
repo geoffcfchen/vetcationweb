@@ -3416,12 +3416,12 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "generalCases",
-          title: "Where Telemedicine Fits (at-a-glance)",
+          title: "Where Telemedicine Fits",
           blocks: [
-            {
-              type: "paragraph",
-              text: "Legend — Fit: <strong>Strong</strong> • <strong>Often</strong> • <strong>Limited/No</strong>",
-            },
+            // {
+            //   type: "paragraph",
+            //   text: "Legend — Fit: <strong>Strong</strong> • <strong>Often</strong> • <strong>Limited/No</strong>",
+            // },
             {
               type: "table",
               caption: "At-a-glance suitability by case type",
@@ -3543,7 +3543,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "gpTelemedComplete",
-          title: "General Practice: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -3719,7 +3719,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "dermTelemedComplete",
-          title: "Dermatology: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4068,14 +4068,13 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
     nutritionTelemedicine: {
-      mainTitle:
-        "Telemedicine: Endocrinology — Clinical Considerations (SAIM/DACVIM)",
+      mainTitle: "Telemedicine: Nutrition — Clinical Considerations (DACVN)",
       mainDescription:
         "Tele-nutrition excels for stable patients, longitudinal coaching, and individualized diet formulation. Labs, imaging, and procedures are routed to partner clinics as needed; results sync back to keep the primary DVM in the loop.",
       sections: [
         {
           id: "nutritionTelemedComplete",
-          title: "Nutrition: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4091,7 +4090,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (DACVN/DVM)" },
-                { key: "rx", title: "Typical eRx / diet" },
+                { key: "rx", title: "Example eRx / diet" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4170,7 +4169,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "endoTelemedComplete",
-          title: "Endocrinology: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4186,7 +4185,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (SAIM/DACVIM)" },
-                { key: "rx", title: "Typical eRx / monitoring" },
+                { key: "rx", title: "Example eRx / monitoring" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4508,7 +4507,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Cardiology/GP)" },
-                { key: "rx", title: "Typical eRx / monitoring" },
+                { key: "rx", title: "Example eRx / monitoring" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4643,7 +4642,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "giTelemedComplete",
-          title: "Gastroenterology: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4816,7 +4815,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "pulmoRespTelemedComplete",
-          title: "Respiratory: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -4986,7 +4985,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "neuroTelemedComplete",
-          title: "Neurology: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -5002,7 +5001,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Neurology/GP)" },
-                { key: "rx", title: "Typical eRx / at-home tools" },
+                { key: "rx", title: "Example eRx / at-home tools" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -5133,8 +5132,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "hemoImmunoTelemedComplete",
-          title:
-            "Hematology & Immunology: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
@@ -5153,7 +5151,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   key: "plan",
                   title: "Telemedicine plan (SAIM/Heme-Immunology)",
                 },
-                { key: "rx", title: "Typical eRx / at-home tools" },
+                { key: "rx", title: "Example eRx / at-home tools" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -5293,8 +5291,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       sections: [
         {
           id: "idTelemedComplete",
-          title:
-            "Infectious Diseases: Example Cases Completed via Telemedicine",
+          title: "Example Cases Completed via Telemedicine",
           blocks: [
             {
               type: "paragraph",
