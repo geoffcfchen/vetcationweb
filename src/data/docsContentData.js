@@ -3559,7 +3559,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (GP)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -3734,7 +3734,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Derm DVM)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -3897,7 +3897,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Oncology DVM)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -3994,7 +3994,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   key: "plan",
                   title: "Telemedicine plan (DACVB/behavior DVM)",
                 },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4346,7 +4346,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Nephro/Uro)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4654,7 +4654,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (SAIM/DACVIM)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -4826,7 +4826,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (Pulmonology/SAIM)" },
-                { key: "rx", title: "Typical eRx / at-home care" },
+                { key: "rx", title: "Example eRx / at-home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
