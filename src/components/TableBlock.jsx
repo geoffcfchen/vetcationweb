@@ -25,6 +25,8 @@ const StyledTable = styled.table`
   table-layout: auto;
   color: #ccc;
   word-break: break-word;
+  overflow-wrap: anywhere; /* allow breaking long tokens */
+  white-space: normal; /* let text wrap */
 
   caption {
     text-align: left;
@@ -46,6 +48,8 @@ const StyledTable = styled.table`
     padding: 0.75rem;
     border-bottom: 1px solid #2a2a2a;
     vertical-align: top;
+    white-space: normal; /* make sure cell text wraps */
+    overflow-wrap: anywhere; /* break long URLs/words if needed */
   }
 
   /* Optional: sticky first column if you use row headers */
@@ -56,11 +60,15 @@ const StyledTable = styled.table`
     background: #1c1c1c;
     font-weight: 600;
     color: #fff;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
   /* Add this block: link styling */
   a {
     color: #4db6c5; /* your chosen colour */
     text-decoration: underline;
+    word-break: break-word; /* also wrap long links */
+    overflow-wrap: anywhere;
   }
   a:hover,
   a:focus {
@@ -140,6 +148,10 @@ export default function TableBlock({ block }) {
       {responsive !== "scroll" && (
         <style>{`
 @media (max-width: ${stackBreakpoint}px) {
+ /* stop horizontal scrolling in stacked mode */
+ .scroll-stack {
+   overflow-x: visible;     /* no sideways scroll */
+ }
   /* hide table header, present cells as blocks with inline labels */
   .scroll-stack table thead,
   .scroll-stack table tfoot { display: none; }
@@ -151,6 +163,7 @@ export default function TableBlock({ block }) {
   .scroll-stack th[scope="row"] {
     display: block;
     width: 100%;
+    min-width: 0 !important; /* override the desktop min-width */
   }
 
   .scroll-stack tr {
@@ -165,6 +178,8 @@ export default function TableBlock({ block }) {
   .scroll-stack th[scope="row"] {
     border: 0;
     padding: 0.4rem 0;
+    white-space: normal;       /* wrap lines on mobile cards */
+    overflow-wrap: anywhere;   /* break long tokens/URLs */
   }
 
   .scroll-stack td::before,
