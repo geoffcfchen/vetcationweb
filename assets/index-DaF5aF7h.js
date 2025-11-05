@@ -6035,6 +6035,8 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
   table-layout: auto;
   color: #ccc;
   word-break: break-word;
+  overflow-wrap: anywhere; /* allow breaking long tokens */
+  white-space: normal; /* let text wrap */
 
   caption {
     text-align: left;
@@ -6056,6 +6058,8 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
     padding: 0.75rem;
     border-bottom: 1px solid #2a2a2a;
     vertical-align: top;
+    white-space: normal; /* make sure cell text wraps */
+    overflow-wrap: anywhere; /* break long URLs/words if needed */
   }
 
   /* Optional: sticky first column if you use row headers */
@@ -6066,11 +6070,15 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
     background: #1c1c1c;
     font-weight: 600;
     color: #fff;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
   /* Add this block: link styling */
   a {
     color: #4db6c5; /* your chosen colour */
     text-decoration: underline;
+    word-break: break-word; /* also wrap long links */
+    overflow-wrap: anywhere;
   }
   a:hover,
   a:focus {
@@ -6078,6 +6086,10 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
   }
 `;function Tie({block:n}){const{columns:e=[],rows:i=[],note:r,minWidth:o,rowHeaders:s=!1,responsive:a="scroll",stackBreakpoint:l=640}=n,c=d=>typeof d=="string"?g.jsx("span",{dangerouslySetInnerHTML:{__html:d}}):g.jsx("span",{children:d??""}),u=d=>({"data-label":d.title});return g.jsxs(g.Fragment,{children:[g.jsx(Cie,{role:"region","aria-label":"Data table",tabIndex:0,className:n.responsive!=="scroll"?"scroll-stack":void 0,children:g.jsxs(_ie,{$minWidth:o,children:[g.jsx("thead",{children:g.jsx("tr",{children:e.map(d=>g.jsx("th",{scope:"col",children:d.title},d.key))})}),g.jsx("tbody",{children:i.map((d,p)=>g.jsx("tr",{children:e.map((m,v)=>{const w=c(d[m.key]);return v===0&&s?g.jsx("th",{scope:"row",children:w},m.key):g.jsx("td",{...u(m),children:w},m.key)})},p))})]})}),r?g.jsx(kie,{dangerouslySetInnerHTML:{__html:r}}):null,a!=="scroll"&&g.jsx("style",{children:`
 @media (max-width: ${l}px) {
+ /* stop horizontal scrolling in stacked mode */
+ .scroll-stack {
+   overflow-x: visible;     /* no sideways scroll */
+ }
   /* hide table header, present cells as blocks with inline labels */
   .scroll-stack table thead,
   .scroll-stack table tfoot { display: none; }
@@ -6089,6 +6101,7 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
   .scroll-stack th[scope="row"] {
     display: block;
     width: 100%;
+    min-width: 0 !important; /* override the desktop min-width */
   }
 
   .scroll-stack tr {
@@ -6103,6 +6116,8 @@ requirements and explain how Vetcation keeps you compliant.`,sections:[{id:"faqB
   .scroll-stack th[scope="row"] {
     border: 0;
     padding: 0.4rem 0;
+    white-space: normal;       /* wrap lines on mobile cards */
+    overflow-wrap: anywhere;   /* break long tokens/URLs */
   }
 
   .scroll-stack td::before,
