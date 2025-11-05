@@ -3874,7 +3874,8 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
 
     oncologyTelemedicine: {
-      mainTitle: "Telemedicine: Oncology (California AB 1399)",
+      mainTitle:
+        "Telemedicine: Oncology — Clinical Considerations (DACVIM-Oncology)",
       mainDescription:
         "Tele-oncology excels at diagnosis reviews, treatment planning, toxicity monitoring, and hospice/QOL counseling. Procedures, chemotherapy infusions, imaging, and biopsies are performed in-clinic; telemedicine extends continuity of care and client education.",
       sections: [
@@ -3968,7 +3969,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
     behaviorTelemedicine: {
-      mainTitle: "Telemedicine: Behavior (California AB 1399)",
+      mainTitle: "Telemedicine: Behavior — Clinical Considerations (DACVB)",
       mainDescription:
         "Board-certified behaviorists (DACVB) use video + owner-supplied footage and structured histories to diagnose and treat many behavior disorders remotely. Telemedicine excels at assessment, coaching, and pharmacologic plans with close follow-ups; in-person care is reserved for safety issues and medical rule-outs.",
       sections: [
