@@ -19,7 +19,8 @@ const topNavData = [
   },
   {
     id: "telemedicineCases",
-    label: "Telemedicine Cases",
+    //shorter
+    label: "Cases",
     defaultDocId: "telemedicineCasesOverview",
   },
   {

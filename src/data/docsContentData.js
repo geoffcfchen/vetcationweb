@@ -3537,7 +3537,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
     generalPracticeTelemedicine: {
-      mainTitle: "Telemedicine Specific Considerations for General Practice",
+      mainTitle: "Telemedicine: General Practice (California AB 1399)",
       mainDescription:
         "When utilizing telemedicine in general practice, it's important to consider specific guidelines and best practices to ensure effective and compliant care. Here are some key considerations:",
       sections: [
@@ -3712,7 +3712,7 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
     dermatologyTelemedicine: {
-      mainTitle: "Telemedicine: Dermatology (California AB 1399)",
+      mainTitle: "Telemedicine: Dermatology — Clinical Considerations (DACVD)",
       mainDescription:
         "Common dermatologist-managed problems that are well-suited to live audio-video care, with examples of red flags that should prompt in-person evaluation. Links in each case point to an authoritative reference.",
       sections: [
@@ -4066,7 +4066,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     nutritionTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Nutrition (DACVN Perspective)",
+        "Telemedicine: Endocrinology — Clinical Considerations (SAIM/DACVIM)",
       mainDescription:
         "Tele-nutrition excels for stable patients, longitudinal coaching, and individualized diet formulation. Labs, imaging, and procedures are routed to partner clinics as needed; results sync back to keep the primary DVM in the loop.",
       sections: [
@@ -4161,7 +4161,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     endocrinologyTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Endocrinology (SAIM/DACVIM Perspective)",
+        "Telemedicine: Endocrinology — Clinical Considerations(SAIM/DACVIM Perspective)",
       mainDescription:
         "Tele-endocrinology is ideal for longitudinal management, dose titration, client coaching, and shared decision-making. Diagnostics (CBC/chem/UA, thyroid panels, ACTH stimulation, LDDST, fructosamine, blood pressure) are routed to partner clinics as needed; results sync back so the primary DVM stays in the loop.",
       sections: [
@@ -4323,7 +4323,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     nephrologyUrologyTelemedicine: {
       mainTitle:
-        "Nephrology & Urology: Telemedicine Use Cases (DACVIM-SAIM perspective)",
+        "Telemedicine: Nephrology & Urology — Clinical Considerations (DACVIM-SAIM perspective)",
       mainDescription:
         "Stable medical management and owner coaching are highly telemedicine-friendly in nephrology/urology. Diagnostics requiring samples or imaging happen in-clinic, with follow-ups and care plans completed by video.",
       sections: [
@@ -4480,7 +4480,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     cardiologyTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Cardiology (ACVIM Perspective)",
+        "Telemedicine: Cardiology — Clinical Considerations (ACVIM Perspective)",
       mainDescription:
         "Tele-cardiology is excellent for longitudinal monitoring, caregiver training (e.g., resting respiratory rate), medication counseling, and shared decision-making. Diagnostics (echocardiography, thoracic radiographs, ECG/Holter, bloodwork, BP) are performed at partner clinics; results sync back so the primary DVM remains in the loop.",
 
@@ -4630,7 +4630,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     gastroenterologyTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Gastroenterology (SAIM/DACVIM Perspective)",
+        "Telemedicine: Gastroenterology — Clinical Considerations (SAIM/DACVIM Perspective)",
       mainDescription:
         "Tele-GI excels at diet trials, owner coaching, medication titration, and longitudinal follow-ups. Diagnostics (CBC/chem/UA, fecal tests, cobalamin/folate, cPLI/fPLI, abdominal ultrasound, endoscopy/biopsy) are routed to partner clinics; results sync back so the primary DVM stays in the loop.",
 
@@ -4802,7 +4802,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     pulmonologyRespiratoryTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Pulmonology & Respiratory (DACVIM-SAIM Perspective)",
+        "Telemedicine: Pulmonology & Respiratory — Clinical Considerations (DACVIM-SAIM Perspective)",
       mainDescription:
         "Tele-respiratory care is excellent for longitudinal management (owner coaching, medication titration, environment control) once a diagnosis and baseline have been established. Diagnostics that require hands-on acquisition (thoracic radiographs, echocardiography, ECG/Holter, airway sampling, bronchoscopy, oxygen therapy) are performed at partner clinics and then followed up by video.",
 
@@ -4971,7 +4971,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     neurologyTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Neurology (DACVIM-Neurology Perspective)",
+        "Telemedicine: Neurology — Clinical Considerations (DACVIM-Neurology Perspective)",
       mainDescription:
         "Tele-neurology excels at longitudinal counseling (seizure diaries & action plans, cognitive dysfunction support, benign movement/vestibular follow-ups) and coordinated pathways where advanced diagnostics occur at partner clinics and results flow back for video follow-ups.",
 
@@ -5117,7 +5117,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     hematologyImmunologyTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Hematology & Immunology (DACVIM-SAIM / AVHTM Perspective)",
+        "Telemedicine: Hematology & Immunology — Clinical Considerations (DACVIM-SAIM / AVHTM Perspective)",
       mainDescription:
         "Tele-hematology/immunology works well for longitudinal counseling, medication adherence/titration with clinic-based labs, transfusion reaction follow-ups, and client education on bleeding/thrombotic risk. Diagnostics that require samples, imaging, hospitalization, transfusion, or procedures occur at partner clinics; results then flow back for video follow-ups.",
 
@@ -5277,7 +5277,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     },
     infectiousDiseasesTelemedicine: {
       mainTitle:
-        "Telemedicine Specific Considerations for Infectious Diseases (SAIM/ID Perspective)",
+        "Telemedicine: Infectious Diseases — Clinical Considerations (SAIM/ID Perspective)",
       mainDescription:
         "Tele-infectious disease is well suited to triage, prevention counseling, outbreak control, treatment adherence, and follow-ups tied to clinic-based diagnostics. Antibiotic stewardship applies: many canine/feline URI/CIRDC cases are viral and do not warrant antibiotics unless bacterial complications are evidenced by exam or tests.",
 
