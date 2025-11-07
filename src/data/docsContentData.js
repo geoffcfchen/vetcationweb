@@ -3412,16 +3412,16 @@ requirements and explain how Vetcation keeps you compliant.`,
     telemedicineCasesOverview: {
       mainTitle: "Telemedicine Case Examples",
       mainDescription:
-        "A simple triage map for where telemedicine fits, what vets can do remotely, and when to route in-person.",
+        "Telemedicine can be a valuable tool for a wide range of cases, allowing veterinarians to provide care remotely while maintaining high standards. Here are some common scenarios where telemedicine can be effectively utilized:",
       sections: [
         {
           id: "generalCases",
           title: "Where Telemedicine Fits",
           blocks: [
-            // {
-            //   type: "paragraph",
-            //   text: "Legend — Fit: <strong>Strong</strong> • <strong>Often</strong> • <strong>Limited/No</strong>",
-            // },
+            {
+              type: "paragraph",
+              text: "Telemedicine suitability by case type",
+            },
             {
               type: "table",
               caption: "At-a-glance suitability by case type",
@@ -3539,7 +3539,7 @@ requirements and explain how Vetcation keeps you compliant.`,
     generalPracticeTelemedicine: {
       mainTitle: "Telemedicine: General Practice (California AB 1399)",
       mainDescription:
-        "When utilizing telemedicine in general practice, it's important to consider specific guidelines and best practices to ensure effective and compliant care. Here are some key considerations:",
+        "Telemedicine can be a valuable tool for a wide range of cases, allowing veterinarians to provide care remotely while maintaining high standards. Here are some common scenarios where telemedicine can be effectively utilized:",
       sections: [
         {
           id: "gpTelemedComplete",
