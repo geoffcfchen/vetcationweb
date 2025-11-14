@@ -619,6 +619,43 @@ const contentData = {
           ],
         },
         {
+          id: "partnerWithClinic",
+          title: "Partner with a Clinic",
+          blocks: [
+            {
+              type: "paragraph",
+              text: `The Vetcation platform enables you to collaborate with brick-and-mortar clinics to offer virtual care under your own name and schedule. Their clients can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.`,
+            },
+            {
+              type: "framedImage",
+              // heading: "Sample: Updating Your Legal Profile",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1543.webp?alt=media&token=dea8ffc8-aaee-46f0-bb7c-b11eddb5483f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1544.webp?alt=media&token=aabc4d6e-c0c0-4d72-a8b2-aa2ab862ce68",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1545.webp?alt=media&token=cb033bff-535d-4502-bfda-e5b303c2c264",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Open drawer and select Telemedicine Settings",
+                },
+                {
+                  heading: "Select Partnership Hub",
+                },
+                {
+                  heading: "Browse available clinics to partner with",
+                  lines: [
+                    "Review the list of hospitals that are open to telemedicine partnerships.",
+                    "Send a partnership request to the desired hospitals.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
           id: "done",
           title: "Done!",
           blocks: [
