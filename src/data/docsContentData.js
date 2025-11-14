@@ -664,10 +664,10 @@ const contentData = {
               items: [
                 {
                   heading:
-                    "You’re all set! You can now start accepting virtual appointments through your clinic.",
-                  // lines: [
-                  //   "You can now start accepting virtual appointments through your clinic.",
-                  // ],
+                    "Congratulations! You have completed all the steps to set up your virtual clinic.",
+                  lines: [
+                    "You can now start accepting virtual appointments through your partnered hospital.",
+                  ],
                 },
               ],
             },
