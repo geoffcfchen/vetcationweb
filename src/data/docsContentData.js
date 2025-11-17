@@ -3634,7 +3634,10 @@ requirements and explain how Vetcation keeps you compliant.`,
                 },
                 {
                   case: `Mild upper-airway signs (no distress)
-                 <a href="https://www.msdvetmanual.com/generalized-conditions/respiratory-diseases-of-dogs/overview-of-respiratory-diseases-in-dogs" target="_blank" rel="noopener">MSD: canine respiratory overview</a>`,
+    <a href="https://www.msdvetmanual.com/respiratory-system/respiratory-diseases-of-small-animals/overview-of-respiratory-diseases-of-dogs-and-cats?query=respiratory%20diseases%20in%20dogs"
+       target="_blank" rel="noopener noreferrer">
+      MSD Veterinary Manual – Respiratory Diseases (dogs & cats)
+    </a>`,
                   plan: "History, home monitoring, humidification, supportive care.",
                   rx: "Antihistamines; lubricating drops/nasal saline when appropriate.",
                   red: "Dyspnea, cyanosis, progressive cough with distress.",
@@ -3662,7 +3665,9 @@ requirements and explain how Vetcation keeps you compliant.`,
                 },
                 {
                   case: `Nutrition & weight management
-                 <a href="https://wsava.org/wp-content/uploads/2020/01/Global-Nutrition-Guidelines-2013.pdf" target="_blank" rel="noopener">WSAVA nutrition</a>`,
+    <a href="https://wsava.org/wp-content/uploads/2021/04/Selecting-a-pet-food-for-your-pet-updated-2021_WSAVA-Global-Nutrition-Toolkit.pdf" target="_blank" rel="noopener">
+      WSAVA nutrition toolkit
+    </a>`,
                   plan: "Dietary assessment, caloric plan, recheck schedule.",
                   rx: "Therapeutic diet enrollment; omega-3 supplements.",
                   red: "Rapid unexplained weight loss → diagnostics.",
@@ -3703,7 +3708,10 @@ requirements and explain how Vetcation keeps you compliant.`,
               rows: [
                 {
                   case: `Allergic dermatitis needing Cytopoint injection
-                 <a href="https://ctajournal.biomedcentral.com/articles/10.1186/s40575-015-0014-5" target="_blank" rel="noopener">ICADA guideline</a>`,
+    <a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0514-6"
+       target="_blank" rel="noopener noreferrer">
+       ICADA guideline – atopic dermatitis (2015)
+    </a>`,
                   tele: "Video exam, rule-in pruritus, document VCPR, place clinic order.",
                   clinic:
                     "RVT administers Cytopoint SC under indirect DVM supervision (on-premises).",
@@ -3721,24 +3729,27 @@ requirements and explain how Vetcation keeps you compliant.`,
                 },
                 {
                   case: `Suspected UTI
-                 <a href="https://iscaid.org/iscaid-guidelines" target="_blank" rel="noopener">ISCAID UTI guidance</a>`,
+   <a href="https://doi.org/10.1016/j.tvjl.2019.02.008" target="_blank" rel="noopener">
+     ISCAID UTI guideline (Vet J 2019)
+   </a>`,
                   tele: "History, risk screen, analgesia/hydration plan, order urinalysis ± culture.",
                   clinic:
                     "Cystocentesis sample collection and lab submission; DVM reviews results.",
                   notes:
-                    "If antibiotics indicated, Rx per results; antimicrobial stewardship applies.",
+                    "If antibiotics indicated, Rx per culture/susceptibility; antimicrobial stewardship applies.",
                 },
                 {
                   case: `Endocrine monitoring (hypothyroid, stable diabetes)
-                 <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA monitoring</a>`,
+   <a href="https://www.avma.org/news/aaha-publishes-endocrinology-diagnosis-treatment-guidelines-dogs-cats" target="_blank" rel="noopener">AAHA endocrinopathies</a>`,
                   tele: "Dose/clinical review, lab order set, monitoring plan; schedule clinic bloodwork.",
                   clinic:
                     "Blood draw (RVT/assistant as permitted) and lab processing; DVM interprets.",
-                  notes: "Adjust dose based on labs; follow-up by video.",
+                  notes:
+                    "Adjust dose based on labs; follow-up by video. See also AAHA diabetes guidelines for detailed protocols.",
                 },
                 {
                   case: `Lameness needing radiographs
-                 <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/" target="_blank" rel="noopener">AAHA pain/lameness</a>`,
+   <a href="https://www.aaha.org/resources/2022-aaha-pain-management-guidelines-for-dogs-and-cats/home-3/" target="_blank" rel="noopener">AAHA pain/lameness</a>`,
                   tele: "Gait video review, pain plan, imaging order, sedation risk screen if needed.",
                   clinic:
                     "Radiographs performed per supervision requirements; DVM reads/plan.",
