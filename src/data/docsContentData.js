@@ -3903,7 +3903,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "Topical + (cats: often) systemic therapy; environmental control; tele-rechecks.",
                 },
                 {
-                  case: 'Demodicosis vs. sarcoptic mange (mite rule-out) <a href="https://www.msdvetmanual.com/integumentary-system/mange-and-mite-infestations/sarcoptic-mange-in-dogs" target="_blank" rel="noopener">MSD Vet Manual</a>',
+                  case: 'Demodicosis vs. sarcoptic mange (mite rule-out) <a href="https://www.msdvetmanual.com/integumentary-system/mange/mange-in-dogs-and-cats" target="_blank" rel="noopener">MSD Vet Manual</a>',
                   tele: "History/photos, contagion counseling; order scrapings/trichograms.",
                   clinic:
                     "Deep/superficial skin scrapings, trichogram; DVM interprets & treats.",
@@ -3955,7 +3955,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               ],
               rows: [
                 {
-                  case: 'Confirmed multicentric lymphoma: staging & CHOP counseling <a href="https://www.merckvetmanual.com/circulatory-system/lymphoma-in-dogs/lymphoma-in-dogs" target="_blank" rel="noopener">ref</a> <a href="https://uwveterinarycare.wisc.edu/wp-content/uploads/2019/06/k9_chop.pdf" target="_blank" rel="noopener">protocol</a>',
+                  case: 'Confirmed multicentric lymphoma: staging & CHOP counseling <a href="https://www.merckvetmanual.com/circulatory-system/lymphoma-in-dogs/lymphoma-in-dogs" target="_blank" rel="noopener">ref</a> ',
                   plan: "Review histopath/cytology, outline staging (minimum database, thoracic imaging ± abdominal US), discuss CHOP vs palliative steroid; VCOG toxicity expectations and recheck cadence.",
                   rx: "Prednisone if palliative; antiemetics (maropitant/ondansetron), gastroprotectants if indicated.",
                   red: "Inappetence >24–48h, repeated vomiting/diarrhea, fever, dyspnea, rapidly enlarging nodes.",
