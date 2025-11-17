@@ -3602,7 +3602,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               rows: [
                 {
                   case: `Allergic itch / atopic flare (no infection signs)
-                 <a href="https://ctajournal.biomedcentral.com/articles/10.1186/s40575-015-0014-5" target="_blank" rel="noopener">ICADA guideline</a>`,
+<a href="https://bmcvetres.biomedcentral.com/articles/10.1186/s12917-015-0514-6" target="_blank" rel="noopener noreferrer">ICADA guideline (2015 update)</a>`,
                   plan: "Photo review, itch scoring, environment control, pruritus plan.",
                   rx: "Oclacitinib; short steroid taper when appropriate; topical antipruritics.",
                   red: "Pustules/crusts, fever, otitis with discharge, spreading lesions.",
@@ -3616,7 +3616,10 @@ requirements and explain how Vetcation keeps you compliant.`,
                 },
                 {
                   case: `Mild acute GI upset (bright/alert; no blood)
-                 <a href="https://wsava.org/wp-content/uploads/2025/01/Acute-Diarrhoea.pdf" target="_blank" rel="noopener">WSAVA acute diarrhea</a>`,
+  <a href="https://todaysveterinarypractice.com/gastroenterology/gi-intervention-approach-to-diagnosis-and-therapy-of-the-patient-with-acute-diarrhea/"
+     target="_blank" rel="noopener">
+    Evidence-based acute diarrhea guidance
+  </a>`,
                   plan: "Hydration + bland diet; anti-nausea/anti-diarrheal; clear return precautions.",
                   rx: "Maropitant; GI protectants/probiotics; electrolytes.",
                   red: "Repeated vomiting, blood, pain, lethargy, dehydration.",
