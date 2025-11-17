@@ -3703,7 +3703,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (GP)" },
                 { key: "clinic", title: "Clinic tasks & supervision" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -3875,7 +3875,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (Derm DVM)" },
                 { key: "clinic", title: "Clinic tasks & supervision" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -4325,7 +4325,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (SAIM/DACVIM)" },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -4475,7 +4475,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (Nephro/Uro)" },
                 { key: "clinic", title: "Clinic tasks & supervision" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -4487,7 +4487,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                     "Culture-guided Rx; stewardship plan and signs for relapse reviewed by video.",
                 },
                 {
-                  case: `Struvite urolith dissolution protocol (cats) <a href="https://urolithcenter.org/recommendations/53?locale=en" target="_blank" rel="noopener">MUC Struvite Dissolution</a>`,
+                  case: 'Struvite urolith dissolution protocol (cats) <a href="https://urolithcenter.org/recommendations/36?locale=en" target="_blank" rel="noopener">MUC Struvite Dissolution</a>',
                   tele: "Confirm radiopaque struvite prediction and absence of obstruction; prescribe dissolution diet; plan re-imaging cadence.",
                   clinic:
                     "Follow-up radiographs every 2–3 weeks; culture if progress stalls; document outcomes.",
@@ -4618,7 +4618,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (Cardiology/GP)" },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -4799,7 +4799,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (SAIM/DACVIM)" },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -4969,7 +4969,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   title: "Telemedicine actions (Pulmonology/SAIM)",
                 },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -5124,7 +5124,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (Neurology/GP)" },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -5283,7 +5283,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   title: "Telemedicine actions (SAIM/Heme-Immunology)",
                 },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
@@ -5358,7 +5358,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               columns: [
                 { key: "case", title: "Case" },
                 { key: "plan", title: "Telemedicine plan (SAIM/ID)" },
-                { key: "rx", title: "Typical home care / eRx" },
+                { key: "rx", title: "Example eRx/home care" },
                 { key: "red", title: "Red flags → in-person" },
               ],
               rows: [
@@ -5436,7 +5436,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                 { key: "case", title: "Case" },
                 { key: "tele", title: "Telemedicine actions (SAIM/ID)" },
                 { key: "clinic", title: "Clinic tasks & diagnostics" },
-                { key: "notes", title: "Typical outcome" },
+                { key: "notes", title: "Example outcome" },
               ],
               rows: [
                 {
