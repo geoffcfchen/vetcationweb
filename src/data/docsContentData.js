@@ -1360,7 +1360,8 @@ const contentData = {
               example:
                 "A client might list a California home address but could be traveling with their pet in Nevada. In this scenario, you cannot initiate a new telemedicine consult under California law because the pet is physically out of state.",
               helpText:
-                "Our platform prompts the client to confirm their current location at the start of each telehealth appointment. If the address is outside California, Vetcation alerts you that proceeding with a new telemedicine consult may not be permissible. This ensures you remain compliant with AB 1399 while still allowing you to manage refills or follow-up actions for existing prescriptions.",
+                // add GPS to confirm, not just address
+                "When booking, Vetcation requires clients to confirm that, at the time of the telemedicine appointment, their pet will be physically located in California. Right before the appointment, our platform uses geolocation technology to verify that the animal is in California, helping ensure compliance with AB 1399. If the pet is detected to be outside California, the system will cancel the appointment and prompt the client to rebook a new telemedicine visit.",
             },
           ],
         },
