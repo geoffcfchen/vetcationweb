@@ -6133,7 +6133,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0838.webp?alt=media&token=a5db0d17-48f7-4bd3-bdaf-a5a64fdd8bb7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1570.webp?alt=media&token=85bc08e1-7a50-4795-a0ea-37ea000a0848",
               ],
             },
             {
@@ -6163,52 +6163,55 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0841.webp?alt=media&token=56d65d8d-1b38-4358-9fdd-a0009239d335",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1039.webp?alt=media&token=0f3f8557-ca8e-4ba9-bd4b-6ebf3f797f88",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1573.webp?alt=media&token=d5e60757-4530-4730-9219-18a4854264b2",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1574.webp?alt=media&token=1d6ed3a4-058c-44bf-9632-a30e0083cbba",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1575.webp?alt=media&token=d0a2d2a6-d755-4929-a39b-b1d55f924149",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Approve partnership requests",
+                  heading: "Access partnership hub",
                   lines: [
-                    "Relief vets may send requests to partner with your hospital.",
-                    "You can review, approve, or decline requests from your hospital account on the map.",
+                    "Go to telemedicine settings from the drawer menu and select 'Partnership Hub' to manage partnerships with telemedicine veterinarians.",
+                    "Toggle on 'Open to new partnerships' so telemedicine vets can know your hospital is actively accepting partnership requests.",
+                    "Send partnership requests to telemedicine veterinarians you want to work with.",
+                    "Review incoming partnership requests from telemedicine veterinarians and accept or decline them based on your hospital's needs.",
+                    "Once a partnership request is accepted, the telemedicine veterinarian will be listed as a telemedicine vet under your hospital's profile.",
                   ],
                 },
               ],
             },
           ],
         },
-        {
-          id: "SendRequestReliefVets",
-          title: "Send Partnership Requests to Relief Veterinarians",
-          blocks: [
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0847.webp?alt=media&token=007fd8c3-a56c-4545-aba8-76649f22b4c2",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0845.webp?alt=media&token=ebd22e27-7272-41a7-aea0-6e74698394e7",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0846.webp?alt=media&token=8387fb7a-5c63-4c09-8564-a6ee375e554e",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Invite trusted vets",
-                  lines: [
-                    "Search for relief veterinarians by name.",
-                    "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
-                    "Once they accept, they will be listed as a telemedicine vet under your hospital’s profile.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   id: "SendRequestReliefVets",
+        //   title: "Send Partnership Requests to Relief Veterinarians",
+        //   blocks: [
+        //     {
+        //       type: "framedImage",
+        //       imageSrcs: [
+        //         "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0847.webp?alt=media&token=007fd8c3-a56c-4545-aba8-76649f22b4c2",
+        //         "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0845.webp?alt=media&token=ebd22e27-7272-41a7-aea0-6e74698394e7",
+        //         "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0846.webp?alt=media&token=8387fb7a-5c63-4c09-8564-a6ee375e554e",
+        //       ],
+        //     },
+        //     {
+        //       type: "bulletList",
+        //       items: [
+        //         {
+        //           heading: "Invite trusted vets",
+        //           lines: [
+        //             "Search for relief veterinarians by name.",
+        //             "Send invitations to relief veterinarians you already work with to join your hospital’s virtual branch.",
+        //             "Once they accept, they will be listed as a telemedicine vet under your hospital’s profile.",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
         // {
         //   id: "viewOutcomes",
         //   title: "View Visit Outcomes",
