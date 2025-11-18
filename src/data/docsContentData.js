@@ -6294,10 +6294,13 @@ requirements and explain how Vetcation keeps you compliant.`,
               items: [
                 {
                   heading: "Total clients:",
-                  lines: ["Count of unique pet owners linked to your account."],
+                  lines: [
+                    "Count of unique pet owners linked to your account.",
+                    "You can select different time ranges (7D, 2W, 4W, 3M, 1Y) to see growth trends.",
+                  ],
                 },
                 {
-                  heading: "New (4W):",
+                  heading: "Example: New (4W):",
                   lines: ["New clients who joined in the last 4 weeks."],
                 },
               ],
