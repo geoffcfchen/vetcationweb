@@ -8890,7 +8890,6 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading:
                     "Step 4: Confirm the payment method (sufficient wallet balance)",
                   lines: [
-                    
                     "If your wallet balance is sufficient, the payment will be processed automatically by using your wallet funds.",
                   ],
                 },
@@ -8940,6 +8939,406 @@ requirements and explain how Vetcation keeps you compliant.`,
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1603.webp?alt=media&token=6b45e30f-f05d-4e2f-b148-625111b286b5",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1604.webp?alt=media&token=92c2da5e-3d61-40f3-b380-0aa5a81d35c3",
               ],
+            },
+          ],
+        },
+      ],
+    },
+    duringYourAppointment: {
+      mainTitle: "Join a Video Call",
+      mainDescription: `
+          Vetcation’s video consultation feature enables you to meet your vet 
+          face-to-face (virtually) and provide information needed 
+          to diagnose and treat patients. Below, learn how to access 
+          your scheduled calls, test your mic and camera, and begin 
+          your real-time telemedicine session.
+        `,
+      sections: [
+        {
+          id: "howToJoinSection",
+          title: "How to Join",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Access Scheduled Appointments",
+                  lines: [
+                    "Go to My Schedule for the upcoming appintment. Press it to navigate to the appointment card.",
+                    "Look for a “Join Call” button on the appointment card.",
+                  ],
+                },
+
+                {
+                  heading: "Stable Internet Connection",
+                  lines: [
+                    "A strong connection helps keep video and audio smooth.",
+                    "If using mobile data, find a reliable spot with good reception.",
+                  ],
+                },
+                {
+                  heading: "Start the Call",
+                  lines: [
+                    "Once you’re ready, click Join Call to enter the video call.",
+                    "Remember to enable your camera so the client can see you (and vice versa).",
+                    "Be mindful of background surroundings for privacy and professionalism.",
+                    "Under AB 1399, you must use synchronous audio-video to form a valid VCPR unless you’ve already examined the patient in person.",
+                  ],
+                },
+                {
+                  heading: "Camera Access Prompt",
+                  lines: [
+                    `When you enable your camera, Vetcation may show a prompt such as “Vetcation Would Like to Access the Camera.”`,
+                    "Allowing camera access enables you to share live video with the client",
+                    "If you tap “Don’t Allow,” you’ll be unable to share your video directly from your device and VCPR establishment cannot be completed.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "featureOverview",
+          title: "Features Overview",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Camera and Audio Requirements",
+                  lines: [
+                    "To achieve legal telemedicine requirements (if your pet is not yet conducted in-person), you must appear on video and turn on the microphone.",
+                    "Vetcation prompts you if your camera is off and nudges clients to enable theirs for an in-clinic-like interaction.",
+                  ],
+                },
+                {
+                  heading: "Flip Camera",
+                  lines: [
+                    "If you want to show your vet something, tap the camera icon to switch between front and back views.",
+                  ],
+                },
+                {
+                  heading: "Mute/Unmute",
+                  lines: [
+                    "Tap the microphone icon to mute or unmute your audio during the call.",
+                  ],
+                },
+
+                {
+                  heading: "End Call",
+                  lines: [
+                    "When you’re finished, tap the red Leave icon to leave the video call room.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.13.19%20PM.png?alt=media&token=086e22cd-ffcc-4028-a467-5e8b8b777788",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Access Telemedicine Info (top middle)",
+                  lines: [
+                    "Tap the Vetcation icon during a video call to view important session details in real-time.",
+                    "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
+                    "You’ll also see confirmation of enhanced encryption and the U.S.-based data center powering the call.",
+                    "This feature promotes transparency and trust while also helping you keep accurate documentation during the session.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "Access Inquiry-based Messager (bottom right corner)",
+                  lines: [
+                    "During a video call, you can use the inquiry-based Messager to send text messages to your vet.",
+                    "This feature is useful for sharing links, files, or other details that might be hard to convey verbally.",
+                    "The chat is saved in the Inquiry-Based Messager, ensuring continuity of care.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "recordingBasics",
+          title: "Recording Basics & Consent",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "No Media Storage",
+                  lines: [
+                    "Vetcation does not retain video or audio once processing is complete.",
+                    "Audio is temporarily captured in real time so our AI can generate summaries, then permanently deleted.",
+                    "This minimizes privacy concerns and long-term data risks.",
+                  ],
+                },
+                {
+                  heading: "AI-Assisted Medical Records (No Saved Recordings)",
+                  lines: [
+                    "Audio from the session is briefly processed to produce a draft medical record for review.",
+                    "After processing, the raw audio is discarded—only the structured text record remains.",
+                  ],
+                },
+                {
+                  heading: "Client-Facing Summaries",
+                  lines: [
+                    "We create a plain-language recap that clients can view in their portal.",
+                    "This summary highlights key discussion points, recommended treatments, and next steps.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "privacySecurity",
+          title: "Privacy & Security",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Data Protection",
+                  lines: [
+                    "All live calls are end-to-end encrypted. Only the assigned veterinarian and authorized staff can access session details.",
+                    "If audio is processed by our AI, it’s stored only until the summary is generated, then automatically deleted.",
+                  ],
+                },
+                {
+                  heading: "Liability Under BPC § 4857",
+                  lines: [
+                    "A veterinarian can face civil liability for negligent release of confidential information.",
+                    "Handle any patient data carefully, whether it’s text, images, or ephemeral audio.",
+                  ],
+                },
+                {
+                  heading: "Deleting Audio Data",
+                  lines: [
+                    "Vetcation’s AI system automatically removes audio once processing is complete.",
+                    "No manual deletion is required—ephemeral files never remain in storage.",
+                  ],
+                },
+                {
+                  heading: "Patient Requests",
+                  lines: [
+                    "Clients can request copies of their medical summaries at any time.",
+                    "Per BPC § 4855, you must furnish these upon request, even if the client owes a balance.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    afterYourAppointment: {
+      mainTitle: "Medical History Overview",
+      mainDescription: `
+        The Medical History section gives you and your vet access to important health information in one place. 
+        You can view your pet's details such as <span class="highlight">breed, color, sex, date of birth, spayed/neutered status, and weight history</span>. 
+        You may also export the full medical history, which pet owners can take to their home clinic when needed.
+      `,
+      sections: [
+        {
+          id: "visits",
+          title: "Visits",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "All Appointments in One Place",
+                  lines: [
+                    "See all past and upcoming visits with your virtual clinic.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "records",
+          title: "Records",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Comprehensive Visit Records",
+                  lines: [
+                    "This section is designed to keep all medical reports, prescriptions, and notes organized and easily accessible.",
+                    "You can upload medical records from your in-clinic visits, which will appear here for unified documentation.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "weightChart",
+          title: "Weight Chart",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8433-min.PNG?alt=media&token=51cecb79-1400-4852-9f35-51d6e5085b1d",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Track Growth and Health Trends",
+                  lines: [
+                    `Press "see chart" to view your pet's weight chart.`,
+                    "See your pet’s weight trends over time in a visual chart.",
+                    "Useful for monitoring young pets, managing chronic conditions, or evaluating treatment progress.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    followUpCare: {
+      mainTitle: "Vetssenger Overview",
+      mainDescription: `
+        Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
+      `,
+      sections: [
+        // NEW SECTION to hold the text previously in mainDescription
+
+        // Existing section about navigating the tabs
+        {
+          id: "",
+          title: "Ask questions after your appointment",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Asking Questions",
+                  lines: [
+                    "After your appointment, you can use Vetssenger to ask follow-up questions about your pet's care.",
+                    "Simply open the Vetssenger tab and select the conversation with your veterinarian to send a message.",
+                    "Once the inquiry is resolved, your vets will close the conversation.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Submit new inquiries",
+                  lines: [
+                    "You can freely ask questions within the time where set by your veterinarian. Typically, this period is 72 hours after your appointment.",
+                    "After that, you can still ask questions, but they may incur additional charges as per your veterinarian's policies.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1617.webp?alt=media&token=e663e7ab-1b62-448f-b981-d1435ec64a80",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    vetcationCommunity: {
+      mainTitle: "Community Q&A",
+      mainDescription:
+        "Vetcation’s Community Q&A is a place where pet owners can learn from real veterinarians who share general educational guidance about common health topics. You can ask questions about your pet, browse answers from licensed professionals, and learn how vets think through symptoms and care considerations. The information shared here is educational only, but it helps you understand what might be going on, what signs to watch for, and when a situation may need more urgent attention. Many pet owners also discover veterinarians they trust and later choose to book appointments with them through the platform.",
+      sections: [
+        {
+          id: "generaladvice",
+          title: "General advice and understanding urgency",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+              ],
+            },
+            {
+              type: "qa",
+              question: "What is general advice?",
+              answer:
+                "General advice means that veterinarians share helpful, educational information that can guide you in understanding your pet’s symptoms or behavior. Instead of diagnosing or giving specific treatment instructions, vets explain what certain signs may indicate, what factors might be important to monitor, and what typical next steps many pet owners consider in similar situations. It is a way for you to learn from professionals, feel more confident, and better understand your pet’s health.",
+            },
+            {
+              type: "qa",
+              question: "What does it mean when a vet comments about urgency?",
+              answer:
+                "When veterinarians comment on urgency, they are helping you understand whether a situation may require prompt in-person care, might be suitable for a scheduled visit, or could be monitored at home with guidance. This is sometimes called teletriage. It does not replace a hands-on exam or diagnosis, but it gives you a clearer sense of how quickly you may need to act. Many pet owners use this educational insight to decide whether to visit their regular vet, seek emergency care, or monitor for changes.",
             },
           ],
         },

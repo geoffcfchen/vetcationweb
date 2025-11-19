@@ -241,15 +241,23 @@ const sideNavData = {
               id: "schedulingAnAppointment",
               label: "Scheduling an Appointment",
             },
-            // {
-            //   id: "duringYourAppointment",
-            //   label: "During Your Appointment",
-            // },
-            // {
-            //   id: "afterYourAppointment",
-            //   label: "After Your Appointment",
-            // },
+            {
+              id: "duringYourAppointment",
+              label: "During Your Appointment",
+            },
+            {
+              id: "afterYourAppointment",
+              label: "After Your Appointment",
+            },
+            {
+              id: "followUpCare",
+              label: "Follow-Up Care",
+            },
           ],
+        },
+        {
+          id: "vetcationCommunity",
+          label: "Vetcation Community",
         },
       ],
     },
