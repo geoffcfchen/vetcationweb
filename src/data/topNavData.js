@@ -2,7 +2,7 @@ const topNavData = [
   {
     id: "clients",
     label: "For Pet Owners",
-    defaultDocId: "clientIntroToVetcation",
+    defaultDocId: "settingUpVetcation",
   },
   { id: "home", label: "For Vets", defaultDocId: "introToVetcation" },
 
