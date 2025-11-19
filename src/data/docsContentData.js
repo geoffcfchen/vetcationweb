@@ -8511,6 +8511,14 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "root",
               helpText: `Vetcation is designed to give pet owners clearer, easier access to trustworthy guidance. You can ask questions, learn from what others have asked, and receive educational support from licensed professionals. When you set your home clinic, Vetcation connects you with your clinic’s partnered veterinarians for telemedicine and follow-up, letting you build a direct and organized line of communication with your primary vets through our Vetssenger system. Our mission is to help you care for your pet with confidence, clarity, and a stronger connection to your regular clinic.`,
             },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
+              ],
+            },
           ],
         },
         {
@@ -8524,12 +8532,6 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "bulletList",
               items: [
-                {
-                  heading: "Ask questions and learn in the community:",
-                  lines: [
-                    "Post your questions, explore what other pet owners have asked, and receive educational guidance from licensed professionals who understand appropriate uses of telemedicine.",
-                  ],
-                },
                 {
                   heading: "Talk to licensed veterinarians from home:",
                   lines: [
