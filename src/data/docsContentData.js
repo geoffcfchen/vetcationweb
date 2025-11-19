@@ -8497,7 +8497,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   clients: {
     clientIntroToVetcation: {
       mainTitle: "Introduction for Pet Owners",
-      mainDescription: `Vetcation helps you connect with licensed California veterinarians and participating hospitals through convenient, legally compliant virtual care. You can ask questions, get follow-up plans, and learn what to do next, while your regular clinic keeps ownership of your pet’s medical records and in-person care. Our goal is to make it easier to care for your pet, and at the same time reduce burnout for the veterinary teams you rely on.`,
+      mainDescription: `Vetcation is a professional community that helps you connect with licensed veterinarians and participating hospitals through convenient, legally compliant virtual care. You can ask questions in the community, learn from what other pet owners have asked, and receive educational guidance from qualified professionals. When you set your home clinic, Vetcation also connects you with the clinic’s partnered veterinarians for telemedicine services, giving you easier access to care, simple follow-up through our Vetssenger system, and continuity with your regular clinic. Our goal is to make it easier to care for your pet and stay connected with your primary veterinarian, while giving you reliable information from professionals you can trust.`,
       sections: [
         {
           id: "missionForOwners",
@@ -8505,11 +8505,11 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: `Many pet owners struggle to get timely answers to important questions. Phone lines are busy, callbacks are short, and it is not always clear when something can wait and when it needs an urgent visit. At the same time, veterinary teams are under heavy pressure, juggling a full schedule of patients and a growing list of voicemails and messages.`,
+              text: `Many pet owners struggle to get timely answers to important questions. Phone lines are busy, callbacks are short, and it is not always clear when something can wait and when it needs an urgent visit. At the same time, clinics often receive more questions than they can respond to quickly, which makes it harder for owners to know what to do next.`,
             },
             {
               type: "root",
-              helpText: `Vetcation is built to create a healthier relationship between pet owners and veterinary teams. You gain easier access to qualified help and clear next steps for your pet. Your veterinarians gain a structured, compensated way to communicate with you through messaging and video, with records that stay organized and connected to your clinic. By aligning incentives on both sides, Vetcation aims to protect your pet’s care, your clinic’s long term stability, and your veterinarian’s well-being at the same time.`,
+              helpText: `Vetcation is designed to give pet owners clearer, easier access to trustworthy guidance. You can ask questions, learn from what others have asked, and receive educational support from licensed professionals. When you set your home clinic, Vetcation connects you with your clinic’s partnered veterinarians for telemedicine and follow-up, letting you build a direct and organized line of communication with your primary vets through our Vetssenger system. Our mission is to help you care for your pet with confidence, clarity, and a stronger connection to your regular clinic.`,
             },
           ],
         },
@@ -8519,45 +8519,53 @@ requirements and explain how Vetcation keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation gives you a simple way to get trusted guidance from licensed veterinarians while keeping your primary clinic in the loop for in-person care.",
+              text: "Vetcation gives you a simple way to learn from licensed veterinarians, ask questions in the community, and stay closely connected with your primary clinic for in-person follow-up when needed.",
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Talk to licensed veterinarians from home:",
+                  heading: "Ask questions and learn in the community:",
                   lines: [
-                    "Schedule virtual visits or secure messaging with California-licensed veterinarians so you can get help without stressing your pet with unnecessary travel.",
+                    "Post your questions, explore what other pet owners have asked, and receive educational guidance from licensed professionals who understand appropriate uses of telemedicine.",
                   ],
                 },
                 {
-                  heading: "Get follow-up care between visits:",
+                  heading: "Talk to licensed veterinarians from home:",
                   lines: [
-                    "Use Vetcation for follow-up questions, progress checks, and ongoing care plans after in-person exams, so you are not relying on rushed phone calls.",
+                    "Schedule virtual visits or use secure messaging with California-licensed veterinarians. When appropriate, veterinarians can prescribe needed medications and have them delivered to your home, saving you time and unnecessary trips.",
+                  ],
+                },
+                {
+                  heading:
+                    "Easy follow-up and direct connection with your primary vets:",
+                  lines: [
+                    "When you set your home clinic, Vetcation connects you directly with your clinic’s partnered veterinarians. You can follow up through our Vetssenger system, keep your communication organized, and maintain a stronger long-term relationship with your primary veterinary team.",
                   ],
                 },
                 {
                   heading: "Know when to go in person:",
                   lines: [
-                    "Veterinarians can review your pet’s history, photos, and videos, then advise whether you can manage at home, book a routine visit, or seek urgent or emergency care.",
+                    "Veterinarians can review your pet’s history, photos, and videos, then guide you on whether home care is enough, a routine visit is needed, or urgent care is required.",
                   ],
                 },
                 {
                   heading: "Stay connected with your clinic:",
                   lines: [
-                    "Your clinic keeps ownership of the medical record and in-person care. Virtual visits can be linked to your hospital account, supporting continuity of care.",
+                    "Telemedicine visits are linked to your clinic when you set a home clinic, helping ensure continuity of care and keeping your regular veterinarian informed.",
                   ],
                 },
                 {
-                  heading: "Learn with confidence, not social media guesses:",
+                  heading: "Learn with confidence, not online guesses:",
                   lines: [
-                    "Instead of relying on random online answers, you receive guidance from licensed professionals who understand your pet’s history and the limits of telemedicine.",
+                    "Vetcation’s community lets you post questions freely and read answers given to other pet owners, so you can learn from many real situations.",
+                    "Because this is an educational community and not a paid consultation, veterinarians answer based on their interests and availability, and responses are not guaranteed for every question.",
                   ],
                 },
                 {
                   heading: "Stay within California’s telehealth rules:",
                   lines: [
-                    "Vetcation’s infrastructure follows California’s telehealth law, AB 1399, helping ensure that telemedicine is used appropriately and that in-person care is arranged when required.",
+                    "Vetcation follows California’s telehealth law, AB 1399, helping ensure telemedicine is used appropriately and that in-person care is arranged when required.",
                   ],
                 },
               ],

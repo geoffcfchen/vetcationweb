@@ -213,10 +213,10 @@ const sideNavData = {
     {
       groupTitle: "GET STARTED",
       items: [
-        // {
-        //   id: "clientIntroToVetcation",
-        //   label: "Introduction for Pet Owners",
-        // },
+        {
+          id: "clientIntroToVetcation",
+          label: "Introduction for Pet Owners",
+        },
         {
           id: "settingUpVetcation",
           label: "Setting Up & Using Vetcation",
