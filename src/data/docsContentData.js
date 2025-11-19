@@ -8813,6 +8813,23 @@ requirements and explain how Vetcation keeps you compliant.`,
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
               ],
             },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 3: Sign Client Agreement (EULA)",
+                  lines: [
+                    "Review and sign the End User License Agreement (EULA).",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1586.webp?alt=media&token=b3e581ca-c6c2-48e0-8e83-90c5f128b269",
+              ],
+            },
           ],
         },
       ],
