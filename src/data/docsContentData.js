@@ -8890,8 +8890,8 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading:
                     "Step 4: Confirm the payment method (sufficient wallet balance)",
                   lines: [
-                    "Choose your preferred payment method and confirm the appointment.",
-                    "If your wallet balance is sufficient, the payment will be processed automatically.",
+                    
+                    "If your wallet balance is sufficient, the payment will be processed automatically by using your wallet funds.",
                   ],
                 },
               ],
