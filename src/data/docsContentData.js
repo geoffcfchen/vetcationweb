@@ -9293,11 +9293,38 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Track Growth and Health Trends",
+                  heading: "Easily Shareable Records",
                   lines: [
-                    `Press "see chart" to view your pet's weight chart.`,
-                    "See your pet’s weight trends over time in a visual chart.",
-                    "Useful for monitoring young pets, managing chronic conditions, or evaluating treatment progress.",
+                    "You can export your pet's complete medical history as a PDF file.",
+                    "If you have set a home clinic, the medical record will be automatically shared with them.",
+                    "This is helpful when visiting a new veterinarian, clinic, or ER that is not your home clinic.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "exportHistory",
+          title: "Export Medical History",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URLs
+
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623.webp?alt=media&token=268fdcf0-ca22-40a2-a67e-85cb82f552ea",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Easily Shareable Records",
+                  lines: [
+                    "You can export your pet's complete medical history as a PDF file.",
+                    "If your have set your home clinic, the medical record will be automatically shared with them.",
+                    "This is useful when you need to visit a new veterinarian/clinic/ER which is not your home clinic.",
                   ],
                 },
               ],
