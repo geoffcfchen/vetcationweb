@@ -8985,6 +8985,25 @@ requirements and explain how Vetcation keeps you compliant.`,
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1602.webp?alt=media&token=8ffcd5ca-045c-46ce-a116-b4aaad494a59",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1603.webp?alt=media&token=6b45e30f-f05d-4e2f-b148-625111b286b5",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "Wallet Balance update & you can find your appointment on telehealth tab",
+                  lines: [
+                    "Your wallet balance has been updated to reflect the cost of the telemedicine appointment.",
+                    "You can find your appointment details in the Telehealth tab.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1624.webp?alt=media&token=df2c3e0e-3cce-42a5-9502-b839634a86cf",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1604.webp?alt=media&token=92c2da5e-3d61-40f3-b380-0aa5a81d35c3",
               ],
             },
