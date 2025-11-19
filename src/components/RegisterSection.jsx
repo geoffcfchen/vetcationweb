@@ -15,10 +15,10 @@ const FeaturesContainer = styled.section`
 
 const CTAGroup = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 equal columns on wide screens */
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns on wide screens */
   gap: 10px;
   margin: 2.25rem auto 0;
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
 
   /* Downshift to 2 columns and stay there */
@@ -92,6 +92,14 @@ function RegisterSection() {
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
       <CTAGroup aria-label="Audience quick links">
+        <CTAButton
+          onClick={() =>
+            navigate("/telemedicine-info/clients/clientIntroToVetcation/")
+          }
+          aria-label="For Pet Owners"
+        >
+          For Pet Owners
+        </CTAButton>
         <CTAButton
           onClick={() => navigate("/telemedicine-info/home/introToVetcation/")}
           aria-label="For Vets"

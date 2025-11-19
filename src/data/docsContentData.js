@@ -5943,7 +5943,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1039.webp?alt=media&token=0f3f8557-ca8e-4ba9-bd4b-6ebf3f797f88",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
               ],
             },
             {
@@ -6266,7 +6266,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
               ],
             },
           ],
@@ -8036,7 +8036,7 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0839.webp?alt=media&token=cb65b265-1c74-42ea-a8d8-bea0a09f2e38",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0848.webp?alt=media&token=402221cd-81a0-45ee-8df2-f39e618494f9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
               ],
             },
             {
@@ -8456,6 +8456,489 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading: "Vetcation Emergency Drug & Equipment List v2.0",
                   lines: [],
                 },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  clients: {
+    clientIntroToVetcation: {
+      mainTitle: "Introduction for Pet Owners",
+      mainDescription: `Vetcation helps you connect with licensed California veterinarians and participating hospitals through convenient, legally compliant virtual care. You can ask questions, get follow-up plans, and learn what to do next, while your regular clinic keeps ownership of your pet’s medical records and in-person care. Our goal is to make it easier to care for your pet, and at the same time reduce burnout for the veterinary teams you rely on.`,
+      sections: [
+        {
+          id: "missionForOwners",
+          title: "Our Mission for Pet Owners",
+          blocks: [
+            {
+              type: "paragraph",
+              text: `Many pet owners struggle to get timely answers to important questions. Phone lines are busy, callbacks are short, and it is not always clear when something can wait and when it needs an urgent visit. At the same time, veterinary teams are under heavy pressure, juggling a full schedule of patients and a growing list of voicemails and messages.`,
+            },
+            {
+              type: "root",
+              helpText: `Vetcation is built to create a healthier relationship between pet owners and veterinary teams. You gain easier access to qualified help and clear next steps for your pet. Your veterinarians gain a structured, compensated way to communicate with you through messaging and video, with records that stay organized and connected to your clinic. By aligning incentives on both sides, Vetcation aims to protect your pet’s care, your clinic’s long term stability, and your veterinarian’s well-being at the same time.`,
+            },
+          ],
+        },
+        {
+          id: "achieveForOwners",
+          title: "What Can You Do with Vetcation?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Vetcation gives you a simple way to get trusted guidance from licensed veterinarians while keeping your primary clinic in the loop for in-person care.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Talk to licensed veterinarians from home:",
+                  lines: [
+                    "Schedule virtual visits or secure messaging with California-licensed veterinarians so you can get help without stressing your pet with unnecessary travel.",
+                  ],
+                },
+                {
+                  heading: "Get follow-up care between visits:",
+                  lines: [
+                    "Use Vetcation for follow-up questions, progress checks, and ongoing care plans after in-person exams, so you are not relying on rushed phone calls.",
+                  ],
+                },
+                {
+                  heading: "Know when to go in person:",
+                  lines: [
+                    "Veterinarians can review your pet’s history, photos, and videos, then advise whether you can manage at home, book a routine visit, or seek urgent or emergency care.",
+                  ],
+                },
+                {
+                  heading: "Stay connected with your clinic:",
+                  lines: [
+                    "Your clinic keeps ownership of the medical record and in-person care. Virtual visits can be linked to your hospital account, supporting continuity of care.",
+                  ],
+                },
+                {
+                  heading: "Learn with confidence, not social media guesses:",
+                  lines: [
+                    "Instead of relying on random online answers, you receive guidance from licensed professionals who understand your pet’s history and the limits of telemedicine.",
+                  ],
+                },
+                {
+                  heading: "Stay within California’s telehealth rules:",
+                  lines: [
+                    "Vetcation’s infrastructure follows California’s telehealth law, AB 1399, helping ensure that telemedicine is used appropriately and that in-person care is arranged when required.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "telemedicineCasesForOwners",
+          title: "When Is Telemedicine a Good Fit for My Pet?",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Telemedicine is not a replacement for all veterinary care. It works best for certain types of questions and follow-up visits, and it is not appropriate for life threatening emergencies.",
+            },
+            {
+              type: "table",
+              responsive: "auto",
+              stackBreakpoint: 640,
+              rowHeaders: false,
+              minWidth: "720px",
+              columns: [
+                { key: "case", title: "Situation" },
+                { key: "fit", title: "Fit for telemedicine?" },
+                { key: "help", title: "How Vetcation can help" },
+                { key: "escalate", title: "When to go in person" },
+              ],
+              rows: [
+                {
+                  case: "You are not sure if something is an emergency",
+                  fit: "Often (triage first)",
+                  help: "A veterinarian can review your concerns, ask questions, and help you decide if your pet needs urgent in-person care.",
+                  escalate:
+                    "Trouble breathing, collapse, pale gums, severe pain, uncontrolled bleeding, suspected blockage or poisoning should go directly to an ER or clinic.",
+                },
+                {
+                  case: "Skin problems or itchiness",
+                  fit: "Strong fit",
+                  help: "You can share photos and videos so a veterinarian can suggest next steps, relief options, and when to plan an in-person exam or testing.",
+                  escalate:
+                    "Deep, rapidly spreading, very painful, or foul smelling wounds need in-person care promptly.",
+                },
+                {
+                  case: "Mild stomach upset (vomiting or diarrhea)",
+                  fit: "Often (mild cases)",
+                  help: "A veterinarian can review your pet’s history and help with home care, monitoring, and warning signs to watch for.",
+                  escalate:
+                    "If your pet is very lethargic, has repeated vomiting, blood in stool or vomit, a tight painful belly, or symptoms last more than a short period, an in-person exam is needed.",
+                },
+                {
+                  case: "Behavior questions (anxiety, house soiling, reactivity)",
+                  fit: "Strong fit",
+                  help: "Video and home descriptions help veterinarians give training strategies and behavior plans, and coordinate with trainers when needed.",
+                  escalate:
+                    "Any immediate safety risk to people or animals or sudden behavior change with possible medical cause needs in-person evaluation.",
+                },
+                {
+                  case: "Nutrition, weight, and chronic care questions",
+                  fit: "Strong fit",
+                  help: "Veterinarians can discuss diet choices, weight loss plans, and ongoing management for chronic conditions between in-person visits.",
+                  escalate:
+                    "Sudden weight loss, extreme thirst or urination, or a major change in energy should prompt an in-person exam and diagnostics.",
+                },
+                {
+                  case: "Puppy or kitten guidance",
+                  fit: "Strong fit",
+                  help: "Use telemedicine for vaccine schedules, training tips, and general wellness questions between in-clinic visits.",
+                  escalate:
+                    "Physical exams, vaccines, and procedures still happen in person at your clinic.",
+                },
+                {
+                  case: "General questions about lab results or treatment plans",
+                  fit: "Strong fit",
+                  help: "A veterinarian can walk you through test results, recheck plans, and what improvement or worsening should look like.",
+                  escalate:
+                    "If your pet is not improving as expected, is getting worse, or has new concerning symptoms, an in-person recheck is needed.",
+                },
+              ],
+              note: "Telemedicine has limits and is subject to California regulations. It is not suitable for life threatening emergencies. If you believe your pet may be in immediate danger, contact an emergency hospital right away.",
+            },
+          ],
+        },
+        {
+          id: "whyVirtualCareTrendForOwners",
+          title: "Why Virtual Care Is Growing – And How It Helps You",
+          blocks: [
+            {
+              type: "trendPoints",
+              introParagraphs: [
+                "Virtual veterinary care is growing because it makes it easier for pet owners to reach qualified help while supporting clinics and their teams. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights trends that directly benefit you and your pet:",
+              ],
+              items: [
+                {
+                  heading: "More access where vets are scarce:",
+                  lines: [
+                    "Over 22% of U.S. counties have no veterinary employees, leaving many pets in underserved areas (VVCA Report 2024, p. 7). Virtual care helps bridge these gaps by connecting you with licensed veterinarians, even if your local options are limited.",
+                  ],
+                },
+                {
+                  heading: "Faster answers for common concerns:",
+                  lines: [
+                    "Around half of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10). Instead of waiting days for a callback, you can often get guidance more quickly through a structured virtual visit.",
+                  ],
+                },
+                {
+                  heading: "Works together with in-person care:",
+                  lines: [
+                    "Virtual consults complement clinic visits. They are useful for triage, education, and follow-up, while your clinic focuses on exams, tests, procedures, and surgery.",
+                  ],
+                },
+                {
+                  heading: "Less stress for you and your pet:",
+                  lines: [
+                    "For many non emergency questions, you can stay at home, avoid travel time, and keep your pet in a familiar environment while still getting help from a veterinarian.",
+                  ],
+                },
+                {
+                  heading: "Supports healthier clinics and teams:",
+                  lines: [
+                    "When clinics use virtual care well, they can organize schedules, reduce callback overload, and support better compensation for staff. A healthier clinic team means more stable care for your pet over the long term.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    // setting up vetcation, we will show 1. choose your role as a pet owner. 2. set up your profile.
+    settingUpVetcation: {
+      mainTitle: "Setting Up Vetcation",
+      mainDescription: `Getting started with Vetcation as a pet owner only takes a couple of steps. Create your account, choose the pet owner role, and set up a basic profile so veterinarians can understand your pet and give more accurate guidance.`,
+      sections: [
+        {
+          id: "gettingStartedOwner",
+          title: "Getting Started as a Pet Owner",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "You can start using Vetcation in just a few minutes. Follow these two steps inside the app or on the website.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 1: Choose your role",
+                  lines: [
+                    "Sign up or log in with your email or supported login method.",
+                    "When asked to choose a role, select “Pet owner” so the system can show you the right tools and options.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0828.webp?alt=media&token=6c2de185-8eb8-4f19-afc2-168dbec6810b",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 2: Set up your profile",
+                  lines: [
+                    "Add your name and basic information.",
+                    "Welcome to Vetcation! You are now in the Vetcation professional community.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1577.webp?alt=media&token=7e9e1e55-7a0a-4dfa-b472-f195928cdca4",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    addingYourPets: {
+      mainTitle: "Adding Your Pets",
+      mainDescription: `To get the most out of Vetcation, add your pets to your profile. This helps veterinarians understand their history and give more accurate advice during virtual visits.`,
+      sections: [
+        {
+          id: "addPets",
+          title: "How to Add Your Pets",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Follow these steps to add your pets to your Vetcation profile.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 1: Open drawer menu",
+                  lines: [
+                    "Open the drawer menu and press 'Pets'.",
+                    "Press the '+' button to add a new pet.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1579.webp?alt=media&token=3867f135-d308-4e3e-b68a-f42375b313aa",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1580.webp?alt=media&token=a984ce69-188c-4a02-86fb-599c721cd280",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 2: Add a new pet",
+                  lines: [
+                    "Enter your pet's name, species, breed, age, and any other relevant details.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1583.webp?alt=media&token=7b3f649e-6fbe-4791-936e-bf2eee12b448",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1582.webp?alt=media&token=e2d249b7-09b1-40c8-9ff7-5588999a3f8b",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    UpdateLegalProfile: {
+      mainTitle: "Update Legal Profile",
+      // emphasize the importance of keeping legal profile up to date and the information is required for compliance
+      mainDescription: `Keeping your legal profile up to date is essential for compliance with California telemedicine regulations. An accurate legal profile ensures that veterinarians have the necessary information to provide appropriate care and maintain the veterinarian–client–patient relationship (VCPR). Follow the steps below to update your legal profile in Vetcation.`,
+      sections: [
+        {
+          id: "updateLegalProfile",
+          title: "How to Update Your Legal Profile",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Follow these steps to update your legal profile in Vetcation.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 1: Open drawer menu",
+                  lines: [
+                    "Open the drawer menu and press 'Telemedicine Setting'.",
+                    "Navigate to Update Legal Profile.",
+                    "Ensure all required fields are filled out accurately.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1584.webp?alt=media&token=254d40e1-72cd-4236-9d6a-5f63886362a5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1585.webp?alt=media&token=c7f984c5-d9ac-4152-b175-17ac434dd9ef",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 2: Link to Your Clinic",
+                  lines: [
+                    "Press 'Home Clinic' to associate your profile with your primary veterinary clinic.",
+                    "Once linked, you will be able to see the partnered veterinarians of your clinic when scheduling telemedicine appointments. The medical records from your telemedicine visits will also be shared with your clinic to ensure continuity of care.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1587.webp?alt=media&token=72baceea-761b-4f35-9647-1482ed7ea7c1",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    schedulingAnAppointment: {
+      mainTitle: "Scheduling an Appointment",
+      mainDescription: `Scheduling a telemedicine appointment with Vetcation is a straightforward process that allows you to connect with licensed veterinarians from the comfort of your home. Follow the steps below to schedule an appointment.`,
+      sections: [
+        {
+          id: "scheduleAppointment",
+          title: "How to Schedule an Appointment",
+          blocks: [
+            {
+              type: "paragraph",
+              text: "Follow these steps to schedule a telemedicine appointment in Vetcation.",
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 1: Open drawer menu",
+                  lines: [
+                    "Open the drawer menu and press 'Telemedicine'.",
+                    "You can select the partnered veterinarian from your home clinic.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1579.webp?alt=media&token=3867f135-d308-4e3e-b68a-f42375b313aa",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 2: Schedule the appointment",
+                  lines: ["Select an available time slot that works for you."],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1590.webp?alt=media&token=6b3a99df-d7cc-41c9-9127-637053b4e2b6",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1591.webp?alt=media&token=916ae9b9-25a9-4b63-8637-d85363ece64a",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 3: Fill in appointment details",
+                  lines: [
+                    "Provide any necessary information about your pet's condition and confirm the appointment details.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1596.webp?alt=media&token=b829bdc5-9cc1-4d63-ae22-804f1218ffed",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1595.webp?alt=media&token=aefacfc8-081f-4019-acc0-66b8ab59b08f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1594.webp?alt=media&token=3b9f4998-8963-4bd6-9341-3de96ffc3808",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "Step 4: Confirm the payment method (sufficient wallet balance)",
+                  lines: [
+                    "Choose your preferred payment method and confirm the appointment.",
+                    "If your wallet balance is sufficient, the payment will be processed automatically.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1601.webp?alt=media&token=3f7fd043-c1b9-4c79-be09-0a50bbd9aeaa",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "Step 4: Confirm the payment method (insufficient wallet balance)",
+                  lines: [
+                    "If your wallet balance is insufficient, you will need to add a new payment method for the rest of the charge.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1600.webp?alt=media&token=1d34ee72-d0c8-49ff-a4eb-9213ee3c4ff5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1598.webp?alt=media&token=04cedaca-f0e6-49ab-a9fc-01e96100a7a7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1599.webp?alt=media&token=51e06933-c0f8-433f-8588-034d5c7a9fb2",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 5: booking Confirmation",
+                  lines: [
+                    "Your telemedicine appointment is now scheduled! You will receive a confirmation notification with the appointment details.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1602.webp?alt=media&token=8ffcd5ca-045c-46ce-a116-b4aaad494a59",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1603.webp?alt=media&token=6b45e30f-f05d-4e2f-b148-625111b286b5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1604.webp?alt=media&token=92c2da5e-3d61-40f3-b380-0aa5a81d35c3",
               ],
             },
           ],

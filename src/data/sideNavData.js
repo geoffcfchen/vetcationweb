@@ -209,6 +209,51 @@ const sideNavData = {
       ],
     },
   ],
+  clients: [
+    {
+      groupTitle: "GET STARTED",
+      items: [
+        {
+          id: "clientIntroToVetcation",
+          label: "Introduction for Pet Owners",
+        },
+        {
+          id: "settingUpVetcation",
+          label: "Setting Up & Using Vetcation",
+        },
+        {
+          id: "yourClinicsTelemedicineServices",
+          label: "Your Home Clinic's Telemedicine Services",
+          subItems: [
+            {
+              id: "addingYourPets",
+              label: "Adding Your Pets",
+            },
+            {
+              id: "UpdateLegalProfile",
+              label: "Legal & Hospital Linking",
+            },
+            // {
+            //   id: "linkingToYourClinic",
+            //   label: "Linking To Your Clinic",
+            // },
+            {
+              id: "schedulingAnAppointment",
+              label: "Scheduling an Appointment",
+            },
+            // {
+            //   id: "duringYourAppointment",
+            //   label: "During Your Appointment",
+            // },
+            // {
+            //   id: "afterYourAppointment",
+            //   label: "After Your Appointment",
+            // },
+          ],
+        },
+      ],
+    },
+  ],
   telemedicineCases: [
     {
       groupTitle: "Telemedicine Cases",
