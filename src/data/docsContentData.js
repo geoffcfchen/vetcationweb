@@ -6274,6 +6274,39 @@ requirements and explain how Vetcation keeps you compliant.`,
       ],
     },
 
+    clinicEarnings: {
+      mainTitle: "Earnings and Wallet",
+      mainDescription: `Vetcation’s earnings and wallet system gives your clinic a clear and straightforward view of income from virtual consultations. You can monitor earnings in real time, review all transactions, and manage your clinic wallet balance. The system shows completed consultations, pending payouts, and revenue allocated to your clinic. This helps your team stay organized and make informed decisions about your virtual branch.`,
+      sections: [
+        {
+          id: "earningsOverview",
+          title: "Earnings Overview",
+          blocks: [
+            {
+              type: "qa",
+              question: "How do I view my clinic earnings and wallet balance?",
+              answer:
+                "You can see your clinic’s earnings inside the Wallet section of your clinic account. This page shows a detailed breakdown of all income allocated to the clinic, including telemedicine consultations and follow-up charges from Vetssenger, our inquiry-based messaging tool. Every time a virtual visit is completed and the medical record is finalized, the system instantly allocates earnings: 60 percent to the veterinarian, 25 percent to the clinic, and the remaining 15 percent stays with the platform.",
+            },
+            {
+              type: "qa",
+              question: "How do payouts work for the clinic?",
+              answer:
+                "Your clinic wallet will grow automatically as virtual visits are completed. You can initiate a payout at any time once the wallet balance is above your preferred threshold. Funds will be transferred to the clinic account your team has set up.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8463-min.PNG?alt=media&token=d03c4ad9-d5c0-43a0-a5a9-6c83f1c5a5db",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1622.webp?alt=media&token=a8b69803-1d82-4256-b65a-a446725e8ca5",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
     clinicOutcomeAnalysis: {
       mainTitle: "Clinic Outcome Analytics",
       mainDescription: `See how telemedicine is performing across your account and by doctor. Track client growth, outcome distribution, and drill down to the exact visits behind each outcome.`,
