@@ -9429,7 +9429,7 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1633.webp?alt=media&token=b9d7d904-1f54-44ed-a277-dbcd6f8afe35",
               ],
             },
             {
