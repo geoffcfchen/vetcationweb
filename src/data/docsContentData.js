@@ -8649,50 +8649,50 @@ requirements and explain how Vetcation keeps you compliant.`,
             },
           ],
         },
-        {
-          id: "whyVirtualCareTrendForOwners",
-          title: "Why Virtual Care Is Growing – And How It Helps You",
-          blocks: [
-            {
-              type: "trendPoints",
-              introParagraphs: [
-                "Virtual veterinary care is growing because it makes it easier for pet owners to reach qualified help while supporting clinics and their teams. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights trends that directly benefit you and your pet:",
-              ],
-              items: [
-                {
-                  heading: "More access where vets are scarce:",
-                  lines: [
-                    "Over 22% of U.S. counties have no veterinary employees, leaving many pets in underserved areas (VVCA Report 2024, p. 7). Virtual care helps bridge these gaps by connecting you with licensed veterinarians, even if your local options are limited.",
-                  ],
-                },
-                {
-                  heading: "Faster answers for common concerns:",
-                  lines: [
-                    "Around half of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10). Instead of waiting days for a callback, you can often get guidance more quickly through a structured virtual visit.",
-                  ],
-                },
-                {
-                  heading: "Works together with in-person care:",
-                  lines: [
-                    "Virtual consults complement clinic visits. They are useful for triage, education, and follow-up, while your clinic focuses on exams, tests, procedures, and surgery.",
-                  ],
-                },
-                {
-                  heading: "Less stress for you and your pet:",
-                  lines: [
-                    "For many non emergency questions, you can stay at home, avoid travel time, and keep your pet in a familiar environment while still getting help from a veterinarian.",
-                  ],
-                },
-                {
-                  heading: "Supports healthier clinics and teams:",
-                  lines: [
-                    "When clinics use virtual care well, they can organize schedules, reduce callback overload, and support better compensation for staff. A healthier clinic team means more stable care for your pet over the long term.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   id: "whyVirtualCareTrendForOwners",
+        //   title: "Why Virtual Care Is Growing – And How It Helps You",
+        //   blocks: [
+        //     {
+        //       type: "trendPoints",
+        //       introParagraphs: [
+        //         "Virtual veterinary care is growing because it makes it easier for pet owners to reach qualified help while supporting clinics and their teams. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights trends that directly benefit you and your pet:",
+        //       ],
+        //       items: [
+        //         {
+        //           heading: "More access where vets are scarce:",
+        //           lines: [
+        //             "Over 22% of U.S. counties have no veterinary employees, leaving many pets in underserved areas (VVCA Report 2024, p. 7). Virtual care helps bridge these gaps by connecting you with licensed veterinarians, even if your local options are limited.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Faster answers for common concerns:",
+        //           lines: [
+        //             "Around half of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10). Instead of waiting days for a callback, you can often get guidance more quickly through a structured virtual visit.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Works together with in-person care:",
+        //           lines: [
+        //             "Virtual consults complement clinic visits. They are useful for triage, education, and follow-up, while your clinic focuses on exams, tests, procedures, and surgery.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Less stress for you and your pet:",
+        //           lines: [
+        //             "For many non emergency questions, you can stay at home, avoid travel time, and keep your pet in a familiar environment while still getting help from a veterinarian.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Supports healthier clinics and teams:",
+        //           lines: [
+        //             "When clinics use virtual care well, they can organize schedules, reduce callback overload, and support better compensation for staff. A healthier clinic team means more stable care for your pet over the long term.",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     },
     // setting up vetcation, we will show 1. choose your role as a pet owner. 2. set up your profile.
