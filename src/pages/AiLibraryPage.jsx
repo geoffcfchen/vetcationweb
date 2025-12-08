@@ -90,7 +90,8 @@ const Page = styled.div`
   height: 100vh;
   background: #020617;
   color: #e5e7eb;
-  overflow-x: hidden; /* NEW */
+  overflow-x: hidden;
+  overflow-y: hidden; /* NEW: prevent whole page from scrolling */
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
@@ -186,20 +187,23 @@ const ModalSecondaryButton = styled.button`
 `;
 
 const ModalPrimaryButton = styled.button`
-  border: none;
   border-radius: 999px;
   padding: 6px 16px;
   font-size: 13px;
-  background: #2563eb;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
+
+  &:hover {
+    background: #f3f4f6;
+  }
 
   &:disabled {
     opacity: 0.5;
     cursor: default;
   }
 `;
-
 /* Patients */
 
 const PatientsHeader = styled.div`
@@ -510,16 +514,17 @@ const MessageRow = styled.div`
 `;
 
 const Bubble = styled.div`
-  display: inline-block; /* NEW */
-  max-width: 100%; /* NEW so it respects MessageContent */
+  display: inline-block;
+  max-width: 100%;
   padding: 10px 12px;
   border-radius: 14px;
   font-size: 14px;
-  background: ${(p) => (p.$role === "user" ? "#2563eb" : "#303030")};
+  /* user bubble matches TextInput background, assistant is transparent */
+  background: ${(p) => (p.$role === "user" ? "#303030" : "transparent")};
   color: #e5e7eb;
-  word-wrap: break-word; /* NEW */
-  overflow-wrap: break-word; /* NEW */
-  white-space: pre-wrap; /* NEW so short lines stay inside */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 `;
 
 const thinkingPulse = keyframes`
@@ -687,6 +692,80 @@ const ChatEmptyState = styled.div`
 `;
 
 /* NEW: attachment menu, ChatGPT style */
+
+const CenterEmptyWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 80px;
+`;
+
+const CenterEmptyCard = styled.div`
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  padding: 24px 28px;
+  border-radius: 16px;
+  background: #181818;
+  border: 1px solid #2f2f2f;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+`;
+
+const CenterEmptyTitle = styled.h2`
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e5e7eb;
+`;
+
+const CenterEmptySubtitle = styled.p`
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #9ca3af;
+`;
+
+const CenterEmptyHint = styled.p`
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+`;
+
+const CenterEmptyIcon = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #303030;
+  color: #e5e7eb;
+`;
+
+const CenterEmptyPrimaryButton = styled.button`
+  margin-top: 4px;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+`;
 
 const AttachMenu = styled.div`
   position: absolute;
@@ -972,7 +1051,7 @@ function AssistantMessageBubble({ message }) {
 }
 
 /* Chat shell with attachment UI */
-function ChatShell({ currentUser, cases, activeCaseChats }) {
+function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
   const { caseId, chatId } = useParams();
   const isNewChat = !!caseId && !chatId;
   const navigateInner = useNavigate();
@@ -1000,6 +1079,8 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
   const isExistingChat = !!chatId; // optional helper
 
   const activeCase = caseId ? cases.find((c) => c.id === caseId) || null : null;
+
+  const hasAnyCases = Array.isArray(cases) && cases.length > 0;
 
   const scrollToBottom = (behavior = "auto") => {
     if (messagesEndRef.current) {
@@ -1621,7 +1702,7 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
         onChange={handleAttachmentFileChange}
       />
       <ChatInner>
-        <ChatHeader $isNewChat={isNewChat}>
+        {/* <ChatHeader $isNewChat={isNewChat}>
           {activeCase ? (
             <>
               <ChatTitle>{activeCase.patientName}</ChatTitle>
@@ -1646,7 +1727,61 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
           <ChatEmptyState>
             Choose a patient from the left sidebar to get started.
           </ChatEmptyState>
+        )} */}
+        {activeCase && (
+          <ChatHeader $isNewChat={isNewChat}>
+            <ChatTitle>{activeCase.patientName}</ChatTitle>
+            <ChatSubtitle>
+              {chatId
+                ? "AI conversation for this patient."
+                : "Start a new chat for this patient, or open a previous one."}
+            </ChatSubtitle>
+          </ChatHeader>
         )}
+
+        {!activeCase && hasAnyCases && (
+          <ChatHeader $isNewChat={false}>
+            <ChatTitle>Start with a patient</ChatTitle>
+            <ChatSubtitle>
+              Select a patient on the left to start an AI case conversation, or
+              create a new one.
+            </ChatSubtitle>
+          </ChatHeader>
+        )}
+
+        {!activeCase &&
+          (hasAnyCases ? (
+            <ChatEmptyState>
+              Choose a patient from the left sidebar to get started or use the
+              New button above to create one.
+            </ChatEmptyState>
+          ) : (
+            <CenterEmptyWrapper>
+              <CenterEmptyCard>
+                <CenterEmptyIcon>
+                  <FiUser size={20} />
+                </CenterEmptyIcon>
+                <CenterEmptyTitle>Create your first patient</CenterEmptyTitle>
+                <CenterEmptySubtitle>
+                  Keep each AI case tied to a specific patient so you can
+                  organize lab panels, notes, and conversations in one place.
+                </CenterEmptySubtitle>
+                <CenterEmptyPrimaryButton
+                  type="button"
+                  onClick={() => onNewPatient && onNewPatient()}
+                  disabled={!currentUser}
+                >
+                  <FiPlus />
+                  New patient
+                </CenterEmptyPrimaryButton>
+                {!currentUser && (
+                  <CenterEmptyHint>
+                    Sign in to create and save patients.
+                  </CenterEmptyHint>
+                )}
+              </CenterEmptyCard>
+            </CenterEmptyWrapper>
+          ))}
 
         {activeCase && !chatId && (
           <>
@@ -2315,6 +2450,7 @@ export default function AiLibraryPage() {
                 currentUser={currentUser}
                 cases={cases}
                 activeCaseChats={activeCaseChats}
+                onNewPatient={handleCreatePatientClick}
               />
             }
           />
@@ -2325,6 +2461,7 @@ export default function AiLibraryPage() {
                 currentUser={currentUser}
                 cases={cases}
                 activeCaseChats={activeCaseChats}
+                onNewPatient={handleCreatePatientClick}
               />
             }
           />
@@ -2335,6 +2472,7 @@ export default function AiLibraryPage() {
                 currentUser={currentUser}
                 cases={cases}
                 activeCaseChats={activeCaseChats}
+                onNewPatient={handleCreatePatientClick}
               />
             }
           />
