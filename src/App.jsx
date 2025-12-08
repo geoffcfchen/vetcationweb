@@ -10,8 +10,8 @@ import {
 import Header from "./components/Header";
 // import HeroSection from "./components/HeroSection";
 // import FeaturesSection from "./components/FeaturesSection";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+// import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+// import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import GlobalContext from "./context/GlobalContext";
 import RegisterPage from "./pages/RegisterPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,6 +32,9 @@ import { createGlobalStyle } from "styled-components";
 import topNavData from "./data/topNavData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import InviteSurvey from "./pages/InviteSurvey";
+import AiLibraryPage from "./pages/AiLibraryPage";
+import LoginPage from "./pages/LoginPage";
+// import LoginPage from "./pages/LoginPage";
 
 // import LoginPage from "./pages/LoginPage";
 // import DashboardPage from "./pages/DashboardPage";
@@ -314,6 +317,7 @@ function App() {
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
+        <Route path="/ai/library/*" element={<AiLibraryPage />} />
         {/* <Route path="/vets" element={<ForVetPage />} /> */}
         {/* <Route path="/mission" element={<MissionsPage />} /> */}
         {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}
@@ -352,7 +356,7 @@ function App() {
           <Route path=":topNavId/:docId/" element={<DocsContent />} />
           {/* <Route path="contributors" element={<ContributorsPage />} /> */}
         </Route>
-        {/* <Route path="/" element={<LoginPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect/" element={<RedirectPage />} />
         <Route path="/app/" element={<RedirectPage />} />

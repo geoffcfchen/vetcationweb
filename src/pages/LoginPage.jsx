@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import Footer from "../components/Footer";
-import { signIn } from "../firebase";
+import { signIn } from "../lib/firebase";
 
 // Styled components
 const StyledLoginPage = styled.div`
@@ -155,7 +155,7 @@ function LoginPage() {
     try {
       const isSuccess = await signIn(email, password);
       if (isSuccess) {
-        navigate("/dashboard"); // Only navigate if sign-in is successful
+        navigate("/ai/library"); // Only navigate if sign-in is successful
       } else {
         setLoginFailed(true); // Set login failed to true if sign-in failed
       }

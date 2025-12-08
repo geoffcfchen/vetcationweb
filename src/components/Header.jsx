@@ -1,16 +1,17 @@
 // Header.jsx
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import logo from "../images/plain_icon_600.png";
 import { Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { FiLogIn } from "react-icons/fi";
+import { useNavigate, Link } from "react-router-dom";
 
 const breakpoint = 900;
 
-// ——— size tokens so it’s easy to tweak ———
+// Size tokens so it is easy to tweak
 const SIZES = {
   headerPaddingY: "1.15rem",
   headerPaddingX: "1.5rem",
@@ -70,15 +71,33 @@ const Nav = styled.nav`
   }
 `;
 
-const MenuLink = styled.a`
+// Button style link for "Log in"
+const LoginButton = styled(Link)`
   text-decoration: none;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.05s ease, box-shadow 0.15s ease;
 
   &:hover {
-    opacity: 0.9;
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.75);
   }
 `;
 
@@ -87,7 +106,7 @@ const BurgerWrap = styled.div`
 
   @media (max-width: ${breakpoint}px) {
     display: block;
-    padding: 4px; /* slightly larger tap target */
+    padding: 4px;
   }
 
   svg {
@@ -114,14 +133,12 @@ function Header() {
     setIsOpen((prev) => !prev);
   }, []);
 
-  // Close the dropdown when clicking outside of it
   const handleClickOutside = useCallback((event) => {
     if (event.target.closest("#dropdown-basic") === null) {
       setIsOpen(false);
     }
   }, []);
 
-  // Stable handler for "resize → close"
   const handleResizeClose = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
@@ -146,12 +163,15 @@ function Header() {
         <LogoText>Vetcation</LogoText>
       </LogoContainer>
 
+      {/* Desktop nav */}
       <Nav>
-        <MenuLink href="/telemedicine-info/">
-          Telemedicine Documentation
-        </MenuLink>
+        <LoginButton to="/login">
+          <FiLogIn />
+          <span>Log in</span>
+        </LoginButton>
       </Nav>
 
+      {/* Mobile dropdown */}
       {windowWidth <= breakpoint && (
         <Dropdown show={isOpen} onToggle={handleToggle} align="end">
           <Dropdown.Toggle
@@ -163,8 +183,8 @@ function Header() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="/telemedicine-info">
-              Telemedicine Documentation
+            <Dropdown.Item as={Link} to="/login">
+              Log in
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
