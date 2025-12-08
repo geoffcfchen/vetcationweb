@@ -1,6 +1,6 @@
 // src/pages/AiLibraryPage.jsx
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   FiUpload,
   FiFileText,
@@ -522,6 +522,43 @@ const Bubble = styled.div`
   white-space: pre-wrap; /* NEW so short lines stay inside */
 `;
 
+const thinkingPulse = keyframes`
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-1px); }
+`;
+
+const ThinkingRow = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const ThinkingBubble = styled(Bubble)`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const ThinkingLabel = styled.span`
+  font-size: 12px;
+  color: #e5e7eb;
+  animation: ${thinkingPulse} 1.2s infinite;
+`;
+
+const ThinkingDots = styled.span`
+  display: inline-flex;
+  gap: 3px;
+`;
+
+const ThinkingDot = styled.span`
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  opacity: 0.7;
+  animation: ${thinkingPulse} 1.2s infinite;
+  animation-delay: ${(p) => p.$delay || "0s"};
+`;
+
 /* NEW: attachment chips bar */
 
 const AttachBar = styled.div`
@@ -951,9 +988,15 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
   const [attachMenuOpen, setAttachMenuOpen] = useState(false);
   const fileInputRef = useRef(null);
 
-  const [uploadProgress, setUploadProgress] = useState({}); // <--- NEW
+  const [uploadProgress, setUploadProgress] = useState({});
 
   const messagesEndRef = useRef(null); // new
+  const messagesContainerRef = useRef(null); // NEW: scroll container
+  const lastMessageRef = useRef(null); // NEW: last message bubble
+  const thinkingRef = useRef(null); // NEW
+
+  const [isThinking, setIsThinking] = useState(false); // NEW
+
   const isExistingChat = !!chatId; // optional helper
 
   const activeCase = caseId ? cases.find((c) => c.id === caseId) || null : null;
@@ -967,11 +1010,58 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
     }
   };
 
+  // When the assistant is "thinking", scroll so the thinking bubble is visible
+  useEffect(() => {
+    if (!isThinking || !thinkingRef.current) return;
+
+    thinkingRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, [isThinking]);
+
+  useEffect(() => {
+    setIsThinking(false);
+  }, [caseId, chatId]);
+
   useEffect(() => {
     if (!chatId) return;
     if (messages.length === 0) return;
     scrollToBottom("auto");
   }, [chatId, messages.length]);
+
+  // When the last message is from the user, scroll so that
+  // the bottom of that bubble sits near the top of the chat.
+  useEffect(() => {
+    if (!messagesContainerRef.current || !lastMessageRef.current) return;
+    if (messages.length === 0) return;
+
+    const last = messages[messages.length - 1];
+    if (!last || last.role !== "user") {
+      // Only adjust in the "user just asked a question" state
+      return;
+    }
+
+    const container = messagesContainerRef.current;
+    const lastEl = lastMessageRef.current;
+
+    const containerRect = container.getBoundingClientRect();
+    const lastRect = lastEl.getBoundingClientRect();
+
+    // Distance from top of container to bottom of last message
+    const bottomRelative = lastRect.bottom - containerRect.top;
+
+    // Where we want that bottom to sit (tweak this number if you want higher/lower)
+    const desiredOffsetFromTop = 72; // pixels
+
+    const delta = bottomRelative - desiredOffsetFromTop;
+    const nextScrollTop = Math.max(0, container.scrollTop + delta);
+
+    container.scrollTo({
+      top: nextScrollTop,
+      behavior: "smooth",
+    });
+  }, [messages.length, messagesContainerRef, lastMessageRef]);
 
   // Listen to messages of this chat
   useEffect(() => {
@@ -1089,6 +1179,8 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
             "Sorry, the AI assistant ran into an error. Please try again.",
           createdAt: serverTimestamp(),
         });
+
+        setIsThinking(false); // NEW
         return;
       }
 
@@ -1113,8 +1205,11 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
         updatedAt: serverTimestamp(),
         lastMessagePreview: json.reply.slice(0, 140),
       });
+
+      setIsThinking(false); // NEW
     } catch (err) {
       console.error("Assistant call failed:", err);
+      setIsThinking(false); // NEW
     }
   };
 
@@ -1353,6 +1448,8 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
 
         const convo = [{ role: "user", content: text }];
 
+        setIsThinking(true); // NEW
+
         await callAssistant(
           currentUser.uid,
           caseId,
@@ -1421,6 +1518,7 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
 
         const convo = [...existingConvo, newMessage];
 
+        setIsThinking(true); // NEW
         await callAssistant(currentUser.uid, caseId, chatId, convo, messageId);
 
         scrollToBottom("smooth");
@@ -1658,14 +1756,19 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
             {messages.length === 0 ? (
               <ChatEmptyState>Loading conversation…</ChatEmptyState>
             ) : (
-              <Messages>
-                {messages.map((m) => {
+              <Messages ref={messagesContainerRef}>
+                {messages.map((m, index) => {
                   const messageAttachments = caseAttachments.filter(
                     (att) => att.chatId === chatId && att.messageId === m.id
                   );
+                  const isLast = index === messages.length - 1;
 
                   return (
-                    <MessageRow key={m.id} $role={m.role}>
+                    <MessageRow
+                      key={m.id}
+                      $role={m.role}
+                      ref={isLast ? lastMessageRef : null} // NEW
+                    >
                       <MessageContent $role={m.role}>
                         {messageAttachments.length > 0 && (
                           <AttachBar style={{ marginBottom: 4 }}>
@@ -1710,7 +1813,23 @@ function ChatShell({ currentUser, cases, activeCaseChats }) {
                     </MessageRow>
                   );
                 })}
-                <div ref={messagesEndRef} /> {/* new sentinel */}
+
+                {isThinking && (
+                  <ThinkingRow ref={thinkingRef}>
+                    <MessageContent $role="assistant">
+                      <ThinkingBubble $role="assistant">
+                        <ThinkingLabel>Thinking</ThinkingLabel>
+                        <ThinkingDots>
+                          <ThinkingDot />
+                          <ThinkingDot $delay="0.15s" />
+                          <ThinkingDot $delay="0.3s" />
+                        </ThinkingDots>
+                      </ThinkingBubble>
+                    </MessageContent>
+                  </ThinkingRow>
+                )}
+
+                <div ref={messagesEndRef} />
               </Messages>
             )}
 
