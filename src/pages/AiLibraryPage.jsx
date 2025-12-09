@@ -442,8 +442,8 @@ const SectionDivider = styled.div`
 
 const SectionHeaderRow = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 const SidebarTitle = styled.div`
@@ -455,6 +455,18 @@ const SidebarTitle = styled.div`
 const SidebarCount = styled.div`
   font-size: 14px; /* was 12px */
   color: #6b7280;
+`;
+
+const LibraryUploadButton = styled(NewPatientButton)`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const LibraryHint = styled.div`
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 10px;
 `;
 
 const UploadBox = styled.label`
@@ -2305,6 +2317,8 @@ export default function AiLibraryPage() {
   const [deleteTarget, setDeleteTarget] = useState(null); // { type, id, caseId?, name }
   const [rowMenu, setRowMenu] = useState(null);
 
+  const libraryFileInputRef = useRef(null); // ✨ NEW
+
   const caseMatch = location.pathname.match(/\/ai\/library\/p\/([^/]+)/);
   const activeCaseIdFromUrl = caseMatch ? caseMatch[1] : null;
 
@@ -2728,6 +2742,11 @@ export default function AiLibraryPage() {
     navigate(`/ai/library/p/${caseId}/c/${chatId}`);
   };
 
+  const handleLibraryUploadClick = () => {
+    if (!currentUser || !libraryFileInputRef.current) return;
+    libraryFileInputRef.current.click();
+  };
+
   const handleUpload = async (e) => {
     if (!currentUser) {
       console.warn("No user, cannot upload");
@@ -2929,30 +2948,46 @@ export default function AiLibraryPage() {
 
           <SectionDivider />
 
-          <SectionHeaderRow>
-            <SidebarTitle>Your library</SidebarTitle>
-            <SidebarCount>
-              {sources.length} file{sources.length === 1 ? "" : "s"}
-            </SidebarCount>
-          </SectionHeaderRow>
+          {/* Hidden input for library uploads */}
+          <input
+            type="file"
+            accept="application/pdf"
+            ref={libraryFileInputRef}
+            style={{ display: "none" }}
+            onChange={handleUpload}
+            disabled={!currentUser || isUploading}
+          />
 
-          <UploadBox>
-            <FiUpload size={18} />
-            <div>Upload PDF (books, papers)</div>
-            <UploadHint>
+          <SectionHeaderRow>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <SidebarTitle>Your library</SidebarTitle>
+
+              <LibraryUploadButton
+                type="button"
+                onClick={handleLibraryUploadClick}
+                disabled={!currentUser || isUploading}
+                aria-label="Upload PDF to library"
+              >
+                <FiUpload size={14} />
+                Upload
+              </LibraryUploadButton>
+            </div>
+
+            <LibraryHint>
+              {sources.length} file{sources.length === 1 ? "" : "s"}
               {currentUser
                 ? isUploading
-                  ? "Uploading..."
-                  : "Files will appear in your library below"
-                : "Log in to upload and build your library"}
-            </UploadHint>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleUpload}
-              disabled={!currentUser || isUploading}
-            />
-          </UploadBox>
+                  ? " • Uploading..."
+                  : " • Upload PDF (books, papers)"
+                : " • Log in to upload and build your library"}
+            </LibraryHint>
+          </SectionHeaderRow>
 
           <SourceList>
             {sources.length === 0 && (
