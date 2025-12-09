@@ -1266,6 +1266,8 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
   const thinkingRef = useRef(null); // NEW
 
   const [isThinking, setIsThinking] = useState(false); // NEW
+  const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
+  // shape: { id, title, filePath }
 
   const isExistingChat = !!chatId; // optional helper
 
@@ -1600,39 +1602,14 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
   };
 
   // Remove an attachment from the pending send (and delete from Firestore/Storage)
-  const handleRemoveAttachment = async (attachment) => {
+  const handleRemoveAttachment = (attachment) => {
     if (!currentUser || !caseId) return;
-    const ok = window.confirm(
-      `Remove "${attachment.title || "attachment"}" from this message?`
-    );
-    if (!ok) return;
 
-    try {
-      setPendingAttachmentIds((prev) =>
-        prev.filter((id) => id !== attachment.id)
-      );
-
-      if (attachment.filePath) {
-        try {
-          const storageRef = ref(storage, attachment.filePath);
-          await deleteObject(storageRef);
-        } catch (e2) {
-          console.warn("Failed to delete attachment file from Storage", e2);
-        }
-      }
-
-      const attachmentRef = doc(
-        firestore,
-        "vetAiCases",
-        caseId,
-        "attachments",
-        attachment.id
-      );
-      await deleteDoc(attachmentRef);
-    } catch (err) {
-      console.error("Failed to remove attachment", err);
-      alert("Could not remove attachment. Please try again.");
-    }
+    setDeleteAttachmentTarget({
+      id: attachment.id,
+      title: attachment.title || "Attachment",
+      filePath: attachment.filePath || null,
+    });
   };
 
   const canSendMessage = () => {
@@ -2226,6 +2203,75 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
           </>
         )}
       </ChatInner>
+      {deleteAttachmentTarget && (
+        <ModalOverlay
+          onClick={() => {
+            setDeleteAttachmentTarget(null);
+          }}
+        >
+          <ModalCard
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ModalTitle>Remove attachment</ModalTitle>
+            <ModalSubtitle>
+              {`This will remove "${deleteAttachmentTarget.title}" from this message.`}
+            </ModalSubtitle>
+
+            <ModalActions>
+              <ModalSecondaryButton
+                type="button"
+                onClick={() => setDeleteAttachmentTarget(null)}
+              >
+                Cancel
+              </ModalSecondaryButton>
+
+              <ModalPrimaryButton
+                type="button"
+                onClick={async () => {
+                  try {
+                    setPendingAttachmentIds((prev) =>
+                      prev.filter((id) => id !== deleteAttachmentTarget.id)
+                    );
+
+                    if (deleteAttachmentTarget.filePath) {
+                      try {
+                        const storageRef = ref(
+                          storage,
+                          deleteAttachmentTarget.filePath
+                        );
+                        await deleteObject(storageRef);
+                      } catch (e2) {
+                        console.warn(
+                          "Failed to delete attachment file from Storage",
+                          e2
+                        );
+                      }
+                    }
+
+                    const attachmentRef = doc(
+                      firestore,
+                      "vetAiCases",
+                      caseId,
+                      "attachments",
+                      deleteAttachmentTarget.id
+                    );
+                    await deleteDoc(attachmentRef);
+                  } catch (err) {
+                    console.error("Failed to remove attachment", err);
+                    alert("Could not remove attachment. Please try again.");
+                  } finally {
+                    setDeleteAttachmentTarget(null);
+                  }
+                }}
+              >
+                Delete
+              </ModalPrimaryButton>
+            </ModalActions>
+          </ModalCard>
+        </ModalOverlay>
+      )}
     </ChatPane>
   );
 }
@@ -2652,6 +2698,19 @@ export default function AiLibraryPage() {
         ) {
           navigate(`/ai/library/p/${deleteTarget.caseId}/project`);
         }
+      } else if (deleteTarget.type === "source") {
+        // delete library PDF
+        if (deleteTarget.filePath) {
+          try {
+            const storageRef = ref(storage, deleteTarget.filePath);
+            await deleteObject(storageRef);
+          } catch (err) {
+            console.warn("Failed to delete storage object:", err);
+          }
+        }
+
+        const srcRef = doc(firestore, "vetLibrarySources", deleteTarget.id);
+        await deleteDoc(srcRef);
       }
     } catch (err) {
       console.error("Failed to delete item:", err);
@@ -2732,28 +2791,15 @@ export default function AiLibraryPage() {
     }
   };
 
-  const handleDeleteSource = async (source) => {
+  const handleDeleteSource = (source) => {
     if (!currentUser) return;
-    if (!window.confirm(`Remove "${source.title}" from your library?`)) {
-      return;
-    }
 
-    try {
-      if (source.filePath) {
-        const storageRef = ref(storage, source.filePath);
-        try {
-          await deleteObject(storageRef);
-        } catch (err) {
-          console.warn("Failed to delete storage object:", err);
-        }
-      }
-
-      const srcRef = doc(firestore, "vetLibrarySources", source.id);
-      await deleteDoc(srcRef);
-    } catch (err) {
-      console.error("Failed to delete source:", err);
-      alert("Could not delete this item. Please try again.");
-    }
+    setDeleteTarget({
+      type: "source",
+      id: source.id,
+      name: source.title || "Untitled PDF",
+      filePath: source.filePath || null,
+    });
   };
 
   return (
@@ -3050,13 +3096,22 @@ export default function AiLibraryPage() {
             <ModalTitle>
               {deleteTarget.type === "patient"
                 ? "Delete patient"
-                : "Delete chat"}
+                : deleteTarget.type === "chat"
+                ? "Delete chat"
+                : "Delete from library"}
             </ModalTitle>
+
             <ModalSubtitle>
-              {deleteTarget.type === "patient"
-                ? `This will remove "${deleteTarget.name}" from your patient list.`
-                : `This will remove the chat "${deleteTarget.name}" from this patient.`}
+              {deleteTarget.type === "patient" &&
+                `This will remove "${deleteTarget.name}" from your patient list.`}
+
+              {deleteTarget.type === "chat" &&
+                `This will remove the chat "${deleteTarget.name}" from this patient.`}
+
+              {deleteTarget.type === "source" &&
+                `This will remove "${deleteTarget.name}" from your library.`}
             </ModalSubtitle>
+
             <ModalActions>
               <ModalSecondaryButton type="button" onClick={handleCancelDelete}>
                 Cancel
