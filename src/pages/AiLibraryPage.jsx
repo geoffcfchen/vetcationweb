@@ -71,17 +71,35 @@ const AttachProgressInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 14px;
   color: #e5e7eb;
 `;
 
+/* top area text + chips stays in a column */
+
 const ComposerColumn = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 `;
 
+const ComposerBottomRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ComposerBottomLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const ComposerBottomRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
 /* Layout */
 
 const Page = styled.div`
@@ -135,13 +153,14 @@ const ModalCard = styled.div`
 
 const ModalTitle = styled.h2`
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
+  color: #e5e7eb;
 `;
 
 const ModalSubtitle = styled.p`
   margin: 6px 0 16px;
-  font-size: 13px;
+  font-size: 15px;
   color: #9ca3af;
 `;
 
@@ -157,7 +176,7 @@ const ModalInput = styled.input`
   background: #020617;
   color: #e5e7eb;
   padding: 10px 12px;
-  font-size: 14px;
+  font-size: 16px; /* was 14px */
   width: 100%;
 
   &::placeholder {
@@ -176,20 +195,20 @@ const ModalSecondaryButton = styled.button`
   border: none;
   border-radius: 999px;
   padding: 6px 14px;
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   background: transparent;
   color: #9ca3af;
   cursor: pointer;
 
   &:hover {
-    background: #111827;
+    background: #303030;
   }
 `;
 
 const ModalPrimaryButton = styled.button`
   border-radius: 999px;
   padding: 6px 16px;
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   background: #ffffff;
   color: #000000;
   border: 1px solid #e5e7eb;
@@ -213,7 +232,7 @@ const PatientsHeader = styled.div`
 `;
 
 const PatientsTitle = styled.div`
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -224,11 +243,11 @@ const NewPatientButton = styled.button`
   border: none;
   border-radius: 999px;
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #111827;
+  background: #303030;
   color: #e5e7eb;
   cursor: pointer;
 
@@ -256,17 +275,17 @@ const PatientRow = styled.button`
   border: none;
   border-radius: 8px;
   padding: 6px 8px;
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   text-align: left;
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  background: ${(p) => (p.$active ? "#111827" : "transparent")};
+  background: ${(p) => (p.$active ? "#303030" : "transparent")};
   color: #e5e7eb;
 
   &:hover {
-    background: #111827;
+    background: #303030;
   }
 
   svg {
@@ -281,7 +300,7 @@ const PatientName = styled.span`
 `;
 
 const PatientEmptyState = styled.div`
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   color: #6b7280;
   padding: 4px 2px;
 `;
@@ -301,14 +320,14 @@ const SubchatRow = styled.button`
   border: none;
   border-radius: 6px;
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   text-align: left;
-  background: ${(p) => (p.$active ? "#111827" : "transparent")};
+  background: ${(p) => (p.$active ? "#303030" : "transparent")};
   color: ${(p) => (p.$active ? "#e5e7eb" : "#9ca3af")};
   cursor: pointer;
 
   &:hover {
-    background: #111827;
+    background: #303030;
     color: #e5e7eb;
   }
 `;
@@ -323,7 +342,7 @@ const SubchatTitle = styled.span`
 
 const SectionDivider = styled.div`
   height: 1px;
-  background: #111827;
+  background: #303030;
   margin: 8px 0 4px;
 `;
 
@@ -334,13 +353,13 @@ const SectionHeaderRow = styled.div`
 `;
 
 const SidebarTitle = styled.div`
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   font-weight: 600;
   color: #9ca3af;
 `;
 
 const SidebarCount = styled.div`
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   color: #6b7280;
 `;
 
@@ -350,12 +369,12 @@ const UploadBox = styled.label`
   padding: 12px;
   text-align: center;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   display: flex;
   flex-direction: column;
   gap: 6px;
   align-items: center;
-  background: #181818; /* was #020617 */
+  background: #181818;
   margin-top: 6px;
 
   &:hover {
@@ -369,14 +388,14 @@ const UploadBox = styled.label`
 `;
 
 const UploadHint = styled.div`
-  font-size: 11px;
+  font-size: 13px; /* was 11px */
   color: #6b7280;
 `;
 
 const SourceList = styled.div`
   flex: 1;
   overflow-y: auto;
-  font-size: 14px;
+  font-size: 16px; /* was 14px */
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -391,7 +410,7 @@ const SourceRow = styled.div`
   padding: 8px;
   border-radius: 10px;
   background: #181818; /* was #020617 */
-  border: 1px solid #111827;
+  border: 1px solid #303030;
 `;
 
 const SourceMain = styled.div`
@@ -400,7 +419,7 @@ const SourceMain = styled.div`
 `;
 
 const SourceTitle = styled.div`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -409,7 +428,7 @@ const SourceTitle = styled.div`
 
 const SourceMeta = styled.div`
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 13px; /* was 11px */
   color: #6b7280;
 `;
 
@@ -417,7 +436,7 @@ const Status = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 13px; /* was 11px */
   color: ${(p) =>
     p.$status === "ready"
       ? "#22c55e"
@@ -443,7 +462,7 @@ const IconButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: #111827;
+    background: #303030;
   }
 
   svg {
@@ -454,7 +473,7 @@ const IconButton = styled.button`
 `;
 
 const EmptyState = styled.div`
-  font-size: 13px;
+  font-size: 15px;
   color: #6b7280;
   padding: 8px 2px;
 `;
@@ -487,12 +506,12 @@ const ChatHeader = styled.div`
 `;
 
 const ChatTitle = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 `;
 
 const ChatSubtitle = styled.div`
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   color: #6b7280;
   margin-top: 2px;
 `;
@@ -518,8 +537,7 @@ const Bubble = styled.div`
   max-width: 100%;
   padding: 10px 12px;
   border-radius: 14px;
-  font-size: 14px;
-  /* user bubble matches TextInput background, assistant is transparent */
+  font-size: 16px; /* was 14px */
   background: ${(p) => (p.$role === "user" ? "#303030" : "transparent")};
   color: #e5e7eb;
   word-wrap: break-word;
@@ -544,7 +562,7 @@ const ThinkingBubble = styled(Bubble)`
 `;
 
 const ThinkingLabel = styled.span`
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   color: #e5e7eb;
   animation: ${thinkingPulse} 1.2s infinite;
 `;
@@ -579,9 +597,9 @@ const AttachChip = styled.div`
   gap: 8px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #303030; /* match chatbox */
+  background: #303030;
   border: 1px solid #424242;
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
 `;
 
 const AttachFilename = styled.span`
@@ -592,7 +610,7 @@ const AttachFilename = styled.span`
 `;
 
 const AttachStatus = styled.span`
-  font-size: 11px;
+  font-size: 15px;
   color: #9ca3af;
 `;
 
@@ -608,17 +626,71 @@ const AttachRemoveButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #111827;
+    background: #303030;
   }
 `;
 
 /* Composer row */
 
 const InputRow = styled.form`
-  display: flex;
-  gap: 8px;
   margin-top: 12px;
-  align-items: flex-end;
+`;
+
+/* NEW: outer shell around +, attachments, and textarea */
+
+const ComposerShell = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 24px;
+  background: #303030;
+  border: 1px solid #424242;
+`;
+/* NEW: small icon-style attach button inside the shell */
+
+const AttachIconButton = styled.button`
+  border: none;
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #e5e7eb;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    background: #383838;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+`;
+
+/* NEW: white circular send button, ChatGPT style */
+
+const SendFabButton = styled.button`
+  border: none;
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
 
 const AttachButtonWrapper = styled.div`
@@ -641,7 +713,7 @@ const AttachButton = styled.button`
   flex-shrink: 0;
 
   &:hover {
-    background: #111827;
+    background: #303030;
   }
 
   &:disabled {
@@ -651,21 +723,27 @@ const AttachButton = styled.button`
 `;
 
 const TextInput = styled.textarea`
-  flex: 1;
+  width: 100%;
   resize: none;
   min-height: 48px;
-  max-height: 120px;
-  border-radius: 10px;
-  border: 1px solid #424242; /* UPDATED */
-  background: #303030; /* UPDATED */
+  max-height: 160px;
+  overflow-y: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
   color: #e5e7eb;
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: 6px 14px 4px; /* was 6px 0 4px  → adds left/right padding */
+  font-size: 16px; /* was 14px */
 
   &::placeholder {
     color: #9e9e9e;
   }
+
+  &:focus {
+    outline: none;
+  }
 `;
+
 const SendButton = styled.button`
   border: none;
   border-radius: 999px;
@@ -686,7 +764,7 @@ const SendButton = styled.button`
 `;
 
 const ChatEmptyState = styled.div`
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   color: #6b7280;
   padding: 12px 2px;
 `;
@@ -714,20 +792,20 @@ const CenterEmptyCard = styled.div`
 
 const CenterEmptyTitle = styled.h2`
   margin: 0 0 8px;
-  font-size: 18px;
+  font-size: 20px; /* was 18px */
   font-weight: 600;
   color: #e5e7eb;
 `;
 
 const CenterEmptySubtitle = styled.p`
   margin: 0 0 16px;
-  font-size: 13px;
+  font-size: 15px; /* was 13px */
   color: #9ca3af;
 `;
 
 const CenterEmptyHint = styled.p`
   margin: 10px 0 0;
-  font-size: 12px;
+  font-size: 14px; /* was 12px */
   color: #6b7280;
 `;
 
@@ -747,7 +825,7 @@ const CenterEmptyPrimaryButton = styled.button`
   margin-top: 4px;
   border-radius: 999px;
   padding: 10px 18px;
-  font-size: 14px;
+  font-size: 16px; /* was 14px */
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -797,12 +875,12 @@ const AttachMenuItem = styled.button`
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 15px;
   color: #e5e7eb;
   cursor: pointer;
 
   &:hover {
-    background: #111827;
+    background: #464646;
   }
 
   span {
@@ -811,22 +889,16 @@ const AttachMenuItem = styled.button`
   }
 `;
 
-const AttachMenuDivider = styled.div`
-  height: 1px;
-  margin: 4px 0;
-  background: #111827;
-`;
-
 /* Subchat list (project history on main pane) */
 
 const ChatListSection = styled.div`
   margin-top: 16px;
   padding-top: 8px;
-  border-top: 1px solid #111827;
+  border-top: 1px solid #303030;
 `;
 
 const ChatListTitle = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #9ca3af;
   margin-bottom: 6px;
@@ -843,14 +915,14 @@ const ChatListItem = styled.button`
   border: none;
   border-radius: 8px;
   padding: 6px 8px;
-  font-size: 13px;
+  font-size: 15px;
   text-align: left;
-  background: ${(p) => (p.$active ? "#111827" : "transparent")};
+  background: ${(p) => (p.$active ? "#303030" : "transparent")};
   color: #e5e7eb;
   cursor: pointer;
 
   &:hover {
-    background: #111827;
+    background: #3a3a3a;
   }
 `;
 
@@ -862,7 +934,7 @@ const ChatListItemTitle = styled.div`
 `;
 
 const ChatListItemMeta = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   color: #6b7280;
   margin-top: 2px;
 `;
@@ -931,19 +1003,19 @@ function AssistantMessageBubble({ message }) {
       ),
       h1: ({ node, ...props }) => (
         <h3
-          style={{ margin: "10px 0", fontSize: 20, fontWeight: 700 }}
+          style={{ margin: "10px 0", fontSize: 22, fontWeight: 700 }}
           {...props}
         />
       ),
       h2: ({ node, ...props }) => (
         <h4
-          style={{ margin: "8px 0", fontSize: 18, fontWeight: 700 }}
+          style={{ margin: "8px 0", fontSize: 20, fontWeight: 700 }}
           {...props}
         />
       ),
       h3: ({ node, ...props }) => (
         <h5
-          style={{ margin: "6px 0", fontSize: 16, fontWeight: 600 }}
+          style={{ margin: "6px 0", fontSize: 18, fontWeight: 600 }}
           {...props}
         />
       ),
@@ -955,7 +1027,7 @@ function AssistantMessageBubble({ message }) {
               background: "#020617",
               padding: "2px 4px",
               borderRadius: 4,
-              fontSize: 12,
+              fontSize: 14,
             }}
             {...props}
           />
@@ -983,7 +1055,7 @@ function AssistantMessageBubble({ message }) {
             style={{
               borderCollapse: "collapse",
               width: "100%",
-              fontSize: 12,
+              fontSize: 14,
             }}
             {...props}
           />
@@ -1039,7 +1111,7 @@ function AssistantMessageBubble({ message }) {
         <div
           style={{
             marginTop: 8,
-            fontSize: 11,
+            fontSize: 13,
             color: "#9ca3af",
           }}
         >
@@ -1616,6 +1688,17 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
     sendMessage();
   };
 
+  const handleComposerChange = (e) => {
+    const el = e.target;
+    setMessageInput(el.value);
+
+    // auto-grow
+    el.style.height = "0px";
+    const maxHeight = 260;
+    const newHeight = Math.min(el.scrollHeight, maxHeight);
+    el.style.height = newHeight + "px";
+  };
+
   const handleComposerKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -1786,59 +1869,58 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
         {activeCase && !chatId && (
           <>
             <InputRow onSubmit={handleSubmit}>
-              <AttachButtonWrapper>
-                <AttachButton
-                  type="button"
-                  onClick={handleToggleAttachMenu}
-                  disabled={!currentUser || !caseId}
-                >
-                  <FiPlus />
-                </AttachButton>
+              <ComposerShell>
+                <ComposerColumn>
+                  {renderAttachBar()}
+                  <TextInput
+                    value={messageInput}
+                    onChange={handleComposerChange}
+                    onKeyDown={handleComposerKeyDown}
+                    placeholder="New chat for this patient, for example: 'Help me interpret today's lab panel...'"
+                    disabled={!currentUser}
+                  />
+                </ComposerColumn>
 
-                {attachMenuOpen && (
-                  <AttachMenu $direction="down">
-                    <AttachMenuItem
-                      type="button"
-                      onClick={handleAttachFilesClick}
+                <ComposerBottomRow>
+                  <ComposerBottomLeft>
+                    <AttachButtonWrapper>
+                      <AttachIconButton
+                        type="button"
+                        onClick={handleToggleAttachMenu}
+                        disabled={!currentUser || !caseId}
+                        aria-label="Add attachment"
+                      >
+                        <FiPlus />
+                      </AttachIconButton>
+
+                      {attachMenuOpen && (
+                        <AttachMenu $direction="down">
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleAttachFilesClick}
+                          >
+                            <FiPaperclip />
+                            <span>Add lab report / PDF</span>
+                          </AttachMenuItem>
+                        </AttachMenu>
+                      )}
+                    </AttachButtonWrapper>
+                  </ComposerBottomLeft>
+
+                  <ComposerBottomRight>
+                    <SendFabButton
+                      type="submit"
+                      disabled={
+                        !currentUser ||
+                        !messageInput.trim() ||
+                        hasUploadingPending
+                      }
                     >
-                      <FiPaperclip />
-                      <span>Add lab report / PDF</span>
-                    </AttachMenuItem>
-                    {/* <AttachMenuDivider /> */}
-                    {/* <AttachMenuItem type="button">
-                      <FiSearch />
-                      <span>Deep research</span>
-                    </AttachMenuItem> */}
-
-                    {/* <AttachMenuDivider /> */}
-                    {/* <AttachMenuItem type="button">
-                      <FiMoreHorizontal />
-                      <span>More</span>
-                    </AttachMenuItem> */}
-                  </AttachMenu>
-                )}
-              </AttachButtonWrapper>
-
-              <ComposerColumn>
-                {renderAttachBar()}
-                <TextInput
-                  value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
-                  onKeyDown={handleComposerKeyDown}
-                  placeholder="New chat for this patient, for example: 'Help me interpret today's lab panel...'"
-                  disabled={!currentUser}
-                />
-              </ComposerColumn>
-
-              <SendButton
-                type="submit"
-                disabled={
-                  !currentUser || !messageInput.trim() || hasUploadingPending
-                }
-              >
-                <FiSend />
-                Send
-              </SendButton>
+                      <FiSend />
+                    </SendFabButton>
+                  </ComposerBottomRight>
+                </ComposerBottomRow>
+              </ComposerShell>
             </InputRow>
 
             <ChatListSection>
@@ -1968,62 +2050,59 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
               </Messages>
             )}
 
-            {/* {renderAttachBar()} */}
-
             <InputRow onSubmit={handleSubmit}>
-              <AttachButtonWrapper>
-                <AttachButton
-                  type="button"
-                  onClick={handleToggleAttachMenu}
-                  disabled={!currentUser || !caseId}
-                >
-                  <FiPlus />
-                </AttachButton>
+              <ComposerShell>
+                <ComposerColumn>
+                  {renderAttachBar()}
+                  <TextInput
+                    value={messageInput}
+                    onChange={handleComposerChange}
+                    onKeyDown={handleComposerKeyDown}
+                    placeholder="Ask anything about this patient's case or lab panel..."
+                    disabled={!currentUser}
+                  />
+                </ComposerColumn>
 
-                {attachMenuOpen && (
-                  <AttachMenu $direction="up">
-                    <AttachMenuItem
-                      type="button"
-                      onClick={handleAttachFilesClick}
+                <ComposerBottomRow>
+                  <ComposerBottomLeft>
+                    <AttachButtonWrapper>
+                      <AttachIconButton
+                        type="button"
+                        onClick={handleToggleAttachMenu}
+                        disabled={!currentUser || !caseId}
+                        aria-label="Add attachment"
+                      >
+                        <FiPlus />
+                      </AttachIconButton>
+
+                      {attachMenuOpen && (
+                        <AttachMenu $direction="up">
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleAttachFilesClick}
+                          >
+                            <FiPaperclip />
+                            <span>Add lab report / PDF</span>
+                          </AttachMenuItem>
+                        </AttachMenu>
+                      )}
+                    </AttachButtonWrapper>
+                  </ComposerBottomLeft>
+
+                  <ComposerBottomRight>
+                    <SendFabButton
+                      type="submit"
+                      disabled={
+                        !currentUser ||
+                        !messageInput.trim() ||
+                        hasUploadingPending
+                      }
                     >
-                      <FiPaperclip />
-                      <span>Add lab report / PDF</span>
-                    </AttachMenuItem>
-                    {/* <AttachMenuDivider /> */}
-                    {/* <AttachMenuItem type="button">
-                      <FiSearch />
-                      <span>Deep research</span>
-                    </AttachMenuItem> */}
-
-                    {/* <AttachMenuDivider /> */}
-                    {/* <AttachMenuItem type="button">
-                      <FiMoreHorizontal />
-                      <span>More</span>
-                    </AttachMenuItem> */}
-                  </AttachMenu>
-                )}
-              </AttachButtonWrapper>
-
-              <ComposerColumn>
-                {renderAttachBar()}
-                <TextInput
-                  value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
-                  onKeyDown={handleComposerKeyDown}
-                  placeholder="Ask anything about this patient's case or lab panel..."
-                  disabled={!currentUser}
-                />
-              </ComposerColumn>
-
-              <SendButton
-                type="submit"
-                disabled={
-                  !currentUser || !messageInput.trim() || hasUploadingPending
-                }
-              >
-                <FiSend />
-                Send
-              </SendButton>
+                      <FiSend />
+                    </SendFabButton>
+                  </ComposerBottomRight>
+                </ComposerBottomRow>
+              </ComposerShell>
             </InputRow>
           </>
         )}
