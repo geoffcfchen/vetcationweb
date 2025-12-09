@@ -388,6 +388,49 @@ const SubchatTitle = styled.span`
   padding-right: 2px; /* keep space for the three-dot button if you have it */
 `;
 
+const PersonalChatList = styled.div`
+  margin-top: 8px;
+  max-height: 22vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const PersonalChatRow = styled.button`
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 15px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: ${(p) => (p.$active ? "#303030" : "transparent")};
+  color: #e5e7eb;
+  min-width: 0;
+  position: relative;
+
+  &:hover {
+    background: #303030;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+`;
+
+const PersonalChatTitle = styled.span`
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 28px; /* room for three dots */
+`;
+
 /* three dot menu and inline edit */
 
 const RowMenuButton = styled.button`
@@ -413,7 +456,8 @@ const RowMenuButton = styled.button`
 
   /* always show on hover */
   ${PatientRow}:hover &,
-  ${SubchatRow}:hover & {
+  ${SubchatRow}:hover &,
+  ${PersonalChatRow}:hover & {
     opacity: 1;
     pointer-events: auto;
   }
@@ -1250,6 +1294,818 @@ function AssistantMessageBubble({ message }) {
         </div>
       )}
     </div>
+  );
+}
+
+function PersonalChatShell({ currentUser }) {
+  const { personalChatId } = useParams();
+  const isExistingChat = !!personalChatId;
+  const navigateInner = useNavigate();
+
+  const [messages, setMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState("");
+
+  const [chatAttachments, setChatAttachments] = useState([]);
+  const [pendingAttachmentIds, setPendingAttachmentIds] = useState([]);
+  const [attachMenuOpen, setAttachMenuOpen] = useState(false);
+  const fileInputRef = useRef(null);
+  const [uploadProgress, setUploadProgress] = useState({});
+
+  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const lastMessageRef = useRef(null);
+  const thinkingRef = useRef(null);
+
+  const [isThinking, setIsThinking] = useState(false);
+  const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
+
+  const scrollToBottom = (behavior = "auto") => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({
+        behavior,
+        block: "end",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!isThinking || !thinkingRef.current) return;
+
+    thinkingRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, [isThinking]);
+
+  useEffect(() => {
+    setIsThinking(false);
+  }, [personalChatId]);
+
+  useEffect(() => {
+    if (!personalChatId) return;
+    if (messages.length === 0) return;
+    scrollToBottom("auto");
+  }, [personalChatId, messages.length]);
+
+  useEffect(() => {
+    if (!messagesContainerRef.current || !lastMessageRef.current) return;
+    if (messages.length === 0) return;
+
+    const last = messages[messages.length - 1];
+    if (!last || last.role !== "user") {
+      return;
+    }
+
+    const container = messagesContainerRef.current;
+    const lastEl = lastMessageRef.current;
+
+    const containerRect = container.getBoundingClientRect();
+    const lastRect = lastEl.getBoundingClientRect();
+
+    const bottomRelative = lastRect.bottom - containerRect.top;
+    const desiredOffsetFromTop = 72;
+
+    const delta = bottomRelative - desiredOffsetFromTop;
+    const nextScrollTop = Math.max(0, container.scrollTop + delta);
+
+    container.scrollTo({
+      top: nextScrollTop,
+      behavior: "smooth",
+    });
+  }, [messages.length, messagesContainerRef, lastMessageRef]);
+
+  // subscribe to messages
+  useEffect(() => {
+    if (!currentUser || !personalChatId) {
+      setMessages([]);
+      return;
+    }
+
+    const msgsCol = collection(
+      firestore,
+      "vetPersonalChats",
+      personalChatId,
+      "messages"
+    );
+    const qMsgs = query(msgsCol, orderBy("createdAt", "asc"));
+
+    const unsub = onSnapshot(qMsgs, (snap) => {
+      const rows = [];
+      snap.forEach((docSnap) =>
+        rows.push({ id: docSnap.id, ...docSnap.data() })
+      );
+      setMessages(rows);
+    });
+
+    return () => unsub();
+  }, [currentUser, personalChatId]);
+
+  // subscribe to attachments
+  useEffect(() => {
+    if (!currentUser || !personalChatId) {
+      setChatAttachments([]);
+      return;
+    }
+
+    const attachmentsCol = collection(
+      firestore,
+      "vetPersonalChats",
+      personalChatId,
+      "attachments"
+    );
+    const qAtt = query(attachmentsCol, orderBy("createdAt", "asc"));
+
+    const unsub = onSnapshot(qAtt, (snap) => {
+      const rows = [];
+      snap.forEach((docSnap) =>
+        rows.push({ id: docSnap.id, ...docSnap.data() })
+      );
+      setChatAttachments(rows);
+    });
+
+    return () => unsub();
+  }, [currentUser, personalChatId]);
+
+  useEffect(() => {
+    setPendingAttachmentIds([]);
+  }, [personalChatId]);
+
+  const hasUploadingPending = chatAttachments.some(
+    (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
+  );
+
+  const callPersonalAssistant = async (vetUid, chatIdArg, convo, triggerId) => {
+    try {
+      const payload = {
+        vetUid,
+        chatId: chatIdArg,
+        messages: convo,
+        triggerMessageId: triggerId,
+      };
+
+      const res = await fetch(
+        "https://us-central1-vetcationapp.cloudfunctions.net/vetPersonalAssistant",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (e) {
+        console.error("Failed to parse vetPersonalAssistant JSON", e);
+        throw new Error(
+          `Non-JSON response from vetPersonalAssistant (status ${res.status})`
+        );
+      }
+
+      const chatDocRef = doc(firestore, "vetPersonalChats", chatIdArg);
+      const msgsCol = collection(chatDocRef, "messages");
+
+      if (!res.ok) {
+        console.error("vetPersonalAssistant HTTP error:", res.status, json);
+
+        await addDoc(msgsCol, {
+          role: "assistant",
+          content:
+            json?.error ||
+            "Sorry, the AI assistant ran into an error. Please try again.",
+          createdAt: serverTimestamp(),
+        });
+
+        setIsThinking(false);
+        return;
+      }
+
+      await addDoc(msgsCol, {
+        role: "assistant",
+        content: json.reply,
+        structured: json.structured || null,
+        sources: json.sources || [],
+        createdAt: serverTimestamp(),
+      });
+
+      await updateDoc(chatDocRef, {
+        updatedAt: serverTimestamp(),
+        lastMessagePreview: json.reply.slice(0, 140),
+      });
+
+      setIsThinking(false);
+    } catch (err) {
+      console.error("Personal assistant call failed:", err);
+      setIsThinking(false);
+    }
+  };
+
+  const handleToggleAttachMenu = () => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    if (!personalChatId) {
+      alert(
+        "Send your first question to start this study chat, then add PDFs."
+      );
+      return;
+    }
+    setAttachMenuOpen((open) => !open);
+  };
+
+  const handleAttachFilesClick = () => {
+    if (!fileInputRef.current) return;
+    fileInputRef.current.click();
+  };
+
+  const handleAttachmentFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    if (!personalChatId) {
+      alert(
+        "Send your first question to start this study chat, then add PDFs."
+      );
+      return;
+    }
+
+    try {
+      setAttachMenuOpen(false);
+
+      const attachmentsCol = collection(
+        firestore,
+        "vetPersonalChats",
+        personalChatId,
+        "attachments"
+      );
+
+      const attachmentDocRef = await addDoc(attachmentsCol, {
+        vetUid: currentUser.uid,
+        chatId: personalChatId,
+        messageId: null,
+        title: file.name,
+        status: "uploading",
+        filePath: null,
+        downloadUrl: null,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+
+      const attachmentId = attachmentDocRef.id;
+
+      setPendingAttachmentIds((prev) =>
+        prev.includes(attachmentId) ? prev : [...prev, attachmentId]
+      );
+      setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
+
+      const path = `aiPersonalUploads/${currentUser.uid}/${personalChatId}/${attachmentId}.pdf`;
+      const storageRef = ref(storage, path);
+      const task = uploadBytesResumable(storageRef, file);
+
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          const percent = snapshot.totalBytes
+            ? Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              )
+            : 0;
+          setUploadProgress((prev) => ({
+            ...prev,
+            [attachmentId]: percent,
+          }));
+        },
+        async (error) => {
+          console.error("Attachment upload error", error);
+          await updateDoc(attachmentDocRef, {
+            status: "error",
+            updatedAt: serverTimestamp(),
+          });
+          setUploadProgress((prev) => {
+            const { [attachmentId]: _ignore, ...rest } = prev;
+            return rest;
+          });
+        },
+        async () => {
+          const url = await getDownloadURL(storageRef);
+          await updateDoc(attachmentDocRef, {
+            status: "uploaded",
+            filePath: path,
+            downloadUrl: url,
+            updatedAt: serverTimestamp(),
+          });
+          setUploadProgress((prev) => {
+            const { [attachmentId]: _ignore, ...rest } = prev;
+            return rest;
+          });
+        }
+      );
+    } catch (err) {
+      console.error("Failed to attach file", err);
+      alert("Could not attach file. Please try again.");
+    } finally {
+      e.target.value = "";
+    }
+  };
+
+  const handleRemoveAttachment = (attachment) => {
+    if (!currentUser || !personalChatId) return;
+
+    setDeleteAttachmentTarget({
+      id: attachment.id,
+      title: attachment.title || "Attachment",
+      filePath: attachment.filePath || null,
+    });
+  };
+
+  const canSendMessage = () => {
+    const text = messageInput.trim();
+    if (!text) return false;
+
+    if (!currentUser) {
+      alert("Please log in first.");
+      return false;
+    }
+
+    if (hasUploadingPending) {
+      alert("Please wait for attachments to finish uploading before sending.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const sendMessage = async () => {
+    if (!canSendMessage()) return;
+
+    const text = messageInput.trim();
+    setMessageInput("");
+
+    if (!isExistingChat) {
+      // create new personal chat
+      try {
+        const chatsCol = collection(firestore, "vetPersonalChats");
+        const chatDocRef = await addDoc(chatsCol, {
+          vetUid: currentUser.uid,
+          title: null,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+          lastMessagePreview: text.slice(0, 140),
+        });
+
+        const newChatId = chatDocRef.id;
+        const msgsCol = collection(chatDocRef, "messages");
+        const userMessageRef = await addDoc(msgsCol, {
+          role: "user",
+          content: text,
+          createdAt: serverTimestamp(),
+        });
+
+        const messageId = userMessageRef.id;
+
+        const title =
+          text.length > 40 ? text.slice(0, 40).trimEnd() + "..." : text;
+        await updateDoc(chatDocRef, { title });
+
+        navigateInner(`/ai/library/personal/${newChatId}`, {
+          replace: true,
+        });
+
+        const convo = [{ role: "user", content: text }];
+
+        setIsThinking(true);
+        await callPersonalAssistant(
+          currentUser.uid,
+          newChatId,
+          convo,
+          messageId
+        );
+
+        scrollToBottom("smooth");
+        setPendingAttachmentIds([]);
+      } catch (err) {
+        console.error("Failed to start personal chat:", err);
+        alert("Could not start chat. Please try again.");
+      }
+    } else {
+      // existing personal chat
+      try {
+        const chatDocRef = doc(firestore, "vetPersonalChats", personalChatId);
+        const msgsCol = collection(chatDocRef, "messages");
+
+        const existingConvo = messages.map((m) => ({
+          role: m.role,
+          content: m.content,
+        }));
+        const newMessage = { role: "user", content: text };
+
+        const userMessageRef = await addDoc(msgsCol, {
+          role: "user",
+          content: text,
+          createdAt: serverTimestamp(),
+        });
+        const messageId = userMessageRef.id;
+
+        await updateDoc(chatDocRef, {
+          updatedAt: serverTimestamp(),
+          lastMessagePreview: text.slice(0, 140),
+        });
+
+        if (pendingAttachmentIds.length > 0) {
+          const now = serverTimestamp();
+          await Promise.all(
+            pendingAttachmentIds.map((attId) =>
+              updateDoc(
+                doc(
+                  firestore,
+                  "vetPersonalChats",
+                  personalChatId,
+                  "attachments",
+                  attId
+                ),
+                {
+                  messageId,
+                  updatedAt: now,
+                }
+              ).catch((err) => {
+                console.warn("Failed to link attachment", attId, err);
+              })
+            )
+          );
+        }
+
+        setPendingAttachmentIds([]);
+
+        const convo = [...existingConvo, newMessage];
+
+        setIsThinking(true);
+        await callPersonalAssistant(
+          currentUser.uid,
+          personalChatId,
+          convo,
+          messageId
+        );
+
+        scrollToBottom("smooth");
+        setPendingAttachmentIds([]);
+      } catch (err) {
+        console.error("Failed to send message:", err);
+        alert("Could not send message. Please try again.");
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
+  const handleComposerChange = (e) => {
+    const el = e.target;
+    setMessageInput(el.value);
+
+    el.style.height = "0px";
+    const maxHeight = 260;
+    const newHeight = Math.min(el.scrollHeight, maxHeight);
+    el.style.height = newHeight + "px";
+  };
+
+  const handleComposerKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
+  const renderAttachBar = () => {
+    const chips = chatAttachments.filter((att) =>
+      pendingAttachmentIds.includes(att.id)
+    );
+    if (chips.length === 0) return null;
+
+    return (
+      <AttachBar>
+        {chips.map((att) => {
+          const isUploading = att.status === "uploading";
+          const percentRaw =
+            typeof uploadProgress[att.id] === "number"
+              ? uploadProgress[att.id]
+              : null;
+          const percent =
+            percentRaw != null ? Math.min(100, Math.max(0, percentRaw)) : null;
+
+          let statusLabel = "";
+          if (isUploading) {
+            statusLabel =
+              percent != null ? `Uploading ${percent}%` : "Uploading";
+          } else if (att.status === "uploaded") {
+            statusLabel = "Uploaded";
+          } else if (att.status === "processing") {
+            statusLabel = "Processing";
+          } else if (att.status === "error") {
+            statusLabel = "Error";
+          } else if (att.status) {
+            statusLabel = att.status;
+          }
+
+          return (
+            <AttachChip key={att.id}>
+              {isUploading && percent != null ? (
+                <AttachProgressRing $percent={percent}>
+                  <AttachProgressInner>
+                    {percent > 0 && percent < 100 ? `${percent}` : ""}
+                  </AttachProgressInner>
+                </AttachProgressRing>
+              ) : (
+                <FiFileText size={14} />
+              )}
+
+              <AttachFilename title={att.title || "Attachment"}>
+                {att.title || "Attachment"}
+              </AttachFilename>
+
+              {statusLabel && <AttachStatus>{statusLabel}</AttachStatus>}
+
+              <AttachRemoveButton
+                type="button"
+                onClick={() => handleRemoveAttachment(att)}
+                title="Remove attachment"
+              >
+                ×
+              </AttachRemoveButton>
+            </AttachChip>
+          );
+        })}
+      </AttachBar>
+    );
+  };
+
+  return (
+    <ChatPane>
+      {/* hidden input for attaching PDFs */}
+      <input
+        type="file"
+        accept="application/pdf"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleAttachmentFileChange}
+      />
+      <ChatInner>
+        <ChatHeader $isNewChat={!isExistingChat}>
+          <ChatTitle>What do you want to learn today?</ChatTitle>
+          <ChatSubtitle>
+            Use this space for personal study. Ask questions and reference your
+            uploaded library.
+          </ChatSubtitle>
+        </ChatHeader>
+
+        {isExistingChat && (
+          <>
+            {messages.length === 0 ? (
+              <ChatEmptyState>Loading conversation…</ChatEmptyState>
+            ) : (
+              <Messages ref={messagesContainerRef}>
+                {messages.map((m, index) => {
+                  const messageAttachments = chatAttachments.filter(
+                    (att) => att.messageId === m.id
+                  );
+                  const isLast = index === messages.length - 1;
+
+                  return (
+                    <MessageRow
+                      key={m.id}
+                      $role={m.role}
+                      ref={isLast ? lastMessageRef : null}
+                    >
+                      <MessageContent $role={m.role}>
+                        {messageAttachments.length > 0 && (
+                          <AttachBar style={{ marginBottom: 4 }}>
+                            {messageAttachments.map((att) => (
+                              <AttachChip
+                                key={att.id}
+                                as={att.downloadUrl ? "a" : "div"}
+                                href={att.downloadUrl || undefined}
+                                target={att.downloadUrl ? "_blank" : undefined}
+                                rel={att.downloadUrl ? "noreferrer" : undefined}
+                              >
+                                <FiFileText size={14} />
+                                <AttachFilename
+                                  title={att.title || "Attachment"}
+                                >
+                                  {att.title || "Attachment"}
+                                </AttachFilename>
+                                {att.status && (
+                                  <AttachStatus>
+                                    {att.status === "uploaded"
+                                      ? "Attached"
+                                      : att.status === "processing"
+                                      ? "Processing"
+                                      : att.status === "error"
+                                      ? "Error"
+                                      : att.status}
+                                  </AttachStatus>
+                                )}
+                              </AttachChip>
+                            ))}
+                          </AttachBar>
+                        )}
+
+                        <Bubble $role={m.role}>
+                          {m.role === "assistant" ? (
+                            <AssistantMessageBubble message={m} />
+                          ) : (
+                            m.content
+                          )}
+                        </Bubble>
+                      </MessageContent>
+                    </MessageRow>
+                  );
+                })}
+
+                {isThinking && (
+                  <ThinkingRow ref={thinkingRef}>
+                    <MessageContent $role="assistant">
+                      <ThinkingBubble $role="assistant">
+                        <ThinkingLabel>Thinking</ThinkingLabel>
+                        <ThinkingDots>
+                          <ThinkingDot />
+                          <ThinkingDot $delay="0.15s" />
+                          <ThinkingDot $delay="0.3s" />
+                        </ThinkingDots>
+                      </ThinkingBubble>
+                    </MessageContent>
+                  </ThinkingRow>
+                )}
+
+                <div ref={messagesEndRef} />
+              </Messages>
+            )}
+
+            <InputRow onSubmit={handleSubmit}>
+              <ComposerShell>
+                <ComposerColumn>
+                  {renderAttachBar()}
+                  <TextInput
+                    value={messageInput}
+                    onChange={handleComposerChange}
+                    onKeyDown={handleComposerKeyDown}
+                    placeholder="Ask anything you want to study..."
+                    disabled={!currentUser}
+                  />
+                </ComposerColumn>
+
+                <ComposerBottomRow>
+                  <ComposerBottomLeft>
+                    <AttachButtonWrapper>
+                      <AttachIconButton
+                        type="button"
+                        onClick={handleToggleAttachMenu}
+                        disabled={!currentUser}
+                        aria-label="Add attachment"
+                      >
+                        <FiPlus />
+                      </AttachIconButton>
+
+                      {attachMenuOpen && (
+                        <AttachMenu $direction="up">
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleAttachFilesClick}
+                          >
+                            <FiPaperclip />
+                            <span>Add PDF for this turn</span>
+                          </AttachMenuItem>
+                        </AttachMenu>
+                      )}
+                    </AttachButtonWrapper>
+                  </ComposerBottomLeft>
+
+                  <ComposerBottomRight>
+                    <SendFabButton
+                      type="submit"
+                      disabled={
+                        !currentUser ||
+                        !messageInput.trim() ||
+                        hasUploadingPending
+                      }
+                    >
+                      <FiSend />
+                    </SendFabButton>
+                  </ComposerBottomRight>
+                </ComposerBottomRow>
+              </ComposerShell>
+            </InputRow>
+          </>
+        )}
+
+        {!isExistingChat && (
+          <InputRow onSubmit={handleSubmit}>
+            <ComposerShell>
+              <ComposerColumn>
+                <TextInput
+                  value={messageInput}
+                  onChange={handleComposerChange}
+                  onKeyDown={handleComposerKeyDown}
+                  placeholder="Type a question you want to learn about..."
+                  disabled={!currentUser}
+                />
+              </ComposerColumn>
+
+              <ComposerBottomRow>
+                <ComposerBottomLeft>
+                  {/* Attachments start after chat exists */}
+                </ComposerBottomLeft>
+                <ComposerBottomRight>
+                  <SendFabButton
+                    type="submit"
+                    disabled={!currentUser || !messageInput.trim()}
+                  >
+                    <FiSend />
+                  </SendFabButton>
+                </ComposerBottomRight>
+              </ComposerBottomRow>
+            </ComposerShell>
+          </InputRow>
+        )}
+      </ChatInner>
+
+      {deleteAttachmentTarget && (
+        <ModalOverlay
+          onClick={() => {
+            setDeleteAttachmentTarget(null);
+          }}
+        >
+          <ModalCard
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ModalTitle>Remove attachment</ModalTitle>
+            <ModalSubtitle>
+              {`This will remove "${deleteAttachmentTarget.title}" from this message.`}
+            </ModalSubtitle>
+
+            <ModalActions>
+              <ModalSecondaryButton
+                type="button"
+                onClick={() => setDeleteAttachmentTarget(null)}
+              >
+                Cancel
+              </ModalSecondaryButton>
+
+              <ModalPrimaryButton
+                type="button"
+                onClick={async () => {
+                  try {
+                    setPendingAttachmentIds((prev) =>
+                      prev.filter((id) => id !== deleteAttachmentTarget.id)
+                    );
+
+                    if (deleteAttachmentTarget.filePath) {
+                      try {
+                        const storageRef = ref(
+                          storage,
+                          deleteAttachmentTarget.filePath
+                        );
+                        await deleteObject(storageRef);
+                      } catch (e2) {
+                        console.warn(
+                          "Failed to delete attachment file from Storage",
+                          e2
+                        );
+                      }
+                    }
+
+                    if (personalChatId) {
+                      const attachmentRef = doc(
+                        firestore,
+                        "vetPersonalChats",
+                        personalChatId,
+                        "attachments",
+                        deleteAttachmentTarget.id
+                      );
+                      await deleteDoc(attachmentRef);
+                    }
+                  } catch (err) {
+                    console.error("Failed to remove attachment", err);
+                    alert("Could not remove attachment. Please try again.");
+                  } finally {
+                    setDeleteAttachmentTarget(null);
+                  }
+                }}
+              >
+                Delete
+              </ModalPrimaryButton>
+            </ModalActions>
+          </ModalCard>
+        </ModalOverlay>
+      )}
+    </ChatPane>
   );
 }
 
@@ -2316,6 +3172,17 @@ export default function AiLibraryPage() {
 
   const [deleteTarget, setDeleteTarget] = useState(null); // { type, id, caseId?, name }
   const [rowMenu, setRowMenu] = useState(null);
+  const [personalChats, setPersonalChats] = useState([]);
+  const [editingPersonalChatId, setEditingPersonalChatId] = useState(null);
+  const [editingPersonalChatTitle, setEditingPersonalChatTitle] = useState("");
+
+  // track which personal chat is active from URL
+  const personalChatMatch = location.pathname.match(
+    /\/ai\/library\/personal\/([^/]+)/
+  );
+  const activePersonalChatIdFromUrl = personalChatMatch
+    ? personalChatMatch[1]
+    : null;
 
   const libraryFileInputRef = useRef(null); // ✨ NEW
 
@@ -2447,6 +3314,29 @@ export default function AiLibraryPage() {
     return () => unsub();
   }, [currentUser]);
 
+  useEffect(() => {
+    if (!currentUser) {
+      setPersonalChats([]);
+      return;
+    }
+
+    const qPersonal = query(
+      collection(firestore, "vetPersonalChats"),
+      where("vetUid", "==", currentUser.uid),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsub = onSnapshot(qPersonal, (snap) => {
+      const rows = [];
+      snap.forEach((docSnap) =>
+        rows.push({ id: docSnap.id, ...docSnap.data() })
+      );
+      setPersonalChats(rows);
+    });
+
+    return () => unsub();
+  }, [currentUser]);
+
   const openRowMenuForPatient = (event, patient) => {
     const rect = event.currentTarget.getBoundingClientRect();
     let left = rect.right + 8;
@@ -2502,6 +3392,39 @@ export default function AiLibraryPage() {
       kind: "chat",
       id: chat.id,
       caseId,
+      name: baseTitle,
+      x: left,
+      y: top,
+    });
+  };
+
+  const openRowMenuForPersonalChat = (event, chat) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    let left = rect.right + 8;
+    let top = rect.top + rect.height / 2;
+
+    const cardWidth = 220;
+    const cardHeight = 140;
+
+    if (left + cardWidth > window.innerWidth - 8) {
+      left = window.innerWidth - cardWidth - 8;
+    }
+    if (top + cardHeight / 2 > window.innerHeight - 8) {
+      top = window.innerHeight - cardHeight / 2 - 8;
+    }
+    if (top - cardHeight / 2 < 8) {
+      top = cardHeight / 2 + 8;
+    }
+
+    const baseTitle =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+
+    setRowMenu({
+      kind: "personal",
+      id: chat.id,
       name: baseTitle,
       x: left,
       y: top,
@@ -2569,6 +3492,17 @@ export default function AiLibraryPage() {
     setEditingChatTitle(baseTitle);
   };
 
+  const beginRenamePersonalChat = (chat) => {
+    setRowMenu(null);
+    setEditingPersonalChatId(chat.id);
+    const baseTitle =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+    setEditingPersonalChatTitle(baseTitle);
+  };
+
   const commitPatientRename = async () => {
     if (!editingPatientId) {
       setEditingPatientId(null);
@@ -2633,6 +3567,44 @@ export default function AiLibraryPage() {
     }
   };
 
+  const commitPersonalChatRename = async () => {
+    if (!editingPersonalChatId) {
+      setEditingPersonalChatId(null);
+      setEditingPersonalChatTitle("");
+      return;
+    }
+    const title = editingPersonalChatTitle.trim();
+    if (!title || !currentUser) {
+      setEditingPersonalChatId(null);
+      setEditingPersonalChatTitle("");
+      return;
+    }
+
+    try {
+      const chatRef = doc(firestore, "vetPersonalChats", editingPersonalChatId);
+      await updateDoc(chatRef, {
+        title,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Failed to rename personal chat:", err);
+      alert("Could not rename chat. Please try again.");
+    } finally {
+      setEditingPersonalChatId(null);
+      setEditingPersonalChatTitle("");
+    }
+  };
+
+  const handleInlinePersonalChatKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      commitPersonalChatRename();
+    } else if (e.key === "Escape") {
+      setEditingPersonalChatId(null);
+      setEditingPersonalChatTitle("");
+    }
+  };
+
   const handleInlinePatientKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -2679,6 +3651,21 @@ export default function AiLibraryPage() {
     });
   };
 
+  const requestDeletePersonalChat = (chat) => {
+    setRowMenu(null);
+    const baseTitle =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+
+    setDeleteTarget({
+      type: "personalChat",
+      id: chat.id,
+      name: baseTitle,
+    });
+  };
+
   const handleCancelDelete = () => {
     setDeleteTarget(null);
   };
@@ -2712,6 +3699,13 @@ export default function AiLibraryPage() {
         ) {
           navigate(`/ai/library/p/${deleteTarget.caseId}/project`);
         }
+      } else if (deleteTarget.type === "personalChat") {
+        const chatRef = doc(firestore, "vetPersonalChats", deleteTarget.id);
+        await deleteDoc(chatRef);
+
+        if (activePersonalChatIdFromUrl === deleteTarget.id) {
+          navigate("/ai/library");
+        }
       } else if (deleteTarget.type === "source") {
         // delete library PDF
         if (deleteTarget.filePath) {
@@ -2740,6 +3734,20 @@ export default function AiLibraryPage() {
 
   const handleOpenSubchat = (caseId, chatId) => {
     navigate(`/ai/library/p/${caseId}/c/${chatId}`);
+  };
+
+  const handleSelectPersonalChat = (chatId) => {
+    if (!chatId) {
+      navigate("/ai/library");
+      return;
+    }
+    navigate(`/ai/library/personal/${chatId}`);
+  };
+
+  const handleCreatePersonalChatClick = () => {
+    if (!currentUser) return;
+    // Go to the root personal view; chat doc will be created on first send
+    navigate("/ai/library");
   };
 
   const handleLibraryUploadClick = () => {
@@ -2948,6 +3956,84 @@ export default function AiLibraryPage() {
 
           <SectionDivider />
 
+          <PatientsHeader>
+            <PatientsTitle>Personal chats</PatientsTitle>
+            <NewPatientButton
+              type="button"
+              onClick={handleCreatePersonalChatClick}
+              disabled={!currentUser}
+            >
+              <FiPlus />
+              New
+            </NewPatientButton>
+          </PatientsHeader>
+
+          <PersonalChatList>
+            {personalChats.length === 0 && (
+              <PatientEmptyState>
+                No personal chats yet. Ask a question to start one.
+              </PatientEmptyState>
+            )}
+            {personalChats.map((chat) => {
+              const baseTitle =
+                chat.title ||
+                (chat.lastMessagePreview
+                  ? chat.lastMessagePreview.slice(0, 36) + "..."
+                  : "Untitled chat");
+              const displayTitle =
+                editingPersonalChatId === chat.id
+                  ? editingPersonalChatTitle
+                  : baseTitle;
+
+              return (
+                <PersonalChatRow
+                  key={chat.id}
+                  type="button"
+                  onClick={() => {
+                    if (editingPersonalChatId === chat.id) return;
+                    handleSelectPersonalChat(chat.id);
+                  }}
+                  $active={chat.id === activePersonalChatIdFromUrl}
+                >
+                  <FiFileText />
+                  <PersonalChatTitle title={displayTitle}>
+                    {editingPersonalChatId === chat.id ? (
+                      <InlineEditInput
+                        value={editingPersonalChatTitle}
+                        onChange={(e) =>
+                          setEditingPersonalChatTitle(e.target.value)
+                        }
+                        onKeyDown={handleInlinePersonalChatKeyDown}
+                        onBlur={commitPersonalChatRename}
+                        autoFocus
+                      />
+                    ) : (
+                      displayTitle
+                    )}
+                  </PersonalChatTitle>
+
+                  <RowMenuButton
+                    type="button"
+                    aria-label="Personal chat actions"
+                    $forceVisible={
+                      rowMenu &&
+                      rowMenu.kind === "personal" &&
+                      rowMenu.id === chat.id
+                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openRowMenuForPersonalChat(e, chat);
+                    }}
+                  >
+                    <FiMoreHorizontal size={16} />
+                  </RowMenuButton>
+                </PersonalChatRow>
+              );
+            })}
+          </PersonalChatList>
+
+          <SectionDivider />
+
           {/* Hidden input for library uploads */}
           <input
             type="file"
@@ -3058,14 +4144,11 @@ export default function AiLibraryPage() {
         <Routes>
           <Route
             path="/"
-            element={
-              <ChatShell
-                currentUser={currentUser}
-                cases={cases}
-                activeCaseChats={activeCaseChats}
-                onNewPatient={handleCreatePatientClick}
-              />
-            }
+            element={<PersonalChatShell currentUser={currentUser} />}
+          />
+          <Route
+            path="personal/:personalChatId"
+            element={<PersonalChatShell currentUser={currentUser} />}
           />
           <Route
             path="p/:caseId/project"
@@ -3133,6 +4216,8 @@ export default function AiLibraryPage() {
                 ? "Delete patient"
                 : deleteTarget.type === "chat"
                 ? "Delete chat"
+                : deleteTarget.type === "personalChat"
+                ? "Delete personal chat"
                 : "Delete from library"}
             </ModalTitle>
 
@@ -3142,6 +4227,9 @@ export default function AiLibraryPage() {
 
               {deleteTarget.type === "chat" &&
                 `This will remove the chat "${deleteTarget.name}" from this patient.`}
+
+              {deleteTarget.type === "personalChat" &&
+                `This will remove the personal chat "${deleteTarget.name}" from your study list.`}
 
               {deleteTarget.type === "source" &&
                 `This will remove "${deleteTarget.name}" from your library.`}
@@ -3178,8 +4266,14 @@ export default function AiLibraryPage() {
                     id: rowMenu.id,
                     patientName: rowMenu.name,
                   });
-                } else {
+                } else if (rowMenu.kind === "chat") {
                   beginRenameChat(rowMenu.caseId, {
+                    id: rowMenu.id,
+                    title: rowMenu.name,
+                    lastMessagePreview: rowMenu.name,
+                  });
+                } else if (rowMenu.kind === "personal") {
+                  beginRenamePersonalChat({
                     id: rowMenu.id,
                     title: rowMenu.name,
                     lastMessagePreview: rowMenu.name,
@@ -3201,8 +4295,14 @@ export default function AiLibraryPage() {
                     id: rowMenu.id,
                     patientName: rowMenu.name,
                   });
-                } else {
+                } else if (rowMenu.kind === "chat") {
                   requestDeleteChat(rowMenu.caseId, {
+                    id: rowMenu.id,
+                    title: rowMenu.name,
+                    lastMessagePreview: rowMenu.name,
+                  });
+                } else if (rowMenu.kind === "personal") {
+                  requestDeletePersonalChat({
                     id: rowMenu.id,
                     title: rowMenu.name,
                     lastMessagePreview: rowMenu.name,
