@@ -15,6 +15,7 @@ import {
   FiShoppingBag,
   FiImage,
   FiMoreHorizontal,
+  FiEdit3, // <--- add this
 } from "react-icons/fi";
 import {
   Routes,
@@ -305,34 +306,6 @@ const PatientName = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 28px; /* reserve space for the three dots */
-`;
-
-const RowRightSlot = styled.div`
-  margin-left: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-shrink: 0;
-  position: relative;
-`;
-
-const RowMoreButton = styled.button`
-  border: none;
-  border-radius: 999px;
-  padding: 2px;
-  width: 24px;
-  height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: #6b7280;
-  cursor: pointer;
-
-  &:hover {
-    background: #303030;
-    color: #e5e7eb;
-  }
 `;
 
 const RowMenu = styled.div`
@@ -817,30 +790,6 @@ const AttachButtonWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-const AttachButton = styled.button`
-  border: none;
-  border-radius: 999px;
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #020617;
-  border: 1px solid #1f2937;
-  color: #e5e7eb;
-  cursor: pointer;
-  flex-shrink: 0;
-
-  &:hover {
-    background: #303030;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: default;
-  }
-`;
-
 const TextInput = styled.textarea`
   width: 100%;
   resize: none;
@@ -1006,6 +955,55 @@ const AttachMenuItem = styled.button`
     flex: 1;
     text-align: left;
   }
+`;
+
+const ContextMenuBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+`;
+
+const ContextMenuCard = styled.div`
+  position: absolute;
+  top: ${(p) => p.$top}px;
+  left: ${(p) => p.$left}px;
+  min-width: 200px;
+  background: #242424;
+  border-radius: 18px;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+  padding: 6px 0;
+`;
+
+const ContextMenuItem = styled.button`
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #e5e7eb;
+  cursor: pointer;
+
+  &:hover {
+    background: #333333;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+`;
+
+const ContextMenuItemDanger = styled(ContextMenuItem)`
+  color: #f97373;
+`;
+
+const ContextMenuDivider = styled.div`
+  height: 1px;
+  margin: 4px 0;
+  background: #3a3a3a;
 `;
 
 /* Subchat list (project history on main pane) */
@@ -2257,6 +2255,7 @@ export default function AiLibraryPage() {
   const [editingChatTitle, setEditingChatTitle] = useState("");
 
   const [deleteTarget, setDeleteTarget] = useState(null); // { type, id, caseId?, name }
+  const [rowMenu, setRowMenu] = useState(null);
 
   const caseMatch = location.pathname.match(/\/ai\/library\/p\/([^/]+)/);
   const activeCaseIdFromUrl = caseMatch ? caseMatch[1] : null;
@@ -2386,6 +2385,67 @@ export default function AiLibraryPage() {
     return () => unsub();
   }, [currentUser]);
 
+  const openRowMenuForPatient = (event, patient) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    let left = rect.right + 8;
+    let top = rect.top + rect.height / 2;
+
+    const cardWidth = 220;
+    const cardHeight = 140;
+
+    if (left + cardWidth > window.innerWidth - 8) {
+      left = window.innerWidth - cardWidth - 8;
+    }
+    if (top + cardHeight / 2 > window.innerHeight - 8) {
+      top = window.innerHeight - cardHeight / 2 - 8;
+    }
+    if (top - cardHeight / 2 < 8) {
+      top = cardHeight / 2 + 8;
+    }
+
+    setRowMenu({
+      kind: "patient",
+      id: patient.id,
+      name: patient.patientName || "Untitled patient",
+      x: left,
+      y: top,
+    });
+  };
+
+  const openRowMenuForChat = (event, caseId, chat) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    let left = rect.right + 8;
+    let top = rect.top + rect.height / 2;
+
+    const cardWidth = 220;
+    const cardHeight = 140;
+
+    if (left + cardWidth > window.innerWidth - 8) {
+      left = window.innerWidth - cardWidth - 8;
+    }
+    if (top + cardHeight / 2 > window.innerHeight - 8) {
+      top = window.innerHeight - cardHeight / 2 - 8;
+    }
+    if (top - cardHeight / 2 < 8) {
+      top = cardHeight / 2 + 8;
+    }
+
+    const baseTitle =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+
+    setRowMenu({
+      kind: "chat",
+      id: chat.id,
+      caseId,
+      name: baseTitle,
+      x: left,
+      y: top,
+    });
+  };
+
   const handleCreatePatientClick = () => {
     if (!currentUser) return;
     setNewPatientName("");
@@ -2430,13 +2490,13 @@ export default function AiLibraryPage() {
   const closeRowMenu = () => setOpenRowMenu(null);
 
   const beginRenamePatient = (patient) => {
-    closeRowMenu();
+    setRowMenu(null);
     setEditingPatientId(patient.id);
     setEditingPatientName(patient.patientName || "Untitled patient");
   };
 
   const beginRenameChat = (caseId, chat) => {
-    closeRowMenu();
+    setRowMenu(null);
     setEditingChatId(chat.id);
     setEditingChatCaseId(caseId);
     const baseTitle =
@@ -2533,7 +2593,7 @@ export default function AiLibraryPage() {
   };
 
   const requestDeletePatient = (patient) => {
-    closeRowMenu();
+    setRowMenu(null);
     setDeleteTarget({
       type: "patient",
       id: patient.id,
@@ -2542,12 +2602,13 @@ export default function AiLibraryPage() {
   };
 
   const requestDeleteChat = (caseId, chat) => {
-    closeRowMenu();
+    setRowMenu(null);
     const title =
       chat.title ||
       (chat.lastMessagePreview
         ? chat.lastMessagePreview.slice(0, 36) + "..."
         : "Untitled chat");
+
     setDeleteTarget({
       type: "chat",
       id: chat.id,
@@ -2745,38 +2806,11 @@ export default function AiLibraryPage() {
                     aria-label="Patient actions"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setOpenRowMenu((prev) =>
-                        prev && prev.type === "patient" && prev.id === c.id
-                          ? null
-                          : { type: "patient", id: c.id }
-                      );
+                      openRowMenuForPatient(e, c);
                     }}
                   >
                     <FiMoreHorizontal size={16} />
                   </RowMenuButton>
-
-                  {openRowMenu &&
-                    openRowMenu.type === "patient" &&
-                    openRowMenu.id === c.id && (
-                      <RowMenu
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <RowMenuItem
-                          type="button"
-                          onClick={() => beginRenamePatient(c)}
-                        >
-                          Rename
-                        </RowMenuItem>
-                        <RowMenuItem
-                          type="button"
-                          onClick={() => requestDeletePatient(c)}
-                        >
-                          Delete
-                        </RowMenuItem>
-                      </RowMenu>
-                    )}
                 </PatientRow>
 
                 {c.id === activeCaseIdFromUrl && activeCaseChats.length > 0 && (
@@ -2821,40 +2855,11 @@ export default function AiLibraryPage() {
                             aria-label="Chat actions"
                             onClick={(e) => {
                               e.stopPropagation();
-                              setOpenRowMenu((prev) =>
-                                prev &&
-                                prev.type === "chat" &&
-                                prev.id === ch.id
-                                  ? null
-                                  : { type: "chat", id: ch.id }
-                              );
+                              openRowMenuForChat(e, c.id, ch);
                             }}
                           >
                             <FiMoreHorizontal size={16} />
                           </RowMenuButton>
-
-                          {openRowMenu &&
-                            openRowMenu.type === "chat" &&
-                            openRowMenu.id === ch.id && (
-                              <RowMenu
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                }}
-                              >
-                                <RowMenuItem
-                                  type="button"
-                                  onClick={() => beginRenameChat(c.id, ch)}
-                                >
-                                  Rename
-                                </RowMenuItem>
-                                <RowMenuItem
-                                  type="button"
-                                  onClick={() => requestDeleteChat(c.id, ch)}
-                                >
-                                  Delete
-                                </RowMenuItem>
-                              </RowMenu>
-                            )}
                         </SubchatRow>
                       );
                     })}
@@ -3050,6 +3055,64 @@ export default function AiLibraryPage() {
             </ModalActions>
           </ModalCard>
         </ModalOverlay>
+      )}
+      {rowMenu && (
+        <ContextMenuBackdrop
+          onClick={() => {
+            setRowMenu(null);
+          }}
+        >
+          <ContextMenuCard
+            $top={rowMenu.y}
+            $left={rowMenu.x}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* We only need Rename + Delete for now, like your use case */}
+            <ContextMenuItem
+              type="button"
+              onClick={() => {
+                if (rowMenu.kind === "patient") {
+                  beginRenamePatient({
+                    id: rowMenu.id,
+                    patientName: rowMenu.name,
+                  });
+                } else {
+                  beginRenameChat(rowMenu.caseId, {
+                    id: rowMenu.id,
+                    title: rowMenu.name,
+                    lastMessagePreview: rowMenu.name,
+                  });
+                }
+              }}
+            >
+              <FiEdit3 size={14} />
+              <span>Rename</span>
+            </ContextMenuItem>
+
+            <ContextMenuDivider />
+
+            <ContextMenuItemDanger
+              type="button"
+              onClick={() => {
+                if (rowMenu.kind === "patient") {
+                  requestDeletePatient({
+                    id: rowMenu.id,
+                    patientName: rowMenu.name,
+                  });
+                } else {
+                  requestDeleteChat(rowMenu.caseId, {
+                    id: rowMenu.id,
+                    title: rowMenu.name,
+                    lastMessagePreview: rowMenu.name,
+                  });
+                }
+              }}
+            >
+              <FiTrash2 size={14} />
+              <span>Delete</span>
+            </ContextMenuItemDanger>
+          </ContextMenuCard>
+        </ContextMenuBackdrop>
       )}
     </>
   );
