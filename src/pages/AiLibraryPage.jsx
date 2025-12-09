@@ -121,10 +121,13 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #181818; /* UPDATED */
+  background: #181818;
+  height: 100vh; /* ✨ key: fix sidebar height */
+  box-sizing: border-box;
   @media (max-width: 900px) {
     border-right: none;
     border-bottom: 1px solid #1f2933;
+    height: auto; /* on mobile let it grow normally */
   }
 `;
 
@@ -260,11 +263,10 @@ const NewPatientButton = styled.button`
     cursor: default;
   }
 `;
-
 const PatientList = styled.div`
   margin-top: 8px;
-  max-height: 40vh;
-  overflow-y: auto;
+  max-height: 30vh; /* ✨ cap how tall the patient list can get */
+  overflow-y: auto; /* ✨ make it scrollable */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -275,7 +277,7 @@ const PatientRow = styled.button`
   border: none;
   border-radius: 8px;
   padding: 6px 8px;
-  font-size: 15px; /* was 13px */
+  font-size: 15px;
   text-align: left;
   display: flex;
   align-items: center;
@@ -283,6 +285,8 @@ const PatientRow = styled.button`
   cursor: pointer;
   background: ${(p) => (p.$active ? "#303030" : "transparent")};
   color: #e5e7eb;
+  min-width: 0;
+  position: relative; /* allow absolute three dot button */
 
   &:hover {
     background: #303030;
@@ -294,13 +298,74 @@ const PatientRow = styled.button`
 `;
 
 const PatientName = styled.span`
+  flex: 1;
+  min-width: 0;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding-right: 28px; /* reserve space for the three dots */
+`;
+
+const RowRightSlot = styled.div`
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  position: relative;
+`;
+
+const RowMoreButton = styled.button`
+  border: none;
+  border-radius: 999px;
+  padding: 2px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+
+  &:hover {
+    background: #303030;
+    color: #e5e7eb;
+  }
+`;
+
+const RowMenu = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  background: #181818;
+  border-radius: 8px;
+  border: 1px solid #303030;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  padding: 4px 0;
+  min-width: 140px;
+  z-index: 25;
+`;
+
+const RowMenuItem = styled.button`
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 14px;
+  text-align: left;
+  padding: 6px 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: #303030;
+  }
 `;
 
 const PatientEmptyState = styled.div`
-  font-size: 14px; /* was 12px */
+  font-size: 14px;
   color: #6b7280;
   padding: 4px 2px;
 `;
@@ -320,11 +385,16 @@ const SubchatRow = styled.button`
   border: none;
   border-radius: 6px;
   padding: 4px 8px;
-  font-size: 14px; /* was 12px */
+  font-size: 14px;
   text-align: left;
   background: ${(p) => (p.$active ? "#303030" : "transparent")};
   color: ${(p) => (p.$active ? "#e5e7eb" : "#9ca3af")};
   cursor: pointer;
+
+  /* IMPORTANT: make it flex so we can control child width */
+  display: flex;
+  align-items: center;
+  position: relative; /* for the three-dot button */
 
   &:hover {
     background: #303030;
@@ -333,12 +403,61 @@ const SubchatRow = styled.button`
 `;
 
 const SubchatTitle = styled.span`
+  /* fixed narrow width so it hits "..." earlier */
+  flex: 0 0 180px; /* change 120 → 100 for even fewer chars */
+  max-width: 180px;
+  min-width: 0;
+
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  padding-right: 2px; /* keep space for the three-dot button if you have it */
 `;
 
-/* Library */
+/* three dot menu and inline edit */
+
+const RowMenuButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+
+  ${PatientRow}:hover &,
+  ${SubchatRow}:hover & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    background: #303030;
+    color: #e5e7eb;
+  }
+`;
+
+const InlineEditInput = styled.input`
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  width: 100%;
+`;
 
 const SectionDivider = styled.div`
   height: 1px;
@@ -898,7 +1017,7 @@ const ChatListSection = styled.div`
 `;
 
 const ChatListTitle = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #9ca3af;
   margin-bottom: 6px;
@@ -2127,6 +2246,17 @@ export default function AiLibraryPage() {
   const [newPatientName, setNewPatientName] = useState("");
 
   const [activeCaseChats, setActiveCaseChats] = useState([]);
+  const patientListRef = useRef(null); // ✨ NEW
+
+  const [openRowMenu, setOpenRowMenu] = useState(null); // { type: 'patient' | 'chat', id }
+  const [editingPatientId, setEditingPatientId] = useState(null);
+  const [editingPatientName, setEditingPatientName] = useState("");
+
+  const [editingChatId, setEditingChatId] = useState(null);
+  const [editingChatCaseId, setEditingChatCaseId] = useState(null);
+  const [editingChatTitle, setEditingChatTitle] = useState("");
+
+  const [deleteTarget, setDeleteTarget] = useState(null); // { type, id, caseId?, name }
 
   const caseMatch = location.pathname.match(/\/ai\/library\/p\/([^/]+)/);
   const activeCaseIdFromUrl = caseMatch ? caseMatch[1] : null;
@@ -2168,6 +2298,27 @@ export default function AiLibraryPage() {
   }, []);
 
   useEffect(() => {
+    if (!patientListRef.current) return;
+    if (!activeCaseIdFromUrl) return;
+
+    // Find the index of the active case
+    const idx = cases.findIndex((c) => c.id === activeCaseIdFromUrl);
+    if (idx === -1) return;
+
+    const isLast = idx === cases.length - 1;
+
+    // Only auto scroll when the last patient has chats and the list is scrollable
+    if (isLast && activeCaseChats.length > 0) {
+      const container = patientListRef.current;
+
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [activeCaseIdFromUrl, activeCaseChats.length, cases]);
+
+  useEffect(() => {
     if (!currentUser) return;
 
     const qCases = query(
@@ -2192,6 +2343,9 @@ export default function AiLibraryPage() {
       setActiveCaseChats([]);
       return;
     }
+
+    // Immediately clear previous case's chats so they don't flash
+    setActiveCaseChats([]);
 
     const chatsCol = collection(
       firestore,
@@ -2271,6 +2425,177 @@ export default function AiLibraryPage() {
   const handleCancelNewPatient = () => {
     setShowNewPatientModal(false);
     setNewPatientName("");
+  };
+
+  const closeRowMenu = () => setOpenRowMenu(null);
+
+  const beginRenamePatient = (patient) => {
+    closeRowMenu();
+    setEditingPatientId(patient.id);
+    setEditingPatientName(patient.patientName || "Untitled patient");
+  };
+
+  const beginRenameChat = (caseId, chat) => {
+    closeRowMenu();
+    setEditingChatId(chat.id);
+    setEditingChatCaseId(caseId);
+    const baseTitle =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+    setEditingChatTitle(baseTitle);
+  };
+
+  const commitPatientRename = async () => {
+    if (!editingPatientId) {
+      setEditingPatientId(null);
+      setEditingPatientName("");
+      return;
+    }
+    const name = editingPatientName.trim();
+    if (!name || !currentUser) {
+      setEditingPatientId(null);
+      setEditingPatientName("");
+      return;
+    }
+
+    try {
+      await updateDoc(doc(firestore, "vetAiCases", editingPatientId), {
+        patientName: name,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Failed to rename patient:", err);
+      alert("Could not rename patient. Please try again.");
+    } finally {
+      setEditingPatientId(null);
+      setEditingPatientName("");
+    }
+  };
+
+  const commitChatRename = async () => {
+    if (!editingChatId || !editingChatCaseId) {
+      setEditingChatId(null);
+      setEditingChatCaseId(null);
+      setEditingChatTitle("");
+      return;
+    }
+    const title = editingChatTitle.trim();
+    if (!title || !currentUser) {
+      setEditingChatId(null);
+      setEditingChatCaseId(null);
+      setEditingChatTitle("");
+      return;
+    }
+
+    try {
+      const chatRef = doc(
+        firestore,
+        "vetAiCases",
+        editingChatCaseId,
+        "chats",
+        editingChatId
+      );
+      await updateDoc(chatRef, {
+        title,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Failed to rename chat:", err);
+      alert("Could not rename chat. Please try again.");
+    } finally {
+      setEditingChatId(null);
+      setEditingChatCaseId(null);
+      setEditingChatTitle("");
+    }
+  };
+
+  const handleInlinePatientKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      commitPatientRename();
+    } else if (e.key === "Escape") {
+      setEditingPatientId(null);
+      setEditingPatientName("");
+    }
+  };
+
+  const handleInlineChatKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      commitChatRename();
+    } else if (e.key === "Escape") {
+      setEditingChatId(null);
+      setEditingChatCaseId(null);
+      setEditingChatTitle("");
+    }
+  };
+
+  const requestDeletePatient = (patient) => {
+    closeRowMenu();
+    setDeleteTarget({
+      type: "patient",
+      id: patient.id,
+      name: patient.patientName || "Untitled patient",
+    });
+  };
+
+  const requestDeleteChat = (caseId, chat) => {
+    closeRowMenu();
+    const title =
+      chat.title ||
+      (chat.lastMessagePreview
+        ? chat.lastMessagePreview.slice(0, 36) + "..."
+        : "Untitled chat");
+    setDeleteTarget({
+      type: "chat",
+      id: chat.id,
+      caseId,
+      name: title,
+    });
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteTarget(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteTarget || !currentUser) {
+      setDeleteTarget(null);
+      return;
+    }
+
+    try {
+      if (deleteTarget.type === "patient") {
+        await deleteDoc(doc(firestore, "vetAiCases", deleteTarget.id));
+
+        if (activeCaseIdFromUrl === deleteTarget.id) {
+          navigate("/ai/library");
+        }
+      } else if (deleteTarget.type === "chat") {
+        const chatRef = doc(
+          firestore,
+          "vetAiCases",
+          deleteTarget.caseId,
+          "chats",
+          deleteTarget.id
+        );
+        await deleteDoc(chatRef);
+
+        if (
+          activeCaseIdFromUrl === deleteTarget.caseId &&
+          activeChatIdFromUrl === deleteTarget.id
+        ) {
+          navigate(`/ai/library/p/${deleteTarget.caseId}/project`);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to delete item:", err);
+      alert("Could not delete. Please try again.");
+    } finally {
+      setDeleteTarget(null);
+    }
   };
 
   const handleSelectCase = (caseId) => {
@@ -2384,7 +2709,7 @@ export default function AiLibraryPage() {
             </NewPatientButton>
           </PatientsHeader>
 
-          <PatientList>
+          <PatientList ref={patientListRef}>
             {cases.length === 0 && (
               <PatientEmptyState>
                 No patients yet. Create one to start a case.
@@ -2394,31 +2719,142 @@ export default function AiLibraryPage() {
               <React.Fragment key={c.id}>
                 <PatientRow
                   type="button"
-                  onClick={() => handleSelectCase(c.id)}
+                  onClick={() => {
+                    if (editingPatientId === c.id) return;
+                    handleSelectCase(c.id);
+                  }}
                   $active={c.id === activeCaseIdFromUrl && !activeChatIdFromUrl}
                 >
                   <FiUser />
                   <PatientName>
-                    {c.patientName || "Untitled patient"}
+                    {editingPatientId === c.id ? (
+                      <InlineEditInput
+                        value={editingPatientName}
+                        onChange={(e) => setEditingPatientName(e.target.value)}
+                        onKeyDown={handleInlinePatientKeyDown}
+                        onBlur={commitPatientRename}
+                        autoFocus
+                      />
+                    ) : (
+                      c.patientName || "Untitled patient"
+                    )}
                   </PatientName>
+
+                  <RowMenuButton
+                    type="button"
+                    aria-label="Patient actions"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenRowMenu((prev) =>
+                        prev && prev.type === "patient" && prev.id === c.id
+                          ? null
+                          : { type: "patient", id: c.id }
+                      );
+                    }}
+                  >
+                    <FiMoreHorizontal size={16} />
+                  </RowMenuButton>
+
+                  {openRowMenu &&
+                    openRowMenu.type === "patient" &&
+                    openRowMenu.id === c.id && (
+                      <RowMenu
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <RowMenuItem
+                          type="button"
+                          onClick={() => beginRenamePatient(c)}
+                        >
+                          Rename
+                        </RowMenuItem>
+                        <RowMenuItem
+                          type="button"
+                          onClick={() => requestDeletePatient(c)}
+                        >
+                          Delete
+                        </RowMenuItem>
+                      </RowMenu>
+                    )}
                 </PatientRow>
 
                 {c.id === activeCaseIdFromUrl && activeCaseChats.length > 0 && (
                   <SubchatList>
                     {activeCaseChats.map((ch) => {
-                      const title =
+                      const baseTitle =
                         ch.title ||
                         (ch.lastMessagePreview
                           ? ch.lastMessagePreview.slice(0, 36) + "..."
                           : "Untitled chat");
+                      const displayTitle =
+                        editingChatId === ch.id ? editingChatTitle : baseTitle;
+
                       return (
                         <SubchatRow
                           key={ch.id}
                           type="button"
-                          onClick={() => handleOpenSubchat(c.id, ch.id)}
+                          onClick={() => {
+                            if (editingChatId === ch.id) return;
+                            handleOpenSubchat(c.id, ch.id);
+                          }}
                           $active={ch.id === activeChatIdFromUrl}
                         >
-                          <SubchatTitle title={title}>{title}</SubchatTitle>
+                          <SubchatTitle title={displayTitle}>
+                            {editingChatId === ch.id ? (
+                              <InlineEditInput
+                                value={editingChatTitle}
+                                onChange={(e) =>
+                                  setEditingChatTitle(e.target.value)
+                                }
+                                onKeyDown={handleInlineChatKeyDown}
+                                onBlur={commitChatRename}
+                                autoFocus
+                              />
+                            ) : (
+                              displayTitle
+                            )}
+                          </SubchatTitle>
+
+                          <RowMenuButton
+                            type="button"
+                            aria-label="Chat actions"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOpenRowMenu((prev) =>
+                                prev &&
+                                prev.type === "chat" &&
+                                prev.id === ch.id
+                                  ? null
+                                  : { type: "chat", id: ch.id }
+                              );
+                            }}
+                          >
+                            <FiMoreHorizontal size={16} />
+                          </RowMenuButton>
+
+                          {openRowMenu &&
+                            openRowMenu.type === "chat" &&
+                            openRowMenu.id === ch.id && (
+                              <RowMenu
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                              >
+                                <RowMenuItem
+                                  type="button"
+                                  onClick={() => beginRenameChat(c.id, ch)}
+                                >
+                                  Rename
+                                </RowMenuItem>
+                                <RowMenuItem
+                                  type="button"
+                                  onClick={() => requestDeleteChat(c.id, ch)}
+                                >
+                                  Delete
+                                </RowMenuItem>
+                              </RowMenu>
+                            )}
                         </SubchatRow>
                       );
                     })}
@@ -2588,6 +3024,30 @@ export default function AiLibraryPage() {
                 </ModalPrimaryButton>
               </ModalActions>
             </ModalForm>
+          </ModalCard>
+        </ModalOverlay>
+      )}
+      {deleteTarget && (
+        <ModalOverlay onClick={handleCancelDelete}>
+          <ModalCard onClick={(e) => e.stopPropagation()}>
+            <ModalTitle>
+              {deleteTarget.type === "patient"
+                ? "Delete patient"
+                : "Delete chat"}
+            </ModalTitle>
+            <ModalSubtitle>
+              {deleteTarget.type === "patient"
+                ? `This will remove "${deleteTarget.name}" from your patient list.`
+                : `This will remove the chat "${deleteTarget.name}" from this patient.`}
+            </ModalSubtitle>
+            <ModalActions>
+              <ModalSecondaryButton type="button" onClick={handleCancelDelete}>
+                Cancel
+              </ModalSecondaryButton>
+              <ModalPrimaryButton type="button" onClick={handleConfirmDelete}>
+                Delete
+              </ModalPrimaryButton>
+            </ModalActions>
           </ModalCard>
         </ModalOverlay>
       )}
