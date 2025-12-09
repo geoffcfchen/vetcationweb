@@ -405,10 +405,13 @@ const RowMenuButton = styled.button`
   justify-content: center;
   color: #9ca3af;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
+
+  /* base visibility controlled by prop */
+  opacity: ${(p) => (p.$forceVisible ? 1 : 0)};
+  pointer-events: ${(p) => (p.$forceVisible ? "auto" : "none")};
   transition: opacity 0.15s ease;
 
+  /* always show on hover */
   ${PatientRow}:hover &,
   ${SubchatRow}:hover & {
     opacity: 1;
@@ -420,7 +423,6 @@ const RowMenuButton = styled.button`
     color: #e5e7eb;
   }
 `;
-
 const InlineEditInput = styled.input`
   border: none;
   background: transparent;
@@ -2804,6 +2806,11 @@ export default function AiLibraryPage() {
                   <RowMenuButton
                     type="button"
                     aria-label="Patient actions"
+                    $forceVisible={
+                      rowMenu &&
+                      rowMenu.kind === "patient" &&
+                      rowMenu.id === c.id
+                    }
                     onClick={(e) => {
                       e.stopPropagation();
                       openRowMenuForPatient(e, c);
@@ -2853,6 +2860,11 @@ export default function AiLibraryPage() {
                           <RowMenuButton
                             type="button"
                             aria-label="Chat actions"
+                            $forceVisible={
+                              rowMenu &&
+                              rowMenu.kind === "chat" &&
+                              rowMenu.id === ch.id
+                            }
                             onClick={(e) => {
                               e.stopPropagation();
                               openRowMenuForChat(e, c.id, ch);
