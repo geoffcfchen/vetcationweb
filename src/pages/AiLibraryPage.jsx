@@ -24,6 +24,7 @@ import {
   useNavigate,
   useLocation,
   useParams,
+  json,
 } from "react-router-dom";
 import { auth, firestore, storage } from "../lib/firebase";
 import {
@@ -1064,6 +1065,11 @@ const AttachMenuItem = styled.button`
     text-align: left;
   }
 `;
+const AttachMenuDivider = styled.div`
+  height: 1px;
+  margin: 4px 0;
+  background: #424242;
+`;
 
 const ContextMenuBackdrop = styled.div`
   position: fixed;
@@ -1469,18 +1475,104 @@ const CodeHeader = styled.div`
 
 const SourcesRow = styled.div`
   margin-top: 8px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #9ca3af;
   border-top: 1px solid #374151;
   padding-top: 6px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 `;
 
-function normalizeLooseOrderedLists(input) {
+const SourcesLabel = styled.span`
+  font-weight: 500;
+  margin-right: 4px;
+`;
+
+const SourcePills = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+`;
+
+const SourcePill = styled.button`
+  border: none;
+  border-radius: 999px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #111827;
+  color: #e5e7eb;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: #1f2937;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+`;
+
+const SourceChunkBody = styled.div`
+  margin-top: 10px;
+  max-height: 360px;
+  overflow-y: auto;
+  font-size: 14px;
+  color: #f5f5f5;
+  text-align: left;
+  white-space: pre-wrap;
+  a {
+    color: #4ea3ff;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #8fc4ff;
+    text-decoration: underline;
+  }
+`;
+
+function extractCitationKeysFromMarkdown(markdown) {
+  const keys = new Set();
+  if (!markdown) return keys;
+
+  // Matches things like: [L1], [A2], [W1], or [L1, L2, A1]
+  const regex = /\[([LAW]\d+(?:\s*,\s*[LAW]\d+)*)\]/g;
+  let match;
+  while ((match = regex.exec(markdown)) !== null) {
+    const inner = match[1]; // e.g. "L1" or "L1, L2"
+    inner.split(/\s*,\s*/).forEach((token) => {
+      const trimmed = token.trim();
+      if (/^[LAW]\d+$/.test(trimmed)) {
+        keys.add(trimmed);
+      }
+    });
+  }
+  return keys;
+}
+
+function normalizeLooseLists(input) {
   if (!input) return "";
 
-  // Collapse blank lines directly before an ordered-list item:
-  // "...something\n\n2. Text" -> "...something\n2. Text"
-  return input.replace(/\n\n(?=\d+\.\s)/g, "\n");
+  let out = input;
+
+  // 1) Tighten loose ordered lists:
+  // "...text\n\n2. Something" -> "...text\n2. Something"
+  out = out.replace(/\n\n(?=\d+\.\s)/g, "\n");
+
+  // 2) Tighten loose dash bullet lists at left margin:
+  // "...text\n\n- Something" -> "...text\n- Something"
+  out = out.replace(/\n\n(?=-\s)/g, "\n");
+
+  // If you ever use "*" bullets:
+  // out = out.replace(/\n\n(?=\*\s)/g, "\n");
+
+  return out;
 }
 
 function normalizeMarkdown(input) {
@@ -1488,7 +1580,7 @@ function normalizeMarkdown(input) {
   let out = normalizeMathDelimiters(input);
   // if you added a <br> normalizer, keep that too
   // out = normalizeHtmlBreaks(out);
-  out = normalizeLooseOrderedLists(out);
+  out = normalizeLooseLists(out);
   return out;
 }
 function normalizeMathDelimiters(input) {
@@ -1513,51 +1605,334 @@ function normalizeMathDelimiters(input) {
   return out;
 }
 
+function stripOpenAIUtmParams(text) {
+  if (!text || typeof text !== "string") return text;
+  return text.replace(/\?utm_source=openai/g, "");
+}
+
+function normalizeSourceDescriptor(raw, index) {
+  if (!raw) return null;
+
+  // Plain string source (for backward compatibility)
+  if (typeof raw === "string") {
+    const trimmed = raw.trim();
+    const isUrl = /^https?:\/\//i.test(trimmed);
+
+    if (isUrl) {
+      let hostname = trimmed;
+      try {
+        const u = new URL(trimmed);
+        hostname = u.hostname.replace(/^www\./, "");
+      } catch {
+        // ignore parse errors
+      }
+      return {
+        id: `s-${index}`,
+        sourceType: "web",
+        url: trimmed,
+        title: trimmed,
+        site: hostname,
+        displayLabel: hostname,
+        citationKey: null,
+      };
+    }
+
+    return {
+      id: `s-${index}`,
+      sourceType: "other",
+      title: trimmed,
+      displayLabel: trimmed,
+      citationKey: null,
+    };
+  }
+
+  // Object shape
+  const base = { ...raw };
+  const sourceType =
+    raw.sourceType || raw.kind || raw.type || (raw.url ? "web" : "library");
+
+  // This is the thing that must match [L1], [A1], [W1] in the markdown
+  const citationKey = raw.citationKey || raw.label || raw.key || null;
+
+  if (!base.id) {
+    base.id = raw.id || raw.sourceId || raw.chunkId || raw.key || `s-${index}`;
+  }
+
+  if (sourceType === "web") {
+    const urlRaw = raw.url || raw.href || null;
+    const url = urlRaw ? stripOpenAIUtmParams(urlRaw) : null;
+
+    let site = raw.site || null;
+    if (!site && url) {
+      try {
+        const u = new URL(url);
+        site = u.hostname.replace(/^www\./, "");
+      } catch {
+        // ignore parse errors
+      }
+    }
+
+    const rawSnippet = raw.snippet || raw.chunkText || raw.text || "";
+    const snippet = stripOpenAIUtmParams(rawSnippet);
+
+    return {
+      ...base,
+      sourceType: "web",
+      citationKey,
+      url,
+      site,
+      title: raw.title || raw.key || url || "Web reference",
+      snippet,
+      // Make sure the modal can show this text
+      chunkText: snippet,
+      displayLabel: raw.title || site || "Web",
+    };
+  }
+
+  if (sourceType === "library") {
+    const bookTitle =
+      raw.bookTitle || raw.sourceTitle || raw.title || "Library source";
+
+    return {
+      ...base,
+      sourceType: "library",
+      citationKey,
+      bookTitle,
+      pageNumber: raw.pageNumber ?? null,
+      chunkText: raw.chunkText || raw.text || raw.snippet || "",
+      downloadUrl: raw.downloadUrl || null,
+      displayLabel:
+        bookTitle + (raw.pageNumber != null ? ` (p. ${raw.pageNumber})` : ""),
+    };
+  }
+
+  if (sourceType === "attachment") {
+    const title = raw.title || "Attachment";
+    return {
+      ...base,
+      sourceType: "attachment",
+      citationKey,
+      title,
+      chunkText: raw.excerpt || raw.text || raw.snippet || "",
+      downloadUrl: raw.downloadUrl || null,
+      displayLabel: raw.label || raw.key || title,
+    };
+  }
+
+  // Fallback
+  return {
+    ...base,
+    sourceType,
+    citationKey,
+    displayLabel: raw.title || raw.key || "Source",
+  };
+}
+
 function AssistantMessageBubble({ message }) {
   const { content, sources } = message || {};
   const normalized = normalizeMarkdown(content || "");
-  console.log("Normalized content:", JSON.stringify(normalized));
+  // jason format
+  console.log(
+    "Normalized assistant message content:",
+    JSON.stringify(normalized, null, 2)
+  );
+  const [activeSource, setActiveSource] = useState(null);
+
+  // Which citation keys are actually used in the answer text, e.g. "L1", "A1", "W1"
+  const usedCitationKeys = extractCitationKeysFromMarkdown(normalized);
+  const hasExplicitCitations = usedCitationKeys.size > 0;
+
+  const allNormalizedSources = Array.isArray(sources)
+    ? sources
+        .map((s, index) => normalizeSourceDescriptor(s, index))
+        .filter(Boolean)
+    : [];
+
+  // Only show sources that are actually cited, if citations exist.
+  const normalizedSources = allNormalizedSources.filter((src) => {
+    if (!src) return false;
+
+    // No explicit [L1]/[A1]/[W1] in the text: keep everything (legacy behavior)
+    if (!hasExplicitCitations) {
+      return true;
+    }
+
+    // With explicit citations:
+    if (!src.citationKey) {
+      return false;
+    }
+
+    return usedCitationKeys.has(src.citationKey);
+  });
+
+  const handleSourceClick = (source) => {
+    if (!source) return;
+
+    // 1) Real web link: open in new tab
+    if (source.sourceType === "web" && source.url) {
+      window.open(source.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    // 2) Web digest without url, library, or attachment: show modal
+    if (
+      source.sourceType === "library" ||
+      source.sourceType === "attachment" ||
+      (source.sourceType === "web" && !source.url)
+    ) {
+      setActiveSource(source);
+      return;
+    }
+
+    // 3) Fallback: treat as link if it has a url
+    if (source.url) {
+      window.open(source.url, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
-    <Row>
-      <Bubble>
-        <MarkdownWrapper>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm, remarkMath]}
-            rehypePlugins={[rehypeKatex]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                const lang = match?.[1];
+    <>
+      <MarkdownWrapper>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeKatex]}
+          components={{
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || "");
+              const lang = match?.[1];
 
-                if (inline) {
-                  return <code {...props}>{children}</code>;
+              if (inline) {
+                return <code {...props}>{children}</code>;
+              }
+
+              return (
+                <CodeBlock>
+                  <CodeHeader>
+                    <span>{lang || "code"}</span>
+                  </CodeHeader>
+                  <pre>
+                    <code {...props}>{children}</code>
+                  </pre>
+                </CodeBlock>
+              );
+            },
+          }}
+        >
+          {normalized}
+        </ReactMarkdown>
+      </MarkdownWrapper>
+
+      {normalizedSources.length > 0 && (
+        <SourcesRow>
+          <SourcesLabel>References</SourcesLabel>
+          <SourcePills>
+            {normalizedSources.map((src) => (
+              <SourcePill
+                key={src.id}
+                type="button"
+                onClick={() => handleSourceClick(src)}
+                title={
+                  src.sourceType === "library"
+                    ? src.bookTitle
+                    : src.title || src.url || src.displayLabel
                 }
+              >
+                {src.sourceType === "web" ? (
+                  <FiGlobe size={12} />
+                ) : (
+                  <FiFileText size={12} />
+                )}
+                <span>{src.displayLabel}</span>
+              </SourcePill>
+            ))}
+          </SourcePills>
+        </SourcesRow>
+      )}
 
-                return (
-                  <CodeBlock>
-                    <CodeHeader>
-                      <span>{lang || "code"}</span>
-                    </CodeHeader>
-                    <pre>
-                      <code {...props}>{children}</code>
-                    </pre>
-                  </CodeBlock>
-                );
-              },
+      {activeSource &&
+        (activeSource.sourceType === "library" ||
+          activeSource.sourceType === "attachment" ||
+          // Also allow "web" sources without a url to show as a digest modal
+          (activeSource.sourceType === "web" && !activeSource.url)) && (
+          <ModalOverlay
+            onClick={() => {
+              setActiveSource(null);
             }}
           >
-            {normalized}
-          </ReactMarkdown>
-        </MarkdownWrapper>
+            <ModalCard
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <ModalTitle>
+                {activeSource.bookTitle ||
+                  activeSource.title ||
+                  activeSource.site ||
+                  "Reference"}
+              </ModalTitle>
 
-        {Array.isArray(sources) && sources.length > 0 && (
-          <SourcesRow>
-            Sources: {sources.map((s) => s.key || s).join(", ")}
-          </SourcesRow>
+              {activeSource.pageNumber != null && (
+                <ModalSubtitle>Page {activeSource.pageNumber}</ModalSubtitle>
+              )}
+              <SourceChunkBody>
+                {(() => {
+                  const rawText =
+                    activeSource.chunkText ||
+                    activeSource.text ||
+                    activeSource.snippet ||
+                    "No text snippet is available for this reference.";
+
+                  // 1) Remove ?utm_source=openai
+                  const noUtm = stripOpenAIUtmParams(rawText);
+                  // 2) Fix loose ordered lists for nicer bullets / numbering
+                  const modalMarkdown = normalizeLooseLists(noUtm);
+
+                  return (
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[rehypeKatex]}
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a
+                            {...props}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          />
+                        ),
+                      }}
+                    >
+                      {modalMarkdown}
+                    </ReactMarkdown>
+                  );
+                })()}
+              </SourceChunkBody>
+
+              <ModalActions>
+                {activeSource.downloadUrl && (
+                  <ModalPrimaryButton
+                    type="button"
+                    onClick={() =>
+                      window.open(
+                        activeSource.downloadUrl,
+                        "_blank",
+                        "noopener,noreferrer"
+                      )
+                    }
+                  >
+                    Open PDF
+                  </ModalPrimaryButton>
+                )}
+                <ModalSecondaryButton
+                  type="button"
+                  onClick={() => setActiveSource(null)}
+                >
+                  Close
+                </ModalSecondaryButton>
+              </ModalActions>
+            </ModalCard>
+          </ModalOverlay>
         )}
-      </Bubble>
-    </Row>
+    </>
   );
 }
 
@@ -2334,6 +2709,7 @@ function PersonalChatShell({ currentUser }) {
                             <span>Add PDF for this turn</span>
                           </AttachMenuItem>
 
+                          <AttachMenuDivider />
                           <AttachMenuItem
                             type="button"
                             onClick={handleEnableWebSearch}
@@ -2417,6 +2793,7 @@ function PersonalChatShell({ currentUser }) {
                             <FiPaperclip />
                             <span>Add PDF for this turn</span>
                           </AttachMenuItem>
+                          <AttachMenuDivider />
 
                           <AttachMenuItem
                             type="button"
@@ -3320,7 +3697,7 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
-
+                          <AttachMenuDivider />
                           <AttachMenuItem
                             type="button"
                             onClick={handleEnableWebSearch}
@@ -3573,7 +3950,7 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
-
+                          <AttachMenuDivider />
                           <AttachMenuItem
                             type="button"
                             onClick={handleEnableWebSearch}
