@@ -1183,7 +1183,7 @@ function AssistantMessageBubble({ message }) {
           style={{
             marginTop: 4, // smaller vertical margin
             marginBottom: 4,
-            paddingLeft: 40, // default is ~40px, this pulls text closer
+            paddingLeft: 18, // default is ~40px, this pulls text closer
             listStylePosition: "outside",
           }}
           {...props}
@@ -1392,6 +1392,32 @@ function PersonalChatShell({ currentUser }) {
 
   const [isThinking, setIsThinking] = useState(false);
   const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
+  const [initialAssistantTriggered, setInitialAssistantTriggered] =
+    useState(false);
+
+  useEffect(() => {
+    // Only in the personal chat route, not on the root "/" view
+    if (!currentUser || !personalChatId) return;
+    if (initialAssistantTriggered) return;
+    if (messages.length === 0) return;
+
+    const hasAssistant = messages.some((m) => m.role === "assistant");
+    const last = messages[messages.length - 1];
+
+    // Brand new chat: only user messages, no assistant yet
+    if (!hasAssistant && last.role === "user") {
+      setInitialAssistantTriggered(true);
+
+      const convo = messages.map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
+      setIsThinking(true);
+      // reuse your existing helper
+      callPersonalAssistant(currentUser.uid, personalChatId, convo, last.id);
+    }
+  }, [currentUser, personalChatId, messages, initialAssistantTriggered]);
 
   const scrollToBottom = (behavior = "auto") => {
     if (messagesEndRef.current) {
@@ -1736,7 +1762,6 @@ function PersonalChatShell({ currentUser }) {
     if (!currentUser) return;
 
     if (!isExistingChat) {
-      // first message: create chat, link any pending attachments, then call assistant
       try {
         const chatsCol = collection(
           firestore,
@@ -1759,10 +1784,8 @@ function PersonalChatShell({ currentUser }) {
           content: text,
           createdAt: serverTimestamp(),
         });
-
         const messageId = userMessageRef.id;
 
-        // title from first question
         const title =
           text.length > 40 ? text.slice(0, 40).trimEnd() + "..." : text;
         await updateDoc(chatDocRef, { title });
@@ -1792,23 +1815,14 @@ function PersonalChatShell({ currentUser }) {
           );
         }
 
+        setPendingAttachmentIds([]);
+
         // navigate into the new chat view
         navigateInner(`/ai/library/personal/${newChatId}`, {
           replace: true,
         });
-
-        const convo = [{ role: "user", content: text }];
-
-        setIsThinking(true);
-        await callPersonalAssistant(
-          currentUser.uid,
-          newChatId,
-          convo,
-          messageId
-        );
-
-        scrollToBottom("smooth");
-        setPendingAttachmentIds([]);
+        // New PersonalChatShell instance will see the single user message,
+        // then the effect above will set isThinking and call the assistant.
       } catch (err) {
         console.error("Failed to start personal chat:", err);
         alert("Could not start chat. Please try again.");
@@ -2290,6 +2304,9 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
 
   const [isThinking, setIsThinking] = useState(false); // NEW
   const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
+  const [initialAssistantTriggered, setInitialAssistantTriggered] =
+    useState(false);
+
   // shape: { id, title, filePath }
 
   const isExistingChat = !!chatId; // optional helper
@@ -2306,6 +2323,28 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
       });
     }
   };
+
+  useEffect(() => {
+    if (!currentUser || !caseId || !chatId) return;
+    if (initialAssistantTriggered) return;
+    if (messages.length === 0) return;
+
+    const hasAssistant = messages.some((m) => m.role === "assistant");
+    const last = messages[messages.length - 1];
+
+    // New chat: only user messages so far
+    if (!hasAssistant && last.role === "user") {
+      setInitialAssistantTriggered(true);
+
+      const convo = messages.map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
+      setIsThinking(true);
+      callAssistant(currentUser.uid, caseId, chatId, convo, last.id);
+    }
+  }, [currentUser, caseId, chatId, messages, initialAssistantTriggered]);
 
   // When the assistant is "thinking", scroll so the thinking bubble is visible
   useEffect(() => {
@@ -2665,7 +2704,6 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
     setMessageInput("");
 
     if (!chatId) {
-      // New chat
       try {
         const chatsCol = collection(firestore, "vetAiCases", caseId, "chats");
         const chatDocRef = await addDoc(chatsCol, {
@@ -2683,7 +2721,6 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
           content: text,
           createdAt: serverTimestamp(),
         });
-
         const messageId = userMessageRef.id;
         const newChatId = chatDocRef.id;
 
@@ -2691,7 +2728,6 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
           text.length > 40 ? text.slice(0, 40).trimEnd() + "..." : text;
         await updateDoc(chatDocRef, { title });
 
-        // Link pending attachments to this chat + message
         if (pendingAttachmentIds.length > 0) {
           const now = serverTimestamp();
           await Promise.all(
@@ -2710,28 +2746,13 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
           );
         }
 
-        // Clear from composer immediately
         setPendingAttachmentIds([]);
 
-        // Update URL so chatId is present
+        // Route into the chat view. Once messages arrive there,
+        // the effect above will set isThinking and call the assistant.
         navigateInner(`/ai/library/p/${caseId}/c/${newChatId}`, {
           replace: true,
         });
-
-        const convo = [{ role: "user", content: text }];
-
-        setIsThinking(true); // NEW
-
-        await callAssistant(
-          currentUser.uid,
-          caseId,
-          newChatId,
-          convo,
-          messageId
-        );
-
-        scrollToBottom("smooth");
-        setPendingAttachmentIds([]);
       } catch (err) {
         console.error("Failed to start new chat:", err);
         alert("Could not start chat. Please try again.");
