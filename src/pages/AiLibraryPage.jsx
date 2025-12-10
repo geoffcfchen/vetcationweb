@@ -1114,7 +1114,8 @@ const ChatListItemMeta = styled.div`
   margin-top: 2px;
 `;
 const MessageContent = styled.div`
-  max-width: 68%;
+  max-width: ${(p) => (p.$role === "user" ? "68%" : "100%")};
+  width: ${(p) => (p.$role === "user" ? "auto" : "100%")};
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1176,6 +1177,40 @@ function AssistantMessageBubble({ message }) {
       p: ({ node, ...props }) => (
         <p style={{ margin: "0 0 6px 0" }} {...props} />
       ),
+      // NEW: control bullet spacing
+      ul: ({ node, ...props }) => (
+        <ul
+          style={{
+            marginTop: 4, // smaller vertical margin
+            marginBottom: 4,
+            paddingLeft: 40, // default is ~40px, this pulls text closer
+            listStylePosition: "outside",
+          }}
+          {...props}
+        />
+      ),
+      ol: ({ node, ...props }) => (
+        <ol
+          style={{
+            marginTop: 4,
+            marginBottom: 4,
+            paddingLeft: 15, // tighter number → text gap
+            listStylePosition: "outside",
+          }}
+          {...props}
+        />
+      ),
+
+      li: ({ node, ...props }) => (
+        <li
+          style={{
+            marginTop: 2, // tighter vertical gap between bullets
+            marginBottom: 2,
+            marginLeft: 0, // remove the old 16px push
+          }}
+          {...props}
+        />
+      ),
       h1: ({ node, ...props }) => (
         <h3
           style={{ margin: "10px 0", fontSize: 22, fontWeight: 700 }}
@@ -1190,34 +1225,69 @@ function AssistantMessageBubble({ message }) {
       ),
       h3: ({ node, ...props }) => (
         <h5
-          style={{ margin: "6px 0", fontSize: 18, fontWeight: 600 }}
+          style={{
+            marginTop: 6, // space above the "3. Lists" heading
+            marginBottom: 2, // smaller space below heading
+            fontSize: 18,
+            fontWeight: 600,
+          }}
           {...props}
         />
       ),
-      li: ({ node, ...props }) => <li style={{ marginLeft: 16 }} {...props} />,
-      code: ({ node, inline, ...props }) =>
-        inline ? (
-          <code
+
+      code: ({ node, inline, className, children, ...props }) => {
+        if (inline) {
+          return (
+            <code
+              style={{
+                background: "#020617",
+                padding: "2px 4px",
+                borderRadius: 4,
+                fontSize: 14,
+              }}
+              {...props}
+            >
+              {children}
+            </code>
+          );
+        }
+
+        const match = /language-(\w+)/.exec(className || "");
+        const lang = match?.[1] || "";
+
+        return (
+          <div
             style={{
-              background: "#020617",
-              padding: "2px 4px",
-              borderRadius: 4,
-              fontSize: 14,
-            }}
-            {...props}
-          />
-        ) : (
-          <pre
-            style={{
-              background: "#020617",
-              padding: 8,
-              borderRadius: 6,
-              overflowX: "auto",
+              margin: "8px 0",
+              borderRadius: 12,
+              overflow: "hidden",
+              background: "#171717",
             }}
           >
-            <code {...props} />
-          </pre>
-        ),
+            <div
+              style={{
+                padding: "6px 10px",
+                fontSize: 12,
+                color: "#9ca3af",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <span>{lang}</span>
+              {/* here you could add a Copy button */}
+            </div>
+            <pre
+              style={{
+                margin: 0,
+                padding: 10,
+                overflowX: "auto",
+              }}
+            >
+              <code {...props}>{children}</code>
+            </pre>
+          </div>
+        );
+      },
       table: ({ node, ...props }) => (
         <div
           style={{
@@ -1238,9 +1308,11 @@ function AssistantMessageBubble({ message }) {
       ),
       thead: ({ node, ...props }) => (
         <thead
-          style={{
-            backgroundColor: "#020617",
-          }}
+          style={
+            {
+              // backgroundColor: "#020617",
+            }
+          }
           {...props}
         />
       ),
@@ -1267,9 +1339,11 @@ function AssistantMessageBubble({ message }) {
       ),
       tr: ({ node, ...props }) => (
         <tr
-          style={{
-            backgroundColor: "#020617",
-          }}
+          style={
+            {
+              // backgroundColor: "#020617",
+            }
+          }
           {...props}
         />
       ),
