@@ -52,6 +52,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
 
 const AttachProgressRing = styled.div`
@@ -1201,23 +1202,315 @@ const MessageContent = styled.div`
   align-items: ${(p) => (p.$role === "user" ? "flex-end" : "flex-start")};
 `;
 
-/* markdown helpers remain unchanged */
+const Row = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+`;
 
-function normalizeTableMarkdown(input) {
-  if (!input) return "";
+const Avatar = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: #10a37f;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+`;
 
-  let out = input;
+// const Bubble = styled.div`
+//   background-color: #212121;
+//   border: 1px solid #2f2f2f;
+//   border-radius: 8px;
+//   padding: 10px 14px;
+//   color: #e5e7eb;
+//   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+//     sans-serif;
+//   font-size: 0.95rem;
+//   line-height: 1.6;
+//   width: 100%;
+// `;
 
-  if (/\n\|[^|\n]+\|[^|\n]+\|\n\|[-:]/.test(out)) {
-    return out;
+const MarkdownBody = styled(ReactMarkdown)`
+  /* Base text */
+  & p {
+    margin: 0 0 8px 0;
   }
 
-  out = out.replace(/:\s*\|/g, ":\n\n|");
-  out = out.replace(/\|\s+\|/g, "|\n|");
+  /* Headings */
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    margin: 8px 0 6px;
+    font-weight: 600;
+  }
 
-  return out;
+  & h1 {
+    font-size: 1.25rem;
+  }
+  & h2 {
+    font-size: 1.15rem;
+  }
+  & h3 {
+    font-size: 1.05rem;
+  }
+
+  /* Lists */
+  & ul,
+  & ol {
+    margin: 6px 0 8px;
+    padding-left: 1.4rem;
+  }
+
+  & li {
+    margin: 2px 0;
+  }
+
+  /* Links */
+  & a {
+    color: #93c5fd;
+    text-decoration: underline;
+  }
+
+  /* Blockquote */
+  & blockquote {
+    border-left: 3px solid #4b5563;
+    margin: 6px 0;
+    padding-left: 10px;
+    color: #9ca3af;
+    font-style: italic;
+  }
+
+  /* Horizontal rule */
+  & hr {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 10px 0;
+  }
+
+  /* Inline code */
+  & code {
+    background: #020617;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85em;
+  }
+
+  /* Code blocks */
+  & pre {
+    background: #171717;
+    padding: 10px 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 8px 0 10px;
+  }
+
+  & pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Tables */
+  & table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+    margin: 6px 0 10px;
+  }
+
+  & th,
+  & td {
+    border: 1px solid #374151;
+    padding: 4px 6px;
+    vertical-align: top;
+  }
+
+  & th {
+    background: #111827;
+    font-weight: 600;
+  }
+`;
+
+/**
+ * This is the styled wrapper around the markdown.
+ * Important: it wraps ReactMarkdown, it does NOT wrap ReactMarkdown itself.
+ */
+const MarkdownWrapper = styled.div`
+  /* Base text */
+  & p {
+    margin: 0 0 8px 0;
+  }
+
+  /* Headings */
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    margin: 8px 0 6px;
+    font-weight: 600;
+  }
+
+  & h1 {
+    font-size: 1.25rem;
+  }
+  & h2 {
+    font-size: 1.15rem;
+  }
+  & h3 {
+    font-size: 1.05rem;
+  }
+
+  /* Lists */
+  & ul,
+  & ol {
+    margin: 6px 0 8px;
+    padding-left: 1.4rem;
+  }
+
+  & li {
+    margin: 2px 0;
+  }
+
+  /* Links */
+  & a {
+    color: #93c5fd;
+    text-decoration: underline;
+  }
+
+  /* Blockquote */
+  & blockquote {
+    border-left: 3px solid #4b5563;
+    margin: 6px 0;
+    padding-left: 10px;
+    color: #9ca3af;
+    font-style: italic;
+  }
+
+  /* Horizontal rule */
+  & hr {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 10px 0;
+  }
+
+  /* Inline code */
+  & code {
+    background: #020617;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85em;
+  }
+
+  /* Code blocks */
+  & pre {
+    background: #171717;
+    padding: 10px 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 8px 0 10px;
+  }
+
+  & pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Tables */
+  & table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+    margin: 6px 0 10px;
+  }
+
+  & th,
+  & td {
+    border: 1px solid #374151;
+    padding: 4px 6px;
+    vertical-align: top;
+  }
+
+  & th {
+    background: #111827;
+    font-weight: 600;
+  }
+`;
+
+const CodeBlock = styled.div`
+  margin: 8px 0 10px;
+  border-radius: 8px;
+  background-color: #171717;
+  overflow: hidden;
+`;
+
+const CodeHeader = styled.div`
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222222;
+`;
+
+const SourcesRow = styled.div`
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  border-top: 1px solid #374151;
+  padding-top: 6px;
+`;
+
+// function normalizeMathDelimiters(input) {
+//   if (!input) return "";
+
+//   const sanitizeMath = (s) => s.replace(/\|/g, "\\vert ");
+
+//   let out = input;
+
+//   out = out.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (_, content) => {
+//     const inner = sanitizeMath(content.trim());
+//     return `\n\n$$\n${inner}\n$$\n\n`;
+//   });
+
+//   out = out.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (_, content) => {
+//     const inner = sanitizeMath(content.trim());
+//     return `$${inner}$`;
+//   });
+
+//   return out;
+// }
+
+function normalizeLooseOrderedLists(input) {
+  if (!input) return "";
+
+  // Collapse blank lines directly before an ordered-list item:
+  // "...something\n\n2. Text" -> "...something\n2. Text"
+  return input.replace(/\n\n(?=\d+\.\s)/g, "\n");
 }
 
+function normalizeMarkdown(input) {
+  if (!input) return "";
+  let out = normalizeMathDelimiters(input);
+  // if you added a <br> normalizer, keep that too
+  // out = normalizeHtmlBreaks(out);
+  out = normalizeLooseOrderedLists(out);
+  return out;
+}
 function normalizeMathDelimiters(input) {
   if (!input) return "";
 
@@ -1225,11 +1518,13 @@ function normalizeMathDelimiters(input) {
 
   let out = input;
 
+  // \[ ... \]  -> $$ ... $$
   out = out.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (_, content) => {
     const inner = sanitizeMath(content.trim());
     return `\n\n$$\n${inner}\n$$\n\n`;
   });
 
+  // \( ... \) -> $ ... $
   out = out.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (_, content) => {
     const inner = sanitizeMath(content.trim());
     return `$${inner}$`;
@@ -1238,215 +1533,256 @@ function normalizeMathDelimiters(input) {
   return out;
 }
 
-function normalizeMarkdown(input) {
-  if (!input) return "";
-  const withMath = normalizeMathDelimiters(input);
-  const withTables = normalizeTableMarkdown(withMath);
+// function AssistantMessageBubble({ message }) {
+//   const { content, sources } = message;
 
-  return withTables;
-}
+//   const baseMarkdownProps = {
+//     remarkPlugins: [remarkGfm, remarkMath],
+//     rehypePlugins: [rehypeKatex],
+//     components: {
+//       p: ({ node, ...props }) => (
+//         <p style={{ margin: "0 0 6px 0" }} {...props} />
+//       ),
+//       // NEW: control bullet spacing
+//       ul: ({ node, ...props }) => (
+//         <ul
+//           style={{
+//             marginTop: 4, // smaller vertical margin
+//             marginBottom: 4,
+//             paddingLeft: 18, // default is ~40px, this pulls text closer
+//             listStylePosition: "outside",
+//           }}
+//           {...props}
+//         />
+//       ),
+//       ol: ({ node, ...props }) => (
+//         <ol
+//           style={{
+//             marginTop: 4,
+//             marginBottom: 4,
+//             paddingLeft: 15, // tighter number → text gap
+//             listStylePosition: "outside",
+//           }}
+//           {...props}
+//         />
+//       ),
+
+//       li: ({ node, ...props }) => (
+//         <li
+//           style={{
+//             marginTop: 2, // tighter vertical gap between bullets
+//             marginBottom: 2,
+//             marginLeft: 0, // remove the old 16px push
+//           }}
+//           {...props}
+//         />
+//       ),
+//       h1: ({ node, ...props }) => (
+//         <h3
+//           style={{ margin: "10px 0", fontSize: 22, fontWeight: 700 }}
+//           {...props}
+//         />
+//       ),
+//       h2: ({ node, ...props }) => (
+//         <h4
+//           style={{ margin: "8px 0", fontSize: 20, fontWeight: 700 }}
+//           {...props}
+//         />
+//       ),
+//       h3: ({ node, ...props }) => (
+//         <h5
+//           style={{
+//             marginTop: 6, // space above the "3. Lists" heading
+//             marginBottom: 2, // smaller space below heading
+//             fontSize: 18,
+//             fontWeight: 600,
+//           }}
+//           {...props}
+//         />
+//       ),
+
+//       code: ({ node, inline, className, children, ...props }) => {
+//         if (inline) {
+//           return (
+//             <code
+//               style={{
+//                 background: "#020617",
+//                 padding: "2px 4px",
+//                 borderRadius: 4,
+//                 fontSize: 14,
+//               }}
+//               {...props}
+//             >
+//               {children}
+//             </code>
+//           );
+//         }
+
+//         const match = /language-(\w+)/.exec(className || "");
+//         const lang = match?.[1] || "";
+
+//         return (
+//           <div
+//             style={{
+//               margin: "8px 0",
+//               borderRadius: 12,
+//               overflow: "hidden",
+//               background: "#171717",
+//             }}
+//           >
+//             <div
+//               style={{
+//                 padding: "6px 10px",
+//                 fontSize: 12,
+//                 color: "#9ca3af",
+//                 display: "flex",
+//                 justifyContent: "space-between",
+//               }}
+//             >
+//               <span>{lang}</span>
+//               {/* here you could add a Copy button */}
+//             </div>
+//             <pre
+//               style={{
+//                 margin: 0,
+//                 padding: 10,
+//                 overflowX: "auto",
+//               }}
+//             >
+//               <code {...props}>{children}</code>
+//             </pre>
+//           </div>
+//         );
+//       },
+//       table: ({ node, ...props }) => (
+//         <div
+//           style={{
+//             width: "100%",
+//             overflowX: "auto",
+//             margin: "6px 0",
+//           }}
+//         >
+//           <table
+//             style={{
+//               borderCollapse: "collapse",
+//               width: "100%",
+//               fontSize: 14,
+//             }}
+//             {...props}
+//           />
+//         </div>
+//       ),
+//       thead: ({ node, ...props }) => (
+//         <thead
+//           style={
+//             {
+//               // backgroundColor: "#020617",
+//             }
+//           }
+//           {...props}
+//         />
+//       ),
+//       th: ({ node, ...props }) => (
+//         <th
+//           style={{
+//             border: "1px solid #1f2937",
+//             padding: "4px 6px",
+//             textAlign: "left",
+//             fontWeight: 600,
+//           }}
+//           {...props}
+//         />
+//       ),
+//       td: ({ node, ...props }) => (
+//         <td
+//           style={{
+//             border: "1px solid #1f2937",
+//             padding: "4px 6px",
+//             verticalAlign: "top",
+//           }}
+//           {...props}
+//         />
+//       ),
+//       tr: ({ node, ...props }) => (
+//         <tr
+//           style={
+//             {
+//               // backgroundColor: "#020617",
+//             }
+//           }
+//           {...props}
+//         />
+//       ),
+//     },
+//   };
+
+//   const normalized = normalizeMarkdown(content || "");
+//   console.log(JSON.stringify(normalized));
+
+//   return (
+//     <div>
+//       <ReactMarkdown {...baseMarkdownProps}>{normalized}</ReactMarkdown>
+
+//       {Array.isArray(sources) && sources.length > 0 && (
+//         <div
+//           style={{
+//             marginTop: 8,
+//             fontSize: 13,
+//             color: "#9ca3af",
+//           }}
+//         >
+//           Sources: {sources.map((s) => s.key).join(", ")}
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
 
 function AssistantMessageBubble({ message }) {
-  const { content, sources } = message;
-
-  const baseMarkdownProps = {
-    remarkPlugins: [remarkGfm, remarkMath],
-    rehypePlugins: [rehypeKatex],
-    components: {
-      p: ({ node, ...props }) => (
-        <p style={{ margin: "0 0 6px 0" }} {...props} />
-      ),
-      // NEW: control bullet spacing
-      ul: ({ node, ...props }) => (
-        <ul
-          style={{
-            marginTop: 4, // smaller vertical margin
-            marginBottom: 4,
-            paddingLeft: 18, // default is ~40px, this pulls text closer
-            listStylePosition: "outside",
-          }}
-          {...props}
-        />
-      ),
-      ol: ({ node, ...props }) => (
-        <ol
-          style={{
-            marginTop: 4,
-            marginBottom: 4,
-            paddingLeft: 15, // tighter number → text gap
-            listStylePosition: "outside",
-          }}
-          {...props}
-        />
-      ),
-
-      li: ({ node, ...props }) => (
-        <li
-          style={{
-            marginTop: 2, // tighter vertical gap between bullets
-            marginBottom: 2,
-            marginLeft: 0, // remove the old 16px push
-          }}
-          {...props}
-        />
-      ),
-      h1: ({ node, ...props }) => (
-        <h3
-          style={{ margin: "10px 0", fontSize: 22, fontWeight: 700 }}
-          {...props}
-        />
-      ),
-      h2: ({ node, ...props }) => (
-        <h4
-          style={{ margin: "8px 0", fontSize: 20, fontWeight: 700 }}
-          {...props}
-        />
-      ),
-      h3: ({ node, ...props }) => (
-        <h5
-          style={{
-            marginTop: 6, // space above the "3. Lists" heading
-            marginBottom: 2, // smaller space below heading
-            fontSize: 18,
-            fontWeight: 600,
-          }}
-          {...props}
-        />
-      ),
-
-      code: ({ node, inline, className, children, ...props }) => {
-        if (inline) {
-          return (
-            <code
-              style={{
-                background: "#020617",
-                padding: "2px 4px",
-                borderRadius: 4,
-                fontSize: 14,
-              }}
-              {...props}
-            >
-              {children}
-            </code>
-          );
-        }
-
-        const match = /language-(\w+)/.exec(className || "");
-        const lang = match?.[1] || "";
-
-        return (
-          <div
-            style={{
-              margin: "8px 0",
-              borderRadius: 12,
-              overflow: "hidden",
-              background: "#171717",
-            }}
-          >
-            <div
-              style={{
-                padding: "6px 10px",
-                fontSize: 12,
-                color: "#9ca3af",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <span>{lang}</span>
-              {/* here you could add a Copy button */}
-            </div>
-            <pre
-              style={{
-                margin: 0,
-                padding: 10,
-                overflowX: "auto",
-              }}
-            >
-              <code {...props}>{children}</code>
-            </pre>
-          </div>
-        );
-      },
-      table: ({ node, ...props }) => (
-        <div
-          style={{
-            width: "100%",
-            overflowX: "auto",
-            margin: "6px 0",
-          }}
-        >
-          <table
-            style={{
-              borderCollapse: "collapse",
-              width: "100%",
-              fontSize: 14,
-            }}
-            {...props}
-          />
-        </div>
-      ),
-      thead: ({ node, ...props }) => (
-        <thead
-          style={
-            {
-              // backgroundColor: "#020617",
-            }
-          }
-          {...props}
-        />
-      ),
-      th: ({ node, ...props }) => (
-        <th
-          style={{
-            border: "1px solid #1f2937",
-            padding: "4px 6px",
-            textAlign: "left",
-            fontWeight: 600,
-          }}
-          {...props}
-        />
-      ),
-      td: ({ node, ...props }) => (
-        <td
-          style={{
-            border: "1px solid #1f2937",
-            padding: "4px 6px",
-            verticalAlign: "top",
-          }}
-          {...props}
-        />
-      ),
-      tr: ({ node, ...props }) => (
-        <tr
-          style={
-            {
-              // backgroundColor: "#020617",
-            }
-          }
-          {...props}
-        />
-      ),
-    },
-  };
-
+  const { content, sources } = message || {};
   const normalized = normalizeMarkdown(content || "");
+  console.log("Normalized content:", JSON.stringify(normalized));
 
   return (
-    <div>
-      <ReactMarkdown {...baseMarkdownProps}>{normalized}</ReactMarkdown>
+    <Row>
+      <Bubble>
+        <MarkdownWrapper>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                const lang = match?.[1];
 
-      {Array.isArray(sources) && sources.length > 0 && (
-        <div
-          style={{
-            marginTop: 8,
-            fontSize: 13,
-            color: "#9ca3af",
-          }}
-        >
-          Sources: {sources.map((s) => s.key).join(", ")}
-        </div>
-      )}
-    </div>
+                if (inline) {
+                  return <code {...props}>{children}</code>;
+                }
+
+                return (
+                  <CodeBlock>
+                    <CodeHeader>
+                      <span>{lang || "code"}</span>
+                    </CodeHeader>
+                    <pre>
+                      <code {...props}>{children}</code>
+                    </pre>
+                  </CodeBlock>
+                );
+              },
+            }}
+          >
+            {normalized}
+          </ReactMarkdown>
+        </MarkdownWrapper>
+
+        {Array.isArray(sources) && sources.length > 0 && (
+          <SourcesRow>
+            Sources: {sources.map((s) => s.key || s).join(", ")}
+          </SourcesRow>
+        )}
+      </Bubble>
+    </Row>
   );
 }
 
