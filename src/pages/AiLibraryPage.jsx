@@ -1561,15 +1561,19 @@ function normalizeLooseLists(input) {
 
   let out = input;
 
-  // 1) Tighten loose ordered lists:
+  // Step 1: unify "blank" lines (only spaces/tabs) into true empty lines.
+  // "\n  \n" or "\n    \n" -> "\n\n"
+  out = out.replace(/\n[ \t]+\n/g, "\n\n");
+
+  // Step 2: tighten loose ordered lists:
   // "...text\n\n2. Something" -> "...text\n2. Something"
   out = out.replace(/\n\n(?=\d+\.\s)/g, "\n");
 
-  // 2) Tighten loose dash bullet lists at left margin:
+  // Step 3: tighten loose dash bullet lists:
   // "...text\n\n- Something" -> "...text\n- Something"
   out = out.replace(/\n\n(?=-\s)/g, "\n");
 
-  // If you ever use "*" bullets:
+  // If you ever use "* " bullets, you can add:
   // out = out.replace(/\n\n(?=\*\s)/g, "\n");
 
   return out;
