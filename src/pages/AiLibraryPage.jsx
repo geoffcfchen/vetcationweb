@@ -16,6 +16,7 @@ import {
   FiImage,
   FiMoreHorizontal,
   FiEdit3, // <--- add this
+  FiGlobe, // NEW
 } from "react-icons/fi";
 import {
   Routes,
@@ -824,6 +825,41 @@ const AttachIconButton = styled.button`
   }
 `;
 
+const WebSearchPill = styled.button`
+  border: none;
+  border-radius: 999px;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #181818;
+  border: 1px solid #424242;
+  color: #e5e7eb;
+  cursor: pointer;
+  font-size: 14px;
+
+  .pill-label {
+    transition: color 0.12s ease;
+  }
+
+  .pill-close {
+    opacity: 0;
+    transform: scale(0.8);
+    margin-left: 2px;
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+
+  &:hover {
+    background: #202020;
+    border-color: #6b7280;
+  }
+
+  &:hover .pill-close {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 /* NEW: white circular send button, ChatGPT style */
 
 const SendFabButton = styled.button`
@@ -1437,6 +1473,7 @@ function PersonalChatShell({ currentUser }) {
   const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
   const [initialAssistantTriggered, setInitialAssistantTriggered] =
     useState(false);
+  const [isWebSearchEnabled, setIsWebSearchEnabled] = useState(false);
 
   useEffect(() => {
     // Only in the personal chat route, not on the root "/" view
@@ -1593,6 +1630,19 @@ function PersonalChatShell({ currentUser }) {
   const hasUploadingPending = chatAttachments.some(
     (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
   );
+
+  const handleEnableWebSearch = () => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    setIsWebSearchEnabled(true);
+    setAttachMenuOpen(false);
+  };
+
+  const handleDisableWebSearch = () => {
+    setIsWebSearchEnabled(false);
+  };
 
   const callPersonalAssistant = async (vetUid, chatIdArg, convo, triggerId) => {
     try {
@@ -2158,9 +2208,28 @@ function PersonalChatShell({ currentUser }) {
                             <FiPaperclip />
                             <span>Add PDF for this turn</span>
                           </AttachMenuItem>
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleEnableWebSearch}
+                          >
+                            <FiGlobe />
+                            <span>Enable web search</span>
+                          </AttachMenuItem>
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
+                    {isWebSearchEnabled && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableWebSearch}
+                        title="Disable web search for this turn"
+                      >
+                        <FiGlobe size={14} />
+                        <span className="pill-label">Search web</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
                   </ComposerBottomLeft>
 
                   <ComposerBottomRight>
@@ -2223,9 +2292,29 @@ function PersonalChatShell({ currentUser }) {
                             <FiPaperclip />
                             <span>Add PDF for this turn</span>
                           </AttachMenuItem>
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleEnableWebSearch}
+                          >
+                            <FiGlobe />
+                            <span>Enable web search</span>
+                          </AttachMenuItem>
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
+
+                    {isWebSearchEnabled && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableWebSearch}
+                        title="Disable web search for this turn"
+                      >
+                        <FiGlobe size={14} />
+                        <span className="pill-label">Search web</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
                   </ComposerBottomLeft>
 
                   <ComposerBottomRight>
@@ -2363,6 +2452,8 @@ function ChatShell({
   const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
   const [initialAssistantTriggered, setInitialAssistantTriggered] =
     useState(false);
+
+  const [isWebSearchEnabled, setIsWebSearchEnabled] = useState(false);
 
   // shape: { id, title, filePath }
 
@@ -2514,6 +2605,23 @@ function ChatShell({
   useEffect(() => {
     setPendingAttachmentIds([]);
   }, [caseId, chatId]);
+
+  const handleEnableWebSearch = () => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    if (!caseId) {
+      alert("Create or select a patient first.");
+      return;
+    }
+    setIsWebSearchEnabled(true);
+    setAttachMenuOpen(false);
+  };
+
+  const handleDisableWebSearch = () => {
+    setIsWebSearchEnabled(false);
+  };
 
   const hasUploadingPending = caseAttachments.some(
     (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
@@ -3071,9 +3179,29 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleEnableWebSearch}
+                          >
+                            <FiGlobe />
+                            <span>Enable web search</span>
+                          </AttachMenuItem>
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
+
+                    {isWebSearchEnabled && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableWebSearch}
+                        title="Disable web search for this turn"
+                      >
+                        <FiGlobe size={14} />
+                        <span className="pill-label">Search web</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
                   </ComposerBottomLeft>
 
                   <ComposerBottomRight>
@@ -3304,9 +3432,29 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleEnableWebSearch}
+                          >
+                            <FiGlobe />
+                            <span>Enable web search</span>
+                          </AttachMenuItem>
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
+
+                    {isWebSearchEnabled && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableWebSearch}
+                        title="Disable web search for this turn"
+                      >
+                        <FiGlobe size={14} />
+                        <span className="pill-label">Search web</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
                   </ComposerBottomLeft>
 
                   <ComposerBottomRight>
