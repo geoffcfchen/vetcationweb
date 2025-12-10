@@ -238,7 +238,7 @@ const PatientsHeader = styled.div`
 const PatientsTitle = styled.div`
   font-size: 15px; /* was 13px */
   font-weight: 600;
-  text-transform: uppercase;
+
   letter-spacing: 0.04em;
   color: #9ca3af;
 `;
@@ -1328,6 +1328,7 @@ function PersonalChatShell({ currentUser }) {
     }
   };
 
+  // keep "Thinking" visible
   useEffect(() => {
     if (!isThinking || !thinkingRef.current) return;
 
@@ -1337,16 +1338,20 @@ function PersonalChatShell({ currentUser }) {
     });
   }, [isThinking]);
 
+  // reset thinking on chat change
   useEffect(() => {
     setIsThinking(false);
+    setMessageInput("");
   }, [personalChatId]);
 
+  // scroll when messages update
   useEffect(() => {
     if (!personalChatId) return;
     if (messages.length === 0) return;
     scrollToBottom("auto");
   }, [personalChatId, messages.length]);
 
+  // keep last user message in view
   useEffect(() => {
     if (!messagesContainerRef.current || !lastMessageRef.current) return;
     if (messages.length === 0) return;
@@ -1374,7 +1379,7 @@ function PersonalChatShell({ currentUser }) {
     });
   }, [messages.length, messagesContainerRef, lastMessageRef]);
 
-  // subscribe to messages
+  // subscribe to messages for an existing chat
   useEffect(() => {
     if (!currentUser || !personalChatId) {
       setMessages([]);
@@ -1384,6 +1389,8 @@ function PersonalChatShell({ currentUser }) {
     const msgsCol = collection(
       firestore,
       "vetPersonalChats",
+      currentUser.uid,
+      "chats",
       personalChatId,
       "messages"
     );
@@ -1400,9 +1407,11 @@ function PersonalChatShell({ currentUser }) {
     return () => unsub();
   }, [currentUser, personalChatId]);
 
-  // subscribe to attachments
+  // subscribe to attachments for this "session"
+  // if personalChatId exists -> chatId == personalChatId
+  // if root view -> chatId == null
   useEffect(() => {
-    if (!currentUser || !personalChatId) {
+    if (!currentUser) {
       setChatAttachments([]);
       return;
     }
@@ -1410,10 +1419,17 @@ function PersonalChatShell({ currentUser }) {
     const attachmentsCol = collection(
       firestore,
       "vetPersonalChats",
-      personalChatId,
+      currentUser.uid,
       "attachments"
     );
-    const qAtt = query(attachmentsCol, orderBy("createdAt", "asc"));
+
+    const chatIdToUse = personalChatId || null;
+
+    const qAtt = query(
+      attachmentsCol,
+      where("chatId", "==", chatIdToUse),
+      orderBy("createdAt", "asc")
+    );
 
     const unsub = onSnapshot(qAtt, (snap) => {
       const rows = [];
@@ -1426,6 +1442,7 @@ function PersonalChatShell({ currentUser }) {
     return () => unsub();
   }, [currentUser, personalChatId]);
 
+  // clear pending list when chat id changes
   useEffect(() => {
     setPendingAttachmentIds([]);
   }, [personalChatId]);
@@ -1462,7 +1479,13 @@ function PersonalChatShell({ currentUser }) {
         );
       }
 
-      const chatDocRef = doc(firestore, "vetPersonalChats", chatIdArg);
+      const chatDocRef = doc(
+        firestore,
+        "vetPersonalChats",
+        vetUid,
+        "chats",
+        chatIdArg
+      );
       const msgsCol = collection(chatDocRef, "messages");
 
       if (!res.ok) {
@@ -1505,12 +1528,6 @@ function PersonalChatShell({ currentUser }) {
       alert("Please log in first.");
       return;
     }
-    if (!personalChatId) {
-      alert(
-        "Send your first question to start this study chat, then add PDFs."
-      );
-      return;
-    }
     setAttachMenuOpen((open) => !open);
   };
 
@@ -1527,12 +1544,6 @@ function PersonalChatShell({ currentUser }) {
       alert("Please log in first.");
       return;
     }
-    if (!personalChatId) {
-      alert(
-        "Send your first question to start this study chat, then add PDFs."
-      );
-      return;
-    }
 
     try {
       setAttachMenuOpen(false);
@@ -1540,13 +1551,13 @@ function PersonalChatShell({ currentUser }) {
       const attachmentsCol = collection(
         firestore,
         "vetPersonalChats",
-        personalChatId,
+        currentUser.uid,
         "attachments"
       );
 
       const attachmentDocRef = await addDoc(attachmentsCol, {
         vetUid: currentUser.uid,
-        chatId: personalChatId,
+        chatId: personalChatId || null, // null before first chat
         messageId: null,
         title: file.name,
         status: "uploading",
@@ -1563,7 +1574,9 @@ function PersonalChatShell({ currentUser }) {
       );
       setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
 
-      const path = `aiPersonalUploads/${currentUser.uid}/${personalChatId}/${attachmentId}.pdf`;
+      const path = `aiPersonalUploads/${currentUser.uid}/${
+        personalChatId || "pending"
+      }/${attachmentId}.pdf`;
       const storageRef = ref(storage, path);
       const task = uploadBytesResumable(storageRef, file);
 
@@ -1614,7 +1627,7 @@ function PersonalChatShell({ currentUser }) {
   };
 
   const handleRemoveAttachment = (attachment) => {
-    if (!currentUser || !personalChatId) return;
+    if (!currentUser) return;
 
     setDeleteAttachmentTarget({
       id: attachment.id,
@@ -1646,10 +1659,17 @@ function PersonalChatShell({ currentUser }) {
     const text = messageInput.trim();
     setMessageInput("");
 
+    if (!currentUser) return;
+
     if (!isExistingChat) {
-      // create new personal chat
+      // first message: create chat, link any pending attachments, then call assistant
       try {
-        const chatsCol = collection(firestore, "vetPersonalChats");
+        const chatsCol = collection(
+          firestore,
+          "vetPersonalChats",
+          currentUser.uid,
+          "chats"
+        );
         const chatDocRef = await addDoc(chatsCol, {
           vetUid: currentUser.uid,
           title: null,
@@ -1668,10 +1688,37 @@ function PersonalChatShell({ currentUser }) {
 
         const messageId = userMessageRef.id;
 
+        // title from first question
         const title =
           text.length > 40 ? text.slice(0, 40).trimEnd() + "..." : text;
         await updateDoc(chatDocRef, { title });
 
+        // link pending attachments to this new chat + message
+        if (pendingAttachmentIds.length > 0) {
+          const now = serverTimestamp();
+          await Promise.all(
+            pendingAttachmentIds.map((attId) =>
+              updateDoc(
+                doc(
+                  firestore,
+                  "vetPersonalChats",
+                  currentUser.uid,
+                  "attachments",
+                  attId
+                ),
+                {
+                  chatId: newChatId,
+                  messageId,
+                  updatedAt: now,
+                }
+              ).catch((err) => {
+                console.warn("Failed to link attachment", attId, err);
+              })
+            )
+          );
+        }
+
+        // navigate into the new chat view
         navigateInner(`/ai/library/personal/${newChatId}`, {
           replace: true,
         });
@@ -1695,7 +1742,13 @@ function PersonalChatShell({ currentUser }) {
     } else {
       // existing personal chat
       try {
-        const chatDocRef = doc(firestore, "vetPersonalChats", personalChatId);
+        const chatDocRef = doc(
+          firestore,
+          "vetPersonalChats",
+          currentUser.uid,
+          "chats",
+          personalChatId
+        );
         const msgsCol = collection(chatDocRef, "messages");
 
         const existingConvo = messages.map((m) => ({
@@ -1716,6 +1769,7 @@ function PersonalChatShell({ currentUser }) {
           lastMessagePreview: text.slice(0, 140),
         });
 
+        // link any pending attachments to this message
         if (pendingAttachmentIds.length > 0) {
           const now = serverTimestamp();
           await Promise.all(
@@ -1724,11 +1778,12 @@ function PersonalChatShell({ currentUser }) {
                 doc(
                   firestore,
                   "vetPersonalChats",
-                  personalChatId,
+                  currentUser.uid,
                   "attachments",
                   attId
                 ),
                 {
+                  chatId: personalChatId,
                   messageId,
                   updatedAt: now,
                 }
@@ -2007,6 +2062,7 @@ function PersonalChatShell({ currentUser }) {
           <InputRow onSubmit={handleSubmit}>
             <ComposerShell>
               <ComposerColumn>
+                {renderAttachBar()}
                 <TextInput
                   value={messageInput}
                   onChange={handleComposerChange}
@@ -2018,12 +2074,37 @@ function PersonalChatShell({ currentUser }) {
 
               <ComposerBottomRow>
                 <ComposerBottomLeft>
-                  {/* Attachments start after chat exists */}
+                  <AttachButtonWrapper>
+                    <AttachIconButton
+                      type="button"
+                      onClick={handleToggleAttachMenu}
+                      disabled={!currentUser}
+                      aria-label="Add attachment"
+                    >
+                      <FiPlus />
+                    </AttachIconButton>
+
+                    {attachMenuOpen && (
+                      <AttachMenu $direction="up">
+                        <AttachMenuItem
+                          type="button"
+                          onClick={handleAttachFilesClick}
+                        >
+                          <FiPaperclip />
+                          <span>Add PDF for this turn</span>
+                        </AttachMenuItem>
+                      </AttachMenu>
+                    )}
+                  </AttachButtonWrapper>
                 </ComposerBottomLeft>
                 <ComposerBottomRight>
                   <SendFabButton
                     type="submit"
-                    disabled={!currentUser || !messageInput.trim()}
+                    disabled={
+                      !currentUser ||
+                      !messageInput.trim() ||
+                      hasUploadingPending
+                    }
                   >
                     <FiSend />
                   </SendFabButton>
@@ -2081,11 +2162,11 @@ function PersonalChatShell({ currentUser }) {
                       }
                     }
 
-                    if (personalChatId) {
+                    if (currentUser) {
                       const attachmentRef = doc(
                         firestore,
                         "vetPersonalChats",
-                        personalChatId,
+                        currentUser.uid,
                         "attachments",
                         deleteAttachmentTarget.id
                       );
@@ -3320,11 +3401,14 @@ export default function AiLibraryPage() {
       return;
     }
 
-    const qPersonal = query(
-      collection(firestore, "vetPersonalChats"),
-      where("vetUid", "==", currentUser.uid),
-      orderBy("createdAt", "desc")
+    const personalChatsCol = collection(
+      firestore,
+      "vetPersonalChats",
+      currentUser.uid,
+      "chats"
     );
+
+    const qPersonal = query(personalChatsCol, orderBy("createdAt", "desc"));
 
     const unsub = onSnapshot(qPersonal, (snap) => {
       const rows = [];
@@ -3581,7 +3665,13 @@ export default function AiLibraryPage() {
     }
 
     try {
-      const chatRef = doc(firestore, "vetPersonalChats", editingPersonalChatId);
+      const chatRef = doc(
+        firestore,
+        "vetPersonalChats",
+        currentUser.uid,
+        "chats",
+        editingPersonalChatId
+      );
       await updateDoc(chatRef, {
         title,
         updatedAt: serverTimestamp(),
@@ -3700,7 +3790,13 @@ export default function AiLibraryPage() {
           navigate(`/ai/library/p/${deleteTarget.caseId}/project`);
         }
       } else if (deleteTarget.type === "personalChat") {
-        const chatRef = doc(firestore, "vetPersonalChats", deleteTarget.id);
+        const chatRef = doc(
+          firestore,
+          "vetPersonalChats",
+          currentUser.uid,
+          "chats",
+          deleteTarget.id
+        );
         await deleteDoc(chatRef);
 
         if (activePersonalChatIdFromUrl === deleteTarget.id) {
@@ -3746,7 +3842,7 @@ export default function AiLibraryPage() {
 
   const handleCreatePersonalChatClick = () => {
     if (!currentUser) return;
-    // Go to the root personal view; chat doc will be created on first send
+    // Do not create chat yet. First message will create chatId.
     navigate("/ai/library");
   };
 
@@ -3957,7 +4053,7 @@ export default function AiLibraryPage() {
           <SectionDivider />
 
           <PatientsHeader>
-            <PatientsTitle>Personal chats</PatientsTitle>
+            <PatientsTitle>Notebook chats</PatientsTitle>
             <NewPatientButton
               type="button"
               onClick={handleCreatePersonalChatClick}
