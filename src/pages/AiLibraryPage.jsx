@@ -449,7 +449,6 @@ const RowMenuButton = styled.button`
   color: #9ca3af;
   cursor: pointer;
 
-  /* base visibility controlled by prop */
   opacity: ${(p) => (p.$forceVisible ? 1 : 0)};
   pointer-events: ${(p) => (p.$forceVisible ? "auto" : "none")};
   transition: opacity 0.15s ease;
@@ -457,7 +456,9 @@ const RowMenuButton = styled.button`
   /* always show on hover */
   ${PatientRow}:hover &,
   ${SubchatRow}:hover &,
-  ${PersonalChatRow}:hover & {
+  ${PersonalChatRow}:hover &,
+  .chat-list-item:hover & {
+    // NEW: when hovering a previous-chat row
     opacity: 1;
     pointer-events: auto;
   }
@@ -1109,13 +1110,15 @@ const ChatListItem = styled.button`
   color: #e5e7eb;
   cursor: pointer;
 
-  display: flex; /* NEW */
-  align-items: flex-start; /* NEW */
-  justify-content: space-between; /* NEW */
-  gap: 8px; /* NEW */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+
+  position: relative; // NEW: so three dots can be absolutely positioned
 
   &:hover {
-    background: "#3a3a3a";
+    background: #3a3a3a; // FIX: no quotes
   }
 `;
 
@@ -1145,6 +1148,7 @@ const ChatListItemTime = styled.div`
   color: #6b7280;
   white-space: nowrap;
   margin-left: 4px;
+  margin-right: 28px; // NEW: room for three dots
 `;
 
 const ChatListItemMeta = styled.div`
@@ -2319,7 +2323,14 @@ function PersonalChatShell({ currentUser }) {
 }
 
 /* Chat shell with attachment UI */
-function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
+function ChatShell({
+  currentUser,
+  cases,
+  activeCaseChats,
+  onNewPatient,
+  rowMenu,
+  onOpenChatContextMenu,
+}) {
   const { caseId, chatId } = useParams();
   const isNewChat = !!caseId && !chatId;
   const navigateInner = useNavigate();
@@ -3096,6 +3107,7 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
                     return (
                       <ChatListItem
                         key={ch.id}
+                        className="chat-list-item" // NEW: used by RowMenuButton CSS
                         type="button"
                         onClick={() => handleOpenChat(ch.id)}
                         $active={ch.id === chatId}
@@ -3121,6 +3133,25 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
                             })}
                           </ChatListItemTime>
                         )}
+
+                        {/* NEW: three-dot menu button, same behavior as sidebar */}
+                        <RowMenuButton
+                          type="button"
+                          aria-label="Chat actions"
+                          $forceVisible={
+                            rowMenu &&
+                            rowMenu.kind === "chat" &&
+                            rowMenu.id === ch.id
+                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onOpenChatContextMenu) {
+                              onOpenChatContextMenu(e, caseId, ch);
+                            }
+                          }}
+                        >
+                          <FiMoreHorizontal size={16} />
+                        </RowMenuButton>
                       </ChatListItem>
                     );
                   })}
@@ -4373,6 +4404,8 @@ export default function AiLibraryPage() {
                 cases={cases}
                 activeCaseChats={activeCaseChats}
                 onNewPatient={handleCreatePatientClick}
+                rowMenu={rowMenu} // NEW
+                onOpenChatContextMenu={openRowMenuForChat} // NEW
               />
             }
           />
@@ -4384,6 +4417,8 @@ export default function AiLibraryPage() {
                 cases={cases}
                 activeCaseChats={activeCaseChats}
                 onNewPatient={handleCreatePatientClick}
+                rowMenu={rowMenu} // NEW (unused in this view but OK)
+                onOpenChatContextMenu={openRowMenuForChat} // NEW
               />
             }
           />
