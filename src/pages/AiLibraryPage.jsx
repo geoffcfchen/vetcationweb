@@ -2710,7 +2710,7 @@ function PersonalChatShell({ currentUser }) {
                             onClick={handleAttachFilesClick}
                           >
                             <FiPaperclip />
-                            <span>Add PDF for this turn</span>
+                            <span>Add lab report / PDF</span>
                           </AttachMenuItem>
 
                           <AttachMenuDivider />
@@ -2795,7 +2795,7 @@ function PersonalChatShell({ currentUser }) {
                             onClick={handleAttachFilesClick}
                           >
                             <FiPaperclip />
-                            <span>Add PDF for this turn</span>
+                            <span>Add lab report / PDF</span>
                           </AttachMenuItem>
                           <AttachMenuDivider />
 
