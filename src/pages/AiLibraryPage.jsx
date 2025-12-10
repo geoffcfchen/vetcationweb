@@ -1495,7 +1495,13 @@ function PersonalChatShell({ currentUser }) {
 
       setIsThinking(true);
       // reuse your existing helper
-      callPersonalAssistant(currentUser.uid, personalChatId, convo, last.id);
+      callPersonalAssistant(
+        currentUser.uid,
+        personalChatId,
+        convo,
+        last.id,
+        isWebSearchEnabled
+      );
     }
   }, [currentUser, personalChatId, messages, initialAssistantTriggered]);
 
@@ -1644,13 +1650,20 @@ function PersonalChatShell({ currentUser }) {
     setIsWebSearchEnabled(false);
   };
 
-  const callPersonalAssistant = async (vetUid, chatIdArg, convo, triggerId) => {
+  const callPersonalAssistant = async (
+    vetUid,
+    chatIdArg,
+    convo,
+    triggerId,
+    webSearchEnabled
+  ) => {
     try {
       const payload = {
         vetUid,
         chatId: chatIdArg,
         messages: convo,
         triggerMessageId: triggerId,
+        webSearchEnabled: !!webSearchEnabled, // <--- NEW
       };
 
       const res = await fetch(
@@ -1984,7 +1997,8 @@ function PersonalChatShell({ currentUser }) {
           currentUser.uid,
           personalChatId,
           convo,
-          messageId
+          messageId,
+          isWebSearchEnabled
         );
 
         scrollToBottom("smooth");
@@ -2490,7 +2504,14 @@ function ChatShell({
       }));
 
       setIsThinking(true);
-      callAssistant(currentUser.uid, caseId, chatId, convo, last.id);
+      callAssistant(
+        currentUser.uid,
+        caseId,
+        chatId,
+        convo,
+        last.id,
+        isWebSearchEnabled
+      );
     }
   }, [currentUser, caseId, chatId, messages, initialAssistantTriggered]);
 
@@ -2632,7 +2653,8 @@ function ChatShell({
     caseIdArg,
     chatIdArg,
     convo,
-    triggerMessageId
+    triggerMessageId,
+    webSearchEnabled // NEW
   ) => {
     try {
       const payload = {
@@ -2641,6 +2663,7 @@ function ChatShell({
         chatId: chatIdArg,
         messages: convo,
         triggerMessageId,
+        webSearchEnabled: !!webSearchEnabled, // NEW
       };
 
       const res = await fetch(
@@ -2977,7 +3000,14 @@ function ChatShell({
         const convo = [...existingConvo, newMessage];
 
         setIsThinking(true); // NEW
-        await callAssistant(currentUser.uid, caseId, chatId, convo, messageId);
+        await callAssistant(
+          currentUser.uid,
+          caseId,
+          chatId,
+          convo,
+          messageId,
+          isWebSearchEnabled
+        );
 
         scrollToBottom("smooth");
         setPendingAttachmentIds([]);
