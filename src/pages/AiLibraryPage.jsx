@@ -652,12 +652,13 @@ const ChatInner = styled.div`
 `;
 
 const ChatHeader = styled.div`
-  margin-bottom: ${(p) => (p.$isNewChat ? "32px" : "12px")};
+  margin-bottom: ${(p) => (p.$isNewChat ? "10px" : "12px")};
+  text-align: ${(p) => (p.$isCentered ? "center" : "left")};
 `;
 
 const ChatTitle = styled.div`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 500;
 `;
 
 const ChatSubtitle = styled.div`
@@ -895,6 +896,17 @@ const ChatEmptyState = styled.div`
   padding: 12px 2px;
 `;
 
+const NewChatCenter = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; // ← was center
+  justify-content: center;
+  max-width: 880px; // match ChatInner max-width if you like
+  width: 100%;
+  margin: 0 auto;
+  gap: 16px;
+`;
 /* NEW: attachment menu, ChatGPT style */
 
 const CenterEmptyWrapper = styled.div`
@@ -1070,6 +1082,7 @@ const ChatListSection = styled.div`
   margin-top: 16px;
   padding-top: 8px;
   border-top: 1px solid #303030;
+  width: 100%; /* NEW: match the composer width inside NewChatCenter */
 `;
 
 const ChatListTitle = styled.div`
@@ -1096,9 +1109,19 @@ const ChatListItem = styled.button`
   color: #e5e7eb;
   cursor: pointer;
 
+  display: flex; /* NEW */
+  align-items: flex-start; /* NEW */
+  justify-content: space-between; /* NEW */
+  gap: 8px; /* NEW */
+
   &:hover {
-    background: #3a3a3a;
+    background: "#3a3a3a";
   }
+`;
+
+const ChatListText = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
 
 const ChatListItemTitle = styled.div`
@@ -1106,6 +1129,22 @@ const ChatListItemTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+const ChatListItemPreview = styled.div`
+  margin-top: 2px;
+  font-size: 13px;
+  color: #9ca3af;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const ChatListItemTime = styled.div`
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+  margin-left: 4px;
 `;
 
 const ChatListItemMeta = styled.div`
@@ -1999,15 +2038,7 @@ function PersonalChatShell({ currentUser }) {
         onChange={handleAttachmentFileChange}
       />
       <ChatInner>
-        <ChatHeader $isNewChat={!isExistingChat}>
-          <ChatTitle>What do you want to learn today?</ChatTitle>
-          <ChatSubtitle>
-            Use this space for personal study. Ask questions and reference your
-            uploaded library.
-          </ChatSubtitle>
-        </ChatHeader>
-
-        {isExistingChat && (
+        {isExistingChat ? (
           <>
             {messages.length === 0 ? (
               <ChatEmptyState>Loading conversation…</ChatEmptyState>
@@ -2144,62 +2175,71 @@ function PersonalChatShell({ currentUser }) {
               </ComposerShell>
             </InputRow>
           </>
-        )}
+        ) : (
+          <NewChatCenter>
+            <ChatHeader $isNewChat $isCentered>
+              <ChatTitle>What do you want to learn today?</ChatTitle>
+              <ChatSubtitle>
+                Use this space for personal study. Ask questions and reference
+                your uploaded library.
+              </ChatSubtitle>
+            </ChatHeader>
 
-        {!isExistingChat && (
-          <InputRow onSubmit={handleSubmit}>
-            <ComposerShell>
-              <ComposerColumn>
-                {renderAttachBar()}
-                <TextInput
-                  value={messageInput}
-                  onChange={handleComposerChange}
-                  onKeyDown={handleComposerKeyDown}
-                  placeholder="Type a question you want to learn about..."
-                  disabled={!currentUser}
-                />
-              </ComposerColumn>
+            <InputRow onSubmit={handleSubmit} style={{ width: "100%" }}>
+              <ComposerShell>
+                <ComposerColumn>
+                  {renderAttachBar()}
+                  <TextInput
+                    value={messageInput}
+                    onChange={handleComposerChange}
+                    onKeyDown={handleComposerKeyDown}
+                    placeholder="Type a question you want to learn about..."
+                    disabled={!currentUser}
+                  />
+                </ComposerColumn>
 
-              <ComposerBottomRow>
-                <ComposerBottomLeft>
-                  <AttachButtonWrapper>
-                    <AttachIconButton
-                      type="button"
-                      onClick={handleToggleAttachMenu}
-                      disabled={!currentUser}
-                      aria-label="Add attachment"
+                <ComposerBottomRow>
+                  <ComposerBottomLeft>
+                    <AttachButtonWrapper>
+                      <AttachIconButton
+                        type="button"
+                        onClick={handleToggleAttachMenu}
+                        disabled={!currentUser}
+                        aria-label="Add attachment"
+                      >
+                        <FiPlus />
+                      </AttachIconButton>
+
+                      {attachMenuOpen && (
+                        <AttachMenu $direction="up">
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleAttachFilesClick}
+                          >
+                            <FiPaperclip />
+                            <span>Add PDF for this turn</span>
+                          </AttachMenuItem>
+                        </AttachMenu>
+                      )}
+                    </AttachButtonWrapper>
+                  </ComposerBottomLeft>
+
+                  <ComposerBottomRight>
+                    <SendFabButton
+                      type="submit"
+                      disabled={
+                        !currentUser ||
+                        !messageInput.trim() ||
+                        hasUploadingPending
+                      }
                     >
-                      <FiPlus />
-                    </AttachIconButton>
-
-                    {attachMenuOpen && (
-                      <AttachMenu $direction="up">
-                        <AttachMenuItem
-                          type="button"
-                          onClick={handleAttachFilesClick}
-                        >
-                          <FiPaperclip />
-                          <span>Add PDF for this turn</span>
-                        </AttachMenuItem>
-                      </AttachMenu>
-                    )}
-                  </AttachButtonWrapper>
-                </ComposerBottomLeft>
-                <ComposerBottomRight>
-                  <SendFabButton
-                    type="submit"
-                    disabled={
-                      !currentUser ||
-                      !messageInput.trim() ||
-                      hasUploadingPending
-                    }
-                  >
-                    <FiSend />
-                  </SendFabButton>
-                </ComposerBottomRight>
-              </ComposerBottomRow>
-            </ComposerShell>
-          </InputRow>
+                      <FiSend />
+                    </SendFabButton>
+                  </ComposerBottomRight>
+                </ComposerBottomRow>
+              </ComposerShell>
+            </InputRow>
+          </NewChatCenter>
         )}
       </ChatInner>
 
@@ -2925,59 +2965,23 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
         onChange={handleAttachmentFileChange}
       />
       <ChatInner>
-        {/* <ChatHeader $isNewChat={isNewChat}>
-          {activeCase ? (
-            <>
-              <ChatTitle>{activeCase.patientName}</ChatTitle>
-              <ChatSubtitle>
-                {chatId
-                  ? "AI conversation for this patient."
-                  : "Start a new chat for this patient, or open a previous one."}
-              </ChatSubtitle>
-            </>
-          ) : (
-            <>
-              <ChatTitle>Start with a patient</ChatTitle>
-              <ChatSubtitle>
-                Create or select a patient on the left to start a case
-                conversation.
-              </ChatSubtitle>
-            </>
-          )}
-        </ChatHeader>
-
-        {!activeCase && (
-          <ChatEmptyState>
-            Choose a patient from the left sidebar to get started.
-          </ChatEmptyState>
-        )} */}
-        {activeCase && (
-          <ChatHeader $isNewChat={isNewChat}>
-            <ChatTitle>{activeCase.patientName}</ChatTitle>
-            <ChatSubtitle>
-              {chatId
-                ? "AI conversation for this patient."
-                : "Start a new chat for this patient, or open a previous one."}
-            </ChatSubtitle>
-          </ChatHeader>
-        )}
-
-        {!activeCase && hasAnyCases && (
-          <ChatHeader $isNewChat={false}>
-            <ChatTitle>Start with a patient</ChatTitle>
-            <ChatSubtitle>
-              Select a patient on the left to start an AI case conversation, or
-              create a new one.
-            </ChatSubtitle>
-          </ChatHeader>
-        )}
-
+        {/* No active patient selected */}
         {!activeCase &&
           (hasAnyCases ? (
-            <ChatEmptyState>
-              Choose a patient from the left sidebar to get started or use the
-              New button above to create one.
-            </ChatEmptyState>
+            <>
+              <ChatHeader $isNewChat={false} $isCentered>
+                <ChatTitle>Start with a patient</ChatTitle>
+                <ChatSubtitle>
+                  Select a patient on the left to start an AI case conversation,
+                  or create a new one.
+                </ChatSubtitle>
+              </ChatHeader>
+
+              <ChatEmptyState>
+                Choose a patient from the left sidebar to get started or use the
+                New button above to create one.
+              </ChatEmptyState>
+            </>
           ) : (
             <CenterEmptyWrapper>
               <CenterEmptyCard>
@@ -3006,9 +3010,17 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
             </CenterEmptyWrapper>
           ))}
 
+        {/* Active patient, but no chat yet: center like ChatGPT */}
         {activeCase && !chatId && (
-          <>
-            <InputRow onSubmit={handleSubmit}>
+          <NewChatCenter>
+            <ChatHeader $isNewChat>
+              <ChatTitle>{activeCase.patientName}</ChatTitle>
+              <ChatSubtitle>
+                Start a new chat for this patient, or open a previous one.
+              </ChatSubtitle>
+            </ChatHeader>
+
+            <InputRow onSubmit={handleSubmit} style={{ width: "100%" }}>
               <ComposerShell>
                 <ComposerColumn>
                   {renderAttachBar()}
@@ -3080,6 +3092,7 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
                       (ch.lastMessagePreview
                         ? ch.lastMessagePreview.slice(0, 40) + "..."
                         : "Untitled chat");
+
                     return (
                       <ChatListItem
                         key={ch.id}
@@ -3087,27 +3100,37 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
                         onClick={() => handleOpenChat(ch.id)}
                         $active={ch.id === chatId}
                       >
-                        <ChatListItemTitle title={title}>
-                          {title}
-                        </ChatListItemTitle>
-                        <ChatListItemMeta>
-                          {created &&
-                            created.toLocaleString(undefined, {
+                        <ChatListText>
+                          <ChatListItemTitle title={title}>
+                            {title}
+                          </ChatListItemTitle>
+                          {ch.lastMessagePreview && (
+                            <ChatListItemPreview title={ch.lastMessagePreview}>
+                              {ch.lastMessagePreview}
+                            </ChatListItemPreview>
+                          )}
+                        </ChatListText>
+
+                        {created && (
+                          <ChatListItemTime>
+                            {created.toLocaleString(undefined, {
                               month: "short",
                               day: "numeric",
                               hour: "2-digit",
                               minute: "2-digit",
                             })}
-                        </ChatListItemMeta>
+                          </ChatListItemTime>
+                        )}
                       </ChatListItem>
                     );
                   })}
                 </ChatList>
               )}
             </ChatListSection>
-          </>
+          </NewChatCenter>
         )}
 
+        {/* Active patient and active chat: no header, just messages + composer */}
         {activeCase && chatId && (
           <>
             {messages.length === 0 ? (
@@ -3124,7 +3147,7 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
                     <MessageRow
                       key={m.id}
                       $role={m.role}
-                      ref={isLast ? lastMessageRef : null} // NEW
+                      ref={isLast ? lastMessageRef : null}
                     >
                       <MessageContent $role={m.role}>
                         {messageAttachments.length > 0 && (
@@ -3247,6 +3270,7 @@ function ChatShell({ currentUser, cases, activeCaseChats, onNewPatient }) {
           </>
         )}
       </ChatInner>
+
       {deleteAttachmentTarget && (
         <ModalOverlay
           onClick={() => {
