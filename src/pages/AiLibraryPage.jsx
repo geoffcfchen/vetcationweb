@@ -2330,6 +2330,12 @@ function ChatShell({
   onNewPatient,
   rowMenu,
   onOpenChatContextMenu,
+  editingChatId,
+  editingChatOrigin,
+  editingChatTitle,
+  setEditingChatTitle,
+  handleInlineChatKeyDown,
+  commitChatRename,
 }) {
   const { caseId, chatId } = useParams();
   const isNewChat = !!caseId && !chatId;
@@ -3104,6 +3110,13 @@ function ChatShell({
                         ? ch.lastMessagePreview.slice(0, 40) + "..."
                         : "Untitled chat");
 
+                    const isEditingHere =
+                      editingChatId === ch.id && editingChatOrigin === "main";
+
+                    const displayTitle = isEditingHere
+                      ? editingChatTitle
+                      : title;
+
                     return (
                       <ChatListItem
                         key={ch.id}
@@ -3113,10 +3126,23 @@ function ChatShell({
                         $active={ch.id === chatId}
                       >
                         <ChatListText>
-                          <ChatListItemTitle title={title}>
-                            {title}
+                          <ChatListItemTitle title={displayTitle}>
+                            {isEditingHere ? (
+                              <InlineEditInput
+                                value={editingChatTitle}
+                                onChange={(e) =>
+                                  setEditingChatTitle(e.target.value)
+                                }
+                                onKeyDown={handleInlineChatKeyDown}
+                                onBlur={commitChatRename}
+                                autoFocus
+                              />
+                            ) : (
+                              displayTitle
+                            )}
                           </ChatListItemTitle>
-                          {ch.lastMessagePreview && (
+
+                          {!isEditingHere && ch.lastMessagePreview && (
                             <ChatListItemPreview title={ch.lastMessagePreview}>
                               {ch.lastMessagePreview}
                             </ChatListItemPreview>
@@ -3400,6 +3426,7 @@ export default function AiLibraryPage() {
   const [editingChatId, setEditingChatId] = useState(null);
   const [editingChatCaseId, setEditingChatCaseId] = useState(null);
   const [editingChatTitle, setEditingChatTitle] = useState("");
+  const [editingChatOrigin, setEditingChatOrigin] = useState(null); // 'sidebar' | 'main'
 
   const [deleteTarget, setDeleteTarget] = useState(null); // { type, id, caseId?, name }
   const [rowMenu, setRowMenu] = useState(null);
@@ -3598,7 +3625,7 @@ export default function AiLibraryPage() {
     });
   };
 
-  const openRowMenuForChat = (event, caseId, chat) => {
+  const openRowMenuForChat = (event, caseId, chat, origin = "sidebar") => {
     const rect = event.currentTarget.getBoundingClientRect();
     let left = rect.right + 8;
     let top = rect.top + rect.height / 2;
@@ -3624,6 +3651,7 @@ export default function AiLibraryPage() {
 
     setRowMenu({
       kind: "chat",
+      origin, // NEW
       id: chat.id,
       caseId,
       name: baseTitle,
@@ -3714,10 +3742,12 @@ export default function AiLibraryPage() {
     setEditingPatientName(patient.patientName || "Untitled patient");
   };
 
-  const beginRenameChat = (caseId, chat) => {
+  const beginRenameChat = (caseId, chat, origin = "sidebar") => {
     setRowMenu(null);
     setEditingChatId(chat.id);
     setEditingChatCaseId(caseId);
+    setEditingChatOrigin(origin); // NEW
+
     const baseTitle =
       chat.title ||
       (chat.lastMessagePreview
@@ -3769,6 +3799,7 @@ export default function AiLibraryPage() {
       setEditingChatId(null);
       setEditingChatCaseId(null);
       setEditingChatTitle("");
+      setEditingChatOrigin(null); // NEW
       return;
     }
     const title = editingChatTitle.trim();
@@ -3776,6 +3807,7 @@ export default function AiLibraryPage() {
       setEditingChatId(null);
       setEditingChatCaseId(null);
       setEditingChatTitle("");
+      setEditingChatOrigin(null); // NEW
       return;
     }
 
@@ -3798,6 +3830,7 @@ export default function AiLibraryPage() {
       setEditingChatId(null);
       setEditingChatCaseId(null);
       setEditingChatTitle("");
+      setEditingChatOrigin(null); // NEW
     }
   };
 
@@ -3863,6 +3896,7 @@ export default function AiLibraryPage() {
       setEditingChatId(null);
       setEditingChatCaseId(null);
       setEditingChatTitle("");
+      setEditingChatOrigin(null); // NEW
     }
   };
 
@@ -4132,7 +4166,7 @@ export default function AiLibraryPage() {
                     }
                     onClick={(e) => {
                       e.stopPropagation();
-                      openRowMenuForPatient(e, c);
+                      openRowMenuForChat(e, c.id, ch, "sidebar");
                     }}
                   >
                     <FiMoreHorizontal size={16} />
@@ -4147,8 +4181,14 @@ export default function AiLibraryPage() {
                         (ch.lastMessagePreview
                           ? ch.lastMessagePreview.slice(0, 36) + "..."
                           : "Untitled chat");
-                      const displayTitle =
-                        editingChatId === ch.id ? editingChatTitle : baseTitle;
+
+                      const isEditingSidebar =
+                        editingChatId === ch.id &&
+                        editingChatOrigin === "sidebar";
+
+                      const displayTitle = isEditingSidebar
+                        ? editingChatTitle
+                        : baseTitle;
 
                       return (
                         <SubchatRow
@@ -4161,7 +4201,7 @@ export default function AiLibraryPage() {
                           $active={ch.id === activeChatIdFromUrl}
                         >
                           <SubchatTitle title={displayTitle}>
-                            {editingChatId === ch.id ? (
+                            {isEditingSidebar ? (
                               <InlineEditInput
                                 value={editingChatTitle}
                                 onChange={(e) =>
@@ -4405,7 +4445,15 @@ export default function AiLibraryPage() {
                 activeCaseChats={activeCaseChats}
                 onNewPatient={handleCreatePatientClick}
                 rowMenu={rowMenu} // NEW
-                onOpenChatContextMenu={openRowMenuForChat} // NEW
+                onOpenChatContextMenu={(e, caseId, chat) =>
+                  openRowMenuForChat(e, caseId, chat, "main")
+                }
+                editingChatId={editingChatId}
+                editingChatOrigin={editingChatOrigin}
+                editingChatTitle={editingChatTitle}
+                setEditingChatTitle={setEditingChatTitle}
+                handleInlineChatKeyDown={handleInlineChatKeyDown}
+                commitChatRename={commitChatRename}
               />
             }
           />
@@ -4418,7 +4466,15 @@ export default function AiLibraryPage() {
                 activeCaseChats={activeCaseChats}
                 onNewPatient={handleCreatePatientClick}
                 rowMenu={rowMenu} // NEW (unused in this view but OK)
-                onOpenChatContextMenu={openRowMenuForChat} // NEW
+                onOpenChatContextMenu={(e, caseId, chat) =>
+                  openRowMenuForChat(e, caseId, chat, "main")
+                }
+                editingChatId={editingChatId}
+                editingChatOrigin={editingChatOrigin}
+                editingChatTitle={editingChatTitle}
+                setEditingChatTitle={setEditingChatTitle}
+                handleInlineChatKeyDown={handleInlineChatKeyDown}
+                commitChatRename={commitChatRename}
               />
             }
           />
@@ -4517,11 +4573,15 @@ export default function AiLibraryPage() {
                     patientName: rowMenu.name,
                   });
                 } else if (rowMenu.kind === "chat") {
-                  beginRenameChat(rowMenu.caseId, {
-                    id: rowMenu.id,
-                    title: rowMenu.name,
-                    lastMessagePreview: rowMenu.name,
-                  });
+                  beginRenameChat(
+                    rowMenu.caseId,
+                    {
+                      id: rowMenu.id,
+                      title: rowMenu.name,
+                      lastMessagePreview: rowMenu.name,
+                    },
+                    rowMenu.origin || "sidebar" // NEW
+                  );
                 } else if (rowMenu.kind === "personal") {
                   beginRenamePersonalChat({
                     id: rowMenu.id,
