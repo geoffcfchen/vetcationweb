@@ -4166,7 +4166,7 @@ export default function AiLibraryPage() {
                     }
                     onClick={(e) => {
                       e.stopPropagation();
-                      openRowMenuForChat(e, c.id, ch, "sidebar");
+                      openRowMenuForPatient(e, c); // <- use the patient helper and pass the patient
                     }}
                   >
                     <FiMoreHorizontal size={16} />
