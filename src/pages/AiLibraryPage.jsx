@@ -1753,15 +1753,16 @@ function AssistantMessageBubble({ message }) {
     : [];
 
   // Only show sources that are actually cited, if citations exist.
+  // Only show sources that are actually cited.
   const normalizedSources = allNormalizedSources.filter((src) => {
     if (!src) return false;
 
-    // No explicit [L1]/[A1]/[W1] in the text: keep everything (legacy behavior)
+    // If there are no explicit [L1]/[A1]/[W1] tags in the text,
+    // treat it as "no references were used" and show nothing.
     if (!hasExplicitCitations) {
-      return true;
+      return false;
     }
 
-    // With explicit citations:
     if (!src.citationKey) {
       return false;
     }
