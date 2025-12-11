@@ -72,7 +72,7 @@ const Nav = styled.nav`
 `;
 
 // Button style link for "Log in"
-const LoginButton = styled(Link)`
+const LoginButton = styled.button`
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -85,12 +85,14 @@ const LoginButton = styled(Link)`
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+  cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease,
     transform 0.05s ease, box-shadow 0.15s ease;
 
   &:hover {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+    background: #ffffff;
+    color: #111827;
+    border-color: #2563eb;
     box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
     transform: translateY(-1px);
   }
@@ -115,9 +117,11 @@ const BurgerWrap = styled.div`
   }
 `;
 
-function Header() {
+function Header({ onLoginClick }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : breakpoint + 1
+  );
   const navigate = useNavigate();
 
   const handleResize = useCallback(() => {
@@ -128,6 +132,19 @@ function Header() {
     window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
   }, [handleResize]);
+
+  const handleLoginClick = useCallback(
+    (e) => {
+      e?.preventDefault?.();
+      if (onLoginClick) {
+        onLoginClick();
+      } else {
+        navigate("/login");
+      }
+      setIsOpen(false);
+    },
+    [onLoginClick, navigate]
+  );
 
   const toggleDropdown = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -165,7 +182,7 @@ function Header() {
 
       {/* Desktop nav */}
       <Nav>
-        <LoginButton to="/login">
+        <LoginButton type="button" onClick={handleLoginClick}>
           <FiLogIn />
           <span>Log in</span>
         </LoginButton>
@@ -173,7 +190,7 @@ function Header() {
 
       {/* Mobile dropdown */}
       {windowWidth <= breakpoint && (
-        <Dropdown show={isOpen} onToggle={handleToggle} align="end">
+        <Dropdown show={isOpen} onToggle={setIsOpen} align="end">
           <Dropdown.Toggle
             as={BurgerWrap}
             id="dropdown-basic"
@@ -183,9 +200,7 @@ function Header() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="/login">
-              Log in
-            </Dropdown.Item>
+            <Dropdown.Item onClick={handleLoginClick}>Log in</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       )}

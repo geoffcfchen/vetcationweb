@@ -1,96 +1,144 @@
+// src/pages/LoginPage.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button as BootstrapButton,
-  Alert,
-} from "react-bootstrap";
 import Footer from "../components/Footer";
 import { signIn } from "../lib/firebase";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-// Styled components
-const StyledLoginPage = styled.div`
-  background-color: #f0f2f5;
-  height: 100vh;
+const Page = styled.div`
+  min-height: 100vh;
+  background: #ffffff;
+  color: #111827;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BrandBar = styled.header`
+  padding: 20px 28px;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const Main = styled.main`
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 765px) {
-    flex-direction: column;
-    padding: 20px;
-  }
+  padding: 24px 16px 32px;
 `;
 
-const FixedSection = styled.div`
-  width: 400px; /* Set fixed width */
-  @media (max-width: 765px) {
-    width: 100%; /* For mobile view, allow full width */
-    text-align: center;
-  }
-`;
-
-const FacebookText = styled.div`
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 36px;
-  font-weight: bold;
-  color: #1877f2;
-  margin-bottom: 10px;
-`;
-
-const FacebookTagline = styled.div`
-  font-size: 20px;
-  color: #1c1e21;
-  margin-top: 10px;
-`;
-
-const InputField = styled(Form.Control)`
-  border-radius: 5px;
-  font-size: 17px;
-  padding: 14px;
-  width: 100%; /* Ensure the input field takes up the entire container */
-`;
-
-const PrimaryButton = styled(BootstrapButton).attrs({
-  variant: "primary",
-})`
-  background-color: #1877f2;
-  border-color: #1877f2;
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 6px;
+const Card = styled.div`
   width: 100%;
-  margin-top: 1rem;
+  max-width: 420px;
+`;
+
+const Title = styled.h1`
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 24px;
+`;
+
+const ErrorBanner = styled.div`
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+`;
+
+const FieldBlock = styled.div`
+  margin-bottom: 16px;
+`;
+
+const FieldLabel = styled.div`
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+`;
+
+const PillShell = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 10px 16px;
+  font-size: 14px;
+`;
+
+const EmailText = styled.span`
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const EditEmailButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2563eb;
+  cursor: pointer;
 
   &:hover {
-    background-color: #166fe5;
-    border-color: #166fe5;
+    text-decoration: underline;
   }
 `;
 
-const SuccessButton = styled(BootstrapButton).attrs({
-  variant: "success",
-})`
-  background-color: #42b72a;
-  border-color: #42b72a;
-  font-size: 17px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  width: 100%;
-  margin-top: 1rem;
+const InputShell = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  padding: 10px 16px;
+`;
 
-  &:hover {
-    background-color: #36a420;
-    border-color: #36a420;
+const TextInput = styled.input`
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #111827;
+
+  ::placeholder {
+    color: #9ca3af;
   }
 `;
 
-const LinkText = styled.a`
-  color: #1877f2;
+const IconButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 18px;
+`;
+
+const ErrorText = styled.div`
+  margin-top: 6px;
+  font-size: 12px;
+  color: #b91c1c;
+`;
+
+const ForgotPasswordLink = styled.a`
+  display: inline-block;
+  margin-top: 6px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: #2563eb;
   text-decoration: none;
 
   &:hover {
@@ -98,37 +146,86 @@ const LinkText = styled.a`
   }
 `;
 
-const Divider = styled.hr`
-  margin-top: 30px;
-  margin-bottom: 20px;
-  border-top: 1px solid #dadde1;
+const PrimaryButton = styled.button`
+  width: 100%;
+  margin-top: 4px;
+  border-radius: 999px;
+  border: none;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #111827;
+  color: #f9fafb;
+
+  &:hover {
+    background: #000000;
+  }
 `;
 
-const SmallText = styled.div`
-  color: #65676b;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 1rem;
-`;
-
-const LoginSection = styled.div`
-  display: grid;
-  grid-template-columns: 400px 400px; /* Fixed widths for both left and right parts */
-  gap: 50px;
+const DividerRow = styled.div`
+  display: flex;
   align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+  font-size: 11px;
+  color: #6b7280;
+`;
 
-  @media (max-width: 765px) {
-    grid-template-columns: 1fr;
-    gap: 20px;
+const DividerLine = styled.div`
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+`;
+
+const SecondaryButton = styled.button`
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #ffffff;
+  color: #111827;
+
+  &:hover {
+    background: #f9fafb;
+  }
+`;
+
+const TermsRow = styled.footer`
+  padding: 12px 0 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+`;
+
+const TermsLink = styled.a`
+  color: #6b7280;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const initialEmail = searchParams.get("email") || "";
+
+  const [email, setEmail] = useState(initialEmail);
+  const [isEditingEmail, setIsEditingEmail] = useState(!initialEmail);
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [loginFailed, setLoginFailed] = useState(false);
-  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -145,6 +242,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoginFailed(false);
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -155,90 +253,112 @@ function LoginPage() {
     try {
       const isSuccess = await signIn(email, password);
       if (isSuccess) {
-        navigate("/ai/library"); // Only navigate if sign-in is successful
+        navigate("/ai/library");
       } else {
-        setLoginFailed(true); // Set login failed to true if sign-in failed
+        setLoginFailed(true);
       }
     } catch (error) {
-      setLoginFailed(true); // Handle unexpected errors
+      setLoginFailed(true);
     }
   };
 
   return (
     <>
-      <StyledLoginPage>
-        <LoginSection>
-          {/* Left side with Vetcation Text */}
-          <FixedSection>
-            <div className="text-center">
-              <FacebookText>Vetcation</FacebookText>
-              <FacebookTagline>
-                Ask, connect, and learn from a community of licensed veterinary
-                experts on Vetcation.
-              </FacebookTagline>
-            </div>
-          </FixedSection>
+      <Page>
+        <BrandBar>Vetcation</BrandBar>
 
-          {/* Right side with Login Form */}
-          <FixedSection>
+        <Main>
+          <Card>
             {loginFailed && (
-              <Alert variant="danger">Invalid email or password.</Alert>
+              <ErrorBanner>Invalid email or password.</ErrorBanner>
             )}
-            <Form noValidate onSubmit={handleSubmit}>
-              <Form.Group controlId="formEmail">
-                <Form.Label className="sr-only">Email</Form.Label>
-                <InputField
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrors({ ...errors, email: null });
-                  }}
-                  isInvalid={!!errors.email}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
 
-              <Form.Group controlId="formPassword" className="mt-3">
-                <Form.Label className="sr-only">Password</Form.Label>
-                <InputField
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setErrors({ ...errors, password: null });
-                  }}
-                  isInvalid={!!errors.password}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
+            <Title>Enter your password</Title>
 
-              <PrimaryButton type="submit">Log In</PrimaryButton>
-            </Form>
+            <form onSubmit={handleSubmit} noValidate>
+              {/* Email block */}
+              <FieldBlock>
+                <FieldLabel>Email address</FieldLabel>
+                {isEditingEmail ? (
+                  <>
+                    <InputShell>
+                      <TextInput
+                        type="email"
+                        placeholder="name@example.com"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          setErrors((prev) => ({ ...prev, email: null }));
+                        }}
+                      />
+                    </InputShell>
+                    {errors.email && <ErrorText>{errors.email}</ErrorText>}
+                  </>
+                ) : (
+                  <PillShell>
+                    <EmailText title={email}>{email}</EmailText>
+                    <EditEmailButton
+                      type="button"
+                      onClick={() => setIsEditingEmail(true)}
+                    >
+                      Edit
+                    </EditEmailButton>
+                  </PillShell>
+                )}
+              </FieldBlock>
 
-            <div className="text-center mt-3">
-              <LinkText href="/forgot-password">Forgot password?</LinkText>
-            </div>
+              {/* Password block */}
+              <FieldBlock>
+                <FieldLabel>Password</FieldLabel>
+                <InputShell>
+                  <TextInput
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setErrors((prev) => ({ ...prev, password: null }));
+                    }}
+                  />
+                  <IconButton
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </IconButton>
+                </InputShell>
+                {errors.password && <ErrorText>{errors.password}</ErrorText>}
+              </FieldBlock>
 
-            <Divider />
+              <ForgotPasswordLink href="/forgot-password">
+                Forgot password?
+              </ForgotPasswordLink>
 
-            <div className="text-center">
-              <SuccessButton href="/register">Create new account</SuccessButton>
-            </div>
+              <PrimaryButton type="submit">Continue</PrimaryButton>
+            </form>
 
-            <SmallText>
-              <LinkText href="/create-page">Create a Page</LinkText> for a
-              celebrity, brand or business.
-            </SmallText>
-          </FixedSection>
-        </LoginSection>
-      </StyledLoginPage>
+            <DividerRow>
+              <DividerLine />
+              <span>OR</span>
+              <DividerLine />
+            </DividerRow>
+
+            <SecondaryButton type="button">
+              Log in with a one-time code
+            </SecondaryButton>
+          </Card>
+        </Main>
+
+        <TermsRow>
+          <TermsLink href="/terms">Terms of Use</TermsLink>
+          <span>|</span>
+          <TermsLink href="/privacy">Privacy Policy</TermsLink>
+        </TermsRow>
+      </Page>
+
       <Footer />
     </>
   );

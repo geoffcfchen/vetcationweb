@@ -34,6 +34,9 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import InviteSurvey from "./pages/InviteSurvey";
 import AiLibraryPage from "./pages/AiLibraryPage";
 import LoginPage from "./pages/LoginPage";
+import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
+import { auth } from "./lib/firebase";
+
 // import LoginPage from "./pages/LoginPage";
 
 // import LoginPage from "./pages/LoginPage";
@@ -247,46 +250,47 @@ function App() {
   const [isUserLoading, setIsUserLoading] = useState(true);
   const { setUserData } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // // Handle authentication state
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-  //     setIsUserLoading(true);
-  //     if (firebaseUser) {
-  //       try {
-  //         await firebaseUser.getIdToken(true); // Refresh token
-  //         setUser(firebaseUser);
-  //         await fetchUserData(firebaseUser.uid);
-  //       } catch (error) {
-  //         handleAuthError(error);
-  //       }
-  //     } else {
-  //       setUser(null);
-  //       setUserData(null);
-  //       navigate("/");
-  //     }
-  //     setIsUserLoading(false);
-  //   });
+  // Handle authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      setIsUserLoading(true);
+      if (firebaseUser) {
+        try {
+          await firebaseUser.getIdToken(true); // Refresh token
+          setUser(firebaseUser);
+          await fetchUserData(firebaseUser.uid);
+        } catch (error) {
+          handleAuthError(error);
+        }
+      } else {
+        setUser(null);
+        setUserData(null);
+        navigate("/");
+      }
+      setIsUserLoading(false);
+    });
 
-  //   return () => unsubscribe(); // Cleanup on unmount
-  // }, [setUserData, navigate, user]);
+    return () => unsubscribe(); // Cleanup on unmount
+  }, [setUserData, navigate, user]);
 
-  // // Fetch user data from Firestore
-  // async function fetchUserData(uid) {
-  //   try {
-  //     const userDocRef = doc(firestore, "customers", uid);
-  //     const docSnap = await getDoc(userDocRef);
+  // Fetch user data from Firestore
+  async function fetchUserData(uid) {
+    try {
+      const userDocRef = doc(firestore, "customers", uid);
+      const docSnap = await getDoc(userDocRef);
 
-  //     if (docSnap.exists()) {
-  //       setUserData(docSnap.data());
-  //     } else {
-  //       await setDoc(userDocRef, { hasCompletedProfile: false, uid });
-  //       setUserData({ hasCompletedProfile: false, uid });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // }
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      } else {
+        await setDoc(userDocRef, { hasCompletedProfile: false, uid });
+        setUserData({ hasCompletedProfile: false, uid });
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
 
   // // Handle authentication errors
   // function handleAuthError(error) {
@@ -306,6 +310,66 @@ function App() {
   //     }
   //   }
   // }
+
+  // // Check the result of a Google redirect on first load
+  // useEffect(() => {
+  //   // Guard for SSR just in case
+  //   if (typeof window === "undefined") return;
+
+  //   getRedirectResult(auth)
+  //     .then((result) => {
+  //       if (result) {
+  //         console.log("Google redirect result user:", result.user?.uid);
+  //       } else {
+  //         console.log("No redirect result (normal if not coming from Google)");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error("Google redirect error:", err);
+  //     });
+  // }, []);
+
+  // // NEW: simple global auth listener to handle post Google redirect
+  // // Handle auth state + post-Google redirect navigation
+  // useEffect(() => {
+  //   const unsub = onAuthStateChanged(auth, (firebaseUser) => {
+  //     console.log("[auth listener] fired. user:", firebaseUser?.uid || null);
+  //     console.log("[auth listener] current path:", location.pathname);
+  //     setUser(firebaseUser || null);
+
+  //     if (!firebaseUser) {
+  //       console.log("Auth state changed: no user");
+  //       return;
+  //     }
+
+  //     // 1) Prefer the path we explicitly stored before redirect
+  //     const stored = sessionStorage.getItem("postAuthRedirectPath");
+  //     console.log("[auth listener] stored redirect:", stored);
+  //     let target = stored || null;
+
+  //     // 2) If nothing stored, but user is on "/" or "/login",
+  //     //    treat this as "log in then go to /ai/library"
+  //     if (
+  //       !target &&
+  //       (location.pathname === "/" || location.pathname === "/login")
+  //     ) {
+  //       target = "/ai/library";
+  //     }
+
+  //     if (stored) {
+  //       sessionStorage.removeItem("postAuthRedirectPath");
+  //     }
+
+  //     // 3) Only navigate if we actually have a target and we're
+  //     //    not already there
+  //     if (target && location.pathname !== target) {
+  //       console.log("Auth listener navigating to:", target);
+  //       navigate(target, { replace: true });
+  //     }
+  //   });
+
+  //   return () => unsub();
+  // }, [navigate, location.pathname]);
 
   return (
     <HelmetProvider>

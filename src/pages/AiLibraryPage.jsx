@@ -15,8 +15,9 @@ import {
   FiShoppingBag,
   FiImage,
   FiMoreHorizontal,
-  FiEdit3, // <--- add this
-  FiGlobe, // NEW
+  FiEdit3,
+  FiGlobe,
+  FiLogOut, // NEW
 } from "react-icons/fi";
 import {
   Routes,
@@ -41,7 +42,7 @@ import {
   deleteDoc,
   setDoc, // NEW
 } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import {
   ref,
   uploadBytesResumable,
@@ -114,6 +115,7 @@ const Page = styled.div`
   color: #e5e7eb;
   overflow-x: hidden;
   overflow-y: hidden; /* NEW: prevent whole page from scrolling */
+  position: relative; /* NEW: for avatar menu positioning */
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
@@ -269,7 +271,7 @@ const NewPatientButton = styled.button`
 `;
 const PatientList = styled.div`
   margin-top: 8px;
-  max-height: 30vh; /* ✨ cap how tall the patient list can get */
+  max-height: 22vh; /* ✨ cap how tall the patient list can get */
   overflow-y: auto; /* ✨ make it scrollable */
   display: flex;
   flex-direction: column;
@@ -1069,6 +1071,59 @@ const AttachMenuDivider = styled.div`
   height: 1px;
   margin: 4px 0;
   background: #424242;
+`;
+
+// Top-right avatar container
+const TopRightUserShell = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+// Button that holds the avatar image
+const UserAvatarButton = styled.button`
+  border: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    outline: 2px solid #374151;
+  }
+`;
+
+const UserAvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+// Fallback initials if no photoURL
+const UserAvatarInitials = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+`;
+
+// Reuse AttachMenu styling, but position it under the avatar on the right
+const ProfileMenu = styled(AttachMenu)`
+  top: 44px;
+  bottom: auto;
+  right: 0;
+  left: auto;
+  width: 200px;
 `;
 
 const ContextMenuBackdrop = styled.div`
@@ -4084,6 +4139,8 @@ export default function AiLibraryPage() {
   const [sources, setSources] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
 
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
   const [showNewPatientModal, setShowNewPatientModal] = useState(false);
   const [newPatientName, setNewPatientName] = useState("");
 
@@ -4268,6 +4325,30 @@ export default function AiLibraryPage() {
 
     return () => unsub();
   }, [currentUser]);
+
+  const getUserInitials = () => {
+    if (!currentUser) return "";
+    const name = currentUser.displayName || currentUser.email || "";
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) {
+      return parts[0].charAt(0).toUpperCase();
+    }
+    return (
+      (parts[0].charAt(0) || "").toUpperCase() +
+      (parts[1].charAt(0) || "").toUpperCase()
+    );
+  };
+
+  const handleLogoutClick = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Error signing out:", err);
+    } finally {
+      setShowProfileMenu(false);
+      navigate("/"); // go back to main page
+    }
+  };
 
   const openRowMenuForPatient = (event, patient) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -4783,6 +4864,35 @@ export default function AiLibraryPage() {
   return (
     <>
       <Page>
+        {currentUser && (
+          <TopRightUserShell>
+            <div style={{ position: "relative" }}>
+              <UserAvatarButton
+                type="button"
+                onClick={() => setShowProfileMenu((open) => !open)}
+                aria-label="Account menu"
+              >
+                {currentUser.photoURL ? (
+                  <UserAvatarImage
+                    src={currentUser.photoURL}
+                    alt={currentUser.displayName || "Account"}
+                  />
+                ) : (
+                  <UserAvatarInitials>{getUserInitials()}</UserAvatarInitials>
+                )}
+              </UserAvatarButton>
+
+              {showProfileMenu && (
+                <ProfileMenu>
+                  <AttachMenuItem type="button" onClick={handleLogoutClick}>
+                    <FiLogOut />
+                    <span>Log out</span>
+                  </AttachMenuItem>
+                </ProfileMenu>
+              )}
+            </div>
+          </TopRightUserShell>
+        )}
         <Sidebar>
           <PatientsHeader>
             <PatientsTitle>Patients</PatientsTitle>

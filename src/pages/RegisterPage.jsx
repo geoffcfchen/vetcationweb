@@ -1,11 +1,12 @@
 // src/pages/RegisterPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import RegisterSection from "../components/RegisterSection";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ClinicsMapSection from "../components/ClinicsMapSection";
 import { IoLocationOutline, IoShieldCheckmarkSharp } from "react-icons/io5";
+import LoginModal from "../components/LoginModal";
 
 const MapShell = styled.section`
   background: #f8fafc;
@@ -108,9 +109,10 @@ const FinePrint = styled.p`
 `;
 
 function RegisterPage() {
+  const [showLogin, setShowLogin] = useState(false);
   return (
     <>
-      <Header />
+      <Header onLoginClick={() => setShowLogin(true)} />
       <RegisterSection />
 
       {/* —— Map Section Shell (copy + legend + compliance link) —— */}
@@ -155,6 +157,7 @@ function RegisterPage() {
       </MapShell>
 
       <Footer />
+      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
     </>
   );
 }
