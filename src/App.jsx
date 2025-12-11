@@ -248,7 +248,7 @@ function SeoForPath() {
 function App() {
   const [user, setUser] = useState(null);
   const [isUserLoading, setIsUserLoading] = useState(true);
-  const { setUserData } = useContext(GlobalContext);
+  const { setUserData, userData } = useContext(GlobalContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -336,6 +336,7 @@ function App() {
       console.log("[auth listener] fired. user:", firebaseUser?.uid || null);
       console.log("[auth listener] current path:", location.pathname);
       setUser(firebaseUser || null);
+      setUserData(firebaseUser || null);
 
       if (!firebaseUser) {
         console.log("Auth state changed: no user");

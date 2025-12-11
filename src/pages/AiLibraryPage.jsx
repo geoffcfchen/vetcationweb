@@ -1,5 +1,5 @@
 // src/pages/AiLibraryPage.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import {
   FiUpload,
@@ -56,6 +56,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
+import GlobalContext from "../context/GlobalContext";
 
 const AttachProgressRing = styled.div`
   width: 18px;
@@ -346,6 +347,30 @@ const PatientEmptyState = styled.div`
   font-size: 14px;
   color: #6b7280;
   padding: 4px 2px;
+`;
+
+const sidebarSpinner = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const SidebarLoadingRow = styled.div`
+  font-size: 14px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+`;
+
+const SmallSpinner = styled.div`
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid #4b5563;
+  border-top-color: #e5e7eb;
+  animation: ${sidebarSpinner} 0.7s linear infinite;
 `;
 
 /* Subchats nested under patient */
@@ -4134,6 +4159,7 @@ export default function AiLibraryPage() {
   const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState(null);
+  const { setUserData, userData } = useContext(GlobalContext);
   const [customerData, setCustomerData] = useState(null);
   const [cases, setCases] = useState([]);
   const [sources, setSources] = useState([]);
@@ -4161,6 +4187,9 @@ export default function AiLibraryPage() {
   const [personalChats, setPersonalChats] = useState([]);
   const [editingPersonalChatId, setEditingPersonalChatId] = useState(null);
   const [editingPersonalChatTitle, setEditingPersonalChatTitle] = useState("");
+  const [casesLoading, setCasesLoading] = useState(false);
+  const [sourcesLoading, setSourcesLoading] = useState(false);
+  const [personalChatsLoading, setPersonalChatsLoading] = useState(false);
 
   // track which personal chat is active from URL
   const personalChatMatch = location.pathname.match(
@@ -4179,6 +4208,13 @@ export default function AiLibraryPage() {
     /\/ai\/library\/p\/[^/]+\/c\/([^/]+)/
   );
   const activeChatIdFromUrl = chatMatch ? chatMatch[1] : null;
+
+  console.log("userData", userData);
+
+  //set currentUser as userData if userData change
+  useEffect(() => {
+    setCurrentUser(userData);
+  }, [userData]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -4233,7 +4269,13 @@ export default function AiLibraryPage() {
   }, [activeCaseIdFromUrl, activeCaseChats.length, cases]);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setCases([]);
+      setCasesLoading(false);
+      return;
+    }
+
+    setCasesLoading(true);
 
     const qCases = query(
       collection(firestore, "vetAiCases"),
@@ -4241,13 +4283,21 @@ export default function AiLibraryPage() {
       orderBy("createdAt", "desc")
     );
 
-    const unsub = onSnapshot(qCases, (snap) => {
-      const rows = [];
-      snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
-      );
-      setCases(rows);
-    });
+    const unsub = onSnapshot(
+      qCases,
+      (snap) => {
+        const rows = [];
+        snap.forEach((docSnap) =>
+          rows.push({ id: docSnap.id, ...docSnap.data() })
+        );
+        setCases(rows);
+        setCasesLoading(false);
+      },
+      (err) => {
+        console.error("Error loading cases:", err);
+        setCasesLoading(false);
+      }
+    );
 
     return () => unsub();
   }, [currentUser]);
@@ -4281,7 +4331,13 @@ export default function AiLibraryPage() {
   }, [currentUser, activeCaseIdFromUrl]);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setSources([]);
+      setSourcesLoading(false);
+      return;
+    }
+
+    setSourcesLoading(true);
 
     const qSources = query(
       collection(firestore, "vetLibrarySources"),
@@ -4289,13 +4345,21 @@ export default function AiLibraryPage() {
       orderBy("createdAt", "desc")
     );
 
-    const unsub = onSnapshot(qSources, (snap) => {
-      const rows = [];
-      snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
-      );
-      setSources(rows);
-    });
+    const unsub = onSnapshot(
+      qSources,
+      (snap) => {
+        const rows = [];
+        snap.forEach((docSnap) =>
+          rows.push({ id: docSnap.id, ...docSnap.data() })
+        );
+        setSources(rows);
+        setSourcesLoading(false);
+      },
+      (err) => {
+        console.error("Error loading sources:", err);
+        setSourcesLoading(false);
+      }
+    );
 
     return () => unsub();
   }, [currentUser]);
@@ -4303,8 +4367,11 @@ export default function AiLibraryPage() {
   useEffect(() => {
     if (!currentUser) {
       setPersonalChats([]);
+      setPersonalChatsLoading(false);
       return;
     }
+
+    setPersonalChatsLoading(true);
 
     const personalChatsCol = collection(
       firestore,
@@ -4315,13 +4382,21 @@ export default function AiLibraryPage() {
 
     const qPersonal = query(personalChatsCol, orderBy("createdAt", "desc"));
 
-    const unsub = onSnapshot(qPersonal, (snap) => {
-      const rows = [];
-      snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
-      );
-      setPersonalChats(rows);
-    });
+    const unsub = onSnapshot(
+      qPersonal,
+      (snap) => {
+        const rows = [];
+        snap.forEach((docSnap) =>
+          rows.push({ id: docSnap.id, ...docSnap.data() })
+        );
+        setPersonalChats(rows);
+        setPersonalChatsLoading(false);
+      },
+      (err) => {
+        console.error("Error loading personal chats:", err);
+        setPersonalChatsLoading(false);
+      }
+    );
 
     return () => unsub();
   }, [currentUser]);
@@ -4907,118 +4982,132 @@ export default function AiLibraryPage() {
           </PatientsHeader>
 
           <PatientList ref={patientListRef}>
-            {cases.length === 0 && (
+            {casesLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading patients...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!casesLoading && cases.length === 0 && (
               <PatientEmptyState>
                 No patients yet. Create one to start a case.
               </PatientEmptyState>
             )}
-            {cases.map((c) => (
-              <React.Fragment key={c.id}>
-                <PatientRow
-                  type="button"
-                  onClick={() => {
-                    if (editingPatientId === c.id) return;
-                    handleSelectCase(c.id);
-                  }}
-                  $active={c.id === activeCaseIdFromUrl && !activeChatIdFromUrl}
-                >
-                  <FiUser />
-                  <PatientName>
-                    {editingPatientId === c.id ? (
-                      <InlineEditInput
-                        value={editingPatientName}
-                        onChange={(e) => setEditingPatientName(e.target.value)}
-                        onKeyDown={handleInlinePatientKeyDown}
-                        onBlur={commitPatientRename}
-                        autoFocus
-                      />
-                    ) : (
-                      c.patientName || "Untitled patient"
-                    )}
-                  </PatientName>
 
-                  <RowMenuButton
+            {!casesLoading &&
+              cases.map((c) => (
+                <React.Fragment key={c.id}>
+                  <PatientRow
                     type="button"
-                    aria-label="Patient actions"
-                    $forceVisible={
-                      rowMenu &&
-                      rowMenu.kind === "patient" &&
-                      rowMenu.id === c.id
-                    }
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openRowMenuForPatient(e, c); // <- use the patient helper and pass the patient
+                    onClick={() => {
+                      if (editingPatientId === c.id) return;
+                      handleSelectCase(c.id);
                     }}
+                    $active={
+                      c.id === activeCaseIdFromUrl && !activeChatIdFromUrl
+                    }
                   >
-                    <FiMoreHorizontal size={16} />
-                  </RowMenuButton>
-                </PatientRow>
+                    <FiUser />
+                    <PatientName>
+                      {editingPatientId === c.id ? (
+                        <InlineEditInput
+                          value={editingPatientName}
+                          onChange={(e) =>
+                            setEditingPatientName(e.target.value)
+                          }
+                          onKeyDown={handleInlinePatientKeyDown}
+                          onBlur={commitPatientRename}
+                          autoFocus
+                        />
+                      ) : (
+                        c.patientName || "Untitled patient"
+                      )}
+                    </PatientName>
 
-                {c.id === activeCaseIdFromUrl && activeCaseChats.length > 0 && (
-                  <SubchatList>
-                    {activeCaseChats.map((ch) => {
-                      const baseTitle =
-                        ch.title ||
-                        (ch.lastMessagePreview
-                          ? ch.lastMessagePreview.slice(0, 36) + "..."
-                          : "Untitled chat");
+                    <RowMenuButton
+                      type="button"
+                      aria-label="Patient actions"
+                      $forceVisible={
+                        rowMenu &&
+                        rowMenu.kind === "patient" &&
+                        rowMenu.id === c.id
+                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openRowMenuForPatient(e, c); // <- use the patient helper and pass the patient
+                      }}
+                    >
+                      <FiMoreHorizontal size={16} />
+                    </RowMenuButton>
+                  </PatientRow>
 
-                      const isEditingSidebar =
-                        editingChatId === ch.id &&
-                        editingChatOrigin === "sidebar";
+                  {c.id === activeCaseIdFromUrl &&
+                    activeCaseChats.length > 0 && (
+                      <SubchatList>
+                        {activeCaseChats.map((ch) => {
+                          const baseTitle =
+                            ch.title ||
+                            (ch.lastMessagePreview
+                              ? ch.lastMessagePreview.slice(0, 36) + "..."
+                              : "Untitled chat");
 
-                      const displayTitle = isEditingSidebar
-                        ? editingChatTitle
-                        : baseTitle;
+                          const isEditingSidebar =
+                            editingChatId === ch.id &&
+                            editingChatOrigin === "sidebar";
 
-                      return (
-                        <SubchatRow
-                          key={ch.id}
-                          type="button"
-                          onClick={() => {
-                            if (editingChatId === ch.id) return;
-                            handleOpenSubchat(c.id, ch.id);
-                          }}
-                          $active={ch.id === activeChatIdFromUrl}
-                        >
-                          <SubchatTitle title={displayTitle}>
-                            {isEditingSidebar ? (
-                              <InlineEditInput
-                                value={editingChatTitle}
-                                onChange={(e) =>
-                                  setEditingChatTitle(e.target.value)
+                          const displayTitle = isEditingSidebar
+                            ? editingChatTitle
+                            : baseTitle;
+
+                          return (
+                            <SubchatRow
+                              key={ch.id}
+                              type="button"
+                              onClick={() => {
+                                if (editingChatId === ch.id) return;
+                                handleOpenSubchat(c.id, ch.id);
+                              }}
+                              $active={ch.id === activeChatIdFromUrl}
+                            >
+                              <SubchatTitle title={displayTitle}>
+                                {isEditingSidebar ? (
+                                  <InlineEditInput
+                                    value={editingChatTitle}
+                                    onChange={(e) =>
+                                      setEditingChatTitle(e.target.value)
+                                    }
+                                    onKeyDown={handleInlineChatKeyDown}
+                                    onBlur={commitChatRename}
+                                    autoFocus
+                                  />
+                                ) : (
+                                  displayTitle
+                                )}
+                              </SubchatTitle>
+
+                              <RowMenuButton
+                                type="button"
+                                aria-label="Chat actions"
+                                $forceVisible={
+                                  rowMenu &&
+                                  rowMenu.kind === "chat" &&
+                                  rowMenu.id === ch.id
                                 }
-                                onKeyDown={handleInlineChatKeyDown}
-                                onBlur={commitChatRename}
-                                autoFocus
-                              />
-                            ) : (
-                              displayTitle
-                            )}
-                          </SubchatTitle>
-
-                          <RowMenuButton
-                            type="button"
-                            aria-label="Chat actions"
-                            $forceVisible={
-                              rowMenu &&
-                              rowMenu.kind === "chat" &&
-                              rowMenu.id === ch.id
-                            }
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openRowMenuForChat(e, c.id, ch);
-                            }}
-                          >
-                            <FiMoreHorizontal size={16} />
-                          </RowMenuButton>
-                        </SubchatRow>
-                      );
-                    })}
-                  </SubchatList>
-                )}
-              </React.Fragment>
-            ))}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openRowMenuForChat(e, c.id, ch);
+                                }}
+                              >
+                                <FiMoreHorizontal size={16} />
+                              </RowMenuButton>
+                            </SubchatRow>
+                          );
+                        })}
+                      </SubchatList>
+                    )}
+                </React.Fragment>
+              ))}
           </PatientList>
 
           <SectionDivider />
@@ -5036,67 +5125,75 @@ export default function AiLibraryPage() {
           </PatientsHeader>
 
           <PersonalChatList>
-            {personalChats.length === 0 && (
+            {personalChatsLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading notebook chats...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!personalChatsLoading && personalChats.length === 0 && (
               <PatientEmptyState>
                 No personal chats yet. Ask a question to start one.
               </PatientEmptyState>
             )}
-            {personalChats.map((chat) => {
-              const baseTitle =
-                chat.title ||
-                (chat.lastMessagePreview
-                  ? chat.lastMessagePreview.slice(0, 36) + "..."
-                  : "Untitled chat");
-              const displayTitle =
-                editingPersonalChatId === chat.id
-                  ? editingPersonalChatTitle
-                  : baseTitle;
+            {!personalChatsLoading &&
+              personalChats.map((chat) => {
+                const baseTitle =
+                  chat.title ||
+                  (chat.lastMessagePreview
+                    ? chat.lastMessagePreview.slice(0, 36) + "..."
+                    : "Untitled chat");
+                const displayTitle =
+                  editingPersonalChatId === chat.id
+                    ? editingPersonalChatTitle
+                    : baseTitle;
 
-              return (
-                <PersonalChatRow
-                  key={chat.id}
-                  type="button"
-                  onClick={() => {
-                    if (editingPersonalChatId === chat.id) return;
-                    handleSelectPersonalChat(chat.id);
-                  }}
-                  $active={chat.id === activePersonalChatIdFromUrl}
-                >
-                  <FiFileText />
-                  <PersonalChatTitle title={displayTitle}>
-                    {editingPersonalChatId === chat.id ? (
-                      <InlineEditInput
-                        value={editingPersonalChatTitle}
-                        onChange={(e) =>
-                          setEditingPersonalChatTitle(e.target.value)
-                        }
-                        onKeyDown={handleInlinePersonalChatKeyDown}
-                        onBlur={commitPersonalChatRename}
-                        autoFocus
-                      />
-                    ) : (
-                      displayTitle
-                    )}
-                  </PersonalChatTitle>
-
-                  <RowMenuButton
+                return (
+                  <PersonalChatRow
+                    key={chat.id}
                     type="button"
-                    aria-label="Personal chat actions"
-                    $forceVisible={
-                      rowMenu &&
-                      rowMenu.kind === "personal" &&
-                      rowMenu.id === chat.id
-                    }
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openRowMenuForPersonalChat(e, chat);
+                    onClick={() => {
+                      if (editingPersonalChatId === chat.id) return;
+                      handleSelectPersonalChat(chat.id);
                     }}
+                    $active={chat.id === activePersonalChatIdFromUrl}
                   >
-                    <FiMoreHorizontal size={16} />
-                  </RowMenuButton>
-                </PersonalChatRow>
-              );
-            })}
+                    <FiFileText />
+                    <PersonalChatTitle title={displayTitle}>
+                      {editingPersonalChatId === chat.id ? (
+                        <InlineEditInput
+                          value={editingPersonalChatTitle}
+                          onChange={(e) =>
+                            setEditingPersonalChatTitle(e.target.value)
+                          }
+                          onKeyDown={handleInlinePersonalChatKeyDown}
+                          onBlur={commitPersonalChatRename}
+                          autoFocus
+                        />
+                      ) : (
+                        displayTitle
+                      )}
+                    </PersonalChatTitle>
+
+                    <RowMenuButton
+                      type="button"
+                      aria-label="Personal chat actions"
+                      $forceVisible={
+                        rowMenu &&
+                        rowMenu.kind === "personal" &&
+                        rowMenu.id === chat.id
+                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openRowMenuForPersonalChat(e, chat);
+                      }}
+                    >
+                      <FiMoreHorizontal size={16} />
+                    </RowMenuButton>
+                  </PersonalChatRow>
+                );
+              })}
           </PersonalChatList>
 
           <SectionDivider />
@@ -5143,68 +5240,78 @@ export default function AiLibraryPage() {
           </SectionHeaderRow>
 
           <SourceList>
-            {sources.length === 0 && (
+            {sourcesLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading library...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!sourcesLoading && sources.length === 0 && (
               <EmptyState>
                 No PDFs yet. Upload a textbook or paper to get started.
               </EmptyState>
             )}
-            {sources.map((s) => {
-              const created =
-                s.createdAt && s.createdAt.toDate ? s.createdAt.toDate() : null;
+            {!sourcesLoading &&
+              sources.map((s) => {
+                const created =
+                  s.createdAt && s.createdAt.toDate
+                    ? s.createdAt.toDate()
+                    : null;
 
-              let statusContent = null;
-              if (s.status === "ready") {
-                statusContent = (
-                  <>
-                    <FiCheckCircle /> Indexed
-                  </>
-                );
-              } else if (s.status === "error") {
-                statusContent = (
-                  <>
-                    <FiAlertCircle /> Error
-                  </>
-                );
-              } else if (s.status === "processing") {
-                statusContent = "Processing";
-              } else if (s.status === "uploaded") {
-                statusContent = "Waiting to process";
-              } else {
-                statusContent = s.status || "Unknown";
-              }
+                let statusContent = null;
+                if (s.status === "ready") {
+                  statusContent = (
+                    <>
+                      <FiCheckCircle /> Indexed
+                    </>
+                  );
+                } else if (s.status === "error") {
+                  statusContent = (
+                    <>
+                      <FiAlertCircle /> Error
+                    </>
+                  );
+                } else if (s.status === "processing") {
+                  statusContent = "Processing";
+                } else if (s.status === "uploaded") {
+                  statusContent = "Waiting to process";
+                } else {
+                  statusContent = s.status || "Unknown";
+                }
 
-              return (
-                <SourceRow key={s.id}>
-                  <FiFileText />
-                  <SourceMain>
-                    <SourceTitle title={s.title}>{s.title}</SourceTitle>
-                    <SourceMeta>
-                      <Status $status={s.status}>{statusContent}</Status>
-                      {created && (
-                        <>
-                          {" "}
-                          •{" "}
-                          {created.toLocaleDateString(undefined, {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
-                        </>
-                      )}
-                    </SourceMeta>
-                  </SourceMain>
-                  <SourceActions>
-                    <IconButton
-                      type="button"
-                      onClick={() => handleDeleteSource(s)}
-                      title="Remove from library"
-                    >
-                      <FiTrash2 />
-                    </IconButton>
-                  </SourceActions>
-                </SourceRow>
-              );
-            })}
+                return (
+                  <SourceRow key={s.id}>
+                    <FiFileText />
+                    <SourceMain>
+                      <SourceTitle title={s.title}>{s.title}</SourceTitle>
+                      <SourceMeta>
+                        <Status $status={s.status}>{statusContent}</Status>
+                        {created && (
+                          <>
+                            {" "}
+                            •{" "}
+                            {created.toLocaleDateString(undefined, {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </>
+                        )}
+                      </SourceMeta>
+                    </SourceMain>
+                    <SourceActions>
+                      <IconButton
+                        type="button"
+                        onClick={() => handleDeleteSource(s)}
+                        title="Remove from library"
+                      >
+                        <FiTrash2 />
+                      </IconButton>
+                    </SourceActions>
+                  </SourceRow>
+                );
+              })}
           </SourceList>
         </Sidebar>
 
