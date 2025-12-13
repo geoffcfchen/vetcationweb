@@ -253,7 +253,7 @@ const ProjectsTitle = styled.div`
 const NewProjectButton = styled.button`
   border: none;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 4px 10px; //
   font-size: 14px; /* was 12px */
   display: inline-flex;
   align-items: center;
@@ -272,7 +272,7 @@ const NewProjectButton = styled.button`
   }
 `;
 const ProjectList = styled.div`
-  margin-top: 8px;
+  margin-top: 0px;
   max-height: 22vh; /* ✨ cap how tall the patient list can get */
   overflow-y: auto; /* ✨ make it scrollable */
   display: flex;
@@ -391,7 +391,7 @@ const SubchatTitle = styled.span`
 `;
 
 const PersonalChatList = styled.div`
-  margin-top: 8px;
+  margin-top: 0px;
   max-height: 22vh;
   overflow-y: auto;
   display: flex;
@@ -482,9 +482,9 @@ const InlineEditInput = styled.input`
 `;
 
 const SectionDivider = styled.div`
-  height: 1px;
+  height: 0.2px;
   background: #303030;
-  margin: 8px 0 4px;
+  margin: 0px 0 0px; //
 `;
 
 const SectionHeaderRow = styled.div`
@@ -553,7 +553,7 @@ const SourceList = styled.div`
   flex-direction: column;
   gap: 8px;
   padding-right: 4px;
-  margin-top: 8px;
+  margin-top: 0px;
 `;
 
 const SourceRow = styled.div`
