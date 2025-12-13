@@ -1088,6 +1088,8 @@ const SourcePartsMenu = styled(AttachMenu)`
   position: fixed; /* break out of the sidebar */
   z-index: 60; /* above chat pane (AttachMenu is 30) */
   width: 320px; /* a bit wider than the status chip menu */
+  max-height: 320px; /* or 40vh, pick what feels better */
+  overflow-y: auto; /* makes the menu scroll if content is too tall */
 
   /* Absolute screen coordinates from state */
   left: ${(p) => (p.$left != null ? `${p.$left}px` : "0px")};
