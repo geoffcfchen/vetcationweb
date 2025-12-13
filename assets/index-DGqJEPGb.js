@@ -7438,7 +7438,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 `,h3=V.button`
   border: none;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 4px 10px; //
   font-size: 14px; /* was 12px */
   display: inline-flex;
   align-items: center;
@@ -7456,7 +7456,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     cursor: default;
   }
 `,Fke=V.div`
-  margin-top: 8px;
+  margin-top: 0px;
   max-height: 22vh; /* ✨ cap how tall the patient list can get */
   overflow-y: auto; /* ✨ make it scrollable */
   display: flex;
@@ -7553,7 +7553,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 
   padding-right: 2px; /* keep space for the three-dot button if you have it */
 `,Hke=V.div`
-  margin-top: 8px;
+  margin-top: 0px;
   max-height: 22vh;
   overflow-y: auto;
   display: flex;
@@ -7633,9 +7633,9 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   outline: none;
   width: 100%;
 `,RP=V.div`
-  height: 1px;
+  height: 0.2px;
   background: #303030;
-  margin: 8px 0 4px;
+  margin: 0px 0 0px; //
 `,Wke=V.div`
   display: flex;
   flex-direction: column;
@@ -7688,7 +7688,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   flex-direction: column;
   gap: 8px;
   padding-right: 4px;
-  margin-top: 8px;
+  margin-top: 0px;
 `,Xke=V.div`
   display: flex;
   align-items: flex-start;
