@@ -17,7 +17,8 @@ import {
   FiMoreHorizontal,
   FiEdit3,
   FiGlobe,
-  FiLogOut, // NEW
+  FiLogOut,
+  FiRefreshCw, // NEW
 } from "react-icons/fi";
 import {
   Routes,
@@ -592,6 +593,7 @@ const SourceRow = styled.div`
   border-radius: 10px;
   background: #181818; /* was #020617 */
   border: 1px solid #303030;
+  position: relative; /* so we can anchor the parts menu */
 `;
 
 const SourceMain = styled.div`
@@ -624,12 +626,6 @@ const Status = styled.span`
       : p.$status === "error"
       ? "#f97316"
       : "#9ca3af"};
-`;
-
-const SourceActions = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 4px;
 `;
 
 const IconButton = styled.button`
@@ -1096,6 +1092,75 @@ const AttachMenuDivider = styled.div`
   height: 1px;
   margin: 4px 0;
   background: #424242;
+`;
+
+const SourceActions = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+`;
+
+const SourceStatusButton = styled.button`
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+`;
+
+const SourcePartsMenu = styled(AttachMenu)`
+  position: fixed; /* break out of the sidebar */
+  z-index: 60; /* above chat pane (AttachMenu is 30) */
+  width: 320px; /* a bit wider than the status chip menu */
+
+  /* Absolute screen coordinates from state */
+  left: ${(p) => (p.$left != null ? `${p.$left}px` : "0px")};
+  top: ${(p) => (p.$top != null ? `${p.$top}px` : "0px")};
+  bottom: auto;
+`;
+
+const SourcePartRow = styled.div`
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+`;
+
+const SourcePartText = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const SourcePartTitle = styled.div`
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const SourcePartMeta = styled.div`
+  font-size: 12px;
+  color: #9ca3af;
+`;
+
+const SourcePartRetryButton = styled.button`
+  border: none;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #ef4444;
+  color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background: #f97373;
+  }
 `;
 
 // Top-right avatar container
@@ -4190,6 +4255,11 @@ export default function AiLibraryPage() {
   const [casesLoading, setCasesLoading] = useState(false);
   const [sourcesLoading, setSourcesLoading] = useState(false);
   const [personalChatsLoading, setPersonalChatsLoading] = useState(false);
+  const [openSourceId, setOpenSourceId] = useState(null);
+  const [openSourceParts, setOpenSourceParts] = useState([]);
+  const [openSourcePartsLoading, setOpenSourcePartsLoading] = useState(false);
+  const [sourceMenuPosition, setSourceMenuPosition] = useState(null); // { left, top }
+  //   const [sourceMenuDirection, setSourceMenuDirection] = useState("down");
 
   // track which personal chat is active from URL
   const personalChatMatch = location.pathname.match(
@@ -4363,6 +4433,42 @@ export default function AiLibraryPage() {
 
     return () => unsub();
   }, [currentUser]);
+
+  // Load parts for the source whose details menu is open
+  useEffect(() => {
+    if (!openSourceId || !currentUser) {
+      setOpenSourceParts([]);
+      return;
+    }
+
+    const partsCol = collection(
+      firestore,
+      "vetLibrarySources",
+      openSourceId,
+      "parts"
+    );
+    const qParts = query(partsCol, orderBy("partIndex", "asc"));
+
+    setOpenSourcePartsLoading(true);
+
+    const unsub = onSnapshot(
+      qParts,
+      (snap) => {
+        const rows = [];
+        snap.forEach((docSnap) =>
+          rows.push({ id: docSnap.id, ...docSnap.data() })
+        );
+        setOpenSourceParts(rows);
+        setOpenSourcePartsLoading(false);
+      },
+      (err) => {
+        console.error("Error loading source parts:", err);
+        setOpenSourcePartsLoading(false);
+      }
+    );
+
+    return () => unsub();
+  }, [openSourceId, currentUser]);
 
   useEffect(() => {
     if (!currentUser) {
@@ -4911,9 +5017,13 @@ export default function AiLibraryPage() {
         async () => {
           const url = await getDownloadURL(storageRef);
           await updateDoc(srcDocRef, {
-            status: "processing",
+            status: "uploaded", // IMPORTANT: leave it in 'uploaded'
             filePath: path,
             downloadUrl: url,
+            overallProgress: 0,
+            pageCount: null,
+            chunkCount: null,
+            errorMessage: null,
             updatedAt: serverTimestamp(),
           });
           setIsUploading(false);
@@ -4922,6 +5032,81 @@ export default function AiLibraryPage() {
     } catch (err) {
       console.error("Upload failed:", err);
       setIsUploading(false);
+    }
+  };
+
+  const handleToggleSourceMenu = (sourceId, event) => {
+    // Close if clicking the same source again
+    if (openSourceId === sourceId) {
+      setOpenSourceId(null);
+      setSourceMenuPosition(null);
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const menuWidth = 320;
+    const margin = 8;
+
+    // Start directly under the "Indexed" chip
+    let left = rect.left;
+    let top = rect.bottom + margin;
+
+    // Clamp horizontally so the menu stays in the viewport
+    if (left + menuWidth > window.innerWidth - margin) {
+      left = window.innerWidth - menuWidth - margin;
+    }
+    if (left < margin) {
+      left = margin;
+    }
+
+    setOpenSourceId(sourceId);
+    setSourceMenuPosition({ left, top });
+  };
+
+  const handleRetryPart = async (sourceId, partId) => {
+    try {
+      const partRef = doc(
+        firestore,
+        "vetLibrarySources",
+        sourceId,
+        "parts",
+        partId
+      );
+      await updateDoc(partRef, {
+        status: "pending",
+        progress: 0,
+        errorMessage: null,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Failed to retry part indexing:", err);
+      alert("Could not retry this part. Please try again.");
+    }
+  };
+
+  const handleRetryAllFailedParts = async (sourceId) => {
+    try {
+      if (sourceId !== openSourceId) return;
+
+      const failedParts = openSourceParts.filter((p) => p.status === "error");
+      if (!failedParts.length) return;
+
+      await Promise.all(
+        failedParts.map((p) =>
+          updateDoc(
+            doc(firestore, "vetLibrarySources", sourceId, "parts", p.id),
+            {
+              status: "pending",
+              progress: 0,
+              errorMessage: null,
+              updatedAt: serverTimestamp(),
+            }
+          )
+        )
+      );
+    } catch (err) {
+      console.error("Failed to retry all failed parts:", err);
+      alert("Could not retry all failed parts. Please try again.");
     }
   };
 
@@ -4969,7 +5154,7 @@ export default function AiLibraryPage() {
           </TopRightUserShell>
         )}
         <Sidebar>
-          <PatientsHeader>
+          {/* <PatientsHeader>
             <PatientsTitle>Patients</PatientsTitle>
             <NewPatientButton
               type="button"
@@ -4979,8 +5164,8 @@ export default function AiLibraryPage() {
               <FiPlus />
               New
             </NewPatientButton>
-          </PatientsHeader>
-
+          </PatientsHeader> */}
+          {/* 
           <PatientList ref={patientListRef}>
             {casesLoading && currentUser && (
               <SidebarLoadingRow>
@@ -5110,7 +5295,7 @@ export default function AiLibraryPage() {
               ))}
           </PatientList>
 
-          <SectionDivider />
+          <SectionDivider /> */}
 
           <PatientsHeader>
             <PatientsTitle>Notebook chats</PatientsTitle>
@@ -5239,7 +5424,7 @@ export default function AiLibraryPage() {
             </LibraryHint>
           </SectionHeaderRow>
 
-          <SourceList>
+          {/* <SourceList>
             {sourcesLoading && currentUser && (
               <SidebarLoadingRow>
                 <SmallSpinner />
@@ -5309,6 +5494,264 @@ export default function AiLibraryPage() {
                         <FiTrash2 />
                       </IconButton>
                     </SourceActions>
+                  </SourceRow>
+                );
+              })}
+          </SourceList> */}
+          <SourceList>
+            {sourcesLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading library...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!sourcesLoading && sources.length === 0 && (
+              <EmptyState>
+                No PDFs yet. Upload a textbook or paper to get started.
+              </EmptyState>
+            )}
+
+            {!sourcesLoading &&
+              sources.map((s) => {
+                const created =
+                  s.createdAt && s.createdAt.toDate
+                    ? s.createdAt.toDate()
+                    : null;
+
+                const rawPercent =
+                  typeof s.overallProgress === "number"
+                    ? s.overallProgress
+                    : s.status === "ready"
+                    ? 100
+                    : 0;
+                const percent = Math.max(
+                  0,
+                  Math.min(100, Math.round(rawPercent))
+                );
+
+                let statusLabel;
+                if (s.status === "ready") {
+                  statusLabel = "Indexed";
+                } else if (s.status === "splitting") {
+                  statusLabel = "Splitting...";
+                } else if (s.status === "processing") {
+                  statusLabel = "Indexing...";
+                } else if (s.status === "partial_error") {
+                  statusLabel = "Partial error";
+                } else if (s.status === "error") {
+                  statusLabel = "Error";
+                } else if (s.status === "uploaded") {
+                  statusLabel = "Waiting";
+                } else {
+                  statusLabel = s.status || "Unknown";
+                }
+
+                let statusContent = null;
+
+                if (s.status === "ready") {
+                  statusContent = (
+                    <>
+                      <AttachProgressRing $percent={100}>
+                        <AttachProgressInner>
+                          <FiCheckCircle size={10} />
+                        </AttachProgressInner>
+                      </AttachProgressRing>
+                      <span style={{ marginLeft: 6 }}>{statusLabel}</span>
+                    </>
+                  );
+                } else if (
+                  s.status === "processing" ||
+                  s.status === "splitting" ||
+                  s.status === "partial_error"
+                ) {
+                  statusContent = (
+                    <>
+                      <AttachProgressRing $percent={percent}>
+                        <AttachProgressInner>{percent}%</AttachProgressInner>
+                      </AttachProgressRing>
+                      <span style={{ marginLeft: 6 }}>{statusLabel}</span>
+                    </>
+                  );
+                } else if (s.status === "error") {
+                  statusContent = (
+                    <>
+                      <AttachProgressRing $percent={percent}>
+                        <AttachProgressInner>!</AttachProgressInner>
+                      </AttachProgressRing>
+                      <span style={{ marginLeft: 6 }}>Error</span>
+                    </>
+                  );
+                } else {
+                  statusContent = statusLabel;
+                }
+
+                const hasFailedPart =
+                  openSourceId === s.id &&
+                  openSourceParts.some((p) => p.status === "error");
+
+                return (
+                  <SourceRow key={s.id}>
+                    <FiFileText />
+                    <SourceMain>
+                      <SourceTitle title={s.title}>{s.title}</SourceTitle>
+                      <SourceMeta>
+                        <SourceStatusButton
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleSourceMenu(s.id, e); // pass event
+                          }}
+                        >
+                          <Status $status={s.status}>{statusContent}</Status>
+                        </SourceStatusButton>
+                        {created && (
+                          <>
+                            {" "}
+                            •{" "}
+                            {created.toLocaleDateString(undefined, {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </>
+                        )}
+                      </SourceMeta>
+                    </SourceMain>
+                    <SourceActions>
+                      <IconButton
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteSource(s);
+                        }}
+                        title="Remove from library"
+                      >
+                        <FiTrash2 />
+                      </IconButton>
+                    </SourceActions>
+
+                    {openSourceId === s.id && sourceMenuPosition && (
+                      <SourcePartsMenu
+                        $top={sourceMenuPosition.top}
+                        $left={sourceMenuPosition.left}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <AttachMenuItem type="button" disabled>
+                          <FiFileText />
+                          <span>{s.title || s.fileName || "Untitled PDF"}</span>
+                        </AttachMenuItem>
+                        <AttachMenuDivider />
+
+                        {openSourcePartsLoading && (
+                          <div
+                            style={{
+                              padding: "8px 14px",
+                              fontSize: 13,
+                              color: "#9ca3af",
+                            }}
+                          >
+                            Loading parts...
+                          </div>
+                        )}
+
+                        {!openSourcePartsLoading &&
+                          openSourceParts.length === 0 && (
+                            <div
+                              style={{
+                                padding: "8px 14px",
+                                fontSize: 13,
+                                color: "#9ca3af",
+                              }}
+                            >
+                              No parts found yet.
+                            </div>
+                          )}
+                        {!openSourcePartsLoading &&
+                          openSourceParts.map((p) => {
+                            const partPercent =
+                              typeof p.progress === "number"
+                                ? Math.max(
+                                    0,
+                                    Math.min(100, Math.round(p.progress))
+                                  )
+                                : 0;
+
+                            const partLabel =
+                              p.status === "ready"
+                                ? "Indexed"
+                                : p.status === "processing"
+                                ? "Indexing..."
+                                : p.status === "pending"
+                                ? "Queued"
+                                : p.status === "error"
+                                ? "Error"
+                                : p.status || "Unknown";
+
+                            return (
+                              <SourcePartRow key={p.id}>
+                                <AttachProgressRing $percent={partPercent}>
+                                  <AttachProgressInner>
+                                    {p.status === "ready" ? (
+                                      <FiCheckCircle size={10} />
+                                    ) : p.status === "error" ? (
+                                      "!"
+                                    ) : (
+                                      `${partPercent}%`
+                                    )}
+                                  </AttachProgressInner>
+                                </AttachProgressRing>
+
+                                <SourcePartText>
+                                  <SourcePartTitle>
+                                    Part {p.partIndex + 1}
+                                    {typeof p.pageStart === "number" &&
+                                      typeof p.pageEnd === "number" && (
+                                        <span>
+                                          {" "}
+                                          (pages {p.pageStart}-{p.pageEnd})
+                                        </span>
+                                      )}
+                                  </SourcePartTitle>
+                                  <SourcePartMeta>
+                                    {partLabel}
+                                    {p.chunkCount != null &&
+                                      ` • ${p.chunkCount} chunks`}
+                                  </SourcePartMeta>
+                                </SourcePartText>
+
+                                {p.status === "error" && (
+                                  <SourcePartRetryButton
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleRetryPart(s.id, p.id);
+                                    }}
+                                  >
+                                    Retry
+                                  </SourcePartRetryButton>
+                                )}
+                              </SourcePartRow>
+                            );
+                          })}
+
+                        {!openSourcePartsLoading && hasFailedPart && (
+                          <>
+                            <AttachMenuDivider />
+                            <AttachMenuItem
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRetryAllFailedParts(s.id);
+                              }}
+                            >
+                              <FiRefreshCw />
+                              <span>Retry all failed parts</span>
+                            </AttachMenuItem>
+                          </>
+                        )}
+                      </SourcePartsMenu>
+                    )}
                   </SourceRow>
                 );
               })}
