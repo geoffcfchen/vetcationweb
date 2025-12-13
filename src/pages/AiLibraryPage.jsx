@@ -236,13 +236,13 @@ const ModalPrimaryButton = styled.button`
 `;
 /* Patients */
 
-const PatientsHeader = styled.div`
+const ProjectsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const PatientsTitle = styled.div`
+const ProjectsTitle = styled.div`
   font-size: 15px; /* was 13px */
   font-weight: 600;
 
@@ -250,7 +250,7 @@ const PatientsTitle = styled.div`
   color: #9ca3af;
 `;
 
-const NewPatientButton = styled.button`
+const NewProjectButton = styled.button`
   border: none;
   border-radius: 999px;
   padding: 4px 10px;
@@ -271,7 +271,7 @@ const NewPatientButton = styled.button`
     cursor: default;
   }
 `;
-const PatientList = styled.div`
+const ProjectList = styled.div`
   margin-top: 8px;
   max-height: 22vh; /* ✨ cap how tall the patient list can get */
   overflow-y: auto; /* ✨ make it scrollable */
@@ -280,7 +280,7 @@ const PatientList = styled.div`
   gap: 4px;
 `;
 
-const PatientRow = styled.button`
+const ProjectRow = styled.button`
   width: 100%;
   border: none;
   border-radius: 8px;
@@ -305,7 +305,7 @@ const PatientRow = styled.button`
   }
 `;
 
-const PatientName = styled.span`
+const ProjectName = styled.span`
   flex: 1;
   min-width: 0;
   display: block;
@@ -315,36 +315,7 @@ const PatientName = styled.span`
   padding-right: 28px; /* reserve space for the three dots */
 `;
 
-const RowMenu = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 32px;
-  transform: translateY(-50%);
-  background: #181818;
-  border-radius: 8px;
-  border: 1px solid #303030;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-  padding: 4px 0;
-  min-width: 140px;
-  z-index: 25;
-`;
-
-const RowMenuItem = styled.button`
-  width: 100%;
-  border: none;
-  background: transparent;
-  color: #e5e7eb;
-  font-size: 14px;
-  text-align: left;
-  padding: 6px 10px;
-  cursor: pointer;
-
-  &:hover {
-    background: #303030;
-  }
-`;
-
-const PatientEmptyState = styled.div`
+const ProjectEmptyState = styled.div`
   font-size: 14px;
   color: #6b7280;
   padding: 4px 2px;
@@ -485,7 +456,7 @@ const RowMenuButton = styled.button`
   transition: opacity 0.15s ease;
 
   /* always show on hover */
-  ${PatientRow}:hover &,
+  ${ProjectRow}:hover &,
   ${SubchatRow}:hover &,
   ${PersonalChatRow}:hover &,
   .chat-list-item:hover & {
@@ -533,7 +504,7 @@ const SidebarCount = styled.div`
   color: #6b7280;
 `;
 
-const LibraryUploadButton = styled(NewPatientButton)`
+const LibraryUploadButton = styled(NewProjectButton)`
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -3271,7 +3242,7 @@ function ChatShell({
       return;
     }
     if (!caseId) {
-      alert("Create or select a patient first.");
+      alert("Create or select a project first.");
       return;
     }
     setIsWebSearchEnabled(true);
@@ -3381,7 +3352,7 @@ function ChatShell({
       return;
     }
     if (!caseId) {
-      alert("Create or select a patient first.");
+      alert("Create or select a project first.");
       return;
     }
     setAttachMenuOpen((open) => !open);
@@ -3403,7 +3374,7 @@ function ChatShell({
       return;
     }
     if (!caseId) {
-      alert("Create or select a patient first.");
+      alert("Create or select a project first.");
       return;
     }
 
@@ -3509,7 +3480,7 @@ function ChatShell({
       return false;
     }
     if (!caseId) {
-      alert("Create or select a patient first.");
+      alert("Create or select a project first.");
       return false;
     }
 
@@ -3763,15 +3734,15 @@ function ChatShell({
           (hasAnyCases ? (
             <>
               <ChatHeader $isNewChat={false} $isCentered>
-                <ChatTitle>Start with a patient</ChatTitle>
+                <ChatTitle>Start with a project</ChatTitle>
                 <ChatSubtitle>
-                  Select a patient on the left to start an AI case conversation,
+                  Select a project on the left to start an AI case conversation,
                   or create a new one.
                 </ChatSubtitle>
               </ChatHeader>
 
               <ChatEmptyState>
-                Choose a patient from the left sidebar to get started or use the
+                Choose a project from the left sidebar to get started or use the
                 New button above to create one.
               </ChatEmptyState>
             </>
@@ -3781,9 +3752,9 @@ function ChatShell({
                 <CenterEmptyIcon>
                   <FiUser size={20} />
                 </CenterEmptyIcon>
-                <CenterEmptyTitle>Create your first patient</CenterEmptyTitle>
+                <CenterEmptyTitle>Create your first project</CenterEmptyTitle>
                 <CenterEmptySubtitle>
-                  Keep each AI case tied to a specific patient so you can
+                  Keep each AI case tied to a specific project so you can
                   organize lab panels, notes, and conversations in one place.
                 </CenterEmptySubtitle>
                 <CenterEmptyPrimaryButton
@@ -3792,11 +3763,11 @@ function ChatShell({
                   disabled={!currentUser}
                 >
                   <FiPlus />
-                  New patient
+                  New project
                 </CenterEmptyPrimaryButton>
                 {!currentUser && (
                   <CenterEmptyHint>
-                    Sign in to create and save patients.
+                    Sign in to create and save projects.
                   </CenterEmptyHint>
                 )}
               </CenterEmptyCard>
@@ -3809,7 +3780,7 @@ function ChatShell({
             <ChatHeader $isNewChat>
               <ChatTitle>{activeCase.patientName}</ChatTitle>
               <ChatSubtitle>
-                Start a new chat for this patient, or open a previous one.
+                Start a new chat for this project, or open a previous one.
               </ChatSubtitle>
             </ChatHeader>
 
@@ -3821,7 +3792,7 @@ function ChatShell({
                     value={messageInput}
                     onChange={handleComposerChange}
                     onKeyDown={handleComposerKeyDown}
-                    placeholder="New chat for this patient, for example: 'Help me interpret today's lab panel...'"
+                    placeholder="New chat for this project, for example: 'Help me interpret today's lab panel...'"
                     disabled={!currentUser}
                   />
                 </ComposerColumn>
@@ -3891,7 +3862,7 @@ function ChatShell({
             <ChatListSection>
               <ChatListTitle>Previous chats</ChatListTitle>
               {activeCaseChats.length === 0 && (
-                <ChatEmptyState>No chats yet for this patient.</ChatEmptyState>
+                <ChatEmptyState>No chats yet for this projects.</ChatEmptyState>
               )}
               {activeCaseChats.length > 0 && (
                 <ChatList>
@@ -5154,235 +5125,6 @@ export default function AiLibraryPage() {
           </TopRightUserShell>
         )}
         <Sidebar>
-          {/* <PatientsHeader>
-            <PatientsTitle>Patients</PatientsTitle>
-            <NewPatientButton
-              type="button"
-              onClick={handleCreatePatientClick}
-              disabled={!currentUser}
-            >
-              <FiPlus />
-              New
-            </NewPatientButton>
-          </PatientsHeader> */}
-          {/* 
-          <PatientList ref={patientListRef}>
-            {casesLoading && currentUser && (
-              <SidebarLoadingRow>
-                <SmallSpinner />
-                <span>Loading patients...</span>
-              </SidebarLoadingRow>
-            )}
-
-            {!casesLoading && cases.length === 0 && (
-              <PatientEmptyState>
-                No patients yet. Create one to start a case.
-              </PatientEmptyState>
-            )}
-
-            {!casesLoading &&
-              cases.map((c) => (
-                <React.Fragment key={c.id}>
-                  <PatientRow
-                    type="button"
-                    onClick={() => {
-                      if (editingPatientId === c.id) return;
-                      handleSelectCase(c.id);
-                    }}
-                    $active={
-                      c.id === activeCaseIdFromUrl && !activeChatIdFromUrl
-                    }
-                  >
-                    <FiUser />
-                    <PatientName>
-                      {editingPatientId === c.id ? (
-                        <InlineEditInput
-                          value={editingPatientName}
-                          onChange={(e) =>
-                            setEditingPatientName(e.target.value)
-                          }
-                          onKeyDown={handleInlinePatientKeyDown}
-                          onBlur={commitPatientRename}
-                          autoFocus
-                        />
-                      ) : (
-                        c.patientName || "Untitled patient"
-                      )}
-                    </PatientName>
-
-                    <RowMenuButton
-                      type="button"
-                      aria-label="Patient actions"
-                      $forceVisible={
-                        rowMenu &&
-                        rowMenu.kind === "patient" &&
-                        rowMenu.id === c.id
-                      }
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openRowMenuForPatient(e, c); // <- use the patient helper and pass the patient
-                      }}
-                    >
-                      <FiMoreHorizontal size={16} />
-                    </RowMenuButton>
-                  </PatientRow>
-
-                  {c.id === activeCaseIdFromUrl &&
-                    activeCaseChats.length > 0 && (
-                      <SubchatList>
-                        {activeCaseChats.map((ch) => {
-                          const baseTitle =
-                            ch.title ||
-                            (ch.lastMessagePreview
-                              ? ch.lastMessagePreview.slice(0, 36) + "..."
-                              : "Untitled chat");
-
-                          const isEditingSidebar =
-                            editingChatId === ch.id &&
-                            editingChatOrigin === "sidebar";
-
-                          const displayTitle = isEditingSidebar
-                            ? editingChatTitle
-                            : baseTitle;
-
-                          return (
-                            <SubchatRow
-                              key={ch.id}
-                              type="button"
-                              onClick={() => {
-                                if (editingChatId === ch.id) return;
-                                handleOpenSubchat(c.id, ch.id);
-                              }}
-                              $active={ch.id === activeChatIdFromUrl}
-                            >
-                              <SubchatTitle title={displayTitle}>
-                                {isEditingSidebar ? (
-                                  <InlineEditInput
-                                    value={editingChatTitle}
-                                    onChange={(e) =>
-                                      setEditingChatTitle(e.target.value)
-                                    }
-                                    onKeyDown={handleInlineChatKeyDown}
-                                    onBlur={commitChatRename}
-                                    autoFocus
-                                  />
-                                ) : (
-                                  displayTitle
-                                )}
-                              </SubchatTitle>
-
-                              <RowMenuButton
-                                type="button"
-                                aria-label="Chat actions"
-                                $forceVisible={
-                                  rowMenu &&
-                                  rowMenu.kind === "chat" &&
-                                  rowMenu.id === ch.id
-                                }
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  openRowMenuForChat(e, c.id, ch);
-                                }}
-                              >
-                                <FiMoreHorizontal size={16} />
-                              </RowMenuButton>
-                            </SubchatRow>
-                          );
-                        })}
-                      </SubchatList>
-                    )}
-                </React.Fragment>
-              ))}
-          </PatientList>
-
-          <SectionDivider /> */}
-
-          <PatientsHeader>
-            <PatientsTitle>Notebook chats</PatientsTitle>
-            <NewPatientButton
-              type="button"
-              onClick={handleCreatePersonalChatClick}
-              disabled={!currentUser}
-            >
-              <FiPlus />
-              New
-            </NewPatientButton>
-          </PatientsHeader>
-
-          <PersonalChatList>
-            {personalChatsLoading && currentUser && (
-              <SidebarLoadingRow>
-                <SmallSpinner />
-                <span>Loading notebook chats...</span>
-              </SidebarLoadingRow>
-            )}
-
-            {!personalChatsLoading && personalChats.length === 0 && (
-              <PatientEmptyState>
-                No personal chats yet. Ask a question to start one.
-              </PatientEmptyState>
-            )}
-            {!personalChatsLoading &&
-              personalChats.map((chat) => {
-                const baseTitle =
-                  chat.title ||
-                  (chat.lastMessagePreview
-                    ? chat.lastMessagePreview.slice(0, 36) + "..."
-                    : "Untitled chat");
-                const displayTitle =
-                  editingPersonalChatId === chat.id
-                    ? editingPersonalChatTitle
-                    : baseTitle;
-
-                return (
-                  <PersonalChatRow
-                    key={chat.id}
-                    type="button"
-                    onClick={() => {
-                      if (editingPersonalChatId === chat.id) return;
-                      handleSelectPersonalChat(chat.id);
-                    }}
-                    $active={chat.id === activePersonalChatIdFromUrl}
-                  >
-                    <FiFileText />
-                    <PersonalChatTitle title={displayTitle}>
-                      {editingPersonalChatId === chat.id ? (
-                        <InlineEditInput
-                          value={editingPersonalChatTitle}
-                          onChange={(e) =>
-                            setEditingPersonalChatTitle(e.target.value)
-                          }
-                          onKeyDown={handleInlinePersonalChatKeyDown}
-                          onBlur={commitPersonalChatRename}
-                          autoFocus
-                        />
-                      ) : (
-                        displayTitle
-                      )}
-                    </PersonalChatTitle>
-
-                    <RowMenuButton
-                      type="button"
-                      aria-label="Personal chat actions"
-                      $forceVisible={
-                        rowMenu &&
-                        rowMenu.kind === "personal" &&
-                        rowMenu.id === chat.id
-                      }
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openRowMenuForPersonalChat(e, chat);
-                      }}
-                    >
-                      <FiMoreHorizontal size={16} />
-                    </RowMenuButton>
-                  </PersonalChatRow>
-                );
-              })}
-          </PersonalChatList>
-
-          <SectionDivider />
-
           {/* Hidden input for library uploads */}
           <input
             type="file"
@@ -5424,80 +5166,6 @@ export default function AiLibraryPage() {
             </LibraryHint>
           </SectionHeaderRow>
 
-          {/* <SourceList>
-            {sourcesLoading && currentUser && (
-              <SidebarLoadingRow>
-                <SmallSpinner />
-                <span>Loading library...</span>
-              </SidebarLoadingRow>
-            )}
-
-            {!sourcesLoading && sources.length === 0 && (
-              <EmptyState>
-                No PDFs yet. Upload a textbook or paper to get started.
-              </EmptyState>
-            )}
-            {!sourcesLoading &&
-              sources.map((s) => {
-                const created =
-                  s.createdAt && s.createdAt.toDate
-                    ? s.createdAt.toDate()
-                    : null;
-
-                let statusContent = null;
-                if (s.status === "ready") {
-                  statusContent = (
-                    <>
-                      <FiCheckCircle /> Indexed
-                    </>
-                  );
-                } else if (s.status === "error") {
-                  statusContent = (
-                    <>
-                      <FiAlertCircle /> Error
-                    </>
-                  );
-                } else if (s.status === "processing") {
-                  statusContent = "Processing";
-                } else if (s.status === "uploaded") {
-                  statusContent = "Waiting to process";
-                } else {
-                  statusContent = s.status || "Unknown";
-                }
-
-                return (
-                  <SourceRow key={s.id}>
-                    <FiFileText />
-                    <SourceMain>
-                      <SourceTitle title={s.title}>{s.title}</SourceTitle>
-                      <SourceMeta>
-                        <Status $status={s.status}>{statusContent}</Status>
-                        {created && (
-                          <>
-                            {" "}
-                            •{" "}
-                            {created.toLocaleDateString(undefined, {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            })}
-                          </>
-                        )}
-                      </SourceMeta>
-                    </SourceMain>
-                    <SourceActions>
-                      <IconButton
-                        type="button"
-                        onClick={() => handleDeleteSource(s)}
-                        title="Remove from library"
-                      >
-                        <FiTrash2 />
-                      </IconButton>
-                    </SourceActions>
-                  </SourceRow>
-                );
-              })}
-          </SourceList> */}
           <SourceList>
             {sourcesLoading && currentUser && (
               <SidebarLoadingRow>
@@ -5756,6 +5424,235 @@ export default function AiLibraryPage() {
                 );
               })}
           </SourceList>
+
+          <SectionDivider />
+
+          <ProjectsHeader>
+            <ProjectsTitle>Projects</ProjectsTitle>
+            <NewProjectButton
+              type="button"
+              onClick={handleCreatePatientClick}
+              disabled={!currentUser}
+            >
+              <FiPlus />
+              New
+            </NewProjectButton>
+          </ProjectsHeader>
+
+          <ProjectList ref={patientListRef}>
+            {casesLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading projects...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!casesLoading && cases.length === 0 && (
+              <ProjectEmptyState>
+                No projects yet. Create one to start a case.
+              </ProjectEmptyState>
+            )}
+
+            {!casesLoading &&
+              cases.map((c) => (
+                <React.Fragment key={c.id}>
+                  <ProjectRow
+                    type="button"
+                    onClick={() => {
+                      if (editingPatientId === c.id) return;
+                      handleSelectCase(c.id);
+                    }}
+                    $active={
+                      c.id === activeCaseIdFromUrl && !activeChatIdFromUrl
+                    }
+                  >
+                    <FiUser />
+                    <ProjectName>
+                      {editingPatientId === c.id ? (
+                        <InlineEditInput
+                          value={editingPatientName}
+                          onChange={(e) =>
+                            setEditingPatientName(e.target.value)
+                          }
+                          onKeyDown={handleInlinePatientKeyDown}
+                          onBlur={commitPatientRename}
+                          autoFocus
+                        />
+                      ) : (
+                        c.patientName || "Untitled patient"
+                      )}
+                    </ProjectName>
+
+                    <RowMenuButton
+                      type="button"
+                      aria-label="Patient actions"
+                      $forceVisible={
+                        rowMenu &&
+                        rowMenu.kind === "patient" &&
+                        rowMenu.id === c.id
+                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openRowMenuForPatient(e, c); // <- use the patient helper and pass the patient
+                      }}
+                    >
+                      <FiMoreHorizontal size={16} />
+                    </RowMenuButton>
+                  </ProjectRow>
+
+                  {c.id === activeCaseIdFromUrl &&
+                    activeCaseChats.length > 0 && (
+                      <SubchatList>
+                        {activeCaseChats.map((ch) => {
+                          const baseTitle =
+                            ch.title ||
+                            (ch.lastMessagePreview
+                              ? ch.lastMessagePreview.slice(0, 36) + "..."
+                              : "Untitled chat");
+
+                          const isEditingSidebar =
+                            editingChatId === ch.id &&
+                            editingChatOrigin === "sidebar";
+
+                          const displayTitle = isEditingSidebar
+                            ? editingChatTitle
+                            : baseTitle;
+
+                          return (
+                            <SubchatRow
+                              key={ch.id}
+                              type="button"
+                              onClick={() => {
+                                if (editingChatId === ch.id) return;
+                                handleOpenSubchat(c.id, ch.id);
+                              }}
+                              $active={ch.id === activeChatIdFromUrl}
+                            >
+                              <SubchatTitle title={displayTitle}>
+                                {isEditingSidebar ? (
+                                  <InlineEditInput
+                                    value={editingChatTitle}
+                                    onChange={(e) =>
+                                      setEditingChatTitle(e.target.value)
+                                    }
+                                    onKeyDown={handleInlineChatKeyDown}
+                                    onBlur={commitChatRename}
+                                    autoFocus
+                                  />
+                                ) : (
+                                  displayTitle
+                                )}
+                              </SubchatTitle>
+
+                              <RowMenuButton
+                                type="button"
+                                aria-label="Chat actions"
+                                $forceVisible={
+                                  rowMenu &&
+                                  rowMenu.kind === "chat" &&
+                                  rowMenu.id === ch.id
+                                }
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openRowMenuForChat(e, c.id, ch);
+                                }}
+                              >
+                                <FiMoreHorizontal size={16} />
+                              </RowMenuButton>
+                            </SubchatRow>
+                          );
+                        })}
+                      </SubchatList>
+                    )}
+                </React.Fragment>
+              ))}
+          </ProjectList>
+
+          <SectionDivider />
+
+          <ProjectsHeader>
+            <ProjectsTitle>Notebook chats</ProjectsTitle>
+            <NewProjectButton
+              type="button"
+              onClick={handleCreatePersonalChatClick}
+              disabled={!currentUser}
+            >
+              <FiPlus />
+              New
+            </NewProjectButton>
+          </ProjectsHeader>
+
+          <PersonalChatList>
+            {personalChatsLoading && currentUser && (
+              <SidebarLoadingRow>
+                <SmallSpinner />
+                <span>Loading notebook chats...</span>
+              </SidebarLoadingRow>
+            )}
+
+            {!personalChatsLoading && personalChats.length === 0 && (
+              <ProjectEmptyState>
+                No personal chats yet. Ask a question to start one.
+              </ProjectEmptyState>
+            )}
+            {!personalChatsLoading &&
+              personalChats.map((chat) => {
+                const baseTitle =
+                  chat.title ||
+                  (chat.lastMessagePreview
+                    ? chat.lastMessagePreview.slice(0, 36) + "..."
+                    : "Untitled chat");
+                const displayTitle =
+                  editingPersonalChatId === chat.id
+                    ? editingPersonalChatTitle
+                    : baseTitle;
+
+                return (
+                  <PersonalChatRow
+                    key={chat.id}
+                    type="button"
+                    onClick={() => {
+                      if (editingPersonalChatId === chat.id) return;
+                      handleSelectPersonalChat(chat.id);
+                    }}
+                    $active={chat.id === activePersonalChatIdFromUrl}
+                  >
+                    <FiFileText />
+                    <PersonalChatTitle title={displayTitle}>
+                      {editingPersonalChatId === chat.id ? (
+                        <InlineEditInput
+                          value={editingPersonalChatTitle}
+                          onChange={(e) =>
+                            setEditingPersonalChatTitle(e.target.value)
+                          }
+                          onKeyDown={handleInlinePersonalChatKeyDown}
+                          onBlur={commitPersonalChatRename}
+                          autoFocus
+                        />
+                      ) : (
+                        displayTitle
+                      )}
+                    </PersonalChatTitle>
+
+                    <RowMenuButton
+                      type="button"
+                      aria-label="Personal chat actions"
+                      $forceVisible={
+                        rowMenu &&
+                        rowMenu.kind === "personal" &&
+                        rowMenu.id === chat.id
+                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openRowMenuForPersonalChat(e, chat);
+                      }}
+                    >
+                      <FiMoreHorizontal size={16} />
+                    </RowMenuButton>
+                  </PersonalChatRow>
+                );
+              })}
+          </PersonalChatList>
         </Sidebar>
 
         <Routes>
@@ -5815,15 +5712,15 @@ export default function AiLibraryPage() {
       {showNewPatientModal && (
         <ModalOverlay onClick={handleCancelNewPatient}>
           <ModalCard onClick={(e) => e.stopPropagation()}>
-            <ModalTitle>New patient</ModalTitle>
+            <ModalTitle>New project</ModalTitle>
             <ModalSubtitle>
-              Create a patient so you can keep this AI case separate from other
-              patients.
+              Create a project so AI can see the same files and prompts across
+              multiple chats.
             </ModalSubtitle>
             <ModalForm onSubmit={handleCreatePatientSubmit}>
               <ModalInput
                 autoFocus
-                placeholder="Patient name, for example Nala"
+                placeholder="Project name, for example handout or diagnosis, client recommendations"
                 value={newPatientName}
                 onChange={(e) => setNewPatientName(e.target.value)}
               />
@@ -5860,10 +5757,10 @@ export default function AiLibraryPage() {
 
             <ModalSubtitle>
               {deleteTarget.type === "patient" &&
-                `This will remove "${deleteTarget.name}" from your patient list.`}
+                `This will remove "${deleteTarget.name}" from your project list.`}
 
               {deleteTarget.type === "chat" &&
-                `This will remove the chat "${deleteTarget.name}" from this patient.`}
+                `This will remove the chat "${deleteTarget.name}" from this project.`}
 
               {deleteTarget.type === "personalChat" &&
                 `This will remove the personal chat "${deleteTarget.name}" from your study list.`}
