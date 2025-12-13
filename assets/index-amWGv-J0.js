@@ -8106,6 +8106,8 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   position: fixed; /* break out of the sidebar */
   z-index: 60; /* above chat pane (AttachMenu is 30) */
   width: 320px; /* a bit wider than the status chip menu */
+  max-height: 320px; /* or 40vh, pick what feels better */
+  overflow-y: auto; /* makes the menu scroll if content is too tall */
 
   /* Absolute screen coordinates from state */
   left: ${n=>n.$left!=null?`${n.$left}px`:"0px"};
