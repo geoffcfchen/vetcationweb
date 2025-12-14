@@ -2072,6 +2072,7 @@ function PersonalChatShell({ currentUser }) {
   const [attachMenuOpen, setAttachMenuOpen] = useState(false);
   const fileInputRef = useRef(null);
   const [uploadProgress, setUploadProgress] = useState({});
+  const attachMenuContainerRef = useRef(null); // NEW
 
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
@@ -2083,6 +2084,24 @@ function PersonalChatShell({ currentUser }) {
   const [initialAssistantTriggered, setInitialAssistantTriggered] =
     useState(false);
   const [isWebSearchEnabled, setIsWebSearchEnabled] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!attachMenuOpen) return;
+
+      if (
+        attachMenuContainerRef.current &&
+        !attachMenuContainerRef.current.contains(e.target)
+      ) {
+        setAttachMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [attachMenuOpen]);
 
   useEffect(() => {
     // Only in the personal chat route, not on the root "/" view
@@ -2812,7 +2831,7 @@ function PersonalChatShell({ currentUser }) {
 
                 <ComposerBottomRow>
                   <ComposerBottomLeft>
-                    <AttachButtonWrapper>
+                    <AttachButtonWrapper ref={attachMenuContainerRef}>
                       <AttachIconButton
                         type="button"
                         onClick={handleToggleAttachMenu}
@@ -2897,7 +2916,7 @@ function PersonalChatShell({ currentUser }) {
 
                 <ComposerBottomRow>
                   <ComposerBottomLeft>
-                    <AttachButtonWrapper>
+                    <AttachButtonWrapper ref={attachMenuContainerRef}>
                       <AttachIconButton
                         type="button"
                         onClick={handleToggleAttachMenu}
@@ -3072,6 +3091,7 @@ function ChatShell({
   const messagesContainerRef = useRef(null); // NEW: scroll container
   const lastMessageRef = useRef(null); // NEW: last message bubble
   const thinkingRef = useRef(null); // NEW
+  const attachMenuContainerRef = useRef(null); // NEW
 
   const [isThinking, setIsThinking] = useState(false); // NEW
   const [deleteAttachmentTarget, setDeleteAttachmentTarget] = useState(null);
@@ -3096,6 +3116,24 @@ function ChatShell({
       });
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!attachMenuOpen) return;
+
+      if (
+        attachMenuContainerRef.current &&
+        !attachMenuContainerRef.current.contains(e.target)
+      ) {
+        setAttachMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [attachMenuOpen]);
 
   useEffect(() => {
     if (!currentUser || !caseId || !chatId) return;
@@ -3801,7 +3839,7 @@ function ChatShell({
 
                 <ComposerBottomRow>
                   <ComposerBottomLeft>
-                    <AttachButtonWrapper>
+                    <AttachButtonWrapper ref={attachMenuContainerRef}>
                       <AttachIconButton
                         type="button"
                         onClick={handleToggleAttachMenu}
@@ -4054,7 +4092,7 @@ function ChatShell({
 
                 <ComposerBottomRow>
                   <ComposerBottomLeft>
-                    <AttachButtonWrapper>
+                    <AttachButtonWrapper ref={attachMenuContainerRef}>
                       <AttachIconButton
                         type="button"
                         onClick={handleToggleAttachMenu}
@@ -4232,7 +4270,7 @@ export default function AiLibraryPage() {
   const [openSourceParts, setOpenSourceParts] = useState([]);
   const [openSourcePartsLoading, setOpenSourcePartsLoading] = useState(false);
   const [sourceMenuPosition, setSourceMenuPosition] = useState(null); // { left, top }
-  //   const [sourceMenuDirection, setSourceMenuDirection] = useState("down");
+  const sourceMenuContainerRef = useRef(null); // NEW
 
   // track which personal chat is active from URL
   const personalChatMatch = location.pathname.match(
@@ -4253,6 +4291,25 @@ export default function AiLibraryPage() {
   const activeChatIdFromUrl = chatMatch ? chatMatch[1] : null;
 
   console.log("userData", userData);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!openSourceId) return;
+
+      if (
+        sourceMenuContainerRef.current &&
+        !sourceMenuContainerRef.current.contains(e.target)
+      ) {
+        setOpenSourceId(null);
+        setSourceMenuPosition(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openSourceId]);
 
   //set currentUser as userData if userData change
   useEffect(() => {
@@ -5261,7 +5318,10 @@ export default function AiLibraryPage() {
                   openSourceParts.some((p) => p.status === "error");
 
                 return (
-                  <SourceRow key={s.id}>
+                  <SourceRow
+                    key={s.id}
+                    ref={openSourceId === s.id ? sourceMenuContainerRef : null} // NEW
+                  >
                     <FiFileText />
                     <SourceMain>
                       <SourceTitle title={s.title}>{s.title}</SourceTitle>
