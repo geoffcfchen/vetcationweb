@@ -5793,8 +5793,8 @@ export default function AiLibraryPage() {
           <ModalCard onClick={(e) => e.stopPropagation()}>
             <ModalTitle>New project</ModalTitle>
             <ModalSubtitle>
-              Create a project so AI can see the same project files and prompts
-              across multiple chats.
+              Create a project so AI can use the same prompts across multiple
+              chats.
             </ModalSubtitle>
             <ModalForm onSubmit={handleCreatePatientSubmit}>
               <ModalInput
