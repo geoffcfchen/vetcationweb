@@ -167,12 +167,22 @@ const ModalTitle = styled.h2`
   font-size: 20px;
   font-weight: 600;
   color: #e5e7eb;
+
+  /* NEW: prevent long strings from overflowing the card */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 `;
 
 const ModalSubtitle = styled.p`
   margin: 6px 0 16px;
   font-size: 15px;
   color: #9ca3af;
+
+  /* NEW: prevent long filenames from overflowing the card */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 `;
 
 const ModalForm = styled.form`
@@ -684,14 +694,20 @@ const MessageRow = styled.div`
 const Bubble = styled.div`
   display: inline-block;
   max-width: 100%;
-  padding: 10px 12px;
+  padding: 6px 12px; /* was 10px 12px */
   border-radius: 14px;
-  font-size: 16px; /* was 14px */
+  font-size: 17px; /* was 16px */
+  line-height: 1.6; /* NEW: makes it easier to read */
   background: ${(p) => (p.$role === "user" ? "#303030" : "transparent")};
   color: #e5e7eb;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: pre-wrap;
+`;
+
+const AssistantBubble = styled(Bubble)`
+  padding-top: 4px; /* was 10px */
+  padding-bottom: 4px;
 `;
 
 const thinkingPulse = keyframes`
@@ -1472,7 +1488,7 @@ const MarkdownBody = styled(ReactMarkdown)`
 const MarkdownWrapper = styled.div`
   /* Base text */
   & p {
-    margin: 0 0 8px 0;
+    margin: 0 0 4px 0; /* was 0 0 8px 0 */
   }
 
   /* Headings */
@@ -1482,7 +1498,7 @@ const MarkdownWrapper = styled.div`
   & h4,
   & h5,
   & h6 {
-    margin: 8px 0 6px;
+    margin: 0; /* keep headings themselves tight */
     font-weight: 600;
   }
 
@@ -1493,13 +1509,14 @@ const MarkdownWrapper = styled.div`
     font-size: 1.15rem;
   }
   & h3 {
-    font-size: 1.05rem;
+    font-size: 1.35rem;
+    line-height: 1.35;
   }
 
   /* Lists */
   & ul,
   & ol {
-    margin: 6px 0 8px;
+    margin: 2px 0 6px; /* was 6px 0 8px */
     padding-left: 1.4rem;
   }
 
