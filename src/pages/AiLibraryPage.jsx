@@ -1616,6 +1616,15 @@ const MarkdownWrapper = styled.div`
     background: #111827;
     font-weight: 600;
   }
+  /* Math (KaTeX) */
+  & .katex-display {
+    margin: 25px 0; // 25px top/bottom for display math
+  }
+
+  /* Optional: give inline math a tiny breathing room */
+  & .katex {
+    line-height: 1.4;
+  }
 `;
 
 const CodeBlock = styled.div`
