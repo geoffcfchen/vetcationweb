@@ -1786,6 +1786,17 @@ const ModalTextarea = styled.textarea`
   }
 `;
 
+const CitationBadge = styled.span`
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #e5e7eb;
+`;
+
 function extractCitationKeysFromMarkdown(markdown) {
   const keys = new Set();
   if (!markdown) return keys;
@@ -1800,6 +1811,28 @@ function extractCitationKeysFromMarkdown(markdown) {
   }
 
   return keys;
+}
+
+function extractCitationKeysInOrder(markdown) {
+  const ordered = [];
+  const seen = new Set();
+  if (!markdown) return ordered;
+
+  const bracketRegex = /\[([^\]]+)\]/g;
+  let match;
+
+  while ((match = bracketRegex.exec(markdown)) !== null) {
+    const inner = match[1];
+    const tokens = inner.match(/[LAW]\d+/g) || [];
+    tokens.forEach((t) => {
+      if (!seen.has(t)) {
+        seen.add(t);
+        ordered.push(t);
+      }
+    });
+  }
+
+  return ordered;
 }
 
 function normalizeLooseLists(input) {
@@ -1984,6 +2017,9 @@ function AssistantMessageBubble({ message }) {
 
   // Which citation keys are actually used in the answer text, e.g. "L1", "A1", "W1"
   const usedCitationKeys = extractCitationKeysFromMarkdown(normalized);
+  const citationOrder = extractCitationKeysInOrder(normalized);
+  const citationRank = new Map(citationOrder.map((k, i) => [k, i]));
+
   const hasExplicitCitations = usedCitationKeys.size > 0;
 
   const allNormalizedSources = Array.isArray(sources)
@@ -1994,21 +2030,24 @@ function AssistantMessageBubble({ message }) {
 
   // Only show sources that are actually cited, if citations exist.
   // Only show sources that are actually cited.
-  const normalizedSources = allNormalizedSources.filter((src) => {
-    if (!src) return false;
+  const normalizedSources = allNormalizedSources
+    .filter((src) => {
+      if (!src) return false;
 
-    // If there are no explicit [L1]/[A1]/[W1] tags in the text,
-    // treat it as "no references were used" and show nothing.
-    if (!hasExplicitCitations) {
-      return false;
-    }
+      if (!hasExplicitCitations) return false;
+      if (!src.citationKey) return false;
 
-    if (!src.citationKey) {
-      return false;
-    }
-
-    return usedCitationKeys.has(src.citationKey);
-  });
+      return usedCitationKeys.has(src.citationKey);
+    })
+    .sort((a, b) => {
+      const ra = citationRank.has(a.citationKey)
+        ? citationRank.get(a.citationKey)
+        : 9999;
+      const rb = citationRank.has(b.citationKey)
+        ? citationRank.get(b.citationKey)
+        : 9999;
+      return ra - rb;
+    });
 
   const handleSourceClick = (source) => {
     if (!source) return;
@@ -2076,17 +2115,20 @@ function AssistantMessageBubble({ message }) {
                 key={src.id}
                 type="button"
                 onClick={() => handleSourceClick(src)}
-                title={
+                title={`${src.citationKey || ""} ${
                   src.sourceType === "library"
                     ? src.bookTitle
                     : src.title || src.url || src.displayLabel
-                }
+                }`.trim()}
               >
+                <CitationBadge>{src.citationKey}</CitationBadge>
+
                 {src.sourceType === "web" ? (
                   <FiGlobe size={12} />
                 ) : (
                   <FiFileText size={12} />
                 )}
+
                 <span>{src.displayLabel}</span>
               </SourcePill>
             ))}
