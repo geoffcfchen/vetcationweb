@@ -652,7 +652,7 @@ const ChatInner = styled.div`
   flex: 1;
   min-height: 0; /* important so Messages can scroll */
   width: 100%;
-  max-width: 880px;
+  max-width: 770px;
   margin: 0 auto;
   padding-top: 32px;
   display: flex;
@@ -705,11 +705,6 @@ const Bubble = styled.div`
 
   /* key change */
   white-space: ${(p) => (p.$role === "user" ? "pre-wrap" : "normal")};
-`;
-
-const AssistantBubble = styled(Bubble)`
-  padding-top: 4px; /* was 10px */
-  padding-bottom: 4px;
 `;
 
 const thinkingPulse = keyframes`
@@ -852,15 +847,34 @@ const WebSearchPill = styled.button`
   cursor: pointer;
   font-size: 14px;
 
-  .pill-label {
-    transition: color 0.12s ease;
+  .pill-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 14px;
   }
 
-  .pill-close {
-    opacity: 0;
-    transform: scale(0.8);
-    margin-left: 2px;
+  .icon-main {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    opacity: 1;
+    transform: scale(1);
     transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+
+  .icon-x {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    line-height: 14px;
+    font-size: 16px;
   }
 
   &:hover {
@@ -868,7 +882,12 @@ const WebSearchPill = styled.button`
     border-color: #6b7280;
   }
 
-  &:hover .pill-close {
+  &:hover .icon-main {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  &:hover .icon-x {
     opacity: 1;
     transform: scale(1);
   }
@@ -953,7 +972,7 @@ const NewChatCenter = styled.div`
   flex-direction: column;
   align-items: stretch; // ← was center
   justify-content: center;
-  max-width: 880px; // match ChatInner max-width if you like
+  max-width: 770px; // match ChatInner max-width if you like
   width: 100%;
   margin: 0 auto;
   gap: 16px;
@@ -1365,19 +1384,6 @@ const Avatar = styled.div`
   flex-shrink: 0;
 `;
 
-// const Bubble = styled.div`
-//   background-color: #212121;
-//   border: 1px solid #2f2f2f;
-//   border-radius: 8px;
-//   padding: 10px 14px;
-//   color: #e5e7eb;
-//   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-//     sans-serif;
-//   font-size: 0.95rem;
-//   line-height: 1.6;
-//   width: 100%;
-// `;
-
 const MarkdownBody = styled(ReactMarkdown)`
   /* Base text */
   & p {
@@ -1627,6 +1633,10 @@ const MarkdownWrapper = styled.div`
   }
 `;
 
+const ModalMarkdownWrapper = styled(MarkdownWrapper)`
+  font-size: 15px;
+`;
+
 const CodeBlock = styled.div`
   margin: 8px 0 10px;
   border-radius: 8px;
@@ -1780,18 +1790,15 @@ function extractCitationKeysFromMarkdown(markdown) {
   const keys = new Set();
   if (!markdown) return keys;
 
-  // Matches things like: [L1], [A2], [W1], or [L1, L2, A1]
-  const regex = /\[([LAW]\d+(?:\s*,\s*[LAW]\d+)*)\]/g;
+  const bracketRegex = /\[([^\]]+)\]/g;
   let match;
-  while ((match = regex.exec(markdown)) !== null) {
-    const inner = match[1]; // e.g. "L1" or "L1, L2"
-    inner.split(/\s*,\s*/).forEach((token) => {
-      const trimmed = token.trim();
-      if (/^[LAW]\d+$/.test(trimmed)) {
-        keys.add(trimmed);
-      }
-    });
+
+  while ((match = bracketRegex.exec(markdown)) !== null) {
+    const inner = match[1];
+    const tokens = inner.match(/[LAW]\d+/g) || [];
+    tokens.forEach((t) => keys.add(t));
   }
+
   return keys;
 }
 
@@ -2120,27 +2127,27 @@ function AssistantMessageBubble({ message }) {
                     activeSource.snippet ||
                     "No text snippet is available for this reference.";
 
-                  // 1) Remove ?utm_source=openai
                   const noUtm = stripOpenAIUtmParams(rawText);
-                  // 2) Fix loose ordered lists for nicer bullets / numbering
                   const modalMarkdown = normalizeLooseLists(noUtm);
 
                   return (
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm, remarkMath]}
-                      rehypePlugins={[rehypeKatex]}
-                      components={{
-                        a: ({ node, ...props }) => (
-                          <a
-                            {...props}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          />
-                        ),
-                      }}
-                    >
-                      {modalMarkdown}
-                    </ReactMarkdown>
+                    <ModalMarkdownWrapper>
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                        components={{
+                          a: ({ node, ...props }) => (
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          ),
+                        }}
+                      >
+                        {modalMarkdown}
+                      </ReactMarkdown>
+                    </ModalMarkdownWrapper>
                   );
                 })()}
               </SourceChunkBody>
@@ -2983,9 +2990,12 @@ function PersonalChatShell({ currentUser }) {
                         onClick={handleDisableWebSearch}
                         title="Disable web search for this turn"
                       >
-                        <FiGlobe size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiGlobe className="icon-globe" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Search web</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
                   </ComposerBottomLeft>
@@ -3069,9 +3079,12 @@ function PersonalChatShell({ currentUser }) {
                         onClick={handleDisableWebSearch}
                         title="Disable web search for this turn"
                       >
-                        <FiGlobe size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiGlobe className="icon-globe" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Search web</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
                   </ComposerBottomLeft>
@@ -4135,9 +4148,12 @@ function ChatShell({
                         onClick={handleDisableInstruction}
                         title="Remove instruction for this chat"
                       >
-                        <FiEdit3 size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiEdit3 className="icon-main" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Instruction</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
 
@@ -4147,9 +4163,12 @@ function ChatShell({
                         onClick={handleDisableWebSearch}
                         title="Disable web search for this turn"
                       >
-                        <FiGlobe size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiGlobe className="icon-globe" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Search web</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
                   </ComposerBottomLeft>
@@ -4409,9 +4428,12 @@ function ChatShell({
                         onClick={handleDisableInstruction}
                         title="Remove instruction for this chat"
                       >
-                        <FiEdit3 size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiEdit3 className="icon-main" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Instruction</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
                     {isWebSearchEnabled && (
@@ -4420,9 +4442,12 @@ function ChatShell({
                         onClick={handleDisableWebSearch}
                         title="Disable web search for this turn"
                       >
-                        <FiGlobe size={14} />
+                        <span className="pill-icon" aria-hidden="true">
+                          <FiGlobe className="icon-globe" size={14} />
+                          <span className="icon-x">×</span>
+                        </span>
+
                         <span className="pill-label">Search web</span>
-                        <span className="pill-close">×</span>
                       </WebSearchPill>
                     )}
                   </ComposerBottomLeft>
