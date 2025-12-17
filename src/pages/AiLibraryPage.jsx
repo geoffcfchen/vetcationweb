@@ -5452,98 +5452,180 @@ export default function AiLibraryPage() {
     libraryFileInputRef.current.click();
   };
 
+  const MAX_PARALLEL_UPLOADS = 3;
+
+  const uploadOneLibraryPdf = async (file) => {
+    const fingerprint = makePdfFingerprint(file);
+
+    // skip duplicates already in library (same logic as your single-file version)
+    const existing = sources.find(
+      (s) =>
+        s.vetUid === currentUser.uid &&
+        ((s.fileFingerprint && s.fileFingerprint === fingerprint) ||
+          (s.fileName &&
+            s.fileName.trim().toLowerCase() ===
+              file.name.trim().toLowerCase() &&
+            typeof s.fileSizeBytes === "number" &&
+            s.fileSizeBytes === file.size))
+    );
+
+    if (existing) {
+      return {
+        ok: false,
+        skipped: true,
+        fileName: file.name,
+        reason: `Already uploaded as "${
+          existing.title || existing.fileName || "Untitled PDF"
+        }"`,
+      };
+    }
+
+    const srcDocRef = await addDoc(collection(firestore, "vetLibrarySources"), {
+      vetUid: currentUser.uid,
+      title: file.name,
+      fileName: file.name,
+      fileSizeBytes: file.size,
+      fileFingerprint: fingerprint,
+      kind: "unknown",
+      status: "uploading", // more accurate than "uploaded" before storage finishes
+      errorMessage: null,
+      filePath: null,
+      downloadUrl: null,
+      pageCount: null,
+      chunkCount: null,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+
+    const path = `aiLibraries/${currentUser.uid}/${srcDocRef.id}.pdf`;
+    const storageRef = ref(storage, path);
+    const task = uploadBytesResumable(storageRef, file);
+
+    await new Promise((resolve, reject) => {
+      task.on(
+        "state_changed",
+        null,
+        (error) => reject(error),
+        () => resolve()
+      );
+    });
+
+    const url = await getDownloadURL(storageRef);
+
+    // This update is what triggers triggerVetLibrarySplit (status=uploaded + filePath)
+    await updateDoc(srcDocRef, {
+      status: "uploaded",
+      filePath: path,
+      downloadUrl: url,
+      overallProgress: 0,
+      pageCount: null,
+      chunkCount: null,
+      errorMessage: null,
+      updatedAt: serverTimestamp(),
+    });
+
+    return { ok: true, skipped: false, fileName: file.name };
+  };
+
+  const runWithConcurrency = async (items, limit, worker) => {
+    const results = [];
+    let idx = 0;
+
+    const runners = new Array(Math.min(limit, items.length))
+      .fill(null)
+      .map(async () => {
+        while (idx < items.length) {
+          const myIdx = idx;
+          idx += 1;
+
+          try {
+            results[myIdx] = await worker(items[myIdx]);
+          } catch (err) {
+            results[myIdx] = {
+              ok: false,
+              skipped: false,
+              fileName: items[myIdx]?.name || "Unknown file",
+              reason: err?.message || String(err),
+            };
+          }
+        }
+      });
+
+    await Promise.all(runners);
+    return results;
+  };
+
   const handleUpload = async (e) => {
     try {
-      if (!currentUser) {
-        console.warn("No user, cannot upload");
+      if (!currentUser) return;
+
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+
+      // Only PDFs
+      const pdfs = files.filter(
+        (f) =>
+          f &&
+          (f.type === "application/pdf" ||
+            (typeof f.name === "string" &&
+              f.name.toLowerCase().endsWith(".pdf")))
+      );
+
+      if (!pdfs.length) {
+        alert("Please select PDF files.");
         return;
       }
 
-      const file = e.target.files?.[0];
-      if (!file) return;
-
-      const fingerprint = makePdfFingerprint(file);
-
-      // Block duplicate uploads (same name + same size)
-      const existing = sources.find(
-        (s) =>
-          s.vetUid === currentUser.uid &&
-          ((s.fileFingerprint && s.fileFingerprint === fingerprint) ||
-            // fallback for older docs if you didn't store fingerprint yet
-            (s.fileName &&
-              s.fileName.trim().toLowerCase() ===
-                file.name.trim().toLowerCase() &&
-              typeof s.fileSizeBytes === "number" &&
-              s.fileSizeBytes === file.size))
-      );
-
-      if (existing) {
-        setDuplicateUpload({
-          fileName: file.name,
-          existingTitle: existing.title || existing.fileName || "Untitled PDF",
-          existingId: existing.id,
-        });
+      // ✅ ADD LIMIT HERE
+      const MAX_FILES_PER_PICK = 10;
+      if (pdfs.length > MAX_FILES_PER_PICK) {
+        alert(`Please select up to ${MAX_FILES_PER_PICK} PDFs at a time.`);
         return;
       }
 
       setIsUploading(true);
 
-      const srcDocRef = await addDoc(
-        collection(firestore, "vetLibrarySources"),
-        {
-          vetUid: currentUser.uid,
-          title: file.name,
-          fileName: file.name,
-          fileSizeBytes: file.size, // NEW
-          fileFingerprint: fingerprint, // NEW
-          kind: "unknown",
-          status: "uploaded",
-          errorMessage: null,
-          filePath: null,
-          downloadUrl: null,
-          pageCount: null,
-          chunkCount: null,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
+      // Also prevent duplicates within the same selection
+      const seen = new Set();
+      const uniquePdfs = [];
+      const skippedInPick = [];
+
+      for (const f of pdfs) {
+        const fp = makePdfFingerprint(f);
+        if (seen.has(fp)) {
+          skippedInPick.push(`${f.name} (duplicate in selection)`);
+          continue;
         }
+        seen.add(fp);
+        uniquePdfs.push(f);
+      }
+
+      const results = await runWithConcurrency(
+        uniquePdfs,
+        MAX_PARALLEL_UPLOADS,
+        uploadOneLibraryPdf
       );
 
-      const path = `aiLibraries/${currentUser.uid}/${srcDocRef.id}.pdf`;
-      const storageRef = ref(storage, path);
-      const task = uploadBytesResumable(storageRef, file);
+      const skippedExisting = results
+        .filter((r) => r && r.skipped)
+        .map((r) => `${r.fileName}: ${r.reason}`);
 
-      task.on(
-        "state_changed",
-        null,
-        async (error) => {
-          console.error(error);
-          await updateDoc(srcDocRef, {
-            status: "error",
-            errorMessage: error.message,
-            updatedAt: serverTimestamp(),
-          });
-          setIsUploading(false);
-        },
-        async () => {
-          const url = await getDownloadURL(storageRef);
-          await updateDoc(srcDocRef, {
-            status: "uploaded",
-            filePath: path,
-            downloadUrl: url,
-            overallProgress: 0,
-            pageCount: null,
-            chunkCount: null,
-            errorMessage: null,
-            updatedAt: serverTimestamp(),
-          });
-          setIsUploading(false);
-        }
-      );
-    } catch (err) {
-      console.error("Upload failed:", err);
-      setIsUploading(false);
+      const failed = results
+        .filter((r) => r && !r.ok && !r.skipped)
+        .map((r) => `${r.fileName}: ${r.reason}`);
+
+      const msgs = [];
+      if (skippedInPick.length)
+        msgs.push(`Skipped:\n${skippedInPick.join("\n")}`);
+      if (skippedExisting.length)
+        msgs.push(`Already uploaded:\n${skippedExisting.join("\n")}`);
+      if (failed.length) msgs.push(`Failed:\n${failed.join("\n")}`);
+
+      if (msgs.length) {
+        alert(msgs.join("\n\n"));
+      }
     } finally {
-      // Always reset so picking same file later still triggers onChange
+      setIsUploading(false);
       e.target.value = "";
     }
   };
@@ -5671,6 +5753,7 @@ export default function AiLibraryPage() {
           <input
             type="file"
             accept="application/pdf"
+            multiple
             ref={libraryFileInputRef}
             style={{ display: "none" }}
             onChange={handleUpload}
