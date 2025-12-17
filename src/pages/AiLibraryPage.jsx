@@ -3034,7 +3034,7 @@ function PersonalChatShell({ currentUser }) {
                         title="Disable web search for this turn"
                       >
                         <span className="pill-icon" aria-hidden="true">
-                          <FiGlobe className="icon-globe" size={14} />
+                          <FiGlobe className="icon-main" size={14} />
                           <span className="icon-x">×</span>
                         </span>
 
@@ -3123,7 +3123,7 @@ function PersonalChatShell({ currentUser }) {
                         title="Disable web search for this turn"
                       >
                         <span className="pill-icon" aria-hidden="true">
-                          <FiGlobe className="icon-globe" size={14} />
+                          <FiGlobe className="icon-main" size={14} />
                           <span className="icon-x">×</span>
                         </span>
 
@@ -4209,7 +4209,7 @@ function ChatShell({
                         title="Disable web search for this turn"
                       >
                         <span className="pill-icon" aria-hidden="true">
-                          <FiGlobe className="icon-globe" size={14} />
+                          <FiGlobe className="icon-main" size={14} />
                           <span className="icon-x">×</span>
                         </span>
 
@@ -4488,7 +4488,7 @@ function ChatShell({
                         title="Disable web search for this turn"
                       >
                         <span className="pill-icon" aria-hidden="true">
-                          <FiGlobe className="icon-globe" size={14} />
+                          <FiGlobe className="icon-main" size={14} />
                           <span className="icon-x">×</span>
                         </span>
 
