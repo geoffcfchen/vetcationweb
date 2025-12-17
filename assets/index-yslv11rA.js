@@ -8467,7 +8467,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     font-size: 1.32rem;
   }
   & h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   } /* <-- this makes "Clinical Summary" bigger */
   & h4 {
     font-size: 1.08rem;
