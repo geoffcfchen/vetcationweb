@@ -694,15 +694,17 @@ const MessageRow = styled.div`
 const Bubble = styled.div`
   display: inline-block;
   max-width: 100%;
-  padding: 6px 12px; /* was 10px 12px */
+  padding: 10px 12px;
   border-radius: 14px;
-  font-size: 17px; /* was 16px */
-  line-height: 1.6; /* NEW: makes it easier to read */
+  font-size: 17px;
   background: ${(p) => (p.$role === "user" ? "#303030" : "transparent")};
   color: #e5e7eb;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
+  line-height: 1.6;
+
+  /* key change */
+  white-space: ${(p) => (p.$role === "user" ? "pre-wrap" : "normal")};
 `;
 
 const AssistantBubble = styled(Bubble)`
@@ -1486,9 +1488,21 @@ const MarkdownBody = styled(ReactMarkdown)`
  * Important: it wraps ReactMarkdown, it does NOT wrap ReactMarkdown itself.
  */
 const MarkdownWrapper = styled.div`
-  /* Base text */
+  /* Base typography */
+  font-size: 17px;
+  line-height: 1.6;
+
+  /* Give every direct block a little breathing room */
+  & > * {
+    margin: 0 0 10px 0;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Paragraphs */
   & p {
-    margin: 0 0 4px 0; /* was 0 0 8px 0 */
+    margin: 0 0 12px 0;
   }
 
   /* Headings */
@@ -1498,30 +1512,45 @@ const MarkdownWrapper = styled.div`
   & h4,
   & h5,
   & h6 {
-    margin: 0; /* keep headings themselves tight */
     font-weight: 600;
+    margin: 14px 0 8px 0;
+    line-height: 1.3;
   }
 
+  & h1:first-child,
+  & h2:first-child,
+  & h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Title scale */
   & h1 {
-    font-size: 1.25rem;
+    font-size: 1.55rem;
   }
   & h2 {
-    font-size: 1.15rem;
+    font-size: 1.32rem;
   }
   & h3 {
-    font-size: 1.35rem;
-    line-height: 1.35;
+    font-size: 1.3rem;
+  } /* <-- this makes "Clinical Summary" bigger */
+  & h4 {
+    font-size: 1.08rem;
+  }
+  & h5 {
+    font-size: 1.02rem;
+  }
+  & h6 {
+    font-size: 0.98rem;
   }
 
   /* Lists */
   & ul,
   & ol {
-    margin: 2px 0 6px; /* was 6px 0 8px */
+    margin: 8px 0 10px 0;
     padding-left: 1.4rem;
   }
-
   & li {
-    margin: 2px 0;
+    margin: 4px 0;
   }
 
   /* Links */
@@ -1533,7 +1562,7 @@ const MarkdownWrapper = styled.div`
   /* Blockquote */
   & blockquote {
     border-left: 3px solid #4b5563;
-    margin: 6px 0;
+    margin: 12px 0;
     padding-left: 10px;
     color: #9ca3af;
     font-style: italic;
@@ -1543,7 +1572,7 @@ const MarkdownWrapper = styled.div`
   & hr {
     border: none;
     border-top: 1px solid #374151;
-    margin: 10px 0;
+    margin: 14px 0;
   }
 
   /* Inline code */
@@ -1553,7 +1582,7 @@ const MarkdownWrapper = styled.div`
     border-radius: 4px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
       "Liberation Mono", "Courier New", monospace;
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
 
   /* Code blocks */
@@ -1562,9 +1591,9 @@ const MarkdownWrapper = styled.div`
     padding: 10px 12px;
     border-radius: 8px;
     overflow-x: auto;
-    margin: 8px 0 10px;
+    margin: 12px 0;
+    font-size: 0.92em;
   }
-
   & pre code {
     background: transparent;
     padding: 0;
@@ -1574,17 +1603,15 @@ const MarkdownWrapper = styled.div`
   & table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 0.9em;
-    margin: 6px 0 10px;
+    font-size: 0.95em;
+    margin: 12px 0;
   }
-
   & th,
   & td {
     border: 1px solid #374151;
-    padding: 4px 6px;
+    padding: 6px 8px;
     vertical-align: top;
   }
-
   & th {
     background: #111827;
     font-weight: 600;
@@ -1660,14 +1687,12 @@ const SourceChunkBody = styled.div`
   font-size: 14px;
   color: #f5f5f5;
   text-align: left;
-  white-space: pre-wrap;
+
+  /* key change */
+  white-space: normal;
+
   a {
     color: #4ea3ff;
-    text-decoration: underline;
-  }
-
-  a:hover {
-    color: #8fc4ff;
     text-decoration: underline;
   }
 `;
@@ -1766,20 +1791,14 @@ function normalizeLooseLists(input) {
 
   let out = input;
 
-  // Step 1: unify "blank" lines (only spaces/tabs) into true empty lines.
-  // "\n  \n" or "\n    \n" -> "\n\n"
   out = out.replace(/\n[ \t]+\n/g, "\n\n");
 
-  // Step 2: tighten loose ordered lists:
-  // "...text\n\n2. Something" -> "...text\n2. Something"
-  out = out.replace(/\n\n(?=\d+\.\s)/g, "\n");
+  // collapse any huge vertical gaps
+  out = out.replace(/\n{3,}/g, "\n\n");
 
-  // Step 3: tighten loose dash bullet lists:
-  // "...text\n\n- Something" -> "...text\n- Something"
-  out = out.replace(/\n\n(?=-\s)/g, "\n");
-
-  // If you ever use "* " bullets, you can add:
-  // out = out.replace(/\n\n(?=\*\s)/g, "\n");
+  // tighten lists even if there are 2+ blank lines
+  out = out.replace(/\n{2,}(?=\d+\.\s)/g, "\n");
+  out = out.replace(/\n{2,}(?=-\s)/g, "\n");
 
   return out;
 }
