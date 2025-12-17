@@ -2259,6 +2259,9 @@ function AssistantMessageBubble({ message }) {
   );
 }
 
+const MAX_ATTACHMENTS_PER_MESSAGE = 10;
+const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024; // 20 MB
+
 function PersonalChatShell({ currentUser }) {
   const { personalChatId } = useParams();
   const isExistingChat = !!personalChatId;
@@ -2568,12 +2571,102 @@ function PersonalChatShell({ currentUser }) {
 
   const handleAttachFilesClick = () => {
     if (!fileInputRef.current) return;
+    fileInputRef.current.value = "";
     fileInputRef.current.click();
   };
 
+  const makeAttachmentFingerprint = (file) => {
+    const name = (file?.name || "").trim().toLowerCase();
+    const size = typeof file?.size === "number" ? file.size : 0;
+    const lm = typeof file?.lastModified === "number" ? file.lastModified : 0;
+    return `${name}__${size}__${lm}`;
+  };
+
+  const fingerprintFromAttachmentDoc = (att) => {
+    const name = (att?.fileName || att?.title || "").trim().toLowerCase();
+    const size = typeof att?.fileSizeBytes === "number" ? att.fileSizeBytes : 0;
+    const lm =
+      typeof att?.fileLastModified === "number" ? att.fileLastModified : 0;
+    return `${name}__${size}__${lm}`;
+  };
+
+  const uploadOnePersonalAttachmentPdf = async (file, fingerprint) => {
+    const attachmentsCol = collection(
+      firestore,
+      "vetPersonalChats",
+      currentUser.uid,
+      "attachments"
+    );
+
+    const attachmentDocRef = await addDoc(attachmentsCol, {
+      vetUid: currentUser.uid,
+      chatId: personalChatId || null,
+      messageId: null,
+      title: file.name,
+
+      fileName: file.name,
+      fileSizeBytes: file.size,
+      fileLastModified: file.lastModified || null,
+      fileFingerprint: fingerprint,
+
+      status: "uploading",
+      filePath: null,
+      downloadUrl: null,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+
+    const attachmentId = attachmentDocRef.id;
+
+    setPendingAttachmentIds((prev) =>
+      prev.includes(attachmentId) ? prev : [...prev, attachmentId]
+    );
+    setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
+
+    const path = `aiPersonalUploads/${currentUser.uid}/${
+      personalChatId || "pending"
+    }/${attachmentId}.pdf`;
+    const storageRef = ref(storage, path);
+    const task = uploadBytesResumable(storageRef, file);
+
+    task.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = snapshot.totalBytes
+          ? Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+          : 0;
+        setUploadProgress((prev) => ({ ...prev, [attachmentId]: percent }));
+      },
+      async (error) => {
+        console.error("Attachment upload error", error);
+        await updateDoc(attachmentDocRef, {
+          status: "error",
+          updatedAt: serverTimestamp(),
+        });
+        setUploadProgress((prev) => {
+          const { [attachmentId]: _ignore, ...rest } = prev;
+          return rest;
+        });
+      },
+      async () => {
+        const url = await getDownloadURL(storageRef);
+        await updateDoc(attachmentDocRef, {
+          status: "uploaded",
+          filePath: path,
+          downloadUrl: url,
+          updatedAt: serverTimestamp(),
+        });
+        setUploadProgress((prev) => {
+          const { [attachmentId]: _ignore, ...rest } = prev;
+          return rest;
+        });
+      }
+    );
+  };
+
   const handleAttachmentFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
 
     if (!currentUser) {
       alert("Please log in first.");
@@ -2583,79 +2676,80 @@ function PersonalChatShell({ currentUser }) {
     try {
       setAttachMenuOpen(false);
 
-      const attachmentsCol = collection(
-        firestore,
-        "vetPersonalChats",
-        currentUser.uid,
-        "attachments"
+      // Keep only PDFs
+      let pdfs = files.filter(
+        (f) =>
+          f &&
+          (f.type === "application/pdf" ||
+            (typeof f.name === "string" &&
+              f.name.toLowerCase().endsWith(".pdf")))
+      );
+      if (!pdfs.length) return;
+
+      // Enforce per-file size limit
+      const oversized = pdfs.filter(
+        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES
+      );
+      if (oversized.length) {
+        alert("Some files are larger than 10 MB and were skipped.");
+        pdfs = pdfs.filter(
+          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES
+        );
+        if (!pdfs.length) return;
+      }
+
+      // Build a set of fingerprints already pending for THIS message
+      const pendingFps = new Set(
+        chatAttachments
+          .filter((att) => pendingAttachmentIds.includes(att.id))
+          .map(
+            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att)
+          )
       );
 
-      const attachmentDocRef = await addDoc(attachmentsCol, {
-        vetUid: currentUser.uid,
-        chatId: personalChatId || null, // null before first chat
-        messageId: null,
-        title: file.name,
-        status: "uploading",
-        filePath: null,
-        downloadUrl: null,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      });
+      const seen = new Set();
+      let toUpload = [];
 
-      const attachmentId = attachmentDocRef.id;
+      for (const file of pdfs) {
+        const fp = makeAttachmentFingerprint(file);
+        if (seen.has(fp)) continue;
+        seen.add(fp);
 
-      setPendingAttachmentIds((prev) =>
-        prev.includes(attachmentId) ? prev : [...prev, attachmentId]
-      );
-      setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
+        if (pendingFps.has(fp)) continue;
+        pendingFps.add(fp);
 
-      const path = `aiPersonalUploads/${currentUser.uid}/${
-        personalChatId || "pending"
-      }/${attachmentId}.pdf`;
-      const storageRef = ref(storage, path);
-      const task = uploadBytesResumable(storageRef, file);
+        toUpload.push({ file, fp });
+      }
 
-      task.on(
-        "state_changed",
-        (snapshot) => {
-          const percent = snapshot.totalBytes
-            ? Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              )
-            : 0;
-          setUploadProgress((prev) => ({
-            ...prev,
-            [attachmentId]: percent,
-          }));
-        },
-        async (error) => {
-          console.error("Attachment upload error", error);
-          await updateDoc(attachmentDocRef, {
-            status: "error",
-            updatedAt: serverTimestamp(),
-          });
-          setUploadProgress((prev) => {
-            const { [attachmentId]: _ignore, ...rest } = prev;
-            return rest;
-          });
-        },
-        async () => {
-          const url = await getDownloadURL(storageRef);
-          await updateDoc(attachmentDocRef, {
-            status: "uploaded",
-            filePath: path,
-            downloadUrl: url,
-            updatedAt: serverTimestamp(),
-          });
-          setUploadProgress((prev) => {
-            const { [attachmentId]: _ignore, ...rest } = prev;
-            return rest;
-          });
-        }
+      if (!toUpload.length) return;
+
+      // Enforce "max 10 per pending message"
+      const existingCount = pendingAttachmentIds.length;
+      if (existingCount >= MAX_ATTACHMENTS_PER_MESSAGE) {
+        alert(
+          "You can attach up to 10 files per message. Remove one before adding more."
+        );
+        return;
+      }
+
+      const availableSlots = MAX_ATTACHMENTS_PER_MESSAGE - existingCount;
+      if (toUpload.length > availableSlots) {
+        alert(
+          `You can only add ${availableSlots} more attachment${
+            availableSlots === 1 ? "" : "s"
+          } (limit is 10). The rest were skipped.`
+        );
+        toUpload = toUpload.slice(0, availableSlots);
+      }
+
+      if (!toUpload.length) return;
+
+      await Promise.all(
+        toUpload.map(({ file, fp }) => uploadOnePersonalAttachmentPdf(file, fp))
       );
     } catch (err) {
-      console.error("Failed to attach file", err);
-      alert("Could not attach file. Please try again.");
+      console.error("Failed to attach files", err);
+      alert("Could not attach file(s). Please try again.");
     } finally {
       e.target.value = "";
     }
@@ -2930,6 +3024,7 @@ function PersonalChatShell({ currentUser }) {
       <input
         type="file"
         accept="application/pdf"
+        multiple
         ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleAttachmentFileChange}
@@ -3730,14 +3825,103 @@ function ChatShell({
 
   const handleAttachFilesClick = () => {
     if (!fileInputRef.current) return;
+    fileInputRef.current.value = "";
     fileInputRef.current.click();
+  };
+
+  const makeAttachmentFingerprint = (file) => {
+    const name = (file?.name || "").trim().toLowerCase();
+    const size = typeof file?.size === "number" ? file.size : 0;
+    const lm = typeof file?.lastModified === "number" ? file.lastModified : 0;
+    return `${name}__${size}__${lm}`;
+  };
+
+  const fingerprintFromAttachmentDoc = (att) => {
+    const name = (att?.fileName || att?.title || "").trim().toLowerCase();
+    const size = typeof att?.fileSizeBytes === "number" ? att.fileSizeBytes : 0;
+    const lm =
+      typeof att?.fileLastModified === "number" ? att.fileLastModified : 0;
+    return `${name}__${size}__${lm}`;
+  };
+
+  const uploadOneCaseAttachmentPdf = async (file, fingerprint) => {
+    const attachmentsCol = collection(
+      firestore,
+      "vetAiCases",
+      caseId,
+      "attachments"
+    );
+
+    const attachmentDocRef = await addDoc(attachmentsCol, {
+      vetUid: currentUser.uid,
+      caseId,
+      chatId: null,
+      messageId: null,
+      title: file.name,
+
+      fileName: file.name,
+      fileSizeBytes: file.size,
+      fileLastModified: file.lastModified || null,
+      fileFingerprint: fingerprint,
+
+      status: "uploading",
+      filePath: null,
+      downloadUrl: null,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+
+    const attachmentId = attachmentDocRef.id;
+
+    setPendingAttachmentIds((prev) =>
+      prev.includes(attachmentId) ? prev : [...prev, attachmentId]
+    );
+    setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
+
+    const path = `aiCaseUploads/${currentUser.uid}/${caseId}/${attachmentId}.pdf`;
+    const storageRef = ref(storage, path);
+    const task = uploadBytesResumable(storageRef, file);
+
+    task.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = snapshot.totalBytes
+          ? Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+          : 0;
+        setUploadProgress((prev) => ({ ...prev, [attachmentId]: percent }));
+      },
+      async (error) => {
+        console.error("Attachment upload error", error);
+        await updateDoc(attachmentDocRef, {
+          status: "error",
+          updatedAt: serverTimestamp(),
+        });
+        setUploadProgress((prev) => {
+          const { [attachmentId]: _ignore, ...rest } = prev;
+          return rest;
+        });
+      },
+      async () => {
+        const url = await getDownloadURL(storageRef);
+        await updateDoc(attachmentDocRef, {
+          status: "uploaded",
+          filePath: path,
+          downloadUrl: url,
+          updatedAt: serverTimestamp(),
+        });
+        setUploadProgress((prev) => {
+          const { [attachmentId]: _ignore, ...rest } = prev;
+          return rest;
+        });
+      }
+    );
   };
 
   // Upload a PDF and create an attachment doc linked to the case.
   // We associate it with a specific message after Send.
   const handleAttachmentFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
 
     if (!currentUser) {
       alert("Please log in first.");
@@ -3751,80 +3935,79 @@ function ChatShell({
     try {
       setAttachMenuOpen(false);
 
-      const attachmentsCol = collection(
-        firestore,
-        "vetAiCases",
-        caseId,
-        "attachments"
+      // Keep only PDFs
+      let pdfs = files.filter(
+        (f) =>
+          f &&
+          (f.type === "application/pdf" ||
+            (typeof f.name === "string" &&
+              f.name.toLowerCase().endsWith(".pdf")))
+      );
+      if (!pdfs.length) return;
+
+      // Enforce per-file size limit
+      const oversized = pdfs.filter(
+        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES
+      );
+      if (oversized.length) {
+        alert("Some files are larger than 10 MB and were skipped.");
+        pdfs = pdfs.filter(
+          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES
+        );
+        if (!pdfs.length) return;
+      }
+
+      const pendingFps = new Set(
+        caseAttachments
+          .filter((att) => pendingAttachmentIds.includes(att.id))
+          .map(
+            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att)
+          )
       );
 
-      // Create attachment doc first so we can use its id in the storage path
-      const attachmentDocRef = await addDoc(attachmentsCol, {
-        vetUid: currentUser.uid,
-        caseId,
-        chatId: null, // filled on Send
-        messageId: null, // filled on Send
-        title: file.name,
-        status: "uploading",
-        filePath: null,
-        downloadUrl: null,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      });
+      const seen = new Set();
+      let toUpload = [];
 
-      const attachmentId = attachmentDocRef.id;
+      for (const file of pdfs) {
+        const fp = makeAttachmentFingerprint(file);
+        if (seen.has(fp)) continue;
+        seen.add(fp);
 
-      // Mark it as pending for this message
-      setPendingAttachmentIds((prev) =>
-        prev.includes(attachmentId) ? prev : [...prev, attachmentId]
-      );
-      setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
+        if (pendingFps.has(fp)) continue;
+        pendingFps.add(fp);
 
-      const path = `aiCaseUploads/${currentUser.uid}/${caseId}/${attachmentId}.pdf`;
-      const storageRef = ref(storage, path);
-      const task = uploadBytesResumable(storageRef, file);
+        toUpload.push({ file, fp });
+      }
 
-      task.on(
-        "state_changed",
-        (snapshot) => {
-          const percent = snapshot.totalBytes
-            ? Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              )
-            : 0;
-          setUploadProgress((prev) => ({
-            ...prev,
-            [attachmentId]: percent,
-          }));
-        },
-        async (error) => {
-          console.error("Attachment upload error", error);
-          await updateDoc(attachmentDocRef, {
-            status: "error",
-            updatedAt: serverTimestamp(),
-          });
-          setUploadProgress((prev) => {
-            const { [attachmentId]: _ignore, ...rest } = prev;
-            return rest;
-          });
-        },
-        async () => {
-          const url = await getDownloadURL(storageRef);
-          await updateDoc(attachmentDocRef, {
-            status: "uploaded",
-            filePath: path,
-            downloadUrl: url,
-            updatedAt: serverTimestamp(),
-          });
-          setUploadProgress((prev) => {
-            const { [attachmentId]: _ignore, ...rest } = prev;
-            return rest;
-          });
-        }
+      if (!toUpload.length) return;
+
+      // Enforce "max 10 per pending message"
+      const existingCount = pendingAttachmentIds.length;
+      if (existingCount >= MAX_ATTACHMENTS_PER_MESSAGE) {
+        alert(
+          "You can attach up to 10 files per message. Remove one before adding more."
+        );
+        return;
+      }
+
+      const availableSlots = MAX_ATTACHMENTS_PER_MESSAGE - existingCount;
+      if (toUpload.length > availableSlots) {
+        alert(
+          `You can only add ${availableSlots} more attachment${
+            availableSlots === 1 ? "" : "s"
+          } (limit is 10). The rest were skipped.`
+        );
+        toUpload = toUpload.slice(0, availableSlots);
+      }
+
+      if (!toUpload.length) return;
+
+      await Promise.all(
+        toUpload.map(({ file, fp }) => uploadOneCaseAttachmentPdf(file, fp))
       );
     } catch (err) {
-      console.error("Failed to attach file", err);
-      alert("Could not attach file. Please try again.");
+      console.error("Failed to attach files", err);
+      alert("Could not attach file(s). Please try again.");
     } finally {
       e.target.value = "";
     }
@@ -4095,6 +4278,7 @@ function ChatShell({
       <input
         type="file"
         accept="application/pdf"
+        multiple
         ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleAttachmentFileChange}
