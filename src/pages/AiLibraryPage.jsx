@@ -724,7 +724,7 @@ const ThinkingBubble = styled(Bubble)`
 `;
 
 const ThinkingLabel = styled.span`
-  font-size: 14px; /* was 12px */
+  font-size: 17px; /* was 12px */
   color: #e5e7eb;
   animation: ${thinkingPulse} 1.2s infinite;
 `;
@@ -2225,6 +2225,13 @@ function PersonalChatShell({ currentUser }) {
     };
   }, [attachMenuOpen]);
 
+  // reset thinking on chat change
+  useEffect(() => {
+    setIsThinking(false);
+    setMessageInput("");
+    setInitialAssistantTriggered(false);
+  }, [personalChatId]);
+
   useEffect(() => {
     // Only in the personal chat route, not on the root "/" view
     if (!currentUser || !personalChatId) return;
@@ -2273,12 +2280,6 @@ function PersonalChatShell({ currentUser }) {
       block: "end",
     });
   }, [isThinking]);
-
-  // reset thinking on chat change
-  useEffect(() => {
-    setIsThinking(false);
-    setMessageInput("");
-  }, [personalChatId]);
 
   // scroll when messages update
   useEffect(() => {
@@ -3297,6 +3298,12 @@ function ChatShell({
   }, [attachMenuOpen]);
 
   useEffect(() => {
+    setIsThinking(false);
+    setMessageInput("");
+    setInitialAssistantTriggered(false);
+  }, [caseId, chatId]);
+
+  useEffect(() => {
     if (!currentUser || !caseId || !chatId) return;
     if (initialAssistantTriggered) return;
     if (messages.length === 0) return;
@@ -3344,10 +3351,6 @@ function ChatShell({
       block: "end",
     });
   }, [isThinking]);
-
-  useEffect(() => {
-    setIsThinking(false);
-  }, [caseId, chatId]);
 
   useEffect(() => {
     if (!chatId) return;
@@ -5357,19 +5360,23 @@ export default function AiLibraryPage() {
 
   const handleLibraryUploadClick = () => {
     if (!currentUser || !libraryFileInputRef.current) return;
+
+    // Allow selecting the same file again
+    libraryFileInputRef.current.value = "";
+
     libraryFileInputRef.current.click();
   };
 
   const handleUpload = async (e) => {
-    if (!currentUser) {
-      console.warn("No user, cannot upload");
-      return;
-    }
-
-    const file = e.target.files?.[0];
-    if (!file) return;
-
     try {
+      if (!currentUser) {
+        console.warn("No user, cannot upload");
+        return;
+      }
+
+      const file = e.target.files?.[0];
+      if (!file) return;
+
       setIsUploading(true);
 
       const srcDocRef = await addDoc(
@@ -5409,7 +5416,7 @@ export default function AiLibraryPage() {
         async () => {
           const url = await getDownloadURL(storageRef);
           await updateDoc(srcDocRef, {
-            status: "uploaded", // IMPORTANT: leave it in 'uploaded'
+            status: "uploaded",
             filePath: path,
             downloadUrl: url,
             overallProgress: 0,
@@ -5424,6 +5431,9 @@ export default function AiLibraryPage() {
     } catch (err) {
       console.error("Upload failed:", err);
       setIsUploading(false);
+    } finally {
+      // Allow picking the same file again
+      e.target.value = "";
     }
   };
 
