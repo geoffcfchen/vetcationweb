@@ -156,9 +156,9 @@ const ModalCard = styled.div`
   background: #020617;
   border-radius: 16px;
   border: 1px solid #1f2937;
-  padding: 20px 24px;
+  padding: 24px 28px;
   width: 100%;
-  max-width: 420px;
+  max-width: ${({ $wide }) => ($wide ? "720px" : "420px")};
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
 `;
 
@@ -1672,6 +1672,76 @@ const SourceChunkBody = styled.div`
   }
 `;
 
+const ChatHeaderTopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+`;
+
+const ChatHeaderTitleBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+`;
+
+const InstructionButton = styled.button`
+  padding: 8px 16px; /* bigger */
+  border-radius: 999px;
+  border: 0.1px solid #6b7280;
+  background: transparent;
+  color: #e5e7eb;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(248, 250, 252, 0.06);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    border-color: #6b7280;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
+const ModalBody = styled.div`
+  margin-top: 12px;
+  margin-bottom: 16px;
+`;
+
+const ModalTextarea = styled.textarea`
+  width: 100%;
+  min-height: 220px;
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 12px 14px; /* slightly roomier padding */
+  font-size: 14px;
+  resize: vertical;
+
+  &::placeholder {
+    color: #6b7280;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+`;
+
 function extractCitationKeysFromMarkdown(markdown) {
   const keys = new Set();
   if (!markdown) return keys;
@@ -3117,6 +3187,13 @@ function ChatShell({
 
   const [isWebSearchEnabled, setIsWebSearchEnabled] = useState(false);
 
+  // Project-level instruction
+  const [instructionText, setInstructionText] = useState("");
+  const [isInstructionApplied, setIsInstructionApplied] = useState(false);
+  const [showInstructionModal, setShowInstructionModal] = useState(false);
+  const [instructionDraft, setInstructionDraft] = useState("");
+  const [isSavingInstruction, setIsSavingInstruction] = useState(false);
+
   // shape: { id, title, filePath }
 
   const isExistingChat = !!chatId; // optional helper
@@ -3133,6 +3210,32 @@ function ChatShell({
       });
     }
   };
+
+  // Load project-level instruction when the active case changes
+  useEffect(() => {
+    if (!caseId) {
+      setInstructionText("");
+      setIsInstructionApplied(false);
+      return;
+    }
+
+    const caseRef = doc(firestore, "vetAiCases", caseId);
+    const unsub = onSnapshot(caseRef, (snap) => {
+      const data = snap.exists() ? snap.data() : null;
+      const text =
+        data && typeof data.instruction === "string"
+          ? data.instruction.trim()
+          : "";
+      setInstructionText(text);
+
+      // Auto apply instruction only for new chat view (no chatId)
+      if (!chatId) {
+        setIsInstructionApplied(!!text);
+      }
+    });
+
+    return () => unsub();
+  }, [caseId, chatId]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -3176,10 +3279,20 @@ function ChatShell({
         chatId,
         convo,
         last.id,
-        isWebSearchEnabled
+        isWebSearchEnabled,
+        isInstructionApplied && !!instructionText
       );
     }
-  }, [currentUser, caseId, chatId, messages, initialAssistantTriggered]);
+  }, [
+    currentUser,
+    caseId,
+    chatId,
+    messages,
+    initialAssistantTriggered,
+    isWebSearchEnabled,
+    isInstructionApplied,
+    instructionText,
+  ]);
 
   // When the assistant is "thinking", scroll so the thinking bubble is visible
   useEffect(() => {
@@ -3310,6 +3423,82 @@ function ChatShell({
     setIsWebSearchEnabled(false);
   };
 
+  const handleOpenInstructionModal = () => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    if (!caseId) {
+      alert("Create or select a project first.");
+      return;
+    }
+    setInstructionDraft(instructionText || "");
+    setShowInstructionModal(true);
+  };
+
+  const handleCloseInstructionModal = () => {
+    if (isSavingInstruction) return;
+    setShowInstructionModal(false);
+  };
+
+  const handleSaveInstruction = async () => {
+    if (!currentUser || !caseId) return;
+
+    const trimmed = instructionDraft.trim();
+
+    try {
+      setIsSavingInstruction(true);
+      const caseRef = doc(firestore, "vetAiCases", caseId);
+      await updateDoc(caseRef, {
+        instruction: trimmed || null,
+        updatedAt: serverTimestamp(),
+      });
+
+      setInstructionText(trimmed);
+
+      // For new chat view, auto apply if we now have instruction
+      if (!chatId) {
+        setIsInstructionApplied(!!trimmed);
+      } else if (!trimmed) {
+        setIsInstructionApplied(false);
+      }
+
+      setShowInstructionModal(false);
+    } catch (err) {
+      console.error("Failed to save instruction", err);
+      alert("Could not save instruction. Please try again.");
+    } finally {
+      setIsSavingInstruction(false);
+    }
+  };
+
+  // From the + menu: apply instruction to this composer
+  const handleApplyInstructionChip = () => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return;
+    }
+    if (!caseId) {
+      alert("Create or select a project first.");
+      return;
+    }
+
+    if (!instructionText || !instructionText.trim()) {
+      // No instruction yet. Open editor.
+      setInstructionDraft("");
+      setShowInstructionModal(true);
+      setAttachMenuOpen(false);
+      return;
+    }
+
+    setIsInstructionApplied(true);
+    setAttachMenuOpen(false);
+  };
+
+  const handleDisableInstruction = () => {
+    setIsInstructionApplied(false);
+  };
+
   const hasUploadingPending = caseAttachments.some(
     (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
   );
@@ -3320,7 +3509,8 @@ function ChatShell({
     chatIdArg,
     convo,
     triggerMessageId,
-    webSearchEnabled // NEW
+    webSearchEnabled,
+    useInstruction
   ) => {
     try {
       const payload = {
@@ -3329,7 +3519,8 @@ function ChatShell({
         chatId: chatIdArg,
         messages: convo,
         triggerMessageId,
-        webSearchEnabled: !!webSearchEnabled, // NEW
+        webSearchEnabled: !!webSearchEnabled,
+        useInstruction: !!useInstruction,
       };
 
       const res = await fetch(
@@ -3672,7 +3863,8 @@ function ChatShell({
           chatId,
           convo,
           messageId,
-          isWebSearchEnabled
+          isWebSearchEnabled,
+          isInstructionApplied && !!instructionText
         );
 
         scrollToBottom("smooth");
@@ -3835,10 +4027,23 @@ function ChatShell({
         {activeCase && !chatId && (
           <NewChatCenter>
             <ChatHeader $isNewChat>
-              <ChatTitle>{activeCase.patientName}</ChatTitle>
-              <ChatSubtitle>
-                Start a new chat for this project, or open a previous one.
-              </ChatSubtitle>
+              <ChatHeaderTopRow>
+                <ChatHeaderTitleBlock>
+                  <ChatTitle>{activeCase.patientName}</ChatTitle>
+                  <ChatSubtitle>
+                    Start a new chat for this project, or open a previous one.
+                  </ChatSubtitle>
+                </ChatHeaderTitleBlock>
+
+                <InstructionButton
+                  type="button"
+                  onClick={handleOpenInstructionModal}
+                  disabled={!currentUser || !caseId}
+                >
+                  <FiEdit3 size={14} />
+                  <span>Instruction</span>
+                </InstructionButton>
+              </ChatHeaderTopRow>
             </ChatHeader>
 
             <InputRow onSubmit={handleSubmit} style={{ width: "100%" }}>
@@ -3875,7 +4080,17 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
+
                           <AttachMenuDivider />
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleApplyInstructionChip}
+                          >
+                            <FiEdit3 />
+                            <span>Apply instruction</span>
+                          </AttachMenuItem>
+
                           <AttachMenuItem
                             type="button"
                             onClick={handleEnableWebSearch}
@@ -3886,6 +4101,17 @@ function ChatShell({
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
+                    {isInstructionApplied && instructionText && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableInstruction}
+                        title="Remove instruction for this chat"
+                      >
+                        <FiEdit3 size={14} />
+                        <span className="pill-label">Instruction</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
 
                     {isWebSearchEnabled && (
                       <WebSearchPill
@@ -4014,6 +4240,20 @@ function ChatShell({
         {/* Active patient and active chat: no header, just messages + composer */}
         {activeCase && chatId && (
           <>
+            <ChatHeader $isNewChat={false}>
+              <ChatHeaderTopRow>
+                <ChatTitle>{activeCase.patientName}</ChatTitle>
+
+                <InstructionButton
+                  type="button"
+                  onClick={handleOpenInstructionModal}
+                  disabled={!currentUser || !caseId}
+                >
+                  <FiEdit3 size={14} />
+                  <span>Instruction</span>
+                </InstructionButton>
+              </ChatHeaderTopRow>
+            </ChatHeader>
             {messages.length === 0 ? (
               <ChatEmptyState>Loading conversation…</ChatEmptyState>
             ) : (
@@ -4128,7 +4368,17 @@ function ChatShell({
                             <FiPaperclip />
                             <span>Add lab report / PDF</span>
                           </AttachMenuItem>
+
                           <AttachMenuDivider />
+
+                          <AttachMenuItem
+                            type="button"
+                            onClick={handleApplyInstructionChip}
+                          >
+                            <FiEdit3 />
+                            <span>Apply instruction</span>
+                          </AttachMenuItem>
+
                           <AttachMenuItem
                             type="button"
                             onClick={handleEnableWebSearch}
@@ -4139,7 +4389,17 @@ function ChatShell({
                         </AttachMenu>
                       )}
                     </AttachButtonWrapper>
-
+                    {isInstructionApplied && instructionText && (
+                      <WebSearchPill
+                        type="button"
+                        onClick={handleDisableInstruction}
+                        title="Remove instruction for this chat"
+                      >
+                        <FiEdit3 size={14} />
+                        <span className="pill-label">Instruction</span>
+                        <span className="pill-close">×</span>
+                      </WebSearchPill>
+                    )}
                     {isWebSearchEnabled && (
                       <WebSearchPill
                         type="button"
@@ -4171,6 +4431,52 @@ function ChatShell({
           </>
         )}
       </ChatInner>
+      {showInstructionModal && (
+        <ModalOverlay
+          onClick={() => {
+            handleCloseInstructionModal();
+          }}
+        >
+          <ModalCard
+            $wide
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ModalTitle>Project instruction</ModalTitle>
+            <ModalSubtitle>
+              This instruction is saved for this project and can be applied to
+              any chat in it.
+            </ModalSubtitle>
+
+            <ModalBody>
+              <ModalTextarea
+                value={instructionDraft}
+                onChange={(e) => setInstructionDraft(e.target.value)}
+                placeholder="For example: Always summarize the assessment and plan in client friendly bullet points."
+              />
+            </ModalBody>
+
+            <ModalActions>
+              <ModalSecondaryButton
+                type="button"
+                onClick={handleCloseInstructionModal}
+                disabled={isSavingInstruction}
+              >
+                Cancel
+              </ModalSecondaryButton>
+
+              <ModalPrimaryButton
+                type="button"
+                onClick={handleSaveInstruction}
+                disabled={isSavingInstruction}
+              >
+                {isSavingInstruction ? "Saving..." : "Save instruction"}
+              </ModalPrimaryButton>
+            </ModalActions>
+          </ModalCard>
+        </ModalOverlay>
+      )}
 
       {deleteAttachmentTarget && (
         <ModalOverlay
