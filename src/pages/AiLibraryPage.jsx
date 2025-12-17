@@ -1531,7 +1531,7 @@ const MarkdownWrapper = styled.div`
     font-size: 1.32rem;
   }
   & h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   } /* <-- this makes "Clinical Summary" bigger */
   & h4 {
     font-size: 1.08rem;
