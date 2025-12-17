@@ -4609,6 +4609,7 @@ export default function AiLibraryPage() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const [showNewPatientModal, setShowNewPatientModal] = useState(false);
+  const [duplicateUpload, setDuplicateUpload] = useState(null);
   const [newPatientName, setNewPatientName] = useState("");
 
   const [activeCaseChats, setActiveCaseChats] = useState([]);
@@ -5358,10 +5359,16 @@ export default function AiLibraryPage() {
     navigate("/ai/library");
   };
 
+  const makePdfFingerprint = (file) => {
+    const name = (file?.name || "").trim().toLowerCase();
+    const size = typeof file?.size === "number" ? file.size : 0;
+    return `${name}__${size}`;
+  };
+
   const handleLibraryUploadClick = () => {
     if (!currentUser || !libraryFileInputRef.current) return;
 
-    // Allow selecting the same file again
+    // Allow selecting the same file again (so we can show the duplicate warning)
     libraryFileInputRef.current.value = "";
 
     libraryFileInputRef.current.click();
@@ -5377,6 +5384,30 @@ export default function AiLibraryPage() {
       const file = e.target.files?.[0];
       if (!file) return;
 
+      const fingerprint = makePdfFingerprint(file);
+
+      // Block duplicate uploads (same name + same size)
+      const existing = sources.find(
+        (s) =>
+          s.vetUid === currentUser.uid &&
+          ((s.fileFingerprint && s.fileFingerprint === fingerprint) ||
+            // fallback for older docs if you didn't store fingerprint yet
+            (s.fileName &&
+              s.fileName.trim().toLowerCase() ===
+                file.name.trim().toLowerCase() &&
+              typeof s.fileSizeBytes === "number" &&
+              s.fileSizeBytes === file.size))
+      );
+
+      if (existing) {
+        setDuplicateUpload({
+          fileName: file.name,
+          existingTitle: existing.title || existing.fileName || "Untitled PDF",
+          existingId: existing.id,
+        });
+        return;
+      }
+
       setIsUploading(true);
 
       const srcDocRef = await addDoc(
@@ -5385,6 +5416,8 @@ export default function AiLibraryPage() {
           vetUid: currentUser.uid,
           title: file.name,
           fileName: file.name,
+          fileSizeBytes: file.size, // NEW
+          fileFingerprint: fingerprint, // NEW
           kind: "unknown",
           status: "uploaded",
           errorMessage: null,
@@ -5432,7 +5465,7 @@ export default function AiLibraryPage() {
       console.error("Upload failed:", err);
       setIsUploading(false);
     } finally {
-      // Allow picking the same file again
+      // Always reset so picking same file later still triggers onChange
       e.target.value = "";
     }
   };
@@ -6287,6 +6320,33 @@ export default function AiLibraryPage() {
             </ContextMenuItemDanger>
           </ContextMenuCard>
         </ContextMenuBackdrop>
+      )}
+      {duplicateUpload && (
+        <ModalOverlay
+          onClick={() => {
+            setDuplicateUpload(null);
+          }}
+        >
+          <ModalCard
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ModalTitle>Already uploaded</ModalTitle>
+            <ModalSubtitle>
+              {`"${duplicateUpload.fileName}" is already in your library as "${duplicateUpload.existingTitle}".`}
+            </ModalSubtitle>
+
+            <ModalActions>
+              <ModalPrimaryButton
+                type="button"
+                onClick={() => setDuplicateUpload(null)}
+              >
+                OK
+              </ModalPrimaryButton>
+            </ModalActions>
+          </ModalCard>
+        </ModalOverlay>
       )}
     </>
   );
