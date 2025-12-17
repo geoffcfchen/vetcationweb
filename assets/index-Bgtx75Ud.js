@@ -8552,6 +8552,15 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     background: #111827;
     font-weight: 600;
   }
+  /* Math (KaTeX) */
+  & .katex-display {
+    margin: 25px 0; // 25px top/bottom for display math
+  }
+
+  /* Optional: give inline math a tiny breathing room */
+  & .katex {
+    line-height: 1.4;
+  }
 `,j8e=j.div`
   margin: 8px 0 10px;
   border-radius: 8px;
