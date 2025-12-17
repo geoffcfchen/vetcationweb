@@ -7792,15 +7792,17 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 `,K1=j.div`
   display: inline-block;
   max-width: 100%;
-  padding: 6px 12px; /* was 10px 12px */
+  padding: 10px 12px;
   border-radius: 14px;
-  font-size: 17px; /* was 16px */
-  line-height: 1.6; /* NEW: makes it easier to read */
+  font-size: 17px;
   background: ${n=>n.$role==="user"?"#303030":"transparent"};
   color: #e5e7eb;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
+  line-height: 1.6;
+
+  /* key change */
+  white-space: ${n=>n.$role==="user"?"pre-wrap":"normal"};
 `;j(K1)`
   padding-top: 4px; /* was 10px */
   padding-bottom: 4px;
@@ -8422,9 +8424,21 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     font-weight: 600;
   }
 `;const N8e=j.div`
-  /* Base text */
+  /* Base typography */
+  font-size: 17px;
+  line-height: 1.6;
+
+  /* Give every direct block a little breathing room */
+  & > * {
+    margin: 0 0 10px 0;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Paragraphs */
   & p {
-    margin: 0 0 4px 0; /* was 0 0 8px 0 */
+    margin: 0 0 12px 0;
   }
 
   /* Headings */
@@ -8434,30 +8448,45 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   & h4,
   & h5,
   & h6 {
-    margin: 0; /* keep headings themselves tight */
     font-weight: 600;
+    margin: 14px 0 8px 0;
+    line-height: 1.3;
   }
 
+  & h1:first-child,
+  & h2:first-child,
+  & h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Title scale */
   & h1 {
-    font-size: 1.25rem;
+    font-size: 1.55rem;
   }
   & h2 {
-    font-size: 1.15rem;
+    font-size: 1.32rem;
   }
   & h3 {
-    font-size: 1.35rem;
-    line-height: 1.35;
+    font-size: 1.3rem;
+  } /* <-- this makes "Clinical Summary" bigger */
+  & h4 {
+    font-size: 1.08rem;
+  }
+  & h5 {
+    font-size: 1.02rem;
+  }
+  & h6 {
+    font-size: 0.98rem;
   }
 
   /* Lists */
   & ul,
   & ol {
-    margin: 2px 0 6px; /* was 6px 0 8px */
+    margin: 8px 0 10px 0;
     padding-left: 1.4rem;
   }
-
   & li {
-    margin: 2px 0;
+    margin: 4px 0;
   }
 
   /* Links */
@@ -8469,7 +8498,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   /* Blockquote */
   & blockquote {
     border-left: 3px solid #4b5563;
-    margin: 6px 0;
+    margin: 12px 0;
     padding-left: 10px;
     color: #9ca3af;
     font-style: italic;
@@ -8479,7 +8508,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   & hr {
     border: none;
     border-top: 1px solid #374151;
-    margin: 10px 0;
+    margin: 14px 0;
   }
 
   /* Inline code */
@@ -8489,7 +8518,7 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     border-radius: 4px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
       "Liberation Mono", "Courier New", monospace;
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
 
   /* Code blocks */
@@ -8498,9 +8527,9 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
     padding: 10px 12px;
     border-radius: 8px;
     overflow-x: auto;
-    margin: 8px 0 10px;
+    margin: 12px 0;
+    font-size: 0.92em;
   }
-
   & pre code {
     background: transparent;
     padding: 0;
@@ -8510,17 +8539,15 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   & table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 0.9em;
-    margin: 6px 0 10px;
+    font-size: 0.95em;
+    margin: 12px 0;
   }
-
   & th,
   & td {
     border: 1px solid #374151;
-    padding: 4px 6px;
+    padding: 6px 8px;
     vertical-align: top;
   }
-
   & th {
     background: #111827;
     font-weight: 600;
@@ -8582,14 +8609,12 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   font-size: 14px;
   color: #f5f5f5;
   text-align: left;
-  white-space: pre-wrap;
+
+  /* key change */
+  white-space: normal;
+
   a {
     color: #4ea3ff;
-    text-decoration: underline;
-  }
-
-  a:hover {
-    color: #8fc4ff;
     text-decoration: underline;
   }
 `,H8e=j.div`
@@ -8654,8 +8679,10 @@ l0,-`+(r+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
   }
 `;function Y8e(n){const e=new Set;if(!n)return e;const r=/\[([LAW]\d+(?:\s*,\s*[LAW]\d+)*)\]/g;let i;for(;(i=r.exec(n))!==null;)i[1].split(/\s*,\s*/).forEach(o=>{const s=o.trim();/^[LAW]\d+$/.test(s)&&e.add(s)});return e}function SU(n){if(!n)return"";let e=n;return e=e.replace(/\n[ \t]+\n/g,`
 
-`),e=e.replace(/\n\n(?=\d+\.\s)/g,`
-`),e=e.replace(/\n\n(?=-\s)/g,`
+`),e=e.replace(/\n{3,}/g,`
+
+`),e=e.replace(/\n{2,}(?=\d+\.\s)/g,`
+`),e=e.replace(/\n{2,}(?=-\s)/g,`
 `),e}function Q8e(n){if(!n)return"";let e=X8e(n);return e=SU(e),e}function X8e(n){if(!n)return"";const e=i=>i.replace(/\|/g,"\\vert ");let r=n;return r=r.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g,(i,a)=>`
 
 $$
