@@ -4240,20 +4240,6 @@ function ChatShell({
         {/* Active patient and active chat: no header, just messages + composer */}
         {activeCase && chatId && (
           <>
-            <ChatHeader $isNewChat={false}>
-              <ChatHeaderTopRow>
-                <ChatTitle>{activeCase.patientName}</ChatTitle>
-
-                <InstructionButton
-                  type="button"
-                  onClick={handleOpenInstructionModal}
-                  disabled={!currentUser || !caseId}
-                >
-                  <FiEdit3 size={14} />
-                  <span>Instruction</span>
-                </InstructionButton>
-              </ChatHeaderTopRow>
-            </ChatHeader>
             {messages.length === 0 ? (
               <ChatEmptyState>Loading conversation…</ChatEmptyState>
             ) : (
