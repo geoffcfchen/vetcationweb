@@ -940,25 +940,6 @@ const TextInput = styled.textarea`
   }
 `;
 
-const SendButton = styled.button`
-  border: none;
-  border-radius: 999px;
-  padding: 0 18px;
-  background: #2563eb;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  flex-shrink: 0;
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
-`;
-
 const ChatEmptyState = styled.div`
   font-size: 15px; /* was 13px */
   color: #6b7280;
@@ -1277,10 +1258,10 @@ const ContextMenuDivider = styled.div`
 /* Subchat list (project history on main pane) */
 
 const ChatListSection = styled.div`
-  margin-top: 16px;
+  margin-top: 24px;
   padding-top: 8px;
   border-top: 1px solid #303030;
-  width: 100%; /* NEW: match the composer width inside NewChatCenter */
+  width: 100%; /* match the composer width inside NewChatCenter */
 `;
 
 const ChatListTitle = styled.div`
@@ -1290,10 +1271,14 @@ const ChatListTitle = styled.div`
   margin-bottom: 6px;
 `;
 
+// this is the scrollable container
 const ChatList = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding-right: 4px; /* optional, small space for scrollbar */
 `;
 
 const ChatListItem = styled.button`
@@ -1362,358 +1347,10 @@ const MessageContent = styled.div`
   align-items: ${(p) => (p.$role === "user" ? "flex-end" : "flex-start")};
 `;
 
-const Row = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-`;
-
-const Avatar = styled.div`
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  background: #10a37f;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-`;
-
-const MarkdownBody = styled(ReactMarkdown)`
-  /* Base text */
-  & p {
-    margin: 0 0 8px 0;
-  }
-
-  /* Headings */
-  & h1,
-  & h2,
-  & h3,
-  & h4,
-  & h5,
-  & h6 {
-    margin: 8px 0 6px;
-    font-weight: 600;
-  }
-
-  & h1 {
-    font-size: 1.25rem;
-  }
-  & h2 {
-    font-size: 1.15rem;
-  }
-  & h3 {
-    font-size: 1.05rem;
-  }
-
-  /* Lists */
-  & ul,
-  & ol {
-    margin: 6px 0 8px;
-    padding-left: 1.4rem;
-  }
-
-  & li {
-    margin: 2px 0;
-  }
-
-  /* Links */
-  & a {
-    color: #93c5fd;
-    text-decoration: underline;
-  }
-
-  /* Blockquote */
-  & blockquote {
-    border-left: 3px solid #4b5563;
-    margin: 6px 0;
-    padding-left: 10px;
-    color: #9ca3af;
-    font-style: italic;
-  }
-
-  /* Horizontal rule */
-  & hr {
-    border: none;
-    border-top: 1px solid #374151;
-    margin: 10px 0;
-  }
-
-  /* Inline code */
-  & code {
-    background: #020617;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
-    font-size: 0.85em;
-  }
-
-  /* Code blocks */
-  & pre {
-    background: #171717;
-    padding: 10px 12px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 8px 0 10px;
-  }
-
-  & pre code {
-    background: transparent;
-    padding: 0;
-  }
-
-  /* Tables */
-  & table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 0.9em;
-    margin: 6px 0 10px;
-  }
-
-  & th,
-  & td {
-    border: 1px solid #374151;
-    padding: 4px 6px;
-    vertical-align: top;
-  }
-
-  & th {
-    background: #111827;
-    font-weight: 600;
-  }
-`;
-
 /**
  * This is the styled wrapper around the markdown.
  * Important: it wraps ReactMarkdown, it does NOT wrap ReactMarkdown itself.
  */
-const MarkdownWrapper = styled.div`
-  /* Base typography */
-  font-size: 17px;
-  line-height: 1.6;
-
-  /* Give every direct block a little breathing room */
-  & > * {
-    margin: 0 0 10px 0;
-  }
-  & > *:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Paragraphs */
-  & p {
-    margin: 0 0 12px 0;
-  }
-
-  /* Headings */
-  & h1,
-  & h2,
-  & h3,
-  & h4,
-  & h5,
-  & h6 {
-    font-weight: 600;
-    margin: 14px 0 8px 0;
-    line-height: 1.3;
-  }
-
-  & h1:first-child,
-  & h2:first-child,
-  & h3:first-child {
-    margin-top: 0;
-  }
-
-  /* Title scale */
-  & h1 {
-    font-size: 1.55rem;
-  }
-  & h2 {
-    font-size: 1.32rem;
-  }
-  & h3 {
-    font-size: 1.25rem;
-  } /* <-- this makes "Clinical Summary" bigger */
-  & h4 {
-    font-size: 1.08rem;
-  }
-  & h5 {
-    font-size: 1.02rem;
-  }
-  & h6 {
-    font-size: 0.98rem;
-  }
-
-  /* Lists */
-  & ul,
-  & ol {
-    margin: 8px 0 10px 0;
-    padding-left: 1.4rem;
-  }
-  & li {
-    margin: 4px 0;
-  }
-
-  /* Links */
-  & a {
-    color: #93c5fd;
-    text-decoration: underline;
-  }
-
-  /* Blockquote */
-  & blockquote {
-    border-left: 3px solid #4b5563;
-    margin: 12px 0;
-    padding-left: 10px;
-    color: #9ca3af;
-    font-style: italic;
-  }
-
-  /* Horizontal rule */
-  & hr {
-    border: none;
-    border-top: 1px solid #374151;
-    margin: 14px 0;
-  }
-
-  /* Inline code */
-  & code {
-    background: #020617;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
-    font-size: 0.9em;
-  }
-
-  /* Code blocks */
-  & pre {
-    background: #171717;
-    padding: 10px 12px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 12px 0;
-    font-size: 0.92em;
-  }
-  & pre code {
-    background: transparent;
-    padding: 0;
-  }
-
-  /* Tables */
-  & table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 0.95em;
-    margin: 12px 0;
-  }
-  & th,
-  & td {
-    border: 1px solid #374151;
-    padding: 6px 8px;
-    vertical-align: top;
-  }
-  & th {
-    background: #111827;
-    font-weight: 600;
-  }
-  /* Math (KaTeX) */
-  & .katex-display {
-    margin: 25px 0; // 25px top/bottom for display math
-  }
-
-  /* Optional: give inline math a tiny breathing room */
-  & .katex {
-    line-height: 1.4;
-  }
-`;
-
-const ModalMarkdownWrapper = styled(MarkdownWrapper)`
-  font-size: 15px;
-`;
-
-const CodeBlock = styled.div`
-  margin: 8px 0 10px;
-  border-radius: 8px;
-  background-color: #171717;
-  overflow: hidden;
-`;
-
-const CodeHeader = styled.div`
-  padding: 6px 10px;
-  font-size: 0.75rem;
-  color: #9ca3af;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #222222;
-`;
-
-const SourcesRow = styled.div`
-  margin-top: 8px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-  border-top: 1px solid #374151;
-  padding-top: 6px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-`;
-
-const SourcesLabel = styled.span`
-  font-weight: 500;
-  margin-right: 4px;
-`;
-
-const SourcePills = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-`;
-
-const SourcePill = styled.button`
-  border: none;
-  border-radius: 999px;
-  padding: 4px 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #111827;
-  color: #e5e7eb;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:hover {
-    background: #1f2937;
-  }
-
-  svg {
-    flex-shrink: 0;
-  }
-`;
-
-const SourceChunkBody = styled.div`
-  margin-top: 10px;
-  max-height: 360px;
-  overflow-y: auto;
-  font-size: 14px;
-  color: #f5f5f5;
-  text-align: left;
-
-  /* key change */
-  white-space: normal;
-
-  a {
-    color: #4ea3ff;
-    text-decoration: underline;
-  }
-`;
 
 const ChatHeaderTopRow = styled.div`
   display: flex;
@@ -1783,17 +1420,6 @@ const ModalTextarea = styled.textarea`
     outline: none;
     border-color: #2563eb;
   }
-`;
-
-const CitationBadge = styled.span`
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #e5e7eb;
 `;
 
 const MAX_ATTACHMENTS_PER_MESSAGE = 10;
@@ -2934,6 +2560,9 @@ function ChatShell({
   const [instructionDraft, setInstructionDraft] = useState("");
   const [isSavingInstruction, setIsSavingInstruction] = useState(false);
 
+  const [visibleChatCount, setVisibleChatCount] = useState(10);
+  const CHAT_PAGE_SIZE = 10;
+
   // shape: { id, title, filePath }
 
   const isExistingChat = !!chatId; // optional helper
@@ -2941,6 +2570,17 @@ function ChatShell({
   const activeCase = caseId ? cases.find((c) => c.id === caseId) || null : null;
 
   const hasAnyCases = Array.isArray(cases) && cases.length > 0;
+
+  const handlePreviousChatsScroll = (e) => {
+    const el = e.currentTarget;
+    const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 40;
+
+    if (nearBottom && visibleChatCount < activeCaseChats.length) {
+      setVisibleChatCount((current) =>
+        Math.min(current + CHAT_PAGE_SIZE, activeCaseChats.length)
+      );
+    }
+  };
 
   const scrollToBottom = (behavior = "auto") => {
     if (messagesEndRef.current) {
@@ -2950,6 +2590,11 @@ function ChatShell({
       });
     }
   };
+
+  useEffect(() => {
+    // When switching projects, reset how many previous chats are shown
+    setVisibleChatCount(CHAT_PAGE_SIZE);
+  }, [caseId]);
 
   // Load project-level instruction when the active case changes
   useEffect(() => {
@@ -3969,12 +3614,14 @@ function ChatShell({
 
             <ChatListSection>
               <ChatListTitle>Previous chats</ChatListTitle>
+
               {activeCaseChats.length === 0 && (
                 <ChatEmptyState>No chats yet for this projects.</ChatEmptyState>
               )}
+
               {activeCaseChats.length > 0 && (
-                <ChatList>
-                  {activeCaseChats.map((ch) => {
+                <ChatList onScroll={handlePreviousChatsScroll}>
+                  {activeCaseChats.slice(0, visibleChatCount).map((ch) => {
                     const created =
                       ch.createdAt && ch.createdAt.toDate
                         ? ch.createdAt.toDate()
@@ -3995,7 +3642,7 @@ function ChatShell({
                     return (
                       <ChatListItem
                         key={ch.id}
-                        className="chat-list-item" // NEW: used by RowMenuButton CSS
+                        className="chat-list-item"
                         type="button"
                         onClick={() => handleOpenChat(ch.id)}
                         $active={ch.id === chatId}
@@ -4035,7 +3682,6 @@ function ChatShell({
                           </ChatListItemTime>
                         )}
 
-                        {/* NEW: three-dot menu button, same behavior as sidebar */}
                         <RowMenuButton
                           type="button"
                           aria-label="Chat actions"
