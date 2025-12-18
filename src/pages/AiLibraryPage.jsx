@@ -52,12 +52,11 @@ import {
 } from "firebase/storage";
 
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
 import GlobalContext from "../context/GlobalContext";
+
+import { AssistantMessageBubble } from "../components/chat/AssistantMessageBubble";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 const AttachProgressRing = styled.div`
   width: 18px;
@@ -1797,468 +1796,6 @@ const CitationBadge = styled.span`
   color: #e5e7eb;
 `;
 
-function extractCitationKeysFromMarkdown(markdown) {
-  return new Set(extractCitationKeysInOrder(markdown));
-}
-
-function extractCitationKeysInOrder(markdown) {
-  const ordered = [];
-  const seen = new Set();
-  if (!markdown) return ordered;
-
-  const add = (key) => {
-    if (!key) return;
-    if (!seen.has(key)) {
-      seen.add(key);
-      ordered.push(key);
-    }
-  };
-
-  const addRange = (prefix, startNum, endNum) => {
-    const a = Number(startNum);
-    const b = Number(endNum);
-    if (!Number.isFinite(a) || !Number.isFinite(b)) return;
-
-    const step = a <= b ? 1 : -1;
-    for (let n = a; step > 0 ? n <= b : n >= b; n += step) {
-      add(`${prefix}${n}`);
-    }
-  };
-
-  const parseInner = (inner) => {
-    if (!inner) return;
-
-    // Supports:
-    // - "L2, L5, L6; W1"
-    // - "L1-L7" / "L1–L7"
-    // - "L1-7"  (implied same prefix)
-    const innerRe =
-      /([LAW])\s*(\d+)(?:\s*[-\u2013\u2014]\s*([LAW])?\s*(\d+))?/g;
-
-    let m;
-    while ((m = innerRe.exec(inner)) !== null) {
-      const prefix = m[1];
-      const start = m[2];
-      const endPrefix = m[3] || prefix;
-      const end = m[4];
-
-      if (end && endPrefix === prefix) {
-        addRange(prefix, start, end);
-      } else {
-        add(`${prefix}${start}`);
-        if (end) add(`${endPrefix}${end}`);
-      }
-    }
-  };
-
-  // Matches either:
-  // 1) Range across two bracket blocks: [L1]-[L7]
-  // 2) Any single bracket block: [ ... ]
-  const re = /\[([LAW])(\d+)\]\s*[-\u2013\u2014]\s*\[\1(\d+)\]|\[([^\]]+)\]/g;
-
-  let match;
-  while ((match = re.exec(markdown)) !== null) {
-    // Case 1: [L1]-[L7]
-    if (match[1] && match[2] && match[3]) {
-      addRange(match[1], match[2], match[3]);
-      continue;
-    }
-
-    // Case 2: [ ... ]
-    const inner = match[4];
-    parseInner(inner);
-  }
-
-  return ordered;
-}
-function normalizeLooseLists(input) {
-  if (!input) return "";
-
-  let out = input;
-
-  out = out.replace(/\n[ \t]+\n/g, "\n\n");
-
-  // collapse any huge vertical gaps
-  out = out.replace(/\n{3,}/g, "\n\n");
-
-  // tighten lists even if there are 2+ blank lines
-  out = out.replace(/\n{2,}(?=\d+\.\s)/g, "\n");
-  out = out.replace(/\n{2,}(?=-\s)/g, "\n");
-
-  return out;
-}
-
-function normalizeMarkdown(input) {
-  if (!input) return "";
-  let out = normalizeMathDelimiters(input);
-  // if you added a <br> normalizer, keep that too
-  // out = normalizeHtmlBreaks(out);
-  out = normalizeLooseLists(out);
-  return out;
-}
-function normalizeMathDelimiters(input) {
-  if (!input) return "";
-
-  const sanitizeMath = (s) => s.replace(/\|/g, "\\vert ");
-
-  let out = input;
-
-  // \[ ... \]  -> $$ ... $$
-  out = out.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (_, content) => {
-    const inner = sanitizeMath(content.trim());
-    return `\n\n$$\n${inner}\n$$\n\n`;
-  });
-
-  // \( ... \) -> $ ... $
-  out = out.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (_, content) => {
-    const inner = sanitizeMath(content.trim());
-    return `$${inner}$`;
-  });
-
-  return out;
-}
-
-function stripOpenAIUtmParams(text) {
-  if (!text || typeof text !== "string") return text;
-  return text.replace(/\?utm_source=openai/g, "");
-}
-
-function normalizeSourceDescriptor(raw, index) {
-  if (!raw) return null;
-
-  // Plain string source (for backward compatibility)
-  if (typeof raw === "string") {
-    const trimmed = raw.trim();
-    const isUrl = /^https?:\/\//i.test(trimmed);
-
-    if (isUrl) {
-      let hostname = trimmed;
-      try {
-        const u = new URL(trimmed);
-        hostname = u.hostname.replace(/^www\./, "");
-      } catch {
-        // ignore parse errors
-      }
-      return {
-        id: `s-${index}`,
-        sourceType: "web",
-        url: trimmed,
-        title: trimmed,
-        site: hostname,
-        displayLabel: hostname,
-        citationKey: null,
-      };
-    }
-
-    return {
-      id: `s-${index}`,
-      sourceType: "other",
-      title: trimmed,
-      displayLabel: trimmed,
-      citationKey: null,
-    };
-  }
-
-  // Object shape
-  const base = { ...raw };
-  const sourceType =
-    raw.sourceType || raw.kind || raw.type || (raw.url ? "web" : "library");
-
-  // This is the thing that must match [L1], [A1], [W1] in the markdown
-  const citationKey = raw.citationKey || raw.label || raw.key || null;
-
-  if (!base.id) {
-    base.id = raw.id || raw.sourceId || raw.chunkId || raw.key || `s-${index}`;
-  }
-
-  if (sourceType === "web") {
-    const urlRaw = raw.url || raw.href || null;
-    const url = urlRaw ? stripOpenAIUtmParams(urlRaw) : null;
-
-    let site = raw.site || null;
-    if (!site && url) {
-      try {
-        const u = new URL(url);
-        site = u.hostname.replace(/^www\./, "");
-      } catch {
-        // ignore parse errors
-      }
-    }
-
-    const rawSnippet = raw.snippet || raw.chunkText || raw.text || "";
-    const snippet = stripOpenAIUtmParams(rawSnippet);
-
-    return {
-      ...base,
-      sourceType: "web",
-      citationKey,
-      url,
-      site,
-      title: raw.title || raw.key || url || "Web reference",
-      snippet,
-      // Make sure the modal can show this text
-      chunkText: snippet,
-      displayLabel: raw.title || site || "Web",
-    };
-  }
-
-  if (sourceType === "library") {
-    const bookTitle =
-      raw.bookTitle || raw.sourceTitle || raw.title || "Library source";
-
-    return {
-      ...base,
-      sourceType: "library",
-      citationKey,
-      bookTitle,
-      pageNumber: raw.pageNumber ?? null,
-      chunkText: raw.chunkText || raw.text || raw.snippet || "",
-      downloadUrl: raw.downloadUrl || null,
-      displayLabel:
-        bookTitle + (raw.pageNumber != null ? ` (p. ${raw.pageNumber})` : ""),
-    };
-  }
-
-  if (sourceType === "attachment") {
-    const title = raw.title || "Attachment";
-    return {
-      ...base,
-      sourceType: "attachment",
-      citationKey,
-      title,
-      chunkText: raw.excerpt || raw.text || raw.snippet || "",
-      downloadUrl: raw.downloadUrl || null,
-      displayLabel: raw.label || raw.key || title,
-    };
-  }
-
-  // Fallback
-  return {
-    ...base,
-    sourceType,
-    citationKey,
-    displayLabel: raw.title || raw.key || "Source",
-  };
-}
-
-function AssistantMessageBubble({ message }) {
-  const { content, sources } = message || {};
-  const normalized = normalizeMarkdown(content || "");
-  // jason format
-  console.log(
-    "Normalized assistant message content:",
-    JSON.stringify(normalized, null, 2)
-  );
-  const [activeSource, setActiveSource] = useState(null);
-
-  // Which citation keys are actually used in the answer text, e.g. "L1", "A1", "W1"
-  const usedCitationKeys = extractCitationKeysFromMarkdown(normalized);
-  const citationOrder = extractCitationKeysInOrder(normalized);
-  const citationRank = new Map(citationOrder.map((k, i) => [k, i]));
-
-  const hasExplicitCitations = usedCitationKeys.size > 0;
-
-  const allNormalizedSources = Array.isArray(sources)
-    ? sources
-        .map((s, index) => normalizeSourceDescriptor(s, index))
-        .filter(Boolean)
-    : [];
-
-  // Only show sources that are actually cited, if citations exist.
-  // Only show sources that are actually cited.
-  const normalizedSources = allNormalizedSources
-    .filter((src) => {
-      if (!src) return false;
-
-      if (!hasExplicitCitations) return false;
-      if (!src.citationKey) return false;
-
-      return usedCitationKeys.has(src.citationKey);
-    })
-    .sort((a, b) => {
-      const ra = citationRank.has(a.citationKey)
-        ? citationRank.get(a.citationKey)
-        : 9999;
-      const rb = citationRank.has(b.citationKey)
-        ? citationRank.get(b.citationKey)
-        : 9999;
-      return ra - rb;
-    });
-
-  const handleSourceClick = (source) => {
-    if (!source) return;
-
-    // 1) Real web link: open in new tab
-    if (source.sourceType === "web" && source.url) {
-      window.open(source.url, "_blank", "noopener,noreferrer");
-      return;
-    }
-
-    // 2) Web digest without url, library, or attachment: show modal
-    if (
-      source.sourceType === "library" ||
-      source.sourceType === "attachment" ||
-      (source.sourceType === "web" && !source.url)
-    ) {
-      setActiveSource(source);
-      return;
-    }
-
-    // 3) Fallback: treat as link if it has a url
-    if (source.url) {
-      window.open(source.url, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  return (
-    <>
-      <MarkdownWrapper>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-          components={{
-            code({ node, inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || "");
-              const lang = match?.[1];
-
-              if (inline) {
-                return <code {...props}>{children}</code>;
-              }
-
-              return (
-                <CodeBlock>
-                  <CodeHeader>
-                    <span>{lang || "code"}</span>
-                  </CodeHeader>
-                  <pre>
-                    <code {...props}>{children}</code>
-                  </pre>
-                </CodeBlock>
-              );
-            },
-          }}
-        >
-          {normalized}
-        </ReactMarkdown>
-      </MarkdownWrapper>
-
-      {normalizedSources.length > 0 && (
-        <SourcesRow>
-          <SourcesLabel>References</SourcesLabel>
-          <SourcePills>
-            {normalizedSources.map((src) => (
-              <SourcePill
-                key={src.id}
-                type="button"
-                onClick={() => handleSourceClick(src)}
-                title={`${src.citationKey || ""} ${
-                  src.sourceType === "library"
-                    ? src.bookTitle
-                    : src.title || src.url || src.displayLabel
-                }`.trim()}
-              >
-                <CitationBadge>{src.citationKey}</CitationBadge>
-
-                {src.sourceType === "web" ? (
-                  <FiGlobe size={12} />
-                ) : (
-                  <FiFileText size={12} />
-                )}
-
-                <span>{src.displayLabel}</span>
-              </SourcePill>
-            ))}
-          </SourcePills>
-        </SourcesRow>
-      )}
-
-      {activeSource &&
-        (activeSource.sourceType === "library" ||
-          activeSource.sourceType === "attachment" ||
-          // Also allow "web" sources without a url to show as a digest modal
-          (activeSource.sourceType === "web" && !activeSource.url)) && (
-          <ModalOverlay
-            onClick={() => {
-              setActiveSource(null);
-            }}
-          >
-            <ModalCard
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <ModalTitle>
-                {activeSource.bookTitle ||
-                  activeSource.title ||
-                  activeSource.site ||
-                  "Reference"}
-              </ModalTitle>
-
-              {activeSource.pageNumber != null && (
-                <ModalSubtitle>Page {activeSource.pageNumber}</ModalSubtitle>
-              )}
-              <SourceChunkBody>
-                {(() => {
-                  const rawText =
-                    activeSource.chunkText ||
-                    activeSource.text ||
-                    activeSource.snippet ||
-                    "No text snippet is available for this reference.";
-
-                  const noUtm = stripOpenAIUtmParams(rawText);
-                  const modalMarkdown = normalizeLooseLists(noUtm);
-
-                  return (
-                    <ModalMarkdownWrapper>
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm, remarkMath]}
-                        rehypePlugins={[rehypeKatex]}
-                        components={{
-                          a: ({ node, ...props }) => (
-                            <a
-                              {...props}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            />
-                          ),
-                        }}
-                      >
-                        {modalMarkdown}
-                      </ReactMarkdown>
-                    </ModalMarkdownWrapper>
-                  );
-                })()}
-              </SourceChunkBody>
-
-              <ModalActions>
-                {activeSource.downloadUrl && (
-                  <ModalPrimaryButton
-                    type="button"
-                    onClick={() =>
-                      window.open(
-                        activeSource.downloadUrl,
-                        "_blank",
-                        "noopener,noreferrer"
-                      )
-                    }
-                  >
-                    Open PDF
-                  </ModalPrimaryButton>
-                )}
-                <ModalSecondaryButton
-                  type="button"
-                  onClick={() => setActiveSource(null)}
-                >
-                  Close
-                </ModalSecondaryButton>
-              </ModalActions>
-            </ModalCard>
-          </ModalOverlay>
-        )}
-    </>
-  );
-}
-
 const MAX_ATTACHMENTS_PER_MESSAGE = 10;
 const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024; // 20 MB
 
@@ -2288,23 +1825,11 @@ function PersonalChatShell({ currentUser }) {
     useState(false);
   const [isWebSearchEnabled, setIsWebSearchEnabled] = useState(false);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!attachMenuOpen) return;
-
-      if (
-        attachMenuContainerRef.current &&
-        !attachMenuContainerRef.current.contains(e.target)
-      ) {
-        setAttachMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [attachMenuOpen]);
+  useClickOutside(
+    attachMenuContainerRef,
+    () => setAttachMenuOpen(false),
+    attachMenuOpen
+  );
 
   // reset thinking on chat change
   useEffect(() => {
@@ -3452,23 +2977,11 @@ function ChatShell({
     return () => unsub();
   }, [caseId, chatId]);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!attachMenuOpen) return;
-
-      if (
-        attachMenuContainerRef.current &&
-        !attachMenuContainerRef.current.contains(e.target)
-      ) {
-        setAttachMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [attachMenuOpen]);
+  useClickOutside(
+    attachMenuContainerRef,
+    () => setAttachMenuOpen(false),
+    attachMenuOpen
+  );
 
   useEffect(() => {
     setIsThinking(false);
@@ -4529,7 +4042,9 @@ function ChatShell({
                           $forceVisible={
                             rowMenu &&
                             rowMenu.kind === "chat" &&
-                            rowMenu.id === ch.id
+                            rowMenu.id === ch.id &&
+                            rowMenu.caseId === caseId &&
+                            rowMenu.origin === "main"
                           }
                           onClick={(e) => {
                             e.stopPropagation();
@@ -4876,6 +4391,7 @@ export default function AiLibraryPage() {
 
   const [activeCaseChats, setActiveCaseChats] = useState([]);
   const patientListRef = useRef(null); // ✨ NEW
+  const profileMenuRef = useRef(null);
 
   const [openRowMenu, setOpenRowMenu] = useState(null); // { type: 'patient' | 'chat', id }
   const [editingPatientId, setEditingPatientId] = useState(null);
@@ -4920,24 +4436,20 @@ export default function AiLibraryPage() {
 
   console.log("userData", userData);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!openSourceId) return;
+  useClickOutside(
+    profileMenuRef,
+    () => setShowProfileMenu(false),
+    showProfileMenu
+  );
 
-      if (
-        sourceMenuContainerRef.current &&
-        !sourceMenuContainerRef.current.contains(e.target)
-      ) {
-        setOpenSourceId(null);
-        setSourceMenuPosition(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [openSourceId]);
+  useClickOutside(
+    sourceMenuContainerRef,
+    () => {
+      setOpenSourceId(null);
+      setSourceMenuPosition(null);
+    },
+    !!openSourceId
+  );
 
   //set currentUser as userData if userData change
   useEffect(() => {
@@ -5905,7 +5417,7 @@ export default function AiLibraryPage() {
       <Page>
         {currentUser && (
           <TopRightUserShell>
-            <div style={{ position: "relative" }}>
+            <div ref={profileMenuRef} style={{ position: "relative" }}>
               <UserAvatarButton
                 type="button"
                 onClick={() => setShowProfileMenu((open) => !open)}
@@ -6362,7 +5874,9 @@ export default function AiLibraryPage() {
                                 $forceVisible={
                                   rowMenu &&
                                   rowMenu.kind === "chat" &&
-                                  rowMenu.id === ch.id
+                                  rowMenu.id === ch.id &&
+                                  rowMenu.caseId === c.id &&
+                                  rowMenu.origin === "sidebar"
                                 }
                                 onClick={(e) => {
                                   e.stopPropagation();
