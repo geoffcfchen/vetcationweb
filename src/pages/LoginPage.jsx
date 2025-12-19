@@ -332,15 +332,15 @@ function LoginPage() {
                 </InputShell>
                 {errors.password && <ErrorText>{errors.password}</ErrorText>}
               </FieldBlock>
-
+              {/* 
               <ForgotPasswordLink href="/forgot-password">
                 Forgot password?
-              </ForgotPasswordLink>
+              </ForgotPasswordLink> */}
 
               <PrimaryButton type="submit">Continue</PrimaryButton>
             </form>
 
-            <DividerRow>
+            {/* <DividerRow>
               <DividerLine />
               <span>OR</span>
               <DividerLine />
@@ -348,14 +348,14 @@ function LoginPage() {
 
             <SecondaryButton type="button">
               Log in with a one-time code
-            </SecondaryButton>
+            </SecondaryButton> */}
           </Card>
         </Main>
 
         <TermsRow>
-          <TermsLink href="/terms">Terms of Use</TermsLink>
+          <TermsLink href="/SMSTerms/">Terms of Use</TermsLink>
           <span>|</span>
-          <TermsLink href="/privacy">Privacy Policy</TermsLink>
+          <TermsLink href="/privacy-policy/">Privacy Policy</TermsLink>
         </TermsRow>
       </Page>
 

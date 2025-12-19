@@ -359,9 +359,9 @@ function EmailRegisterPage() {
         </Main>
 
         <TermsRow>
-          <TermsLink href="/terms">Terms of Use</TermsLink>
+          <TermsLink href="/SMSTerms/">Terms of Use</TermsLink>
           <span>|</span>
-          <TermsLink href="/privacy">Privacy Policy</TermsLink>
+          <TermsLink href="/privacy-policy/">Privacy Policy</TermsLink>
         </TermsRow>
       </Page>
 
