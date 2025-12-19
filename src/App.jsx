@@ -359,7 +359,8 @@ function App() {
           !target &&
           (location.pathname === "/" ||
             location.pathname === "/login" ||
-            location.pathname === "/register-email")
+            location.pathname === "/register-email" ||
+            location.pathname === "/email-verification")
         ) {
           target = "/ai/library";
         }
