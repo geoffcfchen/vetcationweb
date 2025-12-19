@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -119,4 +120,9 @@ export async function signInWithGoogle() {
     alert("Could not sign in with Google: " + error.message);
     throw error;
   }
+}
+
+export async function getSignInMethods(email) {
+  if (!email) return [];
+  return fetchSignInMethodsForEmail(auth, email);
 }

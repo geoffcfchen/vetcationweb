@@ -51,7 +51,6 @@ import {
   deleteObject,
 } from "firebase/storage";
 
-import ReactMarkdown from "react-markdown";
 import "katex/dist/katex.min.css";
 import GlobalContext from "../context/GlobalContext";
 
@@ -1273,7 +1272,7 @@ const ChatListTitle = styled.div`
 
 // this is the scrollable container
 const ChatList = styled.div`
-  max-height: 500px;
+  max-height: 350px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -4096,11 +4095,6 @@ export default function AiLibraryPage() {
     },
     !!openSourceId
   );
-
-  //set currentUser as userData if userData change
-  useEffect(() => {
-    setCurrentUser(userData);
-  }, [userData]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {

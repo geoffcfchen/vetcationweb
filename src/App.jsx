@@ -35,7 +35,10 @@ import InviteSurvey from "./pages/InviteSurvey";
 import AiLibraryPage from "./pages/AiLibraryPage";
 import LoginPage from "./pages/LoginPage";
 import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
-import { auth } from "./lib/firebase";
+import { auth, firestore } from "./lib/firebase";
+import EmailVerificationPage from "./pages/EmailVerificationPage";
+import EmailRegisterPage from "./pages/EmailRegisterPage";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -252,125 +255,132 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // // Handle authentication state
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-  //     setIsUserLoading(true);
-  //     if (firebaseUser) {
-  //       try {
-  //         await firebaseUser.getIdToken(true); // Refresh token
-  //         setUser(firebaseUser);
-  //         await fetchUserData(firebaseUser.uid);
-  //       } catch (error) {
-  //         handleAuthError(error);
-  //       }
-  //     } else {
-  //       setUser(null);
-  //       setUserData(null);
-  //       navigate("/");
-  //     }
-  //     setIsUserLoading(false);
-  //   });
+  async function ensureCustomerDoc(firebaseUser) {
+    const uid = firebaseUser.uid;
+    const userDocRef = doc(firestore, "customers", uid);
+    const snap = await getDoc(userDocRef);
 
-  //   return () => unsubscribe(); // Cleanup on unmount
-  // }, [setUserData, navigate, user]);
+    if (snap.exists()) {
+      const data = snap.data();
+      setUserData(data);
+      return data;
+    } else {
+      const initialData = {
+        uid,
+        email: firebaseUser.email || "",
+        displayName: firebaseUser.displayName || "",
+        photoURL: firebaseUser.photoURL || "",
+        providerId: firebaseUser.providerData?.[0]?.providerId || "unknown",
+        hasCompletedProfile: false,
+        createdAt: serverTimestamp(),
+      };
 
-  // // Fetch user data from Firestore
-  // async function fetchUserData(uid) {
-  //   try {
-  //     const userDocRef = doc(firestore, "customers", uid);
-  //     const docSnap = await getDoc(userDocRef);
+      await setDoc(userDocRef, initialData);
+      setUserData(initialData);
+      return initialData;
+    }
+  }
 
-  //     if (docSnap.exists()) {
-  //       setUserData(docSnap.data());
-  //     } else {
-  //       await setDoc(userDocRef, { hasCompletedProfile: false, uid });
-  //       setUserData({ hasCompletedProfile: false, uid });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // }
+  function handleAuthError(error) {
+    console.error("Authentication error:", error);
 
-  // // Handle authentication errors
-  // function handleAuthError(error) {
-  //   console.error("Authentication error:", error);
+    if (
+      error.code === "auth/user-not-found" ||
+      error.code === "auth/user-disabled"
+    ) {
+      signOut(auth);
+    } else if (error.code === "auth/user-token-expired") {
+      auth.currentUser?.getIdToken(true).catch((refreshError) => {
+        console.error("Token refresh error:", refreshError);
+        signOut(auth);
+      });
+    }
+  }
 
-  //   if (
-  //     error.code === "auth/user-not-found" ||
-  //     error.code === "auth/user-disabled"
-  //   ) {
-  //     signOut(auth);
-  //   } else if (error.code === "auth/user-token-expired") {
-  //     try {
-  //       auth.currentUser?.getIdToken(true);
-  //     } catch (refreshError) {
-  //       console.error("Token refresh error:", refreshError);
-  //       signOut(auth);
-  //     }
-  //   }
-  // }
-
-  // // Check the result of a Google redirect on first load
-  // useEffect(() => {
-  //   // Guard for SSR just in case
-  //   if (typeof window === "undefined") return;
-
-  //   getRedirectResult(auth)
-  //     .then((result) => {
-  //       if (result) {
-  //         console.log("Google redirect result user:", result.user?.uid);
-  //       } else {
-  //         console.log("No redirect result (normal if not coming from Google)");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error("Google redirect error:", err);
-  //     });
-  // }, []);
-
-  // // NEW: simple global auth listener to handle post Google redirect
-  // // Handle auth state + post-Google redirect navigation
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       console.log("[auth listener] fired. user:", firebaseUser?.uid || null);
       console.log("[auth listener] current path:", location.pathname);
-      setUser(firebaseUser || null);
-      setUserData(firebaseUser || null);
+
+      setIsUserLoading(true);
 
       if (!firebaseUser) {
         console.log("Auth state changed: no user");
+        setUser(null);
+        setUserData(null);
+
+        // For example, if the user is logged out on a protected page, send them home.
+        if (location.pathname.startsWith("/ai/")) {
+          navigate("/", { replace: true });
+        }
+
+        setIsUserLoading(false);
         return;
       }
 
-      // 1) Prefer the path we explicitly stored before redirect
-      const stored = sessionStorage.getItem("postAuthRedirectPath");
-      console.log("[auth listener] stored redirect:", stored);
-      let target = stored || null;
-
-      // 2) If nothing stored, but user is on "/" or "/login",
-      //    treat this as "log in then go to /ai/library"
-      if (
-        !target &&
-        (location.pathname === "/" || location.pathname === "/login")
-      ) {
-        target = "/ai/library";
+      try {
+        await firebaseUser.getIdToken(true);
+      } catch (error) {
+        handleAuthError(error);
+        setIsUserLoading(false);
+        return;
       }
 
-      if (stored) {
-        sessionStorage.removeItem("postAuthRedirectPath");
-      }
+      try {
+        setUser(firebaseUser);
 
-      // 3) Only navigate if we actually have a target and we're
-      //    not already there
-      if (target && location.pathname !== target) {
-        console.log("Auth listener navigating to:", target);
-        navigate(target, { replace: true });
+        // 1) Make sure customers/{uid} exists and load it into userData
+        await ensureCustomerDoc(firebaseUser);
+
+        // 2) Email verification gating, similar to React Native
+        const email = firebaseUser.email || "";
+        const isSystemEmail =
+          email.startsWith("client") ||
+          email.startsWith("doctor") ||
+          email.startsWith("tech") ||
+          email.startsWith("clinic") ||
+          email.startsWith("csr");
+
+        if (!firebaseUser.emailVerified && !isSystemEmail) {
+          // If not already on the verification page, go there
+          if (location.pathname !== "/email-verification") {
+            navigate("/email-verification", { replace: true });
+          }
+          setIsUserLoading(false);
+          return;
+        }
+
+        // 3) Normal redirect logic if email is verified
+        const stored = sessionStorage.getItem("postAuthRedirectPath");
+        console.log("[auth listener] stored redirect:", stored);
+        let target = stored || null;
+
+        if (
+          !target &&
+          (location.pathname === "/" ||
+            location.pathname === "/login" ||
+            location.pathname === "/register-email")
+        ) {
+          target = "/ai/library";
+        }
+
+        if (stored) {
+          sessionStorage.removeItem("postAuthRedirectPath");
+        }
+
+        if (target && location.pathname !== target) {
+          console.log("Auth listener navigating to:", target);
+          navigate(target, { replace: true });
+        }
+      } catch (err) {
+        console.error("Error ensuring customer doc or routing:", err);
+      } finally {
+        setIsUserLoading(false);
       }
     });
 
     return () => unsub();
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname, setUserData]);
 
   return (
     <HelmetProvider>
@@ -383,6 +393,8 @@ function App() {
         <Route path="/" element={<RegisterPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
         <Route path="/ai/library/*" element={<AiLibraryPage />} />
+        <Route path="/email-verification" element={<EmailVerificationPage />} />
+        <Route path="/register-email" element={<EmailRegisterPage />} />
         {/* <Route path="/vets" element={<ForVetPage />} /> */}
         {/* <Route path="/mission" element={<MissionsPage />} /> */}
         {/* <Route path="/telemedicine-info" element={<DocsPageLayoutPage />} /> */}

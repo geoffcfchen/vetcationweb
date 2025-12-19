@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { SiGoogle, SiApple, SiMicrosoft } from "react-icons/si";
 import { FiPhone, FiX } from "react-icons/fi";
-import { startGoogleLoginRedirect, signInWithGoogle } from "../lib/firebase";
+import { getSignInMethods, signInWithGoogle } from "../lib/firebase";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -175,7 +175,8 @@ const FinePrint = styled.p`
 function LoginModal({ open, onClose }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [googleLoading, setGoogleLoading] = useState(false); // NEW
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [emailError, setEmailError] = useState(""); // NEW
 
   const handleGoogleSignIn = async () => {
     try {
@@ -223,14 +224,55 @@ function LoginModal({ open, onClose }) {
 
   const stop = (e) => e.stopPropagation();
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     const trimmed = email.trim();
-    if (!trimmed) return;
+    setEmailError("");
 
-    if (onClose) {
-      onClose();
+    if (!trimmed) {
+      setEmailError("Email is required");
+      return;
     }
-    navigate(`/login?email=${encodeURIComponent(trimmed)}`);
+
+    // basic format check
+    if (!/\S+@\S+\.\S+/.test(trimmed)) {
+      setEmailError("Invalid email address");
+      return;
+    }
+
+    try {
+      const methods = await getSignInMethods(trimmed);
+      // methods is an array of provider IDs, for example:
+      // []                 -> no account
+      // ["password"]       -> email/password account
+      // ["google.com"]     -> Google only
+      // ["password","google.com"] -> both linked
+
+      const hasPassword = methods.includes("password");
+      const hasGoogle = methods.includes("google.com");
+
+      if (methods.length === 0) {
+        // No existing account - go to email registration
+        onClose?.();
+        navigate(`/register-email?email=${encodeURIComponent(trimmed)}`);
+      } else if (hasPassword) {
+        // Existing password account - go to LoginPage
+        onClose?.();
+        navigate(`/login?email=${encodeURIComponent(trimmed)}`);
+      } else if (!hasPassword && hasGoogle) {
+        // Google only account - guide user to use Google button
+        setEmailError(
+          "This email is already connected to Google sign in. Please continue with Google."
+        );
+      } else {
+        // Other providers - for now, just show a generic message
+        setEmailError(
+          "This email is already linked to a different sign in method."
+        );
+      }
+    } catch (err) {
+      console.error("Error checking sign in methods:", err);
+      setEmailError("Unable to check this email right now. Please try again.");
+    }
   };
 
   const handleInputKeyDown = (e) => {
@@ -301,9 +343,17 @@ function LoginModal({ open, onClose }) {
             type="email"
             placeholder="Email address"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+            }}
             onKeyDown={handleInputKeyDown}
           />
+          {emailError && (
+            <p style={{ color: "#f97373", fontSize: 11, marginTop: 4 }}>
+              {emailError}
+            </p>
+          )}
         </div>
 
         <PrimaryButton type="button" onClick={handleContinue}>
