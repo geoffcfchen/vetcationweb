@@ -56,6 +56,7 @@ import GlobalContext from "../context/GlobalContext";
 
 import { AssistantMessageBubble } from "../components/chat/AssistantMessageBubble";
 import { useClickOutside } from "../hooks/useClickOutside";
+import { pdfNeedsOcr } from "../utility/pdfOcrGate";
 
 const AttachProgressRing = styled.div`
   width: 18px;
@@ -4809,10 +4810,24 @@ export default function AiLibraryPage() {
       return {
         ok: false,
         skipped: true,
+        kind: "duplicate_existing",
         fileName: file.name,
         reason: `Already uploaded as "${
           existing.title || existing.fileName || "Untitled PDF"
         }"`,
+      };
+    }
+
+    // ✅ NEW: pre check if this PDF needs OCR
+    const needsOcr = await pdfNeedsOcr(file);
+    if (needsOcr) {
+      return {
+        ok: false,
+        skipped: true,
+        kind: "needs_ocr",
+        fileName: file.name,
+        reason:
+          "This PDF text cannot be read by AI (scrambled or scanned). Please run OCR and upload the OCR version.",
       };
     }
 
@@ -4943,7 +4958,11 @@ export default function AiLibraryPage() {
       );
 
       const skippedExisting = results
-        .filter((r) => r && r.skipped)
+        .filter((r) => r && r.skipped && r.kind === "duplicate_existing")
+        .map((r) => `${r.fileName}: ${r.reason}`);
+
+      const needsOcrList = results
+        .filter((r) => r && r.skipped && r.kind === "needs_ocr")
         .map((r) => `${r.fileName}: ${r.reason}`);
 
       const failed = results
@@ -4952,9 +4971,11 @@ export default function AiLibraryPage() {
 
       const msgs = [];
       if (skippedInPick.length)
-        msgs.push(`Skipped:\n${skippedInPick.join("\n")}`);
+        msgs.push(`Skipped in selection:\n${skippedInPick.join("\n")}`);
       if (skippedExisting.length)
         msgs.push(`Already uploaded:\n${skippedExisting.join("\n")}`);
+      if (needsOcrList.length)
+        msgs.push(`Needs OCR before upload:\n${needsOcrList.join("\n")}`);
       if (failed.length) msgs.push(`Failed:\n${failed.join("\n")}`);
 
       if (msgs.length) {
