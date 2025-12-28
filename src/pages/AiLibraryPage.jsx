@@ -3495,7 +3495,8 @@ function ChatShell({
                 <ChatHeaderTitleBlock>
                   <ChatTitle>{activeCase.patientName}</ChatTitle>
                   <ChatSubtitle>
-                    Start a new chat for this project, or open a previous one.
+                    Start a new chat for this customized chat, or open a
+                    previous one.
                   </ChatSubtitle>
                 </ChatHeaderTitleBlock>
 
@@ -3518,7 +3519,7 @@ function ChatShell({
                     value={messageInput}
                     onChange={handleComposerChange}
                     onKeyDown={handleComposerKeyDown}
-                    placeholder="New chat for this project, for example: 'Help me interpret today's lab panel...'"
+                    placeholder="New chat for this customized chat, for example: 'Help me interpret today's lab panel...'"
                     disabled={!currentUser}
                   />
                 </ComposerColumn>
@@ -5413,7 +5414,7 @@ export default function AiLibraryPage() {
           <SectionDivider />
 
           <ProjectsHeader>
-            <ProjectsTitle>Projects</ProjectsTitle>
+            <ProjectsTitle>Customized chat</ProjectsTitle>
             <NewProjectButton
               type="button"
               onClick={handleCreatePatientClick}
@@ -5699,15 +5700,15 @@ export default function AiLibraryPage() {
       {showNewPatientModal && (
         <ModalOverlay onClick={handleCancelNewPatient}>
           <ModalCard onClick={(e) => e.stopPropagation()}>
-            <ModalTitle>New project</ModalTitle>
+            <ModalTitle>Customized chat</ModalTitle>
             <ModalSubtitle>
-              Create a project so AI can use the same prompts across multiple
-              chats.
+              Create a customized chat so AI can use the same prompts or
+              features across multiple chats.
             </ModalSubtitle>
             <ModalForm onSubmit={handleCreatePatientSubmit}>
               <ModalInput
                 autoFocus
-                placeholder="Project name, for example handout or diagnosis, client recommendations"
+                placeholder="Ex: handout or diagnosis, recommendations"
                 value={newPatientName}
                 onChange={(e) => setNewPatientName(e.target.value)}
               />
