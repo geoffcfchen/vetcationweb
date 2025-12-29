@@ -5559,7 +5559,7 @@ export default function AiLibraryPage() {
           <SectionDivider />
 
           <ProjectsHeader>
-            <ProjectsTitle>Notebook chats</ProjectsTitle>
+            <ProjectsTitle>Chats</ProjectsTitle>
             <NewProjectButton
               type="button"
               onClick={handleCreatePersonalChatClick}
@@ -5574,7 +5574,7 @@ export default function AiLibraryPage() {
             {personalChatsLoading && currentUser && (
               <SidebarLoadingRow>
                 <SmallSpinner />
-                <span>Loading notebook chats...</span>
+                <span>Loading chats...</span>
               </SidebarLoadingRow>
             )}
 
