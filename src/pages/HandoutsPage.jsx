@@ -836,12 +836,11 @@ function HandoutsList({ currentUser }) {
                   <FieldRow>
                     <FieldLabel>Hospital name</FieldLabel>
                     <FieldInput
-                      value={form.hospitalName}
+                      value={hospitalDefaults.hospitalName}
                       onChange={(e) =>
                         updateField("hospitalName", e.target.value)
                       }
                       placeholder="Hospital name"
-                      $error={isFieldMissing("hospitalName")}
                     />
                   </FieldRow>
 
