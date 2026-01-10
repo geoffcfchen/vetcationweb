@@ -1422,6 +1422,36 @@ const ModalTextarea = styled.textarea`
   }
 `;
 
+const TopRightActionsRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const HandoutNavButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+
+  &:hover {
+    background: #111827;
+    border-color: #6b7280;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+`;
+
 const MAX_ATTACHMENTS_PER_MESSAGE = 10;
 const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024; // 20 MB
 
@@ -5079,6 +5109,13 @@ export default function AiLibraryPage() {
       <Page>
         {currentUser && (
           <TopRightUserShell>
+            <HandoutNavButton
+              type="button"
+              onClick={() => navigate("/ai/handouts")}
+            >
+              <FiFileText size={14} />
+              <span>Handouts</span>
+            </HandoutNavButton>
             <div ref={profileMenuRef} style={{ position: "relative" }}>
               <UserAvatarButton
                 type="button"

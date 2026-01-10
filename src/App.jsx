@@ -39,6 +39,7 @@ import { auth, firestore } from "./lib/firebase";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
 import EmailRegisterPage from "./pages/EmailRegisterPage";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import HandoutsPage from "./pages/HandoutsPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -394,6 +395,7 @@ function App() {
         <Route path="/" element={<RegisterPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
         <Route path="/ai/library/*" element={<AiLibraryPage />} />
+        <Route path="/ai/handouts/*" element={<HandoutsPage />} />
         <Route path="/email-verification" element={<EmailVerificationPage />} />
         <Route path="/register-email" element={<EmailRegisterPage />} />
         {/* <Route path="/vets" element={<ForVetPage />} /> */}
