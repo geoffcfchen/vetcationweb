@@ -334,9 +334,10 @@ function buildAdvancedUrineInstruction(form) {
 const DEFAULT_FELINE_REMISSION_NOTE =
   "Remission can occur in diabetic cats. This means that they no longer require insulin therapy. Your cat has the best chance of remission if you achieve precise blood glucose control within six months of diagnosis, carefully monitor your cat at home, stop any medications that could interfere with the insulin, and use an appropriate insulin in combination with a low-carbohydrate diet.";
 
-function buildDefaultHopeNote(petName) {
+function buildDefaultHopeNote(petName, sex) {
   const name = (petName || "").trim() || "Winchester";
-  return `There is still hope that ${name} will experience remission. Continue to carefully monitor her at home, give insulin as directed, and feed a high-protein, low-carbohydrate diet.`;
+  const p = getPetPronouns(sex);
+  return `There is still hope that ${name} will experience remission. Continue to carefully monitor ${p.obj} at home, give insulin as directed, and feed a high-protein, low-carbohydrate diet.`;
 }
 
 function buildFormFromDoc(data) {
@@ -354,7 +355,7 @@ function buildFormFromDoc(data) {
   }
 
   if (isFeline && merged.includeHopeNote && !merged.hopeNote.trim()) {
-    merged.hopeNote = buildDefaultHopeNote(merged.petName);
+    merged.hopeNote = buildDefaultHopeNote(merged.petName, merged.sex);
   }
 
   // Feline-only defaults
@@ -427,45 +428,70 @@ function buildFormFromDoc(data) {
 
 function validateDiabetesForm(form) {
   const missing = [];
+  const missingMap = {};
+  const warnings = [];
 
-  if (!form.hospitalName.trim()) missing.push("Hospital name");
-  if (!form.hospitalPhone.trim()) missing.push("Hospital phone number");
+  const markMissing = (fieldKey, label) => {
+    missing.push(label);
+    missingMap[fieldKey] = true;
+  };
 
-  if (!form.petName.trim()) missing.push("Pet name");
-  if (!form.species) missing.push("Species");
-  if (!form.sex) missing.push("Gender");
+  if (!form.hospitalName.trim()) {
+    markMissing("hospitalName", "Hospital name");
+  }
+  if (!form.hospitalPhone.trim()) {
+    markMissing("hospitalPhone", "Hospital phone number");
+  }
 
-  if (!form.recheckValue.toString().trim())
-    missing.push("Recheck interval value");
-  if (!form.recheckUnit) missing.push("Recheck interval unit");
+  if (!form.petName.trim()) {
+    markMissing("petName", "Pet name");
+  }
+  if (!form.species) {
+    markMissing("species", "Species");
+  }
+  if (!form.sex) {
+    markMissing("sex", "Gender");
+  }
+
+  if (!form.recheckValue.toString().trim()) {
+    markMissing("recheckValue", "Recheck interval value");
+  }
+  if (!form.recheckUnit) {
+    markMissing("recheckUnit", "Recheck interval unit");
+  }
 
   if (!form.insulinPrescribed.trim() && !form.insulinOtherName.trim()) {
-    missing.push("Prescribed insulin");
-  }
-  if (!form.insulinUnits.toString().trim()) {
-    missing.push("Insulin units per dose");
-  }
-  if (!form.insulinFrequency && !form.insulinFrequencyOther.trim()) {
-    missing.push("Insulin frequency");
+    markMissing("insulinPrescribed", "Prescribed insulin");
   }
 
-  // NEW: require syringe type
+  if (!form.insulinUnits.toString().trim()) {
+    markMissing("insulinUnits", "Insulin units per dose");
+  }
+
+  if (!form.insulinFrequency && !form.insulinFrequencyOther.trim()) {
+    markMissing("insulinFrequency", "Insulin frequency");
+  }
+
+  // Require syringe type / pen name
   if (!form.syringeType) {
-    missing.push("Type of syringe or pen");
+    markMissing("syringeType", "Type of syringe or pen");
   } else if (
     form.syringeType === "other" &&
     !form.syringeOther.toString().trim()
   ) {
-    missing.push("Insulin pen name");
+    markMissing("syringeOther", "Insulin pen name");
   }
 
-  if (!form.prescribedFood.trim()) missing.push("Prescribed food");
-  if (!form.foodAmount.toString().trim()) missing.push("Food amount");
-
-  const warnings = [];
+  if (!form.prescribedFood.trim()) {
+    markMissing("prescribedFood", "Prescribed food");
+  }
+  if (!form.foodAmount.toString().trim()) {
+    markMissing("foodAmount", "Food amount");
+  }
 
   return {
     missing,
+    missingMap,
     warnings,
     isValid: missing.length === 0,
   };
@@ -810,11 +836,12 @@ function HandoutsList({ currentUser }) {
                   <FieldRow>
                     <FieldLabel>Hospital name</FieldLabel>
                     <FieldInput
-                      value={hospitalDefaults.hospitalName}
+                      value={form.hospitalName}
                       onChange={(e) =>
-                        updateDefaultField("hospitalName", e.target.value)
+                        updateField("hospitalName", e.target.value)
                       }
                       placeholder="Hospital name"
+                      $error={isFieldMissing("hospitalName")}
                     />
                   </FieldRow>
 
@@ -900,6 +927,71 @@ function HandoutsList({ currentUser }) {
   );
 }
 
+function applySexDependentDefaults(prev, next) {
+  // If sex did not change, leave everything as is
+  if (prev.sex === next.sex) return next;
+
+  const updated = { ...next };
+
+  const syncLine = (field, builder) => {
+    const prevCurrent = (prev[field] || "").trim();
+    const prevTemplate = builder(prev).trim();
+
+    // Only auto-update if the old value looked like the default
+    if (!prevCurrent || prevCurrent === prevTemplate) {
+      updated[field] = builder(updated);
+    }
+  };
+
+  // Feeding lines that depend on pronouns
+  syncLine("feeding1Text", buildFeedingLine1);
+  syncLine("feeding2Text", buildFeedingLine2);
+  syncLine("feeding3Text", buildFeedingLine3);
+  syncLine("feeding6Text", buildFeedingLine6);
+  syncLine("feeding7Text", buildFeedingLine7);
+
+  // Feline specific notes
+  const prevCatMeal = buildCatMealInsulinNote(prev);
+  if (
+    (!prev.catFeedingMealInsulinNote ||
+      prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
+    updated.includeCatFeedingMealInsulinNote
+  ) {
+    updated.catFeedingMealInsulinNote = buildCatMealInsulinNote(updated);
+  }
+
+  const prevCatCanned = buildCatCannedDietNote(prev);
+  if (
+    (!prev.catCannedDietNote ||
+      prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
+    updated.includeCatCannedDietNote
+  ) {
+    updated.catCannedDietNote = buildCatCannedDietNote(updated);
+  }
+
+  // Home monitoring encouragement 1
+  const prevHome1 = buildHomeEncouragement1(prev);
+  if (
+    (!prev.homeEncouragement1Text ||
+      prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
+    updated.homeEncouragementInclude1
+  ) {
+    updated.homeEncouragement1Text = buildHomeEncouragement1(updated);
+  }
+
+  // Hope note (feline only) - only if it still looks like the default
+  const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
+  if (
+    (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
+    updated.includeHopeNote &&
+    updated.species === "feline"
+  ) {
+    updated.hopeNote = buildDefaultHopeNote(updated.petName, updated.sex);
+  }
+
+  return updated;
+}
+
 function DiabetesHandoutEditor({ currentUser }) {
   const { handoutId } = useParams();
   const navigate = useNavigate();
@@ -916,9 +1008,33 @@ function DiabetesHandoutEditor({ currentUser }) {
   const [form, setForm] = useState(EMPTY_DIABETES_FORM);
   const [validation, setValidation] = useState({
     missing: [],
+    missingMap: {},
     warnings: [],
     isValid: false,
   });
+
+  const isFieldMissing = (fieldKey) =>
+    !!(validation && validation.missingMap && validation.missingMap[fieldKey]);
+
+  const isAiSuggested = (fieldKey) => {
+    if (!suggestedForm) return false;
+
+    const suggestedValue = suggestedForm[fieldKey];
+
+    // Only treat as AI suggestion if the model actually provided a value
+    if (
+      suggestedValue === null ||
+      typeof suggestedValue === "undefined" ||
+      suggestedValue === ""
+    ) {
+      return false;
+    }
+
+    const currentValue = form[fieldKey];
+
+    // Loose equality handles string vs number cases from JSON
+    return currentValue == suggestedValue;
+  };
 
   useEffect(() => {
     if (!handoutId) return;
@@ -1080,7 +1196,11 @@ function DiabetesHandoutEditor({ currentUser }) {
 
       const merged = { ...prev, ...cleaned };
 
-      const next = normalizeInsulinFields(merged);
+      // Normalize insulin fields
+      const withInsulin = normalizeInsulinFields(merged);
+
+      // NEW: adjust gendered default text if sex changed
+      const next = applySexDependentDefaults(prev, withInsulin);
 
       const v = validateDiabetesForm(next);
       setValidation(v);
@@ -1150,7 +1270,106 @@ function DiabetesHandoutEditor({ currentUser }) {
 
   const updateField = (field, value) => {
     setForm((prev) => {
-      const next = { ...prev, [field]: value };
+      let next = { ...prev, [field]: value };
+
+      // Special handling when sex / gender changes:
+      if (field === "sex") {
+        // 1) Feeding line 1
+        const prevFeed1 = buildFeedingLine1(prev);
+        if (
+          !prev.feeding1Text ||
+          prev.feeding1Text.trim() === prevFeed1.trim()
+        ) {
+          next.feeding1Text = buildFeedingLine1(next);
+        }
+
+        // 2) Feeding line 2
+        const prevFeed2 = buildFeedingLine2(prev);
+        if (
+          !prev.feeding2Text ||
+          prev.feeding2Text.trim() === prevFeed2.trim()
+        ) {
+          next.feeding2Text = buildFeedingLine2(next);
+        }
+
+        // 3) Feeding line 3
+        const prevFeed3 = buildFeedingLine3(prev);
+        if (
+          !prev.feeding3Text ||
+          prev.feeding3Text.trim() === prevFeed3.trim()
+        ) {
+          next.feeding3Text = buildFeedingLine3(next);
+        }
+
+        // 4) Feeding line 5
+        const prevFeed5 = buildFeedingLine5(prev);
+        if (
+          !prev.feeding5Text ||
+          prev.feeding5Text.trim() === prevFeed5.trim()
+        ) {
+          next.feeding5Text = buildFeedingLine5(next);
+        }
+
+        // 5) Feeding line 6
+        const prevFeed6 = buildFeedingLine6(prev);
+        if (
+          !prev.feeding6Text ||
+          prev.feeding6Text.trim() === prevFeed6.trim()
+        ) {
+          next.feeding6Text = buildFeedingLine6(next);
+        }
+
+        // 6) Feeding line 7 (vomits/refuses meal)
+        const prevFeed7 = buildFeedingLine7(prev);
+        if (
+          !prev.feeding7Text ||
+          prev.feeding7Text.trim() === prevFeed7.trim()
+        ) {
+          next.feeding7Text = buildFeedingLine7(next);
+        }
+
+        // 7) Feline-specific feeding notes (if they exist and look default)
+        if (prev.species === "feline" || next.species === "feline") {
+          const prevCatMeal = buildCatMealInsulinNote(prev);
+          if (
+            (!prev.catFeedingMealInsulinNote ||
+              prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
+            next.includeCatFeedingMealInsulinNote
+          ) {
+            next.catFeedingMealInsulinNote = buildCatMealInsulinNote(next);
+          }
+
+          const prevCatCanned = buildCatCannedDietNote(prev);
+          if (
+            (!prev.catCannedDietNote ||
+              prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
+            next.includeCatCannedDietNote
+          ) {
+            next.catCannedDietNote = buildCatCannedDietNote(next);
+          }
+        }
+
+        // 8) Home monitoring encouragement 1
+        const prevHome1 = buildHomeEncouragement1(prev);
+        if (
+          (!prev.homeEncouragement1Text ||
+            prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
+          next.homeEncouragementInclude1
+        ) {
+          next.homeEncouragement1Text = buildHomeEncouragement1(next);
+        }
+
+        // 9) Hope note (for felines, default template only)
+        const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
+        if (
+          (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
+          next.includeHopeNote &&
+          next.species === "feline"
+        ) {
+          next.hopeNote = buildDefaultHopeNote(next.petName, next.sex);
+        }
+      }
+
       const v = validateDiabetesForm(next);
       setValidation(v);
       return next;
@@ -1433,6 +1652,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.petName}
                 onChange={(e) => updateField("petName", e.target.value)}
                 placeholder="Pet name"
+                $error={isFieldMissing("petName")}
+                $aiFilled={isAiSuggested("petName")}
               />
             </FieldRow>
             {/* NEW: veterinarian name */}
@@ -1454,6 +1675,9 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.species === "canine"}
+                    $aiFilled={
+                      isAiSuggested("species") && form.species === "canine"
+                    }
                     onClick={() => updateField("species", "canine")}
                   >
                     Canine
@@ -1461,6 +1685,9 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.species === "feline"}
+                    $aiFilled={
+                      isAiSuggested("species") && form.species === "feline"
+                    }
                     onClick={() => updateField("species", "feline")}
                   >
                     Feline
@@ -1555,10 +1782,10 @@ function DiabetesHandoutEditor({ currentUser }) {
               <FieldRow>
                 <FieldLabel>Remission explanation</FieldLabel>
                 <FieldTextarea
-                  rows={5}
-                  value={form.remissionNote}
-                  onChange={(e) => updateField("remissionNote", e.target.value)}
-                  placeholder={DEFAULT_FELINE_REMISSION_NOTE}
+                  rows={4}
+                  value={form.hopeNote}
+                  onChange={(e) => updateField("hopeNote", e.target.value)}
+                  placeholder={buildDefaultHopeNote(form.petName, form.sex)}
                 />
               </FieldRow>
 
@@ -3104,46 +3331,57 @@ const FieldDescription = styled.p`
 const FieldInput = styled.input`
   height: 32px;
   border-radius: 8px;
-  border: 1px solid #374151;
+  border: 1px solid
+    ${(p) => (p.$error ? "#b91c1c" : p.$aiFilled ? "#1d4ed8" : "#374151")};
   background: #020617;
-  color: #e5e7eb;
+  color: ${(p) => (p.$aiFilled ? "#bfdbfe" : "#e5e7eb")};
   padding: 0 8px;
   font-size: 13px;
 
+  &::placeholder {
+    color: #6b7280;
+  }
+
   &:focus {
     outline: none;
-    border-color: #6b7280;
+    border-color: ${(p) => (p.$error ? "#fca5a5" : "#6b7280")};
   }
 `;
 
 const FieldSelect = styled.select`
   height: 32px;
   border-radius: 8px;
-  border: 1px solid #374151;
+  border: 1px solid
+    ${(p) => (p.$error ? "#b91c1c" : p.$aiFilled ? "#1d4ed8" : "#374151")};
   background: #020617;
-  color: #e5e7eb;
+  color: ${(p) => (p.$aiFilled ? "#bfdbfe" : "#e5e7eb")};
   padding: 0 8px;
   font-size: 13px;
 
   &:focus {
     outline: none;
-    border-color: #6b7280;
+    border-color: ${(p) => (p.$error ? "#fca5a5" : "#6b7280")};
   }
 `;
 
 const FieldTextarea = styled.textarea`
   border-radius: 8px;
-  border: 1px solid #374151;
+  border: 1px solid
+    ${(p) => (p.$error ? "#b91c1c" : p.$aiFilled ? "#1d4ed8" : "#374151")};
   background: #020617;
-  color: #e5e7eb;
+  color: ${(p) => (p.$aiFilled ? "#bfdbfe" : "#e5e7eb")};
   padding: 6px 8px;
   font-size: 13px;
   resize: vertical;
   min-height: 60px;
 
+  &::placeholder {
+    color: #6b7280;
+  }
+
   &:focus {
     outline: none;
-    border-color: #6b7280;
+    border-color: ${(p) => (p.$error ? "#fca5a5" : "#6b7280")};
   }
 `;
 
@@ -3156,26 +3394,43 @@ const ButtonToggleGroup = styled.div`
 const ToggleButton = styled.button`
   padding: 5px 10px;
   border-radius: 999px;
-  border: 1px solid ${(p) => (p.$active ? "#2563eb" : "#374151")};
-  background: ${(p) => (p.$active ? "rgba(37, 99, 235, 0.18)" : "#020617")};
-  color: ${(p) => (p.$active ? "#dbeafe" : "#e5e7eb")};
+  border: 1px solid
+    ${(p) => (p.$aiFilled ? "#1d4ed8" : p.$active ? "#2563eb" : "#374151")};
+  background: ${(p) =>
+    p.$aiFilled
+      ? "rgba(37, 99, 235, 0.26)"
+      : p.$active
+      ? "rgba(37, 99, 235, 0.18)"
+      : "#020617"};
+  color: ${(p) =>
+    p.$aiFilled ? "#dbeafe" : p.$active ? "#dbeafe" : "#e5e7eb"};
   font-size: 12px;
   cursor: pointer;
   transition: background 0.12s ease, border-color 0.12s ease,
     box-shadow 0.12s ease, color 0.12s ease;
 
   box-shadow: ${(p) =>
-    p.$active ? "0 0 0 3px rgba(37, 99, 235, 0.18)" : "none"};
+    p.$aiFilled
+      ? "0 0 0 3px rgba(37, 99, 235, 0.32)"
+      : p.$active
+      ? "0 0 0 3px rgba(37, 99, 235, 0.18)"
+      : "none"};
 
   &:hover {
-    background: ${(p) => (p.$active ? "rgba(37, 99, 235, 0.22)" : "#111827")};
-    border-color: ${(p) => (p.$active ? "#3b82f6" : "#6b7280")};
+    background: ${(p) =>
+      p.$aiFilled
+        ? "rgba(37, 99, 235, 0.32)"
+        : p.$active
+        ? "rgba(37, 99, 235, 0.22)"
+        : "#111827"};
+    border-color: ${(p) =>
+      p.$aiFilled ? "#3b82f6" : p.$active ? "#3b82f6" : "#6b7280"};
   }
 
   &:focus-visible {
     outline: none;
     box-shadow: ${(p) =>
-      p.$active
+      p.$aiFilled || p.$active
         ? "0 0 0 3px rgba(59, 130, 246, 0.22)"
         : "0 0 0 3px rgba(107, 114, 128, 0.28)"};
   }
