@@ -1388,6 +1388,30 @@ function DiabetesHandoutEditor({ currentUser }) {
 
   const unitsDisplay = form.insulinUnits || "___";
 
+  const emergencyHospitalName =
+    form.erHospitalName || "your local emergency hospital";
+
+  const emergencyHospitalPhone = form.erHospitalPhone || "___-___-____";
+
+  const petPronounSubject =
+    form.sex === "F" || form.sex === "FS"
+      ? "she"
+      : form.sex === "M" || form.sex === "MN"
+      ? "he"
+      : "they";
+
+  const petPronounObject =
+    form.sex === "F" || form.sex === "FS"
+      ? "her"
+      : form.sex === "M" || form.sex === "MN"
+      ? "him"
+      : "them";
+
+  const recheckPhrase =
+    form.recheckValue && form.recheckUnit
+      ? `${form.recheckValue} ${form.recheckUnit}`
+      : "a short time";
+
   // Human-readable frequency
   let insulinFrequencyLabel = "";
   if (form.insulinFrequency === "q12h") {
@@ -2984,6 +3008,32 @@ function DiabetesHandoutEditor({ currentUser }) {
                 <li>Received an incorrect insulin dose.</li>
               )}
               {form.emergencyOther && <li>{form.emergencyOther}</li>}
+            </PreviewText>
+            <PreviewText>
+              <div>
+                If we are not available and you need help, please contact{" "}
+                {emergencyHospitalName} at {emergencyHospitalPhone}.
+              </div>
+              <br />
+              <div>
+                {petName} should be re-evaluated by our veterinary team in{" "}
+                {recheckPhrase}. If you haven&apos;t already, please schedule
+                that appointment right away. Frequent rechecks with our team to
+                fine tune {petName}&apos;s insulin, diet, and other treatments
+                are critically important for {petPronounObject} to thrive.
+              </div>
+              <br />
+              <div>
+                We appreciate all the hard work you are pouring into {petName}{" "}
+                and we&apos;re honored to be walking alongside you on this
+                journey.
+              </div>
+              <br />
+              <div>
+                Please call our hospital at{" "}
+                {form.hospitalPhone || "___-___-____"} with any questions or
+                concerns.
+              </div>
             </PreviewText>
           </PreviewCard>
         </PreviewColumn>
