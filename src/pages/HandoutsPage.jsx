@@ -218,13 +218,13 @@ function buildCatCannedDietNote(form) {
 }
 
 function buildHomeEncouragement1(form) {
-  const name = (form.petName || "").trim() || "Winchester";
+  const name = (form.petName || "").trim() || "____";
   const p = getPetPronouns(form.sex);
   return `Initially, home monitoring can be intimidating, but over time, you and ${name} will fall into a sustainable routine. Please reach out if ever you feel overwhelmed by ${p.possAdj} diabetes management.`;
 }
 
 function buildHomeEncouragement2(form) {
-  const name = (form.petName || "").trim() || "Winchester";
+  const name = (form.petName || "").trim() || "____";
   return `You have been doing a great job monitoring ${name} at home!`;
 }
 
@@ -255,7 +255,7 @@ function resolveChoice(main, other, fallback) {
 }
 // UPDATED: main bullet + sub bullets for BG
 function buildAdvancedBgInstruction(form) {
-  const name = (form.petName || "").trim() || "Winchester";
+  const name = (form.petName || "").trim() || "____";
   const p = getPetPronouns(form.sex);
   const hours = resolveChoice(
     form.advancedBgEveryHours,
@@ -293,7 +293,7 @@ function buildAdvancedBgInstruction(form) {
 
 // UPDATED: main bullet + sub bullets for urine
 function buildAdvancedUrineInstruction(form) {
-  const name = (form.petName || "").trim() || "Winchester";
+  const name = (form.petName || "").trim() || "____";
   const p = getPetPronouns(form.sex);
   const hours = resolveChoice(
     form.advancedUrineEveryHours,
@@ -335,7 +335,7 @@ const DEFAULT_FELINE_REMISSION_NOTE =
   "Remission can occur in diabetic cats. This means that they no longer require insulin therapy. Your cat has the best chance of remission if you achieve precise blood glucose control within six months of diagnosis, carefully monitor your cat at home, stop any medications that could interfere with the insulin, and use an appropriate insulin in combination with a low-carbohydrate diet.";
 
 function buildDefaultHopeNote(petName, sex) {
-  const name = (petName || "").trim() || "Winchester";
+  const name = (petName || "").trim() || "____";
   const p = getPetPronouns(sex);
   return `There is still hope that ${name} will experience remission. Continue to carefully monitor ${p.obj} at home, give insulin as directed, and feed a high-protein, low-carbohydrate diet.`;
 }
@@ -927,8 +927,8 @@ function HandoutsList({ currentUser }) {
 }
 
 function applySexDependentDefaults(prev, next) {
-  // If sex did not change, leave everything as is
-  if (prev.sex === next.sex) return next;
+  // If neither sex nor pet name changed, do nothing
+  if (prev.sex === next.sex && prev.petName === next.petName) return next;
 
   const updated = { ...next };
 
@@ -942,14 +942,15 @@ function applySexDependentDefaults(prev, next) {
     }
   };
 
-  // Feeding lines that depend on pronouns
-  syncLine("feeding1Text", buildFeedingLine1);
-  syncLine("feeding2Text", buildFeedingLine2);
-  syncLine("feeding3Text", buildFeedingLine3);
-  syncLine("feeding6Text", buildFeedingLine6);
-  syncLine("feeding7Text", buildFeedingLine7);
+  // Feeding lines that depend on name or pronouns
+  if (updated.feedingInclude1) syncLine("feeding1Text", buildFeedingLine1);
+  if (updated.feedingInclude2) syncLine("feeding2Text", buildFeedingLine2);
+  if (updated.feedingInclude3) syncLine("feeding3Text", buildFeedingLine3);
+  if (updated.feedingInclude5) syncLine("feeding5Text", buildFeedingLine5);
+  if (updated.feedingInclude6) syncLine("feeding6Text", buildFeedingLine6);
+  if (updated.feedingInclude7) syncLine("feeding7Text", buildFeedingLine7);
 
-  // Feline specific notes
+  // Feline specific notes (meal + canned diet)
   const prevCatMeal = buildCatMealInsulinNote(prev);
   if (
     (!prev.catFeedingMealInsulinNote ||
@@ -976,6 +977,16 @@ function applySexDependentDefaults(prev, next) {
     updated.homeEncouragementInclude1
   ) {
     updated.homeEncouragement1Text = buildHomeEncouragement1(updated);
+  }
+
+  // Home monitoring encouragement 2 (also uses pet name)
+  const prevHome2 = buildHomeEncouragement2(prev);
+  if (
+    (!prev.homeEncouragement2Text ||
+      prev.homeEncouragement2Text.trim() === prevHome2.trim()) &&
+    updated.homeEncouragementInclude2
+  ) {
+    updated.homeEncouragement2Text = buildHomeEncouragement2(updated);
   }
 
   // Hope note (feline only) - only if it still looks like the default
@@ -1267,106 +1278,121 @@ function DiabetesHandoutEditor({ currentUser }) {
     }
   };
 
+  // const updateField = (field, value) => {
+  //   setForm((prev) => {
+  //     let next = { ...prev, [field]: value };
+
+  //     // Special handling when sex / gender changes:
+  //     if (field === "sex") {
+  //       // 1) Feeding line 1
+  //       const prevFeed1 = buildFeedingLine1(prev);
+  //       if (
+  //         !prev.feeding1Text ||
+  //         prev.feeding1Text.trim() === prevFeed1.trim()
+  //       ) {
+  //         next.feeding1Text = buildFeedingLine1(next);
+  //       }
+
+  //       // 2) Feeding line 2
+  //       const prevFeed2 = buildFeedingLine2(prev);
+  //       if (
+  //         !prev.feeding2Text ||
+  //         prev.feeding2Text.trim() === prevFeed2.trim()
+  //       ) {
+  //         next.feeding2Text = buildFeedingLine2(next);
+  //       }
+
+  //       // 3) Feeding line 3
+  //       const prevFeed3 = buildFeedingLine3(prev);
+  //       if (
+  //         !prev.feeding3Text ||
+  //         prev.feeding3Text.trim() === prevFeed3.trim()
+  //       ) {
+  //         next.feeding3Text = buildFeedingLine3(next);
+  //       }
+
+  //       // 4) Feeding line 5
+  //       const prevFeed5 = buildFeedingLine5(prev);
+  //       if (
+  //         !prev.feeding5Text ||
+  //         prev.feeding5Text.trim() === prevFeed5.trim()
+  //       ) {
+  //         next.feeding5Text = buildFeedingLine5(next);
+  //       }
+
+  //       // 5) Feeding line 6
+  //       const prevFeed6 = buildFeedingLine6(prev);
+  //       if (
+  //         !prev.feeding6Text ||
+  //         prev.feeding6Text.trim() === prevFeed6.trim()
+  //       ) {
+  //         next.feeding6Text = buildFeedingLine6(next);
+  //       }
+
+  //       // 6) Feeding line 7 (vomits/refuses meal)
+  //       const prevFeed7 = buildFeedingLine7(prev);
+  //       if (
+  //         !prev.feeding7Text ||
+  //         prev.feeding7Text.trim() === prevFeed7.trim()
+  //       ) {
+  //         next.feeding7Text = buildFeedingLine7(next);
+  //       }
+
+  //       // 7) Feline-specific feeding notes (if they exist and look default)
+  //       if (prev.species === "feline" || next.species === "feline") {
+  //         const prevCatMeal = buildCatMealInsulinNote(prev);
+  //         if (
+  //           (!prev.catFeedingMealInsulinNote ||
+  //             prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
+  //           next.includeCatFeedingMealInsulinNote
+  //         ) {
+  //           next.catFeedingMealInsulinNote = buildCatMealInsulinNote(next);
+  //         }
+
+  //         const prevCatCanned = buildCatCannedDietNote(prev);
+  //         if (
+  //           (!prev.catCannedDietNote ||
+  //             prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
+  //           next.includeCatCannedDietNote
+  //         ) {
+  //           next.catCannedDietNote = buildCatCannedDietNote(next);
+  //         }
+  //       }
+
+  //       // 8) Home monitoring encouragement 1
+  //       const prevHome1 = buildHomeEncouragement1(prev);
+  //       if (
+  //         (!prev.homeEncouragement1Text ||
+  //           prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
+  //         next.homeEncouragementInclude1
+  //       ) {
+  //         next.homeEncouragement1Text = buildHomeEncouragement1(next);
+  //       }
+
+  //       // 9) Hope note (for felines, default template only)
+  //       const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
+  //       if (
+  //         (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
+  //         next.includeHopeNote &&
+  //         next.species === "feline"
+  //       ) {
+  //         next.hopeNote = buildDefaultHopeNote(next.petName, next.sex);
+  //       }
+  //     }
+
+  //     const v = validateDiabetesForm(next);
+  //     setValidation(v);
+  //     return next;
+  //   });
+  // };
+
   const updateField = (field, value) => {
     setForm((prev) => {
       let next = { ...prev, [field]: value };
 
-      // Special handling when sex / gender changes:
-      if (field === "sex") {
-        // 1) Feeding line 1
-        const prevFeed1 = buildFeedingLine1(prev);
-        if (
-          !prev.feeding1Text ||
-          prev.feeding1Text.trim() === prevFeed1.trim()
-        ) {
-          next.feeding1Text = buildFeedingLine1(next);
-        }
-
-        // 2) Feeding line 2
-        const prevFeed2 = buildFeedingLine2(prev);
-        if (
-          !prev.feeding2Text ||
-          prev.feeding2Text.trim() === prevFeed2.trim()
-        ) {
-          next.feeding2Text = buildFeedingLine2(next);
-        }
-
-        // 3) Feeding line 3
-        const prevFeed3 = buildFeedingLine3(prev);
-        if (
-          !prev.feeding3Text ||
-          prev.feeding3Text.trim() === prevFeed3.trim()
-        ) {
-          next.feeding3Text = buildFeedingLine3(next);
-        }
-
-        // 4) Feeding line 5
-        const prevFeed5 = buildFeedingLine5(prev);
-        if (
-          !prev.feeding5Text ||
-          prev.feeding5Text.trim() === prevFeed5.trim()
-        ) {
-          next.feeding5Text = buildFeedingLine5(next);
-        }
-
-        // 5) Feeding line 6
-        const prevFeed6 = buildFeedingLine6(prev);
-        if (
-          !prev.feeding6Text ||
-          prev.feeding6Text.trim() === prevFeed6.trim()
-        ) {
-          next.feeding6Text = buildFeedingLine6(next);
-        }
-
-        // 6) Feeding line 7 (vomits/refuses meal)
-        const prevFeed7 = buildFeedingLine7(prev);
-        if (
-          !prev.feeding7Text ||
-          prev.feeding7Text.trim() === prevFeed7.trim()
-        ) {
-          next.feeding7Text = buildFeedingLine7(next);
-        }
-
-        // 7) Feline-specific feeding notes (if they exist and look default)
-        if (prev.species === "feline" || next.species === "feline") {
-          const prevCatMeal = buildCatMealInsulinNote(prev);
-          if (
-            (!prev.catFeedingMealInsulinNote ||
-              prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
-            next.includeCatFeedingMealInsulinNote
-          ) {
-            next.catFeedingMealInsulinNote = buildCatMealInsulinNote(next);
-          }
-
-          const prevCatCanned = buildCatCannedDietNote(prev);
-          if (
-            (!prev.catCannedDietNote ||
-              prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
-            next.includeCatCannedDietNote
-          ) {
-            next.catCannedDietNote = buildCatCannedDietNote(next);
-          }
-        }
-
-        // 8) Home monitoring encouragement 1
-        const prevHome1 = buildHomeEncouragement1(prev);
-        if (
-          (!prev.homeEncouragement1Text ||
-            prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
-          next.homeEncouragementInclude1
-        ) {
-          next.homeEncouragement1Text = buildHomeEncouragement1(next);
-        }
-
-        // 9) Hope note (for felines, default template only)
-        const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
-        if (
-          (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
-          next.includeHopeNote &&
-          next.species === "feline"
-        ) {
-          next.hopeNote = buildDefaultHopeNote(next.petName, next.sex);
-        }
+      // When sex or pet name changes, resync template-like fields
+      if (field === "sex" || field === "petName") {
+        next = applySexDependentDefaults(prev, next);
       }
 
       const v = validateDiabetesForm(next);
@@ -1601,6 +1627,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.hospitalName}
                 onChange={(e) => updateField("hospitalName", e.target.value)}
                 placeholder="Hospital name"
+                $error={isFieldMissing("hospitalName")}
+                $aiFilled={isAiSuggested("hospitalName")}
               />
             </FieldRow>
 
@@ -1610,6 +1638,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.hospitalAddress}
                 onChange={(e) => updateField("hospitalAddress", e.target.value)}
                 placeholder="Street, city, state, ZIP"
+                $error={isFieldMissing("hospitalAddress")}
+                $aiFilled={isAiSuggested("hospitalAddress")}
               />
             </FieldRow>
 
@@ -1619,6 +1649,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.hospitalPhone}
                 onChange={(e) => updateField("hospitalPhone", e.target.value)}
                 placeholder="000-000-0000"
+                $error={isFieldMissing("hospitalPhone")}
+                $aiFilled={isAiSuggested("hospitalPhone")}
               />
             </FieldRow>
 
@@ -1628,6 +1660,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.erHospitalName}
                 onChange={(e) => updateField("erHospitalName", e.target.value)}
                 placeholder="After-hours or ER hospital"
+                $error={isFieldMissing("erHospitalName")}
+                $aiFilled={isAiSuggested("erHospitalName")}
               />
             </FieldRow>
 
@@ -1637,6 +1671,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 value={form.erHospitalPhone}
                 onChange={(e) => updateField("erHospitalPhone", e.target.value)}
                 placeholder="000-000-0000"
+                $error={isFieldMissing("erHospitalPhone")}
+                $aiFilled={isAiSuggested("erHospitalPhone")}
               />
             </FieldRow>
           </SectionCard>
@@ -1677,6 +1713,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                     $aiFilled={
                       isAiSuggested("species") && form.species === "canine"
                     }
+                    $error={isFieldMissing("species")}
                     onClick={() => updateField("species", "canine")}
                   >
                     Canine
@@ -1687,6 +1724,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                     $aiFilled={
                       isAiSuggested("species") && form.species === "feline"
                     }
+                    $error={isFieldMissing("species")}
                     onClick={() => updateField("species", "feline")}
                   >
                     Feline
@@ -1700,6 +1738,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.sex === "M"}
+                    $aiFilled={isAiSuggested("sex") && form.sex === "M"}
+                    $error={isFieldMissing("sex")}
                     onClick={() => updateField("sex", "M")}
                   >
                     M
@@ -1707,6 +1747,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.sex === "MN"}
+                    $aiFilled={isAiSuggested("sex") && form.sex === "MN"}
+                    $error={isFieldMissing("sex")}
                     onClick={() => updateField("sex", "MN")}
                   >
                     MN
@@ -1714,6 +1756,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.sex === "F"}
+                    $aiFilled={isAiSuggested("sex") && form.sex === "F"}
+                    $error={isFieldMissing("sex")}
                     onClick={() => updateField("sex", "F")}
                   >
                     F
@@ -1721,6 +1765,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   <ToggleButton
                     type="button"
                     $active={form.sex === "FS"}
+                    $aiFilled={isAiSuggested("sex") && form.sex === "FS"}
+                    $error={isFieldMissing("sex")}
                     onClick={() => updateField("sex", "FS")}
                   >
                     FS
@@ -1742,6 +1788,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   value={form.recheckValue}
                   onChange={(e) => updateField("recheckValue", e.target.value)}
                   placeholder="#"
+                  $error={isFieldMissing("recheckValue")}
+                  $aiFilled={isAiSuggested("recheckValue")}
                 />
               </InlineField>
               <InlineField>
@@ -1749,6 +1797,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                 <FieldSelect
                   value={form.recheckUnit}
                   onChange={(e) => updateField("recheckUnit", e.target.value)}
+                  $error={isFieldMissing("recheckUnit")}
+                  $aiFilled={isAiSuggested("recheckUnit")}
                 >
                   <option value="days">days</option>
                   <option value="weeks">weeks</option>
@@ -1780,14 +1830,15 @@ function DiabetesHandoutEditor({ currentUser }) {
 
               <FieldRow>
                 <FieldLabel>Remission explanation</FieldLabel>
+
                 <FieldTextarea
                   rows={4}
-                  value={form.hopeNote}
-                  onChange={(e) => updateField("hopeNote", e.target.value)}
-                  placeholder={buildDefaultHopeNote(form.petName, form.sex)}
+                  value={form.remissionNote}
+                  onChange={(e) => updateField("remissionNote", e.target.value)}
+                  placeholder={DEFAULT_FELINE_REMISSION_NOTE}
+                  $aiFilled={isAiSuggested("remissionNote")}
                 />
               </FieldRow>
-
               <CheckboxRow>
                 <CheckboxInput
                   type="checkbox"
@@ -1806,6 +1857,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                   value={form.hopeNote}
                   onChange={(e) => updateField("hopeNote", e.target.value)}
                   placeholder={buildDefaultHopeNote(form.petName)}
+                  $aiFilled={isAiSuggested("hopeNote")}
                 />
               </FieldRow>
             </SectionCard>
@@ -1820,6 +1872,8 @@ function DiabetesHandoutEditor({ currentUser }) {
               <FieldSelect
                 value={form.insulinPrescribed}
                 onChange={(e) => handleInsulinPrescribedChange(e.target.value)}
+                $error={isFieldMissing("insulinPrescribed")}
+                $aiFilled={isAiSuggested("insulinPrescribed")}
               >
                 <option value="">Select insulin</option>
                 <option value="Vetsulin">Vetsulin</option>
@@ -1840,6 +1894,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                     updateField("insulinOtherName", e.target.value)
                   }
                   placeholder="Insulin name"
+                  $aiFilled={isAiSuggested("insulinOtherName")}
                 />
               </FieldRow>
             )}
@@ -1849,6 +1904,8 @@ function DiabetesHandoutEditor({ currentUser }) {
               <FieldSelect
                 value={form.syringeType}
                 onChange={(e) => updateField("syringeType", e.target.value)}
+                $error={isFieldMissing("syringeType")}
+                $aiFilled={isAiSuggested("syringeType")}
               >
                 <option value="">Select type</option>
                 <option value="U-40">U-40 syringes</option>
@@ -1864,6 +1921,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   value={form.syringeOther}
                   onChange={(e) => updateField("syringeOther", e.target.value)}
                   placeholder="Insulin Pen"
+                  $error={isFieldMissing("syringeOther")}
+                  $aiFilled={isAiSuggested("syringeOther")}
                 />
               </FieldRow>
             )}
@@ -1897,6 +1956,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   value={form.insulinUnits}
                   onChange={(e) => updateField("insulinUnits", e.target.value)}
                   placeholder="Units"
+                  $error={isFieldMissing("insulinUnits")}
+                  $aiFilled={isAiSuggested("insulinUnits")}
                 />
               </InlineField>
 
@@ -1907,6 +1968,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   onChange={(e) =>
                     updateField("insulinFrequency", e.target.value)
                   }
+                  $error={isFieldMissing("insulinFrequency")}
+                  $aiFilled={isAiSuggested("insulinFrequency")}
                 >
                   <option value="">Select frequency</option>
                   <option value="q12h">in the morning and evening</option>
@@ -1958,6 +2021,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                   }
                 }}
                 placeholder="Diet name (brand, type)"
+                $error={isFieldMissing("prescribedFood")}
+                $aiFilled={isAiSuggested("prescribedFood")}
               />
             </FieldRow>
 
@@ -1984,6 +2049,8 @@ function DiabetesHandoutEditor({ currentUser }) {
                     }
                   }}
                   placeholder="Amount"
+                  $error={isFieldMissing("foodAmount")}
+                  $aiFilled={isAiSuggested("foodAmount")}
                 />
               </InlineField>
               <InlineField>
@@ -2005,6 +2072,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                       updateField("feeding1Text", templateNow);
                     }
                   }}
+                  $aiFilled={isAiSuggested("foodAmountUnit")}
                 >
                   <option value="cups">cup(s)</option>
                   <option value="cans">can(s)</option>
@@ -2031,6 +2099,7 @@ function DiabetesHandoutEditor({ currentUser }) {
                     updateField("feeding1Text", templateNow);
                   }
                 }}
+                $aiFilled={isAiSuggested("foodIntervalHours")}
               >
                 <option value="8">8 hours</option>
                 <option value="12">12 hours</option>
@@ -3394,22 +3463,39 @@ const ToggleButton = styled.button`
   padding: 5px 10px;
   border-radius: 999px;
   border: 1px solid
-    ${(p) => (p.$aiFilled ? "#1d4ed8" : p.$active ? "#2563eb" : "#374151")};
+    ${(p) =>
+      p.$error
+        ? "#b91c1c"
+        : p.$aiFilled
+        ? "#1d4ed8"
+        : p.$active
+        ? "#2563eb"
+        : "#374151"};
   background: ${(p) =>
-    p.$aiFilled
+    p.$error
+      ? "#111827"
+      : p.$aiFilled
       ? "rgba(37, 99, 235, 0.26)"
       : p.$active
       ? "rgba(37, 99, 235, 0.18)"
       : "#020617"};
   color: ${(p) =>
-    p.$aiFilled ? "#dbeafe" : p.$active ? "#dbeafe" : "#e5e7eb"};
+    p.$error
+      ? "#fecaca"
+      : p.$aiFilled
+      ? "#dbeafe"
+      : p.$active
+      ? "#dbeafe"
+      : "#e5e7eb"};
   font-size: 12px;
   cursor: pointer;
   transition: background 0.12s ease, border-color 0.12s ease,
     box-shadow 0.12s ease, color 0.12s ease;
 
   box-shadow: ${(p) =>
-    p.$aiFilled
+    p.$error
+      ? "0 0 0 1px rgba(185, 28, 28, 0.6)"
+      : p.$aiFilled
       ? "0 0 0 3px rgba(37, 99, 235, 0.32)"
       : p.$active
       ? "0 0 0 3px rgba(37, 99, 235, 0.18)"
@@ -3417,19 +3503,29 @@ const ToggleButton = styled.button`
 
   &:hover {
     background: ${(p) =>
-      p.$aiFilled
+      p.$error
+        ? "#1f2937"
+        : p.$aiFilled
         ? "rgba(37, 99, 235, 0.32)"
         : p.$active
         ? "rgba(37, 99, 235, 0.22)"
         : "#111827"};
     border-color: ${(p) =>
-      p.$aiFilled ? "#3b82f6" : p.$active ? "#3b82f6" : "#6b7280"};
+      p.$error
+        ? "#fca5a5"
+        : p.$aiFilled
+        ? "#3b82f6"
+        : p.$active
+        ? "#3b82f6"
+        : "#6b7280"};
   }
 
   &:focus-visible {
     outline: none;
     box-shadow: ${(p) =>
-      p.$aiFilled || p.$active
+      p.$error
+        ? "0 0 0 3px rgba(248, 113, 113, 0.5)"
+        : p.$aiFilled || p.$active
         ? "0 0 0 3px rgba(59, 130, 246, 0.22)"
         : "0 0 0 3px rgba(107, 114, 128, 0.28)"};
   }
