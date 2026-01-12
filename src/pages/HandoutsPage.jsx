@@ -26,233 +26,37 @@ import {
   FiX,
 } from "react-icons/fi";
 
-const EMPTY_DIABETES_FORM = {
-  // 1. Hospital info
-  hospitalName: "",
-  hospitalAddress: "",
-  hospitalPhone: "",
-  erHospitalName: "",
-  erHospitalPhone: "",
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import {
+  buildActionScheduleRows,
+  buildCatCannedDietNote,
+  buildCatMealInsulinNote,
+  buildDefaultHopeNote,
+  buildDiabetesHandoutMarkdown,
+  buildFeedingLine1,
+  buildFeedingLine2,
+  buildFeedingLine3,
+  buildFeedingLine4,
+  buildFeedingLine5,
+  buildFeedingLine6,
+  buildFeedingLine7,
+  buildHomeEncouragement1,
+  buildHomeEncouragement2,
+  buildMeasureIntakeLines,
+  buildMeasureIntakeText,
+  DEFAULT_FELINE_REMISSION_NOTE,
+  getPetPronouns,
+  resolveChoice,
+} from "../handouts/diabetesTextBuilders";
+import {
+  buildFormFromDoc,
+  deriveHandoutTitle,
+  EMPTY_DIABETES_FORM,
+  formToFirestore,
+  validateDiabetesForm,
+} from "../handouts/diabetesFormModel";
 
-  // 2. Patient info
-  petName: "",
-  species: "feline", // "canine" or "feline"
-  sex: "FS", // "M" | "MN" | "F" | "FS"
-
-  // 3. Recheck interval
-  recheckValue: "",
-  recheckUnit: "weeks", // "days" | "weeks" | "months"
-
-  // 3.5 Feline remission notes
-  includeRemissionNote: true,
-  includeHopeNote: true,
-  remissionNote: "",
-  hopeNote: "",
-
-  // 4. Insulin
-  insulinPrescribed: "", // one of preset options or "Other"
-  insulinOtherName: "",
-  syringeType: "", // "U-40" | "U-100" | "pen" | "other"
-  syringeOther: "",
-  insulinHandling: "roll", // "roll" | "shake"
-  insulinUnits: "",
-  insulinFrequency: "", // "q12h" | "am" | "pm" | "q8h" | "q24h" | "other"
-  insulinFrequencyOther: "",
-
-  // 5. Feeding
-  prescribedFood: "",
-  foodAmount: "",
-  foodAmountUnit: "cups",
-  foodIntervalHours: "12",
-
-  // Feline-only cat feeding instructions
-  includeCatFeedingMealInsulinNote: true,
-  catFeedingMealInsulinNote: "",
-  includeCatCannedDietNote: true,
-  catCannedDietNote: "",
-
-  // Feeding instructions checklist
-  feedingInclude1: true,
-  feeding1Text: "",
-  feedingInclude2: true,
-  feeding2Text: "",
-  feedingInclude3: true,
-  feeding3Text: "",
-  feedingInclude4: true,
-  feeding4Text: "",
-  feedingInclude5: true,
-  feeding5Text: "",
-  feedingInclude6: true,
-  feeding6Text: "",
-  feedingInclude7: true,
-  feeding7Text: "",
-
-  // NEW: behavior options for instruction 7
-  feeding7Mode: "withhold", // "withhold" | "half_dose" | "bg_adjust"
-  feeding7BgThreshold: "",
-  feeding7NewUnits: "",
-
-  // 6. Home monitoring
-  homeEncouragementInclude1: true,
-  homeEncouragement1Text: "",
-  homeEncouragementInclude2: true,
-  homeEncouragement2Text: "",
-  measureFoodWaterFrequency: "twice_daily", // "twice_daily" | "once_daily" | "other"
-  measureFoodWaterOther: "",
-  advancedBgInclude: false,
-  advancedBgEveryHours: "4", // "2" | "4" | "6" | "8" | "other"
-  advancedBgEveryHoursOther: "",
-  advancedBgLowThreshold: "40", // "40" | "60" | "80" | "other"
-  advancedBgLowThresholdOther: "",
-  advancedBgHighThreshold: "300", // "300" | "400" | "500" | "other"
-  advancedBgHighThresholdOther: "",
-  advancedUrineInclude: false,
-  advancedUrineMode: "glucose", // "glucose" | "glucose_ketones"
-  advancedUrineEveryHours: "24", // "8" | "12" | "24" | "48" | "other"
-  advancedUrineEveryHoursOther: "",
-  additionalInstructions: "",
-
-  // 7. Emergency criteria
-  emergencyHasSeizure: true,
-  emergencyTremoring: true,
-  emergencyWeak: true,
-  emergencyHiding: true,
-  emergencyRefusesFoodWater: true,
-  emergencyDiarrhea: true,
-  emergencyVomiting: true,
-  emergencyBumpingIntoObjects: true,
-  emergencyDifficultyWalking: true,
-  emergencyMissedInsulinDoses: true,
-  emergencyIncorrectDose: true,
-  emergencyOther: "",
-};
-
-function getPetPronouns(sex) {
-  if (sex === "M" || sex === "MN") {
-    return { subj: "he", obj: "him", possAdj: "his" };
-  }
-  if (sex === "F" || sex === "FS") {
-    return { subj: "she", obj: "her", possAdj: "her" };
-  }
-  return { subj: "they", obj: "them", possAdj: "their" };
-}
-
-function unitLabel(unit) {
-  return unit === "cans" ? "can(s)" : "cup(s)";
-}
-
-function buildFeedingLine1(form) {
-  const p = getPetPronouns(form.sex);
-  const foodName = (form.prescribedFood || "").trim() || "________";
-  const amount = (form.foodAmount || "").toString().trim() || "___";
-  const unit = unitLabel(form.foodAmountUnit);
-  const interval = (form.foodIntervalHours || "").toString().trim() || "__";
-  return `Feed ${p.obj} ${foodName} ${amount} ${unit} every ${interval} hours.`;
-}
-
-function buildFeedingLine2(form) {
-  const p = getPetPronouns(form.sex);
-  const pet = (form.petName || "").trim() || "your pet";
-  return `Feed ${pet} BEFORE you give ${p.obj} any insulin.`;
-}
-
-function buildFeedingLine3(form) {
-  const p = getPetPronouns(form.sex);
-  return `Do your best to feed ${p.obj} at the same time every day.`;
-}
-
-function buildFeedingLine4() {
-  return "Do not give additional treats, table scraps, or home-cooked meals unless you have discussed this diet with our team.";
-}
-
-function buildFeedingLine5(form) {
-  const pet = (form.petName || "").trim() || "your pet";
-  return `While ${pet} is currently overweight, we are hopeful that this nutrition plan will help ${pet} slowly lose weight.`;
-}
-
-function buildFeedingLine6(form) {
-  const p = getPetPronouns(form.sex);
-  return `If ${p.possAdj} appetite changes (increases or decreases), please contact our veterinary team. This may be a sign that ${p.possAdj} diabetes is uncontrolled or that another condition is developing.`;
-}
-
-function buildFeedingLine7(form) {
-  const p = getPetPronouns(form.sex);
-  const baseClause = `If ${p.subj} vomits soon after eating or refuses to eat one meal`;
-
-  const mode = form.feeding7Mode || "withhold";
-
-  if (mode === "withhold") {
-    // 1. withhold insulin and call us
-    return `${baseClause} withhold insulin and call us.`;
-  }
-
-  if (mode === "half_dose") {
-    // 2. administer half the amount of insulin and resume regimen
-    return (
-      `${baseClause} administer half the amount of insulin ` +
-      `and resume your normal insulin regimen if ${p.subj} eats at the next meal.`
-    );
-  }
-
-  // 3. BG-based plan
-  const bg =
-    (form.feeding7BgThreshold || "").toString().trim() ||
-    "[BLOOD GLUCOSE LEVEL]";
-  const newUnits =
-    (form.feeding7NewUnits || "").toString().trim() || "[NUMBER OF NEW UNITS]";
-
-  return (
-    `${baseClause} take a blood glucose sample. ` +
-    `If it is greater than ${bg}, administer ${newUnits} units and call us.`
-  );
-}
-
-function buildCatMealInsulinNote(form) {
-  const p = getPetPronouns(form.sex);
-  return `It’s best for cats to eat twice a day and receive insulin after each meal. However, if meal feeding isn’t feasible for you, allow ${p.obj} to nibble on food throughout the day.`;
-}
-
-function buildCatCannedDietNote(form) {
-  const p = getPetPronouns(form.sex);
-  return `Ideally, ${p.subj} should eat canned food since diabetic cats are more successfully treated with high-protein, low-carbohydrate canned diets instead of dry food.`;
-}
-
-function buildHomeEncouragement1(form) {
-  const name = (form.petName || "").trim() || "____";
-  const p = getPetPronouns(form.sex);
-  return `Initially, home monitoring can be intimidating, but over time, you and ${name} will fall into a sustainable routine. Please reach out if ever you feel overwhelmed by ${p.possAdj} diabetes management.`;
-}
-
-function buildHomeEncouragement2(form) {
-  const name = (form.petName || "").trim() || "____";
-  return `You have been doing a great job monitoring ${name} at home!`;
-}
-
-function buildMeasureIntakeText(form) {
-  const name = (form.petName || "").trim() || "your pet";
-  if (form.measureFoodWaterFrequency === "twice_daily") {
-    return `Please measure how much ${name} eats and drinks twice daily.`;
-  }
-  if (form.measureFoodWaterFrequency === "once_daily") {
-    return `Please measure how much ${name} eats and drinks once daily.`;
-  }
-  if (form.measureFoodWaterFrequency === "other") {
-    const other = (form.measureFoodWaterOther || "").trim();
-    if (other) {
-      return `Please measure how much ${name} eats and drinks ${other}.`;
-    }
-  }
-  return "";
-}
-
-function resolveChoice(main, other, fallback) {
-  if (main === "other") {
-    const trimmed = (other || "").trim();
-    return trimmed || fallback;
-  }
-  const trimmed = (main || "").trim();
-  return trimmed || fallback;
-}
 // UPDATED: main bullet + sub bullets for BG
 function buildAdvancedBgInstruction(form) {
   const name = (form.petName || "").trim() || "____";
@@ -331,185 +135,6 @@ function buildAdvancedUrineInstruction(form) {
   );
 }
 
-const DEFAULT_FELINE_REMISSION_NOTE =
-  "Remission can occur in diabetic cats. This means that they no longer require insulin therapy. Your cat has the best chance of remission if you achieve precise blood glucose control within six months of diagnosis, carefully monitor your cat at home, stop any medications that could interfere with the insulin, and use an appropriate insulin in combination with a low-carbohydrate diet.";
-
-function buildDefaultHopeNote(petName, sex) {
-  const name = (petName || "").trim() || "____";
-  const p = getPetPronouns(sex);
-  return `There is still hope that ${name} will experience remission. Continue to carefully monitor ${p.obj} at home, give insulin as directed, and feed a high-protein, low-carbohydrate diet.`;
-}
-
-function buildFormFromDoc(data) {
-  const fd = (data && data.formData) || {};
-  const merged = {
-    ...EMPTY_DIABETES_FORM,
-    ...fd,
-  };
-
-  // Prefill feline remission text if enabled and still empty
-  const isFeline = merged.species === "feline";
-
-  if (isFeline && merged.includeRemissionNote && !merged.remissionNote.trim()) {
-    merged.remissionNote = DEFAULT_FELINE_REMISSION_NOTE;
-  }
-
-  if (isFeline && merged.includeHopeNote && !merged.hopeNote.trim()) {
-    merged.hopeNote = buildDefaultHopeNote(merged.petName, merged.sex);
-  }
-
-  // Feline-only defaults
-  if (
-    isFeline &&
-    merged.includeCatFeedingMealInsulinNote &&
-    !merged.catFeedingMealInsulinNote.trim()
-  ) {
-    merged.catFeedingMealInsulinNote = buildCatMealInsulinNote(merged);
-  }
-
-  if (
-    isFeline &&
-    merged.includeCatCannedDietNote &&
-    !merged.catCannedDietNote.trim()
-  ) {
-    merged.catCannedDietNote = buildCatCannedDietNote(merged);
-  }
-
-  // Feeding checklist defaults (gender-aware and depends on top inputs)
-  // if (merged.feedingInclude1 && !merged.feeding1Text.trim()) {
-  //   merged.feeding1Text = buildFeedingLine1(merged);
-  // }
-  if (merged.feedingInclude2 && !merged.feeding2Text.trim()) {
-    merged.feeding2Text = buildFeedingLine2(merged);
-  }
-  if (merged.feedingInclude3 && !merged.feeding3Text.trim()) {
-    merged.feeding3Text = buildFeedingLine3(merged);
-  }
-  if (merged.feedingInclude4 && !merged.feeding4Text.trim()) {
-    merged.feeding4Text = buildFeedingLine4();
-  }
-  if (merged.feedingInclude5 && !merged.feeding5Text.trim()) {
-    merged.feeding5Text = buildFeedingLine5(merged);
-  }
-  if (merged.feedingInclude6 && !merged.feeding6Text.trim()) {
-    merged.feeding6Text = buildFeedingLine6(merged);
-  }
-  if (merged.feedingInclude7 && !merged.feeding7Text.trim()) {
-    merged.feeding7Text = buildFeedingLine7(merged);
-  }
-
-  // Home monitoring encouragement defaults
-  if (
-    merged.homeEncouragementInclude1 &&
-    !(merged.homeEncouragement1Text || "").trim()
-  ) {
-    merged.homeEncouragement1Text = buildHomeEncouragement1(merged);
-  }
-
-  if (
-    merged.homeEncouragementInclude2 &&
-    !(merged.homeEncouragement2Text || "").trim()
-  ) {
-    merged.homeEncouragement2Text = buildHomeEncouragement2(merged);
-  }
-
-  // Optional: migrate old single encouragement field if it exists
-  if (
-    merged.homeMonitoringEncouragement &&
-    !(merged.homeEncouragement1Text || "").trim() &&
-    !(merged.homeEncouragement2Text || "").trim()
-  ) {
-    merged.homeEncouragementInclude1 = true;
-    merged.homeEncouragement1Text = merged.homeMonitoringEncouragement;
-  }
-
-  return merged;
-}
-
-function validateDiabetesForm(form) {
-  const missing = [];
-  const missingMap = {};
-  const warnings = [];
-
-  const markMissing = (fieldKey, label) => {
-    missing.push(label);
-    missingMap[fieldKey] = true;
-  };
-
-  if (!form.hospitalName.trim()) {
-    markMissing("hospitalName", "Hospital name");
-  }
-  if (!form.hospitalPhone.trim()) {
-    markMissing("hospitalPhone", "Hospital phone number");
-  }
-
-  if (!form.petName.trim()) {
-    markMissing("petName", "Pet name");
-  }
-  if (!form.species) {
-    markMissing("species", "Species");
-  }
-  if (!form.sex) {
-    markMissing("sex", "Gender");
-  }
-
-  if (!form.recheckValue.toString().trim()) {
-    markMissing("recheckValue", "Recheck interval value");
-  }
-  if (!form.recheckUnit) {
-    markMissing("recheckUnit", "Recheck interval unit");
-  }
-
-  if (!form.insulinPrescribed.trim() && !form.insulinOtherName.trim()) {
-    markMissing("insulinPrescribed", "Prescribed insulin");
-  }
-
-  if (!form.insulinUnits.toString().trim()) {
-    markMissing("insulinUnits", "Insulin units per dose");
-  }
-
-  if (!form.insulinFrequency && !form.insulinFrequencyOther.trim()) {
-    markMissing("insulinFrequency", "Insulin frequency");
-  }
-
-  // Require syringe type / pen name
-  if (!form.syringeType) {
-    markMissing("syringeType", "Type of syringe or pen");
-  } else if (
-    form.syringeType === "other" &&
-    !form.syringeOther.toString().trim()
-  ) {
-    markMissing("syringeOther", "Insulin pen name");
-  }
-
-  if (!form.prescribedFood.trim()) {
-    markMissing("prescribedFood", "Prescribed food");
-  }
-  if (!form.foodAmount.toString().trim()) {
-    markMissing("foodAmount", "Food amount");
-  }
-
-  return {
-    missing,
-    missingMap,
-    warnings,
-    isValid: missing.length === 0,
-  };
-}
-
-function formToFirestore(form) {
-  // For now we just store the flat structure as formData
-  return { ...form };
-}
-
-function deriveHandoutTitle(form) {
-  const pet = form.petName.trim();
-  if (pet) {
-    return `${pet} - diabetes discharge`;
-  }
-  return "Diabetes discharge handout";
-}
-
 const EMPTY_HOSPITAL_DEFAULTS = {
   hospitalName: "",
   hospitalAddress: "",
@@ -540,6 +165,82 @@ function hospitalDefaultsToFormData(hospitalDefaults) {
     erHospitalPhone: hospitalDefaults.erHospitalPhone || "",
     attendingVetName: hospitalDefaults.attendingVetName || "",
   };
+}
+
+function applySexDependentDefaults(prev, next) {
+  // If neither sex nor pet name changed, do nothing
+  if (prev.sex === next.sex && prev.petName === next.petName) return next;
+
+  const updated = { ...next };
+
+  const syncLine = (field, builder) => {
+    const prevCurrent = (prev[field] || "").trim();
+    const prevTemplate = builder(prev).trim();
+
+    // Only auto-update if the old value looked like the default
+    if (!prevCurrent || prevCurrent === prevTemplate) {
+      updated[field] = builder(updated);
+    }
+  };
+
+  // Feeding lines that depend on name or pronouns
+  if (updated.feedingInclude1) syncLine("feeding1Text", buildFeedingLine1);
+  if (updated.feedingInclude2) syncLine("feeding2Text", buildFeedingLine2);
+  if (updated.feedingInclude3) syncLine("feeding3Text", buildFeedingLine3);
+  if (updated.feedingInclude5) syncLine("feeding5Text", buildFeedingLine5);
+  if (updated.feedingInclude6) syncLine("feeding6Text", buildFeedingLine6);
+  if (updated.feedingInclude7) syncLine("feeding7Text", buildFeedingLine7);
+
+  // Feline specific notes (meal + canned diet)
+  const prevCatMeal = buildCatMealInsulinNote(prev);
+  if (
+    (!prev.catFeedingMealInsulinNote ||
+      prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
+    updated.includeCatFeedingMealInsulinNote
+  ) {
+    updated.catFeedingMealInsulinNote = buildCatMealInsulinNote(updated);
+  }
+
+  const prevCatCanned = buildCatCannedDietNote(prev);
+  if (
+    (!prev.catCannedDietNote ||
+      prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
+    updated.includeCatCannedDietNote
+  ) {
+    updated.catCannedDietNote = buildCatCannedDietNote(updated);
+  }
+
+  // Home monitoring encouragement 1
+  const prevHome1 = buildHomeEncouragement1(prev);
+  if (
+    (!prev.homeEncouragement1Text ||
+      prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
+    updated.homeEncouragementInclude1
+  ) {
+    updated.homeEncouragement1Text = buildHomeEncouragement1(updated);
+  }
+
+  // Home monitoring encouragement 2 (also uses pet name)
+  const prevHome2 = buildHomeEncouragement2(prev);
+  if (
+    (!prev.homeEncouragement2Text ||
+      prev.homeEncouragement2Text.trim() === prevHome2.trim()) &&
+    updated.homeEncouragementInclude2
+  ) {
+    updated.homeEncouragement2Text = buildHomeEncouragement2(updated);
+  }
+
+  // Hope note (feline only) - only if it still looks like the default
+  const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
+  if (
+    (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
+    updated.includeHopeNote &&
+    updated.species === "feline"
+  ) {
+    updated.hopeNote = buildDefaultHopeNote(updated.petName, updated.sex);
+  }
+
+  return updated;
 }
 
 function HandoutsList({ currentUser }) {
@@ -926,82 +627,6 @@ function HandoutsList({ currentUser }) {
   );
 }
 
-function applySexDependentDefaults(prev, next) {
-  // If neither sex nor pet name changed, do nothing
-  if (prev.sex === next.sex && prev.petName === next.petName) return next;
-
-  const updated = { ...next };
-
-  const syncLine = (field, builder) => {
-    const prevCurrent = (prev[field] || "").trim();
-    const prevTemplate = builder(prev).trim();
-
-    // Only auto-update if the old value looked like the default
-    if (!prevCurrent || prevCurrent === prevTemplate) {
-      updated[field] = builder(updated);
-    }
-  };
-
-  // Feeding lines that depend on name or pronouns
-  if (updated.feedingInclude1) syncLine("feeding1Text", buildFeedingLine1);
-  if (updated.feedingInclude2) syncLine("feeding2Text", buildFeedingLine2);
-  if (updated.feedingInclude3) syncLine("feeding3Text", buildFeedingLine3);
-  if (updated.feedingInclude5) syncLine("feeding5Text", buildFeedingLine5);
-  if (updated.feedingInclude6) syncLine("feeding6Text", buildFeedingLine6);
-  if (updated.feedingInclude7) syncLine("feeding7Text", buildFeedingLine7);
-
-  // Feline specific notes (meal + canned diet)
-  const prevCatMeal = buildCatMealInsulinNote(prev);
-  if (
-    (!prev.catFeedingMealInsulinNote ||
-      prev.catFeedingMealInsulinNote.trim() === prevCatMeal.trim()) &&
-    updated.includeCatFeedingMealInsulinNote
-  ) {
-    updated.catFeedingMealInsulinNote = buildCatMealInsulinNote(updated);
-  }
-
-  const prevCatCanned = buildCatCannedDietNote(prev);
-  if (
-    (!prev.catCannedDietNote ||
-      prev.catCannedDietNote.trim() === prevCatCanned.trim()) &&
-    updated.includeCatCannedDietNote
-  ) {
-    updated.catCannedDietNote = buildCatCannedDietNote(updated);
-  }
-
-  // Home monitoring encouragement 1
-  const prevHome1 = buildHomeEncouragement1(prev);
-  if (
-    (!prev.homeEncouragement1Text ||
-      prev.homeEncouragement1Text.trim() === prevHome1.trim()) &&
-    updated.homeEncouragementInclude1
-  ) {
-    updated.homeEncouragement1Text = buildHomeEncouragement1(updated);
-  }
-
-  // Home monitoring encouragement 2 (also uses pet name)
-  const prevHome2 = buildHomeEncouragement2(prev);
-  if (
-    (!prev.homeEncouragement2Text ||
-      prev.homeEncouragement2Text.trim() === prevHome2.trim()) &&
-    updated.homeEncouragementInclude2
-  ) {
-    updated.homeEncouragement2Text = buildHomeEncouragement2(updated);
-  }
-
-  // Hope note (feline only) - only if it still looks like the default
-  const prevHope = buildDefaultHopeNote(prev.petName, prev.sex);
-  if (
-    (!prev.hopeNote || prev.hopeNote.trim() === prevHope.trim()) &&
-    updated.includeHopeNote &&
-    updated.species === "feline"
-  ) {
-    updated.hopeNote = buildDefaultHopeNote(updated.petName, updated.sex);
-  }
-
-  return updated;
-}
-
 function DiabetesHandoutEditor({ currentUser }) {
   const { handoutId } = useParams();
   const navigate = useNavigate();
@@ -1362,12 +987,12 @@ function DiabetesHandoutEditor({ currentUser }) {
   }
 
   const isFeline = form.species === "feline";
-  const measureIntakeLine = buildMeasureIntakeText(form);
+  const measureIntakeLines = buildMeasureIntakeLines(form);
 
   const hasHomeMonitoringContent =
     (form.homeEncouragementInclude1 && form.homeEncouragement1Text) ||
     (form.homeEncouragementInclude2 && form.homeEncouragement2Text) ||
-    measureIntakeLine ||
+    (measureIntakeLines && measureIntakeLines.length > 0) ||
     (form.advancedBgInclude && buildAdvancedBgInstruction(form)) ||
     (form.advancedUrineInclude && buildAdvancedUrineInstruction(form)) ||
     form.additionalInstructions;
@@ -1449,6 +1074,18 @@ function DiabetesHandoutEditor({ currentUser }) {
     handlingLine = `When handling ${insulinName}, be sure to roll it gently between your hands before administering it to ${petName}. Store it in the refrigerator. Call us if the insulin changes color or becomes cloudy.`;
   }
 
+  const handleSaveAndPreview = async () => {
+    // force validation first
+    const v = validateDiabetesForm(form);
+    setValidation(v);
+
+    // if not valid, do not navigate
+    if (!v.isValid) return;
+
+    await handleSave();
+    navigate(`/ai/handouts/${handoutId}/preview`);
+  };
+
   return (
     <HandoutsPageShell>
       <EditorTopRow>
@@ -1462,10 +1099,15 @@ function DiabetesHandoutEditor({ currentUser }) {
             {validation.isValid ? "Ready" : "Draft"}
           </StatusPill>
 
-          <TopBarButton type="button" onClick={handlePrint}>
-            <FiPrinter size={14} />
-            <span>Print</span>
-          </TopBarButton>
+          {validation.isValid && (
+            <TopBarButton
+              type="button"
+              onClick={handleSaveAndPreview}
+              disabled={saving}
+            >
+              {saving ? "Saving..." : "Preview"}
+            </TopBarButton>
+          )}
 
           <TopBarButton type="button" onClick={handleSave} disabled={saving}>
             {saving ? "Saving..." : "Save"}
@@ -2888,7 +2530,6 @@ function DiabetesHandoutEditor({ currentUser }) {
             </PreviewText>
 
             <PreviewSectionTitle>Feeding</PreviewSectionTitle>
-
             {isFeline && (
               <>
                 {(form.includeCatFeedingMealInsulinNote ||
@@ -2909,7 +2550,13 @@ function DiabetesHandoutEditor({ currentUser }) {
               </>
             )}
 
-            <PreviewSectionTitle>Feeding Instructions</PreviewSectionTitle>
+            {/* Subsection title under Feeding */}
+            <PreviewText
+              as="div"
+              style={{ fontWeight: 600, marginTop: 8, marginBottom: 4 }}
+            >
+              Feeding instructions
+            </PreviewText>
             <PreviewText as="ul">
               {form.feedingInclude1 && (
                 <li>
@@ -2961,7 +2608,10 @@ function DiabetesHandoutEditor({ currentUser }) {
 
                 {/* Bullet list of concrete tasks */}
                 <PreviewText as="ul">
-                  {measureIntakeLine && <li>{measureIntakeLine}</li>}
+                  {measureIntakeLines &&
+                    measureIntakeLines.map((line, idx) => (
+                      <li key={`measure-intake-${idx}`}>{line}</li>
+                    ))}
 
                   {form.advancedBgInclude && (
                     <li>{buildAdvancedBgInstruction(form)}</li>
@@ -3042,6 +2692,122 @@ function DiabetesHandoutEditor({ currentUser }) {
   );
 }
 
+function DiabetesHandoutPreview({ currentUser }) {
+  const { handoutId } = useParams();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [form, setForm] = useState(EMPTY_DIABETES_FORM);
+
+  useEffect(() => {
+    if (!handoutId) return;
+    const ref = doc(firestore, "vetHandouts", handoutId);
+
+    const unsub = onSnapshot(
+      ref,
+      (snap) => {
+        if (!snap.exists()) {
+          setNotFound(true);
+          setLoading(false);
+          return;
+        }
+        const data = snap.data();
+        setForm(buildFormFromDoc(data));
+        setNotFound(false);
+        setLoading(false);
+      },
+      (err) => {
+        console.error("Error loading preview:", err);
+        setLoading(false);
+      }
+    );
+
+    return () => unsub();
+  }, [handoutId]);
+
+  const handlePrint = () => window.print();
+
+  if (loading) {
+    return (
+      <HandoutsPageShell>
+        <HandoutsHeaderRow>
+          <HandoutsTitle>Preview</HandoutsTitle>
+        </HandoutsHeaderRow>
+        <EmptyStateText>Loading preview...</EmptyStateText>
+      </HandoutsPageShell>
+    );
+  }
+
+  if (notFound) {
+    return (
+      <HandoutsPageShell>
+        <HandoutsHeaderRow>
+          <HandoutsTitle>Handout not found</HandoutsTitle>
+        </HandoutsHeaderRow>
+        <EmptyStateText>
+          This handout does not exist or you do not have access to it.
+        </EmptyStateText>
+      </HandoutsPageShell>
+    );
+  }
+
+  const markdown = buildDiabetesHandoutMarkdown(form);
+  const scheduleRows = buildActionScheduleRows(form);
+
+  return (
+    <HandoutsPageShell>
+      <PreviewTopRow className="no-print">
+        <BackButton
+          type="button"
+          onClick={() => navigate(`/ai/handouts/${handoutId}`)}
+        >
+          <FiArrowLeft size={14} />
+          <span>Back to editor</span>
+        </BackButton>
+
+        <EditorTopRight>
+          <TopBarButton type="button" onClick={handlePrint}>
+            <FiPrinter size={14} />
+            <span>Print PDF</span>
+          </TopBarButton>
+        </EditorTopRight>
+      </PreviewTopRow>
+
+      <PetOwnerPreviewFrame>
+        <PetOwnerPreviewPaper>
+          {scheduleRows.length > 0 && (
+            <>
+              <ScheduleHeading>Daily schedule at a glance</ScheduleHeading>
+              <ActionScheduleTable>
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>How often</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {scheduleRows.map((row, idx) => (
+                    <tr key={idx}>
+                      <td>{row.task}</td>
+                      <td>{row.frequency}</td>
+                      <td>{row.details}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </ActionScheduleTable>
+              <ScheduleDivider />
+            </>
+          )}
+
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+        </PetOwnerPreviewPaper>
+      </PetOwnerPreviewFrame>
+    </HandoutsPageShell>
+  );
+}
+
 export default function HandoutsPage() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -3060,10 +2826,55 @@ export default function HandoutsPage() {
           path=":handoutId"
           element={<DiabetesHandoutEditor currentUser={currentUser} />}
         />
+        <Route
+          path=":handoutId/preview"
+          element={<DiabetesHandoutPreview currentUser={currentUser} />}
+        />
       </Routes>
     </HandoutsPageOuter>
   );
 }
+
+const ScheduleHeading = styled.h2`
+  font-size: 20px;
+  margin: 0 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+`;
+
+const ActionScheduleTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  font-size: 14px;
+
+  thead tr {
+    background: #f3f4f6;
+  }
+
+  th,
+  td {
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f9fafb;
+  }
+`;
+
+const ScheduleDivider = styled.div`
+  height: 1px;
+  background: #e5e7eb;
+  margin: 10px 0 18px 0;
+`;
 
 const HeaderActions = styled.div`
   display: inline-flex;
@@ -3648,4 +3459,97 @@ const EmptyStateText = styled.p`
   font-size: 13px;
   color: #9ca3af;
   margin: 0 0 8px;
+`;
+
+const PreviewTopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+`;
+
+const PetOwnerPreviewFrame = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const PetOwnerPreviewPaper = styled.div`
+  width: 100%;
+  max-width: 820px; /* print-like */
+  background: #ffffff;
+  color: #111827;
+  border-radius: 12px;
+  padding: 28px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  /* Markdown typography */
+  font-size: 16px;
+  line-height: 1.65;
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin: 22px 0 10px 0;
+    padding-top: 14px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin: 14px 0 8px 0;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  ul,
+  ol {
+    margin: 10px 0 10px 20px;
+  }
+
+  li {
+    margin: 6px 0;
+  }
+
+  blockquote {
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #f9fafb;
+    border-left: 4px solid #d1d5db;
+    border-radius: 8px;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+`;
+
+/* Print rules */
+const PrintStyles = styled.div`
+  @media print {
+    body {
+      background: white !important;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+
+    /* Remove shadows and force paper width */
+    ${PetOwnerPreviewPaper} {
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      max-width: 820px !important;
+      padding: 0 !important;
+    }
+  }
 `;
