@@ -95,6 +95,14 @@ export function buildDiabetesHandoutMarkdown(form) {
     (form.hospitalName || "").trim() || "our veterinary clinic";
   const vetName = (form.attendingVetName || "").trim();
 
+  // Pronouns for exercise text
+  let petPronounObject = "them";
+  if (form.sex === "F" || form.sex === "FS") {
+    petPronounObject = "her";
+  } else if (form.sex === "M" || form.sex === "MN") {
+    petPronounObject = "him";
+  }
+
   const insulinName =
     form.insulinPrescribed === "Other"
       ? (form.insulinOtherName || "").trim() || "insulin"
@@ -298,6 +306,13 @@ export function buildDiabetesHandoutMarkdown(form) {
   } else {
     lines.push(`- ______________________________`);
   }
+  lines.push(``);
+
+  // NEW: Exercise
+  lines.push(`## Exercise`);
+  lines.push(
+    `${petName} will benefit from regular, consistent exercise as this can help ${petPronounObject} lose weight and may decrease insulin requirements.`
+  );
   lines.push(``);
 
   // Home monitoring

@@ -1979,11 +1979,21 @@ function DiabetesHandoutEditor({ currentUser }) {
             </SectionCard>
           </SectionCard>
 
-          {/* Section 6: Home monitoring */}
+          {/* NEW Section: Exercise */}
           <SectionCard>
-            <SectionTitle>6. Home monitoring</SectionTitle>
+            <SectionTitle>6. Exercise</SectionTitle>
+            <FieldDescription>
+              {petName} will benefit from regular, consistent exercise as this
+              can help {petPronounObject} lose weight and may decrease insulin
+              requirements.
+            </FieldDescription>
+          </SectionCard>
 
-            {/* 6.1 Home monitoring encouragement */}
+          {/* Section 7: Home monitoring */}
+          <SectionCard>
+            <SectionTitle>7. Home monitoring</SectionTitle>
+
+            {/* 7.1 Home monitoring encouragement */}
             <FieldLabel>Home monitoring encouragement</FieldLabel>
             <FieldDescription>
               Check the messages you would like to include. You can still edit
@@ -2042,7 +2052,7 @@ function DiabetesHandoutEditor({ currentUser }) {
               />
             </FieldRow>
 
-            {/* 6.2 Measure food and water intake */}
+            {/* 7.2 Measure food and water intake */}
             <FieldRow>
               <FieldLabel>Measure food and water intake</FieldLabel>
               <ButtonToggleGroup>
@@ -2089,7 +2099,7 @@ function DiabetesHandoutEditor({ currentUser }) {
               </FieldRow>
             )}
 
-            {/* 6.3 Advanced home monitoring (if applicable) */}
+            {/* 7.3 Advanced home monitoring (if applicable) */}
             <FieldRow>
               <FieldLabel>Advanced home monitoring (if applicable)</FieldLabel>
             </FieldRow>
@@ -2292,7 +2302,7 @@ function DiabetesHandoutEditor({ currentUser }) {
               </>
             )}
 
-            {/* 6.4 Additional instructions */}
+            {/* 7.4 Additional instructions */}
             <FieldRow style={{ marginTop: 8 }}>
               <FieldLabel>Additional instructions</FieldLabel>
               <FieldTextarea
@@ -2306,9 +2316,9 @@ function DiabetesHandoutEditor({ currentUser }) {
             </FieldRow>
           </SectionCard>
 
-          {/* Section 7: Emergency criteria */}
+          {/* Section 8: Emergency criteria */}
           <SectionCard>
-            <SectionTitle>7. Emergency criteria</SectionTitle>
+            <SectionTitle>8. Emergency criteria</SectionTitle>
 
             <FieldDescription>
               Uncheck items that you do not want to include for this patient,
@@ -2581,6 +2591,16 @@ function DiabetesHandoutEditor({ currentUser }) {
               {form.feedingInclude7 && form.feeding7Text && (
                 <li>{form.feeding7Text}</li>
               )}
+            </PreviewText>
+
+            {/* NEW: Exercise section */}
+            <PreviewSectionTitle>Exercise</PreviewSectionTitle>
+            <PreviewText>
+              <div>
+                {petName} will benefit from regular, consistent exercise as this
+                can help {petPronounObject} lose weight and may decrease insulin
+                requirements.
+              </div>
             </PreviewText>
 
             {hasHomeMonitoringContent && (
