@@ -142,7 +142,7 @@ export function buildDiabetesHandoutMarkdown(form) {
     handlingLine = `When handling ${insulinName}, be sure to **roll it gently between your hands** before administering it to ${petName}. Store it in the refrigerator. Call us if the insulin changes color or becomes cloudy.`;
   }
 
-  // NEW: use the array-based helper
+  // Use the array-based helper for intake bullets
   const measureIntakeLines = buildMeasureIntakeLines(form) || [];
 
   const emergencyHospitalName =
@@ -183,7 +183,7 @@ export function buildDiabetesHandoutMarkdown(form) {
 
   const homeBullets = [];
 
-  // NEW: include both monitoring bullets if present
+  // Include both monitoring bullets if present
   if (measureIntakeLines.length) {
     measureIntakeLines.forEach((line) => {
       if (line && line.trim()) {
@@ -223,30 +223,29 @@ export function buildDiabetesHandoutMarkdown(form) {
   if ((form.emergencyOther || "").trim())
     emergencyBullets.push(form.emergencyOther.trim());
 
+  // Plain letter-style clinic header block
   const hospitalBlock = [
     (form.hospitalName || "").trim(),
     (form.hospitalAddress || "").trim(),
-    (form.hospitalPhone || "").trim()
-      ? `Phone: ${(form.hospitalPhone || "").trim()}`
-      : "",
+    (form.hospitalPhone || "").trim(),
   ].filter(Boolean);
 
   const lines = [];
 
-  // Title
+  // Title and date
   lines.push(`# Diabetes Discharge Instructions`);
-  lines.push(``);
+  lines.push("");
   lines.push(`**Date:** ${todayStr}`);
-  lines.push(``);
+  lines.push("");
 
-  // Hospital header (small)
+  // Clinic name, address, phone on separate visual lines
   if (hospitalBlock.length) {
-    lines.push(`**${hospitalBlock[0]}**`);
-    for (let i = 1; i < hospitalBlock.length; i++) lines.push(hospitalBlock[i]);
-    lines.push(``);
+    // "two spaces + newline" in Markdown = hard line break (<br />)
+    lines.push(hospitalBlock.join("  \n"));
+    lines.push("");
   }
 
-  // Greeting
+  // Greeting + intro paragraph
   lines.push(`To ${petName}'s caregivers,`);
   lines.push(``);
   lines.push(
@@ -254,14 +253,14 @@ export function buildDiabetesHandoutMarkdown(form) {
   );
   lines.push(``);
 
-  // Feline remission notes
+  // Feline remission notes as normal paragraphs (no blockquote styling)
   if (isFeline) {
     if (form.includeRemissionNote && (form.remissionNote || "").trim()) {
-      lines.push(`> ${(form.remissionNote || "").trim()}`);
+      lines.push((form.remissionNote || "").trim());
       lines.push(``);
     }
     if (form.includeHopeNote && (form.hopeNote || "").trim()) {
-      lines.push(`> ${(form.hopeNote || "").trim()}`);
+      lines.push((form.hopeNote || "").trim());
       lines.push(``);
     }
   }
@@ -308,7 +307,7 @@ export function buildDiabetesHandoutMarkdown(form) {
   }
   lines.push(``);
 
-  // NEW: Exercise
+  // Exercise
   lines.push(`## Exercise`);
   lines.push(
     `${petName} will benefit from regular, consistent exercise as this can help ${petPronounObject} lose weight and may decrease insulin requirements.`
