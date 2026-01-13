@@ -12,6 +12,7 @@ import {
   buildHomeEncouragement1,
   buildHomeEncouragement2,
   buildDefaultHopeNote,
+  buildFeedingLine1,
 } from "./diabetesTextBuilders";
 
 export const EMPTY_DIABETES_FORM = {
@@ -151,9 +152,9 @@ export function buildFormFromDoc(data) {
   }
 
   // Feeding checklist defaults (gender-aware and depends on top inputs)
-  // if (merged.feedingInclude1 && !merged.feeding1Text.trim()) {
-  //   merged.feeding1Text = buildFeedingLine1(merged);
-  // }
+  if (merged.feedingInclude1 && !merged.feeding1Text.trim()) {
+    merged.feeding1Text = buildFeedingLine1(merged);
+  }
   if (merged.feedingInclude2 && !merged.feeding2Text.trim()) {
     merged.feeding2Text = buildFeedingLine2(merged);
   }
