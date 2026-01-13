@@ -48,6 +48,7 @@ import {
   DEFAULT_FELINE_REMISSION_NOTE,
   getPetPronouns,
   resolveChoice,
+  stripMarkdownToGreeting,
 } from "../handouts/diabetesTextBuilders";
 import {
   buildFormFromDoc,
@@ -56,6 +57,7 @@ import {
   formToFirestore,
   validateDiabetesForm,
 } from "../handouts/diabetesFormModel";
+import DiabetesHandoutPreview from "../handouts/DiabetesHandoutPreview";
 
 // UPDATED: main bullet + sub bullets for BG
 function buildAdvancedBgInstruction(form) {
@@ -539,7 +541,7 @@ function HandoutsList({ currentUser }) {
                     <FieldInput
                       value={hospitalDefaults.hospitalName}
                       onChange={(e) =>
-                        updateField("hospitalName", e.target.value)
+                        updateDefaultField("hospitalName", e.target.value)
                       }
                       placeholder="Hospital name"
                     />
@@ -931,6 +933,11 @@ function DiabetesHandoutEditor({ currentUser }) {
       const newFormData = formToFirestore(form);
       const title = deriveHandoutTitle(form);
 
+      // NEW: pre-render the markdown and schedule rows for the PDF generator
+      const renderedFullMd = buildDiabetesHandoutMarkdown(form);
+      const renderedBodyMd = stripMarkdownToGreeting(renderedFullMd);
+      const scheduleRows = buildActionScheduleRows(form);
+
       await updateDoc(ref, {
         formData: newFormData,
         patient: {
@@ -938,6 +945,21 @@ function DiabetesHandoutEditor({ currentUser }) {
           species: form.species || null,
           sex: form.sex || null,
         },
+        // NEW: make branding lookup deterministic
+        vetUid: currentUser.uid,
+
+        // NEW: store clinic info explicitly (server can read these without rebuild)
+        clinic: {
+          name: (form.hospitalName || "").trim(),
+          address: (form.hospitalAddress || "").trim(),
+          phone: (form.hospitalPhone || "").trim(),
+        },
+
+        // NEW: server-render inputs
+        renderedFullMd,
+        renderedBodyMd,
+        scheduleRows,
+
         title,
         status: v.isValid ? "ready" : "draft",
         validation: {
@@ -2712,122 +2734,6 @@ function DiabetesHandoutEditor({ currentUser }) {
   );
 }
 
-function DiabetesHandoutPreview({ currentUser }) {
-  const { handoutId } = useParams();
-  const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
-  const [form, setForm] = useState(EMPTY_DIABETES_FORM);
-
-  useEffect(() => {
-    if (!handoutId) return;
-    const ref = doc(firestore, "vetHandouts", handoutId);
-
-    const unsub = onSnapshot(
-      ref,
-      (snap) => {
-        if (!snap.exists()) {
-          setNotFound(true);
-          setLoading(false);
-          return;
-        }
-        const data = snap.data();
-        setForm(buildFormFromDoc(data));
-        setNotFound(false);
-        setLoading(false);
-      },
-      (err) => {
-        console.error("Error loading preview:", err);
-        setLoading(false);
-      }
-    );
-
-    return () => unsub();
-  }, [handoutId]);
-
-  const handlePrint = () => window.print();
-
-  if (loading) {
-    return (
-      <HandoutsPageShell>
-        <HandoutsHeaderRow>
-          <HandoutsTitle>Preview</HandoutsTitle>
-        </HandoutsHeaderRow>
-        <EmptyStateText>Loading preview...</EmptyStateText>
-      </HandoutsPageShell>
-    );
-  }
-
-  if (notFound) {
-    return (
-      <HandoutsPageShell>
-        <HandoutsHeaderRow>
-          <HandoutsTitle>Handout not found</HandoutsTitle>
-        </HandoutsHeaderRow>
-        <EmptyStateText>
-          This handout does not exist or you do not have access to it.
-        </EmptyStateText>
-      </HandoutsPageShell>
-    );
-  }
-
-  const markdown = buildDiabetesHandoutMarkdown(form);
-  const scheduleRows = buildActionScheduleRows(form);
-
-  return (
-    <HandoutsPageShell>
-      <PreviewTopRow className="no-print">
-        <BackButton
-          type="button"
-          onClick={() => navigate(`/ai/handouts/${handoutId}`)}
-        >
-          <FiArrowLeft size={14} />
-          <span>Back to editor</span>
-        </BackButton>
-
-        <EditorTopRight>
-          <TopBarButton type="button" onClick={handlePrint}>
-            <FiPrinter size={14} />
-            <span>Print PDF</span>
-          </TopBarButton>
-        </EditorTopRight>
-      </PreviewTopRow>
-
-      <PetOwnerPreviewFrame>
-        <PetOwnerPreviewPaper>
-          {scheduleRows.length > 0 && (
-            <>
-              <ScheduleHeading>Daily schedule at a glance</ScheduleHeading>
-              <ActionScheduleTable>
-                <thead>
-                  <tr>
-                    <th>Task</th>
-                    <th>How often</th>
-                    <th>Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {scheduleRows.map((row, idx) => (
-                    <tr key={idx}>
-                      <td>{row.task}</td>
-                      <td>{row.frequency}</td>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </ActionScheduleTable>
-              <ScheduleDivider />
-            </>
-          )}
-
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
-        </PetOwnerPreviewPaper>
-      </PetOwnerPreviewFrame>
-    </HandoutsPageShell>
-  );
-}
-
 export default function HandoutsPage() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -2854,47 +2760,6 @@ export default function HandoutsPage() {
     </HandoutsPageOuter>
   );
 }
-
-const ScheduleHeading = styled.h2`
-  font-size: 20px;
-  margin: 0 0 10px 0;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #111827;
-`;
-
-const ActionScheduleTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 18px;
-  font-size: 14px;
-
-  thead tr {
-    background: #f3f4f6;
-  }
-
-  th,
-  td {
-    padding: 8px 10px;
-    border: 1px solid #e5e7eb;
-    vertical-align: top;
-  }
-
-  th {
-    font-weight: 600;
-    text-align: left;
-  }
-
-  tbody tr:nth-child(even) {
-    background: #f9fafb;
-  }
-`;
-
-const ScheduleDivider = styled.div`
-  height: 1px;
-  background: #e5e7eb;
-  margin: 10px 0 18px 0;
-`;
 
 const HeaderActions = styled.div`
   display: inline-flex;

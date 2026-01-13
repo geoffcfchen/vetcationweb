@@ -89,8 +89,11 @@ export function buildDiabetesHandoutMarkdown(form) {
     today.getDate()
   ).padStart(2, "0")}/${today.getFullYear()}`;
 
+  const rawPetName = (form.petName || "").trim();
+  const petName = rawPetName || "____";
+  const hasRealPetName = !!rawPetName;
+
   const isFeline = form.species === "feline";
-  const petName = (form.petName || "").trim() || "____";
   const clinicName =
     (form.hospitalName || "").trim() || "our veterinary clinic";
   const vetName = (form.attendingVetName || "").trim();
@@ -233,10 +236,18 @@ export function buildDiabetesHandoutMarkdown(form) {
   const lines = [];
 
   // Title and date
-  lines.push(`# Diabetes Discharge Instructions`);
+  lines.push(`# Diabetes discharge instructions for ${petName}`);
   lines.push("");
   lines.push(`**Date:** ${todayStr}`);
   lines.push("");
+
+  // Optional soft subtitle for nicer UI if we know the name
+  if (hasRealPetName) {
+    lines.push(
+      `*This handout summarizes the home care plan for ${petName}'s diabetes.*`
+    );
+    lines.push("");
+  }
 
   // Clinic name, address, phone on separate visual lines
   if (hospitalBlock.length) {
@@ -247,21 +258,21 @@ export function buildDiabetesHandoutMarkdown(form) {
 
   // Greeting + intro paragraph
   lines.push(`To ${petName}'s caregivers,`);
-  lines.push(``);
+  lines.push("");
   lines.push(
     `You're doing a great job caring for ${petName}. Your veterinary team at ${clinicName} will continue to support you as you manage ${petName}'s diabetes. ${introDoctorLine}`
   );
-  lines.push(``);
+  lines.push("");
 
   // Feline remission notes as normal paragraphs (no blockquote styling)
   if (isFeline) {
     if (form.includeRemissionNote && (form.remissionNote || "").trim()) {
       lines.push((form.remissionNote || "").trim());
-      lines.push(``);
+      lines.push("");
     }
     if (form.includeHopeNote && (form.hopeNote || "").trim()) {
       lines.push((form.hopeNote || "").trim());
-      lines.push(``);
+      lines.push("");
     }
   }
 
@@ -277,7 +288,7 @@ export function buildDiabetesHandoutMarkdown(form) {
   lines.push(
     `Do not change this regimen unless you have spoken with a member of our veterinary team.`
   );
-  lines.push(``);
+  lines.push("");
 
   // Feeding
   lines.push(`## Feeding`);
@@ -287,14 +298,14 @@ export function buildDiabetesHandoutMarkdown(form) {
       (form.catFeedingMealInsulinNote || "").trim()
     ) {
       lines.push((form.catFeedingMealInsulinNote || "").trim());
-      lines.push(``);
+      lines.push("");
     }
     if (
       form.includeCatCannedDietNote &&
       (form.catCannedDietNote || "").trim()
     ) {
       lines.push((form.catCannedDietNote || "").trim());
-      lines.push(``);
+      lines.push("");
     }
   }
   lines.push(`### Feeding instructions`);
@@ -305,14 +316,14 @@ export function buildDiabetesHandoutMarkdown(form) {
   } else {
     lines.push(`- ______________________________`);
   }
-  lines.push(``);
+  lines.push("");
 
   // Exercise
   lines.push(`## Exercise`);
   lines.push(
     `${petName} will benefit from regular, consistent exercise as this can help ${petPronounObject} lose weight and may decrease insulin requirements.`
   );
-  lines.push(``);
+  lines.push("");
 
   // Home monitoring
   if (
@@ -326,46 +337,50 @@ export function buildDiabetesHandoutMarkdown(form) {
     lines.push(
       `Home monitoring is key when caring for a diabetic animal. You are acting as an extension of your veterinary team by taking on these important tasks.`
     );
-    lines.push(``);
+    lines.push("");
     if (
       form.homeEncouragementInclude1 &&
       (form.homeEncouragement1Text || "").trim()
     ) {
       lines.push((form.homeEncouragement1Text || "").trim());
-      lines.push(``);
+      lines.push("");
     }
     if (
       form.homeEncouragementInclude2 &&
       (form.homeEncouragement2Text || "").trim()
     ) {
       lines.push((form.homeEncouragement2Text || "").trim());
-      lines.push(``);
+      lines.push("");
     }
 
     if (homeBullets.length) {
       homeBullets.forEach((b) => {
         lines.push(`- ${b}`);
       });
-      lines.push(``);
+      lines.push("");
     }
   }
 
   // Emergency
   lines.push(`## Emergency criteria`);
-  emergencyBullets.forEach((t) => lines.push(`- ${t}`));
-  lines.push(``);
+  if (emergencyBullets.length) {
+    emergencyBullets.forEach((t) => lines.push(`- ${t}`));
+  } else {
+    lines.push(`- ______________________________`);
+  }
+  lines.push("");
   lines.push(
     `If we are not available and you need help, please contact **${emergencyHospitalName}** at **${emergencyHospitalPhone}**.`
   );
-  lines.push(``);
+  lines.push("");
   lines.push(
     `${petName} should be re-evaluated by our veterinary team in **${recheckPhrase}**. If you haven't already, please schedule that appointment right away. Frequent rechecks with our team to fine tune ${petName}'s insulin, diet, and other treatments are critically important.`
   );
-  lines.push(``);
+  lines.push("");
   lines.push(
     `We appreciate all the hard work you are pouring into ${petName} and we're honored to be walking alongside you on this journey.`
   );
-  lines.push(``);
+  lines.push("");
   lines.push(
     `Please call our hospital at **${
       (form.hospitalPhone || "").trim() || "___-___-____"
@@ -680,4 +695,10 @@ export function buildActionScheduleRows(form) {
   }
 
   return rows;
+}
+
+export function stripMarkdownToGreeting(md) {
+  const lines = (md || "").split(/\r?\n/);
+  const idx = lines.findIndex((l) => l.startsWith("To "));
+  return idx >= 0 ? lines.slice(idx).join("\n") : md;
 }
