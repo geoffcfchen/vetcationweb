@@ -34,19 +34,6 @@ import { buildFormFromDoc, EMPTY_DIABETES_FORM } from "./diabetesFormModel";
 
 /* Helpers */
 
-function getPxPerInchSafe() {
-  if (typeof document === "undefined") return 96;
-  const el = document.createElement("div");
-  el.style.width = "1in";
-  el.style.position = "absolute";
-  el.style.left = "-9999px";
-  el.style.top = "-9999px";
-  document.body.appendChild(el);
-  const px = el.getBoundingClientRect().width;
-  document.body.removeChild(el);
-  return px || 96;
-}
-
 function normalizeHex(hex) {
   const h = (hex || "").replace("#", "").trim();
   if (h.length === 3) return `#${h[0]}${h[0]}${h[1]}${h[1]}${h[2]}${h[2]}`;
@@ -174,36 +161,13 @@ export default function DiabetesHandoutPreview({ currentUser }) {
   const [pdfUrl, setPdfUrl] = useState(null);
   const [pdfError, setPdfError] = useState(null);
 
-  const measureRef = useRef(null);
-  const [pxPerInch, setPxPerInch] = useState(96);
-  const [pageCount, setPageCount] = useState(1);
-
-  // Match whatever your PDF renderer uses
+  // Margin and width constants
   const PDF_PAGE_MARGIN_IN = 0.4; // matches @page margin: 0.4in
-  const PAGE_HEIGHT_IN = 11;
   const PAGE_WIDTH_IN = 8.5;
-
-  const contentHeightIn = useMemo(
-    () => PAGE_HEIGHT_IN - PDF_PAGE_MARGIN_IN * 2,
-    [PAGE_HEIGHT_IN, PDF_PAGE_MARGIN_IN]
-  );
-
-  const contentWidthIn = useMemo(
-    () => PAGE_WIDTH_IN - PDF_PAGE_MARGIN_IN * 2,
-    [PAGE_WIDTH_IN, PDF_PAGE_MARGIN_IN]
-  );
-
-  const pageStepPx = useMemo(() => {
-    return contentHeightIn * pxPerInch;
-  }, [contentHeightIn, pxPerInch]);
 
   useEffect(() => {
     document.body.classList.add("print-handout");
     return () => document.body.classList.remove("print-handout");
-  }, []);
-
-  useEffect(() => {
-    setPxPerInch(getPxPerInchSafe());
   }, []);
 
   useEffect(() => {
@@ -242,7 +206,7 @@ export default function DiabetesHandoutPreview({ currentUser }) {
     });
   }, [currentUser?.uid]);
 
-  /* Derived values (must be defined BEFORE any hook references them) */
+  /* Derived values */
 
   const scheduleRows = useMemo(() => buildActionScheduleRows(form), [form]);
 
@@ -268,44 +232,9 @@ export default function DiabetesHandoutPreview({ currentUser }) {
   const clinicPhone = (form.hospitalPhone || "").trim();
   const todayStr = DateTime.now().toFormat("MM/dd/yyyy");
 
-  /* Measure total height, then compute pageCount */
-  useEffect(() => {
-    const el = measureRef.current;
-    if (!el) return;
-
-    const recompute = () => {
-      const h = el.getBoundingClientRect().height || 0;
-      const pages = Math.max(1, Math.ceil(h / pageStepPx));
-      setPageCount(pages);
-    };
-
-    recompute();
-
-    if (typeof ResizeObserver === "undefined") return;
-
-    const ro = new ResizeObserver(() => recompute());
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [
-    pageStepPx,
-    bodyMd,
-    petPhotoUrl,
-    branding.logoUrl,
-    bannerColor,
-    bannerTextColor,
-    scheduleRows.length,
-    clinicName,
-    clinicAddr,
-    clinicPhone,
-    todayStr,
-  ]);
-
-  function renderDocument({ attachMeasureRef = false } = {}) {
+  function renderDocument() {
     return (
-      <DocRoot
-        $contentWidthIn={contentWidthIn}
-        ref={attachMeasureRef ? measureRef : null}
-      >
+      <DocRoot>
         <HeaderBand $bannerColor={bannerColor} $textColor={bannerTextColor}>
           <HeaderLeft>
             {branding.logoUrl ? (
@@ -510,8 +439,6 @@ export default function DiabetesHandoutPreview({ currentUser }) {
     );
   }
 
-  const pages = Array.from({ length: pageCount }, (_, i) => i);
-
   return (
     <Shell data-handout-shell>
       <TopBar className="no-print">
@@ -607,38 +534,10 @@ export default function DiabetesHandoutPreview({ currentUser }) {
         </AssetRow>
       </AssetsCard>
 
-      {/* Hidden measurement copy */}
-      <MeasureStage aria-hidden="true">
-        {renderDocument({ attachMeasureRef: true })}
-      </MeasureStage>
-
       <PreviewFrame data-handout-preview-frame>
-        <PagesStack>
-          {pages.map((pageIdx) => (
-            <PageWrap key={pageIdx}>
-              {pageCount > 1 ? (
-                <PagePill className="no-print">
-                  Page {pageIdx + 1} of {pageCount}
-                </PagePill>
-              ) : null}
-
-              <PageSheet data-handout-paper>
-                <PageClip $pageMarginIn={PDF_PAGE_MARGIN_IN}>
-                  <PageTranslate
-                    $contentWidthIn={contentWidthIn}
-                    style={{
-                      transform: `translateY(-${Math.round(
-                        pageIdx * pageStepPx
-                      )}px)`,
-                    }}
-                  >
-                    {renderDocument()}
-                  </PageTranslate>
-                </PageClip>
-              </PageSheet>
-            </PageWrap>
-          ))}
-        </PagesStack>
+        <PageSheet data-handout-paper $pageMarginIn={PDF_PAGE_MARGIN_IN}>
+          <PageInner>{renderDocument()}</PageInner>
+        </PageSheet>
       </PreviewFrame>
     </Shell>
   );
@@ -805,42 +704,12 @@ const PreviewFrame = styled.div`
   justify-content: center;
 `;
 
-const PagesStack = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-
-  /* NEW: extra space after the final page */
-  padding-bottom: 24px;
-
-  @media print {
-    padding-bottom: 0;
-    gap: 0;
-  }
-`;
-
-const PageWrap = styled.div`
-  width: 8.5in;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const PagePill = styled.div`
-  font-size: 12px;
-  color: #9ca3af;
-  margin: 0 0 8px 2px;
-`;
-
 const PageSheet = styled.div`
   width: 8.5in;
-  height: 11in;
   background: #fff;
   color: #111827;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   border-radius: 12px;
-  overflow: hidden;
 
   @media print {
     box-shadow: none;
@@ -848,34 +717,21 @@ const PageSheet = styled.div`
   }
 `;
 
-const PageClip = styled.div`
+const PageInner = styled.div`
   width: 100%;
-  height: 100%;
-  overflow: hidden;
   box-sizing: border-box;
+  padding: ${(p) => `${p.theme?.pageMarginIn || 0.4}in`};
 
-  /* This simulates @page margin: 0.4in in the PDF */
-  padding: ${(p) => `${p.$pageMarginIn || 0}in`};
-`;
-
-const PageTranslate = styled.div`
-  width: ${(p) => `${p.$contentWidthIn || 8.5}in`};
-`;
-
-const MeasureStage = styled.div`
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
+  @media print {
+    padding: 0.4in;
+  }
 `;
 
 const DocRoot = styled.div`
-  width: ${(p) => `${p.$contentWidthIn || 8.5}in`};
+  width: 100%;
   background: #fff;
   color: #111827;
 
-  /* Helps avoid tiny layout differences from global CSS */
   *,
   *::before,
   *::after {
