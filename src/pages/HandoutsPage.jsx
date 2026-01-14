@@ -1,16 +1,14 @@
 // src/pages/HandoutsPage.jsx
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
-import { auth, firestore, storage } from "../lib/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { auth, firestore } from "../lib/firebase";
 import {
   collection,
   doc,
   getDoc,
   setDoc,
   addDoc,
-  updateDoc,
   serverTimestamp,
   onSnapshot,
   query,
@@ -21,7 +19,6 @@ import {
   FiFileText,
   FiPlus,
   FiArrowLeft,
-  FiPrinter,
   FiSettings,
   FiX,
 } from "react-icons/fi";
@@ -35,7 +32,7 @@ const EMPTY_HOSPITAL_DEFAULTS = {
   hospitalPhone: "",
   erHospitalName: "",
   erHospitalPhone: "",
-  attendingVetName: "", // NEW
+  attendingVetName: "",
 };
 
 function pickHospitalDefaultsFromSettingsDoc(data) {
@@ -73,13 +70,25 @@ function HandoutsList({ currentUser }) {
     EMPTY_HOSPITAL_DEFAULTS
   );
 
+  // new: selected template type (null = show template grid)
+  const [selectedType, setSelectedType] = useState(null);
+
   const handleGoBack = () => {
-    // "Back" behavior with a safe fallback
-    if (window.history.length > 1) {
-      navigate("/ai/library");
+    // If we are currently looking at a specific template type (diabetes list),
+    // go back to the template selection grid.
+    if (selectedType !== null) {
+      setSelectedType(null);
       return;
     }
-    navigate("/ai/library"); // change this fallback route if your parent page is different
+
+    // If we are already on the template grid, go back to the previous page
+    // (or fall back to /ai/library).
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+
+    navigate("/ai/library");
   };
 
   useEffect(() => {
@@ -214,7 +223,6 @@ function HandoutsList({ currentUser }) {
           sex: null,
         },
 
-        // Prefill Section 1 using defaults
         formData: hospitalDefaultsToFormData(defaults),
 
         validation: {
@@ -243,220 +251,298 @@ function HandoutsList({ currentUser }) {
     }
   };
 
+  // filter by type for future multi template support
+  const visibleHandouts =
+    selectedType === "diabetes_discharge"
+      ? handouts.filter((h) => h.type === "diabetes_discharge")
+      : handouts;
+
   return (
     <HandoutsPageShell>
       <HandoutsHeaderRow>
         <HandoutsHeaderLeft>
-          {/* Reuse the same BackButton you already use in DiabetesHandoutEditor */}
           <BackButton type="button" onClick={handleGoBack}>
             <FiArrowLeft size={14} />
-            <span>Back</span>
+            <span>{selectedType ? "Back to templates" : "Back"}</span>
           </BackButton>
 
           <HandoutsTitle>Handouts</HandoutsTitle>
         </HandoutsHeaderLeft>
 
         <HeaderActions>
-          <HandoutsNewButton
-            type="button"
-            onClick={openDefaultsModal}
-            disabled={!currentUser}
-            title="Set defaults for diabetes discharge handouts"
-          >
-            <FiSettings size={14} />
-            <span>Defaults</span>
-          </HandoutsNewButton>
+          {selectedType === "diabetes_discharge" && (
+            <>
+              <HandoutsNewButton
+                type="button"
+                onClick={openDefaultsModal}
+                disabled={!currentUser}
+                title="Set defaults for diabetes discharge handouts"
+              >
+                <FiSettings size={14} />
+                <span>Defaults</span>
+              </HandoutsNewButton>
 
-          <HandoutsNewButton
-            type="button"
-            onClick={handleNewDiabetesHandout}
-            disabled={!currentUser}
-          >
-            <FiPlus size={14} />
-            <span>New diabetes handout</span>
-          </HandoutsNewButton>
+              <HandoutsNewButton
+                type="button"
+                onClick={handleNewDiabetesHandout}
+                disabled={!currentUser}
+              >
+                <FiPlus size={14} />
+                <span>New diabetes handout</span>
+              </HandoutsNewButton>
+            </>
+          )}
         </HeaderActions>
       </HandoutsHeaderRow>
 
-      <HandoutsSubtitle>
-        Create and manage printable client handouts here. For now this focuses
-        on diabetic discharge instructions.
-      </HandoutsSubtitle>
+      {/* Step 1 - template selection grid */}
+      {selectedType === null && (
+        <>
+          <HandoutsSubtitle>
+            Choose a handout template to work with. We will add more templates
+            over time.
+          </HandoutsSubtitle>
 
-      <HandoutsListContainer>
-        {currentUser && handouts.length === 0 && (
-          <EmptyStateCard>
-            <EmptyStateTitle>No handouts yet</EmptyStateTitle>
-            <EmptyStateText>
-              Start by creating a diabetes discharge handout.
-            </EmptyStateText>
-            <HandoutsNewButton type="button" onClick={handleNewDiabetesHandout}>
-              <FiPlus size={14} />
-              <span>New diabetes handout</span>
-            </HandoutsNewButton>
-          </EmptyStateCard>
-        )}
-
-        {!currentUser && (
-          <EmptyStateCard>
-            <EmptyStateTitle>Sign in to manage handouts</EmptyStateTitle>
-            <EmptyStateText>
-              Once signed in, you can create and save handouts for your cases.
-            </EmptyStateText>
-          </EmptyStateCard>
-        )}
-
-        {currentUser &&
-          handouts.length > 0 &&
-          handouts.map((h) => (
-            <HandoutRow
-              key={h.id}
+          <HandoutTypeGrid>
+            <HandoutTypeCard
               type="button"
-              onClick={() => navigate(`/ai/handouts/${h.id}`)}
+              onClick={() => setSelectedType("diabetes_discharge")}
             >
-              <FiFileText size={16} />
-              <HandoutRowTexts>
-                <HandoutRowTitle>
-                  {h.title || "Untitled handout"}
-                </HandoutRowTitle>
-                <HandoutRowMeta>
-                  {h.type === "diabetes_discharge"
-                    ? "Diabetes discharge"
-                    : h.type || "Unknown type"}
-                  {h.updatedAt && h.updatedAt.toDate && (
-                    <>
-                      {" "}
-                      •{" "}
-                      {h.updatedAt.toDate().toLocaleString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </>
-                  )}
-                </HandoutRowMeta>
-              </HandoutRowTexts>
-            </HandoutRow>
-          ))}
-      </HandoutsListContainer>
+              <HandoutTypeIconCircle>
+                <FiFileText size={22} />
+              </HandoutTypeIconCircle>
 
-      {defaultsOpen && (
-        <ModalOverlay
-          role="dialog"
-          aria-modal="true"
-          onMouseDown={(e) => {
-            if (e.target === e.currentTarget) closeDefaultsModal();
-          }}
-        >
-          <ModalCard>
-            <ModalHeader>
-              <ModalTitle>Defaults for diabetes discharge handouts</ModalTitle>
-              <IconCloseButton type="button" onClick={closeDefaultsModal}>
-                <FiX size={16} />
-              </IconCloseButton>
-            </ModalHeader>
+              <HandoutTypeTitle>Diabetes discharge</HandoutTypeTitle>
+              <HandoutTypeDescription>
+                Client friendly discharge instructions for canine and feline
+                diabetes, including insulin, feeding, home monitoring, and
+                emergency criteria.
+              </HandoutTypeDescription>
 
-            <ModalSubtext>
-              These values will be used to prefill Section 1 for new diabetes
-              discharge handouts.
-            </ModalSubtext>
+              <HandoutTypeFooterRow>
+                <HandoutTypeBadge>Available</HandoutTypeBadge>
+              </HandoutTypeFooterRow>
+            </HandoutTypeCard>
 
-            {defaultsLoading ? (
-              <ModalSubtext>Loading defaults...</ModalSubtext>
-            ) : (
-              <>
-                <SectionCard>
-                  <SectionTitle>Hospital information</SectionTitle>
+            <HandoutTypeCardDisabled type="button" disabled>
+              <HandoutTypeIconCircle $muted>
+                <FiFileText size={22} />
+              </HandoutTypeIconCircle>
 
-                  <FieldRow>
-                    <FieldLabel>Hospital name</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.hospitalName}
-                      onChange={(e) =>
-                        updateDefaultField("hospitalName", e.target.value)
-                      }
-                      placeholder="Hospital name"
-                    />
-                  </FieldRow>
+              <HandoutTypeTitle>Other templates</HandoutTypeTitle>
+              <HandoutTypeDescription>
+                Future handouts such as chronic kidney disease, heart disease,
+                and more will appear here.
+              </HandoutTypeDescription>
 
-                  <FieldRow>
-                    <FieldLabel>Hospital address</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.hospitalAddress}
-                      onChange={(e) =>
-                        updateDefaultField("hospitalAddress", e.target.value)
-                      }
-                      placeholder="Street, city, state, ZIP"
-                    />
-                  </FieldRow>
+              <HandoutTypeFooterRow>
+                <HandoutTypeBadgeMuted>Coming soon</HandoutTypeBadgeMuted>
+              </HandoutTypeFooterRow>
+            </HandoutTypeCardDisabled>
+          </HandoutTypeGrid>
+        </>
+      )}
 
-                  <FieldRow>
-                    <FieldLabel>Hospital phone number</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.hospitalPhone}
-                      onChange={(e) =>
-                        updateDefaultField("hospitalPhone", e.target.value)
-                      }
-                      placeholder="000-000-0000"
-                    />
-                  </FieldRow>
+      {/* Step 2 - after selecting diabetes, show list and defaults modal */}
+      {selectedType === "diabetes_discharge" && (
+        <>
+          <HandoutsSubtitle>
+            Create and manage printable client handouts here. For now this
+            focuses on diabetic discharge instructions.
+          </HandoutsSubtitle>
 
-                  {/* NEW: default veterinarian name */}
-                  <FieldRow>
-                    <FieldLabel>Default veterinarian name</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.attendingVetName || ""}
-                      onChange={(e) =>
-                        updateDefaultField("attendingVetName", e.target.value)
-                      }
-                      placeholder="For example: Smith"
-                    />
-                  </FieldRow>
-
-                  <FieldRow>
-                    <FieldLabel>Emergency hospital name</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.erHospitalName}
-                      onChange={(e) =>
-                        updateDefaultField("erHospitalName", e.target.value)
-                      }
-                      placeholder="After-hours or ER hospital"
-                    />
-                  </FieldRow>
-
-                  <FieldRow style={{ marginBottom: 0 }}>
-                    <FieldLabel>Emergency hospital phone</FieldLabel>
-                    <FieldInput
-                      value={hospitalDefaults.erHospitalPhone}
-                      onChange={(e) =>
-                        updateDefaultField("erHospitalPhone", e.target.value)
-                      }
-                      placeholder="000-000-0000"
-                    />
-                  </FieldRow>
-                </SectionCard>
-
-                {defaultsError && (
-                  <ModalErrorText>Save failed: {defaultsError}</ModalErrorText>
-                )}
-
-                <ModalActions>
-                  <TopBarButton type="button" onClick={closeDefaultsModal}>
-                    Cancel
-                  </TopBarButton>
-                  <TopBarButton
-                    type="button"
-                    onClick={saveDefaults}
-                    disabled={defaultsSaving}
-                  >
-                    {defaultsSaving ? "Saving..." : "Save defaults"}
-                  </TopBarButton>
-                </ModalActions>
-              </>
+          <HandoutsListContainer>
+            {currentUser && visibleHandouts.length === 0 && (
+              <EmptyStateCard>
+                <EmptyStateTitle>No handouts yet</EmptyStateTitle>
+                <EmptyStateText>
+                  Start by creating a diabetes discharge handout.
+                </EmptyStateText>
+                <HandoutsNewButton
+                  type="button"
+                  onClick={handleNewDiabetesHandout}
+                >
+                  <FiPlus size={14} />
+                  <span>New diabetes handout</span>
+                </HandoutsNewButton>
+              </EmptyStateCard>
             )}
-          </ModalCard>
-        </ModalOverlay>
+
+            {!currentUser && (
+              <EmptyStateCard>
+                <EmptyStateTitle>Sign in to manage handouts</EmptyStateTitle>
+                <EmptyStateText>
+                  Once signed in, you can create and save handouts for your
+                  cases.
+                </EmptyStateText>
+              </EmptyStateCard>
+            )}
+
+            {currentUser &&
+              visibleHandouts.length > 0 &&
+              visibleHandouts.map((h) => (
+                <HandoutRow
+                  key={h.id}
+                  type="button"
+                  onClick={() => navigate(`/ai/handouts/${h.id}`)}
+                >
+                  <FiFileText size={16} />
+                  <HandoutRowTexts>
+                    <HandoutRowTitle>
+                      {h.title || "Untitled handout"}
+                    </HandoutRowTitle>
+                    <HandoutRowMeta>
+                      {h.type === "diabetes_discharge"
+                        ? "Diabetes discharge"
+                        : h.type || "Unknown type"}
+                      {h.updatedAt && h.updatedAt.toDate && (
+                        <>
+                          {" "}
+                          •{" "}
+                          {h.updatedAt.toDate().toLocaleString(undefined, {
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </>
+                      )}
+                    </HandoutRowMeta>
+                  </HandoutRowTexts>
+                </HandoutRow>
+              ))}
+          </HandoutsListContainer>
+
+          {defaultsOpen && (
+            <ModalOverlay
+              role="dialog"
+              aria-modal="true"
+              onMouseDown={(e) => {
+                if (e.target === e.currentTarget) closeDefaultsModal();
+              }}
+            >
+              <ModalCard>
+                <ModalHeader>
+                  <ModalTitle>
+                    Defaults for diabetes discharge handouts
+                  </ModalTitle>
+                  <IconCloseButton type="button" onClick={closeDefaultsModal}>
+                    <FiX size={16} />
+                  </IconCloseButton>
+                </ModalHeader>
+
+                <ModalSubtext>
+                  These values will be used to prefill Section 1 for new
+                  diabetes discharge handouts.
+                </ModalSubtext>
+
+                {defaultsLoading ? (
+                  <ModalSubtext>Loading defaults...</ModalSubtext>
+                ) : (
+                  <>
+                    <SectionCard>
+                      <SectionTitle>Hospital information</SectionTitle>
+
+                      <FieldRow>
+                        <FieldLabel>Hospital name</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.hospitalName}
+                          onChange={(e) =>
+                            updateDefaultField("hospitalName", e.target.value)
+                          }
+                          placeholder="Hospital name"
+                        />
+                      </FieldRow>
+
+                      <FieldRow>
+                        <FieldLabel>Hospital address</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.hospitalAddress}
+                          onChange={(e) =>
+                            updateDefaultField(
+                              "hospitalAddress",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Street, city, state, ZIP"
+                        />
+                      </FieldRow>
+
+                      <FieldRow>
+                        <FieldLabel>Hospital phone number</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.hospitalPhone}
+                          onChange={(e) =>
+                            updateDefaultField("hospitalPhone", e.target.value)
+                          }
+                          placeholder="000-000-0000"
+                        />
+                      </FieldRow>
+
+                      <FieldRow>
+                        <FieldLabel>Default veterinarian name</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.attendingVetName || ""}
+                          onChange={(e) =>
+                            updateDefaultField(
+                              "attendingVetName",
+                              e.target.value
+                            )
+                          }
+                          placeholder="For example: Smith"
+                        />
+                      </FieldRow>
+
+                      <FieldRow>
+                        <FieldLabel>Emergency hospital name</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.erHospitalName}
+                          onChange={(e) =>
+                            updateDefaultField("erHospitalName", e.target.value)
+                          }
+                          placeholder="After-hours or ER hospital"
+                        />
+                      </FieldRow>
+
+                      <FieldRow style={{ marginBottom: 0 }}>
+                        <FieldLabel>Emergency hospital phone</FieldLabel>
+                        <FieldInput
+                          value={hospitalDefaults.erHospitalPhone}
+                          onChange={(e) =>
+                            updateDefaultField(
+                              "erHospitalPhone",
+                              e.target.value
+                            )
+                          }
+                          placeholder="000-000-0000"
+                        />
+                      </FieldRow>
+                    </SectionCard>
+
+                    {defaultsError && (
+                      <ModalErrorText>
+                        Save failed: {defaultsError}
+                      </ModalErrorText>
+                    )}
+
+                    <ModalActions>
+                      <TopBarButton type="button" onClick={closeDefaultsModal}>
+                        Cancel
+                      </TopBarButton>
+                      <TopBarButton
+                        type="button"
+                        onClick={saveDefaults}
+                        disabled={defaultsSaving}
+                      >
+                        {defaultsSaving ? "Saving..." : "Save defaults"}
+                      </TopBarButton>
+                    </ModalActions>
+                  </>
+                )}
+              </ModalCard>
+            </ModalOverlay>
+          )}
+        </>
       )}
     </HandoutsPageShell>
   );
@@ -489,7 +575,8 @@ export default function HandoutsPage() {
   );
 }
 
-// 2) (Optional) a small wrapper so the back button + title align nicely
+/* Layout bits */
+
 const HandoutsHeaderLeft = styled.div`
   display: flex;
   align-items: center;
@@ -635,23 +722,6 @@ const FieldRow = styled.div`
   margin-bottom: 8px;
 `;
 
-const InlineFieldRow = styled.div`
-  display: flex;
-  gap: 12px;
-  margin-bottom: 8px;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-  }
-`;
-
-const InlineField = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
 const FieldLabel = styled.label`
   font-size: 12px;
   color: #9ca3af;
@@ -677,7 +747,7 @@ const FieldInput = styled.input`
   }
 `;
 
-/* Styled components */
+/* Page shell */
 
 const HandoutsPageOuter = styled.div`
   min-height: 100vh;
@@ -800,6 +870,114 @@ const EmptyStateText = styled.p`
   margin: 0 0 8px;
 `;
 
+/* Template selection cards */
+
+const HandoutTypeGrid = styled.div`
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+`;
+
+const HandoutTypeCardBase = styled.button`
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  background: #020617;
+  border: 1px solid #1f2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 190px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease,
+    transform 0.12s ease, box-shadow 0.12s ease;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+  }
+`;
+
+const HandoutTypeCard = styled(HandoutTypeCardBase)`
+  &:hover {
+    background: #030712;
+    border-color: #2563eb;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.6);
+    transform: translateY(-1px);
+  }
+`;
+
+const HandoutTypeCardDisabled = styled(HandoutTypeCardBase)`
+  cursor: default;
+  opacity: 0.5;
+
+  &:hover {
+    background: #020617;
+    border-color: #1f2937;
+    box-shadow: none;
+    transform: none;
+  }
+`;
+
+const HandoutTypeIconCircle = styled.div`
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background: ${(p) => (p.$muted ? "#020617" : "rgba(37, 99, 235, 0.15)")};
+  color: ${(p) => (p.$muted ? "#6b7280" : "#bfdbfe")};
+  border: 1px solid ${(p) => (p.$muted ? "#374151" : "#1d4ed8")};
+`;
+
+const HandoutTypeTitle = styled.div`
+  font-size: 15px;
+  font-weight: 500;
+  color: #f9fafb;
+  margin-bottom: 6px;
+`;
+
+const HandoutTypeDescription = styled.p`
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0 0 10px;
+`;
+
+const HandoutTypeFooterRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const HandoutTypeBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(22, 163, 74, 0.16);
+  color: #bbf7d0;
+  border: 1px solid rgba(22, 163, 74, 0.6);
+`;
+
+const HandoutTypeBadgeMuted = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+`;
+
+/* Optional print styles kept from your original */
+
 const PreviewTopRow = styled.div`
   display: flex;
   align-items: center;
@@ -816,14 +994,12 @@ const PetOwnerPreviewFrame = styled.div`
 
 const PetOwnerPreviewPaper = styled.div`
   width: 100%;
-  max-width: 820px; /* print-like */
+  max-width: 820px;
   background: #ffffff;
   color: #111827;
   border-radius: 12px;
   padding: 28px 28px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-
-  /* Markdown typography */
   font-size: 16px;
   line-height: 1.65;
 
@@ -872,7 +1048,6 @@ const PetOwnerPreviewPaper = styled.div`
   }
 `;
 
-/* Print rules */
 const PrintStyles = styled.div`
   @media print {
     body {
@@ -883,7 +1058,6 @@ const PrintStyles = styled.div`
       display: none !important;
     }
 
-    /* Remove shadows and force paper width */
     ${PetOwnerPreviewPaper} {
       box-shadow: none !important;
       border-radius: 0 !important;
