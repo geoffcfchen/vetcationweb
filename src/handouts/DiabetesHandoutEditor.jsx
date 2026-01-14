@@ -28,6 +28,8 @@ import {
   buildDefaultHopeNote,
   DEFAULT_FELINE_REMISSION_NOTE,
   stripMarkdownToGreeting,
+  getPetPronouns,
+  resolveChoice,
 } from "./diabetesTextBuilders";
 import {
   buildFormFromDoc,
