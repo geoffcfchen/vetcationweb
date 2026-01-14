@@ -260,10 +260,10 @@ function HandoutsList({ currentUser }) {
   const handleGoBack = () => {
     // "Back" behavior with a safe fallback
     if (window.history.length > 1) {
-      navigate(-1);
+      navigate("/ai/library");
       return;
     }
-    navigate("/ai"); // change this fallback route if your parent page is different
+    navigate("/ai/library"); // change this fallback route if your parent page is different
   };
 
   useEffect(() => {

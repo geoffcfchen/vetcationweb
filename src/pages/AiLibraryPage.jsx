@@ -1162,6 +1162,7 @@ const TopRightUserShell = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px; /* NEW: space between Handouts chip and avatar */
 `;
 
 // Button that holds the avatar image
