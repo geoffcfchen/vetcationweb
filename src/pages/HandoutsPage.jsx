@@ -257,6 +257,15 @@ function HandoutsList({ currentUser }) {
     EMPTY_HOSPITAL_DEFAULTS
   );
 
+  const handleGoBack = () => {
+    // "Back" behavior with a safe fallback
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    navigate("/ai"); // change this fallback route if your parent page is different
+  };
+
   useEffect(() => {
     if (!currentUser) {
       setHandouts([]);
@@ -421,7 +430,15 @@ function HandoutsList({ currentUser }) {
   return (
     <HandoutsPageShell>
       <HandoutsHeaderRow>
-        <HandoutsTitle>Handouts</HandoutsTitle>
+        <HandoutsHeaderLeft>
+          {/* Reuse the same BackButton you already use in DiabetesHandoutEditor */}
+          <BackButton type="button" onClick={handleGoBack}>
+            <FiArrowLeft size={14} />
+            <span>Back</span>
+          </BackButton>
+
+          <HandoutsTitle>Handouts</HandoutsTitle>
+        </HandoutsHeaderLeft>
 
         <HeaderActions>
           <HandoutsNewButton
@@ -2760,6 +2777,14 @@ export default function HandoutsPage() {
     </HandoutsPageOuter>
   );
 }
+
+// 2) (Optional) a small wrapper so the back button + title align nicely
+const HandoutsHeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+`;
 
 const HeaderActions = styled.div`
   display: inline-flex;
