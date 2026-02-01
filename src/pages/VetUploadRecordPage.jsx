@@ -9,7 +9,7 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import { doc, getDoc } from "firebase/firestore";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { auth, firestore, storage } from "../lib/firebase";
 
@@ -314,6 +314,18 @@ function VetUploadRecordPage() {
       const storageRef = ref(storage, storagePath);
       await uploadBytes(storageRef, file);
 
+      // 1b) If this is an image, get its download URL so we can save it
+      let imageUrls = null;
+      if (mimeType && mimeType.startsWith("image/")) {
+        try {
+          const downloadUrl = await getDownloadURL(storageRef);
+          imageUrls = [downloadUrl];
+        } catch (urlErr) {
+          console.error("Failed to get download URL for image", urlErr);
+          // optional: keep going without imageUrls
+        }
+      }
+
       // 2) Call previewPetRecordSummary
       const fallbackEventDateIso = new Date().toISOString();
 
@@ -357,6 +369,7 @@ function VetUploadRecordPage() {
         storagePath,
         mimeType,
         mode: data.mode || "vet_upload",
+        imageUrls, // array for images, null for pdfs
       });
     } catch (err) {
       console.error("Send to AI error", err);
@@ -372,7 +385,7 @@ function VetUploadRecordPage() {
     try {
       setIsSaving(true);
       const invite = inviteState.invite;
-      const { storagePath, mimeType, mode } = uploadMeta;
+      const { storagePath, mimeType, mode, imageUrls } = uploadMeta;
 
       const resp = await fetch(
         `${FUNCTIONS_BASE_URL}/savePetRecordToTimeline`,
@@ -390,6 +403,7 @@ function VetUploadRecordPage() {
             fallbackEventDateIso: new Date().toISOString(),
             aiPreview,
             uploadedByUid: auth.currentUser?.uid || null,
+            imageUrls: imageUrls || null,
           }),
         }
       );
