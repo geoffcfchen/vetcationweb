@@ -252,9 +252,12 @@ function LoginPage() {
 
     try {
       const isSuccess = await signIn(email, password);
-      if (isSuccess) {
-        navigate("/ai/library");
-      } else {
+      // if (isSuccess) {
+      //   navigate("/ai/library");
+      // } else {
+      //   setLoginFailed(true);
+      // }
+      if (!isSuccess) {
         setLoginFailed(true);
       }
     } catch (error) {

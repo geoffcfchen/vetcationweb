@@ -53,7 +53,7 @@ export default function GoogleSignInButton() {
 
       // At this point Google showed the account chooser screen.
       // User picked an account and Firebase signed them in.
-      navigate("/ai/library");
+      // navigate("/ai/library");
     } catch (error) {
       // already logged and optionally alerted in signInWithGoogle
     } finally {

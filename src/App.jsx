@@ -40,6 +40,7 @@ import EmailVerificationPage from "./pages/EmailVerificationPage";
 import EmailRegisterPage from "./pages/EmailRegisterPage";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import HandoutsPage from "./pages/HandoutsPage";
+import VetUploadRecordPage from "./pages/VetUploadRecordPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -427,6 +428,7 @@ function App() {
           {/* <Route path="contributors" element={<ContributorsPage />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/pet-upload/:inviteId" element={<VetUploadRecordPage />} />
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect/" element={<RedirectPage />} />
         <Route path="/app/" element={<RedirectPage />} />
