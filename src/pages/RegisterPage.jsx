@@ -116,7 +116,7 @@ function RegisterPage() {
       <RegisterSection />
 
       {/* —— Map Section Shell (copy + legend + compliance link) —— */}
-      <MapShell>
+      {/* <MapShell>
         <Max>
           <Eyebrow>
             <IoLocationOutline aria-hidden="true" />
@@ -154,7 +154,7 @@ function RegisterPage() {
             details.
           </FinePrint>
         </Max>
-      </MapShell>
+      </MapShell> */}
 
       <Footer />
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />

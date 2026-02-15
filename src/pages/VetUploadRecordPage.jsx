@@ -190,10 +190,23 @@ const Small = styled.div`
   margin-top: 4px;
 `;
 
+const InlineLinkButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #2563eb;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
 function VetUploadRecordPage() {
   const { inviteId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const currentUser = auth.currentUser; // new line
 
   const [inviteState, setInviteState] = useState({
     status: "loading", // loading | not-found | expired | ok
@@ -210,15 +223,15 @@ function VetUploadRecordPage() {
   const [isSaving, setIsSaving] = useState(false);
 
   // Gate: if not logged in, send to login and set redirect
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (!user) {
-      const fullPath =
-        location.pathname + (location.search || "") + (location.hash || "");
-      sessionStorage.setItem("postAuthRedirectPath", fullPath);
-      navigate("/login", { replace: true });
-    }
-  }, [navigate, location]);
+  //   useEffect(() => {
+  //     const user = auth.currentUser;
+  //     if (!user) {
+  //       const fullPath =
+  //         location.pathname + (location.search || "") + (location.hash || "");
+  //       sessionStorage.setItem("postAuthRedirectPath", fullPath);
+  //       navigate("/login", { replace: true });
+  //     }
+  //   }, [navigate, location]);
 
   // Load invite document
   useEffect(() => {
@@ -430,6 +443,13 @@ function VetUploadRecordPage() {
     }
   }
 
+  const handleSignInClick = () => {
+    const fullPath =
+      location.pathname + (location.search || "") + (location.hash || "");
+    sessionStorage.setItem("postAuthRedirectPath", fullPath);
+    navigate("/login");
+  };
+
   const { status, invite, error } = inviteState;
 
   return (
@@ -475,6 +495,21 @@ function VetUploadRecordPage() {
               <FiCheckCircle />
               Linked to pet medical memory
             </StatusBadge>
+
+            {currentUser ? (
+              <Small>
+                Signed in as {currentUser.email || "your account"}. Uploads will
+                be linked to your profile.
+              </Small>
+            ) : (
+              <Small>
+                You can upload without an account. If you already use Vetcation,{" "}
+                <InlineLinkButton type="button" onClick={handleSignInClick}>
+                  sign in
+                </InlineLinkButton>{" "}
+                so this upload is linked to your clinic.
+              </Small>
+            )}
             <Text>
               Records uploaded here will be attached to the medical memory for{" "}
               <strong>{invite.petName || "this pet"}</strong>.

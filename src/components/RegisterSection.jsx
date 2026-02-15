@@ -91,7 +91,7 @@ function RegisterSection() {
   return (
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
-      <CTAGroup aria-label="Audience quick links">
+      {/* <CTAGroup aria-label="Audience quick links">
         <CTAButton
           onClick={() =>
             navigate("/telemedicine-info/clients/clientIntroToVetcation/")
@@ -134,12 +134,12 @@ function RegisterSection() {
           />
           Compliance
         </ComplianceButton>
-      </CTAGroup>
+      </CTAGroup> */}
 
       {/* Hero/content below */}
       <Feature
         heading="Vetcation"
-        text="The professional community where veterinarians and pet owners connect and build lasting relationships."
+        text="Create a Universal Medical Record to keep your pet safe and easy to share."
         // to="/telemedicine-info"
         qrCodeLink={qrCodeImage}
         image={{
