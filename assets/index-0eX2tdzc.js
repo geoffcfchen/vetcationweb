@@ -10960,6 +10960,7 @@ ${Br.join(`
   padding: 12px 12px 14px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
+  min-height: 120px; /* optional, keeps layout stable */
 `,SummaryTitle=pt.h2`
   margin: 0 0 6px;
   font-size: 14px;
@@ -10967,13 +10968,17 @@ ${Br.join(`
   color: #111827;
 `,SummaryLoadingRow=pt.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-top: 4px;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px 0 6px;
 `,SummaryLoadingText=pt.p`
   margin: 0;
   font-size: 13px;
   color: #6b7280;
+  text-align: center;
 `,SummaryErrorText=pt.p`
   margin: 6px 0 0;
   font-size: 13px;
