@@ -79,7 +79,7 @@ function PetSummarySharePage() {
 
     const t2 = setTimeout(() => {
       setLoadingPhase((prev) => (prev === 2 ? 3 : prev));
-    }, 13000);
+    }, 14000);
 
     // Cleanup if loading ends or component unmounts
     return () => {
