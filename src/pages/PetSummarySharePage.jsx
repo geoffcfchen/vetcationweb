@@ -25,7 +25,7 @@ import RawUploadRecordCard from "../components/RawUploadRecordCard";
 const FUNCTIONS_BASE_URL =
   "https://us-central1-vetcationapp.cloudfunctions.net";
 
-const MAX_LABELS_INLINE = 6;
+const MAX_LABELS_INLINE = 3;
 
 const formatLabelBadge = (labels) => {
   if (!Array.isArray(labels) || labels.length === 0) return "";
