@@ -37,6 +37,7 @@ const formatLabelBadge = (labels) => {
 
 function PetSummarySharePage() {
   const { shareId } = useParams();
+  const [loadingPhase, setLoadingPhase] = useState(0);
 
   // base page load (link validation, pet, records, pets wall)
   const [baseLoading, setBaseLoading] = useState(true);
@@ -60,6 +61,40 @@ function PetSummarySharePage() {
     itemIndex: null,
     sectionTitle: "",
   });
+
+  useEffect(() => {
+    // When we are not loading, or we already have a summary,
+    // reset and do not run any timers.
+    if (!summaryLoading || summary) {
+      setLoadingPhase(0);
+      return;
+    }
+
+    // Start at phase 1 as soon as we enter loading
+    setLoadingPhase(1);
+
+    const t1 = setTimeout(() => {
+      setLoadingPhase((prev) => (prev === 1 ? 2 : prev));
+    }, 7000);
+
+    const t2 = setTimeout(() => {
+      setLoadingPhase((prev) => (prev === 2 ? 3 : prev));
+    }, 13000);
+
+    // Cleanup if loading ends or component unmounts
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [summaryLoading, summary]);
+
+  const getLoadingMessage = () => {
+    if (loadingPhase === 1) return "Reading uploaded records...";
+    if (loadingPhase === 2) return "Building a one page summary...";
+    if (loadingPhase === 3) return "Generating the final report...";
+    // Fallback for the very first render, or if something resets
+    return "Preparing a one page summary from uploaded records...";
+  };
 
   useEffect(() => {
     const db = getFirestore();
@@ -721,8 +756,12 @@ function PetSummarySharePage() {
                     <SummaryLoadingRow>
                       <Spinner />
                       <SummaryLoadingText>
-                        Creating a one page summary from uploaded records...
+                        {getLoadingMessage()}
                       </SummaryLoadingText>
+                      <SummaryHintText>
+                        You can already review the original medical history on
+                        the right while this is preparing.
+                      </SummaryHintText>
                     </SummaryLoadingRow>
                   </SummaryShell>
                 )}
@@ -1031,9 +1070,9 @@ const SummaryLoadingRow = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
   margin-top: 8px;
-  padding: 12px 0 6px;
+  padding: 10px 4px 6px;
 `;
 
 const SummaryLoadingText = styled.p`
@@ -1043,6 +1082,12 @@ const SummaryLoadingText = styled.p`
   text-align: center;
 `;
 
+const SummaryHintText = styled.p`
+  margin: 0;
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+`;
 const SummaryErrorText = styled.p`
   margin: 6px 0 0;
   font-size: 13px;
