@@ -1016,6 +1016,7 @@ const SummaryShell = styled.section`
   padding: 12px 12px 14px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
+  min-height: 120px; /* optional, keeps layout stable */
 `;
 
 const SummaryTitle = styled.h2`
@@ -1027,15 +1028,19 @@ const SummaryTitle = styled.h2`
 
 const SummaryLoadingRow = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-top: 4px;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px 0 6px;
 `;
 
 const SummaryLoadingText = styled.p`
   margin: 0;
   font-size: 13px;
   color: #6b7280;
+  text-align: center;
 `;
 
 const SummaryErrorText = styled.p`
