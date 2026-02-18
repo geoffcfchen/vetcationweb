@@ -182,6 +182,7 @@ function PetSummarySharePage() {
   const hasAnyContent = useMemo(() => {
     if (!summary) return false;
     const keys = [
+      "ownerMainConcerns",
       "allergies",
       "currentMedications",
       "chronicProblems",
@@ -540,6 +541,10 @@ function PetSummarySharePage() {
                       </SummaryErrorText>
                     ) : (
                       <>
+                        {renderListSection(
+                          "What the owner is worried about",
+                          summary.ownerMainConcerns || []
+                        )}
                         {renderListSection(
                           "Allergies",
                           summary.allergies || []
@@ -1051,6 +1056,7 @@ const TimelineDotSmall = styled.div`
 
 const RecordContent = styled.div`
   flex: 1;
+  min-width: 0; /* allow flex item to shrink with its parent */
 `;
 
 const RecordDate = styled.div`

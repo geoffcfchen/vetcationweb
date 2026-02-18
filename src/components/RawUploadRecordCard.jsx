@@ -1,17 +1,18 @@
 // src/components/RawUploadRecordCard.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiFileText, FiImage, FiFile } from "react-icons/fi";
 import { MdCheckCircle, MdErrorOutline, MdAutorenew } from "react-icons/md";
 
-import { storage } from "../lib/firebase";
+import { storage, firestore } from "../lib/firebase";
 import { ref as storageRef, getDownloadURL } from "firebase/storage";
+import { doc, getDoc } from "firebase/firestore";
 
 function formatCreatedAt(ts) {
   if (!ts) return "";
 
   let date;
-  if (typeof ts.toDate === "function") {
+  if (typeof ts?.toDate === "function") {
     date = ts.toDate();
   } else if (ts instanceof Date) {
     date = ts;
@@ -92,8 +93,35 @@ function getFileIconComponent(mode) {
   return FiFile;
 }
 
+function getDisplayName(user) {
+  if (!user) return "";
+  return (
+    user.displayName ||
+    user.name ||
+    user.fullName ||
+    user.userName ||
+    user.username ||
+    (user.email ? user.email.split("@")[0] : "")
+  );
+}
+
+function getInitialsFromUser(user) {
+  const name = getDisplayName(user);
+  if (!name) return "?";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) {
+    return parts[0].charAt(0).toUpperCase();
+  }
+  return (
+    parts[0].charAt(0).toUpperCase() +
+    parts[parts.length - 1].charAt(0).toUpperCase()
+  );
+}
+
 export default function RawUploadRecordCard({ record }) {
   const [isOpening, setIsOpening] = useState(false);
+  const [uploader, setUploader] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
 
   const createdAtLabel = formatCreatedAt(record?.createdAt);
   const fileKind = getFileKind(record);
@@ -105,13 +133,83 @@ export default function RawUploadRecordCard({ record }) {
   const hasStoragePath =
     typeof record?.storagePath === "string" && record.storagePath.length > 0;
 
+  const uploaderUid =
+    record?.ownerUid ||
+    record?.uploaderUid ||
+    record?.createdByUid ||
+    record?.user?.uid ||
+    null;
+
+  // Load uploader profile (for avatar)
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadUploader() {
+      if (!uploaderUid) {
+        if (isMounted) setUploader(null);
+        return;
+      }
+
+      try {
+        const snap = await getDoc(doc(firestore, "customers", uploaderUid));
+        if (isMounted) {
+          if (snap.exists()) {
+            setUploader({ id: snap.id, ...snap.data() });
+          } else {
+            setUploader(null);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load uploader profile", err);
+        if (isMounted) setUploader(null);
+      }
+    }
+
+    loadUploader();
+    return () => {
+      isMounted = false;
+    };
+  }, [uploaderUid]);
+
+  const displayName = getDisplayName(uploader);
+
+  // Preload image URL for image mode so we can show big inline image
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadImageUrl() {
+      if (!hasStoragePath || record.mode !== "image") return;
+
+      try {
+        const ref = storageRef(storage, record.storagePath);
+        const url = await getDownloadURL(ref);
+        if (isMounted) {
+          setFileUrl(url);
+        }
+      } catch (err) {
+        console.error("Failed to fetch image URL", err);
+      }
+    }
+
+    loadImageUrl();
+    return () => {
+      isMounted = false;
+    };
+  }, [hasStoragePath, record.mode, record.storagePath]);
+
   const handleOpenFile = async () => {
     if (!hasStoragePath || isOpening) return;
 
     try {
       setIsOpening(true);
-      const ref = storageRef(storage, record.storagePath);
-      const url = await getDownloadURL(ref);
+      let url = fileUrl;
+
+      // If we do not have a cached URL yet (e.g. pdf), fetch it
+      if (!url) {
+        const ref = storageRef(storage, record.storagePath);
+        url = await getDownloadURL(ref);
+      }
+
       window.open(url, "_blank", "noopener,noreferrer");
     } catch (err) {
       console.error("Failed to open file from storage", err);
@@ -121,9 +219,33 @@ export default function RawUploadRecordCard({ record }) {
     }
   };
 
+  const isImage = record.mode === "image";
+
   return (
     <Card>
-      {createdAtLabel && <CreatedAt>{createdAtLabel}</CreatedAt>}
+      {/* Header: avatar + name + date */}
+      {uploader ? (
+        <HeaderRow>
+          <AvatarCircle>
+            {uploader.photoURL ? (
+              <AvatarImg
+                src={uploader.photoURL}
+                alt={displayName || "Uploader"}
+              />
+            ) : (
+              <AvatarInitials>{getInitialsFromUser(uploader)}</AvatarInitials>
+            )}
+          </AvatarCircle>
+          <HeaderTextCol>
+            {displayName && <UploaderName>{displayName}</UploaderName>}
+            {createdAtLabel && (
+              <CreatedAtInline>{createdAtLabel}</CreatedAtInline>
+            )}
+          </HeaderTextCol>
+        </HeaderRow>
+      ) : (
+        createdAtLabel && <CreatedAt>{createdAtLabel}</CreatedAt>
+      )}
 
       <TagRow>
         <Tag>{fileKind}</Tag>
@@ -137,28 +259,38 @@ export default function RawUploadRecordCard({ record }) {
 
       {record.ownerNote && <OwnerNote>{record.ownerNote}</OwnerNote>}
 
-      <FileCard
-        type={hasStoragePath ? "button" : "div"}
-        as={hasStoragePath ? "button" : "div"}
-        onClick={hasStoragePath ? handleOpenFile : undefined}
-        $clickable={hasStoragePath}
-        disabled={isOpening}
-      >
-        <FileIconCircle>
-          <FileIcon />
-        </FileIconCircle>
+      {/* For photos: big image block that is clickable */}
+      {isImage && hasStoragePath && fileUrl && (
+        <ImagePreviewWrapper onClick={handleOpenFile}>
+          <ImagePreview src={fileUrl} alt={fileName} />
+        </ImagePreviewWrapper>
+      )}
 
-        <FileMeta>
-          <FileName title={fileName}>{fileName}</FileName>
-          {mime && <FileMime>{mime}</FileMime>}
-        </FileMeta>
+      {/* For non image files: keep the compact file card */}
+      {!isImage && (
+        <FileCard
+          as={hasStoragePath ? "button" : "div"}
+          type={hasStoragePath ? "button" : undefined}
+          onClick={hasStoragePath ? handleOpenFile : undefined}
+          $clickable={hasStoragePath}
+          disabled={isOpening}
+        >
+          <FileIconCircle>
+            <FileIcon />
+          </FileIconCircle>
 
-        {isOpening && <SmallSpinner />}
-      </FileCard>
+          <FileMeta>
+            <FileName title={fileName}>{fileName}</FileName>
+            {mime && <FileMime>{mime}</FileMime>}
+          </FileMeta>
+
+          {isOpening && <SmallSpinner />}
+        </FileCard>
+      )}
 
       {record.summaryText && (
         <SummaryBlock>
-          <SummaryLabel>Summary</SummaryLabel>
+          <SummaryLabel>Pet Sensei Summary</SummaryLabel>
           <SummaryText>{record.summaryText}</SummaryText>
         </SummaryBlock>
       )}
@@ -169,11 +301,68 @@ export default function RawUploadRecordCard({ record }) {
 /* styled components */
 
 const Card = styled.article`
+  max-width: 100%;
+  box-sizing: border-box;
+
   border-radius: 12px;
   padding: 8px 10px 10px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+`;
+
+/* Header */
+
+const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+`;
+
+const AvatarCircle = styled.div`
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AvatarImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const AvatarInitials = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+`;
+
+const HeaderTextCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+`;
+
+const UploaderName = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const CreatedAtInline = styled.div`
+  font-size: 11px;
+  color: #6b7280;
 `;
 
 const CreatedAt = styled.div`
@@ -182,12 +371,15 @@ const CreatedAt = styled.div`
   margin-bottom: 4px;
 `;
 
+/* Tag row */
+
 const TagRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 6px;
   flex-wrap: wrap;
+  max-width: 100%;
 `;
 
 const Tag = styled.span`
@@ -208,6 +400,7 @@ const StatusPill = styled.span`
   font-size: 11px;
   border-width: 1px;
   border-style: solid;
+  max-width: 100%;
 
   ${({ $status }) => {
     if ($status === "ready") {
@@ -240,6 +433,12 @@ const StatusPill = styled.span`
 
   .status-icon {
     font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -248,9 +447,44 @@ const OwnerNote = styled.p`
   font-size: 13px;
   color: #111827;
   line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 `;
 
+/* Big image preview for photos */
+
+const ImagePreviewWrapper = styled.button`
+  display: block;
+  padding: 0;
+  margin: 0 0 8px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+  }
+`;
+
+const ImagePreview = styled.img`
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 260px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+`;
+
+/* File card for non-image files */
+
 const FileCard = styled.div`
+  max-width: 100%;
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
   gap: 10px;
@@ -317,6 +551,9 @@ const FileMime = styled.div`
   font-size: 11px;
   color: #6b7280;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const SmallSpinner = styled.div`
@@ -335,6 +572,8 @@ const SmallSpinner = styled.div`
   }
 `;
 
+/* Summary */
+
 const SummaryBlock = styled.div`
   margin-top: 4px;
 `;
@@ -351,4 +590,6 @@ const SummaryText = styled.p`
   font-size: 13px;
   color: #111827;
   line-height: 1.45;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 `;
