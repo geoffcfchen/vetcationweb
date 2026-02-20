@@ -81,6 +81,10 @@ function PetSummarySharePage() {
       setLoadingPhase((prev) => (prev === 2 ? 3 : prev));
     }, 14000);
 
+    const t3 = setTimeout(() => {
+      setLoadingPhase((prev) => (prev === 3 ? 4 : prev));
+    }, 21000);
+
     // Cleanup if loading ends or component unmounts
     return () => {
       clearTimeout(t1);
@@ -92,6 +96,8 @@ function PetSummarySharePage() {
     if (loadingPhase === 1) return "Reading uploaded records...";
     if (loadingPhase === 2) return "Building a one page summary...";
     if (loadingPhase === 3) return "Generating the final report...";
+    if (loadingPhase > 3)
+      return "This is taking longer than expected. Thanks for your patience!";
     // Fallback for the very first render, or if something resets
     return "Preparing a one page summary from uploaded records...";
   };
