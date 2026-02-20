@@ -89,6 +89,7 @@ function PetSummarySharePage() {
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, [summaryLoading, summary]);
 
