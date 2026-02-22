@@ -139,7 +139,7 @@ function RegisterSection() {
       {/* Hero/content below */}
       <Feature
         heading="Vetcation"
-        text="Create a Universal Medical Record to keep your pet safe and easy to share."
+        text="Protect your pet. Pull their medical records into one place. Share in 1 click"
         // to="/telemedicine-info"
         qrCodeLink={qrCodeImage}
         image={{
@@ -148,8 +148,22 @@ function RegisterSection() {
           png: wordpress1Png,
           png2x: wordpress1Png,
         }}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1491.webp?alt=media&token=3ec63a73-7b12-4f0c-9c4a-fe74644257b5"
       />
+      {/* <Feature
+        heading="Vetcation"
+        text="Protect your pet. Pull their medical records into one place. Share in 1 click"
+        // to="/telemedicine-info"
+        // qrCodeLink={qrCodeImage}
+        linkText={"learn more"}
+        image={{
+          webp: wordpress1Webp,
+          webp2x: wordpress1Webp,
+          png: wordpress1Png,
+          png2x: wordpress1Png,
+        }}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1491.webp?alt=media&token=3ec63a73-7b12-4f0c-9c4a-fe74644257b5"
+      /> */}
     </FeaturesContainer>
   );
 }
