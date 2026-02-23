@@ -25,7 +25,7 @@ import RawUploadRecordCard from "../components/RawUploadRecordCard";
 const FUNCTIONS_BASE_URL =
   "https://us-central1-vetcationapp.cloudfunctions.net";
 
-const MAX_LABELS_INLINE = 3;
+const MAX_LABELS_INLINE = 2;
 
 const formatLabelBadge = (labels) => {
   if (!Array.isArray(labels) || labels.length === 0) return "";
@@ -33,6 +33,58 @@ const formatLabelBadge = (labels) => {
     return labels.join(", ");
   }
   return `${labels.slice(0, MAX_LABELS_INLINE).join(", ")}, ...`;
+};
+
+const parseDateAndText = (item) => {
+  if (typeof item !== "string") {
+    return { date: "Date unknown", text: "" };
+  }
+
+  // Look for "something: rest of text"
+  const firstColon = item.indexOf(":");
+  if (firstColon > -1) {
+    const datePart = item.slice(0, firstColon).trim();
+    const textPart = item.slice(firstColon + 1).trim();
+    if (datePart.length > 0 && textPart.length > 0) {
+      return { date: datePart, text: textPart };
+    }
+  }
+
+  return {
+    date: "Date unknown",
+    text: item.trim(),
+  };
+};
+
+const normalizeCachedSummary = (s) => {
+  if (!s || typeof s !== "object") return s;
+
+  const sb = s.sourcesBySection;
+  if (!sb || typeof sb !== "object") return s;
+
+  const converted = {};
+  Object.keys(sb).forEach((key) => {
+    const list = sb[key];
+
+    // Packed Firestore format: [{labels:[...]}, ...]
+    if (
+      Array.isArray(list) &&
+      list.length > 0 &&
+      list[0] &&
+      typeof list[0] === "object" &&
+      Array.isArray(list[0].labels)
+    ) {
+      converted[key] = list.map((row) =>
+        Array.isArray(row.labels) ? row.labels : []
+      );
+      return;
+    }
+
+    // Already in the UI format: string[][]
+    converted[key] = list;
+  });
+
+  return { ...s, sourcesBySection: converted };
 };
 
 function PetSummarySharePage() {
@@ -175,12 +227,16 @@ function PetSummarySharePage() {
         const petRef = doc(db, "pets", petId);
         const recordsCol = collection(db, "pets", petId, "records");
         const petsCol = collection(db, "pets");
+        const summaryRef = doc(db, "pets", petId, "aiVetSummaries", "vetView");
 
-        const [petSnap, recordsSnap, petsSnap] = await Promise.all([
-          getDoc(petRef),
-          getDocs(query(recordsCol, orderBy("createdAt", "desc"), limit(50))),
-          getDocs(query(petsCol, limit(40))),
-        ]);
+        const [petSnap, recordsSnap, petsSnap, summarySnap] = await Promise.all(
+          [
+            getDoc(petRef),
+            getDocs(query(recordsCol, orderBy("createdAt", "desc"), limit(50))),
+            getDocs(query(petsCol, limit(40))),
+            getDoc(summaryRef),
+          ]
+        );
 
         if (petSnap.exists()) {
           setPet({ id: petSnap.id, ...petSnap.data() });
@@ -199,6 +255,14 @@ function PetSummarySharePage() {
             ...d.data(),
           }))
         );
+
+        // If we have a cached summary, show it immediately
+        if (summarySnap && summarySnap.exists()) {
+          const sData = summarySnap.data() || {};
+          if (sData.summary) {
+            setSummary(normalizeCachedSummary(sData.summary));
+          }
+        }
 
         // Firestore data is ready: show header, original history, other pets
         setBaseLoading(false);
@@ -224,14 +288,13 @@ function PetSummarySharePage() {
               (respData && respData.error) ||
               "The summary could not be generated right now.";
             setSummaryError(msg);
-            setSummary(null);
           } else {
             setSummary(respData.summary);
+            setSummaryError(null);
           }
         } catch (summaryErr) {
           console.error("Error fetching summary in shared page", summaryErr);
           setSummaryError("The summary could not be generated right now.");
-          setSummary(null);
         } finally {
           setSummaryLoading(false);
         }
@@ -383,6 +446,62 @@ function PetSummarySharePage() {
             );
           })}
         </BulletList>
+      </Section>
+    );
+  };
+
+  const renderTableSection = (sectionKey, title, items) => {
+    if (!items || !items.length) return null;
+
+    const hasSourceMetadata =
+      summary && summary.sourcesBySection && summary.sourceSnippets;
+
+    return (
+      <Section>
+        <SectionHeader>
+          <SectionIcon>
+            <FiFileText />
+          </SectionIcon>
+          <SectionTitle>{title}</SectionTitle>
+        </SectionHeader>
+
+        <MiniTable>
+          <thead>
+            <tr>
+              <MiniTh>Date</MiniTh>
+              <MiniTh>Details</MiniTh>
+              <MiniThSources>Sources</MiniThSources>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, idx) => {
+              const { date, text } = parseDateAndText(item);
+              const labels =
+                hasSourceMetadata && summary.sourcesBySection[sectionKey]?.[idx]
+                  ? summary.sourcesBySection[sectionKey][idx]
+                  : [];
+              const hasSources =
+                hasSourceMetadata && Array.isArray(labels) && labels.length > 0;
+
+              return (
+                <tr key={`${sectionKey}-row-${idx}`}>
+                  <MiniTdDate>{date}</MiniTdDate>
+                  <MiniTdText>{text}</MiniTdText>
+                  <MiniTdSources>
+                    {hasSources && (
+                      <SourcesBadge
+                        type="button"
+                        onClick={() => openSourcesFor(sectionKey, title, idx)}
+                      >
+                        [{formatLabelBadge(labels)}]
+                      </SourcesBadge>
+                    )}
+                  </MiniTdSources>
+                </tr>
+              );
+            })}
+          </tbody>
+        </MiniTable>
       </Section>
     );
   };
@@ -780,9 +899,16 @@ function PetSummarySharePage() {
                   </SummaryShell>
                 )}
 
-                {!summaryLoading && summary && (
+                {summary && (
                   <SummaryShell>
                     <SummaryTitle>Vet ready clinical summary</SummaryTitle>
+
+                    {summaryLoading && (
+                      <SummaryRefreshTag>
+                        Updating this summary from the latest uploaded
+                        records...
+                      </SummaryRefreshTag>
+                    )}
 
                     {!hasAnyContent ? (
                       <SummaryErrorText>
@@ -796,34 +922,38 @@ function PetSummarySharePage() {
                           "What the owner is worried about",
                           summary.ownerMainConcerns || []
                         )}
-                        {renderListSection(
-                          "allergies",
-                          "Allergies",
-                          summary.allergies || []
-                        )}
-                        {renderListSection(
-                          "currentMedications",
-                          "Current medications",
-                          summary.currentMedications || []
-                        )}
+                        {renderVisits()}
+
                         {renderListSection(
                           "chronicProblems",
                           "Chronic or active problems",
                           summary.chronicProblems || []
                         )}
+
                         {renderListSection(
+                          "currentMedications",
+                          "Current medications",
+                          summary.currentMedications || []
+                        )}
+
+                        {renderTableSection(
                           "surgeriesAndProcedures",
                           "Surgeries and procedures",
                           summary.surgeriesAndProcedures || []
                         )}
-                        {renderListSection(
+
+                        {renderTableSection(
                           "recentLabsOrImaging",
                           "Recent labs or imaging",
                           summary.recentLabsOrImaging || [],
                           true
                         )}
 
-                        {renderVisits()}
+                        {renderListSection(
+                          "allergies",
+                          "Allergies",
+                          summary.allergies || []
+                        )}
 
                         {summary.redFlagsForVetToDoubleCheck &&
                           summary.redFlagsForVetToDoubleCheck.length > 0 && (
@@ -1056,6 +1186,12 @@ const ColumnRight = styled.div`
 `;
 
 /* Summary shell */
+
+const SummaryRefreshTag = styled.p`
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: #6b7280;
+`;
 
 const SummaryShell = styled.section`
   border-radius: 16px;
@@ -1470,15 +1606,18 @@ const SourcesBadge = styled.button`
   font-size: 11px;
   cursor: pointer;
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
 
   &:hover {
     background: #dbeafe;
   }
 `;
-
 const SourcesModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
@@ -1634,4 +1773,56 @@ const TimelineHeaderRow = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+`;
+
+const MiniTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+  font-size: 12px;
+
+  thead tr {
+    border-bottom: 1px solid #e5e7eb;
+  }
+`;
+
+const MiniTh = styled.th`
+  text-align: left;
+  padding: 4px 4px;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 11px;
+`;
+
+const MiniThSources = styled.th`
+  text-align: right;
+  padding: 4px 4px;
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 11px;
+  width: 110px;
+  max-width: 110px;
+  white-space: nowrap;
+`;
+
+const MiniTdDate = styled.td`
+  padding: 4px 4px;
+  white-space: nowrap;
+  color: #6b7280;
+  vertical-align: top;
+`;
+
+const MiniTdText = styled.td`
+  padding: 4px 4px;
+  color: #111827;
+  vertical-align: top;
+`;
+
+const MiniTdSources = styled.td`
+  padding: 4px 4px;
+  text-align: right;
+  vertical-align: top;
+  width: 110px;
+  max-width: 110px;
+  white-space: nowrap;
 `;
