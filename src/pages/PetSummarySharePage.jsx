@@ -943,7 +943,7 @@ function PetSummarySharePage() {
                       {summaryLoading && (
                         <SummaryUpdatingPill>
                           <InlineSpinner />
-                          Updating (usually ~15s) · {refreshElapsedSec}s
+                          Updating (usually ~20s) · {refreshElapsedSec}s
                         </SummaryUpdatingPill>
                       )}
                     </SummaryMetaRow>
