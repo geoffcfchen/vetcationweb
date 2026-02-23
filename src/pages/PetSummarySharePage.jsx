@@ -1,6 +1,6 @@
 // src/pages/PetSummarySharePage.jsx
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -114,6 +114,28 @@ function PetSummarySharePage() {
     sectionTitle: "",
   });
 
+  const [summaryUpdatedAt, setSummaryUpdatedAt] = useState(null); // Date | null
+  const refreshStartRef = useRef(null);
+  const [refreshTick, setRefreshTick] = useState(0);
+
+  useEffect(() => {
+    // Only run a 1s timer when we are refreshing while already showing a summary
+    if (!summaryLoading || !summary) {
+      refreshStartRef.current = null;
+      return;
+    }
+
+    if (!refreshStartRef.current) {
+      refreshStartRef.current = Date.now();
+    }
+
+    const id = setInterval(() => {
+      setRefreshTick((t) => t + 1);
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, [summaryLoading, summary]);
+
   useEffect(() => {
     // When we are not loading, or we already have a summary,
     // reset and do not run any timers.
@@ -154,6 +176,10 @@ function PetSummarySharePage() {
     // Fallback for the very first render, or if something resets
     return "Preparing a one page summary from uploaded records...";
   };
+
+  const refreshElapsedSec = refreshStartRef.current
+    ? Math.floor((Date.now() - refreshStartRef.current) / 1000)
+    : 0;
 
   useEffect(() => {
     const db = getFirestore();
@@ -262,6 +288,9 @@ function PetSummarySharePage() {
           if (sData.summary) {
             setSummary(normalizeCachedSummary(sData.summary));
           }
+          if (sData.updatedAt && typeof sData.updatedAt.toDate === "function") {
+            setSummaryUpdatedAt(sData.updatedAt.toDate());
+          }
         }
 
         // Firestore data is ready: show header, original history, other pets
@@ -291,6 +320,7 @@ function PetSummarySharePage() {
           } else {
             setSummary(respData.summary);
             setSummaryError(null);
+            setSummaryUpdatedAt(new Date());
           }
         } catch (summaryErr) {
           console.error("Error fetching summary in shared page", summaryErr);
@@ -903,12 +933,20 @@ function PetSummarySharePage() {
                   <SummaryShell>
                     <SummaryTitle>Vet ready clinical summary</SummaryTitle>
 
-                    {summaryLoading && (
-                      <SummaryRefreshTag>
-                        Updating this summary from the latest uploaded
-                        records...
-                      </SummaryRefreshTag>
-                    )}
+                    <SummaryMetaRow>
+                      <SummaryMetaText>
+                        {summaryUpdatedAt
+                          ? `Last updated ${summaryUpdatedAt.toLocaleString()}`
+                          : "Last updated: unknown"}
+                      </SummaryMetaText>
+
+                      {summaryLoading && (
+                        <SummaryUpdatingPill>
+                          <InlineSpinner />
+                          Updating (usually ~15s) · {refreshElapsedSec}s
+                        </SummaryUpdatingPill>
+                      )}
+                    </SummaryMetaRow>
 
                     {!hasAnyContent ? (
                       <SummaryErrorText>
@@ -1825,4 +1863,39 @@ const MiniTdSources = styled.td`
   width: 110px;
   max-width: 110px;
   white-space: nowrap;
+`;
+
+const SummaryMetaRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 6px;
+`;
+
+const SummaryMetaText = styled.p`
+  margin: 0;
+  font-size: 11px;
+  color: #6b7280;
+`;
+
+const SummaryUpdatingPill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #3730a3;
+  background: #eef2ff;
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+`;
+
+const InlineSpinner = styled.span`
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(55, 48, 163, 0.2);
+  border-top-color: rgba(55, 48, 163, 0.9);
+  animation: spin 0.8s linear infinite;
 `;
