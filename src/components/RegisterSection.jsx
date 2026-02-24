@@ -91,7 +91,7 @@ function RegisterSection() {
   return (
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
-      {/* <CTAGroup aria-label="Audience quick links">
+      <CTAGroup aria-label="Audience quick links">
         <CTAButton
           onClick={() =>
             navigate("/telemedicine-info/clients/clientIntroToVetcation/")
@@ -134,21 +134,73 @@ function RegisterSection() {
           />
           Compliance
         </ComplianceButton>
-      </CTAGroup> */}
+      </CTAGroup>
 
       {/* Hero/content below */}
       <Feature
-        heading="Vetcation"
-        text="Protect your pet. Pull their medical records into one place. Share in 1 click"
+        heading="Universal pet medical records"
+        text="Vetcation pulls all scattered medical records into one secure place and transforms them into a structured, vet-ready summary before every visit. Share it in 1 click."
         // to="/telemedicine-info"
-        qrCodeLink={qrCodeImage}
-        image={{
-          webp: wordpress1Webp,
-          webp2x: wordpress1Webp,
-          png: wordpress1Png,
-          png2x: wordpress1Png,
-        }}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1491.webp?alt=media&token=3ec63a73-7b12-4f0c-9c4a-fe74644257b5"
+        // qrCodeLink={qrCodeImage}
+        // image={{
+        //   webp: wordpress1Webp,
+        //   webp2x: wordpress1Webp,
+        //   png: wordpress1Png,
+        //   png2x: wordpress1Png,
+        // }}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1513.webp?alt=media&token=2bc403b8-ece0-42c0-8d96-85c4ec6c3e2d"
+        headerFontSize={50}
+      />
+
+      <Feature
+        heading="Ask questions, get answers from your vets"
+        text="Send direct messages to your vets and get answers. Build long-term relationships with vets who understand your pet's history."
+        // to="/telemedicine-info"
+        // qrCodeLink={qrCodeImage}
+        // image={{
+        //   webp: wordpress1Webp,
+        //   webp2x: wordpress1Webp,
+        //   png: wordpress1Png,
+        //   png2x: wordpress1Png,
+        // }}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
+        headerFontSize={45}
+      />
+
+      <Feature
+        heading="Get medications"
+        text="Start with chat so a vet can understand your pet’s needs. When treatment makes sense, you can schedule a video visit and have medications or refills delivered to your home, where allowed."
+        // to="/telemedicine-info"
+        // qrCodeLink={qrCodeImage}
+        // image={{
+        //   webp: wordpress1Webp,
+        //   webp2x: wordpress1Webp,
+        //   png: wordpress1Png,
+        //   png2x: wordpress1Png,
+        // }}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee"
+        headerFontSize={45}
+      />
+      <Feature
+        heading="The professional community"
+        text="Connect with pet owners and veterinary professionals, share experiences, and learn from real-world questions and answers in a supportive, education-focused community."
+        // to="/telemedicine-info"
+        // qrCodeLink={qrCodeImage}
+        // image={{
+        //   webp: wordpress1Webp,
+        //   webp2x: wordpress1Webp,
+        //   png: wordpress1Png,
+        //   png2x: wordpress1Png,
+        // }}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad"
+        headerFontSize={45}
+      />
+      <Feature
+        heading="The Radar"
+        text="Explore transparent, anonymous clinic insights. Compare real prices, see what pet owners experienced, and understand whether a clinic is privately owned or corporate-owned. Radar helps you choose the right clinic with confidence, not guesswork."
+        // to="/radar"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1514.webp?alt=media&token=3f9f3f91-e706-4931-9d84-b28f0b7d1823"
+        headerFontSize={45}
       />
       {/* <Feature
         heading="Vetcation"

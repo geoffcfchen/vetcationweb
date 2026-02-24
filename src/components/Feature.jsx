@@ -181,6 +181,7 @@ export default function Feature({
   videoSrc,
   imageSrc,
   to, // ⬅️ NEW: route to navigate on click (e.g., "/telemedicine-info")
+  headerFontSize = 30,
 }) {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
@@ -223,7 +224,7 @@ export default function Feature({
 
         <h3
           style={{
-            fontSize: 60,
+            fontSize: headerFontSize,
             color: "#000000",
             fontFamily: "inherit",
             marginBottom: 0,

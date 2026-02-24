@@ -7,6 +7,11 @@ import Header from "../components/Header";
 import ClinicsMapSection from "../components/ClinicsMapSection";
 import { IoLocationOutline, IoShieldCheckmarkSharp } from "react-icons/io5";
 import LoginModal from "../components/LoginModal";
+import HeroSection from "../components/HeroSection";
+import TestimonialsSection from "../components/TestimonialsSection";
+import GetStartedCallout from "../components/GetStartedCallout";
+import StayConnected from "../components/StayConnected";
+import qrCodeImage from "../images/qrcode6.png";
 
 const MapShell = styled.section`
   background: #f8fafc;
@@ -113,6 +118,7 @@ function RegisterPage() {
   return (
     <>
       <Header onLoginClick={() => setShowLogin(true)} />
+      <HeroSection />
       <RegisterSection />
 
       {/* —— Map Section Shell (copy + legend + compliance link) —— */}
@@ -155,6 +161,8 @@ function RegisterPage() {
           </FinePrint>
         </Max>
       </MapShell> */}
+      <TestimonialsSection />
+      <GetStartedCallout qrCodeLink={qrCodeImage} />
 
       <Footer />
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />

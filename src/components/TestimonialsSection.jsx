@@ -1,95 +1,196 @@
+// src/components/TestimonialsSection.jsx
 import React from "react";
 import styled from "styled-components";
-
-// Importing images and sprite
-import testimonialImage from "../images/testimonial2.jpeg";
-import sprite from "../images/sprite.svg"; // Ensure this contains the correct icons
 import { motion } from "framer-motion";
+import sprite from "../images/sprite.svg";
 
-// Define styled components
-const TestimonialsContainer = styled(motion.section)`
+const SectionShell = styled.section`
+  background: #f3f4f6;
+  padding: 5rem 0 6rem;
+`;
+
+const TestimonialsContainer = styled(motion.div)`
   max-width: 1140px;
   margin: 0 auto;
-  padding: 5rem 2rem;
-  background: #fff; // Assuming a white background for the section
-  text-align: center; // Centering the heading
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1); // Adding a shadow for a card-like effect
-  border-radius: 20px; // Rounded corners for the container
-  margin-bottom: 10rem;
+  padding: 0 2rem;
 `;
 
-const TestimonialBlock = styled.div`
+const Heading = styled.h2`
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.75rem;
+`;
+
+const Subheading = styled.p`
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0 0 2.5rem;
+`;
+
+const CardsRow = styled.div`
   display: flex;
-  align-items: center; // Align items vertically
-  gap: 2rem;
-  margin-top: 2rem; // Space from the heading
+  gap: 1.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e5e7eb;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+  }
 `;
 
-const TestimonialImage = styled.img`
-  width: 50%; // Adjust based on the actual size needed
-  border-radius: 8px; // Assuming there's a slight rounding on the image
-`;
+const Card = styled(motion.figure)`
+  flex: 0 0 520px;
+  max-width: 520px;
+  margin: 0;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.25rem 2.5rem 2rem;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+  scroll-snap-align: start;
+  position: relative;
 
-const TestimonialContent = styled.div`
-  flex: 1; // Take up remaining space
-  padding: 2rem;
-  background: #f9f9f9; // Light grey background for the text block
-  border-radius: 8px; // Consistent border rounding
-  position: relative; // For absolute positioning of the quote icon
+  @media (max-width: 768px) {
+    flex: 0 0 86vw;
+    max-width: 86vw;
+    padding: 1.75rem 1.5rem 1.5rem;
+  }
 `;
 
 const QuoteIcon = styled.div`
   position: absolute;
-  top: -50px; // Adjust as needed to position outside the block */
-  right: 500px; // Right align the icon
-  background: #f56a6a; // Icon background color
-  color: white; // Icon color
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  top: 1.5rem;
+  right: 2.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #f97316;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  color: #ffffff;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 768px) {
+    right: 1.5rem;
+  }
 `;
 
 const Quote = styled.blockquote`
-  font-size: 1.5rem;
-  font-style: italic;
-  color: var(--color-body-darker);
-  margin: 0;
+  margin: 0 0 1.25rem;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111827;
 `;
 
-const Author = styled.figcaption`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--color-headings);
-  margin-top: 1rem; // Space between quote and author
+const Author = styled.div`
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
 `;
+
+const Meta = styled.div`
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 0.15rem;
+`;
+
+const testimonials = [
+  {
+    quote:
+      "I like that vets can review everything in chat first, then decide if we should book a video visit for meds. It feels responsible, not rushed.",
+    author: "Monica T.",
+    meta: "Senior dog mom, Long Beach",
+  },
+  {
+    quote:
+      "I used to bring a folder of papers to every appointment. Now I just send my Vetcation link and my vet already knows our history before we start talking.",
+    author: "Sarah P.",
+    meta: "Dog parent, Pasadena",
+  },
+
+  {
+    quote:
+      "Having one shared record between our primary, ER, and cardiologist means fewer repeated tests and fewer things slipping through the cracks.",
+    author: "Dr. Tsou",
+    meta: "Small animal vet, Los Angeles",
+  },
+  {
+    quote:
+      "Vetcation helps me see the full medical history, including what other doctors have already tried. That is incredibly helpful, because medical records are usually scattered across different clinics.",
+    author: "Dr. Chen",
+    meta: "Small animal vet, Los Angeles",
+  },
+
+  {
+    quote:
+      "Being able to message a vet who can see my dog’s timeline makes follow ups much easier. I do not have to repeat the story every single time.",
+    author: "Kevin L.",
+    meta: "Dog owner, Bay Area",
+  },
+  {
+    quote:
+      "I love that I can upload PDFs, lab reports, and even phone photos. It all ends up in one clean view instead of ten different apps and email chains.",
+    author: "Hannah W.",
+    meta: "Cat and dog parent",
+  },
+];
 
 const TestimonialsSection = () => {
   return (
-    <TestimonialsContainer>
-      <h2>What our Customers are Saying</h2>
-      <TestimonialBlock>
-        <TestimonialImage
-          src={testimonialImage}
-          alt="A happy, smiling customer"
-        />
-        <TestimonialContent>
-          <QuoteIcon>
-            <svg width="30" height="30">
-              // Adjust size as necessary
-              <use xlinkHref={`${sprite}#quotes`} />
-            </svg>
-          </QuoteIcon>
-          <Quote>
-            "Vetcation really helps me better use of my time and connect with my
-            clients."
-          </Quote>
-          <Author>Dr. Lee - Sawtelle Clinic</Author>
-        </TestimonialContent>
-      </TestimonialBlock>
-    </TestimonialsContainer>
+    <SectionShell>
+      <TestimonialsContainer
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <Heading>What people are saying</Heading>
+        <Subheading>
+          How universal medical records and telemedicine tools change daily
+          practice for veterinarians.
+        </Subheading>
+
+        <CardsRow>
+          {testimonials.map((t, idx) => (
+            <Card
+              key={idx}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+            >
+              {/* <QuoteIcon>
+                <svg aria-hidden="true">
+                  <use xlinkHref={`${sprite}#quotes`} />
+                </svg>
+              </QuoteIcon> */}
+
+              <Quote>“{t.quote}”</Quote>
+              <Author>{t.author}</Author>
+              <Meta>{t.meta}</Meta>
+            </Card>
+          ))}
+        </CardsRow>
+      </TestimonialsContainer>
+    </SectionShell>
   );
 };
 

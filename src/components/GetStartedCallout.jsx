@@ -1,56 +1,84 @@
+// src/components/GetStartedCallout.jsx
 import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-width: 100%; // Adjusting to full width
-  margin: 0;
+  max-width: 1140px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
 `;
 
 const Callout = styled.div`
-  padding: 1rem 2rem; // Adjust padding to make it slimmer
-  border-radius: 8px; // Smooth out the corners
-  background: #00aaff; // Set the specific shade of blue
-  color: #fff;
+  padding: 1.5rem 0;
+  border-radius: 16px;
+  background: transparent;
+  color: #0f172a;
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center; // Vertically align items
+  grid-template-columns: minmax(0, 2fr) auto;
+  align-items: center;
+  gap: 1.5rem;
 `;
 
 const CalloutContent = styled.div`
-  text-align: center;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const CalloutHeading = styled.h2`
-  margin-top: 0;
-  font-size: 2rem; // Reduce font size for better fit
-  font-weight: bold; // Ensure the text is bold
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  font-weight: 700;
 `;
 
-const Button = styled.a`
-  border-radius: 30px; // More pronounced rounded edges
-  background: #ffffff; // White background for the button
-  color: #00aaff; // Text color matches the callout background
-  font-size: 1.2rem; // Adjust font size for button text
-  font-weight: bold;
-  padding: 1rem 2rem; // Padding to make the button larger
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a subtle shadow for 3D effect
-  transition: background-color 0.3s, transform 0.2s; // Smooth transition for hover effects
+const CalloutSubheading = styled.p`
+  margin: 0;
+  font-size: 1rem;
+  color: #4b5563;
+`;
 
-  &:hover {
-    background-color: #e0f7ff; // Lighter blue on hover
-    transform: translateY(-2px); // Lift the button on hover
+const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (max-width: 768px) {
+    align-items: center;
   }
 `;
-const GetStartedCallout = () => {
+
+const QRCodeImage = styled.img`
+  width: 500px;
+  height: auto;
+  max-width: 100%;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 240px;
+  }
+`;
+
+const GetStartedCallout = ({ qrCodeLink }) => {
   return (
     <Container>
       <Callout>
         <CalloutContent>
-          <CalloutHeading>Ready to Get Started?</CalloutHeading>
+          <CalloutHeading>Ready to get started?</CalloutHeading>
+          <CalloutSubheading>
+            Scan the QR code to download the Vetcation app.
+          </CalloutSubheading>
         </CalloutContent>
-        <Button href="/register">Get Started</Button>
+
+        <RightSide>
+          {qrCodeLink && (
+            <QRCodeImage
+              src={qrCodeLink}
+              alt="Scan to download the Vetcation app"
+            />
+          )}
+        </RightSide>
       </Callout>
     </Container>
   );
