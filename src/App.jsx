@@ -104,7 +104,7 @@ function SeoForPath() {
   const defaultMeta = {
     title: `${BRAND.full} | Universal Medical Record for Pets`,
     description:
-      "Keep your pet’s health organized in one place. Pull records from any clinic, share instantly, message your vet when you need help, and get meds through telehealth when appropriate.",
+      "Keep your pet’s health organized in one place. Pull records from any clinic, share instantly, message your vet when you need help, and get meds when appropriate.",
   };
 
   // Map concrete paths to titles/descriptions.

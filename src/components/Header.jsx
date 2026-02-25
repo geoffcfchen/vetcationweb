@@ -117,6 +117,24 @@ const BurgerWrap = styled.div`
   }
 `;
 
+// add this styled component
+const BrandWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+`;
+
+const LogoSubText = styled.span`
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+
+  @media (max-width: ${breakpoint}px) {
+    font-size: 11px;
+  }
+`;
+
 function Header({ onLoginClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(() =>
@@ -176,8 +194,8 @@ function Header({ onLoginClick }) {
   return (
     <HeaderContainer>
       <LogoContainer onClick={() => navigate("/")}>
-        <Logo src={logo} alt="Vetcation Logo" />
-        <LogoText>Vetcation</LogoText>
+        <Logo src={logo} alt="MyPet Health logo" />
+        <LogoText>MyPet Health</LogoText>
       </LogoContainer>
 
       {/* Desktop nav */}

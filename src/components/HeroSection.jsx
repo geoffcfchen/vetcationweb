@@ -22,10 +22,8 @@ const StyledHeroSection = styled.section`
   background-color: #000;
   color: #ffffff;
 
-  /* 👇 add this */
-  min-height: 80vh; /* try 80vh or 90vh for almost full-screen */
-
-  display: flex; /* center content vertically */
+  min-height: 80vh;
+  display: flex;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -52,11 +50,24 @@ const Content = styled.div`
   width: 100%;
 `;
 
+const BrandKicker = styled.div`
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: ${breakpoint}px) {
+    text-align: left;
+  }
+`;
+
 const HeroHeader = styled.h1`
   color: #ffffff;
   margin-bottom: 1rem;
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.1;
 
   @media (max-width: 1022px) {
@@ -135,17 +146,17 @@ function HeroSection() {
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
             <Col md={7} lg={6}>
-              <HeroHeader>Vetcation</HeroHeader>
+              <BrandKicker>by Vetcation</BrandKicker>
+              <HeroHeader>MyPet Health</HeroHeader>
               <HeroTagline>
-                Vetcation helps you pull and organize your pet’s scattered
-                medical records into one place, so you and your vet can see the
-                full picture in seconds and make informed decisions together.
+                Keep your pet’s health organized in one place. Pull records from
+                any clinic and share in one click, message your vet when you
+                need help, and get meds when appropriate.
               </HeroTagline>
+
               <ButtonsRow>
                 {/* <PrimaryButton href="/register">Sign up now</PrimaryButton> */}
-                {/* <SecondaryButton href="/demo">
-                  Book a walk through
-                </SecondaryButton> */}
+                {/* <SecondaryButton href="/demo">Book a walk through</SecondaryButton> */}
               </ButtonsRow>
             </Col>
           </Row>
