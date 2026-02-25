@@ -84,6 +84,14 @@ const PrintStyles = createGlobalStyle`
 const HOME_DEFAULT =
   topNavData.find((i) => i.id === "home")?.defaultDocId || "introToVetcation";
 
+// Add near the top of App.jsx (above SeoForPath)
+const BRAND = {
+  company: "Vetcation",
+  product: "MyPet Health",
+  full: "MyPet Health by Vetcation",
+  domain: "https://vetcation.com",
+};
+
 /** --- SEO helper that sets <title>, <meta description>, and canonical per path --- */
 function SeoForPath() {
   const { pathname } = useLocation();
@@ -93,26 +101,31 @@ function SeoForPath() {
     pathname.endsWith("/") ? pathname : pathname + "/"
   }`;
 
+  const defaultMeta = {
+    title: `${BRAND.full} | Universal Medical Record for Pets`,
+    description:
+      "Keep your pet’s health organized in one place. Pull records from any clinic, share instantly, message your vet when you need help, and get meds through telehealth when appropriate.",
+  };
+
   // Map concrete paths to titles/descriptions.
   // Start with your priority pages; you can add more anytime.
   const metaMap = {
     "/": {
-      title: "Vetcation — The professional veterinary community",
-      description:
-        "Vetcation is the professional community for veterinarians and pet owners, with compliant telemedicine tools to build lasting relationships.",
+      title: `${BRAND.full} | Universal Medical Record for Pets`,
+      description: defaultMeta.description,
     },
     "/support/": {
-      title: "Support | Vetcation",
+      title: `Support | ${BRAND.full}`,
       description:
         "Get help with your Vetcation account, billing, scheduling, video calls, and compliance questions.",
     },
     "/privacy-policy/": {
-      title: "Privacy Policy | Vetcation",
+      title: `Privacy Policy | ${BRAND.full}`,
       description:
         "Learn how Vetcation collects, uses, and protects your personal information.",
     },
     "/SMSTerms/": {
-      title: "SMS Terms | Vetcation",
+      title: `SMS Terms | ${BRAND.full}`,
       description: "Read Vetcation’s SMS program terms and conditions.",
     },
 
@@ -230,13 +243,20 @@ function SeoForPath() {
     description:
       "Telemedicine and community platform for veterinary professionals.",
   };
-  const meta = metaMap[key] || metaMap[pathname] || fallback;
+  const meta =
+    metaMap[canonical.replace(BRAND.domain, "")] ||
+    metaMap[pathname] ||
+    defaultMeta;
 
   return (
     <Helmet>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
       <link rel="canonical" href={canonical} />
+      {/* Optional but recommended */}
+      <meta property="og:title" content={meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:url" content={canonical} />
     </Helmet>
   );
 }
