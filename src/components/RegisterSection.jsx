@@ -88,6 +88,9 @@ const ComplianceButton = styled(CTAButton)`
 function RegisterSection() {
   const navigate = useNavigate();
 
+  const PRODUCT_NAME = "MyPet Health";
+  const BRAND_FULL = "MyPet Health by Vetcation";
+
   return (
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
@@ -139,7 +142,7 @@ function RegisterSection() {
       {/* Hero/content below */}
       <Feature
         heading="Universal pet medical records"
-        text="Vetcation pulls all scattered medical records into one secure place and transforms them into a structured, vet-ready summary before every visit. Share it in 1 click."
+        text={`${PRODUCT_NAME} pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet-ready timeline. Share it in one click.`}
         // to="/telemedicine-info"
         // qrCodeLink={qrCodeImage}
         // image={{
@@ -153,8 +156,8 @@ function RegisterSection() {
       />
 
       <Feature
-        heading="Ask questions, get answers from your vets"
-        text="Send direct messages to your vets and get answers. Build long-term relationships with vets who understand your pet's history."
+        heading="Message your vet"
+        text={`Message your vet when you need help, and keep everything in one place so they can quickly understand your pet’s history and what other vets have already tried.`}
         // to="/telemedicine-info"
         // qrCodeLink={qrCodeImage}
         // image={{
@@ -169,7 +172,7 @@ function RegisterSection() {
 
       <Feature
         heading="Get medications"
-        text="Start with chat so a vet can understand your pet’s needs. When treatment makes sense, you can schedule a video visit and have medications or refills delivered to your home, where allowed."
+        text="Start with messaging so your vet can understand what’s going on. When treatment makes sense, you can schedule a video visit and get medications or refills delivered, where allowed."
         // to="/telemedicine-info"
         // qrCodeLink={qrCodeImage}
         // image={{
