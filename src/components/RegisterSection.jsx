@@ -143,15 +143,9 @@ function RegisterSection() {
       <Feature
         heading="Universal pet medical records"
         text={`${PRODUCT_NAME} pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet-ready timeline. Share it in one click.`}
-        // to="/telemedicine-info"
-        // qrCodeLink={qrCodeImage}
-        // image={{
-        //   webp: wordpress1Webp,
-        //   webp2x: wordpress1Webp,
-        //   png: wordpress1Png,
-        //   png2x: wordpress1Png,
-        // }}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1513.webp?alt=media&token=2bc403b8-ece0-42c0-8d96-85c4ec6c3e2d"
+        linkText={"learn more"}
+        linkHref={/universal-pet-medical-records/}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
         headerFontSize={50}
       />
 

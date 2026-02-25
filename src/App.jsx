@@ -42,6 +42,7 @@ import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import HandoutsPage from "./pages/HandoutsPage";
 import VetUploadRecordPage from "./pages/VetUploadRecordPage";
 import PetSummarySharePage from "./pages/PetSummarySharePage";
+import UniversalRecordsPage from "./pages/UniversalRecordsPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -405,6 +406,10 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
+        <Route
+          path="/universal-pet-medical-records/"
+          element={<UniversalRecordsPage />}
+        />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
         <Route path="/ai/library/*" element={<AiLibraryPage />} />
         <Route path="/ai/handouts/*" element={<HandoutsPage />} />
