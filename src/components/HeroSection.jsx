@@ -1,7 +1,7 @@
 // src/components/HeroSection.jsx
 import React from "react";
 import styled from "styled-components";
-import heroImage from "../images/banner4.png"; // update path if needed
+import heroImage from "../images/banner4.webp"; // update path if needed
 import {
   Container,
   Row,
