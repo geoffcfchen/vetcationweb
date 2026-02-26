@@ -245,12 +245,7 @@ function SeoForPath() {
   };
 
   // Normalize the key (we want trailing slash in keys)
-  const key = pathname.endsWith("/") ? pathname : pathname + "/";
-  const fallback = {
-    title: "Vetcation",
-    description:
-      "Telemedicine and community platform for veterinary professionals.",
-  };
+
   const meta =
     metaMap[canonical.replace(BRAND.domain, "")] ||
     metaMap[pathname] ||
