@@ -134,6 +134,12 @@ const ScreenshotImage = styled.img`
   height: auto;
 `;
 
+const StepsWrapper = styled.section`
+  max-width: 1140px;
+  margin: 3rem auto 0;
+  padding: 0 20px;
+`;
+
 function UniversalRecordsPage() {
   return (
     <>
@@ -155,17 +161,40 @@ function UniversalRecordsPage() {
 
         <ContentSection>
           {/* Reuse your Feature layout at the top of this page */}
-          <FeatureWrapper>
+          {/* <FeatureWrapper>
             <Feature
               heading="Universal pet medical records"
-              text="Vetcation pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet ready timeline. Share it in one click before any visit."
-              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
+              text="MyPet Health pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet ready timeline. Share it in one click before any visit."
+              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1534.webp?alt=media&token=531293bb-381f-4090-afdf-08c3742ed450"
               headerFontSize={40}
             />
-          </FeatureWrapper>
+          </FeatureWrapper> */}
+
+          <StepsWrapper>
+            <Feature
+              heading="Step 1 · Pull your pet’s records into MyPet Health"
+              text="Upload PDFs and photos from any clinic, ER, shelter, or specialist, or send a secure link to your vets and clinics to request medical records. Everything lands in one secure place instead of being scattered across email and apps."
+              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1536.webp?alt=media&token=f2086851-3879-4607-acf4-98f7f6ac4733"
+              headerFontSize={32}
+            />
+
+            <Feature
+              heading="Step 2 · MyPet Health understands and organizes your medical records"
+              text="MyPet Health reads visit dates, problems, treatments, labs, and imaging so it understands your pet’s history and turns it into a clear, vet ready timeline you can scroll in seconds."
+              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1538.webp?alt=media&token=a90dfbad-68d9-4d11-b692-6689ad087941"
+              headerFontSize={32}
+            />
+
+            <Feature
+              heading="Step 3 · Share one link before any visit or telemedicine call"
+              text="Before an in person or telemedicine visit, send your MyPet Health link so the vet can review the summary and history ahead of time and focus the appointment on decisions, not paperwork."
+              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1539.webp?alt=media&token=871f676e-cb05-4bdf-9186-96191dced74e"
+              headerFontSize={32}
+            />
+          </StepsWrapper>
 
           {/* Owner and vet benefits */}
-          <TwoColumn>
+          {/* <TwoColumn>
             <ColumnCard>
               <ColumnTitle>For pet owners</ColumnTitle>
               <ColumnText>
@@ -210,13 +239,13 @@ function UniversalRecordsPage() {
                 </li>
               </BulletList>
             </ColumnCard>
-          </TwoColumn>
+          </TwoColumn> */}
 
           {/* Big full width summary screenshot */}
           <ScreenshotSection>
             <ScreenshotShell>
               <ScreenshotHeading>
-                What the vet summary looks like
+                What the MyPet Health vet summary looks like in laptop
               </ScreenshotHeading>
               <ScreenshotText>
                 Vetcation turns scattered records into a structured clinical

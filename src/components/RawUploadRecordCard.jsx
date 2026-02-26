@@ -2,7 +2,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiFileText, FiImage, FiFile } from "react-icons/fi";
-import { MdCheckCircle, MdErrorOutline, MdAutorenew } from "react-icons/md";
+import {
+  MdCheckCircle,
+  MdErrorOutline,
+  MdAutorenew,
+  MdVisibilityOff,
+  MdCloudUpload, // NEW
+} from "react-icons/md";
 
 import { storage, firestore } from "../lib/firebase";
 import { ref as storageRef, getDownloadURL } from "firebase/storage";
@@ -118,6 +124,53 @@ function getInitialsFromUser(user) {
   );
 }
 
+// NEW: match the RN anonymous color logic
+function getAnonColorFromUid(uid) {
+  const palette = [
+    "#0f766e", // teal-700
+    "#2563eb", // blue-600
+    "#7c3aed", // violet-600
+    "#db2777", // rose-600
+    "#ea580c", // orange-600
+    "#16a34a", // green-600
+    "#b91c1c", // red-700
+    "#854d0e", // amber-800
+  ];
+
+  if (!uid) {
+    return palette[0];
+  }
+
+  let hash = 0;
+  const str = String(uid);
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  const index = hash % palette.length;
+  return palette[index];
+}
+
+// NEW: mirror RN buildAnonymousLabel semantics
+function buildAnonymousLabelFromUid(uid) {
+  if (!uid) return "Anonymous";
+
+  const uidStr = String(uid);
+  const digitsOnly = uidStr.replace(/\D/g, "");
+  if (digitsOnly.length >= 3) {
+    // const suffix = digitsOnly.slice(-3);
+    // return `Anonymous ${suffix}`;
+    return "Anonymous";
+  }
+
+  let hash = 0;
+  for (let i = 0; i < uidStr.length; i++) {
+    hash = (hash * 31 + uidStr.charCodeAt(i)) >>> 0;
+  }
+  const suffix = (hash % 1000).toString().padStart(3, "0");
+  // return `Anonymous ${suffix}`;
+  return "Anonymous";
+}
+
 export default function RawUploadRecordCard({ record }) {
   const [isOpening, setIsOpening] = useState(false);
   const [uploader, setUploader] = useState(null);
@@ -133,14 +186,23 @@ export default function RawUploadRecordCard({ record }) {
   const hasStoragePath =
     typeof record?.storagePath === "string" && record.storagePath.length > 0;
 
-  const uploaderUid =
-    record?.ownerUid ||
-    record?.uploaderUid ||
-    record?.createdByUid ||
-    record?.user?.uid ||
-    null;
+  const uploaderUid = record?.user?.uid || null;
+  const ownerUid = record?.ownerUid || null;
 
-  // Load uploader profile (for avatar)
+  // Instead of "anonymous", think of it as an unlinked/external upload
+  const isExternalUpload = !uploaderUid && !!ownerUid;
+
+  const externalLabel = isExternalUpload ? "Uploaded via secure link" : null;
+  const externalColor = isExternalUpload ? getAnonColorFromUid(ownerUid) : null;
+
+  // NEW: when no uploader uid but owner uid exists, show anonymous header
+  const isAnonymousOwner = !uploaderUid && !!ownerUid;
+  const anonymousLabel = isAnonymousOwner
+    ? buildAnonymousLabelFromUid(ownerUid)
+    : null;
+  const anonColor = isAnonymousOwner ? getAnonColorFromUid(ownerUid) : null;
+
+  // Load uploader profile (for avatar) only if actual uploader uid exists
   useEffect(() => {
     let isMounted = true;
 
@@ -204,7 +266,7 @@ export default function RawUploadRecordCard({ record }) {
       setIsOpening(true);
       let url = fileUrl;
 
-      // If we do not have a cached URL yet (e.g. pdf), fetch it
+      // If we do not have a cached URL yet (for example pdf), fetch it
       if (!url) {
         const ref = storageRef(storage, record.storagePath);
         url = await getDownloadURL(ref);
@@ -224,7 +286,22 @@ export default function RawUploadRecordCard({ record }) {
   return (
     <Card>
       {/* Header: avatar + name + date */}
-      {uploader ? (
+      {isExternalUpload ? (
+        <HeaderRow>
+          <AvatarCircle style={{ background: externalColor || "#e5e7eb" }}>
+            <MdCloudUpload
+              style={{ color: "#f9fafb", fontSize: 16 }}
+              aria-label="Uploaded via secure link"
+            />
+          </AvatarCircle>
+          <HeaderTextCol>
+            <UploaderName>{externalLabel}</UploaderName>
+            {createdAtLabel && (
+              <CreatedAtInline>{createdAtLabel}</CreatedAtInline>
+            )}
+          </HeaderTextCol>
+        </HeaderRow>
+      ) : uploader ? (
         <HeaderRow>
           <AvatarCircle>
             {uploader.photoURL ? (
