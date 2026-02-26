@@ -152,8 +152,8 @@ function UniversalRecordsPage() {
             <HeroEyebrow>Universal pet medical records</HeroEyebrow>
             <HeroTitle>See your pet’s full story in one place</HeroTitle>
             <HeroSubtitle>
-              Vetcation pulls together scattered PDFs, lab results, imaging, and
-              visit notes so every vet can see the full picture in seconds,
+              MyPet Health pulls together scattered PDFs, lab results, imaging,
+              and visit notes so every vet can see the full picture in seconds,
               especially in emergencies.
             </HeroSubtitle>
           </Max>
@@ -245,16 +245,16 @@ function UniversalRecordsPage() {
           <ScreenshotSection>
             <ScreenshotShell>
               <ScreenshotHeading>
-                What the MyPet Health vet summary looks like in laptop
+                What the MyPet Health vet summary link looks like in laptop
               </ScreenshotHeading>
               <ScreenshotText>
-                Vetcation turns scattered records into a structured clinical
+                MyPet Health turns scattered records into a structured clinical
                 timeline and a clear summary, so every vet can see key problems,
                 treatments, and milestones at a glance.
               </ScreenshotText>
               <ScreenshotFrame>
                 <ScreenshotImage
-                  src="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
+                  src="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
                   alt="Example universal medical record summary view in Vetcation"
                 />
               </ScreenshotFrame>
