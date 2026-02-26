@@ -103,6 +103,44 @@ const FeatureContent = styled(motion.div)`
   }
 `;
 
+const BodyText = styled.p`
+  color: var(--color-body);
+  font-size: 28px;
+  margin-top: 5px;
+  line-height: 1.2;
+  margin-bottom: 0;
+
+  a {
+    color: inherit;
+    font-weight: 800;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    padding-bottom: 1px;
+  }
+
+  a:hover {
+    border-bottom-color: rgba(0, 0, 0, 0.7);
+  }
+
+  a:focus-visible {
+    outline: 2px solid rgba(0, 0, 0, 0.35);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+`;
+
+const CtaLink = styled.a`
+  color: red;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin-top: 12px;
+`;
+
 const IconContainer = styled.span`
   background: #f3f9fa;
   width: 64px;
@@ -233,20 +271,11 @@ export default function Feature({
           {heading}
         </h3>
 
-        <p
-          style={{
-            fontSize: 28,
-            marginTop: 5,
-            lineHeight: 1.2,
-            fontFamily: "inherit",
-          }}
-        >
-          {text}
-        </p>
+        <BodyText>{text}</BodyText>
 
         {/* If we have a specific linkText button, make it route with SPA navigation */}
         {linkText && (
-          <a
+          <CtaLink
             href={to || linkHref || "#"}
             onClick={(e) => {
               if (to) {
@@ -256,13 +285,6 @@ export default function Feature({
             }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            style={{
-              fontSize: "15px",
-              color: "red",
-              display: "inline-flex",
-              alignItems: "center",
-              textDecoration: "none",
-            }}
           >
             {linkText}
             <FaArrowRight
@@ -272,7 +294,7 @@ export default function Feature({
                 transform: hover ? "translateX(5px)" : "translateX(0)",
               }}
             />
-          </a>
+          </CtaLink>
         )}
 
         {qrCodeLink && (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdExpandMore, MdChevronRight } from "react-icons/md";
 import styled from "styled-components";
+import { Link } from "react-router-dom"; // add this at top
 
 const FooterContainer = styled.footer`
   background: #232323;
@@ -122,11 +123,28 @@ const FooterSection = ({ title, links }) => {
       </Header>
       <Content $isOpen={isOpen}>
         <LinkList>
-          {links.map((link, index) => (
-            <LinkItem key={index}>
-              <a href={link.url}>{link.text}</a>
-            </LinkItem>
-          ))}
+          {links.map((link, index) => {
+            const isExternal =
+              link.external ||
+              link.url.startsWith("http") ||
+              link.url.startsWith("mailto:");
+
+            return (
+              <LinkItem key={index}>
+                {isExternal ? (
+                  <a
+                    href={link.url}
+                    target={link.url.startsWith("http") ? "_blank" : undefined}
+                    rel={link.url.startsWith("http") ? "noreferrer" : undefined}
+                  >
+                    {link.text}
+                  </a>
+                ) : (
+                  <Link to={link.url}>{link.text}</Link>
+                )}
+              </LinkItem>
+            );
+          })}
         </LinkList>
       </Content>
     </Section>
@@ -180,6 +198,11 @@ const Footer = () => {
     {
       title: "Company",
       links: [
+        { text: "MyPet Health", url: "/mypet-health/" }, // add this
+        {
+          text: "Universal Pet Medical Records",
+          url: "/universal-pet-medical-records/",
+        }, // optional
         {
           text: "Our Contributors",
           url: "/telemedicine-info/contributors/ourContributors/",

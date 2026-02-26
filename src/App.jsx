@@ -43,6 +43,7 @@ import HandoutsPage from "./pages/HandoutsPage";
 import VetUploadRecordPage from "./pages/VetUploadRecordPage";
 import PetSummarySharePage from "./pages/PetSummarySharePage";
 import UniversalRecordsPage from "./pages/UniversalRecordsPage";
+import MyPetHealthPage from "./pages/MyPetHealthPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -115,96 +116,101 @@ function SeoForPath() {
       title: `${BRAND.full} | Universal Medical Record for Pets`,
       description: defaultMeta.description,
     },
+    "/mypet-health/": {
+      title: `MyPet Health by Vetcation | Official Site`,
+      description: defaultMeta.description,
+    },
     "/support/": {
       title: `Support | ${BRAND.full}`,
       description:
-        "Get help with your Vetcation account, billing, scheduling, video calls, and compliance questions.",
+        "Get help with your MyPet Health account, billing, scheduling, video calls, and compliance questions.",
     },
     "/privacy-policy/": {
       title: `Privacy Policy | ${BRAND.full}`,
       description:
-        "Learn how Vetcation collects, uses, and protects your personal information.",
+        "Learn how MyPet Health collects, uses, and protects your personal information.",
     },
     "/SMSTerms/": {
       title: `SMS Terms | ${BRAND.full}`,
-      description: "Read Vetcation’s SMS program terms and conditions.",
+      description: "Read MyPet Health’s SMS program terms and conditions.",
     },
 
     // HOME (vets) key pages
     "/telemedicine-info/home/introToVetcation/": {
-      title: "Introduction for Veterinarians | Vetcation Telemedicine",
+      title: "Introduction for Veterinarians | MyPet Health Telemedicine",
       description:
-        "How Vetcation helps California-licensed veterinarians launch a virtual clinic and build lasting client relationships.",
+        "How MyPet Health helps California-licensed veterinarians launch a virtual clinic and build lasting client relationships.",
     },
     "/telemedicine-info/home/VirtualClinic/": {
-      title: "Virtual Clinic — How It Works | Vetcation",
+      title: "Virtual Clinic — How It Works | MyPet Health",
       description:
         "Provide telemedicine consults under your professional profile, keep ownership of clients and records, and collaborate with clinics.",
     },
     "/telemedicine-info/home/scheduleOverview/": {
-      title: "Scheduling Overview — Availability & Minimum Notice | Vetcation",
+      title:
+        "Scheduling Overview — Availability & Minimum Notice | MyPet Health",
       description:
         "Manage your availability, minimum notice times, and pauses to control your virtual clinic workflow.",
     },
     "/telemedicine-info/home/joinVideoCall/": {
-      title: "Join a Video Call — Setup & Tips | Vetcation",
+      title: "Join a Video Call — Setup & Tips | MyPet Health",
       description:
-        "How to join video consults, device setup tips, and call features inside Vetcation.",
+        "How to join video consults, device setup tips, and call features inside MyPet Health.",
     },
     "/telemedicine-info/home/InquiryBasedMessagerOverView/": {
-      title: "Inquiry-Based Messenger Overview | Vetcation",
+      title: "Inquiry-Based Messenger Overview | MyPet Health",
       description:
         "Use Vetssenger for structured follow-ups, asynchronous Q&A, and inquiry-based workflows.",
     },
     "/telemedicine-info/home/MedicalHistoryOverview/": {
-      title: "Medical History Overview — Records & Notes | Vetcation",
+      title: "Medical History Overview — Records & Notes | MyPet Health",
       description:
         "Capture, review, and share visit notes and summaries; maintain audit-ready documentation.",
     },
     "/telemedicine-info/home/CommunityMarketing/": {
-      title: "Community & Marketing — Grow Your Practice | Vetcation",
+      title: "Community & Marketing — Grow Your Practice | MyPet Health",
       description:
         "Best practices to build trust, community presence, and recurring relationships with pet owners.",
     },
     "/telemedicine-info/home/partnerWithClinic/": {
-      title: "Partner with a Clinic — Collaboration Model | Vetcation",
+      title: "Partner with a Clinic — Collaboration Model | MyPet Health",
       description:
         "How vets collaborate with clinics to expand capacity, escalate in-person care, and align responsibilities.",
     },
 
     // Compliance pages (home)
     "/telemedicine-info/compliance/Bill1399/": {
-      title: "AB 1399 FAQ — California Telemedicine for Vets | Vetcation",
+      title: "AB 1399 FAQ — California Telemedicine for Vets | MyPet Health",
       description:
         "Understand California AB 1399 telemedicine rules for veterinarians, including VCPR and documentation.",
     },
     "/telemedicine-info/compliance/VCPR/": {
-      title: "VCPR — Establishment & Requirements | Vetcation",
+      title: "VCPR — Establishment & Requirements | MyPet Health",
       description:
-        "Learn how VCPR applies to telemedicine and how Vetcation supports compliant workflows.",
+        "Learn how VCPR applies to telemedicine and how MyPet Health supports compliant workflows.",
     },
     "/telemedicine-info/compliance/PrescriptionLimits/": {
-      title: "Prescription Limits in Telemedicine | Vetcation",
+      title: "Prescription Limits in Telemedicine | MyPet Health",
       description:
         "Guidance on prescribing within telemedicine parameters and documentation best practices.",
     },
     "/telemedicine-info/compliance/PrivacyConfidentiality/": {
-      title: "Privacy & Confidentiality | Vetcation",
+      title: "Privacy & Confidentiality | MyPet Health",
       description:
-        "How Vetcation protects client privacy and supports confidentiality in virtual care.",
+        "How MyPet Health protects client privacy and supports confidentiality in virtual care.",
     },
     "/telemedicine-info/compliance/RacehorseCHRBRestrictions/": {
-      title: "Racehorse & CHRB Restrictions | Vetcation",
+      title: "Racehorse & CHRB Restrictions | MyPet Health",
       description:
         "Key restrictions and considerations for racehorse telemedicine under CHRB rules.",
     },
     "/telemedicine-info/compliance/RecordKeepingDocumentation/": {
-      title: "Record-Keeping & Documentation | Vetcation",
+      title: "Record-Keeping & Documentation | MyPet Health",
       description:
         "Audit-ready documentation, visit notes, and data retention practices for telemedicine.",
     },
     "/telemedicine-info/compliance/MiscellaneousClarifications/": {
-      title: "Miscellaneous Clarifications | Vetcation",
+      title: "Miscellaneous Clarifications | MyPet Health",
       description:
         "Additional compliance clarifications and edge cases for California telemedicine.",
     },
@@ -212,28 +218,29 @@ function SeoForPath() {
     // Clinics
     "/telemedicine-info/clinics/clinicIntroToVetcation/": {
       title:
-        "Introduction for Clinics — Hospital-Branded Virtual Branch | Vetcation",
+        "Introduction for Clinics — Hospital-Branded Virtual Branch | MyPet Health",
       description:
         "Launch a hospital-branded virtual branch with trusted relief veterinarians; expand capacity without adding payroll.",
     },
     "/telemedicine-info/clinics/VirtualBranch/": {
-      title: "Virtual Branch — Setup & Operations | Vetcation",
+      title: "Virtual Branch — Setup & Operations | MyPet Health",
       description:
         "How clinics configure the virtual branch, approve providers, and integrate with in-person workflows.",
     },
 
     // Corporations
     "/telemedicine-info/corporations/corpIntroToVetcation/": {
-      title: "Introduction for Corporate Veterinary Groups | Vetcation",
+      title: "Introduction for Corporate Veterinary Groups | MyPet Health",
       description:
         "Launch a hospital-branded virtual network across multiple hospitals with clear economics and compliance.",
     },
 
     // Contributors
     "/telemedicine-info/contributors/ourContributors/": {
-      title: "Our Contributors — Vets, Technicians, and Advisors | Vetcation",
+      title:
+        "Our Contributors — Vets, Technicians, and Advisors | MyPet Health",
       description:
-        "Meet the professionals who contribute to the Vetcation knowledge-sharing community.",
+        "Meet the professionals who contribute to the MyPet Health knowledge-sharing community.",
     },
   };
 
@@ -406,6 +413,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
+        <Route path="/mypet-health/" element={<MyPetHealthPage />} />
         <Route
           path="/universal-pet-medical-records/"
           element={<UniversalRecordsPage />}

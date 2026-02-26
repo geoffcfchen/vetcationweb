@@ -8,6 +8,7 @@ import {
   Col,
   Button as BootstrapButton,
 } from "react-bootstrap";
+import { Link as RouterLink } from "react-router-dom"; // add this
 
 const breakpoint = 800;
 
@@ -138,6 +139,21 @@ const SecondaryButton = styled(BootstrapButton).attrs({
   align-items: center;
 `;
 
+const HeroTitleLink = styled(RouterLink)`
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.92;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+`;
+
 function HeroSection() {
   return (
     <StyledHeroSection>
@@ -147,7 +163,9 @@ function HeroSection() {
           <Row>
             <Col md={7} lg={6}>
               <BrandKicker>by Vetcation</BrandKicker>
-              <HeroHeader>MyPet Health</HeroHeader>
+              <HeroHeader>
+                <HeroTitleLink to="/mypet-health/">MyPet Health</HeroTitleLink>
+              </HeroHeader>
               <HeroTagline>
                 Keep your pet’s health organized in one place. Pull records from
                 any clinic and share in one click, message your vet when you

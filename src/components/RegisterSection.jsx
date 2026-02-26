@@ -142,7 +142,13 @@ function RegisterSection() {
       {/* Hero/content below */}
       <Feature
         heading="Universal pet medical records"
-        text={`${PRODUCT_NAME} pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet-ready timeline. Share it in one click.`}
+        text={
+          <>
+            <a href="/mypet-health/">MyPet Health</a> pulls your pet’s scattered
+            records from any clinic into one secure place and turns them into a
+            clear, vet-ready timeline. Share it in one click.
+          </>
+        }
         linkText={"learn more"}
         linkHref={/universal-pet-medical-records/}
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
