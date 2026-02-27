@@ -120,6 +120,10 @@ function SeoForPath() {
       title: `MyPet Health by Vetcation | Official Site`,
       description: defaultMeta.description,
     },
+    "/pet-health-record/": {
+      title: `Pet Health Record | ${BRAND.full}`,
+      description: defaultMeta.description,
+    },
     "/support/": {
       title: `Support | ${BRAND.full}`,
       description:
