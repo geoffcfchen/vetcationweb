@@ -200,7 +200,7 @@ const Footer = () => {
       links: [
         { text: "MyPet Health", url: "/mypet-health/" }, // add this
         {
-          text: "Universal Pet Medical Records",
+          text: "Universal Pet Health Records",
           url: "/pet-health-record/",
         }, // optional
         {

@@ -149,7 +149,7 @@ function UniversalRecordsPage() {
         {/* Top hero copy */}
         <HeroSection>
           <Max>
-            <HeroEyebrow>Universal pet medical records</HeroEyebrow>
+            <HeroEyebrow>Universal pet health records</HeroEyebrow>
             <HeroTitle>See your pet’s full story in one place</HeroTitle>
             <HeroSubtitle>
               MyPet Health pulls together scattered PDFs, lab results, imaging,

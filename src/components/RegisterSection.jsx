@@ -141,7 +141,7 @@ function RegisterSection() {
 
       {/* Hero/content below */}
       <Feature
-        heading="Universal pet medical records"
+        heading="Universal pet health records"
         text={
           <>
             <a href="/mypet-health/">MyPet Health</a> pulls your pet’s scattered
