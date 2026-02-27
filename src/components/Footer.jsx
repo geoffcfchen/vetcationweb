@@ -201,7 +201,7 @@ const Footer = () => {
         { text: "MyPet Health", url: "/mypet-health/" }, // add this
         {
           text: "Universal Pet Medical Records",
-          url: "/universal-pet-medical-records/",
+          url: "/pet-health-record/",
         }, // optional
         {
           text: "Our Contributors",

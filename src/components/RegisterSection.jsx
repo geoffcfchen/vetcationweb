@@ -150,7 +150,7 @@ function RegisterSection() {
           </>
         }
         linkText={"learn more"}
-        linkHref={/universal-pet-medical-records/}
+        linkHref={"/pet-health-record/"}
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
         headerFontSize={50}
       />

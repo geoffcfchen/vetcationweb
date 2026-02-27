@@ -409,10 +409,7 @@ function App() {
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />
         <Route path="/mypet-health/" element={<MyPetHealthPage />} />
-        <Route
-          path="/universal-pet-medical-records/"
-          element={<UniversalRecordsPage />}
-        />
+        <Route path="/pet-health-record/" element={<UniversalRecordsPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
         <Route path="/ai/library/*" element={<AiLibraryPage />} />
         <Route path="/ai/handouts/*" element={<HandoutsPage />} />
