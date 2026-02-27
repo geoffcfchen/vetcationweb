@@ -6123,11 +6123,17 @@ Time: ${a.time}`)}function VetRow({user:a,clinicName:e}){const o=Array.isArray(a
   grid-template-columns: minmax(0, 2fr) auto;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    /* since we hide the content, make the QR take the full row and center it */
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 `,CalloutContent=pt.div`
   text-align: left;
 
   @media (max-width: 768px) {
-    text-align: center;
+    display: none;
   }
 `,CalloutHeading=pt.h2`
   margin: 0 0 0.4rem;
@@ -6149,10 +6155,9 @@ Time: ${a.time}`)}function VetRow({user:a,clinicName:e}){const o=Array.isArray(a
   width: 500px;
   height: auto;
   max-width: 100%;
-  cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 240px;
+    width: min(500px, 90vw); /* example */
   }
 `,GetStartedCallout=({qrCodeLink:a})=>jsxRuntimeExports.jsx(Container,{children:jsxRuntimeExports.jsxs(Callout,{children:[jsxRuntimeExports.jsxs(CalloutContent,{children:[jsxRuntimeExports.jsx(CalloutHeading,{children:"Ready to get started?"}),jsxRuntimeExports.jsx(CalloutSubheading,{children:"Scan the QR code to download the Vetcation app."})]}),jsxRuntimeExports.jsx(RightSide,{children:a&&jsxRuntimeExports.jsx(QRCodeImage,{src:a,alt:"Scan to download the Vetcation app"})})]})});pt.section`
   padding: 5rem 2rem;
