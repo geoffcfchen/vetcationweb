@@ -17,13 +17,19 @@ const Callout = styled.div`
   grid-template-columns: minmax(0, 2fr) auto;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    /* since we hide the content, make the QR take the full row and center it */
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 `;
 
 const CalloutContent = styled.div`
   text-align: left;
 
   @media (max-width: 768px) {
-    text-align: center;
+    display: none;
   }
 `;
 
@@ -53,10 +59,9 @@ const QRCodeImage = styled.img`
   width: 500px;
   height: auto;
   max-width: 100%;
-  cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 240px;
+    width: min(500px, 90vw); /* example */
   }
 `;
 
