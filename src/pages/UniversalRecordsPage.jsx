@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Feature from "../components/Feature";
+import GetStartedCallout from "../components/GetStartedCallout";
+import qrCodeImage from "../images/qrcode6.png";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -169,7 +171,6 @@ function UniversalRecordsPage() {
               headerFontSize={40}
             />
           </FeatureWrapper> */}
-
           <StepsWrapper>
             <Feature
               heading="Step 1 · Pull your pet’s health records into MyPet Health"
@@ -192,7 +193,6 @@ function UniversalRecordsPage() {
               headerFontSize={32}
             />
           </StepsWrapper>
-
           {/* Owner and vet benefits */}
           {/* <TwoColumn>
             <ColumnCard>
@@ -240,7 +240,6 @@ function UniversalRecordsPage() {
               </BulletList>
             </ColumnCard>
           </TwoColumn> */}
-
           {/* Big full width summary screenshot */}
           <ScreenshotSection>
             <ScreenshotShell>
@@ -262,6 +261,7 @@ function UniversalRecordsPage() {
           </ScreenshotSection>
         </ContentSection>
       </PageShell>
+      <GetStartedCallout qrCodeLink={qrCodeImage} />
 
       <Footer />
     </>
