@@ -172,22 +172,22 @@ function UniversalRecordsPage() {
 
           <StepsWrapper>
             <Feature
-              heading="Step 1 · Pull your pet’s records into MyPet Health"
+              heading="Step 1 · Pull your pet’s health records into MyPet Health"
               text="Upload PDFs and photos from any clinic, ER, shelter, or specialist, or send a secure link to your vets and clinics to request medical records. Everything lands in one secure place instead of being scattered across email and apps."
               imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1536.webp?alt=media&token=f2086851-3879-4607-acf4-98f7f6ac4733"
               headerFontSize={32}
             />
 
             <Feature
-              heading="Step 2 · MyPet Health understands and organizes your medical records"
-              text="MyPet Health reads visit dates, problems, treatments, labs, and imaging so it understands your pet’s history and turns it into a clear, vet ready timeline you can scroll in seconds."
+              heading="Step 2 · MyPet Health understands and organizes your health records"
+              text="MyPet Health reads visit dates, problems, treatments, labs, and imaging so it understands your pet’s health history and turns it into a clear, vet ready timeline you can scroll in seconds."
               imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1538.webp?alt=media&token=a90dfbad-68d9-4d11-b692-6689ad087941"
               headerFontSize={32}
             />
 
             <Feature
-              heading="Step 3 · Share one link before any visit or telemedicine call"
-              text="Before an in person or telemedicine visit, send your MyPet Health link so the vet can review the summary and history ahead of time and focus the appointment on decisions, not paperwork."
+              heading="Step 3 · Share one link before any visit or telehealth call"
+              text="Before an in person or telehealth visit, send your MyPet Health link so the vet can review the summary and history ahead of time and focus the appointment on decisions, not paperwork."
               imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1539.webp?alt=media&token=871f676e-cb05-4bdf-9186-96191dced74e"
               headerFontSize={32}
             />
@@ -248,14 +248,14 @@ function UniversalRecordsPage() {
                 What the MyPet Health vet summary link looks like in laptop
               </ScreenshotHeading>
               <ScreenshotText>
-                MyPet Health turns scattered records into a structured clinical
-                timeline and a clear summary, so every vet can see key problems,
-                treatments, and milestones at a glance.
+                MyPet Health turns scattered health records into a structured
+                clinical timeline and a clear summary, so every vet can see key
+                problems, treatments, and milestones at a glance.
               </ScreenshotText>
               <ScreenshotFrame>
                 <ScreenshotImage
                   src="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-                  alt="Example universal medical record summary view in Vetcation"
+                  alt="Example universal health record summary view in Vetcation"
                 />
               </ScreenshotFrame>
             </ScreenshotShell>
