@@ -122,7 +122,8 @@ function SeoForPath() {
     },
     "/pet-health-record/": {
       title: `Pet Health Record | ${BRAND.full}`,
-      description: defaultMeta.description,
+      description:
+        "MyPet Health pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet-ready timeline. Share it in one click.",
     },
     "/support/": {
       title: `Support | ${BRAND.full}`,
