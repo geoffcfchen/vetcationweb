@@ -89,13 +89,6 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
         </BrandBarLeft>
 
         <BrandBarRight>
-          <BrandBarLink type="button" onClick={onOpenHow}>
-            <FiInfo />
-            How it works
-          </BrandBarLink>
-          <BrandBarLink type="button" onClick={onGoSupport}>
-            Support
-          </BrandBarLink>
           {uid && (
             <ProfileShell ref={profileMenuRef}>
               <UserAvatarButton
