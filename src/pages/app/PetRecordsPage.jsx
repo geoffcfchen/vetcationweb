@@ -4,11 +4,12 @@ import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { collection, limit, onSnapshot, query } from "firebase/firestore";
 import { DateTime } from "luxon";
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiLink } from "react-icons/fi";
 
 import { firestore } from "../../lib/firebase";
 import RawUploadRecordCard from "../../components/RawUploadRecordCard";
 import PetRecordUploadModal from "../../components/PetRecordUploadModal";
+import PetUploadInviteModal from "../../components/PetUploadInviteModal";
 
 export default function PetRecordsPage() {
   const { petId } = useParams();
@@ -18,7 +19,11 @@ export default function PetRecordsPage() {
   const [loading, setLoading] = useState(true);
   const { pet, uid } = useOutletContext(); // comes from <Outlet context={{ pet: activePet, uid }} />
   const [uploadOpen, setUploadOpen] = useState(false);
+  const [inviteOpen, setInviteOpen] = useState(false);
 
+  const handleRequestLink = () => {
+    setInviteOpen(true);
+  };
   // Option B style: no orderBy (avoids indexes), then sort client-side
   useEffect(() => {
     if (!petId) return;
@@ -68,10 +73,17 @@ export default function PetRecordsPage() {
           </SubTitle>
         </TitleCol>
 
-        <PrimaryButton type="button" onClick={handleUpload}>
-          <FiUpload />
-          Upload
-        </PrimaryButton>
+        <HeaderActions>
+          <SecondaryButton type="button" onClick={handleRequestLink}>
+            <FiLink />
+            Request file upload link
+          </SecondaryButton>
+
+          <PrimaryButton type="button" onClick={handleUpload}>
+            <FiUpload />
+            Upload
+          </PrimaryButton>
+        </HeaderActions>
       </HeaderRow>
 
       <TimelineCard>
@@ -139,6 +151,13 @@ export default function PetRecordsPage() {
         mode="owner_upload"
         title="Upload to medical memory"
         subtitle="Upload a PDF or photo. Preview with AI before saving."
+      />
+      <PetUploadInviteModal
+        open={inviteOpen}
+        onClose={() => setInviteOpen(false)}
+        petId={petId}
+        petName={pet?.displayName || "this pet"}
+        ownerUid={uid}
       />
     </Shell>
   );
@@ -350,4 +369,30 @@ const TimelineHint = styled.p`
   margin: 10px 0 0;
   font-size: 12px;
   color: #94a3b8;
+`;
+
+const HeaderActions = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+const SecondaryButton = styled.button`
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+
+  &:hover {
+    background: #f8fafc;
+  }
 `;

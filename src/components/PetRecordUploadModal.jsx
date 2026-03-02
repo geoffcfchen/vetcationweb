@@ -254,7 +254,7 @@ export default function PetRecordUploadModal({
                 disabled={!canSendToAI}
                 onClick={handleSendToAI}
               >
-                {isSendingToAI ? "Sending to AI..." : "Send to AI"}
+                {isSendingToAI ? "Sending to System..." : "Send to System"}
               </PrimaryButton>
             ) : (
               <PrimaryButton

@@ -367,7 +367,7 @@ export default function RawUploadRecordCard({ record }) {
 
       {record.summaryText && (
         <SummaryBlock>
-          <SummaryLabel>Pet Sensei Summary</SummaryLabel>
+          <SummaryLabel>System Summary</SummaryLabel>
           <SummaryText>{record.summaryText}</SummaryText>
         </SummaryBlock>
       )}

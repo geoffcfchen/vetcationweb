@@ -565,7 +565,7 @@ function VetUploadRecordPage() {
                   disabled={!canSendToAI}
                   onClick={handleSendToAI}
                 >
-                  {isSendingToAI ? "Sending to AI..." : "Send to AI"}
+                  {isSendingToAI ? "Sending to System..." : "Send to System"}
                 </Button>
               ) : (
                 <Button
