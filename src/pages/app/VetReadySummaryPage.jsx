@@ -12,12 +12,15 @@ import {
   limit,
   getDocs,
 } from "firebase/firestore";
-import { FiFileText } from "react-icons/fi";
+import { FiFileText, FiShare2 } from "react-icons/fi";
 
 import VetSummaryCard from "../../components/VetSummaryCard";
+import PetSummaryShareModal from "../../components/PetSummaryShareModal";
 
-const FUNCTIONS_BASE_URL =
-  "https://us-central1-vetcationapp.cloudfunctions.net";
+const FUNCTIONS_BASE_URL = (
+  import.meta.env.VITE_FUNCTIONS_BASE_URL ||
+  "https://us-central1-vetcationapp.cloudfunctions.net"
+).replace(/\/+$/, "");
 
 const normalizeCachedSummary = (s) => {
   if (!s || typeof s !== "object") return s;
@@ -71,7 +74,14 @@ export default function VetReadySummaryPage() {
   const refreshStartRef = useRef(null);
   const [refreshTick, setRefreshTick] = useState(0);
 
+  // NEW: share link state
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareLink, setShareLink] = useState("");
+  const [isCreatingShare, setIsCreatingShare] = useState(false);
+  const [shareError, setShareError] = useState(null);
+
   const petId = pet?.id || null;
+  const petName = pet?.displayName || "my pet";
 
   // Phase based loading text
   useEffect(() => {
@@ -202,6 +212,50 @@ export default function VetReadySummaryPage() {
     loadSummary();
   }, [petId, uid]);
 
+  const handleOpenShareModal = async () => {
+    if (!petId || !uid) {
+      window.alert("Missing info. Please reopen this pet from your profile.");
+      return;
+    }
+
+    // If already created, just open modal
+    if (shareLink) {
+      setShareError("");
+      setShareModalOpen(true);
+      return;
+    }
+
+    try {
+      setIsCreatingShare(true);
+      setShareError("");
+
+      const resp = await fetch(`${FUNCTIONS_BASE_URL}/createPetSummaryShare`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ petId, ownerUid: uid, petName }),
+      });
+
+      const data = await resp.json().catch(() => null);
+
+      if (!resp.ok || !data || !data.ok || !data.shareUrl) {
+        setShareError(
+          (data && data.error) || "Could not create link. Try again.",
+        );
+        setShareModalOpen(true);
+        return;
+      }
+
+      setShareLink(data.shareUrl);
+      setShareModalOpen(true);
+    } catch (err) {
+      console.warn("createPetSummaryShare error", err);
+      setShareError("Network error. Please try again.");
+      setShareModalOpen(true);
+    } finally {
+      setIsCreatingShare(false);
+    }
+  };
+
   if (!pet) {
     return (
       <Card>
@@ -224,31 +278,56 @@ export default function VetReadySummaryPage() {
   }
 
   return (
-    <Card>
-      <HeaderRow>
-        <HeaderLeft>
-          <IconCircle>
-            <FiFileText />
-          </IconCircle>
-          <HeaderStack>
-            <Title>Vet ready summary</Title>
-            <Subtitle>
-              One page clinical summary you can share with vets and pet sitters.
-            </Subtitle>
-          </HeaderStack>
-        </HeaderLeft>
-      </HeaderRow>
+    <>
+      <Card>
+        <HeaderRow>
+          <HeaderLeft>
+            <IconCircle>
+              <FiFileText />
+            </IconCircle>
+            <HeaderStack>
+              <Title>Vet ready summary</Title>
+              <Subtitle>
+                One page clinical summary you can share with vets and pet
+                sitters.
+              </Subtitle>
+            </HeaderStack>
+          </HeaderLeft>
+          <HeaderRight>
+            <ShareButton
+              type="button"
+              onClick={handleOpenShareModal}
+              disabled={!petId || !uid || isCreatingShare}
+              title={
+                !petId || !uid ? "Missing pet info" : "Create a share link"
+              }
+            >
+              <FiShare2 />
+              {isCreatingShare ? "Creating..." : "Share summary link"}
+            </ShareButton>
+          </HeaderRight>
+        </HeaderRow>
 
-      <VetSummaryCard
-        summary={summary}
-        summaryLoading={summaryLoading}
-        summaryError={summaryError}
-        summaryUpdatedAt={summaryUpdatedAt}
-        loadingMessage={loadingMessage}
-        refreshElapsedSec={refreshElapsedSec}
-        records={records}
+        <VetSummaryCard
+          summary={summary}
+          summaryLoading={summaryLoading}
+          summaryError={summaryError}
+          summaryUpdatedAt={summaryUpdatedAt}
+          loadingMessage={loadingMessage}
+          refreshElapsedSec={refreshElapsedSec}
+          records={records}
+        />
+      </Card>
+      <PetSummaryShareModal
+        open={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        isCreating={isCreatingShare}
+        shareUrl={shareLink}
+        petName={petName}
+        error={shareError}
+        onCreateLink={handleOpenShareModal}
       />
-    </Card>
+    </>
   );
 }
 
@@ -268,12 +347,44 @@ const HeaderRow = styled.div`
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
+  flex-wrap: wrap;
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  min-width: 220px;
+`;
+
+const HeaderRight = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const ShareButton = styled.button`
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 `;
 
 const IconCircle = styled.div`
@@ -310,4 +421,28 @@ const BodyText = styled.div`
   font-size: 12px;
   color: #4b5563;
   line-height: 1.5;
+`;
+
+const PrimaryButton = styled.button`
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 `;

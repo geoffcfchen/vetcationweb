@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {
@@ -7,11 +7,46 @@ import {
   FiShare2,
   FiRefreshCw,
   FiExternalLink,
+  FiCheckCircle,
+  FiAlertCircle,
 } from "react-icons/fi";
 
 const FUNCTIONS_BASE_URL = (
   import.meta.env.VITE_FUNCTIONS_BASE_URL || ""
 ).replace(/\/+$/, "");
+
+function copyToClipboardFallback(text) {
+  try {
+    const el = document.createElement("textarea");
+    el.value = text;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function copyToClipboard(text) {
+  if (!text) return false;
+
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // fall through
+    }
+  }
+
+  return copyToClipboardFallback(text);
+}
+
 export default function PetUploadInviteModal({
   open,
   onClose,
@@ -23,6 +58,11 @@ export default function PetUploadInviteModal({
   const [inviteLink, setInviteLink] = useState("");
   const [error, setError] = useState("");
 
+  const [copyLinkLabel, setCopyLinkLabel] = useState("Copy link");
+  const [copyMsgLabel, setCopyMsgLabel] = useState("Copy message");
+
+  const lastKeyRef = useRef("");
+
   const shareMessage = useMemo(() => {
     const name = petName || "my pet";
     return inviteLink
@@ -30,7 +70,7 @@ export default function PetUploadInviteModal({
       : "";
   }, [inviteLink, petName]);
 
-  const createInvite = async () => {
+  const createInvite = async ({ force } = { force: false }) => {
     if (!petId || !ownerUid) {
       setError(
         "Missing pet info. Please reopen this page from your pet profile.",
@@ -39,14 +79,22 @@ export default function PetUploadInviteModal({
     }
     if (!FUNCTIONS_BASE_URL) {
       setError(
-        "Missing REACT_APP_FUNCTIONS_BASE_URL. Please set it so the website can call createPetUploadInvite.",
+        "Missing VITE_FUNCTIONS_BASE_URL. Please set it so the website can call createPetUploadInvite.",
       );
+      return;
+    }
+
+    const key = `${petId}__${ownerUid}`;
+
+    // If we already have a link for this pet+owner and not forcing, do nothing.
+    if (!force && inviteLink && lastKeyRef.current === key) {
       return;
     }
 
     setLoading(true);
     setError("");
-    setInviteLink("");
+    setCopyLinkLabel("Copy link");
+    setCopyMsgLabel("Copy message");
 
     try {
       const resp = await fetch(`${FUNCTIONS_BASE_URL}/createPetUploadInvite`, {
@@ -59,12 +107,7 @@ export default function PetUploadInviteModal({
         }),
       });
 
-      let data = {};
-      try {
-        data = await resp.json();
-      } catch {
-        data = {};
-      }
+      const data = await resp.json().catch(() => ({}));
 
       if (!resp.ok || !data.ok) {
         throw new Error(
@@ -72,9 +115,11 @@ export default function PetUploadInviteModal({
         );
       }
 
+      lastKeyRef.current = key;
       setInviteLink(data.shareUrl || "");
     } catch (e) {
       console.warn("createPetUploadInvite error:", e);
+      setInviteLink("");
       setError(e?.message || "Network error. Please try again.");
     } finally {
       setLoading(false);
@@ -84,8 +129,13 @@ export default function PetUploadInviteModal({
   useEffect(() => {
     if (!open) return;
 
-    // auto-create on open
-    createInvite();
+    // reset per open
+    setError("");
+    setCopyLinkLabel("Copy link");
+    setCopyMsgLabel("Copy message");
+
+    // auto-create on open (but won't regenerate if we already have one for same pet)
+    createInvite({ force: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, petId, ownerUid]);
 
@@ -101,48 +151,42 @@ export default function PetUploadInviteModal({
 
   const handleCopyLink = async () => {
     if (!inviteLink) return;
-    try {
-      await navigator.clipboard.writeText(inviteLink);
-    } catch (e) {
-      console.warn("Clipboard failed:", e);
-    }
+    const ok = await copyToClipboard(inviteLink);
+    setCopyLinkLabel(ok ? "Copied" : "Copy failed");
+    setTimeout(() => setCopyLinkLabel("Copy link"), 1200);
   };
 
   const handleCopyMessage = async () => {
     if (!shareMessage) return;
-    try {
-      await navigator.clipboard.writeText(shareMessage);
-    } catch (e) {
-      console.warn("Clipboard failed:", e);
-    }
+    const ok = await copyToClipboard(shareMessage);
+    setCopyMsgLabel(ok ? "Copied" : "Copy failed");
+    setTimeout(() => setCopyMsgLabel("Copy message"), 1200);
   };
 
   const handleShare = async () => {
     if (!inviteLink) return;
 
-    // Prefer native share if available
     if (navigator.share) {
       try {
         await navigator.share({
+          title: "Upload records",
           text: shareMessage,
           url: inviteLink,
         });
         return;
-      } catch (e) {
-        // user cancelled, or share failed
-        console.log("Share cancelled or failed:", e);
+      } catch {
+        // cancelled or blocked, fall back
       }
     }
 
-    // Fallback: copy message
     await handleCopyMessage();
   };
 
   if (!open) return null;
 
   return (
-    <Overlay onClick={onClose}>
-      <Card onClick={(e) => e.stopPropagation()}>
+    <Overlay onMouseDown={onClose}>
+      <Card onMouseDown={(e) => e.stopPropagation()}>
         <Header>
           <Title>Share upload link</Title>
           <CloseButton type="button" onClick={onClose} aria-label="Close">
@@ -162,50 +206,70 @@ export default function PetUploadInviteModal({
               <span>Creating link...</span>
             </LoadingBox>
           ) : error ? (
-            <ErrorBox>{error}</ErrorBox>
+            <ErrorRow>
+              <FiAlertCircle />
+              <span>{error}</span>
+            </ErrorRow>
           ) : inviteLink ? (
             <>
-              <LinkRow>
-                <LinkBox title={inviteLink}>{inviteLink}</LinkBox>
-                <SmallIconButton
-                  type="button"
-                  onClick={handleCopyLink}
-                  title="Copy link"
-                >
-                  <FiCopy />
-                </SmallIconButton>
-                <SmallIconButton
-                  type="button"
-                  onClick={() =>
-                    window.open(inviteLink, "_blank", "noopener,noreferrer")
-                  }
-                  title="Open link"
-                >
-                  <FiExternalLink />
-                </SmallIconButton>
-              </LinkRow>
+              <UrlBox>
+                <UrlLabel>Share link</UrlLabel>
+                <LinkRow>
+                  <LinkBox title={inviteLink}>{inviteLink}</LinkBox>
 
-              <Hint>
-                Tip: paste this into SMS or email. The message is ready too.
-              </Hint>
+                  <SmallIconButton
+                    type="button"
+                    onClick={handleCopyLink}
+                    title="Copy link"
+                  >
+                    <FiCopy />
+                  </SmallIconButton>
+
+                  <SmallIconButton
+                    type="button"
+                    onClick={() =>
+                      window.open(inviteLink, "_blank", "noopener,noreferrer")
+                    }
+                    title="Open link"
+                  >
+                    <FiExternalLink />
+                  </SmallIconButton>
+                </LinkRow>
+
+                <Hint>
+                  View-only link for upload. You can paste it into SMS, email,
+                  or chat.
+                </Hint>
+              </UrlBox>
+
+              <MessageBox>
+                <MessageTopRow>
+                  <MessageLabel>Suggested message</MessageLabel>
+                  <SmallButton
+                    type="button"
+                    onClick={handleCopyMessage}
+                    disabled={!shareMessage}
+                  >
+                    <FiCheckCircle />
+                    {copyMsgLabel}
+                  </SmallButton>
+                </MessageTopRow>
+
+                <MessageText>{shareMessage}</MessageText>
+
+                <TinyHint>
+                  If Share is not available, we copy this message for you.
+                </TinyHint>
+              </MessageBox>
 
               <ActionsRow>
                 <Secondary
                   type="button"
-                  onClick={createInvite}
+                  onClick={() => createInvite({ force: true })}
                   disabled={loading}
                 >
                   <FiRefreshCw />
                   Regenerate
-                </Secondary>
-
-                <Secondary
-                  type="button"
-                  onClick={handleCopyMessage}
-                  disabled={!shareMessage}
-                >
-                  <FiCopy />
-                  Copy message
                 </Secondary>
 
                 <Primary
@@ -304,6 +368,19 @@ const Body = styled.div`
   padding: 12px 16px 16px;
 `;
 
+const UrlBox = styled.div`
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: #ffffff;
+  padding: 12px;
+`;
+
+const UrlLabel = styled.div`
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+`;
+
 const LinkRow = styled.div`
   margin-top: 8px;
   display: flex;
@@ -320,7 +397,6 @@ const LinkBox = styled.div`
   background: rgba(241, 245, 249, 1);
   font-size: 13px;
   color: #0f172a;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -340,6 +416,47 @@ const SmallIconButton = styled.button`
   &:hover {
     background: #f8fafc;
   }
+`;
+
+const Hint = styled.div`
+  margin-top: 10px;
+  font-size: 12px;
+  color: #6b7280;
+`;
+
+const MessageBox = styled.div`
+  margin-top: 12px;
+  border-radius: 14px;
+  background: rgba(239, 246, 255, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  padding: 12px;
+`;
+
+const MessageTopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+const MessageLabel = styled.div`
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+`;
+
+const MessageText = styled.div`
+  margin-top: 8px;
+  font-size: 13px;
+  color: #0f172a;
+  line-height: 1.45;
+  white-space: pre-wrap;
+`;
+
+const TinyHint = styled.div`
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
 `;
 
 const ActionsRow = styled.div`
@@ -396,10 +513,28 @@ const Secondary = styled.button`
   }
 `;
 
-const Hint = styled.div`
-  margin-top: 10px;
+const SmallButton = styled.button`
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
   font-size: 12px;
-  color: #94a3b8;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 `;
 
 const Muted = styled.div`
@@ -408,14 +543,17 @@ const Muted = styled.div`
   color: #64748b;
 `;
 
-const ErrorBox = styled.div`
+const ErrorRow = styled.div`
   margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(254, 226, 226, 1);
-  border: 1px solid rgba(220, 38, 38, 0.25);
-  color: #7f1d1d;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #b91c1c;
   font-size: 13px;
+
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const LoadingBox = styled.div`

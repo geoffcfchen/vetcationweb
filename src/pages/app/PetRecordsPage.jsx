@@ -94,10 +94,18 @@ export default function PetRecordsPage() {
         ) : sortedRecords.length === 0 ? (
           <EmptyState>
             <Muted>No records yet. Upload a PDF or photo to start.</Muted>
-            <PrimaryButton type="button" onClick={handleUpload}>
-              <FiUpload />
-              Upload your first record
-            </PrimaryButton>
+            <EmptyActions>
+              <PrimaryButton type="button" onClick={handleUpload}>
+                <FiUpload />
+                Upload your first record
+              </PrimaryButton>
+
+              {/* Optional: keep or remove, see notes below */}
+              <SecondaryButton type="button" onClick={handleRequestLink}>
+                <FiLink />
+                Request upload link
+              </SecondaryButton>
+            </EmptyActions>
           </EmptyState>
         ) : (
           <>
@@ -290,6 +298,9 @@ const EmptyState = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 6px 0 4px;
+
+  /* ✅ stops children from stretching full-width */
+  align-items: flex-start;
 `;
 
 const TimelineList = styled.ul`
@@ -395,4 +406,11 @@ const SecondaryButton = styled.button`
   &:hover {
     background: #f8fafc;
   }
+`;
+
+const EmptyActions = styled.div`
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
 `;

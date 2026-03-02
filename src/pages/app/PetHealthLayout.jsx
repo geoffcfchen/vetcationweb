@@ -208,17 +208,30 @@ const LayoutSidebar = React.memo(function LayoutSidebar({
 function MainPanel({
   uid,
   pets,
+  petsLoading,
   hasPets,
   onOpenCreatePet,
   onOpenHow,
   onRequestEditPet,
   savedPetState,
-  onOpenPassportEdit, // NEW
+  onOpenPassportEdit,
 }) {
   const { petId } = useParams();
+  const firstPetId = pets?.[0]?.id || null;
   const navigate = useNavigate();
+
   const [activePet, setActivePet] = useState(null);
   const [activePetLoading, setActivePetLoading] = useState(false);
+
+  // Auto-select the first pet when user has pets but URL is just /app
+  useEffect(() => {
+    // wait until pets are loaded
+    if (petsLoading) return;
+
+    if (!petId && firstPetId) {
+      navigate(`/app/pets/${firstPetId}/records`, { replace: true });
+    }
+  }, [petsLoading, petId, firstPetId, navigate]);
 
   useEffect(() => {
     const load = async () => {
@@ -362,15 +375,7 @@ function MainPanel({
             </EmptyCardInner>
           </EmptyCard>
         </EmptyState>
-      ) : !petId ? (
-        <WelcomeCard>
-          <WelcomeTitle>Welcome</WelcomeTitle>
-          <WelcomeText>
-            Choose a pet to upload PDFs, photos, labs, and invoices. Then share
-            a secure link with any vet.
-          </WelcomeText>
-        </WelcomeCard>
-      ) : !activePet && !activePetLoading ? (
+      ) : !petId ? null : !activePet && !activePetLoading ? (
         <WelcomeCard>
           <WelcomeTitle>Pet not found</WelcomeTitle>
           <WelcomeText>
@@ -592,6 +597,7 @@ function PetHealthLayout() {
         <MainPanel
           uid={uid}
           pets={pets}
+          petsLoading={petsLoading} // NEW
           hasPets={hasPets}
           onOpenCreatePet={openCreatePet}
           onOpenHow={openHowModal}
@@ -762,6 +768,7 @@ MainPanel.propTypes = {
     mode: PropTypes.string,
     pet: petSummaryShape,
   }),
+  petsLoading: PropTypes.bool.isRequired,
 };
 
 /* styled-components */
