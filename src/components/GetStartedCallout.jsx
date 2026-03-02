@@ -72,7 +72,7 @@ const GetStartedCallout = ({ qrCodeLink }) => {
         <CalloutContent>
           <CalloutHeading>Ready to get started?</CalloutHeading>
           <CalloutSubheading>
-            Scan the QR code to download the Vetcation app.
+            Scan the QR code to download the MyPet Health app.
           </CalloutSubheading>
         </CalloutContent>
 
