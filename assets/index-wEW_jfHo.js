@@ -6219,7 +6219,7 @@ Time: ${a.time}`)}function VetRow({user:a,clinicName:e}){const o=Array.isArray(a
   @media (max-width: 768px) {
     width: min(500px, 90vw); /* example */
   }
-`,GetStartedCallout=({qrCodeLink:a})=>jsxRuntimeExports.jsx(Container,{children:jsxRuntimeExports.jsxs(Callout,{children:[jsxRuntimeExports.jsxs(CalloutContent,{children:[jsxRuntimeExports.jsx(CalloutHeading,{children:"Ready to get started?"}),jsxRuntimeExports.jsx(CalloutSubheading,{children:"Scan the QR code to download the Vetcation app."})]}),jsxRuntimeExports.jsx(RightSide,{children:a&&jsxRuntimeExports.jsx(QRCodeImage,{src:a,alt:"Scan to download the Vetcation app"})})]})});pt.section`
+`,GetStartedCallout=({qrCodeLink:a})=>jsxRuntimeExports.jsx(Container,{children:jsxRuntimeExports.jsxs(Callout,{children:[jsxRuntimeExports.jsxs(CalloutContent,{children:[jsxRuntimeExports.jsx(CalloutHeading,{children:"Ready to get started?"}),jsxRuntimeExports.jsx(CalloutSubheading,{children:"Scan the QR code to download the MyPet Health app."})]}),jsxRuntimeExports.jsx(RightSide,{children:a&&jsxRuntimeExports.jsx(QRCodeImage,{src:a,alt:"Scan to download the Vetcation app"})})]})});pt.section`
   padding: 5rem 2rem;
   background: #000;
   color: #7b858b;
