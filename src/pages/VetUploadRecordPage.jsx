@@ -355,7 +355,7 @@ function VetUploadRecordPage() {
             ownerNote,
             fallbackEventDateIso,
           }),
-        }
+        },
       );
 
       const data = await resp.json();
@@ -418,7 +418,7 @@ function VetUploadRecordPage() {
             uploadedByUid: auth.currentUser?.uid || null,
             imageUrls: imageUrls || null,
           }),
-        }
+        },
       );
 
       const data = await resp.json();

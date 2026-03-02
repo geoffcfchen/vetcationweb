@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   Routes,
   Route,
@@ -34,7 +34,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import InviteSurvey from "./pages/InviteSurvey";
 import AiLibraryPage from "./pages/AiLibraryPage";
 import LoginPage from "./pages/LoginPage";
-import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "./lib/firebase";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
 import EmailRegisterPage from "./pages/EmailRegisterPage";
@@ -44,6 +44,19 @@ import VetUploadRecordPage from "./pages/VetUploadRecordPage";
 import PetSummarySharePage from "./pages/PetSummarySharePage";
 import UniversalRecordsPage from "./pages/UniversalRecordsPage";
 import MyPetHealthPage from "./pages/MyPetHealthPage";
+import RequireAuth from "./components/RequireAuth";
+
+import PetHealthLayout from "./pages/app/PetHealthLayout";
+import PetOverviewPage from "./pages/app/PetOverviewPage";
+import PetRecordsPage from "./pages/app/PetRecordsPage";
+import PetUploadPage from "./pages/app/PetUploadPage";
+import PetPassportPage from "./pages/app/PetPassportPage";
+import PetSharePage from "./pages/app/PetSharePage";
+import PetSettingsPage from "./pages/app/PetSettingsPage";
+import NewPetPage from "./pages/app/NewPetPage";
+import VetReadySummaryPage from "./pages/app/VetReadySummaryPage";
+import VaccinePage from "./pages/app/VaccinePage";
+import MemoizedPetHealthLayout from "./pages/app/PetHealthLayout";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -276,6 +289,12 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const latestLocationRef = useRef(location);
+
+  useEffect(() => {
+    latestLocationRef.current = location;
+  }, [location]);
+
   async function ensureCustomerDoc(firebaseUser) {
     const uid = firebaseUser.uid;
     const userDocRef = doc(firestore, "customers", uid);
@@ -320,8 +339,10 @@ function App() {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
+      const currentPath = latestLocationRef.current.pathname;
+
       console.log("[auth listener] fired. user:", firebaseUser?.uid || null);
-      console.log("[auth listener] current path:", location.pathname);
+      console.log("[auth listener] current path:", currentPath);
 
       setIsUserLoading(true);
 
@@ -330,8 +351,8 @@ function App() {
         setUser(null);
         setUserData(null);
 
-        // For example, if the user is logged out on a protected page, send them home.
-        if (location.pathname.startsWith("/ai/")) {
+        // If user gets logged out while on a protected page, send them home
+        if (currentPath.startsWith("/ai/") || currentPath.startsWith("/app")) {
           navigate("/", { replace: true });
         }
 
@@ -340,6 +361,7 @@ function App() {
       }
 
       try {
+        // Force refresh token once when auth state changes
         await firebaseUser.getIdToken(true);
       } catch (error) {
         handleAuthError(error);
@@ -350,10 +372,10 @@ function App() {
       try {
         setUser(firebaseUser);
 
-        // 1) Make sure customers/{uid} exists and load it into userData
+        // 1) Ensure customers/{uid} exists
         await ensureCustomerDoc(firebaseUser);
 
-        // 2) Email verification gating, similar to React Native
+        // 2) Email verification gating
         const email = firebaseUser.email || "";
         const isSystemEmail =
           email.startsWith("client") ||
@@ -363,34 +385,34 @@ function App() {
           email.startsWith("csr");
 
         if (!firebaseUser.emailVerified && !isSystemEmail) {
-          // If not already on the verification page, go there
-          if (location.pathname !== "/email-verification") {
+          if (currentPath !== "/email-verification") {
             navigate("/email-verification", { replace: true });
           }
           setIsUserLoading(false);
           return;
         }
 
-        // 3) Normal redirect logic if email is verified
+        // 3) Post-auth redirect logic
         const stored = sessionStorage.getItem("postAuthRedirectPath");
         console.log("[auth listener] stored redirect:", stored);
+
         let target = stored || null;
 
         if (
           !target &&
-          (location.pathname === "/" ||
-            location.pathname === "/login" ||
-            location.pathname === "/register-email" ||
-            location.pathname === "/email-verification")
+          (currentPath === "/" ||
+            currentPath === "/login" ||
+            currentPath === "/register-email" ||
+            currentPath === "/email-verification")
         ) {
-          target = "/ai/library";
+          target = "/app";
         }
 
         if (stored) {
           sessionStorage.removeItem("postAuthRedirectPath");
         }
 
-        if (target && location.pathname !== target) {
+        if (target && currentPath !== target) {
           console.log("Auth listener navigating to:", target);
           navigate(target, { replace: true });
         }
@@ -402,7 +424,7 @@ function App() {
     });
 
     return () => unsub();
-  }, [navigate, location.pathname, setUserData]);
+  }, [navigate, setUserData]);
 
   return (
     <HelmetProvider>
@@ -463,7 +485,22 @@ function App() {
         <Route path="/pet-summary/:shareId" element={<PetSummarySharePage />} />
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect/" element={<RedirectPage />} />
-        <Route path="/app/" element={<RedirectPage />} />
+        {/* Auth guard layout */}
+        <Route element={<RequireAuth user={user} isLoading={isUserLoading} />}>
+          {/* App shell layout */}
+          <Route path="/app" element={<MemoizedPetHealthLayout />}>
+            <Route path="new-pet" element={<NewPetPage />} />
+
+            <Route path="pets/:petId/records" element={<PetRecordsPage />} />
+            <Route path="pets/:petId/passport" element={<PetPassportPage />} />
+            <Route
+              path="pets/:petId/vetreadysummary"
+              element={<VetReadySummaryPage />}
+            />
+            <Route path="pets/:petId/vaccines" element={<VaccinePage />} />
+            <Route path="pets/:petId/settings" element={<PetSettingsPage />} />
+          </Route>
+        </Route>
         <Route path="/privacy-policy/" element={<PrivacyPolicyPage />} />
         <Route path="/SMSTerms/" element={<SMSTermsPage />} />
         <Route path="/support/" element={<SupportPage />} />

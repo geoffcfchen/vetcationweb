@@ -21,6 +21,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import RawUploadRecordCard from "../components/RawUploadRecordCard";
+import VetSummaryCard from "../components/VetSummaryCard";
 
 const FUNCTIONS_BASE_URL =
   "https://us-central1-vetcationapp.cloudfunctions.net";
@@ -75,7 +76,7 @@ const normalizeCachedSummary = (s) => {
       Array.isArray(list[0].labels)
     ) {
       converted[key] = list.map((row) =>
-        Array.isArray(row.labels) ? row.labels : []
+        Array.isArray(row.labels) ? row.labels : [],
       );
       return;
     }
@@ -261,7 +262,7 @@ function PetSummarySharePage() {
             getDocs(query(recordsCol, orderBy("createdAt", "desc"), limit(50))),
             getDocs(query(petsCol, limit(40))),
             getDoc(summaryRef),
-          ]
+          ],
         );
 
         if (petSnap.exists()) {
@@ -272,14 +273,14 @@ function PetSummarySharePage() {
           recordsSnap.docs.map((d) => ({
             id: d.id,
             ...d.data(),
-          }))
+          })),
         );
 
         setPetsList(
           petsSnap.docs.map((d) => ({
             id: d.id,
             ...d.data(),
-          }))
+          })),
         );
 
         // If we have a cached summary, show it immediately
@@ -369,8 +370,8 @@ function PetSummarySharePage() {
     pet?.dob && typeof pet.dob.toDate === "function"
       ? pet.dob.toDate()
       : pet?.dob instanceof Date
-      ? pet.dob
-      : null;
+        ? pet.dob
+        : null;
 
   const dobLabel = dobDate
     ? dobDate.toLocaleDateString(undefined, {
@@ -418,7 +419,7 @@ function PetSummarySharePage() {
 
     const labelSet = new Set(labels);
     const snippets = summary.sourceSnippets.filter((sn) =>
-      labelSet.has(sn.label)
+      labelSet.has(sn.label),
     );
 
     if (!snippets.length) return;
@@ -575,7 +576,7 @@ function PetSummarySharePage() {
                           openSourcesFor(
                             "recentVisitsAndEvents",
                             "Recent visits and events",
-                            idx
+                            idx,
                           )
                         }
                       >
@@ -907,19 +908,28 @@ function PetSummarySharePage() {
               {/* Left column: clinical summary card */}
               <ColumnLeft>
                 {summaryLoading && !summary && (
-                  <SummaryShell>
-                    <SummaryTitle>Vet ready clinical summary</SummaryTitle>
-                    <SummaryLoadingRow>
-                      <Spinner />
-                      <SummaryLoadingText>
-                        {getLoadingMessage()}
-                      </SummaryLoadingText>
-                      <SummaryHintText>
-                        You can already review the original medical history on
-                        the right while this is preparing.
-                      </SummaryHintText>
-                    </SummaryLoadingRow>
-                  </SummaryShell>
+                  // <SummaryShell>
+                  //   <SummaryTitle>Vet ready clinical summary</SummaryTitle>
+                  //   <SummaryLoadingRow>
+                  //     <Spinner />
+                  //     <SummaryLoadingText>
+                  //       {getLoadingMessage()}
+                  //     </SummaryLoadingText>
+                  //     <SummaryHintText>
+                  //       You can already review the original medical history on
+                  //       the right while this is preparing.
+                  //     </SummaryHintText>
+                  //   </SummaryLoadingRow>
+                  // </SummaryShell>
+                  <VetSummaryCard
+                    summary={summary}
+                    summaryLoading={summaryLoading}
+                    summaryError={summaryError}
+                    summaryUpdatedAt={summaryUpdatedAt}
+                    loadingMessage={getLoadingMessage()}
+                    refreshElapsedSec={refreshElapsedSec}
+                    records={records}
+                  />
                 )}
 
                 {!summaryLoading && summaryError && !summary && (
@@ -958,39 +968,39 @@ function PetSummarySharePage() {
                         {renderListSection(
                           "ownerMainConcerns",
                           "What the owner is worried about",
-                          summary.ownerMainConcerns || []
+                          summary.ownerMainConcerns || [],
                         )}
                         {renderVisits()}
 
                         {renderListSection(
                           "chronicProblems",
                           "Chronic or active problems",
-                          summary.chronicProblems || []
+                          summary.chronicProblems || [],
                         )}
 
                         {renderListSection(
                           "currentMedications",
                           "Current medications",
-                          summary.currentMedications || []
+                          summary.currentMedications || [],
                         )}
 
                         {renderTableSection(
                           "surgeriesAndProcedures",
                           "Surgeries and procedures",
-                          summary.surgeriesAndProcedures || []
+                          summary.surgeriesAndProcedures || [],
                         )}
 
                         {renderTableSection(
                           "recentLabsOrImaging",
                           "Recent labs or imaging",
                           summary.recentLabsOrImaging || [],
-                          true
+                          true,
                         )}
 
                         {renderListSection(
                           "allergies",
                           "Allergies",
-                          summary.allergies || []
+                          summary.allergies || [],
                         )}
 
                         {summary.redFlagsForVetToDoubleCheck &&
@@ -1030,7 +1040,7 @@ function PetSummarySharePage() {
                                               openSourcesFor(
                                                 "redFlagsForVetToDoubleCheck",
                                                 "Red flags to double check",
-                                                idx
+                                                idx,
                                               )
                                             }
                                           >
@@ -1039,7 +1049,7 @@ function PetSummarySharePage() {
                                         )}
                                       </BulletItem>
                                     );
-                                  }
+                                  },
                                 )}
                               </BulletList>
                             </AlertSection>
@@ -1052,7 +1062,7 @@ function PetSummarySharePage() {
                                 "missingOrUnclearInformation",
                                 "Missing or unclear information",
                                 summary.missingOrUnclearInformation || [],
-                                true
+                                true,
                               )}
                             </>
                           )}
@@ -1122,7 +1132,8 @@ const CenteredCard = styled.section`
   border-radius: 24px;
   padding: 24px 24px 28px;
   background: #ffffff;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08),
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.08),
     0 0 0 1px rgba(148, 163, 184, 0.15);
 `;
 

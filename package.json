@@ -40,7 +40,8 @@
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "styled-components": "^6.1.11",
-    "typesense": "^2.1.0"
+    "typesense": "^2.1.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

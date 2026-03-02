@@ -604,8 +604,8 @@ const Status = styled.span`
     p.$status === "ready"
       ? "#22c55e"
       : p.$status === "error"
-      ? "#f97316"
-      : "#9ca3af"};
+        ? "#f97316"
+        : "#9ca3af"};
 `;
 
 const IconButton = styled.button`
@@ -862,7 +862,9 @@ const WebSearchPill = styled.button`
     margin: auto;
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.12s ease, transform 0.12s ease;
+    transition:
+      opacity 0.12s ease,
+      transform 0.12s ease;
   }
 
   .icon-x {
@@ -871,7 +873,9 @@ const WebSearchPill = styled.button`
     margin: auto;
     opacity: 0;
     transform: scale(0.85);
-    transition: opacity 0.12s ease, transform 0.12s ease;
+    transition:
+      opacity 0.12s ease,
+      transform 0.12s ease;
     line-height: 14px;
     font-size: 16px;
   }
@@ -1440,7 +1444,10 @@ const HandoutNavButton = styled.button`
   color: #e5e7eb;
   font-size: 13px;
   cursor: pointer;
-  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
 
   &:hover {
     background: #111827;
@@ -1485,7 +1492,7 @@ function PersonalChatShell({ currentUser }) {
   useClickOutside(
     attachMenuContainerRef,
     () => setAttachMenuOpen(false),
-    attachMenuOpen
+    attachMenuOpen,
   );
 
   // reset thinking on chat change
@@ -1520,7 +1527,7 @@ function PersonalChatShell({ currentUser }) {
         personalChatId,
         convo,
         last.id,
-        isWebSearchEnabled
+        isWebSearchEnabled,
       );
     }
   }, [currentUser, personalChatId, messages, initialAssistantTriggered]);
@@ -1592,14 +1599,14 @@ function PersonalChatShell({ currentUser }) {
       currentUser.uid,
       "chats",
       personalChatId,
-      "messages"
+      "messages",
     );
     const qMsgs = query(msgsCol, orderBy("createdAt", "asc"));
 
     const unsub = onSnapshot(qMsgs, (snap) => {
       const rows = [];
       snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
+        rows.push({ id: docSnap.id, ...docSnap.data() }),
       );
       setMessages(rows);
     });
@@ -1620,7 +1627,7 @@ function PersonalChatShell({ currentUser }) {
       firestore,
       "vetPersonalChats",
       currentUser.uid,
-      "attachments"
+      "attachments",
     );
 
     const chatIdToUse = personalChatId || null;
@@ -1628,13 +1635,13 @@ function PersonalChatShell({ currentUser }) {
     const qAtt = query(
       attachmentsCol,
       where("chatId", "==", chatIdToUse),
-      orderBy("createdAt", "asc")
+      orderBy("createdAt", "asc"),
     );
 
     const unsub = onSnapshot(qAtt, (snap) => {
       const rows = [];
       snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
+        rows.push({ id: docSnap.id, ...docSnap.data() }),
       );
       setChatAttachments(rows);
     });
@@ -1648,7 +1655,8 @@ function PersonalChatShell({ currentUser }) {
   }, [personalChatId]);
 
   const hasUploadingPending = chatAttachments.some(
-    (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
+    (att) =>
+      pendingAttachmentIds.includes(att.id) && att.status === "uploading",
   );
 
   const handleEnableWebSearch = () => {
@@ -1669,7 +1677,7 @@ function PersonalChatShell({ currentUser }) {
     chatIdArg,
     convo,
     triggerId,
-    webSearchEnabled
+    webSearchEnabled,
   ) => {
     try {
       const payload = {
@@ -1686,7 +1694,7 @@ function PersonalChatShell({ currentUser }) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       let json;
@@ -1695,7 +1703,7 @@ function PersonalChatShell({ currentUser }) {
       } catch (e) {
         console.error("Failed to parse vetPersonalAssistant JSON", e);
         throw new Error(
-          `Non-JSON response from vetPersonalAssistant (status ${res.status})`
+          `Non-JSON response from vetPersonalAssistant (status ${res.status})`,
         );
       }
 
@@ -1704,7 +1712,7 @@ function PersonalChatShell({ currentUser }) {
         "vetPersonalChats",
         vetUid,
         "chats",
-        chatIdArg
+        chatIdArg,
       );
       const msgsCol = collection(chatDocRef, "messages");
 
@@ -1777,7 +1785,7 @@ function PersonalChatShell({ currentUser }) {
       firestore,
       "vetPersonalChats",
       currentUser.uid,
-      "attachments"
+      "attachments",
     );
 
     const attachmentDocRef = await addDoc(attachmentsCol, {
@@ -1801,7 +1809,7 @@ function PersonalChatShell({ currentUser }) {
     const attachmentId = attachmentDocRef.id;
 
     setPendingAttachmentIds((prev) =>
-      prev.includes(attachmentId) ? prev : [...prev, attachmentId]
+      prev.includes(attachmentId) ? prev : [...prev, attachmentId],
     );
     setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
 
@@ -1842,7 +1850,7 @@ function PersonalChatShell({ currentUser }) {
           const { [attachmentId]: _ignore, ...rest } = prev;
           return rest;
         });
-      }
+      },
     );
   };
 
@@ -1864,18 +1872,18 @@ function PersonalChatShell({ currentUser }) {
           f &&
           (f.type === "application/pdf" ||
             (typeof f.name === "string" &&
-              f.name.toLowerCase().endsWith(".pdf")))
+              f.name.toLowerCase().endsWith(".pdf"))),
       );
       if (!pdfs.length) return;
 
       // Enforce per-file size limit
       const oversized = pdfs.filter(
-        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES
+        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES,
       );
       if (oversized.length) {
         alert("Some files are larger than 10 MB and were skipped.");
         pdfs = pdfs.filter(
-          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES
+          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES,
         );
         if (!pdfs.length) return;
       }
@@ -1885,8 +1893,8 @@ function PersonalChatShell({ currentUser }) {
         chatAttachments
           .filter((att) => pendingAttachmentIds.includes(att.id))
           .map(
-            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att)
-          )
+            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att),
+          ),
       );
 
       const seen = new Set();
@@ -1909,7 +1917,7 @@ function PersonalChatShell({ currentUser }) {
       const existingCount = pendingAttachmentIds.length;
       if (existingCount >= MAX_ATTACHMENTS_PER_MESSAGE) {
         alert(
-          "You can attach up to 10 files per message. Remove one before adding more."
+          "You can attach up to 10 files per message. Remove one before adding more.",
         );
         return;
       }
@@ -1919,7 +1927,7 @@ function PersonalChatShell({ currentUser }) {
         alert(
           `You can only add ${availableSlots} more attachment${
             availableSlots === 1 ? "" : "s"
-          } (limit is 10). The rest were skipped.`
+          } (limit is 10). The rest were skipped.`,
         );
         toUpload = toUpload.slice(0, availableSlots);
       }
@@ -1927,7 +1935,9 @@ function PersonalChatShell({ currentUser }) {
       if (!toUpload.length) return;
 
       await Promise.all(
-        toUpload.map(({ file, fp }) => uploadOnePersonalAttachmentPdf(file, fp))
+        toUpload.map(({ file, fp }) =>
+          uploadOnePersonalAttachmentPdf(file, fp),
+        ),
       );
     } catch (err) {
       console.error("Failed to attach files", err);
@@ -1978,7 +1988,7 @@ function PersonalChatShell({ currentUser }) {
           firestore,
           "vetPersonalChats",
           currentUser.uid,
-          "chats"
+          "chats",
         );
         const chatDocRef = await addDoc(chatsCol, {
           vetUid: currentUser.uid,
@@ -2012,17 +2022,17 @@ function PersonalChatShell({ currentUser }) {
                   "vetPersonalChats",
                   currentUser.uid,
                   "attachments",
-                  attId
+                  attId,
                 ),
                 {
                   chatId: newChatId,
                   messageId,
                   updatedAt: now,
-                }
+                },
               ).catch((err) => {
                 console.warn("Failed to link attachment", attId, err);
-              })
-            )
+              }),
+            ),
           );
         }
 
@@ -2046,7 +2056,7 @@ function PersonalChatShell({ currentUser }) {
           "vetPersonalChats",
           currentUser.uid,
           "chats",
-          personalChatId
+          personalChatId,
         );
         const msgsCol = collection(chatDocRef, "messages");
 
@@ -2079,17 +2089,17 @@ function PersonalChatShell({ currentUser }) {
                   "vetPersonalChats",
                   currentUser.uid,
                   "attachments",
-                  attId
+                  attId,
                 ),
                 {
                   chatId: personalChatId,
                   messageId,
                   updatedAt: now,
-                }
+                },
               ).catch((err) => {
                 console.warn("Failed to link attachment", attId, err);
-              })
-            )
+              }),
+            ),
           );
         }
 
@@ -2103,7 +2113,7 @@ function PersonalChatShell({ currentUser }) {
           personalChatId,
           convo,
           messageId,
-          isWebSearchEnabled
+          isWebSearchEnabled,
         );
 
         scrollToBottom("smooth");
@@ -2139,7 +2149,7 @@ function PersonalChatShell({ currentUser }) {
 
   const renderAttachBar = () => {
     const chips = chatAttachments.filter((att) =>
-      pendingAttachmentIds.includes(att.id)
+      pendingAttachmentIds.includes(att.id),
     );
     if (chips.length === 0) return null;
 
@@ -2220,7 +2230,7 @@ function PersonalChatShell({ currentUser }) {
               <Messages ref={messagesContainerRef}>
                 {messages.map((m, index) => {
                   const messageAttachments = chatAttachments.filter(
-                    (att) => att.messageId === m.id
+                    (att) => att.messageId === m.id,
                   );
                   const isLast = index === messages.length - 1;
 
@@ -2252,10 +2262,10 @@ function PersonalChatShell({ currentUser }) {
                                     {att.status === "uploaded"
                                       ? "Attached"
                                       : att.status === "processing"
-                                      ? "Processing"
-                                      : att.status === "error"
-                                      ? "Error"
-                                      : att.status}
+                                        ? "Processing"
+                                        : att.status === "error"
+                                          ? "Error"
+                                          : att.status}
                                   </AttachStatus>
                                 )}
                               </AttachChip>
@@ -2493,20 +2503,20 @@ function PersonalChatShell({ currentUser }) {
                 onClick={async () => {
                   try {
                     setPendingAttachmentIds((prev) =>
-                      prev.filter((id) => id !== deleteAttachmentTarget.id)
+                      prev.filter((id) => id !== deleteAttachmentTarget.id),
                     );
 
                     if (deleteAttachmentTarget.filePath) {
                       try {
                         const storageRef = ref(
                           storage,
-                          deleteAttachmentTarget.filePath
+                          deleteAttachmentTarget.filePath,
                         );
                         await deleteObject(storageRef);
                       } catch (e2) {
                         console.warn(
                           "Failed to delete attachment file from Storage",
-                          e2
+                          e2,
                         );
                       }
                     }
@@ -2517,7 +2527,7 @@ function PersonalChatShell({ currentUser }) {
                         "vetPersonalChats",
                         currentUser.uid,
                         "attachments",
-                        deleteAttachmentTarget.id
+                        deleteAttachmentTarget.id,
                       );
                       await deleteDoc(attachmentRef);
                     }
@@ -2608,7 +2618,7 @@ function ChatShell({
 
     if (nearBottom && visibleChatCount < activeCaseChats.length) {
       setVisibleChatCount((current) =>
-        Math.min(current + CHAT_PAGE_SIZE, activeCaseChats.length)
+        Math.min(current + CHAT_PAGE_SIZE, activeCaseChats.length),
       );
     }
   };
@@ -2656,7 +2666,7 @@ function ChatShell({
   useClickOutside(
     attachMenuContainerRef,
     () => setAttachMenuOpen(false),
-    attachMenuOpen
+    attachMenuOpen,
   );
 
   useEffect(() => {
@@ -2690,7 +2700,7 @@ function ChatShell({
         convo,
         last.id,
         isWebSearchEnabled,
-        isInstructionApplied && !!instructionText
+        isInstructionApplied && !!instructionText,
       );
     }
   }, [
@@ -2766,14 +2776,14 @@ function ChatShell({
       caseId,
       "chats",
       chatId,
-      "messages"
+      "messages",
     );
     const qMsgs = query(msgsCol, orderBy("createdAt", "asc"));
 
     const unsub = onSnapshot(qMsgs, (snap) => {
       const rows = [];
       snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
+        rows.push({ id: docSnap.id, ...docSnap.data() }),
       );
       setMessages(rows);
     });
@@ -2792,14 +2802,14 @@ function ChatShell({
       firestore,
       "vetAiCases",
       caseId,
-      "attachments"
+      "attachments",
     );
     const qAtt = query(attachmentsCol, orderBy("createdAt", "asc"));
 
     const unsub = onSnapshot(qAtt, (snap) => {
       const rows = [];
       snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
+        rows.push({ id: docSnap.id, ...docSnap.data() }),
       );
       setCaseAttachments(rows);
     });
@@ -2906,7 +2916,8 @@ function ChatShell({
   };
 
   const hasUploadingPending = caseAttachments.some(
-    (att) => pendingAttachmentIds.includes(att.id) && att.status === "uploading"
+    (att) =>
+      pendingAttachmentIds.includes(att.id) && att.status === "uploading",
   );
 
   const callAssistant = async (
@@ -2916,7 +2927,7 @@ function ChatShell({
     convo,
     triggerMessageId,
     webSearchEnabled,
-    useInstruction
+    useInstruction,
   ) => {
     try {
       const payload = {
@@ -2935,7 +2946,7 @@ function ChatShell({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       let json;
@@ -2944,7 +2955,7 @@ function ChatShell({
       } catch (e) {
         console.error("Failed to parse vetCaseAssistant response JSON", e);
         throw new Error(
-          `Non-JSON response from vetCaseAssistant (status ${res.status})`
+          `Non-JSON response from vetCaseAssistant (status ${res.status})`,
         );
       }
 
@@ -2955,7 +2966,7 @@ function ChatShell({
           "vetAiCases",
           caseIdArg,
           "chats",
-          chatIdArg
+          chatIdArg,
         );
         const msgsCol = collection(chatDocRef, "messages");
 
@@ -2976,7 +2987,7 @@ function ChatShell({
         "vetAiCases",
         caseIdArg,
         "chats",
-        chatIdArg
+        chatIdArg,
       );
       const msgsCol = collection(chatDocRef, "messages");
 
@@ -3038,7 +3049,7 @@ function ChatShell({
       firestore,
       "vetAiCases",
       caseId,
-      "attachments"
+      "attachments",
     );
 
     const attachmentDocRef = await addDoc(attachmentsCol, {
@@ -3063,7 +3074,7 @@ function ChatShell({
     const attachmentId = attachmentDocRef.id;
 
     setPendingAttachmentIds((prev) =>
-      prev.includes(attachmentId) ? prev : [...prev, attachmentId]
+      prev.includes(attachmentId) ? prev : [...prev, attachmentId],
     );
     setUploadProgress((prev) => ({ ...prev, [attachmentId]: 0 }));
 
@@ -3102,7 +3113,7 @@ function ChatShell({
           const { [attachmentId]: _ignore, ...rest } = prev;
           return rest;
         });
-      }
+      },
     );
   };
 
@@ -3130,18 +3141,18 @@ function ChatShell({
           f &&
           (f.type === "application/pdf" ||
             (typeof f.name === "string" &&
-              f.name.toLowerCase().endsWith(".pdf")))
+              f.name.toLowerCase().endsWith(".pdf"))),
       );
       if (!pdfs.length) return;
 
       // Enforce per-file size limit
       const oversized = pdfs.filter(
-        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES
+        (f) => typeof f.size === "number" && f.size > MAX_FILE_SIZE_BYTES,
       );
       if (oversized.length) {
         alert("Some files are larger than 10 MB and were skipped.");
         pdfs = pdfs.filter(
-          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES
+          (f) => typeof f.size === "number" && f.size <= MAX_FILE_SIZE_BYTES,
         );
         if (!pdfs.length) return;
       }
@@ -3150,8 +3161,8 @@ function ChatShell({
         caseAttachments
           .filter((att) => pendingAttachmentIds.includes(att.id))
           .map(
-            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att)
-          )
+            (att) => att.fileFingerprint || fingerprintFromAttachmentDoc(att),
+          ),
       );
 
       const seen = new Set();
@@ -3174,7 +3185,7 @@ function ChatShell({
       const existingCount = pendingAttachmentIds.length;
       if (existingCount >= MAX_ATTACHMENTS_PER_MESSAGE) {
         alert(
-          "You can attach up to 10 files per message. Remove one before adding more."
+          "You can attach up to 10 files per message. Remove one before adding more.",
         );
         return;
       }
@@ -3184,7 +3195,7 @@ function ChatShell({
         alert(
           `You can only add ${availableSlots} more attachment${
             availableSlots === 1 ? "" : "s"
-          } (limit is 10). The rest were skipped.`
+          } (limit is 10). The rest were skipped.`,
         );
         toUpload = toUpload.slice(0, availableSlots);
       }
@@ -3192,7 +3203,7 @@ function ChatShell({
       if (!toUpload.length) return;
 
       await Promise.all(
-        toUpload.map(({ file, fp }) => uploadOneCaseAttachmentPdf(file, fp))
+        toUpload.map(({ file, fp }) => uploadOneCaseAttachmentPdf(file, fp)),
       );
     } catch (err) {
       console.error("Failed to attach files", err);
@@ -3277,11 +3288,11 @@ function ChatShell({
                   chatId: newChatId,
                   messageId,
                   updatedAt: now,
-                }
+                },
               ).catch((err) => {
                 console.warn("Failed to link attachment", attId, err);
-              })
-            )
+              }),
+            ),
           );
         }
 
@@ -3304,7 +3315,7 @@ function ChatShell({
           "vetAiCases",
           caseId,
           "chats",
-          chatId
+          chatId,
         );
         const msgsCol = collection(chatDocRef, "messages");
 
@@ -3337,11 +3348,11 @@ function ChatShell({
                   chatId,
                   messageId,
                   updatedAt: now,
-                }
+                },
               ).catch((err) => {
                 console.warn("Failed to link attachment", attId, err);
-              })
-            )
+              }),
+            ),
           );
         }
 
@@ -3358,7 +3369,7 @@ function ChatShell({
           convo,
           messageId,
           isWebSearchEnabled,
-          isInstructionApplied && !!instructionText
+          isInstructionApplied && !!instructionText,
         );
 
         scrollToBottom("smooth");
@@ -3400,7 +3411,7 @@ function ChatShell({
 
   const renderAttachBar = () => {
     const chips = caseAttachments.filter((att) =>
-      pendingAttachmentIds.includes(att.id)
+      pendingAttachmentIds.includes(att.id),
     );
     if (chips.length === 0) return null;
 
@@ -3751,7 +3762,7 @@ function ChatShell({
               <Messages ref={messagesContainerRef}>
                 {messages.map((m, index) => {
                   const messageAttachments = caseAttachments.filter(
-                    (att) => att.chatId === chatId && att.messageId === m.id
+                    (att) => att.chatId === chatId && att.messageId === m.id,
                   );
                   const isLast = index === messages.length - 1;
 
@@ -3783,10 +3794,10 @@ function ChatShell({
                                     {att.status === "uploaded"
                                       ? "Attached"
                                       : att.status === "processing"
-                                      ? "Processing"
-                                      : att.status === "error"
-                                      ? "Error"
-                                      : att.status}
+                                        ? "Processing"
+                                        : att.status === "error"
+                                          ? "Error"
+                                          : att.status}
                                   </AttachStatus>
                                 )}
                               </AttachChip>
@@ -4004,20 +4015,20 @@ function ChatShell({
                 onClick={async () => {
                   try {
                     setPendingAttachmentIds((prev) =>
-                      prev.filter((id) => id !== deleteAttachmentTarget.id)
+                      prev.filter((id) => id !== deleteAttachmentTarget.id),
                     );
 
                     if (deleteAttachmentTarget.filePath) {
                       try {
                         const storageRef = ref(
                           storage,
-                          deleteAttachmentTarget.filePath
+                          deleteAttachmentTarget.filePath,
                         );
                         await deleteObject(storageRef);
                       } catch (e2) {
                         console.warn(
                           "Failed to delete attachment file from Storage",
-                          e2
+                          e2,
                         );
                       }
                     }
@@ -4027,7 +4038,7 @@ function ChatShell({
                       "vetAiCases",
                       caseId,
                       "attachments",
-                      deleteAttachmentTarget.id
+                      deleteAttachmentTarget.id,
                     );
                     await deleteDoc(attachmentRef);
                   } catch (err) {
@@ -4096,7 +4107,7 @@ export default function AiLibraryPage() {
 
   // track which personal chat is active from URL
   const personalChatMatch = location.pathname.match(
-    /\/ai\/library\/personal\/([^/]+)/
+    /\/ai\/library\/personal\/([^/]+)/,
   );
   const activePersonalChatIdFromUrl = personalChatMatch
     ? personalChatMatch[1]
@@ -4108,7 +4119,7 @@ export default function AiLibraryPage() {
   const activeCaseIdFromUrl = caseMatch ? caseMatch[1] : null;
 
   const chatMatch = location.pathname.match(
-    /\/ai\/library\/p\/[^/]+\/c\/([^/]+)/
+    /\/ai\/library\/p\/[^/]+\/c\/([^/]+)/,
   );
   const activeChatIdFromUrl = chatMatch ? chatMatch[1] : null;
 
@@ -4117,7 +4128,7 @@ export default function AiLibraryPage() {
   useClickOutside(
     profileMenuRef,
     () => setShowProfileMenu(false),
-    showProfileMenu
+    showProfileMenu,
   );
 
   useClickOutside(
@@ -4126,7 +4137,7 @@ export default function AiLibraryPage() {
       setOpenSourceId(null);
       setSourceMenuPosition(null);
     },
-    !!openSourceId
+    !!openSourceId,
   );
 
   useEffect(() => {
@@ -4193,7 +4204,7 @@ export default function AiLibraryPage() {
     const qCases = query(
       collection(firestore, "vetAiCases"),
       where("vetUid", "==", currentUser.uid),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
     );
 
     const unsub = onSnapshot(
@@ -4201,7 +4212,7 @@ export default function AiLibraryPage() {
       (snap) => {
         const rows = [];
         snap.forEach((docSnap) =>
-          rows.push({ id: docSnap.id, ...docSnap.data() })
+          rows.push({ id: docSnap.id, ...docSnap.data() }),
         );
         setCases(rows);
         setCasesLoading(false);
@@ -4209,7 +4220,7 @@ export default function AiLibraryPage() {
       (err) => {
         console.error("Error loading cases:", err);
         setCasesLoading(false);
-      }
+      },
     );
 
     return () => unsub();
@@ -4228,14 +4239,14 @@ export default function AiLibraryPage() {
       firestore,
       "vetAiCases",
       activeCaseIdFromUrl,
-      "chats"
+      "chats",
     );
     const qChats = query(chatsCol, orderBy("createdAt", "desc"));
 
     const unsub = onSnapshot(qChats, (snap) => {
       const rows = [];
       snap.forEach((docSnap) =>
-        rows.push({ id: docSnap.id, ...docSnap.data() })
+        rows.push({ id: docSnap.id, ...docSnap.data() }),
       );
       setActiveCaseChats(rows);
     });
@@ -4255,7 +4266,7 @@ export default function AiLibraryPage() {
     const qSources = query(
       collection(firestore, "vetLibrarySources"),
       where("vetUid", "==", currentUser.uid),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
     );
 
     const unsub = onSnapshot(
@@ -4263,7 +4274,7 @@ export default function AiLibraryPage() {
       (snap) => {
         const rows = [];
         snap.forEach((docSnap) =>
-          rows.push({ id: docSnap.id, ...docSnap.data() })
+          rows.push({ id: docSnap.id, ...docSnap.data() }),
         );
         setSources(rows);
         setSourcesLoading(false);
@@ -4271,7 +4282,7 @@ export default function AiLibraryPage() {
       (err) => {
         console.error("Error loading sources:", err);
         setSourcesLoading(false);
-      }
+      },
     );
 
     return () => unsub();
@@ -4288,7 +4299,7 @@ export default function AiLibraryPage() {
       firestore,
       "vetLibrarySources",
       openSourceId,
-      "parts"
+      "parts",
     );
     const qParts = query(partsCol, orderBy("partIndex", "asc"));
 
@@ -4299,7 +4310,7 @@ export default function AiLibraryPage() {
       (snap) => {
         const rows = [];
         snap.forEach((docSnap) =>
-          rows.push({ id: docSnap.id, ...docSnap.data() })
+          rows.push({ id: docSnap.id, ...docSnap.data() }),
         );
         setOpenSourceParts(rows);
         setOpenSourcePartsLoading(false);
@@ -4307,7 +4318,7 @@ export default function AiLibraryPage() {
       (err) => {
         console.error("Error loading source parts:", err);
         setOpenSourcePartsLoading(false);
-      }
+      },
     );
 
     return () => unsub();
@@ -4326,7 +4337,7 @@ export default function AiLibraryPage() {
       firestore,
       "vetPersonalChats",
       currentUser.uid,
-      "chats"
+      "chats",
     );
 
     const qPersonal = query(personalChatsCol, orderBy("createdAt", "desc"));
@@ -4336,7 +4347,7 @@ export default function AiLibraryPage() {
       (snap) => {
         const rows = [];
         snap.forEach((docSnap) =>
-          rows.push({ id: docSnap.id, ...docSnap.data() })
+          rows.push({ id: docSnap.id, ...docSnap.data() }),
         );
         setPersonalChats(rows);
         setPersonalChatsLoading(false);
@@ -4344,7 +4355,7 @@ export default function AiLibraryPage() {
       (err) => {
         console.error("Error loading personal chats:", err);
         setPersonalChatsLoading(false);
-      }
+      },
     );
 
     return () => unsub();
@@ -4593,7 +4604,7 @@ export default function AiLibraryPage() {
         "vetAiCases",
         editingChatCaseId,
         "chats",
-        editingChatId
+        editingChatId,
       );
       await updateDoc(chatRef, {
         title,
@@ -4629,7 +4640,7 @@ export default function AiLibraryPage() {
         "vetPersonalChats",
         currentUser.uid,
         "chats",
-        editingPersonalChatId
+        editingPersonalChatId,
       );
       await updateDoc(chatRef, {
         title,
@@ -4739,7 +4750,7 @@ export default function AiLibraryPage() {
           "vetAiCases",
           deleteTarget.caseId,
           "chats",
-          deleteTarget.id
+          deleteTarget.id,
         );
         await deleteDoc(chatRef);
 
@@ -4755,7 +4766,7 @@ export default function AiLibraryPage() {
           "vetPersonalChats",
           currentUser.uid,
           "chats",
-          deleteTarget.id
+          deleteTarget.id,
         );
         await deleteDoc(chatRef);
 
@@ -4835,7 +4846,7 @@ export default function AiLibraryPage() {
             s.fileName.trim().toLowerCase() ===
               file.name.trim().toLowerCase() &&
             typeof s.fileSizeBytes === "number" &&
-            s.fileSizeBytes === file.size))
+            s.fileSizeBytes === file.size)),
     );
 
     if (existing) {
@@ -4889,7 +4900,7 @@ export default function AiLibraryPage() {
         "state_changed",
         null,
         (error) => reject(error),
-        () => resolve()
+        () => resolve(),
       );
     });
 
@@ -4951,7 +4962,7 @@ export default function AiLibraryPage() {
           f &&
           (f.type === "application/pdf" ||
             (typeof f.name === "string" &&
-              f.name.toLowerCase().endsWith(".pdf")))
+              f.name.toLowerCase().endsWith(".pdf"))),
       );
 
       if (!pdfs.length) {
@@ -4986,7 +4997,7 @@ export default function AiLibraryPage() {
       const results = await runWithConcurrency(
         uniquePdfs,
         MAX_PARALLEL_UPLOADS,
-        uploadOneLibraryPdf
+        uploadOneLibraryPdf,
       );
 
       const skippedExisting = results
@@ -5054,7 +5065,7 @@ export default function AiLibraryPage() {
         "vetLibrarySources",
         sourceId,
         "parts",
-        partId
+        partId,
       );
       await updateDoc(partRef, {
         status: "pending",
@@ -5084,9 +5095,9 @@ export default function AiLibraryPage() {
               progress: 0,
               errorMessage: null,
               updatedAt: serverTimestamp(),
-            }
-          )
-        )
+            },
+          ),
+        ),
       );
     } catch (err) {
       console.error("Failed to retry all failed parts:", err);
@@ -5212,11 +5223,11 @@ export default function AiLibraryPage() {
                   typeof s.overallProgress === "number"
                     ? s.overallProgress
                     : s.status === "ready"
-                    ? 100
-                    : 0;
+                      ? 100
+                      : 0;
                 const percent = Math.max(
                   0,
-                  Math.min(100, Math.round(rawPercent))
+                  Math.min(100, Math.round(rawPercent)),
                 );
 
                 let statusLabel;
@@ -5365,7 +5376,7 @@ export default function AiLibraryPage() {
                               typeof p.progress === "number"
                                 ? Math.max(
                                     0,
-                                    Math.min(100, Math.round(p.progress))
+                                    Math.min(100, Math.round(p.progress)),
                                   )
                                 : 0;
 
@@ -5373,12 +5384,12 @@ export default function AiLibraryPage() {
                               p.status === "ready"
                                 ? "Indexed"
                                 : p.status === "processing"
-                                ? "Indexing..."
-                                : p.status === "pending"
-                                ? "Queued"
-                                : p.status === "error"
-                                ? "Error"
-                                : p.status || "Unknown";
+                                  ? "Indexing..."
+                                  : p.status === "pending"
+                                    ? "Queued"
+                                    : p.status === "error"
+                                      ? "Error"
+                                      : p.status || "Unknown";
 
                             return (
                               <SourcePartRow key={p.id}>
@@ -5775,10 +5786,10 @@ export default function AiLibraryPage() {
               {deleteTarget.type === "patient"
                 ? "Delete patient"
                 : deleteTarget.type === "chat"
-                ? "Delete chat"
-                : deleteTarget.type === "personalChat"
-                ? "Delete personal chat"
-                : "Delete from library"}
+                  ? "Delete chat"
+                  : deleteTarget.type === "personalChat"
+                    ? "Delete personal chat"
+                    : "Delete from library"}
             </ModalTitle>
 
             <ModalSubtitle>
@@ -5834,7 +5845,7 @@ export default function AiLibraryPage() {
                       title: rowMenu.name,
                       lastMessagePreview: rowMenu.name,
                     },
-                    rowMenu.origin || "sidebar" // NEW
+                    rowMenu.origin || "sidebar", // NEW
                   );
                 } else if (rowMenu.kind === "personal") {
                   beginRenamePersonalChat({
