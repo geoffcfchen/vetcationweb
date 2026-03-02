@@ -368,7 +368,7 @@ export default function RawUploadRecordCard({ record }) {
       {record.summaryText && (
         <SummaryBlock>
           <SummaryLabel>System Summary</SummaryLabel>
-          <SummaryText>{record.summaryText}</SummaryText>
+          <SummaryText>{record.ai.rawTextForEmbedding}</SummaryText>
         </SummaryBlock>
       )}
     </Card>
