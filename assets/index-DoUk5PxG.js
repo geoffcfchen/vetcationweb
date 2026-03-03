@@ -6386,7 +6386,7 @@ Time: ${a.time}`)}function VetRow({user:a,clinicName:e}){const o=Array.isArray(a
   margin: 10px 2px 0;
   font-size: 12px;
   color: #6b7280;
-`;function RegisterPage(){const[a,e]=reactExports.useState(!1);return jsxRuntimeExports.jsxs(SiteShell,{children:[jsxRuntimeExports.jsx(HeroSection$1,{onGetStarted:()=>e(!0)}),jsxRuntimeExports.jsx(RegisterSection,{}),jsxRuntimeExports.jsx(TestimonialsSection,{}),jsxRuntimeExports.jsx(GetStartedCallout,{qrCodeLink:qrCodeImage})]})}const GlobalStyle=ht`
+`;function RegisterPage(){const[a,e]=reactExports.useState(!1);return jsxRuntimeExports.jsxs(SiteShell,{children:[jsxRuntimeExports.jsx(HeroSection$1,{onGetStarted:()=>e(!0)}),jsxRuntimeExports.jsx(RegisterSection,{}),jsxRuntimeExports.jsx(TestimonialsSection,{}),jsxRuntimeExports.jsx(GetStartedCallout,{qrCodeLink:qrCodeImage}),jsxRuntimeExports.jsx(LoginModal,{open:a,onClose:()=>e(!1)})]})}const GlobalStyle=ht`
   body {
     font-family: 'Arial', sans-serif; // You can customize this with any sans-serif font you prefer
     margin: 0;
