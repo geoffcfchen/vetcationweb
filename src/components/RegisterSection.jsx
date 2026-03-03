@@ -221,7 +221,7 @@ function RegisterSection() {
             scattered across email and portals.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1624%202.webp?alt=media&token=9f39d7bb-6a98-4bdc-a064-9c1cb02c8fc2"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1626%202.webp?alt=media&token=e6803fd3-e0cb-4913-95ea-4a568bbf3e6f"
         headerFontSize={45}
       />
       <Feature
