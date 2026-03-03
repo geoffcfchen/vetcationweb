@@ -225,15 +225,28 @@ function RegisterSection() {
         headerFontSize={45}
       />
       <Feature
-        heading="Step 3: View the timeline and share instantly"
+        heading="Step 3: View the timeline"
         text={
           <>
-            We transform scattered files into a structured medical memory. In
-            emergencies, travel, or referrals, you can share your pet’s full
-            history in seconds.
+            MyPet Health organizes visits, diagnoses, treatments, labs, and
+            imaging into a clear chronological timeline. Scroll through your
+            pet’s entire medical story in one place instead of opening dozens of
+            PDFs.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1625.webp?alt=media&token=15d7368d-c3fd-4e65-a15c-6d5b76285671"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1628.webp?alt=media&token=edc58db6-1252-46ad-9736-a9c0c4b9a787"
+        headerFontSize={45}
+      />
+      <Feature
+        heading="Step 4: Share a vet-ready summary"
+        text={
+          <>
+            Instantly generate a structured summary from your timeline. When you
+            visit a new clinic or face an emergency, share a concise, organized
+            overview so any vet can understand the situation in seconds.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1627.webp?alt=media&token=1f2ad88b-2351-425e-a7fc-deb6805f6edd"
         headerFontSize={45}
       />
 

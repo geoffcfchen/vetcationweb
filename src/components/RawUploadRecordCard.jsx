@@ -71,14 +71,14 @@ function getIndexStatusMeta(status) {
   switch (status) {
     case "ready":
       return {
-        label: "System indexed",
+        label: "System memorized",
         status: "ready",
         Icon: MdCheckCircle,
       };
     case "processing":
     case "pending":
       return {
-        label: "System indexing",
+        label: "System memorizing...",
         status: "processing",
         Icon: MdAutorenew,
       };
