@@ -133,9 +133,6 @@ function RegisterSection() {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState("mobile");
 
-  const PRODUCT_NAME = "MyPet Health";
-  const BRAND_FULL = "MyPet Health by Vetcation";
-
   return (
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
@@ -216,6 +213,7 @@ function RegisterSection() {
       {viewMode === "mobile" ? (
         <>
           <Feature
+            key={`${viewMode}-step1`}
             heading="Step 1: Create your pet"
             text={
               <>
@@ -229,6 +227,7 @@ function RegisterSection() {
           />
 
           <Feature
+            key={`${viewMode}-step2`}
             heading="Step 2: Upload or request records"
             text={
               <>
@@ -242,6 +241,7 @@ function RegisterSection() {
           />
 
           <Feature
+            key={`${viewMode}-step3`}
             heading="Step 3: View the timeline"
             text={
               <>
@@ -256,6 +256,7 @@ function RegisterSection() {
           />
 
           <Feature
+            key={`${viewMode}-step4`}
             heading="Step 4: Share a vet-ready summary"
             text={
               <>
@@ -274,6 +275,7 @@ function RegisterSection() {
       ) : (
         <>
           <Feature
+            key={`${viewMode}-step1`}
             heading="Step 1: Create your pet"
             text={
               <>
@@ -284,11 +286,12 @@ function RegisterSection() {
             }
             // Replace with a desktop screenshot when you have it
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-            headerFontSize={45}
+            headerFontSize={30}
             mediaVariant="desktop"
           />
 
           <Feature
+            key={`${viewMode}-step2`}
             heading="Step 2: Upload records faster on desktop"
             text={
               <>
@@ -299,11 +302,12 @@ function RegisterSection() {
             }
             // Replace with a desktop uploader screenshot when you have it
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-            headerFontSize={45}
+            headerFontSize={30}
             mediaVariant="desktop"
           />
 
           <Feature
+            key={`${viewMode}-step3`}
             heading="Step 3: Review the full timeline"
             text={
               <>
@@ -314,11 +318,12 @@ function RegisterSection() {
             }
             // Replace with desktop timeline screenshot when you have it
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-            headerFontSize={45}
+            headerFontSize={30}
             mediaVariant="desktop"
           />
 
           <Feature
+            key={`${viewMode}-step4`}
             heading="Step 4: Share a vet-ready summary"
             text={
               <>
@@ -328,7 +333,7 @@ function RegisterSection() {
               </>
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-            headerFontSize={45}
+            headerFontSize={30}
             linkText={"What vets see when you share"}
             to="/pet-health-record/"
             mediaVariant="desktop"
