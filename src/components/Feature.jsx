@@ -44,12 +44,12 @@ const QRCodeImage = styled.img`
 const FeatureBlock = styled(motion.article)`
   display: grid;
   gap: 4rem;
-  margin: 12rem 0;
+  margin: 8rem 0;
   outline: none; /* for custom focus when clickable */
   cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   &:first-of-type {
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 
   &:last-of-type {

@@ -103,7 +103,9 @@ const MapCard = styled.div`
   margin-top: 16px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.04);
   background: #fff;
 `;
 
@@ -118,7 +120,7 @@ function RegisterPage() {
   return (
     <>
       <Header onLoginClick={() => setShowLogin(true)} />
-      <HeroSection />
+      <HeroSection onGetStarted={() => setShowLogin(true)} />
       <RegisterSection />
 
       {/* —— Map Section Shell (copy + legend + compliance link) —— */}

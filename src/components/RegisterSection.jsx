@@ -13,6 +13,34 @@ const FeaturesContainer = styled.section`
   padding: 0rem 2rem;
 `;
 
+// NEW
+const SectionHeader = styled.div`
+  padding: 3.25rem 0 1.25rem;
+`;
+
+const Eyebrow = styled.div`
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+`;
+
+const Headline = styled.h2`
+  margin: 10px 0 8px;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.2;
+  font-weight: 800;
+  color: #0f172a;
+`;
+
+const Subhead = styled.p`
+  margin: 0;
+  max-width: 820px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #334155;
+`;
+
 const CTAGroup = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 equal columns on wide screens */
@@ -44,7 +72,9 @@ const CTAButton = styled.button`
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
-  transition: background 120ms ease, border-color 120ms ease,
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
     transform 120ms ease;
 
   /* Make each button fill its grid cell equally */
@@ -85,6 +115,26 @@ const ComplianceButton = styled(CTAButton)`
   }
 `;
 
+const SectionIntro = styled.div`
+  padding: 3.5rem 0 0;
+`;
+
+const SectionKicker = styled.div`
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-weight: 700;
+`;
+
+const SectionTitle = styled.h2`
+  margin: 10px 0 0;
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #000;
+`;
+
 function RegisterSection() {
   const navigate = useNavigate();
 
@@ -94,7 +144,7 @@ function RegisterSection() {
   return (
     <FeaturesContainer>
       {/* Top-centered, subtle CTA row */}
-      <CTAGroup aria-label="Audience quick links">
+      {/* <CTAGroup aria-label="Audience quick links">
         <CTAButton
           onClick={() =>
             navigate("/telemedicine-info/clients/clientIntroToVetcation/")
@@ -137,74 +187,84 @@ function RegisterSection() {
           />
           Compliance
         </ComplianceButton>
-      </CTAGroup>
+      </CTAGroup> */}
 
       {/* Hero/content below */}
+      <SectionHeader>
+        <Eyebrow>How it works</Eyebrow>
+        <Headline>Create a pet record in minutes</Headline>
+        <Subhead>
+          Upload PDFs, photos, or exports from any clinic, shelter, or ER. We
+          organize everything into a vet-ready timeline you can share instantly,
+          especially in emergencies.
+        </Subhead>
+      </SectionHeader>
+
       <Feature
-        heading="Universal pet health records"
+        heading="Step1: create your pet"
         text={
           <>
-            <a href="/mypet-health/">MyPet Health</a> pulls your pet’s scattered
-            records from any clinic into one secure place and turns them into a
-            clear, vet-ready timeline. Share it in one click.
+            Start by creating your pet profile. It only takes a minute, and it
+            gives you a secure home for your pet’s full medical history, ready
+            to share in an emergency.
           </>
         }
-        linkText={"learn more"}
-        linkHref={"/pet-health-record/"}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1533.webp?alt=media&token=b40a6669-3cfc-48e7-9d89-ba0c779ed6ff"
-        headerFontSize={50}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623_2.webp?alt=media&token=9a908f83-ce0d-40da-9a43-acb6a0087352"
+        headerFontSize={45}
+      />
+      <Feature
+        heading="Step 2: Upload or request records"
+        text={
+          <>
+            Upload what you already have, or send a secure link to your clinic
+            to request records. Everything flows into one place instead of being
+            scattered across email and portals.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1624%202.webp?alt=media&token=9f39d7bb-6a98-4bdc-a064-9c1cb02c8fc2"
+        headerFontSize={45}
+      />
+      <Feature
+        heading="Step 3: View the timeline and share instantly"
+        text={
+          <>
+            We transform scattered files into a structured medical memory. In
+            emergencies, travel, or referrals, you can share your pet’s full
+            history in seconds.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1625.webp?alt=media&token=15d7368d-c3fd-4e65-a15c-6d5b76285671"
+        headerFontSize={45}
       />
 
-      <Feature
+      {/* <Feature
         heading="Message your vet"
         text={`Message your vet when you need help, and keep everything in one place so they can quickly understand your pet’s history and what other vets have already tried.`}
-        // to="/telemedicine-info"
-        // qrCodeLink={qrCodeImage}
-        // image={{
-        //   webp: wordpress1Webp,
-        //   webp2x: wordpress1Webp,
-        //   png: wordpress1Png,
-        //   png2x: wordpress1Png,
-        // }}
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
         headerFontSize={45}
-      />
+      /> */}
 
-      <Feature
+      {/* <Feature
         heading="Get medications"
         text="Start with messaging so your vet can understand what’s going on. When treatment makes sense, you can schedule a video visit and get medications or refills delivered, where allowed."
-        // to="/telemedicine-info"
-        // qrCodeLink={qrCodeImage}
-        // image={{
-        //   webp: wordpress1Webp,
-        //   webp2x: wordpress1Webp,
-        //   png: wordpress1Png,
-        //   png2x: wordpress1Png,
-        // }}
+
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee"
         headerFontSize={45}
-      />
-      <Feature
+      /> */}
+      {/* <Feature
         heading="The professional community"
         text="Connect with pet owners and veterinary professionals, share experiences, and learn from real-world questions and answers in a supportive, education-focused community."
-        // to="/telemedicine-info"
-        // qrCodeLink={qrCodeImage}
-        // image={{
-        //   webp: wordpress1Webp,
-        //   webp2x: wordpress1Webp,
-        //   png: wordpress1Png,
-        //   png2x: wordpress1Png,
-        // }}
+
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/IMG_7383_compressed.png?alt=media&token=4f4cc1eb-073b-4a46-acba-1dedd89943ad"
         headerFontSize={45}
-      />
-      <Feature
+      /> */}
+      {/* <Feature
         heading="The Radar"
         text="Explore transparent, anonymous clinic insights. Compare real prices, see what pet owners experienced, and understand whether a clinic is privately owned or corporate-owned. Radar helps you choose the right clinic with confidence, not guesswork."
         // to="/radar"
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1514.webp?alt=media&token=3f9f3f91-e706-4931-9d84-b28f0b7d1823"
         headerFontSize={45}
-      />
+      /> */}
       {/* <Feature
         heading="Vetcation"
         text="Protect your pet. Pull their medical records into one place. Share in 1 click"

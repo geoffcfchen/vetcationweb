@@ -65,9 +65,10 @@ const BrandKicker = styled.div`
 `;
 
 const HeroHeader = styled.h1`
+  max-width: 760px;
   color: #ffffff;
   margin-bottom: 1rem;
-  font-size: 60px;
+  font-size: clamp(40px, 5vw, 56px);
   font-weight: 800;
   line-height: 1.1;
 
@@ -125,18 +126,23 @@ const PrimaryButton = styled(BootstrapButton).attrs({
   }
 `;
 
-const SecondaryButton = styled(BootstrapButton).attrs({
-  variant: "outline-light",
-})`
+const SecondaryButton = styled(BootstrapButton)`
   padding: 1.2rem 2.8rem;
   text-transform: uppercase;
   border-radius: 999px;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.04em;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    color: #ffffff;
+  }
 `;
 
 const HeroTitleLink = styled(RouterLink)`
@@ -154,27 +160,46 @@ const HeroTitleLink = styled(RouterLink)`
   }
 `;
 
-function HeroSection() {
+const NoWrap = styled.span`
+  white-space: nowrap;
+
+  @media (max-width: 560px) {
+    white-space: normal;
+  }
+`;
+
+function HeroSection({ onGetStarted }) {
   return (
     <StyledHeroSection>
       <LeftGradient />
       <Content>
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
-            <Col md={7} lg={6}>
-              <BrandKicker>by Vetcation</BrandKicker>
+            <Col md={10} lg={8} xl={7}>
+              <BrandKicker>MyPet Health by Vetcation</BrandKicker>
               <HeroHeader>
-                <HeroTitleLink to="/mypet-health/">MyPet Health</HeroTitleLink>
+                <NoWrap>The universal medical record</NoWrap> <br />
+                for pets
               </HeroHeader>
               <HeroTagline>
-                Keep your pet’s health organized in one place. Pull records from
-                any clinic and share in one click, message your vet when you
-                need help, and get meds when appropriate.
+                Gather records from every clinic and keep your pet’s full
+                history ready for emergencies, shareable in seconds.
               </HeroTagline>
 
               <ButtonsRow>
-                {/* <PrimaryButton href="/register">Sign up now</PrimaryButton> */}
-                {/* <SecondaryButton href="/demo">Book a walk through</SecondaryButton> */}
+                <PrimaryButton
+                  type="button"
+                  onClick={() => onGetStarted && onGetStarted()}
+                >
+                  Create a pet record
+                </PrimaryButton>
+                <SecondaryButton
+                  as={RouterLink}
+                  to="/pet-health-record/"
+                  type="button"
+                >
+                  See how it works
+                </SecondaryButton>
               </ButtonsRow>
             </Col>
           </Row>
