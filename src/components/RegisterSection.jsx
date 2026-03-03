@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Feature from "./Feature";
@@ -27,7 +27,7 @@ const Eyebrow = styled.div`
 
 const Headline = styled.h2`
   margin: 10px 0 8px;
-  font-size: clamp(28px, 3.6vw, 40px);
+  font-size: clamp(28px, 3.6vw, 45px);
   line-height: 1.2;
   font-weight: 800;
   color: #0f172a;
@@ -42,64 +42,45 @@ const Subhead = styled.p`
 `;
 
 const CTAGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 equal columns on wide screens */
-  gap: 10px;
-  margin: 2.25rem auto 0;
-  max-width: 800px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
   width: 100%;
+`;
 
-  /* Downshift to 2 columns and stay there */
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 480px; /* optional: adjust as you like */
-  }
-  /* Removed the 1-column breakpoint */
+const TogglePill = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* equal width */
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  min-width: 260px; /* ensures nice width */
 `;
 
 const CTAButton = styled.button`
-  --radius: 10px;
-  --pad-y: 10px;
-  --pad-x: 12px;
-
   appearance: none;
-  border: 1px solid #e2e8f0;
-  border-radius: var(--radius);
-  padding: var(--pad-y) var(--pad-x);
-  background: #f7f9fc;
-  color: #0f1217;
-  font-weight: 600;
+  border: 1px solid ${(p) => (p.$active ? "#0f172a" : "transparent")};
+  border-radius: 999px;
+  padding: 10px 0; /* remove horizontal padding */
+  background: ${(p) => (p.$active ? "#0f172a" : "transparent")};
+  color: ${(p) => (p.$active ? "#ffffff" : "#0f1217")};
+  font-weight: 700;
   font-size: 14px;
-  line-height: 1;
   cursor: pointer;
-  transition:
-    background 120ms ease,
-    border-color 120ms ease,
-    transform 120ms ease;
+  transition: all 120ms ease;
 
-  /* Make each button fill its grid cell equally */
-  width: 100%;
-  justify-self: stretch;
-
-  /* Nice centering for text + (optional) icon */
-  display: inline-flex;
+  width: 100%; /* fill grid column */
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
 
   &:hover {
-    background: #eef2f7;
-    border-color: #cbd5e1;
-    transform: translateY(-0.5px);
-  }
-  &:active {
-    transform: translateY(0);
-  }
-  &:focus-visible {
-    outline: 2px solid #9ec1ff;
-    outline-offset: 2px;
+    background: ${(p) => (p.$active ? "#0b1220" : "rgba(15,23,42,0.08)")};
   }
 `;
+
 const ComplianceButton = styled(CTAButton)`
   border-color: #4d9fec;
   background: #f5f9ff; /* subtle cool blue tint */
@@ -135,8 +116,22 @@ const SectionTitle = styled.h2`
   color: #000;
 `;
 
+const HeaderTop = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
 function RegisterSection() {
   const navigate = useNavigate();
+  const [viewMode, setViewMode] = useState("mobile");
 
   const PRODUCT_NAME = "MyPet Health";
   const BRAND_FULL = "MyPet Health by Vetcation";
@@ -198,60 +193,148 @@ function RegisterSection() {
           organize everything into a vet-ready timeline you can share instantly,
           especially in emergencies.
         </Subhead>
+        <CTAGroup aria-label="Choose interface">
+          <TogglePill>
+            <CTAButton
+              type="button"
+              $active={viewMode === "mobile"}
+              onClick={() => setViewMode("mobile")}
+            >
+              Mobile
+            </CTAButton>
+            <CTAButton
+              type="button"
+              $active={viewMode === "desktop"}
+              onClick={() => setViewMode("desktop")}
+            >
+              Desktop
+            </CTAButton>
+          </TogglePill>
+        </CTAGroup>
       </SectionHeader>
 
-      <Feature
-        heading="Step1: Create your pet"
-        text={
-          <>
-            Start by creating your pet profile. It only takes a minute, and it
-            gives you a secure home for your pet’s full medical history, ready
-            to share in an emergency.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623_2.webp?alt=media&token=9a908f83-ce0d-40da-9a43-acb6a0087352"
-        headerFontSize={45}
-      />
-      <Feature
-        heading="Step 2: Upload or request records"
-        text={
-          <>
-            Upload what you already have, or send a secure link to your clinic
-            to request records. Everything flows into one place instead of being
-            scattered across email and portals.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1626%202.webp?alt=media&token=e6803fd3-e0cb-4913-95ea-4a568bbf3e6f"
-        headerFontSize={45}
-      />
-      <Feature
-        heading="Step 3: View the timeline"
-        text={
-          <>
-            MyPet Health memorizes visits, diagnoses, treatments, labs, and
-            imaging into a clear chronological history. Scroll through your
-            pet’s entire medical story in one place instead of opening dozens of
-            PDFs.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1628.webp?alt=media&token=edc58db6-1252-46ad-9736-a9c0c4b9a787"
-        headerFontSize={45}
-      />
-      <Feature
-        heading="Step 4: Share a vet-ready summary"
-        text={
-          <>
-            Instantly generate a structured summary from your timeline. When you
-            visit a new clinic or face an emergency, share a concise, organized
-            overview so any vet can understand the situation in seconds.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1627.webp?alt=media&token=1f2ad88b-2351-425e-a7fc-deb6805f6edd"
-        headerFontSize={45}
-        linkText={"What vets see when you share"}
-        to="/pet-health-record/"
-      />
+      {viewMode === "mobile" ? (
+        <>
+          <Feature
+            heading="Step 1: Create your pet"
+            text={
+              <>
+                Start by creating your pet profile. It only takes a minute, and
+                it gives you a secure home for your pet’s full medical history,
+                ready to share in an emergency.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623_2.webp?alt=media&token=9a908f83-ce0d-40da-9a43-acb6a0087352"
+            headerFontSize={30}
+          />
 
+          <Feature
+            heading="Step 2: Upload or request records"
+            text={
+              <>
+                Upload what you already have, or send a secure link to your
+                clinic to request records. Everything flows into one place
+                instead of being scattered across email and portals.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1626%202.webp?alt=media&token=e6803fd3-e0cb-4913-95ea-4a568bbf3e6f"
+            headerFontSize={30}
+          />
+
+          <Feature
+            heading="Step 3: View the timeline"
+            text={
+              <>
+                MyPet Health memorizes visits, diagnoses, treatments, labs, and
+                imaging into a clear chronological history. Scroll through your
+                pet’s entire medical story in one place instead of opening
+                dozens of PDFs.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1628.webp?alt=media&token=edc58db6-1252-46ad-9736-a9c0c4b9a787"
+            headerFontSize={30}
+          />
+
+          <Feature
+            heading="Step 4: Share a vet-ready summary"
+            text={
+              <>
+                Instantly generate a structured summary from your timeline. When
+                you visit a new clinic or face an emergency, share a concise,
+                organized overview so any vet can understand the situation in
+                seconds.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1627.webp?alt=media&token=1f2ad88b-2351-425e-a7fc-deb6805f6edd"
+            headerFontSize={30}
+            linkText={"What vets see when you share"}
+            to="/pet-health-record/"
+          />
+        </>
+      ) : (
+        <>
+          <Feature
+            heading="Step 1: Create your pet"
+            text={
+              <>
+                Create a profile for each pet so every document, note, and lab
+                stays organized in one place. Perfect if you manage multiple
+                pets or ongoing conditions.
+              </>
+            }
+            // Replace with a desktop screenshot when you have it
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
+            headerFontSize={45}
+            mediaVariant="desktop"
+          />
+
+          <Feature
+            heading="Step 2: Upload records faster on desktop"
+            text={
+              <>
+                Drag-and-drop PDFs and exports from portals, email, or your
+                computer. Keep everything centralized instead of scattered
+                across folders and inboxes.
+              </>
+            }
+            // Replace with a desktop uploader screenshot when you have it
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
+            headerFontSize={45}
+            mediaVariant="desktop"
+          />
+
+          <Feature
+            heading="Step 3: Review the full timeline"
+            text={
+              <>
+                Get a structured timeline with attachments linked as proof. It
+                is easier to compare visits, track labs, and prepare for
+                referrals.
+              </>
+            }
+            // Replace with desktop timeline screenshot when you have it
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
+            headerFontSize={45}
+            mediaVariant="desktop"
+          />
+
+          <Feature
+            heading="Step 4: Share a vet-ready summary"
+            text={
+              <>
+                Share one link before an appointment so the clinic can review
+                history ahead of time. Reduce repeated questions and help vets
+                make decisions faster.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
+            headerFontSize={45}
+            linkText={"What vets see when you share"}
+            to="/pet-health-record/"
+            mediaVariant="desktop"
+          />
+        </>
+      )}
       {/* <Feature
         heading="Message your vet"
         text={`Message your vet when you need help, and keep everything in one place so they can quickly understand your pet’s history and what other vets have already tried.`}

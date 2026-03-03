@@ -208,6 +208,45 @@ const imageVariants = {
   },
 };
 
+const DesktopFrameContainer = styled.div`
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+`;
+
+const BrowserFrame = styled.div`
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b1220;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+`;
+
+const BrowserTopBar = styled.div`
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+`;
+
+const Dot = styled.span`
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+`;
+
+const BrowserBody = styled.div`
+  background: #0b1220;
+`;
+
+const DesktopImage = styled(motion.img)`
+  display: block;
+  width: 100%;
+  height: auto;
+`;
+
 export default function Feature({
   iconId = null,
   heading,
@@ -220,6 +259,7 @@ export default function Feature({
   imageSrc,
   to, // ⬅️ NEW: route to navigate on click (e.g., "/telemedicine-info")
   headerFontSize = 30,
+  mediaVariant = "phone", // "phone" | "desktop"
 }) {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
@@ -329,17 +369,47 @@ export default function Feature({
           <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
         </VideoFrameContainer>
       ) : imageSrc ? (
-        <VideoFrameContainer
-          onClick={clickable ? go : undefined}
-          role={clickable ? "img" : undefined}
-          aria-label={clickable ? `${heading} image` : undefined}
-          tabIndex={clickable ? 0 : undefined}
-          onKeyDown={onKeyDown}
-          style={{ cursor: clickable ? "pointer" : "default" }}
-        >
-          <FramedImage variants={imageVariants} src={imageSrc} alt={heading} />
-          <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
-        </VideoFrameContainer>
+        mediaVariant === "desktop" ? (
+          <DesktopFrameContainer
+            onClick={clickable ? go : undefined}
+            style={{ cursor: clickable ? "pointer" : "default" }}
+            role={clickable ? "img" : undefined}
+            aria-label={clickable ? `${heading} screenshot` : undefined}
+            tabIndex={clickable ? 0 : undefined}
+            onKeyDown={onKeyDown}
+          >
+            <BrowserFrame>
+              <BrowserTopBar aria-hidden="true">
+                <Dot />
+                <Dot />
+                <Dot />
+              </BrowserTopBar>
+              <BrowserBody>
+                <DesktopImage
+                  variants={imageVariants}
+                  src={imageSrc}
+                  alt={heading}
+                />
+              </BrowserBody>
+            </BrowserFrame>
+          </DesktopFrameContainer>
+        ) : (
+          <VideoFrameContainer
+            onClick={clickable ? go : undefined}
+            role={clickable ? "img" : undefined}
+            aria-label={clickable ? `${heading} image` : undefined}
+            tabIndex={clickable ? 0 : undefined}
+            onKeyDown={onKeyDown}
+            style={{ cursor: clickable ? "pointer" : "default" }}
+          >
+            <FramedImage
+              variants={imageVariants}
+              src={imageSrc}
+              alt={heading}
+            />
+            <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
+          </VideoFrameContainer>
+        )
       ) : (
         <picture
           onClick={clickable ? go : undefined}
