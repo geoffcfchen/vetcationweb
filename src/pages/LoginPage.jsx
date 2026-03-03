@@ -268,7 +268,7 @@ function LoginPage() {
   return (
     <>
       <Page>
-        <BrandBar>Vetcation</BrandBar>
+        <BrandBar>MyPet Health</BrandBar>
 
         <Main>
           <Card>

@@ -261,12 +261,12 @@ function LoginModal({ open, onClose }) {
       } else if (!hasPassword && hasGoogle) {
         // Google only account - guide user to use Google button
         setEmailError(
-          "This email is already connected to Google sign in. Please continue with Google."
+          "This email is already connected to Google sign in. Please continue with Google.",
         );
       } else {
         // Other providers - for now, just show a generic message
         setEmailError(
-          "This email is already linked to a different sign in method."
+          "This email is already linked to a different sign in method.",
         );
       }
     } catch (err) {
@@ -291,7 +291,7 @@ function LoginModal({ open, onClose }) {
 
         <Title>Log in or sign up</Title>
         <Subtitle>
-          You will get smarter responses and can upload files, images, and more.
+          Enter your email to get started, or continue with a provider below.
         </Subtitle>
 
         <Providers>
