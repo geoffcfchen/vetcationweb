@@ -12,6 +12,7 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import GetStartedCallout from "../components/GetStartedCallout";
 import StayConnected from "../components/StayConnected";
 import qrCodeImage from "../images/qrcode7.png";
+import SiteShell from "../components/SiteShell";
 
 const MapShell = styled.section`
   background: #f8fafc;
@@ -118,8 +119,8 @@ const FinePrint = styled.p`
 function RegisterPage() {
   const [showLogin, setShowLogin] = useState(false);
   return (
-    <>
-      <Header onLoginClick={() => setShowLogin(true)} />
+    <SiteShell>
+      {/* <Header onLoginClick={() => setShowLogin(true)} /> */}
       <HeroSection onGetStarted={() => setShowLogin(true)} />
       <RegisterSection />
 
@@ -168,7 +169,7 @@ function RegisterPage() {
 
       <Footer />
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
-    </>
+    </SiteShell>
   );
 }
 

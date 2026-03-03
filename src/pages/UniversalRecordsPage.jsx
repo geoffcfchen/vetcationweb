@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GetStartedCallout from "../components/GetStartedCallout";
 import qrCodeImage from "../images/qrcode7.png";
+import SiteShell from "../components/SiteShell";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -141,9 +142,7 @@ const ScreenshotImage = styled.img`
 
 function UniversalRecordsPage() {
   return (
-    <>
-      <Header />
-
+    <SiteShell>
       <PageShell>
         <HeroSection>
           <Max>
@@ -294,7 +293,7 @@ function UniversalRecordsPage() {
 
       <GetStartedCallout qrCodeLink={qrCodeImage} />
       <Footer />
-    </>
+    </SiteShell>
   );
 }
 
