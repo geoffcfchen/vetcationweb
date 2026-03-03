@@ -19,17 +19,16 @@ const Callout = styled.div`
   gap: 1.5rem;
 
   @media (max-width: 768px) {
-    /* since we hide the content, make the QR take the full row and center it */
     grid-template-columns: 1fr;
     justify-items: center;
+    text-align: center;
   }
 `;
-
 const CalloutContent = styled.div`
   text-align: left;
 
   @media (max-width: 768px) {
-    display: none;
+    text-align: center;
   }
 `;
 
@@ -61,7 +60,7 @@ const QRCodeImage = styled.img`
   max-width: 100%;
 
   @media (max-width: 768px) {
-    width: min(500px, 90vw); /* example */
+    width: min(500px, 90vw);
   }
 `;
 
@@ -70,9 +69,10 @@ const GetStartedCallout = ({ qrCodeLink }) => {
     <Container>
       <Callout>
         <CalloutContent>
-          <CalloutHeading>Ready to get started?</CalloutHeading>
+          <CalloutHeading>Create your pet record today</CalloutHeading>
           <CalloutSubheading>
-            Scan the QR code to download the MyPet Health app.
+            Scan to get MyPet Health and upload your pet’s medical records. Keep
+            everything ready to share in seconds, especially in emergencies.
           </CalloutSubheading>
         </CalloutContent>
 
@@ -80,7 +80,7 @@ const GetStartedCallout = ({ qrCodeLink }) => {
           {qrCodeLink && (
             <QRCodeImage
               src={qrCodeLink}
-              alt="Scan to download the Vetcation app"
+              alt="Scan to download the MyPet Health app"
             />
           )}
         </RightSide>

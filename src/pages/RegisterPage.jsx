@@ -11,7 +11,7 @@ import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import GetStartedCallout from "../components/GetStartedCallout";
 import StayConnected from "../components/StayConnected";
-import qrCodeImage from "../images/qrcode6.png";
+import qrCodeImage from "../images/qrcode7.png";
 
 const MapShell = styled.section`
   background: #f8fafc;
