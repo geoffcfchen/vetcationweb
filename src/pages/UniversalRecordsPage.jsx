@@ -1,8 +1,6 @@
 // src/pages/UniversalRecordsPage.jsx
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import GetStartedCallout from "../components/GetStartedCallout";
 import qrCodeImage from "../images/qrcode7.png";
 import SiteShell from "../components/SiteShell";
@@ -130,17 +128,41 @@ const ScreenshotText = styled.p`
 const ScreenshotFrame = styled.div`
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-  background: #0b1220;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
 `;
 
-const ScreenshotImage = styled.img`
+/**
+ * Stack multiple screenshots vertically so they look like one long “stitched” image.
+ * Keep the frame, but render several images inside.
+ */
+const ScreenshotStack = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ScreenshotPart = styled.img`
   display: block;
   width: 100%;
   height: auto;
+
+  /* subtle divider so the seam is not jarring */
+  & + & {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
 `;
 
 function UniversalRecordsPage() {
+  // Up to 3 screenshot URLs. If you only provide 1, it still works.
+  const vetSummaryImages = [
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2",
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.15.30%20PM.webp?alt=media&token=772e38ed-3468-4986-a4c5-5d343eb671a7",
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.30.21%20PM.webp?alt=media&token=3e4d031f-f02c-4bb9-8fc0-e917b033d7f8",
+  ]
+    .filter(Boolean)
+    .slice(0, 3);
+
   return (
     <SiteShell>
       <PageShell>
@@ -158,7 +180,6 @@ function UniversalRecordsPage() {
         </HeroSection>
 
         <ContentSection>
-          {/* What happens after upload */}
           <TwoColumn>
             <ColumnCard>
               <ColumnTitle>What happens after you upload</ColumnTitle>
@@ -201,7 +222,6 @@ function UniversalRecordsPage() {
 
           <SectionDivider />
 
-          {/* What vets see */}
           <ScreenshotSection>
             <ScreenshotShell>
               <ScreenshotHeading>
@@ -211,18 +231,24 @@ function UniversalRecordsPage() {
                 A concise vet-ready summary plus the full timeline, with
                 original records attached for context.
               </ScreenshotText>
+
               <ScreenshotFrame>
-                <ScreenshotImage
-                  src="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-                  alt="Example MyPet Health vet-ready summary view"
-                />
+                <ScreenshotStack>
+                  {vetSummaryImages.map((src, idx) => (
+                    <ScreenshotPart
+                      key={src}
+                      src={src}
+                      alt={`Example MyPet Health vet-ready summary view part ${idx + 1}`}
+                      loading="lazy"
+                    />
+                  ))}
+                </ScreenshotStack>
               </ScreenshotFrame>
             </ScreenshotShell>
           </ScreenshotSection>
 
           <SectionDivider />
 
-          {/* Privacy + control */}
           <TwoColumn>
             <ColumnCard>
               <ColumnTitle>Owner-controlled sharing</ColumnTitle>
@@ -257,7 +283,6 @@ function UniversalRecordsPage() {
 
           <SectionDivider />
 
-          {/* Emergency scenario */}
           <TwoColumn>
             <ColumnCard>
               <ColumnTitle>Emergency example</ColumnTitle>
@@ -290,6 +315,7 @@ function UniversalRecordsPage() {
           </TwoColumn>
         </ContentSection>
       </PageShell>
+
       <GetStartedCallout qrCodeLink={qrCodeImage} />
     </SiteShell>
   );
