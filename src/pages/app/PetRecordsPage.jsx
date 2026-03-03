@@ -158,7 +158,7 @@ export default function PetRecordsPage() {
         ownerUid={uid}
         mode="owner_upload"
         title="Upload to medical memory"
-        subtitle="Upload a PDF or photo. Preview with AI before saving."
+        subtitle="Upload a PDF or photo. Preview with System before saving."
       />
       <PetUploadInviteModal
         open={inviteOpen}

@@ -45,7 +45,7 @@ const FeatureBlock = styled(motion.article)`
   display: grid;
   gap: 4rem;
   margin: 8rem 0;
-  outline: none; /* for custom focus when clickable */
+  outline: none;
   cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   &:first-of-type {
@@ -57,7 +57,23 @@ const FeatureBlock = styled(motion.article)`
   }
 
   @media screen and (min-width: 768px) {
+    /* default layout */
     grid-template-columns: repeat(2, 1fr);
+
+    ${(props) =>
+      props.$mediaVariant === "desktop" &&
+      `
+        /* text smaller, media bigger */
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.55fr);
+
+        /* when we flip (even rows), also flip column sizes
+           so media stays in the big column */
+        &:nth-of-type(even) {
+          grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+        }
+      `}
+
+    /* your alternating order */
     &:nth-of-type(even) {
       & > div:first-child {
         order: 2;
@@ -210,7 +226,7 @@ const imageVariants = {
 
 const DesktopFrameContainer = styled.div`
   width: 100%;
-  max-width: 920px;
+  max-width: 1100px; /* was 920px */
   margin: 0 auto;
 `;
 
@@ -290,6 +306,7 @@ export default function Feature({
       tabIndex={clickable ? 0 : undefined}
       aria-label={clickable ? `Open ${heading}` : undefined}
       $clickable={clickable}
+      $mediaVariant={mediaVariant}
     >
       <FeatureContent>
         {iconId && (
