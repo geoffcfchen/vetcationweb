@@ -237,7 +237,7 @@ export default function PetRecordUploadModal({
 
           {aiPreview && (
             <PreviewBox>
-              <PreviewTitle>AI preview ready</PreviewTitle>
+              <PreviewTitle>System preview ready</PreviewTitle>
 
               <PreviewLabel>Detected type</PreviewLabel>
               <PreviewValue>{aiPreview.recordType || "Unknown"}</PreviewValue>
