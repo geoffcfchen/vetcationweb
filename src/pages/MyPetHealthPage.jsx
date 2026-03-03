@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import SiteShell from "../components/SiteShell";
 
 const Wrap = styled.main`
   max-width: 1140px;
@@ -143,8 +144,7 @@ const Hr = styled.hr`
 
 function MyPetHealthPage() {
   return (
-    <>
-      <Header />
+    <SiteShell>
       <Wrap>
         <H1>MyPet Health</H1>
 
@@ -246,8 +246,7 @@ function MyPetHealthPage() {
 
         <Hr />
       </Wrap>
-      <Footer />
-    </>
+    </SiteShell>
   );
 }
 
