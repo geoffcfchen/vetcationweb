@@ -290,9 +290,7 @@ function UniversalRecordsPage() {
           </TwoColumn>
         </ContentSection>
       </PageShell>
-
       <GetStartedCallout qrCodeLink={qrCodeImage} />
-      <Footer />
     </SiteShell>
   );
 }

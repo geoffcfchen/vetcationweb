@@ -166,9 +166,6 @@ function RegisterPage() {
       </MapShell> */}
       <TestimonialsSection />
       <GetStartedCallout qrCodeLink={qrCodeImage} />
-
-      <Footer />
-      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
     </SiteShell>
   );
 }
