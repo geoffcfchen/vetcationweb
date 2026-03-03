@@ -3,9 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Feature from "../components/Feature";
 import GetStartedCallout from "../components/GetStartedCallout";
-import qrCodeImage from "../images/qrcode6.png";
+import qrCodeImage from "../images/qrcode7.png";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -32,27 +31,21 @@ const HeroEyebrow = styled.div`
 
 const HeroTitle = styled.h1`
   margin: 10px 0 8px;
-  font-size: clamp(32px, 4vw, 40px);
-  line-height: 1.2;
-  font-weight: 600;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.15;
+  font-weight: 700;
 `;
 
 const HeroSubtitle = styled.p`
   margin: 0;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #e5e7eb;
-  max-width: 640px;
+  max-width: 720px;
 `;
 
 const ContentSection = styled.section`
   padding: 3rem 0 5rem;
-`;
-
-const FeatureWrapper = styled.div`
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 20px;
 `;
 
 const TwoColumn = styled.div`
@@ -78,7 +71,7 @@ const ColumnCard = styled.div`
 const ColumnTitle = styled.h2`
   margin: 0 0 0.75rem;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   color: #111827;
 `;
 
@@ -86,6 +79,7 @@ const ColumnText = styled.p`
   margin: 0 0 1rem;
   font-size: 16px;
   color: #4b5563;
+  line-height: 1.55;
 `;
 
 const BulletList = styled.ul`
@@ -93,14 +87,22 @@ const BulletList = styled.ul`
   padding-left: 1.1rem;
   font-size: 15px;
   color: #374151;
+  line-height: 1.55;
 
   li + li {
     margin-top: 0.4rem;
   }
 `;
 
+const SectionDivider = styled.div`
+  max-width: 1140px;
+  margin: 3.25rem auto 0;
+  padding: 0 20px;
+  border-top: 1px solid #e5e7eb;
+`;
+
 const ScreenshotSection = styled.section`
-  margin-top: 4rem;
+  margin-top: 3.25rem;
   padding: 0 20px;
 `;
 
@@ -112,7 +114,7 @@ const ScreenshotShell = styled.div`
 const ScreenshotHeading = styled.h2`
   margin: 0 0 0.5rem;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: #111827;
 `;
 
@@ -120,7 +122,8 @@ const ScreenshotText = styled.p`
   margin: 0 0 1.5rem;
   font-size: 16px;
   color: #4b5563;
-  max-width: 640px;
+  max-width: 720px;
+  line-height: 1.55;
 `;
 
 const ScreenshotFrame = styled.div`
@@ -136,133 +139,160 @@ const ScreenshotImage = styled.img`
   height: auto;
 `;
 
-const StepsWrapper = styled.section`
-  max-width: 1140px;
-  margin: 3rem auto 0;
-  padding: 0 20px;
-`;
-
 function UniversalRecordsPage() {
   return (
     <>
       <Header />
 
       <PageShell>
-        {/* Top hero copy */}
         <HeroSection>
           <Max>
-            <HeroEyebrow>Universal pet health records</HeroEyebrow>
-            <HeroTitle>See your pet’s full story in one place</HeroTitle>
+            <HeroEyebrow>How it works</HeroEyebrow>
+            <HeroTitle>From PDFs to a vet-ready timeline</HeroTitle>
             <HeroSubtitle>
-              MyPet Health pulls together scattered PDFs, lab results, imaging,
-              and visit notes so every vet can see the full picture in seconds,
-              especially in emergencies.
+              MyPet Health ingests whatever you have (PDFs, photos, exports),
+              normalizes key clinical fields into a structured timeline, and
+              keeps source-of-truth attachments linked so vets can understand
+              the full story fast, especially in emergencies.
             </HeroSubtitle>
           </Max>
         </HeroSection>
 
         <ContentSection>
-          {/* Reuse your Feature layout at the top of this page */}
-          {/* <FeatureWrapper>
-            <Feature
-              heading="Universal pet medical records"
-              text="MyPet Health pulls your pet’s scattered records from any clinic into one secure place and turns them into a clear, vet ready timeline. Share it in one click before any visit."
-              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1534.webp?alt=media&token=531293bb-381f-4090-afdf-08c3742ed450"
-              headerFontSize={40}
-            />
-          </FeatureWrapper> */}
-          <StepsWrapper>
-            <Feature
-              heading="Step 1 · Pull your pet’s health records into MyPet Health"
-              text="Upload PDFs and photos from any clinic, ER, shelter, or specialist, or send a secure link to your vets and clinics to request medical records. Everything lands in one secure place instead of being scattered across email and apps."
-              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1536.webp?alt=media&token=f2086851-3879-4607-acf4-98f7f6ac4733"
-              headerFontSize={32}
-            />
-
-            <Feature
-              heading="Step 2 · MyPet Health understands and organizes your health records"
-              text="MyPet Health reads visit dates, problems, treatments, labs, and imaging so it understands your pet’s health history and turns it into a clear, vet ready timeline you can scroll in seconds."
-              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1538.webp?alt=media&token=a90dfbad-68d9-4d11-b692-6689ad087941"
-              headerFontSize={32}
-            />
-
-            <Feature
-              heading="Step 3 · Share one link before any visit or telehealth call"
-              text="Before an in person or telehealth visit, send your MyPet Health link so the vet can review the summary and history ahead of time and focus the appointment on decisions, not paperwork."
-              imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1539.webp?alt=media&token=871f676e-cb05-4bdf-9186-96191dced74e"
-              headerFontSize={32}
-            />
-          </StepsWrapper>
-          {/* Owner and vet benefits */}
-          {/* <TwoColumn>
+          {/* What happens after upload */}
+          <TwoColumn>
             <ColumnCard>
-              <ColumnTitle>For pet owners</ColumnTitle>
+              <ColumnTitle>What happens after you upload</ColumnTitle>
               <ColumnText>
-                Keep everything in one place so you are not digging through
-                emails and portals when your pet needs help.
+                MyPet Health reads your documents and turns them into structured
+                medical history, without losing the originals.
               </ColumnText>
               <BulletList>
+                <li>Extracts visit dates and groups related records.</li>
                 <li>
-                  Upload records from any clinic, shelter, ER, or specialist.
+                  Pulls problems, treatments, medications, labs, and imaging.
                 </li>
+                <li>Builds a chronological timeline you can scroll quickly.</li>
                 <li>
-                  See a simple, date ordered timeline of visits, labs, and
-                  imaging.
+                  Keeps every source document attached for verification and
+                  context.
                 </li>
-                <li>Share a secure link with your vet in one click.</li>
-                <li>Bring the same organized history to every new hospital.</li>
               </BulletList>
             </ColumnCard>
 
             <ColumnCard>
-              <ColumnTitle>For veterinarians</ColumnTitle>
+              <ColumnTitle>Source-of-truth stays intact</ColumnTitle>
               <ColumnText>
-                Start each case with context so you can spend more time on
-                thinking and less time hunting for files.
+                The summary is fast. The attachments are the proof.
               </ColumnText>
               <BulletList>
                 <li>
-                  Review past diagnoses, medications, and lab trends at a
-                  glance.
+                  Original PDFs and photos remain linked to each timeline item.
                 </li>
                 <li>
-                  See which clinics have treated the pet before and what was
-                  done.
+                  Easy to confirm details like medication dose or lab values.
                 </li>
                 <li>
-                  Use the AI summary as a quick briefing before walking into the
-                  room.
+                  Reduces missing history and repeated paperwork across clinics.
                 </li>
-                <li>
-                  Reduce duplicate tests and missed history in urgent or complex
-                  cases.
-                </li>
+                <li>Designed for urgent situations, travel, and referrals.</li>
               </BulletList>
             </ColumnCard>
-          </TwoColumn> */}
-          {/* Big full width summary screenshot */}
+          </TwoColumn>
+
+          <SectionDivider />
+
+          {/* What vets see */}
           <ScreenshotSection>
             <ScreenshotShell>
               <ScreenshotHeading>
-                What the MyPet Health vet summary link looks like in laptop
+                What vets see when you share
               </ScreenshotHeading>
               <ScreenshotText>
-                MyPet Health turns scattered health records into a structured
-                clinical timeline and a clear summary, so every vet can see key
-                problems, treatments, and milestones at a glance.
+                A concise vet-ready summary plus the full timeline, with
+                original records attached for context.
               </ScreenshotText>
               <ScreenshotFrame>
                 <ScreenshotImage
                   src="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2"
-                  alt="Example universal health record summary view in Vetcation"
+                  alt="Example MyPet Health vet-ready summary view"
                 />
               </ScreenshotFrame>
             </ScreenshotShell>
           </ScreenshotSection>
+
+          <SectionDivider />
+
+          {/* Privacy + control */}
+          <TwoColumn>
+            <ColumnCard>
+              <ColumnTitle>Owner-controlled sharing</ColumnTitle>
+              <ColumnText>
+                You decide who can access your pet’s record and when.
+              </ColumnText>
+              <BulletList>
+                <li>Share a secure link when you need help.</li>
+                <li>
+                  Use it for new clinics, specialists, second opinions, or
+                  travel.
+                </li>
+                <li>
+                  Keep your timeline organized even if you switch providers.
+                </li>
+              </BulletList>
+            </ColumnCard>
+
+            <ColumnCard>
+              <ColumnTitle>Built to reduce friction for vets</ColumnTitle>
+              <ColumnText>
+                Vets get context fast, without hunting through portals and email
+                threads.
+              </ColumnText>
+              <BulletList>
+                <li>One link for summary plus supporting documents.</li>
+                <li>Quick briefing before appointments or urgent care.</li>
+                <li>Less time on paperwork, more time on care.</li>
+              </BulletList>
+            </ColumnCard>
+          </TwoColumn>
+
+          <SectionDivider />
+
+          {/* Emergency scenario */}
+          <TwoColumn>
+            <ColumnCard>
+              <ColumnTitle>Emergency example</ColumnTitle>
+              <ColumnText>
+                Your pet gets sick while traveling or ends up at an ER that has
+                never seen them before.
+              </ColumnText>
+              <BulletList>
+                <li>Open MyPet Health.</li>
+                <li>Share the vet-ready summary link.</li>
+                <li>
+                  The ER team sees history, meds, and key problems immediately.
+                </li>
+              </BulletList>
+            </ColumnCard>
+
+            <ColumnCard>
+              <ColumnTitle>Why this matters</ColumnTitle>
+              <ColumnText>
+                Missing history can lead to delays, duplicate tests, and
+                avoidable risk. A clear record helps vets act faster with more
+                confidence.
+              </ColumnText>
+              <BulletList>
+                <li>Especially important for chronic or complex cases.</li>
+                <li>Useful for referrals and specialist handoffs.</li>
+                <li>Peace of mind for pet owners.</li>
+              </BulletList>
+            </ColumnCard>
+          </TwoColumn>
         </ContentSection>
       </PageShell>
-      <GetStartedCallout qrCodeLink={qrCodeImage} />
 
+      <GetStartedCallout qrCodeLink={qrCodeImage} />
       <Footer />
     </>
   );

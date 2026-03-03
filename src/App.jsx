@@ -57,6 +57,7 @@ import NewPetPage from "./pages/app/NewPetPage";
 import VetReadySummaryPage from "./pages/app/VetReadySummaryPage";
 import VaccinePage from "./pages/app/VaccinePage";
 import MemoizedPetHealthLayout from "./pages/app/PetHealthLayout";
+import ScrollToTop from "./components/ScrollToTop";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -432,6 +433,7 @@ function App() {
       <GlobalStyle />
       {/* Global/default SEO for current path */}
       <SeoForPath />
+      <ScrollToTop />
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
         <Route path="/" element={<RegisterPage />} />

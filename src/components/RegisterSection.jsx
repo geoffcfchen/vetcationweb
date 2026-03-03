@@ -201,7 +201,7 @@ function RegisterSection() {
       </SectionHeader>
 
       <Feature
-        heading="Step1: create your pet"
+        heading="Step1: Create your pet"
         text={
           <>
             Start by creating your pet profile. It only takes a minute, and it
@@ -228,8 +228,8 @@ function RegisterSection() {
         heading="Step 3: View the timeline"
         text={
           <>
-            MyPet Health organizes visits, diagnoses, treatments, labs, and
-            imaging into a clear chronological timeline. Scroll through your
+            MyPet Health memorizes visits, diagnoses, treatments, labs, and
+            imaging into a clear chronological history. Scroll through your
             pet’s entire medical story in one place instead of opening dozens of
             PDFs.
           </>
@@ -248,6 +248,8 @@ function RegisterSection() {
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1627.webp?alt=media&token=1f2ad88b-2351-425e-a7fc-deb6805f6edd"
         headerFontSize={45}
+        linkText={"What vets see when you share"}
+        to="/pet-health-record/"
       />
 
       {/* <Feature
