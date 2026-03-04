@@ -316,10 +316,10 @@ function MainPanel({
       {!hasPets ? (
         <EmptyState>
           <EmptyHeader>
-            <EmptyTitle>Universal Medical Record</EmptyTitle>
+            <EmptyTitle>MyPet Health Record</EmptyTitle>
             <EmptySubtitle>
-              Keep your pet’s records in one place. Share with any vet in
-              seconds.
+              Keep your pet’s history in one place. Request records from any
+              clinic and share a vet-ready view in seconds.
             </EmptySubtitle>
           </EmptyHeader>
 
@@ -333,7 +333,9 @@ function MainPanel({
                 </StepIcon>
                 <StepText>
                   <StepTitle>Create your pet profile</StepTitle>
-                  <StepDesc>Add name, species, and basic info.</StepDesc>
+                  <StepDesc>
+                    One profile becomes the home for every record.
+                  </StepDesc>
                 </StepText>
               </StepRow>
 
@@ -342,8 +344,8 @@ function MainPanel({
                   <FiUpload />
                 </StepIcon>
                 <StepText>
-                  <StepTitle>Upload records</StepTitle>
-                  <StepDesc>PDFs, images, exports, anything you have.</StepDesc>
+                  <StepTitle>Upload what you have</StepTitle>
+                  <StepDesc>PDFs, photos, portal exports, anything.</StepDesc>
                 </StepText>
               </StepRow>
 
@@ -352,8 +354,11 @@ function MainPanel({
                   <FiShare2 />
                 </StepIcon>
                 <StepText>
-                  <StepTitle>Share with your vet</StepTitle>
-                  <StepDesc>Send a secure link to request uploads.</StepDesc>
+                  <StepTitle>Request and share with your vet</StepTitle>
+                  <StepDesc>
+                    Send a secure upload link to your clinic, or share a
+                    view-only link before a visit.
+                  </StepDesc>
                 </StepText>
               </StepRow>
 
@@ -370,7 +375,8 @@ function MainPanel({
 
               <PrivacyNote>
                 <FiShield />
-                You control access. You decide who can view and upload records.
+                Owner-controlled sharing. You decide who can view and who can
+                upload.
               </PrivacyNote>
             </EmptyCardInner>
           </EmptyCard>
@@ -610,15 +616,15 @@ function PetHealthLayout() {
           <ModalBackdrop onClick={closeHowModal}>
             <ModalCard onClick={(e) => e.stopPropagation()}>
               <ModalHeader>
-                <ModalTitle>How the Medical Record works</ModalTitle>
+                <ModalTitle>How MyPet Health works</ModalTitle>
                 <ModalClose type="button" onClick={closeHowModal}>
                   <FiX />
                 </ModalClose>
               </ModalHeader>
 
               <ModalSub>
-                Keep your pet’s records in one place. Share with any vet in
-                seconds.
+                Pull records into one timeline. Share a vet-ready view in
+                seconds, especially in emergencies.
               </ModalSub>
 
               <ModalBody>
@@ -629,7 +635,8 @@ function PetHealthLayout() {
                   <HowText>
                     <HowTitle>Create your pet profile</HowTitle>
                     <HowDesc>
-                      Add basic info so everything stays organized.
+                      One profile becomes the home for visits, labs, imaging,
+                      invoices, and meds.
                     </HowDesc>
                   </HowText>
                 </HowStep>
@@ -640,7 +647,10 @@ function PetHealthLayout() {
                   </HowIcon>
                   <HowText>
                     <HowTitle>Upload records</HowTitle>
-                    <HowDesc>PDFs, images, exports, anything you have.</HowDesc>
+                    <HowDesc>
+                      Add PDFs, photos, portal exports, anything you already
+                      have.
+                    </HowDesc>
                   </HowText>
                 </HowStep>
 
@@ -649,29 +659,49 @@ function PetHealthLayout() {
                     <FiShare2 />
                   </HowIcon>
                   <HowText>
-                    <HowTitle>Share with your vet</HowTitle>
+                    <HowTitle>Request and share with your vet</HowTitle>
                     <HowDesc>
-                      Send a secure link to request uploads or share history.
+                      Send a secure upload link to your clinic, or share a
+                      read-only view before an appointment.
+                    </HowDesc>
+                  </HowText>
+                </HowStep>
+
+                <HowStep>
+                  <HowIcon $bg="#10b981">
+                    <FiShare2 />
+                  </HowIcon>
+                  <HowText>
+                    <HowTitle>Generate a vet-ready summary</HowTitle>
+                    <HowDesc>
+                      Turn the timeline into a concise overview so new vets can
+                      get up to speed fast.
                     </HowDesc>
                   </HowText>
                 </HowStep>
 
                 <MiniCard>
                   <MiniCardTitle>Privacy and control</MiniCardTitle>
+                  <MiniBullet>• You decide who can view vs upload.</MiniBullet>
                   <MiniBullet>
-                    • You control who can view and upload.
+                    • Links can expire and can be regenerated.
                   </MiniBullet>
-                  <MiniBullet>• Share links can expire.</MiniBullet>
                   <MiniBullet>• You can revoke access anytime.</MiniBullet>
-                  <MiniBullet>• Every access can be logged.</MiniBullet>
+                  <MiniBullet>
+                    • Access can be logged for transparency.
+                  </MiniBullet>
                 </MiniCard>
 
                 <MiniCard>
-                  <MiniCardTitle>What to upload first</MiniCardTitle>
-                  <MiniBullet>• Vaccine records</MiniBullet>
-                  <MiniBullet>• Most recent invoice</MiniBullet>
+                  <MiniCardTitle>What to add first</MiniCardTitle>
+                  <MiniBullet>
+                    • Recent visit summary or discharge instructions
+                  </MiniBullet>
                   <MiniBullet>• Recent lab results</MiniBullet>
                   <MiniBullet>• Current medications</MiniBullet>
+                  <MiniBullet>
+                    • Recent discharge instructions (or invoices with summaries)
+                  </MiniBullet>
                 </MiniCard>
 
                 <ModalCtaRow>
