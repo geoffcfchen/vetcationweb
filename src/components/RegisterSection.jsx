@@ -285,7 +285,7 @@ function RegisterSection() {
               </>
             }
             // Replace with a desktop screenshot when you have it
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%203.35.24%20PM.webp?alt=media&token=aa319acc-133a-42e9-a7c9-1e22474478e5"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%2011.29.53%E2%80%AFPM.webp?alt=media&token=1f83e8f3-66cb-4329-8a1a-edcd61fbbfbc"
             headerFontSize={30}
             mediaVariant="desktop"
           />
