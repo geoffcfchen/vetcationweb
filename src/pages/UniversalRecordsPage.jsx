@@ -156,7 +156,7 @@ const ScreenshotPart = styled.img`
 function UniversalRecordsPage() {
   // Up to 3 screenshot URLs. If you only provide 1, it still works.
   const vetSummaryImages = [
-    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fvetsummary.webp?alt=media&token=83ed2036-eeea-46a2-a692-8a2ef3c4d4d2",
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1",
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.15.30%20PM.webp?alt=media&token=772e38ed-3468-4986-a4c5-5d343eb671a7",
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.30.21%20PM.webp?alt=media&token=3e4d031f-f02c-4bb9-8fc0-e917b033d7f8",
   ]
