@@ -180,7 +180,7 @@ function MyPetHealthPage() {
           </Card>
 
           <Card>
-            <CardTitle>Built for emergencies</CardTitle>
+            <CardTitle>Built for all visits and emergencies</CardTitle>
             <CardText>
               ER visits move fast. MyPet Health helps you get the important
               history in front of the vet without digging through paperwork.

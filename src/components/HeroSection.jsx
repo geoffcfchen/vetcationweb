@@ -182,7 +182,7 @@ function HeroSection({ onGetStarted }) {
                 for pets
               </HeroHeader>
               <HeroTagline>
-                Pull records from every clinic and keep your pet’s full history
+                Pull records from any clinic and keep your pet’s full history
                 organized, shareable in seconds, and ready for any visit or
                 emergency.
               </HeroTagline>
