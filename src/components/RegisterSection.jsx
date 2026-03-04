@@ -316,7 +316,7 @@ function RegisterSection() {
               </>
             }
             // Replace with a desktop uploader screenshot when you have it
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.15.46%E2%80%AFPM.png?alt=media&token=4cf7482c-bb61-4dfa-a626-be765335e798"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.17.23%E2%80%AFPM.webp?alt=media&token=dc72f96f-b68f-4633-9d3c-bf3f683850e6"
             headerFontSize={30}
             mediaVariant="desktop"
           />

@@ -25,6 +25,22 @@ const ContributionNote = styled.div`
   }
 `;
 
+const Heading = styled.h3`
+  margin: 10px 0 0;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000;
+  font-family: inherit;
+
+  /* desktop (uses your prop) */
+  font-size: ${(p) => p.$size}px;
+
+  /* mobile: scale down */
+  @media (max-width: 768px) {
+    font-size: clamp(20px, 5.2vw, ${(p) => Math.round(p.$size * 0.9)}px);
+  }
+`;
+
 const QRCodeImage = styled.img`
   margin-top: 10px;
   width: 450px;
@@ -121,9 +137,12 @@ const FeatureContent = styled(motion.div)`
 
 const BodyText = styled.p`
   color: var(--color-body);
-  font-size: 28px;
+
+  /* auto shrink on small screens */
+  font-size: clamp(16px, 4.6vw, 28px);
+
   margin-top: 5px;
-  line-height: 1.2;
+  line-height: 1.3;
   margin-bottom: 0;
 
   a {
@@ -148,7 +167,9 @@ const BodyText = styled.p`
 const CtaLink = styled.a`
   color: red;
   text-transform: uppercase;
-  font-size: 15px;
+
+  font-size: clamp(12px, 3.4vw, 15px);
+
   font-weight: bold;
   text-decoration: none;
   display: inline-flex;
@@ -317,16 +338,7 @@ export default function Feature({
           </IconContainer>
         )}
 
-        <h3
-          style={{
-            fontSize: headerFontSize,
-            color: "#000000",
-            fontFamily: "inherit",
-            marginBottom: 0,
-          }}
-        >
-          {heading}
-        </h3>
+        <Heading $size={headerFontSize}>{heading}</Heading>
 
         <BodyText>{text}</BodyText>
 
