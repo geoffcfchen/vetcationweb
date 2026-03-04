@@ -203,8 +203,8 @@ function RegisterSection() {
         <Headline>Create a pet record in minutes</Headline>
         <Subhead>
           Upload PDFs, photos, or exports from any clinic, shelter, or ER. We
-          organize everything into a vet-ready timeline you can share instantly,
-          especially in emergencies.
+          organize everything into a clear, vet-ready timeline you can share in
+          seconds, for everyday visits or emergencies.
         </Subhead>
         <CTAGroup aria-label="Choose interface">
           <TogglePill>
@@ -235,7 +235,7 @@ function RegisterSection() {
               <>
                 Start by creating your pet profile. It only takes a minute, and
                 it gives you a secure home for your pet’s full medical history,
-                ready to share in an emergency.
+                ready to share anytime.
               </>
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623_2.webp?alt=media&token=9a908f83-ce0d-40da-9a43-acb6a0087352"
