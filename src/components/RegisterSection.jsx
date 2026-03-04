@@ -314,7 +314,7 @@ function RegisterSection() {
 
           <Feature
             key={`${viewMode}-step2`}
-            heading="Step 2: Upload records faster on desktop"
+            heading="Step 2: Upload records"
             text={
               <>
                 Upload PDFs and exports from portals, email, or your computer.
@@ -329,7 +329,7 @@ function RegisterSection() {
           />
           <Feature
             key={`${viewMode}-step2-2`}
-            heading="Or request records from your vet"
+            heading="Or request uploads from your clinic"
             text={
               <>
                 Send a secure upload link to your clinic so they can add records
