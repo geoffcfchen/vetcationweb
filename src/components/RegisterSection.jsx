@@ -305,6 +305,21 @@ function RegisterSection() {
             headerFontSize={30}
             mediaVariant="desktop"
           />
+          <Feature
+            key={`${viewMode}-step2-2`}
+            heading="Or request records from your vet"
+            text={
+              <>
+                Send a secure upload link to your clinic so they can add records
+                directly to your pet’s timeline. No chasing PDFs, no forwarding
+                emails, and no portal logins, everything lands in one place.
+              </>
+            }
+            // Replace with a desktop uploader screenshot when you have it
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.15.46%E2%80%AFPM.png?alt=media&token=4cf7482c-bb61-4dfa-a626-be765335e798"
+            headerFontSize={30}
+            mediaVariant="desktop"
+          />
 
           <Feature
             key={`${viewMode}-step3`}
