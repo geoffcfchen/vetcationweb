@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import Feature from "./Feature";
 import qrCodeImage from "../images/qrcode6.png";
 import wordpress1Webp from "../images/wordpress1.webp";
@@ -13,7 +13,23 @@ const FeaturesContainer = styled.section`
   padding: 0rem 2rem;
 `;
 
-// NEW
+const BrandLink = styled(RouterLink)`
+  color: #1d4ed8;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: #1e40af;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #a9d0ff;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+`;
+
 const SectionHeader = styled.div`
   padding: 3.25rem 0 1.25rem;
 `;
@@ -245,10 +261,15 @@ function RegisterSection() {
             heading="Step 3: View the timeline"
             text={
               <>
-                MyPet Health memorizes visits, diagnoses, treatments, labs, and
-                imaging into a clear chronological history. Scroll through your
-                pet’s entire medical story in one place instead of opening
-                dozens of PDFs.
+                <BrandLink
+                  to="/mypet-health/"
+                  aria-label="Learn more about MyPet Health"
+                >
+                  MyPet Health
+                </BrandLink>{" "}
+                memorizes visits, diagnoses, treatments, labs, and imaging into
+                a clear chronological history. Scroll through your pet’s entire
+                medical story in one place instead of opening dozens of PDFs.
               </>
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1628.webp?alt=media&token=edc58db6-1252-46ad-9736-a9c0c4b9a787"
