@@ -301,9 +301,9 @@ function RegisterSection() {
             heading="Step 1: Create your pet"
             text={
               <>
-                Create a profile for each pet so every document, note, and lab
-                stays organized in one place. Perfect if you manage multiple
-                pets or ongoing conditions.
+                Start by creating your pet profile. It only takes a minute, and
+                it gives you a secure home for your pet’s full medical history,
+                ready to share anytime.
               </>
             }
             // Replace with a desktop screenshot when you have it
@@ -317,9 +317,9 @@ function RegisterSection() {
             heading="Step 2: Upload records faster on desktop"
             text={
               <>
-                Drag-and-drop PDFs and exports from portals, email, or your
-                computer. Keep everything centralized instead of scattered
-                across folders and inboxes.
+                Upload PDFs and exports from portals, email, or your computer.
+                Keep everything centralized instead of scattered across folders
+                and inboxes.
               </>
             }
             // Replace with a desktop uploader screenshot when you have it
@@ -345,12 +345,18 @@ function RegisterSection() {
 
           <Feature
             key={`${viewMode}-step3`}
-            heading="Step 3: Review the full timeline"
+            heading="Step 3: View the timeline"
             text={
               <>
-                Get a structured timeline with attachments linked as proof. It
-                is easier to compare visits, track labs, and prepare for
-                referrals.
+                <BrandLink
+                  to="/mypet-health/"
+                  aria-label="Learn more about MyPet Health"
+                >
+                  MyPet Health
+                </BrandLink>{" "}
+                memorizes visits, diagnoses, treatments, labs, and imaging into
+                a clear chronological history. Scroll through your pet’s entire
+                medical story in one place instead of opening dozens of PDFs.
               </>
             }
             // Replace with desktop timeline screenshot when you have it
@@ -364,9 +370,10 @@ function RegisterSection() {
             heading="Step 4: Share a vet-ready summary"
             text={
               <>
-                Share one link before an appointment so the clinic can review
-                history ahead of time. Reduce repeated questions and help vets
-                make decisions faster.
+                Instantly generate a structured summary from your timeline. When
+                you visit a new clinic or face an emergency, share a concise,
+                organized overview so any vet can understand the situation in
+                seconds.
               </>
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.15.46%E2%80%AFPM.png?alt=media&token=4cf7482c-bb61-4dfa-a626-be765335e798"
