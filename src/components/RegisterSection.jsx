@@ -147,7 +147,7 @@ const HeaderTop = styled.div`
 
 function RegisterSection() {
   const navigate = useNavigate();
-  const [viewMode, setViewMode] = useState("mobile");
+  const [viewMode, setViewMode] = useState("desktop"); // ✅ start on Desktop
 
   return (
     <FeaturesContainer>
@@ -210,17 +210,18 @@ function RegisterSection() {
           <TogglePill>
             <CTAButton
               type="button"
-              $active={viewMode === "mobile"}
-              onClick={() => setViewMode("mobile")}
-            >
-              Mobile
-            </CTAButton>
-            <CTAButton
-              type="button"
               $active={viewMode === "desktop"}
               onClick={() => setViewMode("desktop")}
             >
               Desktop
+            </CTAButton>
+
+            <CTAButton
+              type="button"
+              $active={viewMode === "mobile"}
+              onClick={() => setViewMode("mobile")}
+            >
+              Mobile
             </CTAButton>
           </TogglePill>
         </CTAGroup>
