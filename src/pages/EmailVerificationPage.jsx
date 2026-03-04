@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../lib/firebase";
 import Footer from "../components/Footer";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const Page = styled.div`
   min-height: 100vh;
