@@ -11,6 +11,12 @@ import {
 } from "firebase/firestore";
 import { DateTime } from "luxon";
 import { FiX } from "react-icons/fi";
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
+import { storage } from "../lib/firebase";
 
 import { firestore } from "../lib/firebase";
 import {
@@ -38,6 +44,9 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
   const [saving, setSaving] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [formError, setFormError] = useState("");
+  const [photoFile, setPhotoFile] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(""); // preview url or existing photoURL
+  const [photoError, setPhotoError] = useState("");
 
   const todayIso = useMemo(() => DateTime.now().toISODate(), []);
 
@@ -45,6 +54,15 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
     () => (petType === "cat" ? categoriesCatBreed : categoriesDogBreed),
     [petType],
   );
+
+  useEffect(() => {
+    return () => {
+      if (photoPreview && photoPreview.startsWith("blob:")) {
+        URL.revokeObjectURL(photoPreview);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Prefill for edit, or reset for create
   useEffect(() => {
@@ -82,6 +100,9 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
       );
       setFormErrors({});
       setFormError("");
+      setPhotoFile(null);
+      setPhotoPreview(initialPet.photoURL || "");
+      setPhotoError("");
     } else {
       setPetName("");
       setPetType("dog");
@@ -95,12 +116,25 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
       setIsFixedForm(null);
       setFormErrors({});
       setFormError("");
+      setPhotoFile(null);
+      setPhotoPreview("");
+      setPhotoError("");
     }
   }, [isEdit, initialPet]);
 
   const validateForm = () => {
     const errors = {};
     let dobDate = null;
+
+    const hasExistingPhoto = Boolean(isEdit && initialPet?.photoURL);
+    const hasNewPhoto = Boolean(photoFile);
+    const hasAnyPhoto = hasNewPhoto || hasExistingPhoto;
+
+    setPhotoError(errors.photo || "");
+
+    if (!isEdit && !hasAnyPhoto) {
+      errors.photo = "Please upload a pet photo.";
+    }
 
     if (!petName.trim()) {
       errors.name = "Please enter your pet's name.";
@@ -207,8 +241,10 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
         // Update existing pet
         const petRef = doc(firestore, "pets", initialPet.id);
 
+        const photoURL = await uploadPetPhotoIfNeeded({ petId: initialPet.id });
         const updatePayload = {
           displayName: petName.trim(),
+          photoURL: photoURL || initialPet.photoURL || "",
           type: petType,
           dob: dobDate ? Timestamp.fromDate(dobDate) : null,
           categoryBreed,
@@ -231,10 +267,12 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
         // Create new pet
         const petRef = doc(collection(firestore, "pets"));
         const petId = petRef.id;
+        const photoURL = await uploadPetPhotoIfNeeded({ petId });
 
         const petData = {
           id: petId,
           displayName: petName.trim(),
+          photoURL: photoURL || "",
           type: petType,
           dob: dobDate ? Timestamp.fromDate(dobDate) : null,
           owner: uid,
@@ -261,6 +299,50 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
     }
   };
 
+  const onPickPhoto = (file) => {
+    setPhotoError("");
+
+    if (!file) {
+      setPhotoFile(null);
+      setPhotoPreview(initialPet?.photoURL || "");
+      return;
+    }
+
+    if (!file.type || !file.type.startsWith("image/")) {
+      setPhotoError("Please choose an image file.");
+      return;
+    }
+
+    // Optional: enforce size, e.g. 8MB
+    const maxBytes = 8 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      setPhotoError("Image is too large. Please choose a smaller photo.");
+      return;
+    }
+
+    setPhotoFile(file);
+
+    const localUrl = URL.createObjectURL(file);
+    setPhotoPreview(localUrl);
+  };
+
+  const uploadPetPhotoIfNeeded = async ({ petId }) => {
+    // If user didn't pick a new file, keep current URL (or empty for create)
+    if (!photoFile) return photoPreview || "";
+
+    if (!storage) {
+      throw new Error("Storage is not configured.");
+    }
+
+    const ext = (photoFile.name || "").split(".").pop() || "jpg";
+    const path = `images/petPhotos/${uid}/${petId}/${Date.now()}.${ext}`;
+
+    const r = storageRef(storage, path);
+    await uploadBytes(r, photoFile);
+    const url = await getDownloadURL(r);
+    return url;
+  };
+
   return (
     <Backdrop onClick={onClose}>
       <ModalCard onClick={(e) => e.stopPropagation()}>
@@ -283,6 +365,61 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
               placeholder="Example: Luna"
             />
             {formErrors.name && <FieldError>{formErrors.name}</FieldError>}
+          </FieldGroup>
+          <FieldGroup>
+            <FieldLabel>Pet photo</FieldLabel>
+
+            <PhotoRow>
+              <PhotoPreview>
+                {photoPreview ? (
+                  <img src={photoPreview} alt="Pet preview" />
+                ) : (
+                  <PhotoPlaceholder>Upload</PhotoPlaceholder>
+                )}
+              </PhotoPreview>
+
+              <PhotoActions>
+                <HiddenFileInput
+                  id="petPhotoInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => onPickPhoto(e.target.files?.[0] || null)}
+                />
+
+                <FileRow>
+                  <FileButton as="label" htmlFor="petPhotoInput">
+                    Choose photo
+                  </FileButton>
+
+                  <FileName
+                    title={
+                      photoFile?.name ||
+                      (photoPreview ? "Current photo" : "No file chosen")
+                    }
+                  >
+                    {photoFile?.name ||
+                      (photoPreview ? "Current photo" : "No file chosen")}
+                  </FileName>
+
+                  {photoFile && (
+                    <SmallTextButton
+                      type="button"
+                      onClick={() => onPickPhoto(null)}
+                    >
+                      Remove
+                    </SmallTextButton>
+                  )}
+                </FileRow>
+
+                <PhotoHint>
+                  {isEdit
+                    ? "Optional. Upload a new photo to replace the current one."
+                    : "Required. Add a clear face photo if possible."}
+                </PhotoHint>
+
+                {photoError ? <FieldError>{photoError}</FieldError> : null}
+              </PhotoActions>
+            </PhotoRow>
           </FieldGroup>
 
           <FieldGroup>
@@ -661,4 +798,124 @@ const SecondaryButton = styled.button`
     cursor: default;
     text-decoration: none;
   }
+`;
+
+const PhotoRow = styled.div`
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  align-items: center;
+`;
+
+const PhotoPreview = styled.div`
+  width: 88px;
+  height: 88px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
+const PhotoPlaceholder = styled.div`
+  font-size: 12px;
+  font-weight: 900;
+  color: #64748b;
+`;
+
+const PhotoActions = styled.div`
+  min-width: 0;
+`;
+
+const PhotoInput = styled.input`
+  width: 100%;
+  font-size: 13px;
+`;
+
+const PhotoHint = styled.div`
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.35;
+`;
+
+const SmallTextButton = styled.button`
+  margin-top: 8px;
+  border: none;
+  background: transparent;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const HiddenFileInput = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
+
+const FileRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+const FileButton = styled.button`
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
+  }
+`;
+
+const FileName = styled.div`
+  flex: 1;
+  min-width: 180px;
+  font-size: 13px;
+  color: #0f172a; /* key: darker text */
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(241, 245, 249, 1);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
