@@ -183,8 +183,8 @@ function HeroSection({ onGetStarted }) {
               </HeroHeader>
               <HeroTagline>
                 Pull records from any clinic and keep your pet’s full history
-                organized, shareable in seconds, and ready for any visit or
-                emergency.
+                organized, shareable in seconds, and ready for any visit and
+                especially emergencies.
               </HeroTagline>
 
               <ButtonsRow>
