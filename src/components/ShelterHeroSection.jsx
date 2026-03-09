@@ -69,8 +69,8 @@ const HeroHeader = styled.h1`
   max-width: 760px;
   color: #ffffff;
   margin-bottom: 1rem;
-  font-size: clamp(38px, 4.8vw, 54px);
-  font-weight: 800;
+  font-size: clamp(38px, 4.8vw, 44px);
+  font-weight: 600;
   line-height: 1.1;
 
   @media (max-width: 1022px) {
@@ -156,7 +156,8 @@ function ShelterHeroSection() {
             <Col md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>
-                Give every adopted pet a lifelong medical record
+                Give every adopted pet a centralized medical record and
+                post-adoption support
               </HeroHeader>
               <HeroTagline>
                 With MyPet Health, your intake, vaccine, and surgery paperwork

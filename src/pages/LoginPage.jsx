@@ -31,6 +31,12 @@ const Main = styled.main`
 const Card = styled.div`
   width: 100%;
   max-width: 420px;
+
+  /* Optional: slightly narrower than the page padding on very small screens */
+  @media (max-width: 420px) {
+    max-width: 360px;
+    margin: 0 auto;
+  }
 `;
 
 const Title = styled.h1`
@@ -63,11 +69,20 @@ const PillShell = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   border-radius: 999px;
   border: 1px solid #e5e7eb;
   background: #f9fafb;
   padding: 10px 16px;
   font-size: 14px;
+
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+
+  @media (max-width: 420px) {
+    padding: 10px 12px;
+  }
 `;
 
 const EmailText = styled.span`
@@ -75,21 +90,21 @@ const EmailText = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  flex: 1;
+  min-width: 0;
 `;
 
 const EditEmailButton = styled.button`
   border: none;
   background: none;
   padding: 0;
-  margin-left: 12px;
+  margin-left: 8px;
   font-size: 13px;
   font-weight: 500;
   color: #2563eb;
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  flex-shrink: 0;
 `;
 
 const InputShell = styled.div`
@@ -99,19 +114,24 @@ const InputShell = styled.div`
   border: 1px solid #d1d5db;
   background: #f9fafb;
   padding: 10px 16px;
+
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+
+  @media (max-width: 420px) {
+    padding: 10px 12px;
+  }
 `;
 
 const TextInput = styled.input`
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
   background: transparent;
-  font-size: 14px;
+  font-size: 16px;
   color: #111827;
-
-  ::placeholder {
-    color: #9ca3af;
-  }
 `;
 
 const IconButton = styled.button`
@@ -125,6 +145,12 @@ const IconButton = styled.button`
   cursor: pointer;
   color: #6b7280;
   font-size: 18px;
+  flex-shrink: 0;
+
+  @media (max-width: 420px) {
+    margin-left: 8px;
+    font-size: 16px;
+  }
 `;
 
 const ErrorText = styled.div`
@@ -202,6 +228,7 @@ const TermsRow = styled.footer`
   display: flex;
   justify-content: center;
   gap: 8px;
+  flex-wrap: wrap; /* prevents overflow on small screens */
 `;
 
 const TermsLink = styled.a`
