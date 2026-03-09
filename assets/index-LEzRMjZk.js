@@ -12908,6 +12908,8 @@ attempted value: ${nt}
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
+    min-height: auto;
     overflow: visible; /* let the whole page scroll on mobile */
   }
 `,Sidebar=pt.aside`
@@ -13452,7 +13454,7 @@ attempted value: ${nt}
 `,Page=pt.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 
   color: #e5e7eb;
 `,BrandBar=pt.header`
