@@ -89,6 +89,15 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
         </BrandBarLeft>
 
         <BrandBarRight>
+          {/* NEW: mobile-only quick links */}
+          <BrandBarLinksMobile>
+            <BrandBarLink type="button" onClick={onOpenHow}>
+              How it works
+            </BrandBarLink>
+            <BrandBarLink type="button" onClick={onGoSupport}>
+              Support
+            </BrandBarLink>
+          </BrandBarLinksMobile>
           {uid && (
             <ProfileShell ref={profileMenuRef}>
               <UserAvatarButton
@@ -808,8 +817,14 @@ const Shell = styled.div`
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   flex: 1;
-  min-height: 0; /* allow children to manage their own scroll */
-  overflow: hidden; /* prevent the whole window from scrolling */
+  min-height: 0;
+  overflow: hidden; /* desktop: independent scroll for sidebar/content */
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    overflow: visible; /* let the whole page scroll on mobile */
+  }
 `;
 const Sidebar = styled.aside`
   border-right: 1px solid rgba(148, 163, 184, 0.25);
@@ -818,9 +833,17 @@ const Sidebar = styled.aside`
   flex-direction: column;
   min-width: 0;
 
-  /* key bits for independent scrolling */
   overflow-y: auto;
   overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 10px 12px 12px;
+
+    /* let it size to content and use page scroll instead */
+    overflow-y: visible;
+  }
 `;
 
 const SidebarTopRow = styled.div`
@@ -859,6 +882,14 @@ const PetsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: stretch;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
 `;
 
 const PetLink = styled(NavLink)`
@@ -881,6 +912,12 @@ const PetRow = styled.button`
 
   &:hover {
     background: ${(p) => (p.$active ? "rgba(239, 246, 255, 1)" : "#f8fafc")};
+  }
+
+  @media (max-width: 768px) {
+    min-width: 180px;
+    padding: 8px 9px;
+    flex: 0 0 auto;
   }
 `;
 
@@ -910,6 +947,12 @@ const PetAvatar = styled.div`
 
   box-shadow: ${(p) =>
     p.$active ? "0 10px 24px rgba(15, 23, 42, 0.08)" : "none"};
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
 `;
 
 const PetInfo = styled.div`
@@ -945,6 +988,10 @@ const SidebarFooter = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const FooterLink = styled.button`
@@ -1013,7 +1060,12 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   padding: 16px 20px 24px;
-  overflow: hidden; /* prevent the whole page from scrolling */
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 12px 12px 20px;
+    overflow: visible;
+  }
 `;
 
 const HeaderCard = styled.div`
@@ -1027,6 +1079,11 @@ const HeaderCard = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    padding: 12px 10px;
+    align-items: flex-start;
+  }
 `;
 
 const HeaderLeft = styled.div``;
@@ -1035,8 +1092,11 @@ const HeaderTitle = styled.div`
   font-size: 18px;
   font-weight: 900;
   color: #0f172a;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
 const HeaderSub = styled.div`
   margin-top: 4px;
   font-size: 12px;
@@ -1073,6 +1133,10 @@ const TabsRow = styled.nav`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const TabLink = styled(NavLink)`
@@ -1092,6 +1156,13 @@ const TabLink = styled(NavLink)`
     background: rgba(239, 246, 255, 1);
     color: #1d4ed8;
   }
+
+  @media (max-width: 640px) {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px 8px;
+  }
 `;
 
 const Content = styled.div`
@@ -1099,11 +1170,13 @@ const Content = styled.div`
   min-height: 0;
   margin-top: 16px;
 
-  /* this is the scrollable area for the pet sub-pages */
   overflow-y: auto;
   overflow-x: hidden;
-`;
 
+  @media (max-width: 768px) {
+    overflow-y: visible;
+  }
+`;
 const WelcomeCard = styled.div`
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(148, 163, 184, 0.22);
@@ -1465,8 +1538,11 @@ const BrandBarInner = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-`;
 
+  @media (max-width: 768px) {
+    padding: 10px 14px;
+  }
+`;
 /* NEW */
 const BrandBarLeft = styled.button`
   border: none;
@@ -1486,8 +1562,11 @@ const BrandBarTitle = styled.div`
   font-size: 16px;
   font-weight: 900;
   color: #0f172a;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+`;
 /* NEW */
 const BrandBarSub = styled.div`
   margin-top: 3px;
@@ -1518,6 +1597,16 @@ const BrandBarLink = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const BrandBarLinksMobile = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
 `;
 
