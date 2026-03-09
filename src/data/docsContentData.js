@@ -6,6 +6,7 @@
  *   - text: paragraph text (can be an array of paragraphs or any React element)
  */
 
+// src/data/docsContentData.js
 const contentData = {
   home: {
     introToVetcation: {
@@ -5514,9 +5515,9 @@ requirements and explain how Vetcation keeps you compliant.`,
 
   contributors: {
     ourContributors: {
-      mainTitle: "Vetcation Contributors",
+      mainTitle: "MyPet Health Contributors",
       mainDescription:
-        "Vetcation is shaped by the passion, expertise, and collaboration of dedicated individuals from across the veterinary and technology fields. This section highlights the contributors who have helped bring our vision to life. We list our contributors in alphabetical order to honor their unique contributions and the diverse backgrounds they bring to Vetcation.",
+        "MyPet Health is shaped by the passion, expertise, and collaboration of dedicated individuals from across the veterinary and technology fields. This section highlights the contributors who have helped bring our vision to life. We list our contributors in alphabetical order to honor their unique contributions and the diverse backgrounds they bring to MyPet Health.",
       sections: [
         {
           id: "coreTeam",
@@ -5526,23 +5527,29 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "customContributorList",
               contributors: [
                 {
-                  name: "Geoff Chih-Fan Chen",
-                  title: "Founder of Vetcation",
+                  name: "Dr. Jeremy Prupas",
+                  title: "Chief Veterinarian at City of Los Angeles",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FPrupas2.webp?alt=media&token=53123546-8837-4a0a-97d6-e98dfc17acd4",
                   description:
-                    "Geoff Chih-Fan Chen, a former astrophysicist at UCLA, leveraged his expertise to build the core infrastructure of the Vetcation platform. Inspired by Dr. Fuchi Yu, he combined advanced technology with clinical insight to help advance telemedicine in the veterinary field.",
+                    "Jeremy Prupas, VMD, MPH, is the Chief Veterinarian for the City of Los Angeles Department of Animal Services. Since 2008 he has overseen medical operations across six shelters and supported the veterinarians and technicians who run them every day. A graduate of the University of Pennsylvania, he brings nearly 30 years of experience in shelter medicine, small animal and exotics practice, veterinary education, and public health. Through initiatives such as AlignCare Los Angeles, he focuses on access to care for underserved communities, helping shelters keep more pets with their families instead of seeing them surrendered. Shelter teams know him as a champion of practical, real world solutions grounded in One Health principles and in building sustainable, high functioning shelter veterinary systems.",
                 },
                 {
-                  name: "Mingli Lee",
-                  title: "UX Designer",
+                  name: "Geoff Chih-Fan Chen",
+                  title: "Founder of MyPet Health",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChen.webp?alt=media&token=a901ddff-720b-4e35-93c2-e6f9560f568b",
                   description:
-                    "Mingli Lee made significant contributions to the UX design during the early stages of the Vetcation product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                    "Geoff Chih-Fan Chen is the founder of MyPet Health and leads the product and engineering work behind its universal medical record for pets. He holds a PhD in physics from UC Davis and previously worked as a research scientist at UCLA before moving into software engineering. Today he works closely with veterinarians like Dr. Fuchi Yu and Dr. Prupas to build simple, reliable tools that fit real shelter workflows, make it easy to send adopters home with a complete digital record, and keep families, clinics, and shelters on the same page after adoption.",
                 },
 
                 {
                   name: "Dr. Fuchi Yu",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FYu.webp?alt=media&token=151df4e9-481b-45a6-86e1-b1b0d99f0ecf4",
                   title: "Veterinarian at Overland Veterinary Clinic",
                   description:
-                    "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the Vetcation platform. Her clinical insights and frontline experience have been instrumental in shaping Vetcation’s telemedicine services.",
+                    "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the MyPet Health platform. Her clinical insights and frontline experience have been instrumental in shaping MyPet Health telemedicine services. She holds a master’s degree in Veterinary Preventive Medicine, Epidemiology, and Public Health from the University of California, Davis,",
                 },
 
                 // More contributors...
@@ -5561,31 +5568,31 @@ requirements and explain how Vetcation keeps you compliant.`,
                   name: "Jackson Konkle",
                   title: "Marketing Intern",
                   description:
-                    "Jackson Konkle is a Marketing Intern at Vetcation, bringing a passion for storytelling and experience in content creation, social media strategy, and community outreach. Currently studying Business Information Management at UC Irvine, Jackson is helping Vetcation grow its community and expand access to veterinary knowledge and care.",
+                    "Jackson Konkle is a Marketing Intern at MyPet Health, bringing a passion for storytelling and experience in content creation, social media strategy, and community outreach. Currently studying Business Information Management at UC Irvine, Jackson is helping MyPet Health grow its community and expand access to veterinary knowledge and care.",
                 },
               ],
             },
           ],
         },
-        {
-          id: "advisors",
-          title: "Advisors",
-          blocks: [
-            {
-              type: "customContributorList",
-              contributors: [
-                {
-                  name: "Dr. Jeremy Prupas",
-                  title: "Chief Veterinarian at City of Los Angeles",
-                  description:
-                    "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare, SCVMA, and veterinary hospitals helped align the platform with broader efforts to advance virtual care in the veterinary field.",
-                },
+        // {
+        //   id: "advisors",
+        //   title: "Advisors",
+        //   blocks: [
+        //     {
+        //       type: "customContributorList",
+        //       contributors: [
+        //         {
+        //           name: "Dr. Jeremy Prupas",
+        //           title: "Chief Veterinarian at City of Los Angeles",
+        //           description:
+        //             "Dr. Jeremy Prupas has provided key strategic guidance that helped steer Vetcation toward telemedicine. His connections with organizations such as AlignCare, SCVMA, and veterinary hospitals helped align the platform with broader efforts to advance virtual care in the veterinary field.",
+        //         },
 
-                // More contributors...
-              ],
-            },
-          ],
-        },
+        //         // More contributors...
+        //       ],
+        //     },
+        //   ],
+        // },
         {
           id: "contributors",
           title: "Contributors",
@@ -5594,23 +5601,29 @@ requirements and explain how Vetcation keeps you compliant.`,
               type: "customContributorList",
               contributors: [
                 {
+                  name: "Mingli Lee",
+                  title: "UX Designer",
+                  description:
+                    "Mingli Lee made significant contributions to the UX design during the early stages of the MyPet Health product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                },
+                {
                   name: "Dr. Ross Massimiano",
                   title: "Veterinarian at Veterinary Emergency Group (VEG)",
                   description:
-                    "Dr. Ross Massimiano has helped check the workflow of the Vetcation platform and provided valuable feedback on the features. His insights have been crucial in ensuring that the platform meets the needs of both veterinary professionals and pet owners.",
+                    "Dr. Ross Massimiano has helped check the workflow of the MyPet Health platform and provided valuable feedback on the features. His insights have been crucial in ensuring that the platform meets the needs of both veterinary professionals and pet owners.",
                 },
                 {
                   name: "Emily Schmieder",
                   title:
                     "Licensed Veterinary Technician at Benfield Animal Hospital",
                   description:
-                    "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—Vetcation’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
+                    "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—MyPet Health’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
                 },
                 {
                   name: "Dr. Ying Tsou",
                   title: "Veterinarian at Norco Animal Hospital",
                   description:
-                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the Vetcation platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
                 },
                 {
                   name: "Tahnee Morris",
@@ -5637,7 +5650,7 @@ requirements and explain how Vetcation keeps you compliant.`,
   oneHealth: {
     introToOneHealth: {
       mainTitle: "Collaborations for One Health Impact",
-      mainDescription: `We partner with public agencies, nonprofits, and community leaders to keep more pets with their people and strengthen veterinary teams. Our focus: expand access to care, reduce preventable surrenders, improve post-adoption outcomes, and protect clinician well-being. Each collaboration aligns with Vetcation’s platform strengths—virtual care, coordinated follow-ups, and transparent data—while honoring the missions of our partners.`,
+      mainDescription: `We partner with public agencies, nonprofits, and community leaders to keep more pets with their people and strengthen veterinary teams. Our focus: expand access to care, reduce preventable surrenders, improve post-adoption outcomes, and protect clinician well-being. Each collaboration aligns with MyPet Health’s platform strengths—virtual care, coordinated follow-ups, and transparent data—while honoring the missions of our partners.`,
 
       sections: [
         {
@@ -5668,7 +5681,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   heading: "Initial Joint Initiatives:",
                   lines: [
                     "Map a shelter-to-community virtual care loop (triage → telemedicine → in-person handoff) with clear escalation rules.",
-                    "Use Vetcation’s time-boxed messaging and video visits for follow-ups to protect staff time and increase continuity.",
+                    "Use MyPet Health’s time-boxed messaging and video visits for follow-ups to protect staff time and increase continuity.",
                     "Define metrics: prevented surrenders, resolved cases without ER visits, clinician workload reduction, client satisfaction.",
                   ],
                 },

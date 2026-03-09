@@ -58,6 +58,9 @@ import VetReadySummaryPage from "./pages/app/VetReadySummaryPage";
 import VaccinePage from "./pages/app/VaccinePage";
 import MemoizedPetHealthLayout from "./pages/app/PetHealthLayout";
 import ScrollToTop from "./components/ScrollToTop";
+import ForShelterPage from "./pages/ForShelterPage";
+import MissionPage from "./pages/MissionPage";
+import TeamPage from "./pages/TeamPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -485,6 +488,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/pet-upload/:inviteId" element={<VetUploadRecordPage />} />
         <Route path="/pet-summary/:shareId" element={<PetSummarySharePage />} />
+        <Route path="/for-shelters/" element={<ForShelterPage />} />
+        <Route path="/mission/" element={<MissionPage />} />
+        <Route path="/team/" element={<TeamPage />} />
         {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
         <Route path="/redirect/" element={<RedirectPage />} />
         {/* Auth guard layout */}

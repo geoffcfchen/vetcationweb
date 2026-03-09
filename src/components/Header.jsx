@@ -86,8 +86,11 @@ const LoginButton = styled.button`
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease,
-    transform 0.05s ease, box-shadow 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.05s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
     background: #ffffff;
@@ -135,10 +138,32 @@ const LogoSubText = styled.span`
   }
 `;
 
+const NavLinkItem = styled(Link)`
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: rgba(249, 250, 251, 0.08);
+    color: #ffffff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(249, 250, 251, 0.9);
+    outline-offset: 3px;
+  }
+`;
+
 function Header({ onLoginClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth : breakpoint + 1
+    typeof window !== "undefined" ? window.innerWidth : breakpoint + 1,
   );
   const navigate = useNavigate();
 
@@ -161,7 +186,7 @@ function Header({ onLoginClick }) {
       }
       setIsOpen(false);
     },
-    [onLoginClick, navigate]
+    [onLoginClick, navigate],
   );
 
   const toggleDropdown = useCallback(() => {
@@ -200,6 +225,9 @@ function Header({ onLoginClick }) {
 
       {/* Desktop nav */}
       <Nav>
+        <NavLinkItem to="/team/">Team</NavLinkItem>
+        <NavLinkItem to="/mission/">Mission</NavLinkItem>
+        <NavLinkItem to="/for-shelters/">For shelters</NavLinkItem>
         <LoginButton type="button" onClick={handleLoginClick}>
           <FiLogIn />
           <span>Log in</span>
@@ -218,6 +246,27 @@ function Header({ onLoginClick }) {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
+            <Dropdown.Item
+              as={Link}
+              to="/team/"
+              onClick={() => setIsOpen(false)}
+            >
+              Mission
+            </Dropdown.Item>
+            <Dropdown.Item
+              as={Link}
+              to="/mission/"
+              onClick={() => setIsOpen(false)}
+            >
+              Mission
+            </Dropdown.Item>
+            <Dropdown.Item
+              as={Link}
+              to="/for-shelters/"
+              onClick={() => setIsOpen(false)}
+            >
+              For shelters
+            </Dropdown.Item>
             <Dropdown.Item onClick={handleLoginClick}>Log in</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
