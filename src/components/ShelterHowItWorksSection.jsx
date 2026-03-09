@@ -113,6 +113,19 @@ function ShelterHowItWorksSection() {
       />
 
       <Feature
+        heading="Step 4: Extend support beyond the adoption day"
+        text={
+          <>
+            MyPet Health helps adopters stay connected with veterinarians after
+            they bring the pet home. They can message vets directly, ask follow
+            up questions, and get medications from vets when their pet needs
+            continued care.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
+        headerFontSize={36}
+      />
+      {/* <Feature
         heading="Step 4: Reduce post adoption friction"
         text={
           <>
@@ -127,7 +140,7 @@ function ShelterHowItWorksSection() {
         mediaVariant="desktop"
         linkText="What vets see when you share"
         to="/pet-health-record/"
-      />
+      /> */}
     </FeaturesContainer>
   );
 }
