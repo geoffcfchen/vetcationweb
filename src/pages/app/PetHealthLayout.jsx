@@ -823,6 +823,8 @@ const Shell = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
+    min-height: auto;
     overflow: visible; /* let the whole page scroll on mobile */
   }
 `;
@@ -1515,7 +1517,7 @@ const ChipPill = styled.div`
 const Page = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 
   color: #e5e7eb;
 `;
