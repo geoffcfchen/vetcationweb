@@ -471,6 +471,7 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
                   value={dobInput}
                   onChange={(e) => setDobInput(e.target.value)}
                   max={todayIso}
+                  placeholder="YYYY-MM-DD"
                 />
                 {formErrors.dob && <FieldError>{formErrors.dob}</FieldError>}
               </>
@@ -622,6 +623,7 @@ const Backdrop = styled.div`
 `;
 
 const ModalCard = styled.div`
+  box-sizing: border-box;
   width: 100%;
   max-width: 720px;
   max-height: 90vh;
@@ -667,7 +669,9 @@ const ModalClose = styled.button`
 `;
 
 const ModalBody = styled.div`
+  box-sizing: border-box;
   padding: 12px 16px 16px;
+  max-width: 100%;
 `;
 
 const FormError = styled.div`
@@ -694,19 +698,39 @@ const FieldDescription = styled.div`
 `;
 
 const TextInputStyled = styled.input`
+  display: block;
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   font-size: 13px;
+  line-height: 1.2;
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
   outline: none;
+  background: #ffffff;
+
+  /* keep height consistent whether empty or with a date */
+  height: 36px;
 
   &:focus {
     border-color: #2563eb;
     box-shadow: 0 0 0 1px #2563eb33;
   }
-`;
 
+  &[type="date"] {
+    /* force native widget to respect container width */
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 36px;
+  }
+`;
 const SmallInlineInputs = styled.div`
   display: flex;
   flex-wrap: wrap;
