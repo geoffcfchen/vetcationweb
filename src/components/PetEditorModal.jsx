@@ -1,5 +1,5 @@
 // src/components/PetEditorModal.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import styled from "styled-components";
 import {
   arrayUnion,
@@ -48,12 +48,30 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
   const [photoPreview, setPhotoPreview] = useState(""); // preview url or existing photoURL
   const [photoError, setPhotoError] = useState("");
 
+  const [breedDropdownOpen, setBreedDropdownOpen] = useState(false);
+  const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
+
+  const breedFieldRef = useRef(null);
+  const colorFieldRef = useRef(null);
+
   const todayIso = useMemo(() => DateTime.now().toISODate(), []);
 
   const breedOptions = useMemo(
     () => (petType === "cat" ? categoriesCatBreed : categoriesDogBreed),
     [petType],
   );
+
+  const filteredBreedOptions = useMemo(() => {
+    const q = breedInput.trim().toLowerCase();
+    if (!q) return breedOptions;
+    return breedOptions.filter((b) => b.label.toLowerCase().includes(q));
+  }, [breedInput, breedOptions]);
+
+  const filteredColorOptions = useMemo(() => {
+    const q = colorInput.trim().toLowerCase();
+    if (!q) return categoriesColor;
+    return categoriesColor.filter((c) => c.label.toLowerCase().includes(q));
+  }, [colorInput]);
 
   useEffect(() => {
     return () => {
@@ -121,6 +139,28 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
       setPhotoError("");
     }
   }, [isEdit, initialPet]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        breedFieldRef.current &&
+        !breedFieldRef.current.contains(event.target)
+      ) {
+        setBreedDropdownOpen(false);
+      }
+      if (
+        colorFieldRef.current &&
+        !colorFieldRef.current.contains(event.target)
+      ) {
+        setColorDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const validateForm = () => {
     const errors = {};
@@ -501,35 +541,69 @@ function PetEditorModal({ mode, initialPet, uid, onClose, onSaved }) {
 
           <FieldGroup>
             <FieldLabel>Breed</FieldLabel>
-            <TextInputStyled
-              type="text"
-              list="breedOptionsList"
-              value={breedInput}
-              onChange={(e) => setBreedInput(e.target.value)}
-              placeholder='Start typing, or choose "Mixed" / "Unknown"'
-            />
-            <datalist id="breedOptionsList">
-              {breedOptions.map((b) => (
-                <option key={b.id} value={b.label} />
-              ))}
-            </datalist>
+            <AutocompleteContainer ref={breedFieldRef}>
+              <TextInputStyled
+                type="text"
+                value={breedInput}
+                onFocus={() => setBreedDropdownOpen(true)}
+                onChange={(e) => {
+                  setBreedInput(e.target.value);
+                  setBreedDropdownOpen(true);
+                }}
+                placeholder='Start typing, or choose "Mixed" / "Unknown"'
+                autoComplete="off"
+              />
+              {breedDropdownOpen && filteredBreedOptions.length > 0 && (
+                <SuggestionsList>
+                  {filteredBreedOptions.map((b) => (
+                    <SuggestionItem
+                      type="button"
+                      key={b.id}
+                      onClick={() => {
+                        setBreedInput(b.label);
+                        setBreedDropdownOpen(false);
+                      }}
+                    >
+                      {b.label}
+                    </SuggestionItem>
+                  ))}
+                </SuggestionsList>
+              )}
+            </AutocompleteContainer>
             {formErrors.breed && <FieldError>{formErrors.breed}</FieldError>}
           </FieldGroup>
 
           <FieldGroup>
             <FieldLabel>Color</FieldLabel>
-            <TextInputStyled
-              type="text"
-              list="colorOptionsList"
-              value={colorInput}
-              onChange={(e) => setColorInput(e.target.value)}
-              placeholder="Start typing a color"
-            />
-            <datalist id="colorOptionsList">
-              {categoriesColor.map((c) => (
-                <option key={c.id} value={c.label} />
-              ))}
-            </datalist>
+            <AutocompleteContainer ref={colorFieldRef}>
+              <TextInputStyled
+                type="text"
+                value={colorInput}
+                onFocus={() => setColorDropdownOpen(true)}
+                onChange={(e) => {
+                  setColorInput(e.target.value);
+                  setColorDropdownOpen(true);
+                }}
+                placeholder="Start typing a color"
+                autoComplete="off"
+              />
+              {colorDropdownOpen && filteredColorOptions.length > 0 && (
+                <SuggestionsList>
+                  {filteredColorOptions.map((c) => (
+                    <SuggestionItem
+                      type="button"
+                      key={c.id}
+                      onClick={() => {
+                        setColorInput(c.label);
+                        setColorDropdownOpen(false);
+                      }}
+                    >
+                      {c.label}
+                    </SuggestionItem>
+                  ))}
+                </SuggestionsList>
+              )}
+            </AutocompleteContainer>
             {formErrors.color && <FieldError>{formErrors.color}</FieldError>}
           </FieldGroup>
 
@@ -942,4 +1016,40 @@ const FileName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const AutocompleteContainer = styled.div`
+  position: relative;
+`;
+
+const SuggestionsList = styled.ul`
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  overflow-y: auto;
+  z-index: 20;
+`;
+
+const SuggestionItem = styled.button`
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 13px;
+  color: #0f172a;
+  cursor: pointer;
+
+  &:hover {
+    background: #f1f5f9;
+  }
 `;
