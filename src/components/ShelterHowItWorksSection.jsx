@@ -70,12 +70,13 @@ function ShelterHowItWorksSection() {
       </SectionHeader>
 
       <Feature
-        heading="Step 1: Connect your shelter"
+        heading="Step 1: Create pet profile from your shelter account"
         text={
           <>
-            We create a shelter profile with your logo and contact details. You
-            decide which standard documents you want to include automatically,
-            like intake forms, vaccine records, or surgery notes.
+            Your team creates a pet profile in MyPet Health with basic info like
+            name, breed, and photo. This profile will hold all the pet&apos;s
+            records and be the source of truth for adopters and vets after the
+            pet goes home.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%2011.29.53%E2%80%AFPM.webp?alt=media&token=1f83e8f3-66cb-4329-8a1a-edcd61fbbfbc"
