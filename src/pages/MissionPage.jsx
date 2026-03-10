@@ -31,7 +31,7 @@ const HeroEyebrow = styled.div`
 
 const HeroTitle = styled.h1`
   margin: 12px 0 10px;
-  font-size: clamp(32px, 4.3vw, 44px);
+  font-size: clamp(34px, 4.5vw, 46px);
   line-height: 1.12;
   font-weight: 800;
   color: #0f172a;
@@ -40,8 +40,8 @@ const HeroTitle = styled.h1`
 const HeroSubtitle = styled.p`
   margin: 0;
   margin-top: 6px;
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 19px;
+  line-height: 1.65;
   color: #4b5563;
   max-width: 720px;
 `;
@@ -72,27 +72,27 @@ const SectionBlock = styled.section`
 
 const SectionTitle = styled.h2`
   margin: 0 0 0.75rem;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: #0f172a;
 `;
 
 const SectionLead = styled.p`
   margin: 0 0 1rem;
-  font-size: 17px;
+  font-size: 18px;
   color: #475569;
-  line-height: 1.6;
+  line-height: 1.65;
 `;
 
 const BulletList = styled.ul`
   margin: 0;
   padding-left: 1.1rem;
-  font-size: 15px;
+  font-size: 16px;
   color: #374151;
-  line-height: 1.6;
+  line-height: 1.7;
 
   li + li {
-    margin-top: 0.4rem;
+    margin-top: 0.45rem;
   }
 `;
 
@@ -106,9 +106,9 @@ const PillRow = styled.div`
 const Pill = styled.span`
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 13px;
   color: #0f172a;
   background: #e0f2fe;
   border: 1px solid #bfdbfe;
@@ -132,17 +132,16 @@ const SmallCard = styled.div`
 `;
 
 const SmallCardTitle = styled.h3`
-  margin: 0 0 0.4rem;
-  font-size: 16px;
+  margin: 0 0 0.45rem;
+  font-size: 17px;
   font-weight: 700;
   color: #111827;
 `;
-
 const SmallCardText = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   color: #4b5563;
-  line-height: 1.5;
+  line-height: 1.6;
 `;
 
 /* Divider */
@@ -159,9 +158,9 @@ const SectionDivider = styled.div`
 const PrincipleList = styled.ul`
   margin: 0;
   padding-left: 1.1rem;
-  font-size: 15px;
+  font-size: 16px;
   color: #374151;
-  line-height: 1.6;
+  line-height: 1.7;
 
   li + li {
     margin-top: 0.5rem;
