@@ -5551,6 +5551,22 @@ requirements and explain how Vetcation keeps you compliant.`,
                   description:
                     "Dr. Fuchi Yu is a veterinarian at Overland Veterinary Clinic and has played a key role in supporting the development of the MyPet Health platform. Her clinical insights and frontline experience have been instrumental in shaping MyPet Health telemedicine services. She holds a master’s degree in Veterinary Preventive Medicine, Epidemiology, and Public Health from the University of California, Davis,",
                 },
+                {
+                  name: "Dr. Ying Tsou",
+                  title: "Veterinarian at Norco Animal Hospital",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.39.00%E2%80%AFPM.webp?alt=media&token=56705fb0-8eff-4586-8da7-910e7e86ab85",
+                  description:
+                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                },
+                {
+                  name: "Mingli Lee",
+                  title: "UX Designer",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.42.03%E2%80%AFPM.webp?alt=media&token=af08d413-f40e-4aad-93b4-0ff12ea48e24",
+                  description:
+                    "Mingli Lee made significant contributions to the UX design during the early stages of the MyPet Health product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                },
 
                 // More contributors...
               ],
@@ -5600,12 +5616,12 @@ requirements and explain how Vetcation keeps you compliant.`,
             {
               type: "customContributorList",
               contributors: [
-                {
-                  name: "Mingli Lee",
-                  title: "UX Designer",
-                  description:
-                    "Mingli Lee made significant contributions to the UX design during the early stages of the MyPet Health product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
-                },
+                // {
+                //   name: "Mingli Lee",
+                //   title: "UX Designer",
+                //   description:
+                //     "Mingli Lee made significant contributions to the UX design during the early stages of the MyPet Health product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                // },
                 {
                   name: "Dr. Ross Massimiano",
                   title: "Veterinarian at Veterinary Emergency Group (VEG)",
@@ -5619,12 +5635,12 @@ requirements and explain how Vetcation keeps you compliant.`,
                   description:
                     "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—MyPet Health’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
                 },
-                {
-                  name: "Dr. Ying Tsou",
-                  title: "Veterinarian at Norco Animal Hospital",
-                  description:
-                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
-                },
+                // {
+                //   name: "Dr. Ying Tsou",
+                //   title: "Veterinarian at Norco Animal Hospital",
+                //   description:
+                //     "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                // },
                 {
                   name: "Tahnee Morris",
                   title: "Hospital Manager at Animal Hospital of Redondo Beach",
