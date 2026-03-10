@@ -24,6 +24,7 @@ const Callout = styled.div`
     text-align: center;
   }
 `;
+
 const CalloutContent = styled.div`
   text-align: left;
 
@@ -64,25 +65,22 @@ const QRCodeImage = styled.img`
   }
 `;
 
-const GetStartedCallout = ({ qrCodeLink }) => {
+const GetStartedCallout = ({
+  qrCodeLink,
+  heading = "Create your pet record today",
+  subheading = "Scan to get MyPet Health and upload your pet’s medical records. Keep everything ready to share in seconds, especially in emergencies.",
+  imageAlt = "Scan to download the MyPet Health app",
+}) => {
   return (
     <Container>
       <Callout>
         <CalloutContent>
-          <CalloutHeading>Create your pet record today</CalloutHeading>
-          <CalloutSubheading>
-            Scan to get MyPet Health and upload your pet’s medical records. Keep
-            everything ready to share in seconds, especially in emergencies.
-          </CalloutSubheading>
+          <CalloutHeading>{heading}</CalloutHeading>
+          <CalloutSubheading>{subheading}</CalloutSubheading>
         </CalloutContent>
 
         <RightSide>
-          {qrCodeLink && (
-            <QRCodeImage
-              src={qrCodeLink}
-              alt="Scan to download the MyPet Health app"
-            />
-          )}
+          {qrCodeLink && <QRCodeImage src={qrCodeLink} alt={imageAlt} />}
         </RightSide>
       </Callout>
     </Container>

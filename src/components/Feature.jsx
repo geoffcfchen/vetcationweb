@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // ⬅️ add this
+import { useNavigate } from "react-router-dom";
 import sprite from "../images/sprite.svg";
 import iPhoneFrame from "../images/iphone-frame_15pro.png";
 
@@ -31,11 +31,8 @@ const Heading = styled.h3`
   line-height: 1.3;
   color: #000;
   font-family: inherit;
-
-  /* desktop (uses your prop) */
   font-size: ${(p) => p.$size}px;
 
-  /* mobile: scale down */
   @media (max-width: 768px) {
     font-size: clamp(20px, 5.2vw, ${(p) => Math.round(p.$size * 0.9)}px);
   }
@@ -73,23 +70,18 @@ const FeatureBlock = styled(motion.article)`
   }
 
   @media screen and (min-width: 768px) {
-    /* default layout */
     grid-template-columns: repeat(2, 1fr);
 
     ${(props) =>
       props.$mediaVariant === "desktop" &&
       `
-        /* text smaller, media bigger */
         grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.55fr);
 
-        /* when we flip (even rows), also flip column sizes
-           so media stays in the big column */
         &:nth-of-type(even) {
           grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
         }
       `}
 
-    /* your alternating order */
     &:nth-of-type(even) {
       & > div:first-child {
         order: 2;
@@ -137,10 +129,7 @@ const FeatureContent = styled(motion.div)`
 
 const BodyText = styled.p`
   color: var(--color-body);
-
-  /* auto shrink on small screens */
   font-size: clamp(16px, 4.6vw, 28px);
-
   margin-top: 5px;
   line-height: 1.3;
   margin-bottom: 0;
@@ -167,9 +156,7 @@ const BodyText = styled.p`
 const CtaLink = styled.a`
   color: red;
   text-transform: uppercase;
-
   font-size: clamp(12px, 3.4vw, 15px);
-
   font-weight: bold;
   text-decoration: none;
   display: inline-flex;
@@ -230,7 +217,6 @@ const FramedImage = styled(motion.img)`
   object-fit: contain;
 `;
 
-// Animation variants
 const contentVariants = {
   hidden: { x: -100, opacity: 0 },
   visible: { x: 0, opacity: 1, transition: { type: "spring", duration: 0.8 } },
@@ -247,7 +233,7 @@ const imageVariants = {
 
 const DesktopFrameContainer = styled.div`
   width: 100%;
-  max-width: 1100px; /* was 920px */
+  max-width: 1100px;
   margin: 0 auto;
 `;
 
@@ -294,21 +280,23 @@ export default function Feature({
   image,
   videoSrc,
   imageSrc,
-  to, // ⬅️ NEW: route to navigate on click (e.g., "/telemedicine-info")
+  to,
   headerFontSize = 30,
-  mediaVariant = "phone", // "phone" | "desktop"
+  mediaVariant = "phone",
+  clickTarget = "feature", // "feature" | "cta"
 }) {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
-  const clickable = Boolean(to);
+  const featureClickable = Boolean(to) && clickTarget === "feature";
+  const ctaNavigates = Boolean(to);
 
   const go = () => {
     if (to) navigate(to);
   };
 
-  const onKeyDown = (e) => {
-    if (!clickable) return;
+  const onFeatureKeyDown = (e) => {
+    if (!featureClickable) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       go();
@@ -321,12 +309,12 @@ export default function Feature({
       whileInView="visible"
       viewport={{ once: true }}
       variants={contentVariants}
-      onClick={clickable ? go : undefined}
-      onKeyDown={onKeyDown}
-      role={clickable ? "link" : undefined}
-      tabIndex={clickable ? 0 : undefined}
-      aria-label={clickable ? `Open ${heading}` : undefined}
-      $clickable={clickable}
+      onClick={featureClickable ? go : undefined}
+      onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
+      role={featureClickable ? "link" : undefined}
+      tabIndex={featureClickable ? 0 : undefined}
+      aria-label={featureClickable ? `Open ${heading}` : undefined}
+      $clickable={featureClickable}
       $mediaVariant={mediaVariant}
     >
       <FeatureContent>
@@ -342,18 +330,18 @@ export default function Feature({
 
         <BodyText>{text}</BodyText>
 
-        {/* If we have a specific linkText button, make it route with SPA navigation */}
         {linkText && (
           <CtaLink
             href={to || linkHref || "#"}
             onClick={(e) => {
-              if (to) {
+              if (ctaNavigates) {
                 e.preventDefault();
                 go();
               }
             }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            aria-label={linkText}
           >
             {linkText}
             <FaArrowRight
@@ -370,21 +358,20 @@ export default function Feature({
           <QRCodeImage
             src={qrCodeLink}
             alt="QR Code"
-            $clickable={clickable}
-            onClick={clickable ? go : undefined}
+            $clickable={featureClickable}
+            onClick={featureClickable ? go : undefined}
           />
         )}
       </FeatureContent>
 
-      {/* Media side */}
       {videoSrc ? (
         <VideoFrameContainer
-          onClick={clickable ? go : undefined}
-          role={clickable ? "img" : undefined}
-          aria-label={clickable ? `${heading} demo` : undefined}
-          tabIndex={clickable ? 0 : undefined}
-          onKeyDown={onKeyDown}
-          style={{ cursor: clickable ? "pointer" : "default" }}
+          onClick={featureClickable ? go : undefined}
+          role={featureClickable ? "img" : undefined}
+          aria-label={featureClickable ? `${heading} demo` : undefined}
+          tabIndex={featureClickable ? 0 : undefined}
+          onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
+          style={{ cursor: featureClickable ? "pointer" : "default" }}
         >
           <StyledVideo
             variants={imageVariants}
@@ -400,12 +387,12 @@ export default function Feature({
       ) : imageSrc ? (
         mediaVariant === "desktop" ? (
           <DesktopFrameContainer
-            onClick={clickable ? go : undefined}
-            style={{ cursor: clickable ? "pointer" : "default" }}
-            role={clickable ? "img" : undefined}
-            aria-label={clickable ? `${heading} screenshot` : undefined}
-            tabIndex={clickable ? 0 : undefined}
-            onKeyDown={onKeyDown}
+            onClick={featureClickable ? go : undefined}
+            style={{ cursor: featureClickable ? "pointer" : "default" }}
+            role={featureClickable ? "img" : undefined}
+            aria-label={featureClickable ? `${heading} screenshot` : undefined}
+            tabIndex={featureClickable ? 0 : undefined}
+            onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
           >
             <BrowserFrame>
               <BrowserTopBar aria-hidden="true">
@@ -424,12 +411,12 @@ export default function Feature({
           </DesktopFrameContainer>
         ) : (
           <VideoFrameContainer
-            onClick={clickable ? go : undefined}
-            role={clickable ? "img" : undefined}
-            aria-label={clickable ? `${heading} image` : undefined}
-            tabIndex={clickable ? 0 : undefined}
-            onKeyDown={onKeyDown}
-            style={{ cursor: clickable ? "pointer" : "default" }}
+            onClick={featureClickable ? go : undefined}
+            role={featureClickable ? "img" : undefined}
+            aria-label={featureClickable ? `${heading} image` : undefined}
+            tabIndex={featureClickable ? 0 : undefined}
+            onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
+            style={{ cursor: featureClickable ? "pointer" : "default" }}
           >
             <FramedImage
               variants={imageVariants}
@@ -441,12 +428,12 @@ export default function Feature({
         )
       ) : (
         <picture
-          onClick={clickable ? go : undefined}
-          role={clickable ? "img" : undefined}
-          aria-label={clickable ? `${heading} image` : undefined}
-          tabIndex={clickable ? 0 : undefined}
-          onKeyDown={onKeyDown}
-          style={{ cursor: clickable ? "pointer" : "default" }}
+          onClick={featureClickable ? go : undefined}
+          role={featureClickable ? "img" : undefined}
+          aria-label={featureClickable ? `${heading} image` : undefined}
+          tabIndex={featureClickable ? 0 : undefined}
+          onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
+          style={{ cursor: featureClickable ? "pointer" : "default" }}
         >
           <FeatureImage
             variants={imageVariants}
@@ -455,8 +442,6 @@ export default function Feature({
           />
         </picture>
       )}
-
-      {/* <ContributionNote> ... </ContributionNote> */}
     </FeatureBlock>
   );
 }

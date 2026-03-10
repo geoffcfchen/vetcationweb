@@ -24,7 +24,12 @@ function ForShelterPage() {
 
       {/* Reuse the same QR callout so shelters can see / share the app */}
       <TestimonialsSection />
-      <GetStartedCallout qrCodeLink={qrCodeImage} />
+      <GetStartedCallout
+        qrCodeLink={qrCodeImage}
+        heading="Help adopters start a lifelong medical record"
+        subheading="Scan to get MyPet Health and give every adopted pet a centralized medical record that can grow over time and be shared with future vets."
+        imageAlt="Scan to get started with MyPet Health"
+      />
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
     </SiteShell>
   );

@@ -311,6 +311,7 @@ function RegisterSection() {
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"
             mediaVariant="desktop"
+            clickTarget="cta"
           />
 
           <Feature
@@ -427,6 +428,7 @@ function RegisterSection() {
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"
             mediaVariant="desktop"
+            clickTarget="cta"
           />
           <Feature
             key={`${viewMode}-step5`}

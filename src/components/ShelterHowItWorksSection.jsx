@@ -128,6 +128,7 @@ function ShelterHowItWorksSection() {
         linkText={"See details of the vet summary"}
         to="/pet-health-record/"
         mediaVariant="desktop"
+        clickTarget="cta"
       />
 
       <Feature
