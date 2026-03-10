@@ -63,9 +63,10 @@ function ShelterHowItWorksSection() {
           Send adopters home with a record, not a stack of paper
         </Headline>
         <Subhead>
-          Use MyPet Health as a digital envelope for intake history, vaccines,
-          spay or neuter notes, and follow up instructions. Every adopter gets a
-          record that is easy to keep, share, and build on with their own vet.
+          Use MyPet Health to turn intake history, vaccines, spay or neuter
+          notes, and follow-up instructions into the first chapter of a pet’s
+          universal medical record. Every adopter leaves with a record that is
+          easy to keep, share, and build on with their own vet.
         </Subhead>
       </SectionHeader>
 
