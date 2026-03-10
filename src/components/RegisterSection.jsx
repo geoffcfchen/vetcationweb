@@ -306,7 +306,7 @@ function RegisterSection() {
                 through paperwork.
               </>
             }
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.02.15%E2%80%AFPM.webp?alt=media&token=f7716d35-bdf4-481e-9ffb-40638d0c482a"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.12.53%E2%80%AFPM.webp?alt=media&token=f56bb8bb-e10a-4051-b0cb-b5879191ac24"
             headerFontSize={30}
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"
@@ -422,7 +422,7 @@ function RegisterSection() {
                 through paperwork.
               </>
             }
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.02.15%E2%80%AFPM.webp?alt=media&token=f7716d35-bdf4-481e-9ffb-40638d0c482a"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.12.53%E2%80%AFPM.webp?alt=media&token=f56bb8bb-e10a-4051-b0cb-b5879191ac24"
             headerFontSize={30}
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"
