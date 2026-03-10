@@ -173,7 +173,7 @@ function ShelterHeroSection({ onGetStarted }) {
                 >
                   Create a pet record
                 </PrimaryButton>
-                <SecondaryButton as={RouterLink} to="/support/" type="button">
+                <SecondaryButton as="a" href="#shelter-contact" type="button">
                   Talk to us
                 </SecondaryButton>
               </ButtonsRow>
