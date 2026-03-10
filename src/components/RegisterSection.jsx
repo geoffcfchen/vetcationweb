@@ -202,9 +202,9 @@ function RegisterSection() {
         <Eyebrow>How it works</Eyebrow>
         <Headline>Create a pet record in minutes</Headline>
         <Subhead>
-          Upload PDFs, photos, or exports from any clinic, shelter, or ER. We
-          organize everything into a clear, vet-ready timeline you can share in
-          seconds, for everyday visits or emergencies.
+          Upload PDFs, photos, or records from any clinic, shelter, or ER. We
+          organize everything into one clear, vet-ready timeline so every vet
+          can quickly see the same medical history.
         </Subhead>
         <CTAGroup aria-label="Choose interface">
           <TogglePill>

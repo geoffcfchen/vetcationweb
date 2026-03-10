@@ -182,9 +182,10 @@ function HeroSection({ onGetStarted }) {
                 for pets
               </HeroHeader>
               <HeroTagline>
-                Pull records from any clinic and keep your pet’s full history
-                organized, shareable in seconds, and ready for any visit and
-                especially emergencies.
+                Register your pet in a free, centralized medical record system
+                so every vet at any clinic, ER, or telehealth visit can see the
+                same medical history. It could save your pet’s life in an
+                emergency.
               </HeroTagline>
 
               <ButtonsRow>
