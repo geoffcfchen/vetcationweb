@@ -742,7 +742,7 @@ function PetSummarySharePage() {
 
     return (
       <PetsWallCard>
-        <PetsWallTitle>Other pets in Vetcation</PetsWallTitle>
+        <PetsWallTitle>Other pets in MyPet Health</PetsWallTitle>
         <PetsWallSubtitle>
           You are viewing one pet in a shared medical memory. Other pet
           identifiers are blurred for privacy.
