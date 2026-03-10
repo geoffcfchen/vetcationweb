@@ -115,7 +115,7 @@ function ShelterHowItWorksSection() {
       />
 
       <Feature
-        heading="Step 4: Extend support beyond the adoption day"
+        heading="Extend support beyond the adoption day"
         text={
           <>
             MyPet Health helps adopters stay connected with licensed

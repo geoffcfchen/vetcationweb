@@ -140,7 +140,7 @@ const LogoSubText = styled.span`
 
 const NavLinkItem = styled(Link)`
   font-size: 1.08rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #e5e7eb;
   text-decoration: none;
   padding: 0.3rem 0.6rem;
@@ -225,9 +225,10 @@ function Header({ onLoginClick }) {
 
       {/* Desktop nav */}
       <Nav>
-        <NavLinkItem to="/team/">Team</NavLinkItem>
-        <NavLinkItem to="/mission/">Mission</NavLinkItem>
         <NavLinkItem to="/for-shelters/">For shelters</NavLinkItem>
+        <NavLinkItem to="/mission/">Mission</NavLinkItem>
+        <NavLinkItem to="/team/">Team</NavLinkItem>
+
         <LoginButton type="button" onClick={handleLoginClick}>
           <FiLogIn />
           <span>Log in</span>
@@ -248,10 +249,10 @@ function Header({ onLoginClick }) {
           <Dropdown.Menu>
             <Dropdown.Item
               as={Link}
-              to="/team/"
+              to="/for-shelters/"
               onClick={() => setIsOpen(false)}
             >
-              Team
+              For shelters
             </Dropdown.Item>
             <Dropdown.Item
               as={Link}
@@ -262,11 +263,12 @@ function Header({ onLoginClick }) {
             </Dropdown.Item>
             <Dropdown.Item
               as={Link}
-              to="/for-shelters/"
+              to="/team/"
               onClick={() => setIsOpen(false)}
             >
-              For shelters
+              Team
             </Dropdown.Item>
+
             <Dropdown.Item onClick={handleLoginClick}>Log in</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
