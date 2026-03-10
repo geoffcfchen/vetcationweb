@@ -230,37 +230,6 @@ function TeamPage() {
             </SectionShell>
           )}
 
-          {/* Interns */}
-          {interns.length > 0 && (
-            <SectionShell>
-              <SectionHeader>
-                <SectionTitle>Interns</SectionTitle>
-                <SectionSubtitle>
-                  Students and early career contributors helping MyPet Health
-                  grow.
-                </SectionSubtitle>
-              </SectionHeader>
-              <CardsGrid>
-                {interns.map((person) => (
-                  <PersonCard key={person.name}>
-                    {person.photoUrl && (
-                      <PhotoWrapper>
-                        <Photo src={person.photoUrl} alt={person.name} />
-                      </PhotoWrapper>
-                    )}
-                    <PersonName>{person.name}</PersonName>
-                    {person.title && <PersonTitle>{person.title}</PersonTitle>}
-                    {person.description && (
-                      <PersonDescription>
-                        {person.description}
-                      </PersonDescription>
-                    )}
-                  </PersonCard>
-                ))}
-              </CardsGrid>
-            </SectionShell>
-          )}
-
           {/* Advisors */}
           {advisors.length > 0 && (
             <SectionShell>
@@ -304,6 +273,36 @@ function TeamPage() {
               </SectionHeader>
               <CardsGrid>
                 {contributors.map((person) => (
+                  <PersonCard key={person.name}>
+                    {person.photoUrl && (
+                      <PhotoWrapper>
+                        <Photo src={person.photoUrl} alt={person.name} />
+                      </PhotoWrapper>
+                    )}
+                    <PersonName>{person.name}</PersonName>
+                    {person.title && <PersonTitle>{person.title}</PersonTitle>}
+                    {person.description && (
+                      <PersonDescription>
+                        {person.description}
+                      </PersonDescription>
+                    )}
+                  </PersonCard>
+                ))}
+              </CardsGrid>
+            </SectionShell>
+          )}
+          {/* Interns */}
+          {interns.length > 0 && (
+            <SectionShell>
+              <SectionHeader>
+                <SectionTitle>Interns</SectionTitle>
+                <SectionSubtitle>
+                  Students and early career contributors helping MyPet Health
+                  grow.
+                </SectionSubtitle>
+              </SectionHeader>
+              <CardsGrid>
+                {interns.map((person) => (
                   <PersonCard key={person.name}>
                     {person.photoUrl && (
                       <PhotoWrapper>
