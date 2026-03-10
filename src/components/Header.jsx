@@ -251,7 +251,7 @@ function Header({ onLoginClick }) {
               to="/team/"
               onClick={() => setIsOpen(false)}
             >
-              Mission
+              Team
             </Dropdown.Item>
             <Dropdown.Item
               as={Link}
