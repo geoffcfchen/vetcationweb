@@ -290,9 +290,10 @@ function RegisterSection() {
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1627.webp?alt=media&token=1f2ad88b-2351-425e-a7fc-deb6805f6edd"
             headerFontSize={30}
-            linkText={"What vets see when you share"}
-            to="/pet-health-record/"
+            // linkText={"What vets see when you share"}
+            // to="/pet-health-record/"
           />
+
           <Feature
             key={`${viewMode}-step5`}
             heading="Get support from your vet"
@@ -385,7 +386,26 @@ function RegisterSection() {
             }
             imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.15.46%E2%80%AFPM.png?alt=media&token=4cf7482c-bb61-4dfa-a626-be765335e798"
             headerFontSize={30}
-            linkText={"What vets see when you share"}
+            // linkText={"What vets see when you share"}
+            // to="/pet-health-record/"
+            mediaVariant="desktop"
+          />
+
+          <Feature
+            key={`${viewMode}-step4`}
+            heading="What vets see when you share"
+            text={
+              <>
+                When you share your pet’s history, vets get a clear, organized
+                summary instead of a stack of PDFs. They can quickly understand
+                the situation, see what treatments have already been tried with
+                reference attached, and make informed decisions without digging
+                through paperwork.
+              </>
+            }
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.02.15%E2%80%AFPM.webp?alt=media&token=f7716d35-bdf4-481e-9ffb-40638d0c482a"
+            headerFontSize={30}
+            linkText={"See details of the vet summary"}
             to="/pet-health-record/"
             mediaVariant="desktop"
           />
