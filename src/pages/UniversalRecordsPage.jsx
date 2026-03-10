@@ -133,10 +133,6 @@ const ScreenshotFrame = styled.div`
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
 `;
 
-/**
- * Stack multiple screenshots vertically so they look like one long “stitched” image.
- * Keep the frame, but render several images inside.
- */
 const ScreenshotStack = styled.div`
   display: flex;
   flex-direction: column;
@@ -147,14 +143,38 @@ const ScreenshotPart = styled.img`
   width: 100%;
   height: auto;
 
-  /* subtle divider so the seam is not jarring */
   & + & {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 `;
 
+function ScreenshotShowcase({ heading, text, images, altPrefix }) {
+  if (!images?.length) return null;
+
+  return (
+    <ScreenshotSection>
+      <ScreenshotShell>
+        <ScreenshotHeading>{heading}</ScreenshotHeading>
+        <ScreenshotText>{text}</ScreenshotText>
+
+        <ScreenshotFrame>
+          <ScreenshotStack>
+            {images.map((src, idx) => (
+              <ScreenshotPart
+                key={`${altPrefix}-${idx}`}
+                src={src}
+                alt={`${altPrefix} part ${idx + 1}`}
+                loading="lazy"
+              />
+            ))}
+          </ScreenshotStack>
+        </ScreenshotFrame>
+      </ScreenshotShell>
+    </ScreenshotSection>
+  );
+}
+
 function UniversalRecordsPage() {
-  // Up to 3 screenshot URLs. If you only provide 1, it still works.
   const vetSummaryImages = [
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1",
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.15.30%20PM.webp?alt=media&token=772e38ed-3468-4986-a4c5-5d343eb671a7",
@@ -162,6 +182,12 @@ function UniversalRecordsPage() {
   ]
     .filter(Boolean)
     .slice(0, 3);
+
+  const referenceImages = [
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%203.33.47%20PM.webp?alt=media&token=59cfd2ad-a925-4de0-b085-a8c03ec46450",
+  ]
+    .filter(Boolean)
+    .slice(0, 1);
 
   return (
     <SiteShell>
@@ -222,30 +248,21 @@ function UniversalRecordsPage() {
 
           <SectionDivider />
 
-          <ScreenshotSection>
-            <ScreenshotShell>
-              <ScreenshotHeading>
-                What vets see when you share
-              </ScreenshotHeading>
-              <ScreenshotText>
-                A concise vet-ready summary plus the full timeline, with
-                original records attached for context.
-              </ScreenshotText>
+          <ScreenshotShowcase
+            heading="What vets see when you share"
+            text="A concise vet-ready summary plus the full timeline, with original records attached for context."
+            images={vetSummaryImages}
+            altPrefix="Example MyPet Health vet-ready summary view"
+          />
 
-              <ScreenshotFrame>
-                <ScreenshotStack>
-                  {vetSummaryImages.map((src, idx) => (
-                    <ScreenshotPart
-                      key={src}
-                      src={src}
-                      alt={`Example MyPet Health vet-ready summary view part ${idx + 1}`}
-                      loading="lazy"
-                    />
-                  ))}
-                </ScreenshotStack>
-              </ScreenshotFrame>
-            </ScreenshotShell>
-          </ScreenshotSection>
+          <SectionDivider />
+
+          <ScreenshotShowcase
+            heading="How vets check the original reference"
+            text="Each summarized item can still point back to the original source, so vets can quickly verify details in the attached record."
+            images={referenceImages}
+            altPrefix="Example MyPet Health reference view"
+          />
 
           <SectionDivider />
 
