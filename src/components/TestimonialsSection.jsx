@@ -93,9 +93,9 @@ const Meta = styled.div`
 const testimonials = [
   {
     quote:
-      "I used to bring a binder of papers to every appointment. Now I just share one MyPet Health link and the vet can review everything before we even start.",
-    author: "Sarah P.",
-    meta: "Dog parent, Pasadena",
+      "This app could even save your pet's life if you have to take them to an Emergency Vet or when out of town and they are borded and need help.",
+    author: "Kaye W. on BlueSky",
+    meta: "Dog parent, San Diego",
   },
   {
     quote:
@@ -103,6 +103,13 @@ const testimonials = [
     author: "Dr. Chen",
     meta: "Small animal vet, Los Angeles",
   },
+  {
+    quote:
+      "I used to bring a binder of papers to every appointment. Now I just share one MyPet Health link and the vet can review everything before we even start.",
+    author: "Sarah P.",
+    meta: "Dog parent, Pasadena",
+  },
+
   {
     quote:
       "When I get a new patient, missing history slows everything down. A clean timeline plus the original PDFs saves time and prevents mistakes.",
