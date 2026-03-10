@@ -5557,7 +5557,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   photoUrl:
                     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.39.00%E2%80%AFPM.webp?alt=media&token=56705fb0-8eff-4586-8da7-910e7e86ab85",
                   description:
-                    "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
+                    "Dr. Ying Tsou is a veterinarian at Norco Animal Hospital who has provided thoughtful feedback on the clinical and telemedicine direction of MyPet Health. Drawing on frontline experience in everyday veterinary practice, Dr. Tsou has helped shape features that make the platform more practical for veterinarians while keeping the experience clear and accessible for pet owners. This input has been valuable in refining how MyPet Health supports communication, continuity of care, and real world use across different care settings.",
                 },
                 {
                   name: "Mingli Lee",
@@ -5565,7 +5565,7 @@ requirements and explain how Vetcation keeps you compliant.`,
                   photoUrl:
                     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.42.03%E2%80%AFPM.webp?alt=media&token=af08d413-f40e-4aad-93b4-0ff12ea48e24",
                   description:
-                    "Mingli Lee made significant contributions to the UX design during the early stages of the MyPet Health product. Since then, she has continued to support the evolution of the platform by refining app workflows and actively participating in product direction brainstorming.",
+                    "Mingli Lee is a UX designer who contributed to the product design of MyPet Health and helped shape how the platform feels for both pet owners and veterinary professionals. From the beginning, she played an important role in improving user flows, simplifying interactions, and thinking through how complex health information could be presented in a clear and approachable way. Her continued input has supported the evolution of the product as MyPet Health grows into a more polished and user centered platform.",
                 },
 
                 // More contributors...
