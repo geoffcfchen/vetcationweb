@@ -5583,6 +5583,8 @@ requirements and explain how Vetcation keeps you compliant.`,
                 {
                   name: "Jackson Konkle",
                   title: "Marketing Intern",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.50.36%E2%80%AFPM.webp?alt=media&token=97e90f9f-1ffc-4293-ae35-b2271a03bf38",
                   description:
                     "Jackson Konkle is a Marketing Intern at MyPet Health, bringing a passion for storytelling and experience in content creation, social media strategy, and community outreach. Currently studying Business Information Management at UC Irvine, Jackson is helping MyPet Health grow its community and expand access to veterinary knowledge and care.",
                 },
