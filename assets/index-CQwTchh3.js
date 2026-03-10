@@ -928,8 +928,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     font-size: 11px;
   }
 `;const NavLinkItem=pt(Link)`
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.08rem;
+  font-weight: 600;
   color: #e5e7eb;
   text-decoration: none;
   padding: 0.3rem 0.6rem;
