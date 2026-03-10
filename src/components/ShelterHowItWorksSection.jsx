@@ -113,6 +113,22 @@ function ShelterHowItWorksSection() {
         headerFontSize={30}
         mediaVariant="desktop"
       />
+      <Feature
+        key={`step4-4`}
+        heading="Vets get a clear summary instead of a stack of PDFs"
+        text={
+          <>
+            When the adopter shares the pet&apos;s record with a vet, they see a
+            clear summary of the pet&apos;s history with references to the
+            original records.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.02.15%E2%80%AFPM.webp?alt=media&token=f7716d35-bdf4-481e-9ffb-40638d0c482a"
+        headerFontSize={30}
+        linkText={"See details of the vet summary"}
+        to="/pet-health-record/"
+        mediaVariant="desktop"
+      />
 
       <Feature
         heading="Extend support beyond the adoption day"
