@@ -5627,6 +5627,8 @@ requirements and explain how Vetcation keeps you compliant.`,
                 {
                   name: "Dr. Ross Massimiano",
                   title: "Veterinarian at Veterinary Emergency Group (VEG)",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.56.22%E2%80%AFPM.webp?alt=media&token=e6c82844-5226-4cb6-adb1-3c9a1d3c4f8b",
                   description:
                     "Dr. Ross Massimiano has helped check the workflow of the MyPet Health platform and provided valuable feedback on the features. His insights have been crucial in ensuring that the platform meets the needs of both veterinary professionals and pet owners.",
                 },
@@ -5634,6 +5636,8 @@ requirements and explain how Vetcation keeps you compliant.`,
                   name: "Emily Schmieder",
                   title:
                     "Licensed Veterinary Technician at Benfield Animal Hospital",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%202.05.40%E2%80%AFPM.webp?alt=media&token=f3d881cc-09af-4605-b617-4e55ae30a7f0",
                   description:
                     "Emily Schmieder, a licensed veterinary technician, contributed significantly to the design of the Vetssenger feature—MyPet Health’s chargeable, inquiry-based messaging system. Her input was instrumental in shaping a workflow that supports both veterinary professionals and pet owners.",
                 },
@@ -5644,16 +5648,18 @@ requirements and explain how Vetcation keeps you compliant.`,
                 //     "Dr. Ying Tsou has provided valuable feedback on the telemedicine features of the MyPet Health platform. His insights have been essential in ensuring that the platform effectively supports both veterinary professionals and pet owners.",
                 // },
                 {
+                  name: "Dr. Polly Chen",
+                  title: "Veterinarian",
+                  photoUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%202.07.25%E2%80%AFPM.webp?alt=media&token=3e262659-b8ed-47ae-bf70-589779b7b196",
+                  description:
+                    "Dr. Polly Chen recommended surfacing telemedicine outcomes analysis. Previously available only at the clinic level, the app now provides every doctor with their own outcomes dashboard and adds a metric showing how many patients they’ve connected with over their career.",
+                },
+                {
                   name: "Tahnee Morris",
                   title: "Hospital Manager at Animal Hospital of Redondo Beach",
                   description:
                     "Based on Tahnee Morris’s guidance, we expanded the virtual professional network to include qualified non-DVM services. This enhancement allows providers to affiliate with clinics for increased trust and deliver coordinated support for clients.",
-                },
-                {
-                  name: "Dr. Polly Chen",
-                  title: "Veterinarian",
-                  description:
-                    "Dr. Polly Chen recommended surfacing telemedicine outcomes analysis. Previously available only at the clinic level, the app now provides every doctor with their own outcomes dashboard and adds a metric showing how many patients they’ve connected with over their career.",
                 },
 
                 // More contributors...
