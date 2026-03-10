@@ -146,7 +146,7 @@ const SecondaryButton = styled(BootstrapButton)`
   }
 `;
 
-function ShelterHeroSection() {
+function ShelterHeroSection({ onGetStarted }) {
   return (
     <StyledHeroSection>
       <LeftGradient />
@@ -168,11 +168,10 @@ function ShelterHeroSection() {
 
               <ButtonsRow>
                 <PrimaryButton
-                  as={RouterLink}
-                  to="/pet-health-record/"
                   type="button"
+                  onClick={() => onGetStarted && onGetStarted()}
                 >
-                  See adopter view
+                  Create a pet record
                 </PrimaryButton>
                 <SecondaryButton as={RouterLink} to="/support/" type="button">
                   Talk to us
