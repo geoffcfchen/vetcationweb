@@ -147,22 +147,21 @@ function ShelterHowItWorksSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
         headerFontSize={36}
       />
-      {/* <Feature
-        heading="Step 4: Reduce post adoption friction"
+      <Feature
+        heading="Create a recurring support stream for shelters"
         text={
           <>
-            When adopters have clear history and instructions, your team spends
-            less time answering repeated questions by phone or email. Partner
-            clinics get better context, so they can focus on care instead of
-            chasing missing paperwork.
+            MyPet Health helps shelters stay connected to the pets they place
+            even after adoption. When adopters use paid consultations, they can
+            choose to allocate part of the consultation to the shelter that
+            helped their pet, with no additional charge to them. This creates a
+            simple recurring benefit for shelters as adopters continue to use
+            the platform for follow-up questions and care.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.15.46%E2%80%AFPM.png?alt=media&token=4cf7482c-bb61-4dfa-a626-be765335e798"
-        headerFontSize={30}
-        mediaVariant="desktop"
-        linkText="What vets see when you share"
-        to="/pet-health-record/"
-      /> */}
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754"
+        headerFontSize={36}
+      />
     </FeaturesContainer>
   );
 }
