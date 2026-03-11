@@ -160,10 +160,11 @@ function ShelterHeroSection({ onGetStarted }) {
                 post-adoption support
               </HeroHeader>
               <HeroTagline>
-                MyPet Health helps shelters turn intake, vaccine, and surgery
-                records into a free, centralized medical record that stays with
-                the pet after adoption, reduces post-adoption questions, and
-                gives every future vet a clear, complete history from day one.
+                MyPet Health helps turn shelters’ intake, vaccine, and surgery
+                records into the first chapter of a lifelong, centralized
+                medical record that stays with the pet after adoption, reduces
+                post-adoption questions, and helps every vet see the same
+                complete history from day one.
               </HeroTagline>
 
               <ButtonsRow>
