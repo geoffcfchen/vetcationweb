@@ -83,8 +83,8 @@ export default function TopNavBarRounter({
     <TopNavBarContainer $hideNav={hideNav}>
       {/* Logo & Text (always visible) */}
       <LogoContainer onClick={() => navigate("/")}>
-        <Logo src={logo} alt="Vetcation Logo" />
-        <LogoText>Vetcation</LogoText>
+        <Logo src={logo} alt="MyPet Health Logo" />
+        <LogoText>MyPet Health</LogoText>
       </LogoContainer>
 
       {/* Inline nav links (desktop only) */}
