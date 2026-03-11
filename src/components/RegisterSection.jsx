@@ -300,13 +300,12 @@ function RegisterSection() {
             text={
               <>
                 When you share your pet’s history, vets get a clear, organized
-                summary instead of a stack of PDFs. They can quickly understand
-                the situation, see what treatments have already been tried with
-                reference attached, and make informed decisions without digging
-                through paperwork.
+                summary with source documents attached. They can quickly
+                understand the situation, see what treatments have already been
+                tried with reference attached, and make informed decisions.
               </>
             }
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.12.53%E2%80%AFPM.webp?alt=media&token=f56bb8bb-e10a-4051-b0cb-b5879191ac24"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1"
             headerFontSize={30}
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"
@@ -417,13 +416,12 @@ function RegisterSection() {
             text={
               <>
                 When you share your pet’s history, vets get a clear, organized
-                summary instead of a stack of PDFs. They can quickly understand
-                the situation, see what treatments have already been tried with
-                reference attached, and make informed decisions without digging
-                through paperwork.
+                summary with source documents attached. They can quickly
+                understand the situation, see what treatments have already been
+                tried with reference attached, and make informed decisions.
               </>
             }
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-10%20at%201.02.15%E2%80%AFPM.webp?alt=media&token=f7716d35-bdf4-481e-9ffb-40638d0c482a"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1"
             headerFontSize={30}
             linkText={"See details of the vet summary"}
             to="/pet-health-record/"

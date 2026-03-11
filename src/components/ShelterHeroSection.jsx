@@ -156,7 +156,7 @@ function ShelterHeroSection({ onGetStarted }) {
             <Col md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>
-                Give every adopted pet a lifelong medical record and
+                Give every adopted pet a universal medical record and
                 post-adoption support
               </HeroHeader>
               <HeroTagline>
