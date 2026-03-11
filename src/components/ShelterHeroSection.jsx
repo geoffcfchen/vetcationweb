@@ -10,7 +10,7 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 
 // Swap this for a shelter-specific photo when you have it
-import shelterHeroImage from "../images/banner7.webp";
+import shelterHeroImage from "../images/banner7_2.webp";
 
 const breakpoint = 800;
 
