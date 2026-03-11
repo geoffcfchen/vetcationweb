@@ -14893,7 +14893,7 @@ attempted value: ${nt}
   &:hover {
     background: #e5e7eb;
   }
-`,shelterHeroImage="/assets/banner7-DgAUUyYX.webp",breakpoint=800,StyledHeroSection=pt.section`
+`,shelterHeroImage="/assets/banner7_2-_rQ0iMhk.webp",breakpoint=800,StyledHeroSection=pt.section`
   position: relative;
   padding: 5rem 2rem;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 0% 100%);
