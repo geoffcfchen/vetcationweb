@@ -36,7 +36,7 @@ const MissionContentBlock = ({ block }) => {
           }}
         >
           <strong style={{ color: "#1cd0b0" }}>
-            How Vetcation Solve this problem:
+            How MyPet Health Solves this problem:
           </strong>{" "}
           {block.helpText}
         </div>
