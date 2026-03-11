@@ -35,7 +35,7 @@ const QAContentBlock = ({ block }) => {
             color: "#ccc",
           }}
         >
-          <strong style={{ color: "#1cd0b0" }}>How Vetcation Helps:</strong>{" "}
+          <strong style={{ color: "#1cd0b0" }}>How MyPet Health Helps:</strong>{" "}
           {block.helpText}
         </div>
       )}
