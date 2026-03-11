@@ -156,14 +156,14 @@ function ShelterHeroSection({ onGetStarted }) {
             <Col md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>
-                Give every adopted pet a universal medical record and
+                Give every adopted pet a lifelong medical record and
                 post-adoption support
               </HeroHeader>
               <HeroTagline>
-                With MyPet Health, your intake, vaccine, and surgery paperwork
-                becomes the first chapter of a lifelong medical record that
-                follows the pet after adoption, reduces post-adoption questions,
-                and gives every vet a clear history from day one.
+                MyPet Health helps shelters turn intake, vaccine, and surgery
+                records into a free, centralized medical record that stays with
+                the pet after adoption, reduces post-adoption questions, and
+                gives every future vet a clear, complete history from day one.
               </HeroTagline>
 
               <ButtonsRow>
