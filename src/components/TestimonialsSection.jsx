@@ -94,7 +94,7 @@ const testimonials = [
   {
     quote:
       "This app could even save your pet's life if you have to take them to an Emergency Vet or when out of town and they are borded and need help.",
-    author: "Kaye W. on BlueSky",
+    author: "Kaye W.",
     meta: "Dog parent, San Diego",
   },
   {
