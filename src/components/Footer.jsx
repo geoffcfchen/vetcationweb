@@ -205,7 +205,7 @@ const Footer = () => {
         }, // optional
         {
           text: "Our Contributors",
-          url: "/telemedicine-info/contributors/ourContributors/",
+          url: "/team/",
         },
         // Add more when you have them:
         // { text: "About", url: "/about/" },
