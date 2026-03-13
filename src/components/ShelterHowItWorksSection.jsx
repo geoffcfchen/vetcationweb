@@ -159,7 +159,7 @@ function ShelterHowItWorksSection() {
             the platform for follow-up questions and care.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1794.webp?alt=media&token=3aab35be-5c80-4e95-80bd-1dfcfcfb2450"
         headerFontSize={36}
       />
     </FeaturesContainer>

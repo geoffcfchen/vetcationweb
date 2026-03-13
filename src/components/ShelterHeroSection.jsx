@@ -155,7 +155,7 @@ function ShelterHeroSection({ onGetStarted }) {
           <Row>
             <Col md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
-              <HeroHeader>Modern post-adoption support</HeroHeader>
+              <HeroHeader>Modern shelter-branded post-adoption app</HeroHeader>
               <HeroTagline>
                 MyPet Health helps turn shelters’ intake, vaccine, and surgery
                 records into the first chapter of a lifelong, centralized
