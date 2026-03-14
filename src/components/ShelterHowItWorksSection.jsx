@@ -135,13 +135,11 @@ function ShelterHowItWorksSection() {
         heading="Extend support beyond the adoption day"
         text={
           <>
-            MyPet Health helps adopters stay connected with licensed
-            veterinarians after they bring their pet home. Each adopter is
-            assigned to a vet they can message directly when questions come up.
-            Every interaction is documented in the pet’s medical record so any
-            veterinarian can see the full picture. This creates better
-            continuity of care and strengthens the bond between the pet, pet
-            parent, and veterinary team.
+            adopters stay connected with shelter-partnered vets after they bring
+            their pet home. Every interaction is documented in the pet’s medical
+            record so any veterinarian can see the full picture. This creates
+            better continuity of care and strengthens the bond between the pet,
+            pet parent, and veterinary team.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
@@ -151,12 +149,12 @@ function ShelterHowItWorksSection() {
         heading="Create a recurring support stream for shelters"
         text={
           <>
-            MyPet Health helps shelters stay connected to adopted pets even
-            after they go to their new homes. When adopters use paid
-            consultations, they can choose to allocate part of the consultation
-            to the shelter that helped their pet, with no additional charge.
-            This creates ongoing support for shelters as adopters continue using
-            the platform for follow-up questions and care.
+            MyPet Health helps shelter stay connected to adopted pets even after
+            they go to their new homes. When adopters use paid consultations
+            with partnered vets, they can choose to direct part of the platform
+            fee to the shelter that helped their pet, at no additional cost.
+            This creates ongoing support for shelter while giving adopters
+            trusted follow-up care.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1794.webp?alt=media&token=3aab35be-5c80-4e95-80bd-1dfcfcfb2450"
