@@ -90,14 +90,15 @@ function ShelterHighLevelSection() {
       />
 
       <Feature
-        heading="Connect medical data, adopters, shelters, and partnered vets"
+        heading="Extend support beyond adoption day"
         text={
           <>
-            <BrandLink to="/mypet-health/">MyPet Health</BrandLink> connects the
-            shelter&apos;s discharge records with the adopter&apos;s future
-            uploads and the veterinarians who care for the pet later. This helps
-            everyone work from the same history instead of scattered files
-            across email threads, paper folders, and different clinics.
+            <BrandLink to="/mypet-health/">MyPet Health</BrandLink> helps
+            adopters stay connected with shelter-partnered vets after they bring
+            their pet home. We will help you build partnerships with vets who
+            are excited to support shelters. Each message and follow-up is
+            documented in the pet’s medical record so future veterinarians can
+            see the full story.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F26eebb48-01bf-4af9-8bd6-0c779fe989e6%20(1).webp?alt=media&token=7ed0a87b-0f75-4b3b-ac6b-11ab335a2104"
