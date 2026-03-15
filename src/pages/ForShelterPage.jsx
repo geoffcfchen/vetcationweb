@@ -9,6 +9,7 @@ import qrCodeImage from "../images/qrcode7.png";
 import TestimonialsSection from "../components/TestimonialsSection";
 import LoginModal from "../components/LoginModal";
 import ShelterContactSection from "../components/ShelterContactSection";
+import ShelterHighLevelSection from "../components/ShelterHighLevelSection";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -20,6 +21,7 @@ function ForShelterPage() {
     <SiteShell>
       <PageShell>
         <ShelterHeroSection onGetStarted={() => setShowLogin(true)} />
+        <ShelterHighLevelSection />
         <ShelterHowItWorksSection />
         <TestimonialsSection />
         <ShelterContactSection />

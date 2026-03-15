@@ -6,6 +6,13 @@ import { useNavigate } from "react-router-dom";
 import sprite from "../images/sprite.svg";
 import iPhoneFrame from "../images/iphone-frame_15pro.png";
 
+const HighLevelMedia = styled.picture`
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  overflow: hidden;
+`;
+
 const ContributionNote = styled.div`
   margin-top: 2rem;
   padding: 1rem;
@@ -182,6 +189,7 @@ const IconContainer = styled.span`
 
 const FeatureImage = styled(motion.img)`
   width: 100%;
+  display: block;
 `;
 
 const VideoFrameContainer = styled.div`
@@ -282,7 +290,7 @@ export default function Feature({
   imageSrc,
   to,
   headerFontSize = 30,
-  mediaVariant = "phone",
+  mediaVariant = "phone", // "phone" | "desktop" | "highlevel"
   clickTarget = "feature", // "feature" | "cta"
 }) {
   const [hover, setHover] = useState(false);
@@ -385,7 +393,25 @@ export default function Feature({
           <FrameImage src={iPhoneFrame} alt="iPhone Frame" />
         </VideoFrameContainer>
       ) : imageSrc ? (
-        mediaVariant === "desktop" ? (
+        mediaVariant === "highlevel" ? (
+          <HighLevelMedia
+            onClick={featureClickable ? go : undefined}
+            role={featureClickable ? "img" : undefined}
+            aria-label={featureClickable ? `${heading} image` : undefined}
+            tabIndex={featureClickable ? 0 : undefined}
+            onKeyDown={featureClickable ? onFeatureKeyDown : undefined}
+            style={{ cursor: featureClickable ? "pointer" : "default" }}
+          >
+            <FeatureImage
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={imageVariants}
+              src={imageSrc}
+              alt={heading}
+            />
+          </HighLevelMedia>
+        ) : mediaVariant === "desktop" ? (
           <DesktopFrameContainer
             onClick={featureClickable ? go : undefined}
             style={{ cursor: featureClickable ? "pointer" : "default" }}
