@@ -131,6 +131,19 @@ function MainHighLevelSection() {
         headerFontSize={34}
         mediaVariant="highlevel"
       />
+      <Feature
+        heading="Free for pet parents, forever"
+        text={
+          <>
+            We believe every pet deserves a complete medical history. MyPet
+            Health is free for pet parents, so you can keep your pet’s records
+            in one place and access them anytime, even if you switch phones.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2016%2C%202026%2C%2011_30_46%20AM.webp?alt=media&token=b5bbfcd4-c80a-4b54-867a-5defe0dfa9f5"
+        headerFontSize={34}
+        mediaVariant="highlevel"
+      />
 
       <Feature
         heading="Available on web, iPhone, and Android"
