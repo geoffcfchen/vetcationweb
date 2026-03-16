@@ -95,8 +95,8 @@ function ShelterHighLevelSection() {
           <>
             <BrandLink to="/mypet-health/">MyPet Health</BrandLink> helps
             shelters partner with vets who are excited to support adopted pets
-            after they go home. Adopters can reach out to your shelter-partnered
-            vets when questions come up.
+            after they go home. You can offer a trusted follow-up option without
+            adding extra work for your staff.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-15%20at%2012.06.50%E2%80%AFAM.webp?alt=media&token=94717607-3cda-41b1-9da1-ec04d9524374"
@@ -108,10 +108,9 @@ function ShelterHighLevelSection() {
         heading="Extend support beyond adoption day"
         text={
           <>
-            After adopters bring their pet home, they can message
-            shelter-partnered vets when questions come up. Each message and
-            follow-up is documented in the pet’s medical record so future
-            veterinarians can see the full story.
+            After adoption, adopters can message your shelter-partnered vets for
+            follow-up help. Each conversation is saved to the pet’s medical
+            record so future veterinarians can see what happened.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F26eebb48-01bf-4af9-8bd6-0c779fe989e6%20(1).webp?alt=media&token=7ed0a87b-0f75-4b3b-ac6b-11ab335a2104"
