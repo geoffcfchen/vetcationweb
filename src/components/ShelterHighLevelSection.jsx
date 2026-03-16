@@ -95,8 +95,8 @@ function ShelterHighLevelSection() {
           <>
             <BrandLink to="/mypet-health/">MyPet Health</BrandLink> helps
             shelters partner with vets who are excited to support adopted pets
-            after they go home. You get a vetted group of shelter-friendly
-            providers that adopters can reach out to when questions come up.
+            after they go home. Adopters can reach out to your shelter-partnered
+            vets when questions come up.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-15%20at%2012.06.50%E2%80%AFAM.webp?alt=media&token=94717607-3cda-41b1-9da1-ec04d9524374"
