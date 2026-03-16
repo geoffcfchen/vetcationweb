@@ -7,9 +7,7 @@ import {
   Col,
   Button as BootstrapButton,
 } from "react-bootstrap";
-import { Link as RouterLink } from "react-router-dom";
 
-// Swap this for a shelter-specific photo when you have it
 import shelterHeroImage from "../images/banner7_2.webp";
 
 const breakpoint = 800;
@@ -30,7 +28,10 @@ const StyledHeroSection = styled.section`
   align-items: center;
 
   @media (max-width: 768px) {
-    min-height: 60vh;
+    padding: 3.5rem 1.25rem 3rem;
+    min-height: auto;
+    clip-path: none;
+    align-items: flex-start;
   }
 `;
 
@@ -44,6 +45,15 @@ const LeftGradient = styled.div`
     rgba(0, 0, 0, 0.2) 55%,
     rgba(0, 0, 0, 0) 80%
   );
+
+  @media (max-width: 768px) {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.48) 55%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
+  }
 `;
 
 const Content = styled.div`
@@ -53,7 +63,7 @@ const Content = styled.div`
 `;
 
 const BrandKicker = styled.div`
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -62,6 +72,11 @@ const BrandKicker = styled.div`
 
   @media (max-width: ${breakpoint}px) {
     text-align: left;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    letter-spacing: 0.07em;
   }
 `;
 
@@ -80,13 +95,21 @@ const HeroHeader = styled.h1`
   @media (max-width: ${breakpoint}px) {
     text-align: left;
   }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.08;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const HeroTagline = styled.p`
   color: #e5edf5;
-  margin: 1.5rem 0 3rem;
+  margin: 1.25rem 0 2.5rem;
   font-size: 20px;
   line-height: 1.5;
+  max-width: 760px;
 
   @media (max-width: 1022px) {
     font-size: 18px;
@@ -94,6 +117,13 @@ const HeroTagline = styled.p`
 
   @media (max-width: ${breakpoint}px) {
     text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    font-size: clamp(16px, 4.6vw, 18px);
+    margin: 1rem 0 1.75rem;
+    line-height: 1.45;
   }
 `;
 
@@ -104,6 +134,13 @@ const ButtonsRow = styled.div`
 
   @media (max-width: ${breakpoint}px) {
     justify-content: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
   }
 `;
 
@@ -125,6 +162,11 @@ const PrimaryButton = styled(BootstrapButton).attrs({
   &:hover {
     background: #ec3000;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.95rem 1.25rem;
+  }
 `;
 
 const SecondaryButton = styled(BootstrapButton)`
@@ -136,13 +178,17 @@ const SecondaryButton = styled(BootstrapButton)`
   letter-spacing: 0.04em;
 
   background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
   color: #ffffff;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: #ffffff;
     color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -153,7 +199,7 @@ function ShelterHeroSection({ onGetStarted }) {
       <Content>
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
-            <Col md={10} lg={8} xl={7}>
+            <Col xs={12} md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>Modern shelter-branded post-adoption app</HeroHeader>
               <HeroTagline>
