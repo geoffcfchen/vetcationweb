@@ -136,6 +136,21 @@ function ShelterHighLevelSection() {
       />
 
       <Feature
+        heading="Built with shelter leaders and frontline vets"
+        text={
+          <>
+            MyPet Health is built with people who work in shelters and clinics
+            every day. Our team includes the Chief Veterinarian for the City of
+            Los Angeles, plus practicing vets and technicians. We build simple
+            tools that fit real shelter workflows and help you support adopters
+            after they go home.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2015%2C%202026%2C%2005_30_14%20PM.webp?alt=media&token=7de3ecab-5616-4df0-95c9-103443191632"
+        headerFontSize={34}
+        mediaVariant="highlevel"
+      />
+      <Feature
         heading="Available on web, iPhone, and Android"
         text={
           <>
