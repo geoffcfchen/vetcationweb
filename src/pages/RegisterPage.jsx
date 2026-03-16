@@ -13,6 +13,7 @@ import GetStartedCallout from "../components/GetStartedCallout";
 import StayConnected from "../components/StayConnected";
 import qrCodeImage from "../images/qrcode7.png";
 import SiteShell from "../components/SiteShell";
+import MainHighLevelSection from "../components/MainHighLevelSection";
 
 const MapShell = styled.section`
   background: #f8fafc;
@@ -122,6 +123,7 @@ function RegisterPage() {
     <SiteShell>
       {/* <Header onLoginClick={() => setShowLogin(true)} /> */}
       <HeroSection onGetStarted={() => setShowLogin(true)} />
+      <MainHighLevelSection />
       <RegisterSection />
 
       {/* —— Map Section Shell (copy + legend + compliance link) —— */}

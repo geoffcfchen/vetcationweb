@@ -1,14 +1,14 @@
 // src/components/HeroSection.jsx
 import React from "react";
 import styled from "styled-components";
-import heroImage from "../images/banner4.webp"; // update path if needed
+import heroImage from "../images/banner4.webp";
 import {
   Container,
   Row,
   Col,
   Button as BootstrapButton,
 } from "react-bootstrap";
-import { Link as RouterLink } from "react-router-dom"; // add this
+import { Link as RouterLink } from "react-router-dom";
 
 const breakpoint = 800;
 
@@ -28,11 +28,14 @@ const StyledHeroSection = styled.section`
   align-items: center;
 
   @media (max-width: 768px) {
-    min-height: 60vh;
+    padding: 3.5rem 1.25rem 3rem;
+    min-height: auto;
+    clip-path: none;
+    align-items: flex-start;
+    background-position: center top;
   }
 `;
 
-// Darkens only the left side, fades out to the right
 const LeftGradient = styled.div`
   position: absolute;
   inset: 0;
@@ -43,6 +46,15 @@ const LeftGradient = styled.div`
     rgba(0, 0, 0, 0.2) 55%,
     rgba(0, 0, 0, 0) 80%
   );
+
+  @media (max-width: 768px) {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.45) 55%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
+  }
 `;
 
 const Content = styled.div`
@@ -62,6 +74,11 @@ const BrandKicker = styled.div`
   @media (max-width: ${breakpoint}px) {
     text-align: left;
   }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    letter-spacing: 0.07em;
+  }
 `;
 
 const HeroHeader = styled.h1`
@@ -79,6 +96,13 @@ const HeroHeader = styled.h1`
   @media (max-width: ${breakpoint}px) {
     text-align: left;
   }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    font-size: clamp(32px, 8.6vw, 42px);
+    line-height: 1.06;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const HeroTagline = styled.p`
@@ -86,6 +110,7 @@ const HeroTagline = styled.p`
   margin: 1.5rem 0 3rem;
   font-size: 22px;
   line-height: 1.5;
+  max-width: 760px;
 
   @media (max-width: 1022px) {
     font-size: 20px;
@@ -93,6 +118,13 @@ const HeroTagline = styled.p`
 
   @media (max-width: ${breakpoint}px) {
     text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    font-size: clamp(16px, 4.8vw, 18px);
+    line-height: 1.45;
+    margin: 1rem 0 1.75rem;
   }
 `;
 
@@ -103,6 +135,13 @@ const ButtonsRow = styled.div`
 
   @media (max-width: ${breakpoint}px) {
     justify-content: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
   }
 `;
 
@@ -124,6 +163,11 @@ const PrimaryButton = styled(BootstrapButton).attrs({
   &:hover {
     background: #ec3000;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.95rem 1.25rem;
+  }
 `;
 
 const SecondaryButton = styled(BootstrapButton)`
@@ -138,25 +182,19 @@ const SecondaryButton = styled(BootstrapButton)`
   border: 1.5px solid rgba(255, 255, 255, 0.5);
   color: #ffffff;
 
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: #ffffff;
     color: #ffffff;
   }
-`;
 
-const HeroTitleLink = styled(RouterLink)`
-  color: #fff;
-  text-decoration: none;
-
-  &:hover {
-    opacity: 0.92;
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.7);
-    outline-offset: 4px;
-    border-radius: 6px;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.95rem 1.25rem;
   }
 `;
 
@@ -175,12 +213,14 @@ function HeroSection({ onGetStarted }) {
       <Content>
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
-            <Col md={10} lg={8} xl={7}>
+            <Col xs={12} md={10} lg={8} xl={7}>
               <BrandKicker>MyPet Health by Vetcation</BrandKicker>
+
               <HeroHeader>
                 <NoWrap>The universal medical record</NoWrap> <br />
                 for pets
               </HeroHeader>
+
               <HeroTagline>
                 Register your pet in a free, centralized medical record system
                 so every vet at any clinic, ER, or telehealth visit can see the
@@ -195,6 +235,7 @@ function HeroSection({ onGetStarted }) {
                 >
                   Create a pet record
                 </PrimaryButton>
+
                 <SecondaryButton
                   as={RouterLink}
                   to="/pet-health-record/"
