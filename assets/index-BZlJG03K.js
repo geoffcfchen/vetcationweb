@@ -15058,6 +15058,9 @@ attempted value: ${nt}
 
   @media (max-width: 768px) {
     width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 `;function ShelterHeroSection({onGetStarted:a}){return jsxRuntimeExports.jsxs(StyledHeroSection,{children:[jsxRuntimeExports.jsx(LeftGradient,{}),jsxRuntimeExports.jsx(Content,{children:jsxRuntimeExports.jsx(Container$1,{style:{maxWidth:"1140px"},children:jsxRuntimeExports.jsx(Row$1,{children:jsxRuntimeExports.jsxs(Col,{xs:12,md:10,lg:8,xl:7,children:[jsxRuntimeExports.jsx(BrandKicker,{children:"For shelters and rescue groups"}),jsxRuntimeExports.jsx(HeroHeader,{children:"Modern shelter-branded post-adoption app"}),jsxRuntimeExports.jsx(HeroTagline,{children:"MyPet Health helps turn shelters’ intake, vaccine, and surgery records into the first chapter of a lifelong, centralized medical record that stays with the pet after adoption, reduces post-adoption questions, and helps every vet see the same complete history from day one."}),jsxRuntimeExports.jsxs(ButtonsRow,{children:[jsxRuntimeExports.jsx(PrimaryButton,{type:"button",onClick:()=>a&&a(),children:"Create a pet record"}),jsxRuntimeExports.jsx(SecondaryButton,{as:"a",href:"#shelter-contact",type:"button",children:"Talk to us"})]})]})})})})]})}const FeaturesContainer=pt.section`
   max-width: 1140px;
