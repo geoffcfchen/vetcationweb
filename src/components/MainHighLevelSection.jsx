@@ -140,7 +140,7 @@ function MainHighLevelSection() {
             in one place and access them anytime, even if you switch phones.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2016%2C%202026%2C%2011_30_46%20AM.webp?alt=media&token=b5bbfcd4-c80a-4b54-867a-5defe0dfa9f5"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2016%2C%202026%2C%2011_30_46%20AM%20(1).webp?alt=media&token=314a0f10-b542-40bd-905c-ef77b9ca9287"
         headerFontSize={34}
         mediaVariant="highlevel"
       />
