@@ -106,9 +106,10 @@ function MainHighLevelSection() {
         heading="Get support from your trusted vet"
         text={
           <>
-            You can build personal connections with your trusted vets and reach
-            out when questions come up. Your vet can see the full history and
-            help you make informed decisions about your pet’s care.
+            You can build a personal connection with a veterinarian you trust
+            and send direct messages when questions come up between
+            appointments. When appropriate and permitted, vets can provide
+            telehealth support and prescriptions.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F26eebb48-01bf-4af9-8bd6-0c779fe989e6%20(1).webp?alt=media&token=7ed0a87b-0f75-4b3b-ac6b-11ab335a2104"
@@ -120,10 +121,10 @@ function MainHighLevelSection() {
         heading="Support your favorite shelters"
         text={
           <>
-            When you use paid consultations with shelter-partnered vets, you can
-            choose to direct part of the platform fee to a shelter you care
-            about, at no additional cost. It’s an easy way to support shelters
-            while getting trusted care.
+            We partner with shelters, so when you use paid consultations with
+            shelter-partnered vets, you can choose to direct part of the
+            platform fee to a shelter you care about, at no additional cost.
+            It’s an easy way to support shelters while getting trusted care.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F15847442_012925-wabc-animal-shelter-thank-you-img.webp?alt=media&token=457decb9-b965-437b-b47f-ba75e3f4b998"
