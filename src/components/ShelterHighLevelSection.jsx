@@ -60,19 +60,6 @@ const placeholderImage =
 function ShelterHighLevelSection() {
   return (
     <SectionWrap>
-      {/* <SectionHeader>
-        <Eyebrow>What MyPet Health provides</Eyebrow>
-        <Headline>
-          A universal record system that helps shelters protect pets long after
-          adoption
-        </Headline>
-        <Subhead>
-          MyPet Health gives shelters a practical way to launch a lifelong pet
-          health record, connect adopters with trusted follow-up support, and
-          create stronger continuity of care after pets go home.
-        </Subhead>
-      </SectionHeader> */}
-
       <Feature
         heading="Protect pets with a universal medical record"
         text={
@@ -146,6 +133,19 @@ function ShelterHighLevelSection() {
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2015%2C%202026%2C%2005_30_14%20PM.webp?alt=media&token=7de3ecab-5616-4df0-95c9-103443191632"
+        headerFontSize={34}
+        mediaVariant="highlevel"
+      />
+      <Feature
+        heading="Free for shelters, no downloads"
+        text={
+          <>
+            MyPet Health is free for shelters. Your team can get started from
+            the web with no app download. Create a pet record, upload discharge
+            documents, and share the link with adopters in minutes.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2016%2C%202026%2C%2011_30_46%20AM%20(1).webp?alt=media&token=314a0f10-b542-40bd-905c-ef77b9ca9287"
         headerFontSize={34}
         mediaVariant="highlevel"
       />
