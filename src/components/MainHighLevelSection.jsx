@@ -97,7 +97,7 @@ function MainHighLevelSection() {
             make a big difference in urgent situations.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2015%2C%202026%2C%2005_30_14%20PM.webp?alt=media&token=7de3ecab-5616-4df0-95c9-103443191632"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-16%20at%2010.59.07%20AM.webp?alt=media&token=22252bba-339f-4404-a352-06eb87cde25e"
         headerFontSize={34}
         mediaVariant="highlevel"
       />
