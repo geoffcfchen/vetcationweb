@@ -189,6 +189,9 @@ const SecondaryButton = styled(BootstrapButton)`
 
   @media (max-width: 768px) {
     width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
