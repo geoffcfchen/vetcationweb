@@ -74,6 +74,8 @@ function ShelterHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2014%2C%202026%2C%2001_14_36%20AM.webp?alt=media&token=a7aab9bb-c561-4c51-abd4-b0625a1279b8"
         headerFontSize={34}
         mediaVariant="highlevel"
+        linkText={"See how it work"}
+        linkHref={/pet-health-record/}
       />
 
       <Feature
@@ -135,6 +137,8 @@ function ShelterHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2015%2C%202026%2C%2005_30_14%20PM.webp?alt=media&token=7de3ecab-5616-4df0-95c9-103443191632"
         headerFontSize={34}
         mediaVariant="highlevel"
+        linkText={"Meet the team"}
+        linkHref={/team/}
       />
       <Feature
         heading="Free for shelters, no downloads"

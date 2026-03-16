@@ -206,11 +206,11 @@ function ShelterHeroSection({ onGetStarted }) {
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>Modern shelter-branded post-adoption app</HeroHeader>
               <HeroTagline>
-                MyPet Health helps turn shelters’ intake, vaccine, and surgery
-                records into the first chapter of a lifelong, centralized
-                medical record that stays with the pet after adoption, reduces
-                post-adoption questions, and helps every vet see the same
-                complete history from day one.
+                MyPet Health helps shelters send adopters home with a lifelong
+                digital medical record and trusted follow-up support from your
+                partnered veterinarians. It’s free for shelters, with no
+                downloads for your staff. Create a pet record and share the link
+                in minutes.
               </HeroTagline>
 
               <ButtonsRow>
