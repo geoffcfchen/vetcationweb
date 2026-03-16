@@ -135,10 +135,9 @@ function MainHighLevelSection() {
         heading="Available on web, iPhone, and Android"
         text={
           <>
-            MyPet Health is designed to be easy for both shelter staff and pet
-            parents to use. Records can be viewed and shared from the web, iOS,
-            and Android, which makes adoption day simpler and helps the pet’s
-            medical record stay accessible wherever care happens next.
+            MyPet Health works across web, iOS, and Android so you can access
+            your pet’s record anywhere. Add new documents, keep the record
+            up-to-date, and share it whenever care happens next.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2Fdevelop-ios-android-and-web-apps.webp?alt=media&token=55e685e7-d7e8-4e5c-b14b-cb506fa7506f"
