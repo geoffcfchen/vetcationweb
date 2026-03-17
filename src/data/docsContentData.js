@@ -5655,12 +5655,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
                   description:
                     "Dr. Polly Chen recommended surfacing telemedicine outcomes analysis. Previously available only at the clinic level, the app now provides every doctor with their own outcomes dashboard and adds a metric showing how many patients they’ve connected with over their career.",
                 },
-                {
-                  name: "Tahnee Morris",
-                  title: "Hospital Manager at Animal Hospital of Redondo Beach",
-                  description:
-                    "Based on Tahnee Morris’s guidance, we expanded the virtual professional network to include qualified non-DVM services. This enhancement allows providers to affiliate with clinics for increased trust and deliver coordinated support for clients.",
-                },
+                // {
+                //   name: "Tahnee Morris",
+                //   title: "Hospital Manager at Animal Hospital of Redondo Beach",
+                //   description:
+                //     "Based on Tahnee Morris’s guidance, we expanded the virtual professional network to include qualified non-DVM services. This enhancement allows providers to affiliate with clinics for increased trust and deliver coordinated support for clients.",
+                // },
 
                 // More contributors...
               ],
