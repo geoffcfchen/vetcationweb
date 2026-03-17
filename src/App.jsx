@@ -38,7 +38,13 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "./lib/firebase";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
 import EmailRegisterPage from "./pages/EmailRegisterPage";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import HandoutsPage from "./pages/HandoutsPage";
 import VetUploadRecordPage from "./pages/VetUploadRecordPage";
 import PetSummarySharePage from "./pages/PetSummarySharePage";
@@ -61,6 +67,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import ForShelterPage from "./pages/ForShelterPage";
 import MissionPage from "./pages/MissionPage";
 import TeamPage from "./pages/TeamPage";
+import RoleSelectionPage from "./pages/onboarding/RoleSelectionPage";
+import ProfileOnboardingPage from "./pages/onboarding/ProfileOnboardingPage";
+import ScanQrOnboardingPage from "./pages/onboarding/ScanQrOnboardingPage";
+import SelectClinicOnboardingPage from "./pages/onboarding/SelectClinicOnboardingPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -286,6 +296,21 @@ function SeoForPath() {
   );
 }
 
+function getOnboardingTarget(customer) {
+  const role = customer?.role || null;
+
+  // // Role not chosen yet
+  // if (!role) return "/onboarding/role";
+
+  // // Match your RN behavior: Organization goes to ScanQRcode
+  // if (role?.label === "Organization" || role?.label === "Clinic") {
+  //   return "/onboarding/scan-qrcode";
+  // }
+
+  // Pet owners, vets, techs, professionals go to Profile
+  return "/onboarding/role";
+}
+
 function App() {
   const [user, setUser] = useState(null);
   const [isUserLoading, setIsUserLoading] = useState(true);
@@ -299,30 +324,76 @@ function App() {
     latestLocationRef.current = location;
   }, [location]);
 
+  useEffect(() => {
+    const uid = user?.uid || null;
+    if (!uid) return;
+
+    const ref = doc(firestore, "customers", uid);
+
+    const unsub = onSnapshot(ref, (snap) => {
+      if (snap.exists()) {
+        setUserData(snap.data());
+      } else {
+        setUserData(null);
+      }
+    });
+
+    return () => unsub();
+  }, [user?.uid, setUserData]);
+
   async function ensureCustomerDoc(firebaseUser) {
     const uid = firebaseUser.uid;
-    const userDocRef = doc(firestore, "customers", uid);
-    const snap = await getDoc(userDocRef);
+    const ref = doc(firestore, "customers", uid);
+    const snap = await getDoc(ref);
 
-    if (snap.exists()) {
-      const data = snap.data();
-      setUserData(data);
-      return data;
-    } else {
-      const initialData = {
-        uid,
-        email: firebaseUser.email || "",
-        displayName: firebaseUser.displayName || "",
-        photoURL: firebaseUser.photoURL || "",
-        providerId: firebaseUser.providerData?.[0]?.providerId || "unknown",
-        hasCompletedProfile: false,
-        createdAt: serverTimestamp(),
-      };
+    const existing = snap.exists() ? snap.data() : {};
 
-      await setDoc(userDocRef, initialData);
-      setUserData(initialData);
-      return initialData;
+    const patch = {};
+
+    // Always ensure uid exists
+    if (!existing.uid) patch.uid = uid;
+
+    // Ensure email exists (RN parity)
+    if (!existing.email && firebaseUser.email) {
+      patch.email = firebaseUser.email.toLowerCase();
     }
+
+    // Ensure providerId exists
+    if (!existing.providerId) {
+      patch.providerId =
+        firebaseUser.providerData?.[0]?.providerId || "unknown";
+    }
+
+    // Ensure hasCompletedProfile exists
+    if (typeof existing.hasCompletedProfile !== "boolean") {
+      patch.hasCompletedProfile = false;
+    }
+
+    // Ensure createdAt exists
+    if (!existing.createdAt) {
+      patch.createdAt = serverTimestamp();
+    }
+
+    // Optional: save Firebase creationTime
+    if (!existing.creationTime && firebaseUser?.metadata?.creationTime) {
+      patch.creationTime = firebaseUser.metadata.creationTime;
+    }
+
+    // Optional: initial displayName/photoURL if missing
+    if (!existing.displayName && firebaseUser.displayName) {
+      patch.displayName = firebaseUser.displayName;
+    }
+    if (!existing.photoURL && firebaseUser.photoURL) {
+      patch.photoURL = firebaseUser.photoURL;
+    }
+
+    // If anything missing, patch it in
+    if (Object.keys(patch).length > 0) {
+      await setDoc(ref, patch, { merge: true });
+    }
+
+    // Return something usable for gating immediately
+    return { ...existing, ...patch };
   }
 
   function handleAuthError(error) {
@@ -344,9 +415,6 @@ function App() {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       const currentPath = latestLocationRef.current.pathname;
-
-      console.log("[auth listener] fired. user:", firebaseUser?.uid || null);
-      console.log("[auth listener] current path:", currentPath);
 
       setIsUserLoading(true);
 
@@ -377,7 +445,8 @@ function App() {
         setUser(firebaseUser);
 
         // 1) Ensure customers/{uid} exists
-        await ensureCustomerDoc(firebaseUser);
+        // await ensureCustomerDoc(firebaseUser);
+        const customer = await ensureCustomerDoc(firebaseUser);
 
         // 2) Email verification gating
         const email = firebaseUser.email || "";
@@ -396,7 +465,25 @@ function App() {
           return;
         }
 
-        // 3) Post-auth redirect logic
+        // 3) Onboarding gating (NEW)
+        // hasCompletedProfile includes role + profile completion, same as RN
+        const needsOnboarding = !customer?.hasCompletedProfile;
+
+        if (needsOnboarding) {
+          const onboardingTarget = getOnboardingTarget(customer);
+          const isAlreadyOnOnboarding = currentPath.startsWith("/onboarding/");
+
+          // Important: do NOT consume postAuthRedirectPath yet.
+          // We want to finish onboarding first, then go to target (/app, /ai/library, etc).
+          if (!isAlreadyOnOnboarding && currentPath !== onboardingTarget) {
+            navigate(onboardingTarget, { replace: true });
+          }
+
+          setIsUserLoading(false);
+          return;
+        }
+
+        // 4) Post-auth redirect logic
         const stored = sessionStorage.getItem("postAuthRedirectPath");
         console.log("[auth listener] stored redirect:", stored);
 
@@ -495,6 +582,19 @@ function App() {
         <Route path="/redirect/" element={<RedirectPage />} />
         {/* Auth guard layout */}
         <Route element={<RequireAuth user={user} isLoading={isUserLoading} />}>
+          <Route path="/onboarding/role" element={<RoleSelectionPage />} />
+          <Route
+            path="/onboarding/profile"
+            element={<ProfileOnboardingPage />}
+          />
+          <Route
+            path="/onboarding/scan-qrcode"
+            element={<ScanQrOnboardingPage />}
+          />
+          <Route
+            path="/onboarding/select-clinic"
+            element={<SelectClinicOnboardingPage />}
+          />
           {/* App shell layout */}
           <Route path="/app" element={<MemoizedPetHealthLayout />}>
             <Route path="new-pet" element={<NewPetPage />} />

@@ -221,7 +221,8 @@ const LabelChip = styled.div`
   &.active {
     border-color: #4d9fec;
     background: #e9f3ff;
-    box-shadow: 0 14px 28px rgba(77, 159, 236, 0.25),
+    box-shadow:
+      0 14px 28px rgba(77, 159, 236, 0.25),
       0 4px 12px rgba(0, 0, 0, 0.1);
     transform: translate(-50%, -34px) scale(1.03);
     font-weight: 700;
@@ -243,8 +244,16 @@ const PanelWrap = styled.div`
   flex-direction: column; /* NEW */
   min-height: 0; /* NEW: enables inner overflow children */
 
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
-    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
   /* On wider viewports (e.g., InfoWindow desktop), gently cap width */
   @media (min-width: 640px) {
     max-width: 360px;
@@ -254,8 +263,9 @@ const PanelWrap = styled.div`
 const PanelHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 5px;
+  min-width: 0; /* critical so title can shrink */
 `;
 
 const PanelTitle = styled.h3`
@@ -263,6 +273,35 @@ const PanelTitle = styled.h3`
   line-height: 1.2;
   margin: 0;
   flex: 1;
+  min-width: 0; /* allow ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const HeaderCTAButton = styled.button`
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+    background: rgba(148, 163, 184, 0.35);
+    color: #0f172a;
+  }
 `;
 
 const PanelSubtitle = styled.div`
@@ -327,6 +366,20 @@ const Avatar = styled.div`
   place-items: center;
   font-weight: 700;
   color: #1e40af;
+`;
+
+const MetaBar = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0 10px;
+  min-width: 0;
+`;
+
+const MetaLeftCol = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
 
 const Meta = styled.div`
@@ -703,6 +756,92 @@ const PrimaryCTA = styled.button`
   width: 100%;
 `;
 
+const MetaCTA = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0 10px;
+  min-width: 0;
+`;
+
+const MetaLeft = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const MetaLine = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap; /* important: prevents horizontal scrolling */
+  min-width: 0;
+`;
+
+const IdPill = styled.div`
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+
+  font-size: 10px;
+  line-height: 1.2;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 3px 8px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const RatingLine = styled.div`
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #111827;
+
+  flex-wrap: wrap; /* keeps it from forcing horizontal scroll */
+  min-width: 0;
+`;
+
+const RatingPill = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #111827;
+  white-space: nowrap;
+`;
+
+const PickerSelectBtn = styled.button`
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+    background: rgba(148, 163, 184, 0.35);
+    color: #0f172a;
+  }
+`;
+
 const BackLink = styled.button`
   border: 0;
   background: transparent;
@@ -758,21 +897,28 @@ const InlineCTAButton = styled(PrimaryCTA)`
   font-size: 13px; /* single size */
   font-weight: 800; /* single weight */
 
-  box-shadow: 0 8px 20px rgba(77, 159, 236, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.08s ease, box-shadow 0.12s ease;
+  box-shadow:
+    0 8px 20px rgba(77, 159, 236, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.12s ease;
 
   &:hover {
     transform: translateY(-1px);
   }
   &:active {
     transform: translateY(0);
-    box-shadow: 0 6px 16px rgba(77, 159, 236, 0.22),
+    box-shadow:
+      0 6px 16px rgba(77, 159, 236, 0.22),
       0 1px 6px rgba(0, 0, 0, 0.08);
   }
   &:focus-visible {
     outline: 0;
-    box-shadow: 0 0 0 3px rgba(77, 159, 236, 0.35),
-      0 8px 20px rgba(77, 159, 236, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 0 0 3px rgba(77, 159, 236, 0.35),
+      0 8px 20px rgba(77, 159, 236, 0.25),
+      0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   @media (max-width: 360px) {
@@ -809,7 +955,8 @@ const LegendWrap = styled.div`
   border-radius: 14px;
   border: 1px solid #f5b6b6;
   background: rgba(255, 245, 245, 0.96);
-  box-shadow: 0 12px 32px rgba(211, 47, 47, 0.18),
+  box-shadow:
+    0 12px 32px rgba(211, 47, 47, 0.18),
     0 4px 12px rgba(0, 0, 0, 0.08);
   pointer-events: none;
   backdrop-filter: saturate(120%) blur(4px);
@@ -948,7 +1095,7 @@ function onSlotClick(slot, user) {
   alert(
     `Demo\nDoctor: ${user.name}\nDate: ${formatDateISO(slot.date)}\nTime: ${
       slot.time
-    }`
+    }`,
   );
 }
 
@@ -1171,7 +1318,7 @@ function makeTomorrowSlotsAt(times = ["10:30", "14:00"]) {
       hh ?? 9,
       mm ?? 0,
       0,
-      0
+      0,
     );
     return {
       appointmentId: `demo_${d.getTime()}_${i}`,
@@ -1227,6 +1374,12 @@ export function ClinicPanel({
   showInlineCTA = false, // NEW
   onOpenSurvey, // NEW
   fillScrollable = false, // NEW
+
+  // NEW picker props
+  pickerMode = false,
+  pickerButtonLabel = "Select",
+  pickerSelected = false,
+  onPick = null,
 }) {
   const [tab, setTab] = useState("vets"); // 'vets' | 'inhouse'
   const demoVetsNow = useMemo(buildDemoVets, []); // ← always-future
@@ -1238,16 +1391,72 @@ export function ClinicPanel({
       <PanelTop>
         <div>
           <PanelHeader>
-            <PanelTitle>{clinicName || "Clinic"}</PanelTitle>
+            <PanelTitle title={clinicName || "Clinic"}>
+              {clinicName || "Clinic"}
+            </PanelTitle>
+
+            {/* {pickerMode ? (
+              <HeaderCTAButton
+                type="button"
+                disabled={pickerSelected}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onPick?.();
+                }}
+                title={pickerSelected ? "Selected" : pickerButtonLabel}
+                aria-label={pickerSelected ? "Selected" : pickerButtonLabel}
+              >
+                {pickerSelected ? "Selected" : pickerButtonLabel}
+              </HeaderCTAButton>
+            ) : null} */}
           </PanelHeader>
           {/* NEW: tiny light-grey clinicId */}
-          {clinicId && (
+          {/* {clinicId && (
             <IdTag title={clinicId}>ID:{clinicId.slice(0, 8)}</IdTag>
+          )} */}
+
+          {(clinicId || typeof rating === "number" || pickerMode) && (
+            <MetaBar>
+              <MetaLeftCol>
+                {clinicId && (
+                  <IdPill title={clinicId}>ID:{clinicId.slice(0, 8)}</IdPill>
+                )}
+
+                {typeof rating === "number" && (
+                  <RatingLine>
+                    <StarRating value={rating} />
+                    <span>
+                      {rating.toFixed(1)}
+                      {typeof reviewsCount === "number"
+                        ? ` (${reviewsCount})`
+                        : ""}
+                    </span>
+                  </RatingLine>
+                )}
+              </MetaLeftCol>
+
+              {pickerMode ? (
+                <PickerSelectBtn
+                  type="button"
+                  disabled={pickerSelected}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onPick?.();
+                  }}
+                  title={pickerSelected ? "Selected" : pickerButtonLabel}
+                  aria-label={pickerSelected ? "Selected" : pickerButtonLabel}
+                >
+                  {pickerSelected ? "Selected" : pickerButtonLabel}
+                </PickerSelectBtn>
+              ) : null}
+            </MetaBar>
           )}
 
-          {(rating || phone || address || website) && (
+          {(phone || address || website) && (
             <InfoGrid>
-              {typeof rating === "number" && (
+              {/* {typeof rating === "number" && (
                 <RatingRow>
                   <StarRating value={rating} />
                   <span>
@@ -1257,7 +1466,7 @@ export function ClinicPanel({
                       : ""}
                   </span>
                 </RatingRow>
-              )}
+              )} */}
               {phone && (
                 <InfoLine>
                   <IoCallOutline size={16} />
@@ -1452,7 +1661,7 @@ export default function InviteSurvey() {
 
   // responsive mode
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < BREAKPOINT : false
+    typeof window !== "undefined" ? window.innerWidth < BREAKPOINT : false,
   );
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < BREAKPOINT);
@@ -1539,7 +1748,7 @@ export default function InviteSurvey() {
   function fitToServiceRadius(
     center,
     radiusMeters,
-    padding = { top: 48, right: 48, bottom: 48, left: 48 }
+    padding = { top: 48, right: 48, bottom: 48, left: 48 },
   ) {
     const map = mapRef.current;
     if (!map || !center || !window.google) return;
@@ -1603,7 +1812,7 @@ export default function InviteSurvey() {
     const dy = dragRef.current.startY - clientY;
     const next = Math.max(
       minSheet,
-      Math.min(maxSheet, dragRef.current.startH + dy)
+      Math.min(maxSheet, dragRef.current.startH + dy),
     );
     setSheetH(next);
   };
@@ -1690,13 +1899,13 @@ export default function InviteSurvey() {
       { key: "dog_trainers", label: "Certified dog trainers" },
       { key: "none", label: "None of the above" },
     ],
-    []
+    [],
   );
 
   const activeMarker = useMemo(() => {
     if (active !== null && markers[active]) return markers[active];
     const idx = markers.findIndex(
-      (r) => r.id === clinicId || r.id === "__current"
+      (r) => r.id === clinicId || r.id === "__current",
     );
     if (idx !== -1) return markers[idx];
     return markers[0] || null;
@@ -1773,10 +1982,10 @@ export default function InviteSurvey() {
               orderBy("geohash"),
               startAt(start),
               endAt(end),
-              limit(perRangeLimit)
-            )
-          )
-        )
+              limit(perRangeLimit),
+            ),
+          ),
+        ),
       );
 
       const dedup = new Map();
@@ -1790,14 +1999,14 @@ export default function InviteSurvey() {
             typeof loc?.latitude === "number"
               ? loc.latitude
               : typeof loc?.lat === "number"
-              ? loc.lat
-              : undefined;
+                ? loc.lat
+                : undefined;
           const lng =
             typeof loc?.longitude === "number"
               ? loc.longitude
               : typeof loc?.lng === "number"
-              ? loc.lng
-              : undefined;
+                ? loc.lng
+                : undefined;
           if (typeof lat !== "number" || typeof lng !== "number") return;
 
           const distKm = distanceBetween([centerLat, centerLng], [lat, lng]);
@@ -1822,10 +2031,10 @@ export default function InviteSurvey() {
                 typeof x.rating === "number"
                   ? x.rating
                   : typeof x.avgRating === "number"
-                  ? x.avgRating
-                  : typeof x?.place?.rating === "number"
-                  ? x.place.rating
-                  : undefined,
+                    ? x.avgRating
+                    : typeof x?.place?.rating === "number"
+                      ? x.place.rating
+                      : undefined,
               reviewsCount:
                 x.reviewsCount ??
                 x.reviewCount ??
@@ -1866,7 +2075,7 @@ export default function InviteSurvey() {
       }
 
       const rows = Array.from(dedup.values()).sort(
-        (a, b) => a._distM - b._distM
+        (a, b) => a._distM - b._distM,
       );
       rows.forEach((r) => delete r._distM);
 
@@ -1877,7 +2086,7 @@ export default function InviteSurvey() {
       setActive((prev) => {
         if (prev !== null) return prev;
         const idx = rows.findIndex(
-          (r) => r.id === clinicId || r.id === "__current"
+          (r) => r.id === clinicId || r.id === "__current",
         );
         return idx !== -1 ? idx : prev;
       });

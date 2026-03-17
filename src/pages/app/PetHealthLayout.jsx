@@ -477,6 +477,8 @@ function PetHealthLayout() {
   const { pets, loading: petsLoading } = useGetUserPets(uid);
   const hasPets = pets.length > 0;
 
+  console.log("PetHealthLayout userData?", userData);
+
   const navigate = useNavigate();
 
   const [howOpen, setHowOpen] = useState(false);
@@ -496,8 +498,9 @@ function PetHealthLayout() {
     setPassportEditorConfig(null);
   }, []);
 
-  const userPhoto =
-    firebaseUser?.photoURL || userData?.photoURL || userData?.avatarUrl || "";
+  const userPhoto = userData?.photoURL || firebaseUser?.photoURL || "";
+
+  // console.log("PetHealthLayout userPhoto ", userPhoto);
 
   const userLabel =
     firebaseUser?.displayName ||
