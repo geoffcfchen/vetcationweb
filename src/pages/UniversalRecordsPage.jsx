@@ -4,6 +4,7 @@ import styled from "styled-components";
 import GetStartedCallout from "../components/GetStartedCallout";
 import qrCodeImage from "../images/qrcode7.png";
 import SiteShell from "../components/SiteShell";
+import { m } from "framer-motion";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -175,6 +176,11 @@ function ScreenshotShowcase({ heading, text, images, altPrefix }) {
 }
 
 function UniversalRecordsPage() {
+  const medicalHistoryImages = [
+    "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.05.30%E2%80%AFPM.webp?alt=media&token=a0c276c0-fc6b-47a9-b722-600238bbbabb",
+  ]
+    .filter(Boolean)
+    .slice(0, 1);
   const vetSummaryImages = [
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1",
     "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%202.15.30%20PM.webp?alt=media&token=772e38ed-3468-4986-a4c5-5d343eb671a7",
@@ -247,6 +253,13 @@ function UniversalRecordsPage() {
           </TwoColumn>
 
           <SectionDivider />
+
+          <ScreenshotShowcase
+            heading="What medical history looks like in MyPet Health"
+            text="Original documents are processed to extract key details, but the source files remain attached so vets can verify and get context when it matters most."
+            images={medicalHistoryImages}
+            altPrefix="Example MyPet Health vet-ready summary view"
+          />
 
           <ScreenshotShowcase
             heading="What vets see when you share"
