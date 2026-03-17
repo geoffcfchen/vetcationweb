@@ -142,12 +142,12 @@ function ForShelterPage() {
               more organizations near you.
             </Subtitle>
 
-            <LinkRow>
+            {/* <LinkRow>
               <LinkButton href="/post-adoption-support/">
                 <IoShieldCheckmarkSharp aria-hidden="true" />
                 What is post-adoption support?
               </LinkButton>
-            </LinkRow>
+            </LinkRow> */}
 
             <MapCard>
               <ClinicsMapSection
