@@ -7,7 +7,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { doc, getDoc } from "firebase/firestore";
@@ -25,6 +31,11 @@ import {
   FiInfo,
   FiLogOut,
   FiUser,
+  FiGrid,
+  FiDollarSign,
+  FiVideo,
+  FiAlertTriangle,
+  FiBookOpen,
 } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 
@@ -56,6 +67,8 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
   onGoHome,
   onOpenHow,
   onGoSupport,
+  onGoWallet,
+  onGoTelehealth,
   onToggleProfileMenu,
   onLogout,
 }) {
@@ -89,6 +102,18 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
         </BrandBarLeft>
 
         <BrandBarRight>
+          {/* Desktop quick links */}
+          <BrandBarLinksDesktop>
+            <BrandBarLink as={NavLink} to="/app/wallet">
+              <FiDollarSign />
+              Wallet
+            </BrandBarLink>
+
+            <BrandBarLink as={NavLink} to="/app/telehealth">
+              <FiVideo />
+              Telehealth
+            </BrandBarLink>
+          </BrandBarLinksDesktop>
           {/* NEW: mobile-only quick links */}
           <BrandBarLinksMobile>
             <BrandBarLink type="button" onClick={onOpenHow}>
@@ -152,6 +177,62 @@ const LayoutSidebar = React.memo(function LayoutSidebar({
 }) {
   return (
     <Sidebar>
+      <SidebarSection>
+        <SidebarSectionTitle>Workspace</SidebarSectionTitle>
+
+        <SidebarNav>
+          {/* <SideNavItem to="/app/profile">
+            <FiUser />
+            Profile
+          </SideNavItem> */}
+
+          <SideNavItem to="/app/wallet">
+            <FiDollarSign />
+            Wallet
+          </SideNavItem>
+
+          <SideNavItem to="/app/dashboard">
+            <FiGrid />
+            Dashboard
+          </SideNavItem>
+
+          {/* <SideNavItem to="/app/telehealth">
+            <FiVideo />
+            Telehealth
+          </SideNavItem> */}
+        </SidebarNav>
+      </SidebarSection>
+
+      <SidebarDivider />
+
+      <SidebarSection>
+        <SidebarSectionTitle>Tools</SidebarSectionTitle>
+
+        <SidebarNav>
+          <SideNavItem to="/app/telehealth/settings">
+            <FiSettings />
+            Telehealth settings
+          </SideNavItem>
+
+          {/* <SideNavItem to="/app/settings">
+            <FiShield />
+            Settings & Privacy
+          </SideNavItem> */}
+
+          {/* <SideNavItem to="/app/tips">
+            <FiBookOpen />
+            Tips
+          </SideNavItem>
+
+          <SideNavItem to="/app/emergency">
+            <FiAlertTriangle />
+            Emergency
+          </SideNavItem> */}
+        </SidebarNav>
+      </SidebarSection>
+
+      <SidebarDivider />
+
       <SidebarTopRow>
         <SidebarHeading>Your pets</SidebarHeading>
         <IconButton type="button" onClick={onOpenCreatePet} title="Add pet">
@@ -225,6 +306,11 @@ function MainPanel({
   savedPetState,
   onOpenPassportEdit,
 }) {
+  const location = useLocation();
+  const isAppRoot =
+    location.pathname === "/app" || location.pathname === "/app/";
+  const isPetRoute = location.pathname.startsWith("/app/pets/");
+
   const { petId } = useParams();
   const firstPetId = pets?.[0]?.id || null;
   const navigate = useNavigate();
@@ -236,14 +322,20 @@ function MainPanel({
   useEffect(() => {
     // wait until pets are loaded
     if (petsLoading) return;
-
+    if (!isAppRoot) return;
     if (!petId && firstPetId) {
       navigate(`/app/pets/${firstPetId}/records`, { replace: true });
     }
-  }, [petsLoading, petId, firstPetId, navigate]);
+  }, [petsLoading, isAppRoot, petId, firstPetId, navigate]);
 
   useEffect(() => {
     const load = async () => {
+      if (!isPetRoute) {
+        setActivePet(null);
+        setActivePetLoading(false);
+        return;
+      }
+
       if (!petId) {
         setActivePet(null);
         return;
@@ -276,7 +368,7 @@ function MainPanel({
     };
 
     load();
-  }, [petId, uid]);
+  }, [isPetRoute, petId, uid]);
 
   useEffect(() => {
     if (!savedPetState?.pet?.id) return;
@@ -319,6 +411,16 @@ function MainPanel({
     if (!activePet) return;
     onRequestEditPet(activePet);
   }, [activePet, onRequestEditPet]);
+
+  if (!isPetRoute && !isAppRoot) {
+    return (
+      <Main>
+        <Content>
+          <Outlet context={{ uid }} />
+        </Content>
+      </Main>
+    );
+  }
 
   return (
     <Main>
@@ -477,6 +579,9 @@ function PetHealthLayout() {
   const { pets, loading: petsLoading } = useGetUserPets(uid);
   const hasPets = pets.length > 0;
 
+  const roleLabel = userData?.role?.label || "";
+  const isOrg = roleLabel === "Organization" || roleLabel === "Clinic";
+
   console.log("PetHealthLayout userData?", userData);
 
   const navigate = useNavigate();
@@ -612,6 +717,7 @@ function PetHealthLayout() {
           onOpenHow={openHowModal}
           onGoSupport={goSupport}
         />
+
         <MainPanel
           uid={uid}
           pets={pets}
@@ -788,6 +894,8 @@ LayoutBrandBar.propTypes = {
   onGoSupport: PropTypes.func.isRequired,
   onToggleProfileMenu: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
+  onGoWallet: PropTypes.func,
+  onGoTelehealth: PropTypes.func,
 };
 
 LayoutSidebar.propTypes = {
@@ -1747,5 +1855,68 @@ const ProfileMenuItem = styled.button`
 
   svg {
     color: #64748b;
+  }
+`;
+
+const SidebarSection = styled.div`
+  padding: 6px;
+`;
+
+const SidebarSectionTitle = styled.div`
+  font-size: 12px;
+  font-weight: 800;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+`;
+
+const SidebarNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const SideNavItem = styled(NavLink)`
+  text-decoration: none;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  padding: 10px 10px;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  &.active {
+    border-color: rgba(37, 99, 235, 0.35);
+    background: rgba(239, 246, 255, 1);
+    color: #1d4ed8;
+  }
+
+  svg {
+    color: #64748b;
+  }
+`;
+
+const SidebarDivider = styled.div`
+  height: 1px;
+  background: rgba(148, 163, 184, 0.22);
+  margin: 10px 6px;
+`;
+
+const BrandBarLinksDesktop = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;

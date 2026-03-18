@@ -1,13 +1,27 @@
+// src/hooks/usePushNotification.js
+
 import { useCallback } from "react";
 
-async function sendPushNotification(expoPushToken, title, body, data) {
+async function sendPushNotification(
+  expoPushToken,
+  title,
+  body,
+  data,
+  badgeCount,
+) {
+  if (!expoPushToken) return;
+
   const message = {
     to: expoPushToken,
     sound: "default",
-    title: title,
-    body: body,
-    data: data,
+    title,
+    body,
+    data,
   };
+
+  if (typeof badgeCount === "number") {
+    message.badge = badgeCount;
+  }
 
   try {
     const response = await fetch("https://exp.host/--/api/v2/push/send", {
@@ -29,9 +43,12 @@ async function sendPushNotification(expoPushToken, title, body, data) {
 }
 
 export default function usePushNotification() {
-  const sendNotification = useCallback((expoPushToken, title, body, data) => {
-    sendPushNotification(expoPushToken, title, body, data);
-  }, []);
+  const sendNotification = useCallback(
+    (expoPushToken, title, body, data, badgeCount) => {
+      sendPushNotification(expoPushToken, title, body, data, badgeCount);
+    },
+    [],
+  );
 
   return { sendNotification };
 }

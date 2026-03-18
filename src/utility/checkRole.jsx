@@ -1,3 +1,5 @@
+// src/utility/checkRole.jsx
+
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 

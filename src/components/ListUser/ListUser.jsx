@@ -1,4 +1,4 @@
-// src/components/ListUser.jsx
+// src/components/ListUser/ListUser.jsx
 import React from "react";
 import styled from "styled-components";
 import LeftContainer from "./LeftContainer";
@@ -12,10 +12,11 @@ function ListUser({
   canNavigate = true,
   hasBorderBottomline = true,
   canAskQuestion = false,
-  canAskPartner,
+  canAskClinicDoctor,
   onPress,
   canDelete = false,
   isManagerCanDelete = false,
+  canSeeMore = false,
 }) {
   return (
     <Container hasBorderBottomline={hasBorderBottomline}>
@@ -27,10 +28,11 @@ function ListUser({
         canFollow={canFollow}
         canNavigate={canNavigate}
         canAskQuestion={canAskQuestion}
-        canAskPartner={canAskPartner}
+        canAskClinicDoctor={canAskClinicDoctor}
         canDelete={canDelete}
         onPress={onPress}
         isManagerCanDelete={isManagerCanDelete}
+        canSeeMore={canSeeMore}
       />
     </Container>
   );

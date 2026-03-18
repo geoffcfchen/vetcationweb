@@ -71,6 +71,11 @@ import RoleSelectionPage from "./pages/onboarding/RoleSelectionPage";
 import ProfileOnboardingPage from "./pages/onboarding/ProfileOnboardingPage";
 import ScanQrOnboardingPage from "./pages/onboarding/ScanQrOnboardingPage";
 import SelectClinicOnboardingPage from "./pages/onboarding/SelectClinicOnboardingPage";
+import WalletPage from "./pages/app/WalletPage";
+import DashboardPage from "./pages/app/DashboardPage";
+import TelehealthSettingsPage from "./pages/app/TelehealthSettingsPage";
+import PartnershipHubPage from "./pages/app/PartnershipHubPage";
+import TelemedProfileEditPage from "./pages/app/TelemedProfileEditPage";
 
 // import LoginPage from "./pages/LoginPage";
 
@@ -597,6 +602,20 @@ function App() {
           />
           {/* App shell layout */}
           <Route path="/app" element={<MemoizedPetHealthLayout />}>
+            <Route path="wallet" element={<WalletPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route
+              path="telehealth/settings"
+              element={<TelehealthSettingsPage />}
+            />
+            <Route
+              path="telehealth/profile"
+              element={<TelemedProfileEditPage />}
+            />
+            <Route
+              path="telehealth/partnership-hub"
+              element={<PartnershipHubPage />}
+            />
             <Route path="new-pet" element={<NewPetPage />} />
 
             <Route path="pets/:petId/records" element={<PetRecordsPage />} />

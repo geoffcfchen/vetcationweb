@@ -1,5 +1,5 @@
 export default {
-  primary: "#43fdd8",
+  primary: "#51ffdf",
   secondary: "#4ecdc4",
   black: "#2a2a2a",
   white: "#ffffff",
@@ -8,11 +8,19 @@ export default {
   dark: "#0c0c0c",
   danger: "#ff5252",
   tint: "#4D9FEC",
-  purple: "#7A1DC2",
+  purple: "#5B2C6F",
+  lighterPurple: "#6C458A",
+  lighterPurple2: "#7A52A1",
+  softpurple: "#8A6BBE", // balanced lavender-purple, pairs well with softblue
+  softdarkpurple: "#4B2E83", // deep, elegant indigo-purple, good for contrast
+  softlightpurple: "#E6D9F7", // gentle lavender tint, same vibe as softlightblue
+  fedexpurple: "#4D148C",
   green: "#32940C",
+  darkgreen: "#2E7D32", // darker, richer green for success states
   lightblue: "#f3f4f6",
   gold: "#FFD700",
   softlightblue: "#D1E8FF",
+  softlightlightblue: "#E5F2FF",
   softblue: "#5675ac",
   softdarkblue: "#324a79",
   softred: "#dc3545",
@@ -22,12 +30,14 @@ export default {
   softgreen2: "#3fbb46",
   softlightgreen: "#AFE1AF",
   softlightgrey: "#F0F0F0",
+  softgold: "#E0CD67",
   blue2: "#06bcee",
+  grey: "#829aab",
 };
 
 export const theme = {
   colors: {
-    primary: "#43fdd8",
+    primary: "#51ffdf",
     secondary: "#4ecdc4",
     black: "#2a2a2a",
     white: "#fff",
@@ -36,11 +46,15 @@ export const theme = {
     dark: "#0c0c0c",
     danger: "#ff5252",
     tint: "#4D9FEC",
-    purple: "#7A1DC2",
+    purple: "#5B2C6F",
+    softpurple: "#8A6BBE", // balanced lavender-purple, pairs well with softblue
+    softdarkpurple: "#4B2E83", // deep, elegant indigo-purple, good for contrast
+    softlightpurple: "#E6D9F7", // gentle lavender tint, same vibe as softlightblue
     green: "#32940C",
     lightblue: "#f3f4f6",
     gold: "#FFD700",
     softlightblue: "#D1E8FF",
+    softlightlightblue: "#E5F2FF",
     softblue: "#5675ac",
     softdarkblue: "#324a79",
     softred: "#dc3545",
@@ -50,6 +64,8 @@ export const theme = {
     softgreen2: "#3fbb46",
     softlightgreen: "#AFE1AF",
     softlightgrey: "#F0F0F0",
+    softgold: "#E0CD67",
     blue2: "#06bcee",
+    grey: "#829aab",
   },
 };

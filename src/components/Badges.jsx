@@ -1,99 +1,66 @@
 // src/components/Badges.jsx
 import React from "react";
 import styled from "styled-components";
-import {
-  FaStethoscope,
-  FaUserNurse,
-  FaCheck,
-  FaClinicMedical,
-  FaCircle,
-} from "react-icons/fa";
-import { FiSun } from "react-icons/fi";
+import { MdVerified } from "react-icons/md";
 import colors from "../config/colors";
 
+function BadgeIcon({ color }) {
+  return (
+    <BadgeWrap>
+      <MdVerified size={16} color={color} />
+    </BadgeWrap>
+  );
+}
+
+export function ProfessionalBadges() {
+  return <BadgeIcon color={colors.softgreen} />;
+}
+
+export function SpecialistBadges() {
+  return <BadgeIcon color={colors.lighterPurple} />;
+}
+
 export function GeneralPracticeBadges() {
-  return (
-    <Badge>
-      <FaCircle size={15} color={colors.tint} />
-      <FiSun size={18} color={colors.tint} style={{ position: "absolute" }} />
-      <FaStethoscope
-        size={8}
-        color="white"
-        style={{ position: "absolute", marginTop: "2px" }}
-      />
-    </Badge>
-  );
-}
-
-export function LicensedTechBadges() {
-  return (
-    <Badge>
-      <FaCircle size={15} color={colors.green} />
-      <FiSun size={18} color={colors.green} style={{ position: "absolute" }} />
-      <FaUserNurse
-        size={9}
-        color="white"
-        style={{ position: "absolute", marginTop: "0px" }}
-      />
-    </Badge>
-  );
-}
-
-export function TechBadges() {
-  return (
-    <Badge>
-      <FaCircle size={15} color={colors.medium} />
-      <FiSun size={18} color={colors.medium} style={{ position: "absolute" }} />
-      <FaUserNurse
-        size={9}
-        color="white"
-        style={{ position: "absolute", marginTop: "0px" }}
-      />
-    </Badge>
-  );
+  return <BadgeIcon color={colors.tint} />;
 }
 
 export function PremiumBadges() {
-  return (
-    <Badge>
-      <FaCircle size={15} color={colors.softdarkblue} />
-      <FiSun
-        size={18}
-        color={colors.softdarkblue}
-        style={{ position: "absolute" }}
-      />
-      <FaCheck
-        size={9}
-        color="white"
-        style={{ position: "absolute", marginTop: "0px" }}
-      />
-    </Badge>
-  );
+  return <BadgeIcon color={colors.softdarkblue} />;
+}
+
+export function OrgBadges() {
+  return <BadgeIcon color={colors.grey} />;
+}
+
+export function LicensedTechBadges() {
+  return <BadgeIcon color={colors.green} />;
+}
+
+export function ClinicBadges() {
+  return <BadgeIcon color={colors.grey} />;
+}
+
+export function TechBadges() {
+  return <BadgeIcon color={colors.medium} />;
+}
+
+export function BasicBadges() {
+  return <BadgeIcon color="grey" />;
 }
 
 export function PremiumTestBadges() {
-  return (
-    <Badge>
-      <FaCircle size={15} color={colors.softdarkblue} />
-      <FiSun
-        size={18}
-        color={colors.softdarkblue}
-        style={{ position: "absolute" }}
-      />
-      <FaCheck
-        size={9}
-        color="lightgrey"
-        style={{ position: "absolute", marginTop: "0px" }}
-      />
-    </Badge>
-  );
+  return <BadgeIcon color={colors.softdarkblue} />;
 }
 
-const Badge = styled.div`
-  position: relative;
+export function ClientBadges() {
+  return <BadgeIcon color="blue" />;
+}
+
+const BadgeWrap = styled.div`
+  border-radius: 15px;
   width: 20px;
   height: 20px;
-  display: flex;
-  align-items: center;
+  display: inline-flex;
   justify-content: center;
+  align-items: center;
 `;
