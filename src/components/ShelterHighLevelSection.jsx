@@ -88,7 +88,7 @@ function ShelterHighLevelSection() {
             adding extra work for your staff.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-15%20at%2012.06.50%E2%80%AFAM.webp?alt=media&token=94717607-3cda-41b1-9da1-ec04d9524374"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-19%20at%201.52.25%E2%80%AFPM.webp?alt=media&token=3130b869-631d-40af-886e-4649b1767264"
         headerFontSize={34}
         mediaVariant="highlevel"
       />
