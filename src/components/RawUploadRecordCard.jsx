@@ -13,6 +13,7 @@ import {
 import { storage, firestore } from "../lib/firebase";
 import { ref as storageRef, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
+import NameBadge from "./NameBadge";
 
 function formatCreatedAt(ts) {
   if (!ts) return "";
@@ -216,7 +217,7 @@ export default function RawUploadRecordCard({ record }) {
         const snap = await getDoc(doc(firestore, "customers", uploaderUid));
         if (isMounted) {
           if (snap.exists()) {
-            setUploader({ id: snap.id, ...snap.data() });
+            setUploader({ uid: snap.id, ...snap.data() });
           } else {
             setUploader(null);
           }
@@ -305,16 +306,23 @@ export default function RawUploadRecordCard({ record }) {
         <HeaderRow>
           <AvatarCircle>
             {uploader.photoURL ? (
-              <AvatarImg
-                src={uploader.photoURL}
-                alt={displayName || "Uploader"}
-              />
+              <AvatarImg src={uploader.photoURL} alt="Uploader" />
             ) : (
               <AvatarInitials>{getInitialsFromUser(uploader)}</AvatarInitials>
             )}
           </AvatarCircle>
+
           <HeaderTextCol>
-            {displayName && <UploaderName>{displayName}</UploaderName>}
+            <NameBadge
+              userBData={uploader}
+              isAnonymous={false}
+              withName={true}
+              withBadge={true}
+              withOrg={true}
+              canNavigate={false}
+              nameFontSize="12px"
+              maxLength={26}
+            />
             {createdAtLabel && (
               <CreatedAtInline>{createdAtLabel}</CreatedAtInline>
             )}
