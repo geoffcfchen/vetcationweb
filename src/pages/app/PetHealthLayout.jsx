@@ -48,6 +48,7 @@ import { DateTime } from "luxon";
 import logo from "../../images/plain_icon_600.png";
 import PetEditorModal from "../../components/PetEditorModal";
 import PassportEditModal from "../../components/PassportEditModal";
+import checkRole from "../../utility/checkRole";
 
 const petSummaryShape = PropTypes.shape({
   id: PropTypes.string,
@@ -174,6 +175,7 @@ const LayoutSidebar = React.memo(function LayoutSidebar({
   onOpenCreatePet,
   onOpenHow,
   onGoSupport,
+  canSeeDashboard,
 }) {
   return (
     <Sidebar>
@@ -191,10 +193,16 @@ const LayoutSidebar = React.memo(function LayoutSidebar({
             Wallet
           </SideNavItem>
 
-          <SideNavItem to="/app/dashboard">
+          {/* <SideNavItem to="/app/dashboard">
             <FiGrid />
             Dashboard
-          </SideNavItem>
+          </SideNavItem> */}
+          {canSeeDashboard && (
+            <SideNavItem to="/app/dashboard">
+              <FiGrid />
+              Dashboard
+            </SideNavItem>
+          )}
 
           {/* <SideNavItem to="/app/telehealth">
             <FiVideo />
@@ -579,8 +587,12 @@ function PetHealthLayout() {
   const { pets, loading: petsLoading } = useGetUserPets(uid);
   const hasPets = pets.length > 0;
 
-  const roleLabel = userData?.role?.label || "";
-  const isOrg = roleLabel === "Organization" || roleLabel === "Clinic";
+  const role = checkRole();
+
+  console.log("role", role);
+
+  // const isOrg = role === "Organization";
+  const canSeeDashboard = role === "Organization" || role === "Doctor";
 
   console.log("PetHealthLayout userData?", userData);
 
@@ -716,6 +728,7 @@ function PetHealthLayout() {
           onOpenCreatePet={openCreatePet}
           onOpenHow={openHowModal}
           onGoSupport={goSupport}
+          canSeeDashboard={canSeeDashboard}
         />
 
         <MainPanel
@@ -904,6 +917,7 @@ LayoutSidebar.propTypes = {
   onOpenCreatePet: PropTypes.func.isRequired,
   onOpenHow: PropTypes.func.isRequired,
   onGoSupport: PropTypes.func.isRequired,
+  canSeeDashboard: PropTypes.bool,
 };
 
 MainPanel.propTypes = {
