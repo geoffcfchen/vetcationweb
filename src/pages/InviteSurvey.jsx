@@ -1552,7 +1552,7 @@ export function ClinicPanel({
                   Pending
                 </PendingBadge>
                 <EmptyWrap style={{ marginTop: 10 }}>
-                  This hospital hasn’t partnered online yet. Once approved,
+                  This organization hasn’t partnered online yet. Once approved,
                   their partnered doctors and professionals will appear here.
                 </EmptyWrap>
               </>
