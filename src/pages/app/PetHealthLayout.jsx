@@ -16,7 +16,15 @@ import {
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 
 import {
   FiChevronRight,
@@ -313,6 +321,8 @@ function MainPanel({
   onRequestEditPet,
   savedPetState,
   onOpenPassportEdit,
+  canTransferOwnership,
+  onOpenTransferOwnership,
 }) {
   const location = useLocation();
   const isAppRoot =
@@ -552,6 +562,16 @@ function MainPanel({
                 <FiSettings />
                 Edit pet
               </HeaderAction>
+              {canTransferOwnership && activePet?.id && (
+                <HeaderAction
+                  type="button"
+                  onClick={() => onOpenTransferOwnership(activePet)}
+                  title="Transfer this pet to another user"
+                >
+                  <FiUser />
+                  Transfer ownership
+                </HeaderAction>
+              )}
             </HeaderRight>
           </HeaderCard>
 
@@ -580,6 +600,223 @@ function MainPanel({
   );
 }
 
+function TransferOwnershipModal({ pet, onClose, onDone, uid }) {
+  const [email, setEmail] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [foundUser, setFoundUser] = useState(null);
+
+  const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [confirmTouched, setConfirmTouched] = useState(false);
+
+  const petName = pet?.displayName || "Pet";
+  const petId = pet?.id || "";
+
+  useEffect(() => {
+    let alive = true;
+
+    const t = setTimeout(async () => {
+      const cleaned = String(email || "")
+        .trim()
+        .toLowerCase();
+      setError("");
+      setFoundUser(null);
+
+      if (cleaned.length < 5 || !cleaned.includes("@")) {
+        setChecking(false);
+        return;
+      }
+
+      setChecking(true);
+      try {
+        // Exact lookup by email in customers
+        const q = query(
+          collection(firestore, "customers"),
+          where("email", "==", cleaned),
+          where("hasCompletedProfile", "==", true),
+          limit(1),
+        );
+
+        const snap = await getDocs(q);
+
+        if (!alive) return;
+
+        if (snap.empty) {
+          setFoundUser(null);
+          return;
+        }
+
+        const doc0 = snap.docs[0];
+        const data = doc0.data() || {};
+        const targetUid = doc0.id;
+
+        // prevent selecting yourself
+        if (targetUid === uid) {
+          setFoundUser(null);
+          setError("That email belongs to your own account.");
+          return;
+        }
+
+        setFoundUser({
+          uid: targetUid,
+          email: (data.email || "").toLowerCase(),
+          displayName: data.displayName || data.name || "",
+          photoURL: data.photoURL || "",
+        });
+      } catch (e) {
+        if (!alive) return;
+        setFoundUser(null);
+        setError("Could not look up that email. Please try again.");
+      } finally {
+        if (!alive) return;
+        setChecking(false);
+      }
+    }, 200);
+
+    return () => {
+      alive = false;
+      clearTimeout(t);
+    };
+  }, [email, uid]);
+
+  const submit = async () => {
+    setError("");
+
+    if (!petId) return setError("Pet id is missing.");
+    if (!foundUser?.email)
+      return setError("Please enter an existing user email.");
+    if (!confirmed) {
+      setConfirmTouched(true);
+      return setError("Please confirm you want to transfer ownership.");
+    }
+    const firebaseUser = auth.currentUser;
+    if (!firebaseUser) return setError("You must be signed in.");
+
+    setSubmitting(true);
+    try {
+      const token = await firebaseUser.getIdToken(true);
+
+      const res = await fetch(
+        "https://transferpetownership-dr6lirynsq-uc.a.run.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            petId,
+            newOwnerEmail: foundUser.email,
+          }),
+        },
+      );
+
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok) {
+        const code = json?.error || `http-${res.status}`;
+        if (code === "target-user-not-found")
+          throw new Error("No user found with that email.");
+        if (code === "not-current-owner")
+          throw new Error("You are not the current owner of this pet.");
+        if (code === "forbidden")
+          throw new Error("You do not have permission to transfer ownership.");
+        throw new Error("Transfer failed. Please try again.");
+      }
+
+      onDone?.();
+      onClose?.();
+    } catch (e) {
+      setError(e?.message || "Transfer failed.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ModalBackdrop onClick={onClose}>
+      <ModalCard onClick={(e) => e.stopPropagation()}>
+        <ModalHeader>
+          <ModalTitle>Transfer ownership</ModalTitle>
+          <ModalClose type="button" onClick={onClose} aria-label="Close">
+            <FiX />
+          </ModalClose>
+        </ModalHeader>
+
+        <ModalBody>
+          <TransferHint>
+            Transfer <strong>{petName}</strong> (ID: {petId}) to another user.
+          </TransferHint>
+
+          {error ? <TransferError>{error}</TransferError> : null}
+
+          <TransferField>
+            <TransferLabel>New owner email</TransferLabel>
+            <TransferInput
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@email.com"
+              autoComplete="email"
+            />
+
+            {checking ? <TransferSub>Checking…</TransferSub> : null}
+
+            {!checking && email.trim() && !foundUser?.email && !error ? (
+              <TransferSub>
+                No user found yet. Make sure the email is correct.
+              </TransferSub>
+            ) : null}
+
+            {foundUser?.email ? (
+              <SelectedRow>
+                Found:{" "}
+                <strong>{foundUser.displayName || foundUser.email}</strong>
+                <div style={{ color: "#64748b", fontSize: 12 }}>
+                  {foundUser.email}
+                </div>
+              </SelectedRow>
+            ) : null}
+          </TransferField>
+
+          <TransferConfirmRow $error={confirmTouched && !confirmed}>
+            <TransferCheckbox
+              type="checkbox"
+              checked={confirmed}
+              onChange={(e) => {
+                setConfirmed(e.target.checked);
+                setConfirmTouched(true);
+              }}
+              id="transferConfirm"
+            />
+            <TransferConfirmLabel htmlFor="transferConfirm">
+              I understand this will change the pet owner.
+            </TransferConfirmLabel>
+          </TransferConfirmRow>
+
+          <TransferActions>
+            <SecondaryButton
+              type="button"
+              onClick={onClose}
+              disabled={submitting}
+            >
+              Cancel
+            </SecondaryButton>
+
+            <PrimaryButton
+              type="button"
+              onClick={submit}
+              disabled={submitting || !foundUser?.email}
+            >
+              {submitting ? "Transferring..." : "Transfer"}
+            </PrimaryButton>
+          </TransferActions>
+        </ModalBody>
+      </ModalCard>
+    </ModalBackdrop>
+  );
+}
+
 function PetHealthLayout() {
   const { userData } = useContext(GlobalContext);
   const firebaseUser = auth.currentUser;
@@ -593,6 +830,18 @@ function PetHealthLayout() {
 
   // const isOrg = role === "Organization";
   const canSeeDashboard = role === "Organization" || role === "Doctor";
+  const canTransferOwnership = role === "Organization";
+
+  const [transferModalConfig, setTransferModalConfig] = useState(null);
+
+  const openTransferModal = useCallback((pet) => {
+    if (!pet?.id) return;
+    setTransferModalConfig({ pet });
+  }, []);
+
+  const closeTransferModal = useCallback(() => {
+    setTransferModalConfig(null);
+  }, []);
 
   console.log("PetHealthLayout userData?", userData);
 
@@ -734,13 +983,15 @@ function PetHealthLayout() {
         <MainPanel
           uid={uid}
           pets={pets}
-          petsLoading={petsLoading} // NEW
+          petsLoading={petsLoading}
           hasPets={hasPets}
           onOpenCreatePet={openCreatePet}
           onOpenHow={openHowModal}
           onRequestEditPet={requestEditPet}
           savedPetState={savedPetState}
-          onOpenPassportEdit={openPassportEdit} // NEW
+          onOpenPassportEdit={openPassportEdit}
+          canTransferOwnership={canTransferOwnership}
+          onOpenTransferOwnership={openTransferModal}
         />
 
         {howOpen && (
@@ -866,6 +1117,15 @@ function PetHealthLayout() {
           </ModalBackdrop>
         )}
 
+        {transferModalConfig?.pet && (
+          <TransferOwnershipModal
+            pet={transferModalConfig.pet}
+            uid={uid}
+            onClose={closeTransferModal}
+            onDone={() => navigate("/app", { replace: true })}
+          />
+        )}
+
         {petEditorConfig && (
           <PetEditorModal
             mode={petEditorConfig.mode}
@@ -933,6 +1193,8 @@ MainPanel.propTypes = {
     pet: petSummaryShape,
   }),
   petsLoading: PropTypes.bool.isRequired,
+  canTransferOwnership: PropTypes.bool,
+  onOpenTransferOwnership: PropTypes.func,
 };
 
 /* styled-components */
@@ -1933,4 +2195,139 @@ const BrandBarLinksDesktop = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const TransferHint = styled.div`
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.5;
+`;
+
+const TransferError = styled.div`
+  margin-top: 10px;
+  font-size: 12px;
+  color: #b91c1c;
+`;
+
+const TransferField = styled.div`
+  margin-top: 12px;
+`;
+
+const TransferLabel = styled.div`
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+`;
+
+const TransferInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 10px;
+  font-size: 13px;
+  outline: none;
+
+  &:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb33;
+  }
+`;
+
+const TransferSub = styled.div`
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+`;
+
+const TransferConfirmRow = styled.div`
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid
+    ${(p) => (p.$error ? "rgba(185, 28, 28, 0.7)" : "transparent")};
+  background: ${(p) =>
+    p.$error ? "rgba(254, 226, 226, 0.35)" : "transparent"};
+`;
+
+const TransferCheckbox = styled.input`
+  width: 16px;
+  height: 16px;
+`;
+
+const TransferConfirmLabel = styled.label`
+  font-size: 13px;
+  color: #0f172a;
+`;
+
+const TransferActions = styled.div`
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`;
+
+const TransferSearchWrap = styled.div`
+  position: relative;
+`;
+
+const SearchPill = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  font-size: 12px;
+  color: #64748b;
+`;
+
+const SearchDropdown = styled.div`
+  margin-top: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+`;
+
+const SearchItem = styled.button`
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 10px;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: #f8fafc;
+  }
+`;
+
+const SearchMainRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const SearchName = styled.div`
+  font-size: 13px;
+  font-weight: 900;
+  color: #0f172a;
+`;
+
+const SearchEmail = styled.div`
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const SelectedRow = styled.div`
+  margin-top: 8px;
+  font-size: 13px;
+  color: #0f172a;
 `;
