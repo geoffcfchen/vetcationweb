@@ -1,5 +1,5 @@
 // src/components/ShelterHeroSection.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import {
   Container,
@@ -7,25 +7,30 @@ import {
   Col,
   Button as BootstrapButton,
 } from "react-bootstrap";
-
 import shelterHeroImage from "../images/banner7_2.webp";
 
 const breakpoint = 800;
+
+// Bigger = stronger movement (not slower)
+const PARALLAX_SPEED_DESKTOP = 0.35;
+// Mobile should usually be smaller for smoothness
+const PARALLAX_SPEED_TOUCH = 0.14;
+
+const MAX_SHIFT_PX_DESKTOP = 180;
+const MAX_SHIFT_PX_TOUCH = 90;
 
 const StyledHeroSection = styled.section`
   position: relative;
   padding: 5rem 2rem;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 0% 100%);
-  background-image: url(${shelterHeroImage});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-color: #000;
   color: #ffffff;
 
   min-height: 70vh;
   display: flex;
   align-items: center;
+
+  overflow: hidden;
 
   @media (max-width: 768px) {
     padding: 3.5rem 1.25rem 3rem;
@@ -35,9 +40,37 @@ const StyledHeroSection = styled.section`
   }
 `;
 
+const BgLayer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12%;
+  bottom: -12%;
+
+  background-image: url(${shelterHeroImage});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0) scale(1.08);
+  z-index: 0;
+
+  /* IMPORTANT: do NOT disable transform on mobile */
+  @media (max-width: 768px) {
+    top: -8%;
+    bottom: -8%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none !important;
+  }
+`;
+
 const LeftGradient = styled.div`
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.65) 0%,
@@ -58,7 +91,7 @@ const LeftGradient = styled.div`
 
 const Content = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 `;
 
@@ -144,9 +177,7 @@ const ButtonsRow = styled.div`
   }
 `;
 
-const PrimaryButton = styled(BootstrapButton).attrs({
-  variant: "danger",
-})`
+const PrimaryButton = styled(BootstrapButton).attrs({ variant: "danger" })`
   padding: 1.1rem 2.6rem;
   text-transform: uppercase;
   border-radius: 999px;
@@ -195,10 +226,68 @@ const SecondaryButton = styled(BootstrapButton)`
   }
 `;
 
-function ShelterHeroSection({ onGetStarted }) {
+function clamp(n, min, max) {
+  return Math.min(max, Math.max(min, n));
+}
+
+export default function ShelterHeroSection({ onGetStarted }) {
+  const sectionRef = useRef(null);
+  const bgRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const bg = bgRef.current;
+    if (!section || !bg) return;
+
+    const isTouchDevice = () =>
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    const prefersReducedMotion = () =>
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const update = () => {
+      if (prefersReducedMotion()) {
+        bg.style.transform = "";
+        return;
+      }
+
+      const rect = section.getBoundingClientRect();
+
+      const speed = isTouchDevice()
+        ? PARALLAX_SPEED_TOUCH
+        : PARALLAX_SPEED_DESKTOP;
+
+      const maxShift = isTouchDevice()
+        ? MAX_SHIFT_PX_TOUCH
+        : MAX_SHIFT_PX_DESKTOP;
+
+      const shift = clamp(-rect.top * speed, -maxShift, maxShift);
+
+      bg.style.transform = `translate3d(0, ${shift}px, 0) scale(1.08)`;
+    };
+
+    const onScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
-    <StyledHeroSection>
+    <StyledHeroSection ref={sectionRef}>
+      <BgLayer ref={bgRef} />
       <LeftGradient />
+
       <Content>
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
@@ -231,5 +320,3 @@ function ShelterHeroSection({ onGetStarted }) {
     </StyledHeroSection>
   );
 }
-
-export default ShelterHeroSection;

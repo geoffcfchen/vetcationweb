@@ -1,5 +1,5 @@
 // src/components/HeroSection.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import heroImage from "../images/banner4.webp";
 import {
@@ -12,14 +12,17 @@ import { Link as RouterLink } from "react-router-dom";
 
 const breakpoint = 800;
 
+// Smaller = slower movement
+const PARALLAX_SPEED_DESKTOP = 0.35;
+const PARALLAX_SPEED_TOUCH = 0.1;
+
+const MAX_SHIFT_PX_DESKTOP = 180;
+const MAX_SHIFT_PX_TOUCH = 90;
+
 const StyledHeroSection = styled.section`
   position: relative;
   padding: 5rem 2rem;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 0% 100%);
-  background-image: url(${heroImage});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-color: #000;
   color: #ffffff;
 
@@ -27,18 +30,45 @@ const StyledHeroSection = styled.section`
   display: flex;
   align-items: center;
 
+  overflow: hidden;
+
   @media (max-width: 768px) {
     padding: 3.5rem 1.25rem 3rem;
     min-height: auto;
     clip-path: none;
     align-items: flex-start;
+  }
+`;
+
+const BgLayer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12%;
+  bottom: -12%;
+
+  background-image: url(${heroImage});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0) scale(1.08);
+  z-index: 0;
+
+  @media (max-width: 768px) {
     background-position: center top;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none !important;
   }
 `;
 
 const LeftGradient = styled.div`
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.55) 0%,
@@ -59,7 +89,7 @@ const LeftGradient = styled.div`
 
 const Content = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 `;
 
@@ -206,10 +236,68 @@ const NoWrap = styled.span`
   }
 `;
 
-function HeroSection({ onGetStarted }) {
+function clamp(n, min, max) {
+  return Math.min(max, Math.max(min, n));
+}
+
+export default function HeroSection({ onGetStarted }) {
+  const sectionRef = useRef(null);
+  const bgRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const bg = bgRef.current;
+    if (!section || !bg) return;
+
+    const isTouchDevice = () =>
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    const prefersReducedMotion = () =>
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const update = () => {
+      if (prefersReducedMotion()) {
+        bg.style.transform = "";
+        return;
+      }
+
+      const rect = section.getBoundingClientRect();
+
+      const speed = isTouchDevice()
+        ? PARALLAX_SPEED_TOUCH
+        : PARALLAX_SPEED_DESKTOP;
+
+      const maxShift = isTouchDevice()
+        ? MAX_SHIFT_PX_TOUCH
+        : MAX_SHIFT_PX_DESKTOP;
+
+      const shift = clamp(-rect.top * speed, -maxShift, maxShift);
+
+      bg.style.transform = `translate3d(0, ${shift}px, 0) scale(1.08)`;
+    };
+
+    const onScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
-    <StyledHeroSection>
+    <StyledHeroSection ref={sectionRef}>
+      <BgLayer ref={bgRef} />
       <LeftGradient />
+
       <Content>
         <Container style={{ maxWidth: "1140px" }}>
           <Row>
@@ -251,5 +339,3 @@ function HeroSection({ onGetStarted }) {
     </StyledHeroSection>
   );
 }
-
-export default HeroSection;
