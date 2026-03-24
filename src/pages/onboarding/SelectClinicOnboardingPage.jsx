@@ -130,7 +130,7 @@ export default function SelectClinicOnboardingPage() {
       <Main>
         <Card>
           <Header>
-            <H1>Select your hospital or organization</H1>
+            <H1>Select your organization</H1>
             <Sub>Search the map and choose the correct location.</Sub>
           </Header>
 
