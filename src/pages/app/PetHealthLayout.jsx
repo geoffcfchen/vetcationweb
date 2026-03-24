@@ -112,7 +112,7 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
 
         <BrandBarRight>
           {/* Desktop quick links */}
-          <BrandBarLinksDesktop>
+          {/* <BrandBarLinksDesktop>
             <BrandBarLink as={NavLink} to="/app/wallet">
               <FiDollarSign />
               Wallet
@@ -122,7 +122,7 @@ const LayoutBrandBar = React.memo(function LayoutBrandBar({
               <FiVideo />
               Telehealth
             </BrandBarLink>
-          </BrandBarLinksDesktop>
+          </BrandBarLinksDesktop> */}
           {/* NEW: mobile-only quick links */}
           <BrandBarLinksMobile>
             <BrandBarLink type="button" onClick={onOpenHow}>
