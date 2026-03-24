@@ -437,6 +437,51 @@ function mergeGoogleDetails(base, details) {
   };
 }
 
+function stripUndefinedAndFunctions(value) {
+  if (value === undefined) return undefined;
+  if (typeof value === "function") return undefined;
+  if (value === null) return null;
+
+  // Keep Firestore-friendly special types
+  if (value instanceof GeoPoint) return value;
+  if (value instanceof Date) return value;
+
+  if (Array.isArray(value)) {
+    const next = value
+      .map(stripUndefinedAndFunctions)
+      .filter((v) => v !== undefined);
+    return next;
+  }
+
+  if (typeof value === "object") {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) {
+      const cleaned = stripUndefinedAndFunctions(v);
+      if (cleaned !== undefined) out[k] = cleaned;
+    }
+    return out;
+  }
+
+  return value;
+}
+
+function photoUrlsFromPhotos(photos) {
+  if (!Array.isArray(photos)) return undefined;
+  const urls = photos
+    .slice(0, 6)
+    .map((p) => {
+      try {
+        return typeof p?.getUrl === "function"
+          ? p.getUrl({ maxWidth: 1200 })
+          : null;
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean);
+  return urls.length ? urls : undefined;
+}
+
 export default function ClinicsMapSection({
   height = SECTION_HEIGHT,
   initialCenter = { lat: 34.04707440503318, lng: -118.23408222822691 },
@@ -468,6 +513,8 @@ export default function ClinicsMapSection({
   const [showSearchBtn, setShowSearchBtn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [locating, setLocating] = useState(false);
+
+  const GOOGLE_LIBRARIES = ["places"];
 
   useEffect(() => {
     setMarkers([]);
@@ -738,12 +785,12 @@ export default function ClinicsMapSection({
             permanently_closed: safeAssign(place.permanently_closed, false),
 
             // Optional fields (kept consistent with your RN pattern)
-            website: firebaseData.website || undefined,
+            website: firebaseData.website ?? null,
             phone:
               firebaseData.phone ||
               firebaseData.formatted_phone_number ||
               firebaseData.tel ||
-              undefined,
+              null,
 
             ...firebaseData, // same idea as your RN code: keep Firestore overrides
           };
@@ -754,16 +801,20 @@ export default function ClinicsMapSection({
           // Write a normalized doc into clinics collection
           try {
             const batch = writeBatch(firestore);
-            batch.set(
-              doc(firestore, "clinics", placeId),
-              {
-                ...baseDoc,
-                geohash,
-                // helpful: also store GeoPoint for any future geospatial reads
-                locationGeo: new GeoPoint(ll.lat, ll.lng),
-              },
-              { merge: true },
-            );
+            const payload = stripUndefinedAndFunctions({
+              ...baseDoc,
+
+              // store geospatial fields in a stable way
+              geohash,
+              locationGeo: new GeoPoint(ll.lat, ll.lng),
+
+              // optional: store photo urls instead of raw photo objects
+              photoUrls: photoUrlsFromPhotos(place.photos),
+            });
+
+            batch.set(doc(firestore, "clinics", placeId), payload, {
+              merge: true,
+            });
             await batch.commit();
           } catch (e) {
             console.warn("Failed writing shelter into clinics:", e);
@@ -904,32 +955,33 @@ export default function ClinicsMapSection({
 
     // Write to Firestore (merge) so shelters are “treated the same” as clinics
     try {
+      const payload = stripUndefinedAndFunctions({
+        place_id: row.id,
+        name: row.name,
+        address: updated.address || row.address || "",
+        website: updated.website || row.website || null,
+        phone: updated.phone || row.phone || null,
+        rating: typeof updated.rating === "number" ? updated.rating : null,
+        total_ratings:
+          typeof updated.total_ratings === "number"
+            ? updated.total_ratings
+            : null,
+
+        // IMPORTANT: don't write raw photos objects (they contain functions)
+        photoUrls: photoUrlsFromPhotos(details?.photos),
+
+        // IMPORTANT: updated.place can contain opening_hours.isOpen function
+        place: updated.place ? stripUndefinedAndFunctions(updated.place) : null,
+
+        plus_code: updated.plus_code || null,
+        types: updated.types || null,
+        business_status: updated.business_status || null,
+        price_level:
+          typeof updated.price_level === "number" ? updated.price_level : -1,
+      });
+
       await writeBatch(firestore)
-        .set(
-          doc(firestore, "clinics", row.id),
-          {
-            place_id: row.id,
-            name: row.name,
-            address: updated.address || row.address || "",
-            website: updated.website || row.website || null,
-            phone: updated.phone || row.phone || null,
-            rating: typeof updated.rating === "number" ? updated.rating : null,
-            total_ratings:
-              typeof updated.total_ratings === "number"
-                ? updated.total_ratings
-                : null,
-            place: updated.place || null,
-            photos: updated.photos || null,
-            plus_code: updated.plus_code || null,
-            types: updated.types || null,
-            business_status: updated.business_status || null,
-            price_level:
-              typeof updated.price_level === "number"
-                ? updated.price_level
-                : -1,
-          },
-          { merge: true },
-        )
+        .set(doc(firestore, "clinics", row.id), payload, { merge: true })
         .commit();
     } catch (e) {
       console.warn("Failed to write Place Details merge:", e);
