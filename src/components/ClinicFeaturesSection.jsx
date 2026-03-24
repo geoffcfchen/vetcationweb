@@ -61,7 +61,7 @@ function ClinicFeaturesSection() {
       <Feature
         iconId="easy" // Use the ID of the icon from the sprite
         heading="Every vet can acceess Pre-Screen Summaries for every Upcoming Appointments"
-        text="Enhance your preparation with Vetcation's advanced AI-driven features. Every veterinarian in your clinic can access comprehensive pre-screen summaries directly from the in-app calendar. These summaries include detailed information and images submitted by pet owners about their upcoming appointments. Our AI system meticulously analyzes the provided content to generate insightful summaries, helping veterinarians understand each pet's condition before the visit. This proactive approach not only saves time but also ensures more effective and efficient appointments. Join Vetcation to leverage cutting-edge technology for better care and streamlined operations."
+        text="Enhance your preparation with MyPet Health's advanced AI-driven features. Every veterinarian in your clinic can access comprehensive pre-screen summaries directly from the in-app calendar. These summaries include detailed information and images submitted by pet owners about their upcoming appointments. Our AI system meticulously analyzes the provided content to generate insightful summaries, helping veterinarians understand each pet's condition before the visit. This proactive approach not only saves time but also ensures more effective and efficient appointments. Join MyPet Health to leverage cutting-edge technology for better care and streamlined operations."
         // linkText="Learn More"
         linkHref="#"
         image={{

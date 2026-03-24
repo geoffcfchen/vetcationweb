@@ -568,7 +568,7 @@ const contentData = {
                 {
                   heading: "Review the End User License Agreement (EULA)",
                   lines: [
-                    "Carefully read through the EULA to understand your rights and responsibilities when using Vetcation’s platform.",
+                    "Carefully read through the EULA to understand your rights and responsibilities when using MyPet Health's platform.",
                   ],
                 },
                 {
@@ -687,7 +687,7 @@ const contentData = {
 
     ViewingYourUpcomingAppointments: {
       mainTitle: "Viewing Your Upcoming Appointments",
-      mainDescription: `Vetcation’s scheduling system is designed to make managing your appointments as easy as possible.
+      mainDescription: `MyPet Health's scheduling system is designed to make managing your appointments as easy as possible.
       You can view all your upcoming appointments in a calendar format, allowing you to see your schedule at a glance.
       You can choose to view your appointments by day, week, or month, depending on your preference. This flexibility allows you to plan your time effectively and ensure you never miss a virtual consult.`,
       sections: [
@@ -717,7 +717,7 @@ const contentData = {
 
     VideoCall: {
       mainTitle: "Video Call",
-      mainDescription: `Vetcation’s telemedicine system is designed to help you provide high-quality virtual consultations with ease.
+      mainDescription: `MyPet Health's telemedicine system is designed to help you provide high-quality virtual consultations with ease.
       The platform allows you to conduct video calls with clients, share medical records, and manage prescriptions—all in a secure and compliant environment. You can also use the system to document your consultations, ensuring that you have a complete record of each appointment. This feature is essential for maintaining compliance with California’s telemedicine regulations and providing the best possible care to your patients.`,
       sections: [
         {
@@ -726,9 +726,9 @@ const contentData = {
           blocks: [
             {
               type: "qa",
-              question: "How does Vetcation’s telemedicine system work?",
+              question: "How does MyPet Health's telemedicine system work?",
               answer:
-                "Vetcation’s telemedicine system allows you to conduct video calls with clients, share medical records, and manage prescriptions in a secure and compliant environment. You can document your consultations, ensuring that you have a complete record of each appointment.",
+                "MyPet Health's telemedicine system allows you to conduct video calls with clients, share medical records, and manage prescriptions in a secure and compliant environment. You can document your consultations, ensuring that you have a complete record of each appointment.",
             },
             {
               type: "framedImage",
@@ -786,7 +786,7 @@ const contentData = {
 
     earnings: {
       mainTitle: "Earnings & Wallet",
-      mainDescription: `Vetcation’s earnings and wallet system is designed to help you manage your income from virtual consultations effectively.
+      mainDescription: `MyPet Health's earnings and wallet system is designed to help you manage your income from virtual consultations effectively.
       You can view your earnings in real-time, track your transactions, and manage your wallet balance. The system provides a clear overview of your earnings, including completed consultations, pending payments, and any fees associated with your transactions. This transparency allows you to stay on top of your finances and make informed decisions about your virtual practice.`,
       sections: [
         {
@@ -1255,7 +1255,7 @@ const contentData = {
     
     Below are frequently asked questions (FAQs) the Veterinary Medical Board (Board) has 
     compiled in response to public inquiries about the new law. We’ve included notes on 
-    how Vetcation’s features help veterinary professionals comply with each requirement 
+    how MyPet Health's features help veterinary professionals comply with each requirement 
     through our built-in workflows and technology tools. In the event of any differences 
     between these FAQs and the statute itself, the statute is controlling, and the Board 
     will enforce it accordingly. Veterinary professionals should review the official 
@@ -1703,7 +1703,7 @@ compliant.`,
                 " can rely on the premises-based VCPR, within prescription limits.",
               helpText:
                 "Each premises visit is time-stamped and condition-tagged in" +
-                " Vetcation’s records to demonstrate compliance.",
+                " MyPet Health's records to demonstrate compliance.",
             },
           ],
         },
@@ -1992,7 +1992,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
         </ul>
       `,
               helpText:
-                "Vetcation’s note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
+                "MyPet Health's note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
             },
           ],
         },
@@ -2027,7 +2027,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
         </ul>
       `,
               helpText:
-                "Vetcation’s >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
+                "MyPet Health's >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
             },
           ],
         },
@@ -2074,7 +2074,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 "<li><strong>OR Vet:</strong> May provide telehealth only if licensed in Oregon and if Oregon telehealth rules allow it.</li>" +
                 "</ul>",
               helpText:
-                "Vetcation’s scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
+                "MyPet Health's scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
             },
           ],
         },
@@ -2108,7 +2108,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               example:
                 "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
               helpText:
-                "Vetcation’s platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
+                "MyPet Health's platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
             },
           ],
         },
@@ -2172,7 +2172,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
            <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 515-5220 for questions.”</li>
          </ul>`,
               helpText:
-                "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
+                "MyPet Health's onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
             },
           ],
         },
@@ -2221,7 +2221,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     joinVideoCall: {
       mainTitle: "Join a Video Call",
       mainDescription: `
-          Vetcation’s video consultation feature enables you to meet clients 
+          MyPet Health's video consultation feature enables you to meet clients 
           face-to-face (virtually) and gather information needed 
           to diagnose and treat patients. Below, learn how to access 
           your scheduled calls, test your mic and camera, and begin 
@@ -2287,7 +2287,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     videoCallFeatures: {
       mainTitle: "Call Features & Settings",
       mainDescription: `
-          Vetcation’s call interface offers more than a basic camera and microphone. 
+          MyPet Health's call interface offers more than a basic camera and microphone. 
           From reducing background noise to customizing your video background, 
           these features let you deliver professional, efficient telehealth 
           consultations wherever you are.
@@ -2482,7 +2482,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Deleting Audio Data",
                   lines: [
-                    "Vetcation’s AI system automatically removes audio once processing is complete.",
+                    "MyPet Health's AI system automatically removes audio once processing is complete.",
                     "No manual deletion is required—ephemeral files never remain in storage.",
                   ],
                 },
@@ -2503,7 +2503,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     InquiryBasedMessagerOverView: {
       mainTitle: "Vetssenger Overview",
       mainDescription: `
-        Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
+        Vetssenger is MyPet Health's inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
       `,
       sections: [
         // NEW SECTION to hold the text previously in mainDescription
@@ -3095,7 +3095,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     DAP: {
       mainTitle: "Data, Assessment, Plan (DAP)",
       mainDescription:
-        "Vetcation’s DAP template is designed to empower your virtual clinic by streamlining record-keeping while enhancing client communication. Tailored for California-licensed veterinarians, it captures every detail of your telehealth sessions—from a thorough history and live observations to clear, actionable next steps. With a format that mirrors the high standards of in-person care, you can deliver flexible, legally compliant care from anywhere while keeping your practice audit-ready.",
+        "MyPet Health's DAP template is designed to empower your virtual clinic by streamlining record-keeping while enhancing client communication. Tailored for California-licensed veterinarians, it captures every detail of your telehealth sessions—from a thorough history and live observations to clear, actionable next steps. With a format that mirrors the high standards of in-person care, you can deliver flexible, legally compliant care from anywhere while keeping your practice audit-ready.",
       sections: [
         {
           id: "dapTemplate",
@@ -3344,7 +3344,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     CommunityMarketing: {
       mainTitle: "Community Marketing",
       mainDescription:
-        "For veterinarians looking to market their expertise, Vetcation’s community Q&A section provides a space to connect with pet owners who have questions about their pets and to share your professional knowledge. Through general advice or teletriage, you can offer valuable educational insights about common pet health topics or help pet owners assess the urgency of their pets' conditions by commenting on their questions. The information you share will be seen by many other pet owners who care deeply about their pets, helping you increase your visibility and ultimately drive more appointments.",
+        "For veterinarians looking to market their expertise, MyPet Health's community Q&A section provides a space to connect with pet owners who have questions about their pets and to share your professional knowledge. Through general advice or teletriage, you can offer valuable educational insights about common pet health topics or help pet owners assess the urgency of their pets' conditions by commenting on their questions. The information you share will be seen by many other pet owners who care deeply about their pets, helping you increase your visibility and ultimately drive more appointments.",
       sections: [
         {
           id: "generaladvice",
@@ -6030,7 +6030,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Ensure compliance with AB 1399:",
                   lines: [
-                    "Vetcation’s infrastructure aligns with California’s telehealth law, AB 1399, providing automated documentation and audit readiness so your practice stays compliant as it grows.",
+                    "MyPet Health's infrastructure aligns with California’s telehealth law, AB 1399, providing automated documentation and audit readiness so your practice stays compliant as it grows.",
                   ],
                 },
               ],
@@ -6312,7 +6312,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
 
     clinicEarnings: {
       mainTitle: "Earnings and Wallet",
-      mainDescription: `Vetcation’s earnings and wallet system gives your clinic a clear and straightforward view of income from virtual consultations. You can monitor earnings in real time, review all transactions, and manage your clinic wallet balance. The system shows completed consultations, pending payouts, and revenue allocated to your clinic. This helps your team stay organized and make informed decisions about your virtual branch.`,
+      mainDescription: `MyPet Health's earnings and wallet system gives your clinic a clear and straightforward view of income from virtual consultations. You can monitor earnings in real time, review all transactions, and manage your clinic wallet balance. The system shows completed consultations, pending payouts, and revenue allocated to your clinic. This helps your team stay organized and make informed decisions about your virtual branch.`,
       sections: [
         {
           id: "earningsOverview",
@@ -6470,11 +6470,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
       sections: [
         {
           id: "referralNetwork",
-          title: "Vetcation’s Referral Clinic Network",
+          title: "MyPet Health's Referral Clinic Network",
           blocks: [
             {
               type: "paragraph",
-              text: "Vetcation’s Referral Clinic Network is designed to connect virtual veterinarians with local clinics that can provide in-person care. This network allows pet owners to receive timely and appropriate care while ensuring that clinics have the opportunity to support their community.",
+              text: "MyPet Health's Referral Clinic Network is designed to connect virtual veterinarians with local clinics that can provide in-person care. This network allows pet owners to receive timely and appropriate care while ensuring that clinics have the opportunity to support their community.",
             },
             {
               type: "map",
@@ -7017,7 +7017,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Built‑in legal safeguards:",
                   lines: [
-                    "Vetcation’s workflows align with California’s telehealth rules — reducing audit risk and paperwork.",
+                    "MyPet Health's workflows align with California’s telehealth rules — reducing audit risk and paperwork.",
                   ],
                 },
               ],
@@ -7127,7 +7127,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
 
     //     Below are frequently asked questions (FAQs) the Veterinary Medical Board (Board) has
     //     compiled in response to public inquiries about the new law. We’ve included notes on
-    //     how Vetcation’s features help veterinary professionals comply with each requirement
+    //     how MyPet Health's features help veterinary professionals comply with each requirement
     //     through our built-in workflows and technology tools. In the event of any differences
     //     between these FAQs and the statute itself, the statute is controlling, and the Board
     //     will enforce it accordingly. Veterinary professionals should review the official
@@ -7554,7 +7554,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //                 " can rely on the premises-based VCPR, within prescription limits.",
     //               helpText:
     //                 "Each premises visit is time-stamped and condition-tagged in" +
-    //                 " Vetcation’s records to demonstrate compliance.",
+    //                 " MyPet Health's records to demonstrate compliance.",
     //             },
     //           ],
     //         },
@@ -7843,7 +7843,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //         </ul>
     //       `,
     //               helpText:
-    //                 "Vetcation’s note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
+    //                 "MyPet Health's note template maps one-to-one with each § 2032.3(a) item and prevents closure of a consult until all required fields are completed.",
     //             },
     //           ],
     //         },
@@ -7878,7 +7878,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //         </ul>
     //       `,
     //               helpText:
-    //                 "Vetcation’s >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
+    //                 "MyPet Health's >Export → Generate Summary tool auto-pulls every § 2032.3(b) element, inserts your e-signature, and produces a PDF. The timer ensures delivery within five days (or sooner if you mark the case critical).",
     //             },
     //           ],
     //         },
@@ -7925,7 +7925,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //                 "<li><strong>OR Vet:</strong> May provide telehealth only if licensed in Oregon and if Oregon telehealth rules allow it.</li>" +
     //                 "</ul>",
     //               helpText:
-    //                 "Vetcation’s scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
+    //                 "MyPet Health's scheduling and location checks block new telehealth bookings when the system detects the pet is outside California, ensuring only appropriately-licensed veterinarians can see the patient.",
     //             },
     //           ],
     //         },
@@ -7959,7 +7959,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //               example:
     //                 "During a video consult for a limping horse, you realize you cannot adequately evaluate lameness without hands-on palpation or diagnostic imaging. You tell the owner they must schedule an in-person exam before you can prescribe or finalize a diagnosis.",
     //               helpText:
-    //                 "Vetcation’s platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
+    //                 "MyPet Health's platform includes documentation prompts to note 'telehealth insufficient, recommended in-person exam.' This ensures transparency in your medical record if the Board later reviews why you referred the animal for in-person care.",
     //             },
     //           ],
     //         },
@@ -8023,7 +8023,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     //            <li>Your website footer shows: Dr. Jane Doe, DVM #12345; “For medical records requests, email records@example.com”; “Call the CA Veterinary Medical Board at (916) 515-5220 for questions.”</li>
     //          </ul>`,
     //               helpText:
-    //                 "Vetcation’s onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
+    //                 "MyPet Health's onboarding checks each § 4853(h) condition. If any fail, we guide you through submitting a premises-registration application to the Board—ensuring full compliance with state law.",
     //             },
     //           ],
     //         },
@@ -8597,7 +8597,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Learn with confidence, not online guesses:",
                   lines: [
-                    "Vetcation’s community lets you post questions freely and read answers given to other pet owners, so you can learn from many real situations.",
+                    "MyPet Health's community lets you post questions freely and read answers given to other pet owners, so you can learn from many real situations.",
                     "Because this is an educational community and not a paid consultation, veterinarians answer based on their interests and availability, and responses are not guaranteed for every question.",
                   ],
                 },
@@ -9061,7 +9061,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     duringYourAppointment: {
       mainTitle: "Join a Video Call",
       mainDescription: `
-          Vetcation’s video consultation feature enables you to meet your vet 
+          MyPet Health's video consultation feature enables you to meet your vet 
           face-to-face (virtually) and provide information needed 
           to diagnose and treat patients. Below, learn how to access 
           your scheduled calls, test your mic and camera, and begin 
@@ -9266,7 +9266,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Deleting Audio Data",
                   lines: [
-                    "Vetcation’s AI system automatically removes audio once processing is complete.",
+                    "MyPet Health's AI system automatically removes audio once processing is complete.",
                     "No manual deletion is required—ephemeral files never remain in storage.",
                   ],
                 },
@@ -9402,7 +9402,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     followUpCare: {
       mainTitle: "Vetssenger Overview",
       mainDescription: `
-        Vetssenger is Vetcation’s inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
+        Vetssenger is MyPet Health's inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
       `,
       sections: [
         // NEW SECTION to hold the text previously in mainDescription
@@ -9457,7 +9457,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     vetcationCommunity: {
       mainTitle: "Community Q&A",
       mainDescription:
-        "Vetcation’s Community Q&A is a place where pet owners can learn from real veterinarians who share general educational guidance about common health topics. You can ask questions about your pet, browse answers from licensed professionals, and learn how vets think through symptoms and care considerations. The information shared here is educational only, but it helps you understand what might be going on, what signs to watch for, and when a situation may need more urgent attention. Many pet owners also discover veterinarians they trust and later choose to book appointments with them through the platform.",
+        "MyPet Health's Community Q&A is a place where pet owners can learn from real veterinarians who share general educational guidance about common health topics. You can ask questions about your pet, browse answers from licensed professionals, and learn how vets think through symptoms and care considerations. The information shared here is educational only, but it helps you understand what might be going on, what signs to watch for, and when a situation may need more urgent attention. Many pet owners also discover veterinarians they trust and later choose to book appointments with them through the platform.",
       sections: [
         {
           id: "generaladvice",

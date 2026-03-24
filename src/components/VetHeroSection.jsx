@@ -96,8 +96,8 @@ function VetHeroSection() {
           <Col md={6}>
             <div>
               <HeroHeader>
-                Elevate Veterinary Care with Vetcation’s Advanced Communication
-                Tools
+                Elevate Veterinary Care with MyPet Health's Advanced
+                Communication Tools
               </HeroHeader>
               <HeroTagline>
                 Connect, Earn, and Grow in a Community of Esteemed Veterinarians

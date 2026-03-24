@@ -43,7 +43,7 @@ const introToVetcation = {
             {
               heading: "Stay Legally Protected Under AB 1399:",
               lines: [
-                "Vetcation’s automated workflows help you maintain compliance with California’s evolving telehealth regulations, so you can focus on patient care instead of worrying about the fine print.",
+                "MyPet Health's automated workflows help you maintain compliance with California’s evolving telehealth regulations, so you can focus on patient care instead of worrying about the fine print.",
               ],
             },
           ],

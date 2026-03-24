@@ -100,7 +100,7 @@ function ClinicHeroSection() {
                 talent
               </HeroHeader>
               <HeroTagline>
-                Transform Your Clinic Operations with Vetcation’s All-in-One
+                Transform Your Clinic Operations with MyPet Health's All-in-One
                 Platform
               </HeroTagline>
               <HeroButton href="/register">Get Started</HeroButton>
