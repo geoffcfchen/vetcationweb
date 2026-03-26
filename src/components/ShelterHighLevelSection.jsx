@@ -98,8 +98,9 @@ function ShelterHighLevelSection() {
         text={
           <>
             After adoption, adopters can message your shelter-partnered vets for
-            follow-up help. Each conversation is saved to the pet’s medical
-            record so future veterinarians can see what happened.
+            follow-up help or receive medication through the platform when
+            appropriate. Each conversation is saved to the pet’s medical record
+            so future veterinarians can see what happened.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F26eebb48-01bf-4af9-8bd6-0c779fe989e6%20(1).webp?alt=media&token=7ed0a87b-0f75-4b3b-ac6b-11ab335a2104"
@@ -112,10 +113,10 @@ function ShelterHighLevelSection() {
         text={
           <>
             When adopters use paid consultations with shelter-partnered vets,
-            they can choose to direct part of the platform fee back to the
-            shelter that helped their pet, at no additional cost. This creates
-            ongoing support for shelters while also giving adopters trusted
-            follow-up care.
+            MyPet Health directs 50% of the platform fee back to the shelter
+            that helped their pet, at no additional cost to the adopter. This
+            helps create an ongoing support stream for shelters while giving
+            adopters trusted follow-up care.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F15847442_012925-wabc-animal-shelter-thank-you-img.webp?alt=media&token=457decb9-b965-437b-b47f-ba75e3f4b998"
