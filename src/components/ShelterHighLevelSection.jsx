@@ -79,7 +79,7 @@ function ShelterHighLevelSection() {
       />
 
       <Feature
-        heading="Build post-adoption vet partnerships"
+        heading="Build post-adoption telehealth vet partnerships"
         text={
           <>
             <BrandLink to="/mypet-health/">MyPet Health</BrandLink> helps
