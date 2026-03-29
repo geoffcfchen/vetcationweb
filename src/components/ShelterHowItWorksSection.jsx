@@ -59,14 +59,11 @@ function ShelterHowItWorksSection() {
     <FeaturesContainer>
       <SectionHeader>
         <Eyebrow>How it works for shelters</Eyebrow>
-        <Headline>
-          Send adopters home with a record, not a stack of paper
-        </Headline>
+        <Headline>Three simple steps to join MyPet Health.</Headline>
         <Subhead>
-          Use MyPet Health to turn intake history, vaccines, spay or neuter
-          notes, and follow-up instructions into the first chapter of a pet’s
-          universal medical record. Every adopter leaves with a record that is
-          easy to keep, share, and build on with their own vet.
+          MyPet Health is designed to fit seamlessly into your existing
+          workflow. Your team can create pet profiles upload records in minutes,
+          and transfer the pet&apos;s history to adopters with one link.
         </Subhead>
       </SectionHeader>
 
@@ -86,12 +83,12 @@ function ShelterHowItWorksSection() {
       />
 
       <Feature
-        heading="Step 2: Upload or attach records at discharge"
+        heading="Step 2: Upload records before adoption"
         text={
           <>
-            At adoption, staff upload PDFs or photos, or attach files from your
-            existing system. Each pet leaves with a unified digital record
-            instead of loose sheets that get lost in the car.
+            Before adoption, staff upload PDFs or photos from your existing
+            system. Each pet leaves with a unified digital record instead of
+            loose sheets that get lost.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.02.08%E2%80%AFPM.webp?alt=media&token=7c4c8451-5b1e-49d9-b482-f70f31cf5d73"

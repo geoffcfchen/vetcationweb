@@ -298,7 +298,7 @@ export default function ShelterHeroSection({ onGetStarted }) {
               </HeroHeader>
               <HeroTagline>
                 MyPet Health helps shelters send adopters home with a lifelong
-                digital medical record and trusted follow-up support from your
+                digital medical record and trusted telehealth support from your
                 partnered veterinarians. It’s free for shelters, with no
                 downloads for your staff. Create a pet record and share the link
                 in minutes.
