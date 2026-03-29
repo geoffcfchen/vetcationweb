@@ -294,7 +294,7 @@ export default function ShelterHeroSection({ onGetStarted }) {
             <Col xs={12} md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>
-                Shelter-branded post-adoption telehealth support platform
+                Shelter-branded post-adoption support platform
               </HeroHeader>
               <HeroTagline>
                 MyPet Health helps shelters send adopters home with a lifelong
