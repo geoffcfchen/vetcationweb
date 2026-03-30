@@ -8534,7 +8534,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
   clients: {
     clientIntroToVetcation: {
       mainTitle: "Introduction for Pet Owners",
-      mainDescription: `MyPet Health is a professional community that helps you connect with licensed veterinarians and participating hospitals through convenient, legally compliant virtual care. You can ask questions in the community, learn from what other pet owners have asked, and receive educational guidance from qualified professionals. When you set your home clinic, MyPet Health also connects you with the clinic’s partnered veterinarians for telemedicine services, giving you easier access to care, simple follow-up through our Vetssenger system, and continuity with your regular clinic. Our goal is to make it easier to care for your pet and stay connected with your primary veterinarian, while giving you reliable information from professionals you can trust.`,
+      mainDescription: `MyPet Health helps you keep your pet’s medical history in one place and access trusted post-adoption telehealth support. If your shelter partners with MyPet Health, your pet can come home with a lifelong digital medical record that you can continue to build over time. You can upload future records, stay organized, and connect with shelter-partnered veterinarians when follow-up support is needed. Our goal is to make it easier for adopters to continue care after adoption with better records, clearer communication, and a trusted path to veterinary support.`,
       sections: [
         {
           id: "missionForOwners",
@@ -8542,11 +8542,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: `Many pet owners struggle to get timely answers to important questions. Phone lines are busy, callbacks are short, and it is not always clear when something can wait and when it needs an urgent visit. At the same time, clinics often receive more questions than they can respond to quickly, which makes it harder for owners to know what to do next.`,
+              text: `After adoption, many pet owners are left trying to piece together medical records, discharge notes, vaccine history, and follow-up questions on their own. It is not always clear what records to keep, when to worry, or where to turn when new questions come up at home.`,
             },
             {
               type: "root",
-              helpText: `MyPet Health is designed to give pet owners clearer, easier access to trustworthy guidance. You can ask questions, learn from what others have asked, and receive educational support from licensed professionals. When you set your home clinic, MyPet Health connects you with your clinic’s partnered veterinarians for telemedicine and follow-up, letting you build a direct and organized line of communication with your primary vets through our Vetssenger system. Our mission is to help you care for your pet with confidence, clarity, and a stronger connection to your regular clinic.`,
+              helpText: `MyPet Health is designed to make post-adoption care easier. Your pet’s records can start with the shelter and continue with you over time in one lifelong profile. You can keep documents organized, understand your pet’s history more clearly, and connect with trusted shelter-partnered veterinarians for telehealth follow-up when needed. Our mission is to give adopters more confidence, better continuity of care, and easier access to support after bringing a pet home.`,
             },
           ],
         },
@@ -8556,12 +8556,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: "MyPet Health gives you a simple way to learn from licensed veterinarians, ask questions in the community, and stay closely connected with your primary clinic for in-person follow-up when needed.",
+              text: "MyPet Health gives adopters a simple way to keep medical records organized, understand their pet’s history, and access trusted telehealth follow-up after adoption.",
             },
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
               ],
@@ -8570,41 +8570,39 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Talk to licensed veterinarians from home:",
+                  heading: "Keep a lifelong medical record from day one:",
                   lines: [
-                    "Schedule virtual visits or use secure messaging with California-licensed veterinarians. When appropriate, veterinarians can prescribe needed medications and have them delivered to your home, saving you time and unnecessary trips.",
+                    "Your pet’s record can begin with the shelter and stay with you after adoption. Keep original documents, upload future records, and maintain one organized history over time.",
                   ],
                 },
                 {
-                  heading:
-                    "Easy follow-up and direct connection with your primary vets:",
+                  heading: "Access trusted post-adoption telehealth support:",
                   lines: [
-                    "When you set your home clinic, MyPet Health connects you directly with your clinic’s partnered veterinarians. You can follow up through our Vetssenger system, keep your communication organized, and maintain a stronger long-term relationship with your primary veterinary team.",
+                    "If your shelter partners with MyPet Health, you may be able to connect with shelter-partnered veterinarians for post-adoption telehealth support when questions come up at home.",
                   ],
                 },
                 {
-                  heading: "Know when to go in person:",
+                  heading: "Share records more easily:",
                   lines: [
-                    "Veterinarians can review your pet’s history, photos, and videos, then guide you on whether home care is enough, a routine visit is needed, or urgent care is required.",
+                    "You can keep vaccine records, discharge notes, lab results, and other documents together in one place, making it easier to share your pet’s history with clinics, ERs, or specialists.",
                   ],
                 },
                 {
-                  heading: "Stay connected with your clinic:",
+                  heading: "Know when in-person care is needed:",
                   lines: [
-                    "Telemedicine visits are linked to your clinic when you set a home clinic, helping ensure continuity of care and keeping your regular veterinarian informed.",
+                    "Veterinarians can review your pet’s history, photos, and videos, then help you understand whether home care, follow-up, or an in-person visit may be the right next step.",
                   ],
                 },
                 {
-                  heading: "Learn with confidence, not online guesses:",
+                  heading: "Stay organized after adoption:",
                   lines: [
-                    "MyPet Health's community lets you post questions freely and read answers given to other pet owners, so you can learn from many real situations.",
-                    "Because this is an educational community and not a paid consultation, veterinarians answer based on their interests and availability, and responses are not guaranteed for every question.",
+                    "Instead of losing paperwork or searching across emails and portals, you can continue building your pet’s profile in one place as new care happens.",
                   ],
                 },
                 {
-                  heading: "Stay within California’s telehealth rules:",
+                  heading: "Use telehealth within California rules:",
                   lines: [
-                    "MyPet Health follows California’s telehealth law, AB 1399, helping ensure telemedicine is used appropriately and that in-person care is arranged when required.",
+                    "MyPet Health is designed to support appropriate telehealth use under California law and to help guide you toward in-person care when needed.",
                   ],
                 },
               ],
@@ -8686,50 +8684,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             },
           ],
         },
-        // {
-        //   id: "whyVirtualCareTrendForOwners",
-        //   title: "Why Virtual Care Is Growing – And How It Helps You",
-        //   blocks: [
-        //     {
-        //       type: "trendPoints",
-        //       introParagraphs: [
-        //         "Virtual veterinary care is growing because it makes it easier for pet owners to reach qualified help while supporting clinics and their teams. The latest VVCA State of Veterinary Virtual Care Report (2024) highlights trends that directly benefit you and your pet:",
-        //       ],
-        //       items: [
-        //         {
-        //           heading: "More access where vets are scarce:",
-        //           lines: [
-        //             "Over 22% of U.S. counties have no veterinary employees, leaving many pets in underserved areas (VVCA Report 2024, p. 7). Virtual care helps bridge these gaps by connecting you with licensed veterinarians, even if your local options are limited.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Faster answers for common concerns:",
-        //           lines: [
-        //             "Around half of global virtual consults address symptomatic issues (VVCA Report 2024, p. 10). Instead of waiting days for a callback, you can often get guidance more quickly through a structured virtual visit.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Works together with in-person care:",
-        //           lines: [
-        //             "Virtual consults complement clinic visits. They are useful for triage, education, and follow-up, while your clinic focuses on exams, tests, procedures, and surgery.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Less stress for you and your pet:",
-        //           lines: [
-        //             "For many non emergency questions, you can stay at home, avoid travel time, and keep your pet in a familiar environment while still getting help from a veterinarian.",
-        //           ],
-        //         },
-        //         {
-        //           heading: "Supports healthier clinics and teams:",
-        //           lines: [
-        //             "When clinics use virtual care well, they can organize schedules, reduce callback overload, and support better compensation for staff. A healthier clinic team means more stable care for your pet over the long term.",
-        //           ],
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
       ],
     },
     // setting up vetcation, we will show 1. choose your role as a pet owner. 2. set up your profile.
@@ -8779,7 +8733,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1577.webp?alt=media&token=7e9e1e55-7a0a-4dfa-b472-f195928cdca4",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
               ],
             },
           ],

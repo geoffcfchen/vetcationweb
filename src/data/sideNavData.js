@@ -255,10 +255,10 @@ const sideNavData = {
             },
           ],
         },
-        {
-          id: "vetcationCommunity",
-          label: "Vetcation Community",
-        },
+        // {
+        //   id: "vetcationCommunity",
+        //   label: "Vetcation Community",
+        // },
       ],
     },
   ],
