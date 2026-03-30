@@ -148,7 +148,7 @@ function ShelterHowItWorksSection() {
         heading="Extend support beyond the adoption day"
         text={
           <>
-            adopters stay connected with shelter-partnered vets after they bring
+            Adopters stay connected with shelter-partnered vets after they bring
             their pet home. Every interaction is documented in the pet’s medical
             record so any veterinarian can see the full picture. This creates
             better continuity of care and strengthens the bond between the pet,
