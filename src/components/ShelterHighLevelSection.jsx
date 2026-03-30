@@ -112,11 +112,11 @@ function ShelterHighLevelSection() {
         heading="Create a new support stream for shelters"
         text={
           <>
-            When adopters use paid consultations with shelter-partnered vets,
-            MyPet Health directs 50% of the platform fee back to the shelter
-            that helped their pet, at no additional cost to the adopter. This
-            helps create an ongoing support stream for shelters while giving
-            adopters trusted follow-up care.
+            When adopters use paid consultations with shelter-partnered
+            veterinarians, MyPet Health directs a portion of the platform fee
+            back to the shelter that helped their pet, at no additional cost to
+            the adopter. This creates an ongoing support stream for shelters
+            while giving adopters trusted post-adoption telehealth care.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F15847442_012925-wabc-animal-shelter-thank-you-img.webp?alt=media&token=457decb9-b965-437b-b47f-ba75e3f4b998"

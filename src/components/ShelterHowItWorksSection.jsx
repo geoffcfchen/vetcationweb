@@ -97,20 +97,36 @@ function ShelterHowItWorksSection() {
       />
 
       <Feature
-        heading="Step 3: Share with adopters in one link"
+        heading="Step 3: Transfer the pet profile to the adopter"
         text={
           <>
-            The adopter receives a secure link to their pet&apos;s{" "}
-            <BrandLink to="/mypet-health/">MyPet Health</BrandLink> record. They
-            can add their own vet, upload future records, and share the history
-            with clinics, ERs, or specialists.
+            Once adopted, your team can find the adopter on{" "}
+            <BrandLink to="/mypet-health/">MyPet Health</BrandLink> and transfer
+            the pet&apos;s profile to them in one step. The adopter can then add
+            their own vet, upload future records, and share the history with
+            clinics, ERs, or specialists.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-24%20at%201.11.07%E2%80%AFAM.webp?alt=media&token=c67f885b-a5f9-4fa5-8146-f98c046f4c74"
+        headerFontSize={30}
+        mediaVariant="desktop"
+      />
+      <Feature
+        heading="What adopters get: A lifelong medical record"
+        text={
+          <>
+            Adopters receive a complete digital medical record for their pet in{" "}
+            <BrandLink to="/mypet-health/">MyPet Health</BrandLink>. All records
+            stay in one place, including original documents and clear summaries.
+            They can add future visits, upload new records, and share the full
+            history with any clinic, ER, or specialist.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.05.30%E2%80%AFPM.webp?alt=media&token=a0c276c0-fc6b-47a9-b722-600238bbbabb"
         headerFontSize={30}
         mediaVariant="desktop"
       />
-      <Feature
+      {/* <Feature
         key={`step4-4`}
         heading="Vets get a clear summary with source documents attached"
         text={
@@ -126,7 +142,7 @@ function ShelterHowItWorksSection() {
         to="/pet-health-record/"
         mediaVariant="desktop"
         clickTarget="cta"
-      />
+      /> */}
 
       <Feature
         heading="Extend support beyond the adoption day"
