@@ -42,12 +42,13 @@ function ShelterHowToPartnerSection() {
       <SectionHeader>
         <Eyebrow>How telehealth partnerships work</Eyebrow>
         <Headline>
-          Two simple steps to offer post-adoption telehealth support
+          Three simple steps to offer post-adoption telehealth support
         </Headline>
         <Subhead>
           MyPet Health makes it easy for shelters to offer post-adoption
-          telehealth support. Claim your organization, then partner with remote
-          veterinarians who are excited to support your adopters.
+          telehealth support. Claim your organization, partner with remote
+          veterinarians, and help adopters connect to your organization at
+          adoption.
         </Subhead>
       </SectionHeader>
 
@@ -85,20 +86,20 @@ function ShelterHowToPartnerSection() {
         spacing="compact"
       />
       <Feature
-        heading="What adopters do next"
+        heading="Step 3: Help adopters connect to your organization"
         text={
           <>
-            After adoption, adopters can add your shelter or rescue as their
-            adoption organization in MyPet Health. This helps them see which
-            veterinarians are partnered with your organization and makes it
-            easier to get follow-up support after they go home.
+            At adoption, your team can help adopters connect their account to
+            your shelter or rescue in MyPet Health. This allows them to see your
+            shelter-partnered veterinarian and makes post-adoption follow-up
+            support easier to access after they go home.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2103.webp?alt=media&token=b7bfd108-967d-4544-9192-86dd6b048b39"
         headerFontSize={36}
       />
       <Feature
-        heading="How adopters get support"
+        heading="What support adopters actually get"
         text={
           <>
             Once connected to your organization, adopters are matched with a
