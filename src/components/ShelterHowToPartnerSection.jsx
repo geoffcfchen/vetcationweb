@@ -52,13 +52,13 @@ function ShelterHowToPartnerSection() {
       </SectionHeader>
 
       <Feature
-        heading="Step 1: Claim your organization"
+        heading="Step 1: Claim your organization during onboarding"
         text={
           <>
-            Search for your shelter, rescue, or adoption center on the map and
-            select the correct organization. Once claimed, your team can manage
-            your profile and start setting up post-adoption support under your
-            brand.
+            When creating your organization account, your team can search the
+            map and claim the correct shelter, rescue, or adoption center. This
+            connects your account to the right organization and sets up
+            post-adoption support under your brand.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-30%20at%209.35.57%E2%80%AFPM.webp?alt=media&token=05834873-b587-4771-9e37-8f08d5209ef0"
