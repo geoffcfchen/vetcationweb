@@ -13,8 +13,8 @@ import { FiBriefcase } from "react-icons/fi";
 import { firestore } from "../lib/firebase";
 
 const cfg = {
-  title: "Partner Vets",
-  subtitle: "See and manage veterinarians who partner with your clinic.",
+  title: "Partnership Hub",
+  subtitle: "See and manage veterinarians who partner with your organization.",
   chipIcon: FiBriefcase,
   chipLabel: "Clinic account",
   cardHint: "When this is on, vets that match your preferences can find you.",
