@@ -503,7 +503,8 @@ function VetUploadRecordPage() {
               </Small>
             ) : (
               <Small>
-                You can upload without an account. If you already use Vetcation,{" "}
+                You can upload without an account. If you already use MyPet
+                Health,{" "}
                 <InlineLinkButton type="button" onClick={handleSignInClick}>
                   sign in
                 </InlineLinkButton>{" "}

@@ -1587,7 +1587,7 @@ const contentData = {
               answer:
                 "If you established a valid VCPR by synchronous audio-video while the animal was in California, a second in-person exam is not automatically required to carry out that plan. At a registered premises, an RVT or a trained veterinary assistant may administer a prescribed, non-controlled injectable such as Cytopoint on your order under indirect supervision. Indirect means you are not on site but are quickly available and have provided instructions. If the clinic prefers to become the attending provider of record, their DVM may perform a brief exam and take over before administering.",
               helpText:
-                "Legal anchors to cite in your handbook: BPC § 4826.6 for tele-VCPR, BPC § 4836.1 and 16 CCR § 2034 for supervision and task delegation. In Vetcation, include a written administration order with dose and route, a checkbox for Indirect Vet Supervision, and a field to record the RVT or assistant who administered the dose.",
+                "Legal anchors to cite in your handbook: BPC § 4826.6 for tele-VCPR, BPC § 4836.1 and 16 CCR § 2034 for supervision and task delegation. In MyPet Health, include a written administration order with dose and route, a checkbox for Indirect Vet Supervision, and a field to record the RVT or assistant who administered the dose.",
               example:
                 "Dermatology video visit on Monday. Order Cytopoint 20 mg SC at Partner Clinic A. Clinic logs Indirect supervision by Dr. Smith and RVT Jones administered. Administration record syncs back to your chart and to the client’s primary DVM.",
             },
@@ -2142,7 +2142,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               example:
                 "A rural client requests video guidance to administer pentobarbital. You must decline and refer them to an in-person service.",
               helpText:
-                "If a client raises the request inside Vetcation, the system displays a canned message explaining that euthanasia requires an on-site veterinarian.",
+                "If a client raises the request inside MyPet Health, the system displays a canned message explaining that euthanasia requires an on-site veterinarian.",
             },
           ],
         },
@@ -3210,7 +3210,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     addprescription: {
       mainTitle: "Add Prescription",
       mainDescription:
-        "At Vetcation, we believe veterinarians and pet parents should have the freedom to choose how and where prescriptions are filled — without hidden fees or restrictive pharmacy policies. In California, AB 1399 requires veterinarians to offer written prescriptions and inform clients they may fill them at a pharmacy of their choice or directly through the prescriber. Our platform fully supports this by integrating with a wide range of online and local pharmacies, helping you deliver affordable, convenient care while staying compliant.",
+        "At MyPet Health, we believe veterinarians and pet parents should have the freedom to choose how and where prescriptions are filled — without hidden fees or restrictive pharmacy policies. In California, AB 1399 requires veterinarians to offer written prescriptions and inform clients they may fill them at a pharmacy of their choice or directly through the prescriber. Our platform fully supports this by integrating with a wide range of online and local pharmacies, helping you deliver affordable, convenient care while staying compliant.",
       sections: [
         {
           id: "ourApproach",
@@ -8864,7 +8864,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     },
     addingYourPets: {
       mainTitle: "Adding Your Pets",
-      mainDescription: `To get the most out of Vetcation, add your pets to your profile. This helps veterinarians understand their history and give more accurate advice during virtual visits.`,
+      mainDescription: `To get the most out of MyPet Health, add your pets to your profile. This helps veterinarians understand their history and give more accurate advice during virtual visits.`,
       sections: [
         {
           id: "addPets",

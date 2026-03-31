@@ -149,7 +149,10 @@ const TocItem = styled.li`
     color: #d7e2ff;
     text-decoration: none;
     font-size: 14px;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.04s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      transform 0.04s ease;
     &:hover {
       background: rgba(96, 165, 250, 0.12);
       color: #fff;
@@ -210,7 +213,7 @@ export default function SMSTermsPage() {
         title: "Opting Out",
         body: (
           <>
-            To stop receiving SMS notifications from Vetcation, text{" "}
+            To stop receiving SMS notifications from MyPet Health, text{" "}
             <strong>STOP</strong> to <strong>{primaryNumber}</strong> at any
             time. You may also contact us at <strong>{altNumber}</strong> to opt
             out.
@@ -250,7 +253,7 @@ export default function SMSTermsPage() {
         ),
       },
     ],
-    [primaryNumber, altNumber]
+    [primaryNumber, altNumber],
   );
 
   return (
@@ -261,10 +264,10 @@ export default function SMSTermsPage() {
             <Col lg={9} xl={8}>
               <Title>SMS Terms &amp; Conditions</Title>
               <Sub>
-                By opting in to receive SMS notifications from Vetcation, you
+                By opting in to receive SMS notifications from MyPet Health, you
                 agree to the following terms.
               </Sub>
-              <Badge>Program: Vetcation SMS</Badge>
+              <Badge>Program: MyPet Health SMS</Badge>
             </Col>
           </Row>
         </Container>

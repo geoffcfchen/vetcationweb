@@ -13,16 +13,16 @@ const topNavData = [
     defaultDocId: "shelterIntroToVetcation",
   },
 
-  // {
-  //   id: "clinics",
-  //   label: "For Hospitals",
-  //   defaultDocId: "clinicIntroToVetcation",
-  // },
-  // {
-  //   id: "corporations",
-  //   label: "For Corporations",
-  //   defaultDocId: "corpIntroToVetcation",
-  // },
+  {
+    id: "clinics",
+    label: "For Hospitals",
+    defaultDocId: "clinicIntroToVetcation",
+  },
+  {
+    id: "corporations",
+    label: "For Corporations",
+    defaultDocId: "corpIntroToVetcation",
+  },
   // { id: "oneHealth", label: "One Health", defaultDocId: "introToOneHealth" }, // adjust if different
   {
     id: "compliance",

@@ -47,7 +47,7 @@ function ClinicFeaturesSection() {
       <Feature
         iconId="wordpress" // Use the ID of the icon from the sprite
         heading="Open new appointments for your clients in less 50 seconds"
-        text="Unlock seamless appointment scheduling in less than 50 seconds with Vetcation. Our industry-leading system not only allows you to effortlessly set up appointments with varying times, dates, and durations, but also enables veterinarians to access all appointment details directly from their phones. By joining Vetcation, you gain access to the most comprehensive and user-friendly appointment management solution available. Start streamlining your booking process today and ensure your staff is well-prepared and informed for every client interaction."
+        text="Unlock seamless appointment scheduling in less than 50 seconds with Vetcation. Our industry-leading system not only allows you to effortlessly set up appointments with varying times, dates, and durations, but also enables veterinarians to access all appointment details directly from their phones. By joining MyPet Health, you gain access to the most comprehensive and user-friendly appointment management solution available. Start streamlining your booking process today and ensure your staff is well-prepared and informed for every client interaction."
         // linkText="Learn More"
         linkHref="#"
         image={{

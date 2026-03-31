@@ -708,8 +708,14 @@ export default function ProfileOnboardingPage() {
       throw new Error("username-taken");
     }
 
+    const emailLower = String(userData?.email || "")
+      .trim()
+      .toLowerCase();
+    const isClinic3Test = emailLower === "clinic3@test.com";
+
     const updateData = {
       hasCompletedProfile: true,
+      // ...(isClinic3Test ? {} : { hasCompletedProfile: true }), // ← key change
       userName: fullUserName,
       uid,
       platform: "web",
