@@ -109,7 +109,7 @@ function ShelterHowToPartnerSection() {
             they can also have medications sent directly to their home.
           </>
         }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2105.webp?alt=media&token=6b39bd55-1fd5-4d40-a208-fdfd8e11c68d"
         headerFontSize={36}
       />
     </FeaturesContainer>
