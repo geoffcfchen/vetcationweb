@@ -12,6 +12,7 @@ import ShelterContactSection from "../components/ShelterContactSection";
 import ShelterHighLevelSection from "../components/ShelterHighLevelSection";
 import ClinicsMapSection from "../components/ClinicsMapSection";
 import { IoLocationOutline, IoShieldCheckmarkSharp } from "react-icons/io5";
+import ShelterHowToPartnerSection from "../components/ShelterHowToPartnerSection";
 
 const PageShell = styled.main`
   background: #f8fafc;
@@ -127,6 +128,7 @@ function ForShelterPage() {
         <ShelterHeroSection onGetStarted={() => setShowLogin(true)} />
         <ShelterHighLevelSection />
         <ShelterHowItWorksSection />
+        <ShelterHowToPartnerSection />
         <MapShell>
           <Max>
             <Eyebrow>

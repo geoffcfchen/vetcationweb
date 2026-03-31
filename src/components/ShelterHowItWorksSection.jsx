@@ -7,6 +7,7 @@ import Feature from "./Feature";
 const FeaturesContainer = styled.section`
   max-width: 1140px;
   margin: 0 auto;
+
   padding: 3rem 2rem 4rem;
 `;
 
@@ -23,7 +24,7 @@ const Eyebrow = styled.div`
 
 const Headline = styled.h2`
   margin: 10px 0 8px;
-  font-size: clamp(28px, 3.6vw, 40px);
+  font-size: clamp(24px, 3vw, 32px);
   line-height: 1.2;
   font-weight: 800;
   color: #0f172a;
@@ -59,11 +60,13 @@ function ShelterHowItWorksSection() {
     <FeaturesContainer>
       <SectionHeader>
         <Eyebrow>How it works for shelters</Eyebrow>
-        <Headline>Three simple steps to join MyPet Health.</Headline>
+        <Headline>
+          Three simple steps to share digital medical records with adopters
+        </Headline>
         <Subhead>
-          MyPet Health is designed to fit seamlessly into your existing
-          workflow. Your team can create pet profiles upload records in minutes,
-          and transfer the pet&apos;s history to adopters with one link.
+          MyPet Health fits seamlessly into your existing workflow. Your team
+          can create pet profiles, upload records in minutes, and transfer the
+          pet’s profile to the adopter.
         </Subhead>
       </SectionHeader>
 
@@ -125,53 +128,6 @@ function ShelterHowItWorksSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-03%20at%204.05.30%E2%80%AFPM.webp?alt=media&token=a0c276c0-fc6b-47a9-b722-600238bbbabb"
         headerFontSize={30}
         mediaVariant="desktop"
-      />
-      {/* <Feature
-        key={`step4-4`}
-        heading="Vets get a clear summary with source documents attached"
-        text={
-          <>
-            When the adopter shares the pet&apos;s record with a vet, they see a
-            clear summary of the pet&apos;s history with references to the
-            original records.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-04%20at%2012.43.58%E2%80%AFAM.webp?alt=media&token=8a15b0c3-3062-4567-9e0b-4916b70b16c1"
-        headerFontSize={30}
-        linkText={"See details of the vet summary"}
-        to="/pet-health-record/"
-        mediaVariant="desktop"
-        clickTarget="cta"
-      /> */}
-
-      <Feature
-        heading="Extend support beyond the adoption day"
-        text={
-          <>
-            Adopters stay connected with shelter-partnered vets after they bring
-            their pet home. Every interaction is documented in the pet’s medical
-            record so any veterinarian can see the full picture. This creates
-            better continuity of care and strengthens the bond between the pet,
-            pet parent, and veterinary team.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
-        headerFontSize={36}
-      />
-      <Feature
-        heading="Create a recurring support stream for shelters"
-        text={
-          <>
-            MyPet Health helps shelter stay connected to adopted pets even after
-            they go to their new homes. When adopters use paid consultations
-            with partnered vets, they can choose to direct part of the platform
-            fee to the shelter that helped their pet, at no additional cost.
-            This creates ongoing support for shelter while giving adopters
-            trusted follow-up care.
-          </>
-        }
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1794.webp?alt=media&token=3aab35be-5c80-4e95-80bd-1dfcfcfb2450"
-        headerFontSize={36}
       />
     </FeaturesContainer>
   );
