@@ -101,11 +101,11 @@ function ShelterHowToPartnerSection() {
         heading="How adopters get support"
         text={
           <>
-            Once connected to your organization, adopters can view your
-            shelter-partnered veterinarians, message them for follow-up support,
-            book virtual appointments, and get trusted post-adoption telehealth
-            care. When appropriate, they can also have medications sent directly
-            to their home.
+            Once connected to your organization, adopters are matched with a
+            shelter-partnered veterinarian they can message for follow-up
+            support or book for virtual appointments. This gives adopters a
+            trusted path to post-adoption telehealth care. When appropriate,
+            they can also have medications sent directly to their home.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264"
