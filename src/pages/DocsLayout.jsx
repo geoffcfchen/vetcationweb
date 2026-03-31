@@ -1,4 +1,4 @@
-// DocsLayout.jsx
+// src/pages/DocsLayout.jsx
 import React, {
   useState,
   useRef,
@@ -125,7 +125,7 @@ export default function DocsLayout() {
     }
     navigate(
       { pathname: location.pathname, hash: activeSectionId },
-      { replace: true }
+      { replace: true },
     );
   }, [activeSectionId, location.pathname, navigate]);
   // useEffect(() => {

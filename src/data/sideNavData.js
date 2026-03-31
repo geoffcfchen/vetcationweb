@@ -219,7 +219,7 @@ const sideNavData = {
         },
         {
           id: "settingUpVetcation",
-          label: "Setting Up & Using Vetcation",
+          label: "Setting Up & Using MyPet Health",
         },
         {
           id: "yourClinicsTelemedicineServices",
@@ -415,6 +415,26 @@ const sideNavData = {
           id: "MiscellaneousClarifications",
           label: "Miscellaneous Clarifications",
         },
+      ],
+    },
+  ],
+
+  shelters: [
+    {
+      groupTitle: "GET STARTED",
+      items: [
+        {
+          id: "shelterIntroToVetcation",
+          label: "Introduction for Shelters",
+        },
+        // {
+        //   id: "shelterHowItWorks",
+        //   label: "How It Works for Shelters",
+        // },
+        // {
+        //   id: "shelterHowToPartner",
+        //   label: "How to Partner with Vets",
+        // },
       ],
     },
   ],

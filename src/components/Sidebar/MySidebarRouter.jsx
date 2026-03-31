@@ -1,4 +1,4 @@
-// MySidebarRouter.jsx
+// src/components/Sidebar/MySidebarRouter.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -32,7 +32,7 @@ export default function MySidebarRouter({
         if (
           parent.subItems?.some(
             (child) =>
-              `/telemedicine-info/${activeTopNav}/${child.id}` === currentPath
+              `/telemedicine-info/${activeTopNav}/${child.id}` === currentPath,
           )
         ) {
           parentsToExpand.push(parent.id);
@@ -42,7 +42,7 @@ export default function MySidebarRouter({
 
     // Merge with any user-toggled expands so we don’t forcibly collapse others
     setExpandedItems((prev) =>
-      Array.from(new Set([...prev, ...parentsToExpand]))
+      Array.from(new Set([...prev, ...parentsToExpand])),
     );
   }, [location.pathname, activeTopNav]);
 
@@ -50,7 +50,7 @@ export default function MySidebarRouter({
     setExpandedItems((prev) =>
       prev.includes(itemId)
         ? prev.filter((id) => id !== itemId)
-        : [...prev, itemId]
+        : [...prev, itemId],
     );
   }
 
@@ -96,7 +96,7 @@ export default function MySidebarRouter({
                 const isChildActive = parentItem.subItems.some(
                   (child) =>
                     normalizedPath ===
-                    `/telemedicine-info/${activeTopNav}/${child.id}`
+                    `/telemedicine-info/${activeTopNav}/${child.id}`,
                 );
 
                 return (
