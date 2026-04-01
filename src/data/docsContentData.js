@@ -11,7 +11,7 @@ const contentData = {
   home: {
     introToVetcation: {
       mainTitle: "Introduction for Veterinarians",
-      mainDescription: `MyPet Health is a legally compliant platform that empowers California-licensed veterinarians to launch your own virtual clinic, retain full ownership of clients, patient records, and revenue, and collaborate with clinics to provide telemedicine services. Our mission is to end burnout, build professional and lasting relationships with pet owners, and restore professional autonomy for veterinarians.`,
+      mainDescription: `MyPet Health is a legally compliant platform that empowers California-licensed veterinarians to provide telehealth care through your own virtual clinic and through partnerships with shelters, rescue organizations. You retain ownership of your client relationships, patient records, and earnings while offering structured follow-up through Vetssenger and documented telehealth visits. Our mission is to protect veterinarians’ time, reduce burnout, and help you build respectful, lasting relationships with pet owners, including adopters who need support after they bring a pet home.`,
       sections: [
         {
           id: "missionforvets",
@@ -19,11 +19,11 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: `MyPet Health is designed to address one of the biggest problems in the veterinary field: <span class="highlight">burnout</span>. Solving these problems is not as simple as taking more vacation; it requires building professional, respectful, and lasting relationships with clients. Many vets face a growing backlog of callbacks, owners who call repeatedly and expect hour-long return calls, or clients who are rude or accusatory, often bringing unrealistic expectations and distrustful, argumentative behavior. It only takes one difficult interaction to derail the day. These pressures are a primary driver of burnout and contribute to higher suicide rates within the veterinary profession.`,
+              text: `MyPet Health is built to help veterinarians practice in a way that feels sustainable, respectful, and aligned with your values. We believe telehealth can protect your time, reduce unnecessary friction, and give you more control over how you support pet owners.`,
             },
             {
               type: "root",
-              helpText: `We believe the root cause is the lack of a clear method for building incentive-aligned, trust-based, long-term relationships. People are usually kinder to those with whom they have an ongoing relationship and whom they expect to need in the future. High quality follow-up communication builds trust, but it takes vets' time. The solution is a reliable system that enables efficient communication with a proper compensation mechanism, incentivizing both sides to engage productively. The Vetssenger tool and the MyPet Health ecosystem are the solution we have built to solve this issue, protect vets’ time, and ultimately end burnout. The stronger the healthy connection, the better the patient outcomes.`,
+              helpText: `Our shelter partnership model is designed to extend care beyond adoption day. By working with shelters and rescue organizations, veterinarians can support newly adopted pets through structured post-adoption telehealth, with clear expectations, organized follow-up, and documented records. This creates a simple way to contribute to animal welfare while building trust-based relationships with pet owners and providing care on your own terms.`,
             },
           ],
         },
@@ -33,7 +33,7 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: "MyPet Health enables vets to compound your work into assets you own: a growing client book, a trusted reputation in the professional community, and data that travels with you through every stage of your career.",
+              text: "MyPet Health helps you build a durable professional asset: a growing client base, a trusted reputation, and medical records that stay organized and portable across your career.",
             },
             {
               type: "bulletList",
@@ -41,37 +41,33 @@ const contentData = {
                 {
                   heading: "Build your own virtual clinic and brand:",
                   lines: [
-                    "Start a digital practice under your name and nurture strong, lasting client relationships. Your clients, your records, and your revenue stay with you.",
-                  ],
-                },
-                {
-                  heading: "Maximize your earning potential:",
-                  lines: [
-                    "Retain up to 70% of your service fees. A full-time schedule (40 hours a week) can bring in $265,000 or more per year while reducing overhead and growing your independent practice.",
+                    "Start a digital practice under your name and nurture strong, lasting client relationships. Your clients, your records, and your earnings stay with you.",
                   ],
                 },
                 {
                   heading: "Work on your terms, from anywhere:",
                   lines: [
-                    "Practice from a clinic, your home, or across the globe. Your client book and medical records travel with you, giving you true career mobility.",
+                    "Offer telehealth from a clinic or home. Use structured messaging and scheduled visits to protect your time and reduce interruptions.",
                   ],
                 },
                 {
-                  heading: "Partner with existing clinics:",
+                  heading: "Support adopters through shelter partnerships:",
                   lines: [
-                    "With one click, collaborate with brick-and-mortar clinics to extend your reach. Their clients see your availability, while records and relationships remain part of your professional portfolio.",
+                    "Partner with shelters and adoption organizations to provide post-adoption telehealth support for newly adopted pets.",
+                    "Shelter partnerships can provide consistent inbound cases while helping pets and adopters transition smoothly after adoption.",
                   ],
                 },
+
                 {
                   heading: "Your personal AI assistant:",
                   lines: [
-                    "Save time with a native AI that drafts Vetssenger notes and generates personalized DAPs. Deliver consistent, high-quality care while protecting your time.",
+                    "Save time with AI-assisted documentation that drafts visit notes and helps structure Vetssenger follow-ups and DAPs.",
                   ],
                 },
                 {
                   heading: "Ensure compliance with AB 1399:",
                   lines: [
-                    "MyPet Health’s infrastructure aligns with California’s telehealth law, AB 1399, providing automated documentation and audit readiness so your practice stays compliant as it grows.",
+                    "MyPet Health’s infrastructure aligns with California’s telehealth law, AB 1399, supporting appropriate use and documentation as your telehealth volume grows.",
                   ],
                 },
               ],
@@ -208,6 +204,7 @@ const contentData = {
         },
       ],
     },
+
     VirtualClinic: {
       mainTitle: "Build Your Virtual Clinic with MyPet Health",
       mainDescription: `MyPet Health empowers California-licensed veterinarians to transform remote care into a complete digital practice. Our platform goes beyond basic telemedicine by enabling you to build a branded virtual clinic, complete with secure recordkeeping, automated scheduling, and client management, all while staying fully compliant with AB 1399. Learn the difference between telemedicine and a virtual clinic, the legal compliance, and follow simple steps to set up your own clinic from anywhere.`,
@@ -249,7 +246,7 @@ const contentData = {
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0889.webp?alt=media&token=e54cfd43-85fa-4235-a06b-c81509158953",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2145.webp?alt=media&token=6e7599d4-c4e1-4d52-97e5-842d8754299e",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0891.webp?alt=media&token=8d64e774-b865-4ccb-8763-a4c04195714a",
               ],
             },
@@ -376,8 +373,8 @@ const contentData = {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0897.webp?alt=media&token=f37622c3-0b7f-41bb-a7da-aaace70c6ea1",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0898.webp?alt=media&token=dc216572-b1cc-4a1f-b6f2-394783b3502e",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2155.webp?alt=media&token=0be2e2cb-8a07-4eb1-9fc7-0efe217cac7f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2156.webp?alt=media&token=19ead1ca-7e9d-4828-afb1-6f2c22ecc71c",
               ],
             },
             {
@@ -446,8 +443,8 @@ const contentData = {
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0899.webp?alt=media&token=2299fb00-7d12-40b8-a93d-2b685b4c25c4",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0900.webp?alt=media&token=3c6ab220-b311-4d0c-b636-dd8ad3d2c4ac",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2153.webp?alt=media&token=25df3654-0872-44f8-b441-09ffab699a65",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2154.webp?alt=media&token=116331cd-83c6-47d6-b5d8-4aca7d487c4f",
               ],
             },
             {
@@ -621,7 +618,7 @@ const contentData = {
         },
         {
           id: "partnerWithClinic",
-          title: "Partner with a Clinic",
+          title: "Partner with an Adoption Organization or Rescue",
           blocks: [
             {
               type: "paragraph",
@@ -705,7 +702,7 @@ const contentData = {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0889.webp?alt=media&token=e54cfd43-85fa-4235-a06b-c81509158953",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2145.webp?alt=media&token=6e7599d4-c4e1-4d52-97e5-842d8754299e",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0920.webp?alt=media&token=6ce4dd2d-e4a1-4225-b917-1643b6a05fcd",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
               ],
@@ -3373,7 +3370,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     partnerWithClinic: {
-      mainTitle: "Partner with a Clinic",
+      mainTitle: "Partner with an Adoption Organization or Rescue",
       mainDescription:
         "The MyPet Health platform enables you to collaborate with brick-and-mortar clinics to offer virtual care under your own name and schedule. Their clients can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.",
       sections: [

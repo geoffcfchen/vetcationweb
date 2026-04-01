@@ -151,13 +151,13 @@ const sideNavData = {
             //   id: "MarketingOverview",
             //   label: "Marketing Overview",
             // },
-            {
-              id: "CommunityMarketing",
-              label: "Community Marketing",
-            },
+            // {
+            //   id: "CommunityMarketing",
+            //   label: "Community Marketing",
+            // },
             {
               id: "partnerWithClinic",
-              label: "Partner with a Clinic",
+              label: "Partner with an Adoption Organization",
             },
           ],
         },
