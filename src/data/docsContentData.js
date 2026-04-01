@@ -622,13 +622,13 @@ const contentData = {
           blocks: [
             {
               type: "paragraph",
-              text: `The MyPet Health platform enables you to collaborate with brick-and-mortar clinics to offer virtual care under your own name and schedule. Their clients can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.`,
+              text: `The MyPet Health platform enables you to partner with adoption organizations or rescues to offer virtual care under your own name and schedule. Their adopters can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their adopters.`,
             },
             {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1543.webp?alt=media&token=dea8ffc8-aaee-46f0-bb7c-b11eddb5483f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2145.webp?alt=media&token=6e7599d4-c4e1-4d52-97e5-842d8754299e",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1544.webp?alt=media&token=aabc4d6e-c0c0-4d72-a8b2-aa2ab862ce68",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1545.webp?alt=media&token=cb033bff-535d-4502-bfda-e5b303c2c264",
               ],
@@ -643,10 +643,11 @@ const contentData = {
                   heading: "Select Partnership Hub",
                 },
                 {
-                  heading: "Browse available clinics to partner with",
+                  heading:
+                    "Browse available adoption organizations to partner with",
                   lines: [
-                    "Review the list of hospitals that are open to telemedicine partnerships.",
-                    "Send a partnership request to the desired hospitals.",
+                    "Review the list of adoption organizations that are open to telemedicine partnerships.",
+                    "Send a partnership request to the desired adoption organizations.",
                   ],
                 },
               ],
@@ -3372,11 +3373,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
     partnerWithClinic: {
       mainTitle: "Partner with an Adoption Organization or Rescue",
       mainDescription:
-        "The MyPet Health platform enables you to collaborate with brick-and-mortar clinics to offer virtual care under your own name and schedule. Their clients can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.",
+        "The MyPet Health platform enables you to collaborate with adoption organizations or rescues to offer virtual care under your own name and schedule. Their adopters can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their clients.",
       sections: [
         {
           id: "partnerWithClinic",
-          title: "How to Partner with a Clinic",
+          title: "How to Partner with an Adoption Organization or Rescue",
           blocks: [
             {
               type: "framedImage",
