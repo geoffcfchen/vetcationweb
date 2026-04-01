@@ -9536,6 +9536,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1617.webp?alt=media&token=e663e7ab-1b62-448f-b981-d1435ec64a80",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2144.webp?alt=media&token=1e98fd64-244a-4686-b0b8-4f4092e0b101",
               ],
             },
           ],
