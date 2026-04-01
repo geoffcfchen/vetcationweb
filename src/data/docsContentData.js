@@ -314,6 +314,68 @@ const contentData = {
             },
           ],
         },
+        {
+          id: "licenseVerification",
+          title: "Verify Your License",
+          blocks: [
+            {
+              type: "paragraph",
+              text: `Before you can accept telehealth appointments on MyPet Health, you must verify your veterinary license. This helps protect pet owners and shelter partners and ensures your profile is eligible for bookings.`,
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URL
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2158.webp?alt=media&token=8644a76d-7f3e-478b-9dba-3104266a1bb8",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Step 1: Enter your license details",
+                  lines: [
+                    "Enter your full license number exactly as shown (include the prefix letters, e.g., VET12345).",
+                    "Choose your license expiration date so we can confirm it stays current.",
+                  ],
+                },
+                {
+                  heading: "Step 2: Upload a license photo",
+                  lines: [
+                    "Upload a clear photo of your license (no glare, all text visible).",
+                    "Make sure the photo includes the expiration date.",
+                    "Confirm the name and license number match what you entered.",
+                  ],
+                },
+                {
+                  heading: "Step 3: Submit for verification",
+                  lines: [
+                    "After submission, MyPet Health reviews your information and verifies it against official state license records.",
+                    "Once verified, your profile will show a 'License verified' badge and you can begin accepting appointments.",
+                  ],
+                },
+                {
+                  heading: "Keep your license current",
+                  lines: [
+                    "If your license expires, you will need to update the expiration date and re-verify to continue offering telehealth appointments.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "qa",
+              question: "When can I start accepting appointments?",
+              answer:
+                "You can accept telehealth appointments after your license is verified and your telehealth settings setup is complete.",
+            },
+            {
+              type: "qa",
+              question: "What if my license is from a different state?",
+              answer:
+                "For now, MyPet Health telehealth is limited to eligible states based on licensing and telehealth rules. For example, if you are not licensed in California, you are not eligible to accept California telehealth appointments.",
+            },
+          ],
+        },
         // NEW FRAMED IMAGE BLOCK:
 
         {
