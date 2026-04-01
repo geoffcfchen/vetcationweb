@@ -228,6 +228,9 @@ function Header({ onLoginClick }) {
         <NavLinkItem to="/for-shelters/">For shelters</NavLinkItem>
         <NavLinkItem to="/mission/">Mission</NavLinkItem>
         <NavLinkItem to="/team/">Team</NavLinkItem>
+        <NavLinkItem to="/telemedicine-info/shelters/shelterIntroToVetcation/">
+          Documents
+        </NavLinkItem>
 
         <LoginButton type="button" onClick={handleLoginClick}>
           <FiLogIn />

@@ -223,7 +223,7 @@ const sideNavData = {
         },
         {
           id: "yourClinicsTelemedicineServices",
-          label: "Your Home Clinic's Telemedicine Services",
+          label: "Your adoption organization's Telehealth Services",
           subItems: [
             {
               id: "addingYourPets",
@@ -231,7 +231,7 @@ const sideNavData = {
             },
             {
               id: "UpdateLegalProfile",
-              label: "Legal & Hospital Linking",
+              label: "Legal & Organization Linking",
             },
             // {
             //   id: "linkingToYourClinic",

@@ -255,7 +255,7 @@ const contentData = {
             },
             {
               type: "paragraph",
-              text: `In telemedicine setting, here's a quick overview of the steps to set up your virtual clinic with MyPet Health. Each step is explained in detail below. If the status icon in each item is not red, you have completed the necessary information in that step! Once you complete all steps, you can start setting up your regular availability and begin seeing clients.`,
+              text: `In telehealth setting, here's a quick overview of the steps to set up your virtual clinic with MyPet Health. Each step is explained in detail below. If the status icon in each item is not red, you have completed the necessary information in that step! Once you complete all steps, you can start setting up your regular availability and begin seeing clients.`,
             },
           ],
         },
@@ -640,7 +640,7 @@ const contentData = {
               type: "bulletList",
               items: [
                 {
-                  heading: "Open drawer and select Telemedicine Settings",
+                  heading: "Open drawer and select telehealth Settings",
                 },
                 {
                   heading: "Select Partnership Hub",
@@ -6300,7 +6300,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Find Legal Documents:",
                   lines: [
-                    "Slide right to open the drawer menu and press 'Telemedicine settings' to access the required inputs for telemedicine services.",
+                    "Slide right to open the drawer menu and press 'telehealth settings' to access the required inputs for telemedicine services.",
                   ],
                 },
                 {
@@ -6332,7 +6332,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Access partnership hub",
                   lines: [
-                    "Go to telemedicine settings from the drawer menu and select 'Partnership Hub' to manage partnerships with telemedicine veterinarians.",
+                    "Go to telehealth settings from the drawer menu and select 'Partnership Hub' to manage partnerships with telemedicine veterinarians.",
                     "Toggle on 'Open to new partnerships' so telemedicine vets can know your hospital is actively accepting partnership requests.",
                     "Send partnership requests to telemedicine veterinarians you want to work with.",
                     "Review incoming partnership requests from telemedicine veterinarians and accept or decline them based on your hospital's needs.",
@@ -8836,17 +8836,32 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0828.webp?alt=media&token=6c2de185-8eb8-4f19-afc2-168dbec6810b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2106.webp?alt=media&token=8fb1feac-2e2c-461d-8f32-801cc7c8c36d",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 2: Set up your profile",
+                  heading: "Step 2: Set up your profile:",
+                  lines: ["Add your name and basic information."],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2107.webp?alt=media&token=9b3ace31-6de4-4aed-9a72-a32ba52beb11",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Welcome to MyPet Health!",
                   lines: [
-                    "Add your name and basic information.",
-                    "Welcome to Vetcation! You are now in the MyPet Health professional community.",
+                    "Now you can start creating your pet’s profile, keeping records organized, and connecting with shelter-partnered veterinarians for telehealth support when needed.",
                   ],
                 },
               ],
@@ -8854,7 +8869,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1577.webp?alt=media&token=7e9e1e55-7a0a-4dfa-b472-f195928cdca4",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2110.webp?alt=media&token=ba32606e-5f7f-4922-ac67-7170963601d6",
                 // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
               ],
             },
@@ -8863,43 +8878,38 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     addingYourPets: {
-      mainTitle: "Adding Your Pets",
-      mainDescription: `To get the most out of MyPet Health, add your pets to your profile. This helps veterinarians understand their history and give more accurate advice during virtual visits.`,
+      mainTitle: "Add Your Pet for Telehealth",
+      mainDescription: `To book a telehealth appointment, you’ll first create a pet profile. This gives your veterinarian the key details they need to review your case and provide better guidance during virtual care.`,
       sections: [
         {
           id: "addPets",
-          title: "How to Add Your Pets",
+          title: "Create a Pet Profile",
           blocks: [
             {
               type: "paragraph",
-              text: "Follow these steps to add your pets to your MyPet Health profile.",
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Step 1: Open drawer menu",
-                  lines: [
-                    "Open the drawer menu and press 'Pets'.",
-                    "Press the '+' button to add a new pet.",
-                  ],
-                },
-              ],
+              text: 'Before you can message a veterinarian or book a telehealth visit, press "Create Your First Pet" to add your pet’s basic information. It only takes about a minute.',
             },
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1579.webp?alt=media&token=3867f135-d308-4e3e-b68a-f42375b313aa",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1580.webp?alt=media&token=a984ce69-188c-4a02-86fb-599c721cd280",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2110.webp?alt=media&token=ba32606e-5f7f-4922-ac67-7170963601d6",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 2: Add a new pet",
+                  heading: "Step 1: Add basic information",
                   lines: [
-                    "Enter your pet's name, species, breed, age, and any other relevant details.",
+                    "Enter your pet’s name and species, then add a photo if you’d like.",
+                    "If you know it, add your pet’s date of birth to help with more accurate recommendations.",
+                  ],
+                },
+                {
+                  heading: "Step 2: Add a few more details",
+                  lines: [
+                    "Select breed and color if known.",
+                    "Choose sex and spay or neuter status.",
                   ],
                 },
               ],
@@ -8916,9 +8926,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     UpdateLegalProfile: {
-      mainTitle: "Update Legal Profile",
+      mainTitle: "Update Legal Profile & Linking your Organization",
       // emphasize the importance of keeping legal profile up to date and the information is required for compliance
-      mainDescription: `Keeping your legal profile up to date is essential for compliance with California telemedicine regulations. An accurate legal profile ensures that veterinarians have the necessary information to provide appropriate care and maintain the veterinarian–client–patient relationship (VCPR). Follow the steps below to update your legal profile in Vetcation.`,
+      mainDescription: `Keeping your legal profile up to date is essential for compliance with California telemedicine regulations. An accurate legal profile ensures that veterinarians have the necessary information to provide appropriate care and maintain the veterinarian–client–patient relationship (VCPR). Follow the steps below to update your legal profile in MyPet Health and link your organization.`,
       sections: [
         {
           id: "updateLegalProfile",
@@ -8934,7 +8944,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 {
                   heading: "Step 1: Open drawer menu",
                   lines: [
-                    "Open the drawer menu and press 'Telemedicine Setting'.",
+                    "Open the drawer menu and press 'Telehealth Setting'.",
                     "Navigate to Update Legal Profile.",
                     "Ensure all required fields are filled out accurately.",
                   ],
@@ -8945,17 +8955,18 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1584.webp?alt=media&token=254d40e1-72cd-4236-9d6a-5f63886362a5",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1585.webp?alt=media&token=c7f984c5-d9ac-4152-b175-17ac434dd9ef",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2103.webp?alt=media&token=b7bfd108-967d-4544-9192-86dd6b048b39",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 2: Link to Your Clinic",
+                  heading:
+                    "Step 2: Add your adoption organization (recommended)",
                   lines: [
-                    "Press 'Home Clinic' to associate your profile with your primary veterinary clinic.",
-                    "Once linked, you will be able to see the partnered veterinarians of your clinic when scheduling telemedicine appointments. The medical records from your telemedicine visits will also be shared with your clinic to ensure continuity of care.",
+                    "Tap 'Adoption organization' and select the shelter or rescue you adopted from.",
+                    "This helps you see the veterinarians partnered with that organization and makes it easier to access post-adoption telehealth support.",
                   ],
                 },
               ],
@@ -8963,8 +8974,8 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1587.webp?alt=media&token=72baceea-761b-4f35-9647-1482ed7ea7c1",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2127.webp?alt=media&token=f930c277-70d5-4a28-b4bc-01a2ed1e6863",
+                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2128.webp?alt=media&token=17aa694e-c7a7-4c46-8be4-778d879930bb",
               ],
             },
             {
