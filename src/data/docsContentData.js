@@ -9490,7 +9490,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     followUpCare: {
       mainTitle: "Vetssenger Overview",
       mainDescription: `
-        Vetssenger is MyPet Health's inquiry-based messaging tool designed to help you maintain continuous care and build healthy and lasting relationships with your clients.
+        Vetssenger is MyPet Health’s messaging tool for post-appointment follow-up. It helps you ask questions, get guidance from your veterinarian, and keep everything organized in one place.
       `,
       sections: [
         // NEW SECTION to hold the text previously in mainDescription
