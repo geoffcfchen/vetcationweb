@@ -9001,7 +9001,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
     },
     schedulingAnAppointment: {
       mainTitle: "Scheduling an Appointment",
-      mainDescription: `Scheduling a telemedicine appointment with MyPet Health is a straightforward process that allows you to connect with licensed veterinarians from the comfort of your home. Follow the steps below to schedule an appointment.`,
+      mainDescription: `Scheduling a telehealth appointment with MyPet Health is straightforward and lets you connect with licensed veterinarians from home. Follow the steps below to book an appointment.`,
       sections: [
         {
           id: "scheduleAppointment",
@@ -9009,16 +9009,16 @@ requirements and explain how MyPet Health keeps you compliant.`,
           blocks: [
             {
               type: "paragraph",
-              text: "Follow these steps to schedule a telemedicine appointment in Vetcation.",
+              text: "Follow these steps to schedule a telehealth appointment in MyPet Health.",
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 1: Open drawer menu",
+                  heading: "Step 1: Open Telehealth",
                   lines: [
-                    "Open the drawer menu and press 'Telemedicine'.",
-                    "You can select the partnered veterinarian from your home clinic.",
+                    "Open your pet profile and tap 'Telehealth' under Care tools.",
+                    "If you added an adoption organization in the previous step, you will see all shelter-partnered veterinarians.",
                   ],
                 },
               ],
@@ -9026,33 +9026,35 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1579.webp?alt=media&token=3867f135-d308-4e3e-b68a-f42375b313aa",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2129.webp?alt=media&token=3c552014-9960-4be5-a5ae-393b93079f6f",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2128.webp?alt=media&token=17aa694e-c7a7-4c46-8be4-778d879930bb",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 2: Schedule the appointment",
-                  lines: ["Select an available time slot that works for you."],
+                  heading: "Step 2: Select a vet and choose a time:",
+                  lines: [
+                    "Select a veterinarian from the list and choose an available time slot that works for you.",
+                  ],
                 },
               ],
             },
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1590.webp?alt=media&token=6b3a99df-d7cc-41c9-9127-637053b4e2b6",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1591.webp?alt=media&token=916ae9b9-25a9-4b63-8637-d85363ece64a",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2136.webp?alt=media&token=b2c56373-1cfb-4503-a7b7-caf32b64c158",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 3: Fill in appointment details",
+                  heading: "Step 3: Confirm appointment details",
                   lines: [
-                    "Provide any necessary information about your pet's condition and confirm the appointment details.",
+                    "Describe your pet’s concern and confirm the appointment details before booking.",
                   ],
                 },
               ],
@@ -9070,9 +9072,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
               items: [
                 {
                   heading:
-                    "Step 4: Confirm the payment method (sufficient wallet balance)",
+                    "Step 4: Confirm payment (sufficient wallet balance)",
                   lines: [
-                    "If your wallet balance is sufficient, the payment will be processed automatically by using your wallet funds.",
+                    "If your wallet balance is sufficient, payment will be processed automatically using your wallet funds.",
                   ],
                 },
               ],
@@ -9080,7 +9082,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1601.webp?alt=media&token=3f7fd043-c1b9-4c79-be09-0a50bbd9aeaa",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2137.webp?alt=media&token=96da8dc6-ea28-436e-b891-3b74be15cfe8",
               ],
             },
             {
@@ -9088,9 +9090,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
               items: [
                 {
                   heading:
-                    "Step 4: Confirm the payment method (insufficient wallet balance)",
+                    "Step 4: Confirm payment (insufficient wallet balance)",
                   lines: [
-                    "If your wallet balance is insufficient, you will need to add a new payment method for the rest of the charge.",
+                    "If your wallet balance is insufficient, add a payment method to cover the remaining amount.",
                   ],
                 },
               ],
@@ -9098,7 +9100,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1600.webp?alt=media&token=1d34ee72-d0c8-49ff-a4eb-9213ee3c4ff5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2138.webp?alt=media&token=056d52dd-dc79-4c02-a84c-cc294a65a530",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1598.webp?alt=media&token=04cedaca-f0e6-49ab-a9fc-01e96100a7a7",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1599.webp?alt=media&token=51e06933-c0f8-433f-8588-034d5c7a9fb2",
               ],
@@ -9107,9 +9109,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 5: booking Confirmation",
+                  heading: "Step 5: Booking confirmation",
                   lines: [
-                    "Your telemedicine appointment is now scheduled! You will receive a confirmation notification with the appointment details.",
+                    "Your telehealth appointment is now scheduled. You will receive a confirmation with the appointment details.",
                   ],
                 },
               ],
@@ -9117,18 +9119,17 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1602.webp?alt=media&token=8ffcd5ca-045c-46ce-a116-b4aaad494a59",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1603.webp?alt=media&token=6b45e30f-f05d-4e2f-b148-625111b286b5",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2140.webp?alt=media&token=a1a99ef9-c7d8-4d52-ad1e-5486653987d9",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2141.webp?alt=media&token=63135e8f-5f96-4bdc-9b86-48395b4a5e2b",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading:
-                    "Wallet Balance update & you can find your appointment on telehealth tab",
+                  heading: "Find your appointment and updated wallet balance",
                   lines: [
-                    "Your wallet balance has been updated to reflect the cost of the telemedicine appointment.",
+                    "Your wallet balance will update to reflect the cost of the appointment.",
                     "You can find your appointment details in the Telehealth tab.",
                   ],
                 },
@@ -9137,8 +9138,8 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1624.webp?alt=media&token=df2c3e0e-3cce-42a5-9502-b839634a86cf",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1604.webp?alt=media&token=92c2da5e-3d61-40f3-b380-0aa5a81d35c3",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2142.webp?alt=media&token=98bd8375-92f4-451e-98de-91cce9d564cd",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2143.webp?alt=media&token=be0fd4a3-c01a-45a4-b10c-4bc90ecb13fa",
               ],
             },
           ],
