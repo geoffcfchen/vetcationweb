@@ -156,6 +156,10 @@ const Footer = () => {
     {
       title: "Guides",
       links: [
+        {
+          text: "For Pet Owners",
+          url: "/telemedicine-info/clients/clientIntroToVetcation/",
+        },
         { text: "For Vets", url: "/telemedicine-info/home/introToVetcation/" },
         {
           text: "For Hospitals & Clinics",
