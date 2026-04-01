@@ -624,24 +624,22 @@ const contentData = {
               type: "paragraph",
               text: `The MyPet Health platform enables you to partner with adoption organizations or rescues to offer virtual care under your own name and schedule. Their adopters can view your availability, and medical records are shared to support continuity of care. There are no obligations or minimum time commitments—simply make your availability visible to their adopters.`,
             },
+
             {
               type: "framedImage",
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2145.webp?alt=media&token=6e7599d4-c4e1-4d52-97e5-842d8754299e",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1544.webp?alt=media&token=aabc4d6e-c0c0-4d72-a8b2-aa2ab862ce68",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1545.webp?alt=media&token=cb033bff-535d-4502-bfda-e5b303c2c264",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2157.webp?alt=media&token=4290c2d4-3287-422e-840a-aeb116f9304b",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Open drawer and select telehealth Settings",
+                  heading: "Select Partnership Hub in telehealth Settings",
                 },
-                {
-                  heading: "Select Partnership Hub",
-                },
+
                 {
                   heading:
                     "Browse available adoption organizations to partner with",
