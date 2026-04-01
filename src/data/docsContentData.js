@@ -9372,12 +9372,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     afterYourAppointment: {
-      mainTitle: "Medical History Overview",
+      mainTitle: "Telehealth Medical Record Overview",
       mainDescription: `
-        The Medical History section gives you and your vet access to important health information in one place. 
-        You can view your pet's details such as <span class="highlight">breed, color, sex, date of birth, spayed/neutered status, and weight history</span>. 
-        You may also export the full medical history, which pet owners can take to their home clinic when needed.
-      `,
+    After each telehealth visit, MyPet Health saves a medical record to your pet’s history. 
+    You can review appointment details, visit notes, prescriptions when applicable, and follow-up guidance in one place. 
+    You can also export the telehealth medical record to share with any clinic, ER, or specialist when needed.
+  `,
       sections: [
         {
           id: "visits",
@@ -9386,8 +9386,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8427-min.PNG?alt=media&token=8509c639-207e-459d-af0b-2b1c478f3c15",
               ],
             },
@@ -9395,9 +9393,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "All Appointments in One Place",
+                  heading: "All telehealth appointments in one place",
                   lines: [
-                    "See all past and upcoming visits with your virtual clinic.",
+                    "See past and upcoming telehealth appointments, including visit status and key details.",
                   ],
                 },
               ],
@@ -9411,8 +9409,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
               ],
             },
@@ -9420,38 +9416,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Comprehensive Visit Records",
+                  heading: "Telehealth visit records and prescriptions",
                   lines: [
-                    "This section is designed to keep all medical reports, prescriptions, and notes organized and easily accessible.",
-                    "You can upload medical records from your in-clinic visits, which will appear here for unified documentation.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "weightChart",
-          title: "Weight Chart",
-          blocks: [
-            {
-              type: "framedImage",
-              imageSrcs: [
-                // Replace with your actual screenshot URLs
-
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8432-min.PNG?alt=media&token=b2e4620a-d057-48d1-95e5-1286039fd5ee",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8433-min.PNG?alt=media&token=51cecb79-1400-4852-9f35-51d6e5085b1d",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Easily Shareable Records",
-                  lines: [
-                    "You can export your pet's complete medical history as a PDF file.",
-                    "If you have set a home clinic, the medical record will be automatically shared with them.",
-                    "This is helpful when visiting a new veterinarian, clinic, or ER that is not your home clinic.",
+                    "After each telehealth visit, your veterinarian’s notes and recommendations are saved here.",
+                    "If a prescription is provided, it will appear in your record for easy reference.",
+                    "This keeps your telehealth care history organized and easy to share later.",
                   ],
                 },
               ],
@@ -9460,13 +9429,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
         },
         {
           id: "exportHistory",
-          title: "Export Medical History",
+          title: "Export Telehealth Medical Record",
           blocks: [
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1623.webp?alt=media&token=268fdcf0-ca22-40a2-a67e-85cb82f552ea",
               ],
             },
@@ -9474,11 +9441,10 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Easily Shareable Records:",
+                  heading: "Share your telehealth record when needed",
                   lines: [
-                    "You can export your pet's complete medical history as a PDF file.",
-                    // "If your have set your home clinic, the medical record will be automatically shared with them.",
-                    // "This is useful when you need to visit a new veterinarian/clinic/ER which is not your home clinic.",
+                    "Export your pet’s telehealth medical record as a PDF.",
+                    "This is helpful if you visit an in-person clinic, a new veterinarian, an ER, or a specialist.",
                   ],
                 },
               ],
