@@ -143,24 +143,24 @@ const sideNavData = {
             },
           ],
         },
-        {
-          id: "marketing",
-          label: "Marketing",
-          subItems: [
-            // {
-            //   id: "MarketingOverview",
-            //   label: "Marketing Overview",
-            // },
-            // {
-            //   id: "CommunityMarketing",
-            //   label: "Community Marketing",
-            // },
-            {
-              id: "partnerWithClinic",
-              label: "Partner with an Adoption Organization",
-            },
-          ],
-        },
+        // {
+        //   id: "marketing",
+        //   label: "Marketing",
+        //   subItems: [
+        //     {
+        //       id: "MarketingOverview",
+        //       label: "Marketing Overview",
+        //     },
+        //     {
+        //       id: "CommunityMarketing",
+        //       label: "Community Marketing",
+        //     },
+        //     {
+        //       id: "partnerWithClinic",
+        //       label: "Partner with an Adoption Organization",
+        //     },
+        //   ],
+        // },
         // ... you can add more
       ],
     },

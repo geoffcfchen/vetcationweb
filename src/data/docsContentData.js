@@ -663,7 +663,7 @@ const contentData = {
                   heading:
                     "Congratulations! You have completed all the steps to set up your virtual clinic.",
                   lines: [
-                    "You can now start accepting virtual appointments through your partnered hospital.",
+                    "You can now start accepting virtual appointments through your partnered adoption organizations or rescues.",
                   ],
                 },
               ],
