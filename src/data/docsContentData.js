@@ -9474,11 +9474,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Easily Shareable Records",
+                  heading: "Easily Shareable Records:",
                   lines: [
                     "You can export your pet's complete medical history as a PDF file.",
-                    "If your have set your home clinic, the medical record will be automatically shared with them.",
-                    "This is useful when you need to visit a new veterinarian/clinic/ER which is not your home clinic.",
+                    // "If your have set your home clinic, the medical record will be automatically shared with them.",
+                    // "This is useful when you need to visit a new veterinarian/clinic/ER which is not your home clinic.",
                   ],
                 },
               ],
