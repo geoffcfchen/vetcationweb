@@ -162,13 +162,17 @@ const Footer = () => {
         },
         { text: "For Vets", url: "/telemedicine-info/home/introToVetcation/" },
         {
-          text: "For Hospitals & Clinics",
-          url: "/telemedicine-info/clinics/clinicIntroToVetcation/",
+          text: "For Shelters",
+          url: "/telemedicine-info/shelters/shelterIntroToVetcation/",
         },
-        {
-          text: "For Corporations",
-          url: "/telemedicine-info/corporations/corpIntroToVetcation/",
-        },
+        // {
+        //   text: "For Hospitals & Clinics",
+        //   url: "/telemedicine-info/clinics/clinicIntroToVetcation/",
+        // },
+        // {
+        //   text: "For Corporations",
+        //   url: "/telemedicine-info/corporations/corpIntroToVetcation/",
+        // },
         // {
         //   text: "Virtual Clinic",
         //   url: "/telemedicine-info/home/VirtualClinic",
