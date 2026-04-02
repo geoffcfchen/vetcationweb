@@ -427,6 +427,19 @@ const sideNavData = {
           id: "shelterIntroToVetcation",
           label: "Introduction for Shelters",
         },
+        {
+          id: "VirtualBranch",
+          label: "Setting Up Your post-adoption telehealth support",
+        },
+        {
+          id: "shelterFAQ",
+          label: "Shelter Telehealth FAQ",
+        },
+        {
+          id: "shelterEarnings",
+          label: "Earnings & Wallet",
+        },
+
         // {
         //   id: "shelterHowItWorks",
         //   label: "How It Works for Shelters",

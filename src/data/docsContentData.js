@@ -6126,6 +6126,301 @@ requirements and explain how MyPet Health keeps you compliant.`,
         },
       ],
     },
+    VirtualBranch: {
+      mainTitle: "Set Up Your Post-adoption Telehealth Support",
+      mainDescription: `These steps explain how a shelter or rescue organization can set up post-adoption telehealth support. You will create an organization account, claim your organization, complete required setup, and partner with veterinarians who are excited to support your adopters. Once enabled, adopters can select your organization and access your partnered vets for messaging and virtual appointments.`,
+      sections: [
+        {
+          id: "SignUp",
+          title: "Create an Organization Account",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0828.webp?alt=media&token=6c2de185-8eb8-4f19-afc2-168dbec6810b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0830.webp?alt=media&token=d0e41069-a189-4084-9f3c-8d69473aafbb",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Select 'Organization' during sign-up:",
+                  lines: [
+                    "Choose the 'Organization' option to create your shelter or rescue account.",
+                    "Use an email that your team can access for updates and partnership notifications.",
+                  ],
+                },
+                {
+                  heading: "Use a QR code (optional):",
+                  lines: [
+                    "If you were provided a QR code, scan it to speed up onboarding.",
+                    "If you need one, email gcfchen@vetcation.com to request a QR code for your organization.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "claimOrganization",
+          title: "Claim Your Shelter or Rescue",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-30%20at%209.35.57%E2%80%AFPM.webp?alt=media&token=05834873-b587-4771-9e37-8f08d5209ef0",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Search and select your organization:",
+                  lines: [
+                    "During onboarding, search for your shelter or rescue on the map and select the correct location.",
+                    "If multiple locations appear, choose the one where adopters should be connected for post-adoption support.",
+                  ],
+                },
+                {
+                  heading: "Why claiming matters:",
+                  lines: [
+                    "Claiming lets your team manage partnerships and enables adopters to select your organization for follow-up support.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "legalDocs",
+          title: "Complete Required Setup",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1570.webp?alt=media&token=85bc08e1-7a50-4795-a0ea-37ea000a0848",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Enter organization details:",
+                  lines: [
+                    "Add an authorized representative name and phone number.",
+                    "Confirm your organization address and basic public information.",
+                  ],
+                },
+                {
+                  heading: "Review and sign required agreements:",
+                  lines: [
+                    "Read and sign the organization agreement so you can enable post-adoption telehealth partnerships.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "partnerVets",
+          title: "Partner with Veterinarians",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-30%20at%209.43.33%E2%80%AFPM.webp?alt=media&token=0386e537-9a99-4449-88b2-1dbc9e5205e6",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Open Partnership Hub:",
+                  lines: [
+                    "Go to Telehealth settings and open the Partnership Hub.",
+                    "Toggle on 'Open to new partnerships' so veterinarians can find your organization.",
+                  ],
+                },
+                {
+                  heading: "Review and manage partners:",
+                  lines: [
+                    "Review veterinarians who request to partner with your organization.",
+                    "Accept partners that fit your mission and post-adoption support goals.",
+                    "Once accepted, those veterinarians become available as partnered options for adopters who select your organization.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "connectAdopters",
+          title: "Connect Adopters to Your Organization",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2103.webp?alt=media&token=b7bfd108-967d-4544-9192-86dd6b048b39",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "At adoption, help adopters select your organization:",
+                  lines: [
+                    "Encourage adopters to add your shelter or rescue as their adoption organization in MyPet Health.",
+                    "This allows them to see your partnered veterinarians and access post-adoption telehealth support.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "doneShelter",
+          title: "Done!",
+          blocks: [
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading:
+                    "Your organization can now offer post-adoption telehealth support through MyPet Health.",
+                  lines: [
+                    "Adopters who select your organization can browse your partnered veterinarians, message them for follow-up support, and book virtual appointments.",
+                    "When appropriate, veterinarians can prescribe medications and have them delivered to the adopter’s home.",
+                    "A portion of the platform fee can be allocated back to your organization to create a new support stream for your mission.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    shelterFAQ: {
+      mainTitle: "Shelter FAQ",
+      mainDescription: `Below are common questions shelters and rescue organizations ask when setting up post-adoption support with MyPet Health. These FAQs explain how we verify veterinarians, how post-adoption telehealth works for adopters, and how the shelter support stream is allocated.`,
+      sections: [
+        {
+          id: "faqs",
+          title: "FAQs for Shelters and Rescue Organizations",
+          blocks: [
+            {
+              type: "qa",
+              question: "How do you verify veterinarians’ licenses?",
+              answer:
+                "Before a veterinarian can accept telehealth appointments on MyPet Health, they must verify their license. We require the full license number exactly as shown (including any prefix letters, for example VET12345), the license state, and the expiration date. The veterinarian must upload a clear photo of the license that includes the expiration date. We then validate the license against official state license records and confirm it is active and not expired. Veterinarians must keep their license information current to remain eligible for appointments.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Replace with your actual screenshot URL
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0892.webp?alt=media&token=78568895-0f32-4930-9d36-bca32b1bca4a",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2158.webp?alt=media&token=8644a76d-7f3e-478b-9dba-3104266a1bb8",
+              ],
+            },
+            {
+              type: "qa",
+              question: "Who provides post-adoption telehealth support?",
+              answer:
+                "Telehealth support is provided by licensed veterinarians who partner with your shelter or rescue through MyPet Health. Your organization controls which veterinarians are approved as partners. Only your accepted partners are shown to adopters who select your organization.",
+            },
+            {
+              type: "qa",
+              question: "What does the shelter need to do day to day?",
+              answer:
+                "Very little. Your team’s main tasks are to claim your organization once during onboarding, accept veterinarian partners through the Partnership Hub, and remind adopters at adoption time to select your organization in MyPet Health for post-adoption support.",
+            },
+            {
+              type: "qa",
+              question: "How do adopters access your partnered veterinarians?",
+              answer:
+                "After adoption, adopters add your shelter or rescue as their adoption organization in MyPet Health. Once connected, they can browse your partnered veterinarians, message them for follow-up support, and book virtual appointments when needed.",
+            },
+            {
+              type: "qa",
+              question: "Can adopters get medications delivered to their home?",
+              answer:
+                "When appropriate and legally permitted, veterinarians may prescribe medications through the platform. Depending on the case and pharmacy options, medications can be delivered directly to the adopter’s home.",
+            },
+            {
+              type: "qa",
+              question: "How does the shelter support stream work?",
+              answer:
+                "When adopters use paid telehealth services with shelter-partnered veterinarians, MyPet Health can allocate a portion of the platform fee back to the shelter or rescue that supported the adoption. This creates an ongoing support stream for your mission that can help you fund operations and help more pets over time.",
+            },
+            {
+              type: "qa",
+              question: "Is telehealth appropriate for emergencies?",
+              answer:
+                "Telehealth is not a replacement for emergency care. If a pet may be in immediate danger, adopters should go directly to an emergency hospital or an in-person clinic. Telehealth is best for guidance, triage, follow-up questions, and non-emergency concerns.",
+            },
+          ],
+        },
+      ],
+    },
+    shelterEarnings: {
+      mainTitle: "Support Stream and Wallet",
+      mainDescription: `MyPet Health’s wallet system gives your shelter or rescue a clear view of support funds generated through post-adoption telehealth. You can monitor allocations in real time, review every transaction, and manage your organization wallet balance. The system shows completed visits, pending payouts, and the amount allocated to your organization, helping your team stay organized and plan support for your mission.`,
+      sections: [
+        {
+          id: "supportStreamOverview",
+          title: "Support Stream Overview",
+          blocks: [
+            {
+              type: "qa",
+              question:
+                "How do I view my organization wallet balance and allocations?",
+              answer:
+                "You can view your organization’s balance in the Wallet section of your shelter or rescue account. This page shows a detailed breakdown of funds allocated to your organization from post-adoption telehealth activity, including virtual appointments and follow-up charges through Vetssenger when applicable. When a paid visit is completed and the medical record is finalized, MyPet Health automatically allocates the organization share into your wallet based on the partnership split configuration.",
+            },
+            {
+              type: "qa",
+              question: "Where do these funds come from?",
+              answer:
+                "These funds come from adopter-paid telehealth services with veterinarians partnered to your organization. When adopters select your shelter or rescue as their adoption organization and use paid post-adoption telehealth, a portion of the platform fee can be allocated back to your organization as an ongoing support stream.",
+            },
+            {
+              type: "qa",
+              question: "How do payouts work for shelters and rescues?",
+              answer:
+                "Your organization wallet increases automatically as eligible post-adoption visits are completed. You can initiate a payout once your balance reaches your preferred threshold. Funds are transferred to the bank account your organization has connected for payouts.",
+            },
+            {
+              type: "qa",
+              question:
+                "Can we track transactions for reporting and reconciliation?",
+              answer:
+                "Yes. Your wallet includes a transaction history that shows allocations, payouts, and supporting details so your team can reconcile and report funds clearly.",
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Reuse these for now if the wallet UI is the same; swap later with shelter-specific screenshots if you have them.
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1622.webp?alt=media&token=a8b69803-1d82-4256-b65a-a446725e8ca5",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
 
   clinics: {
