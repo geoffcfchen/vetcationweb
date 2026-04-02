@@ -6431,7 +6431,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
       sections: [
         {
           id: "adopterGrowth",
-          title: "Adopter engagement (last 4 weeks)",
+          title: "Adopter engagement",
           blocks: [
             {
               type: "framedImage",
@@ -6540,36 +6540,36 @@ requirements and explain how MyPet Health keeps you compliant.`,
           ],
         },
 
-        {
-          id: "outcomeDrilldowns",
-          title: "Drill down to visits behind each outcome",
-          blocks: [
-            {
-              type: "framedImage",
-              imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0855.webp?alt=media&token=17eeca01-c874-42a3-a442-a764402bee96",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Audit trail and transparency:",
-                  lines: [
-                    "Every outcome links to the visit card so your team can review what happened and understand follow-up actions.",
-                  ],
-                },
-                {
-                  heading: "Operational learnings:",
-                  lines: [
-                    "Use drilldowns to identify common post-adoption issues, improve education resources, and refine partner coverage over time.",
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   id: "outcomeDrilldowns",
+        //   title: "Drill down to visits behind each outcome",
+        //   blocks: [
+        //     {
+        //       type: "framedImage",
+        //       imageSrcs: [
+        //         "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
+        //         "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0855.webp?alt=media&token=17eeca01-c874-42a3-a442-a764402bee96",
+        //       ],
+        //     },
+        //     {
+        //       type: "bulletList",
+        //       items: [
+        //         {
+        //           heading: "Audit trail and transparency:",
+        //           lines: [
+        //             "Every outcome links to the visit card so your team can review what happened and understand follow-up actions.",
+        //           ],
+        //         },
+        //         {
+        //           heading: "Operational learnings:",
+        //           lines: [
+        //             "Use drilldowns to identify common post-adoption issues, improve education resources, and refine partner coverage over time.",
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     },
   },
@@ -9187,6 +9187,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2110.webp?alt=media&token=ba32606e-5f7f-4922-ac67-7170963601d6",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
               ],
@@ -9423,6 +9424,23 @@ requirements and explain how MyPet Health keeps you compliant.`,
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1583.webp?alt=media&token=7b3f649e-6fbe-4791-936e-bf2eee12b448",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1582.webp?alt=media&token=e2d249b7-09b1-40c8-9ff7-5588999a3f8b",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Done! Your pet’s profile is ready for telehealth:",
+                  lines: [
+                    "You can add multiple pets if you have more than one, and you can always edit or add more details later.",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2177.webp?alt=media&token=435ab600-b9e2-441a-9af9-b2c815ff021b",
               ],
             },
           ],
