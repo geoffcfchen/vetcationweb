@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
@@ -16,6 +17,9 @@ import topNavData from "../data/topNavData";
 import ScrollToTop from "../components/ScrollToTop";
 import ComplianceVettedBanner from "../components/ComplianceVettedBanner";
 import { doc } from "firebase/firestore";
+
+import DocsPager from "../components/DocsPager";
+import { getPrevNextDocs } from "../utility/docsNavigation.js";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -64,6 +68,21 @@ export default function DocsLayout() {
   const mainContentRef = useRef(null);
 
   const lastScrollYRef = useRef(0);
+
+  const { previousDoc, nextDoc } = useMemo(() => {
+    return getPrevNextDocs(topNavId, docId);
+  }, [topNavId, docId]);
+
+  const handleDocNavigate = useCallback(
+    (targetDoc) => {
+      if (!targetDoc?.path) return;
+
+      navigate(targetDoc.path, {
+        state: { suppressInitialHash: true },
+      });
+    },
+    [navigate],
+  );
 
   // Wrap registerSections in useCallback so its identity is stable
   const registerSections = useCallback((sectionsArray) => {
@@ -267,6 +286,11 @@ export default function DocsLayout() {
                   }
                 },
               }}
+            />
+            <DocsPager
+              previousDoc={previousDoc}
+              nextDoc={nextDoc}
+              onNavigate={handleDocNavigate}
             />
           </Col>
 
