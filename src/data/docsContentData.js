@@ -36,6 +36,13 @@ const contentData = {
               text: "MyPet Health helps you build a durable professional asset: a growing client base, a trusted reputation, and medical records that stay organized and portable across your career.",
             },
             {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2179.webp?alt=media&token=869121c1-6741-4d67-8d1e-45ff38777632",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
@@ -692,7 +699,7 @@ const contentData = {
               // heading: "Sample: Updating Your Legal Profile",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1544.webp?alt=media&token=aabc4d6e-c0c0-4d72-a8b2-aa2ab862ce68",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2157.webp?alt=media&token=4290c2d4-3287-422e-840a-aeb116f9304b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2180%202.webp?alt=media&token=bd096c0e-d394-4c83-8966-ca593ee5ed4d",
               ],
             },
             {
