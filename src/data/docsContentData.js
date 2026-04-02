@@ -6315,7 +6315,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2128.webp?alt=media&token=17aa694e-c7a7-4c46-8be4-778d879930bb",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
               ],
             },
           ],
@@ -9187,8 +9187,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2177.webp?alt=media&token=435ab600-b9e2-441a-9af9-b2c815ff021b",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
               ],
             },
@@ -9329,10 +9328,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Step 1: Choose your role",
+                  heading: "Choose your role and set up your profile:",
                   lines: [
                     "Sign up or log in with your email or supported login method.",
                     "When asked to choose a role, select “Pet owner” so the system can show you the right tools and options.",
+                    "Add your name and basic information to complete your profile setup.",
                   ],
                 },
               ],
@@ -9341,24 +9341,24 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2106.webp?alt=media&token=8fb1feac-2e2c-461d-8f32-801cc7c8c36d",
-              ],
-            },
-            {
-              type: "bulletList",
-              items: [
-                {
-                  heading: "Step 2: Set up your profile:",
-                  lines: ["Add your name and basic information."],
-                },
-              ],
-            },
-            {
-              type: "framedImage",
-              imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2107.webp?alt=media&token=9b3ace31-6de4-4aed-9a72-a32ba52beb11",
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
               ],
             },
+            // {
+            //   type: "bulletList",
+            //   items: [
+            //     {
+            //       heading: "Step 2: Set up your profile:",
+            //       lines: ["Add your name and basic information."],
+            //     },
+            //   ],
+            // },
+            // {
+            //   type: "framedImage",
+            //   imageSrcs: [
+            //     // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+            //   ],
+            // },
             {
               type: "bulletList",
               items: [
@@ -9374,7 +9374,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2110.webp?alt=media&token=ba32606e-5f7f-4922-ac67-7170963601d6",
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2177.webp?alt=media&token=435ab600-b9e2-441a-9af9-b2c815ff021b",
               ],
             },
           ],
