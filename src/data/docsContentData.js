@@ -6351,9 +6351,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
           blocks: [
             {
               type: "qa",
-              question: "How do you verify veterinarians’ licenses?",
+              question: "How does MyPet Health verify veterinarians’ licenses?",
               answer:
-                "Before a veterinarian can accept telehealth appointments on MyPet Health, they must verify their license. We require the full license number exactly as shown (including any prefix letters, for example VET12345), the license state, and the expiration date. The veterinarian must upload a clear photo of the license that includes the expiration date. We then validate the license against official state license records and confirm it is active and not expired. Veterinarians must keep their license information current to remain eligible for appointments.",
+                "Vets must verify their license and identity before accepting appointments. We collect the full license number (including prefix letters), state, and expiration date, plus a license photo showing the expiration date. We validate against official state records and confirm identity using phone and live video. Licenses must stay current to remain eligible.",
             },
             {
               type: "framedImage",
@@ -6368,6 +6368,13 @@ requirements and explain how MyPet Health keeps you compliant.`,
               question: "Who provides post-adoption telehealth support?",
               answer:
                 "Telehealth support is provided by licensed veterinarians who partner with your shelter or rescue through MyPet Health. Your organization controls which veterinarians are approved as partners. Only your accepted partners are shown to adopters who select your organization.",
+            },
+            {
+              type: "qa",
+              question:
+                "Who is responsible for telehealth outcomes and liability?",
+              answer:
+                "The partnered veterinarian is responsible for care decisions and visit documentation. If in-person care is needed, the adopter is directed to a clinic or ER, and that provider is responsible for on-site care. Your shelter or rescue is not providing medical care through MyPet Health, it is connecting adopters to licensed veterinarians for post-adoption support.",
             },
             {
               type: "qa",
@@ -6386,6 +6393,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
               question: "Can adopters get medications delivered to their home?",
               answer:
                 "When appropriate and legally permitted, veterinarians may prescribe medications through the platform. Depending on the case and pharmacy options, medications can be delivered directly to the adopter’s home.",
+            },
+            {
+              type: "qa",
+              question: "How many veterinarians do we need to partner with?",
+              answer:
+                "A good approach is to start with a small pilot and scale based on real demand. For most shelters, we recommend starting with 2 partnered veterinarians so you have coverage and backup. Capacity planning is straightforward: a veterinarian who dedicates 5–10 hours per week can typically handle about 10–20 thirty-minute telehealth appointments per week (more if some cases are messaging-only). We then adjust the number of partners based on your adoption volume, expected uptake, and the availability targets you want (for example, same-week appointments). Because support is remote, you can add additional partnered veterinarians quickly as demand grows.",
             },
             {
               type: "qa",
