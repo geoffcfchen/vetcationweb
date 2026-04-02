@@ -6035,6 +6035,14 @@ requirements and explain how MyPet Health keeps you compliant.`,
               text: "Support adopters after they go home, reduce staff burden, and create a new support stream for your mission without changing your existing workflow.",
             },
             {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2110.webp?alt=media&token=ba32606e-5f7f-4922-ac67-7170963601d6",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
+              ],
+            },
+            {
               type: "bulletList",
               items: [
                 {
