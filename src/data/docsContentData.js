@@ -6411,18 +6411,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
               answer:
                 "Your organization wallet increases automatically as eligible post-adoption visits are completed. You can initiate a payout once your balance reaches your preferred threshold. Funds are transferred to the bank account your organization has connected for payouts.",
             },
-            {
-              type: "qa",
-              question:
-                "Can we track transactions for reporting and reconciliation?",
-              answer:
-                "Yes. Your wallet includes a transaction history that shows allocations, payouts, and supporting details so your team can reconcile and report funds clearly.",
-            },
+
             {
               type: "framedImage",
               imageSrcs: [
                 // Reuse these for now if the wallet UI is the same; swap later with shelter-specific screenshots if you have them.
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1031.webp?alt=media&token=7a81a522-f6cd-4428-b1d5-81ea4e609754",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1794.webp?alt=media&token=3aab35be-5c80-4e95-80bd-1dfcfcfb2450",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1622.webp?alt=media&token=a8b69803-1d82-4256-b65a-a446725e8ca5",
               ],
             },
@@ -9193,8 +9187,8 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1578.webp?alt=media&token=2008663e-e24d-4ed6-bfe8-63fb8872dde7",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1567.webp?alt=media&token=27d25436-5588-410b-8288-c6c98d355907",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2177.webp?alt=media&token=435ab600-b9e2-441a-9af9-b2c815ff021b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1616.webp?alt=media&token=8e0a5619-a268-491a-8cd0-fae9edb1b1a8",
               ],
             },
