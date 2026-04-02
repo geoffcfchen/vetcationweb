@@ -6421,6 +6421,154 @@ requirements and explain how MyPet Health keeps you compliant.`,
         },
       ],
     },
+
+    shelterOutcomeAnalysis: {
+      mainTitle: "Post-adoption Outcome Analytics",
+      mainDescription: `See how post-adoption telehealth is performing for your organization. Track adopter engagement, outcome distribution, and drill down to the exact visits behind each outcome so your team can understand impact and improve follow-up support.`,
+      sections: [
+        {
+          id: "adopterGrowth",
+          title: "Adopter engagement (last 4 weeks)",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                // Reuse existing analytics screenshots for now if the UI is shared.
+                // Swap to shelter-specific screenshots later if you have them.
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0850.webp?alt=media&token=2b09333e-b495-4f1a-9597-0cab3594b7ec",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0854.webp?alt=media&token=3362662c-1b60-4138-8f84-ccefacf04994",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Total adopters:",
+                  lines: [
+                    "Count of unique pet owners who selected your organization as their adoption organization.",
+                    "You can select different time ranges (7D, 2W, 4W, 3M, 1Y) to see engagement trends.",
+                  ],
+                },
+                {
+                  heading: "New adopters (4W):",
+                  lines: [
+                    "New pet owners who connected to your organization in the last 4 weeks.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "telemedOutcomesAll",
+          title: "Telehealth outcomes — organization",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Prescribed meds:",
+                  lines: [
+                    "The visit resulted in a prescription and follow-up plan when appropriate.",
+                  ],
+                },
+                {
+                  heading: "Escalate to in-person:",
+                  lines: [
+                    "Telehealth triage recommended an in-person exam at a clinic.",
+                  ],
+                },
+                {
+                  heading: "Refer other doctors:",
+                  lines: [
+                    "The case was directed to a different clinician or specialist.",
+                  ],
+                },
+                {
+                  heading: "ER:",
+                  lines: ["Emergency care was advised based on triage."],
+                },
+                {
+                  heading: "Monitor:",
+                  lines: [
+                    "No immediate intervention; the adopter received monitoring guidance and warning signs.",
+                  ],
+                },
+                {
+                  heading: "Resolved:",
+                  lines: [
+                    "The issue was addressed within the telehealth visit with clear next steps.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "telemedOutcomesByDoctor",
+          title: "Telehealth outcomes — by partnered veterinarian",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0852.webp?alt=media&token=06d6f20c-0002-4600-a57c-8c8f8b8f9187",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0853.webp?alt=media&token=420b61b1-454e-48da-a1c0-0bbc98b2ac20",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Compare outcomes by partner:",
+                  lines: [
+                    "See outcome distributions across your partnered veterinarians to understand how care is being delivered.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          id: "outcomeDrilldowns",
+          title: "Drill down to visits behind each outcome",
+          blocks: [
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0851.webp?alt=media&token=c15ec67a-9dec-40a2-b47e-cf861a74ed06",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0855.webp?alt=media&token=17eeca01-c874-42a3-a442-a764402bee96",
+              ],
+            },
+            {
+              type: "bulletList",
+              items: [
+                {
+                  heading: "Audit trail and transparency:",
+                  lines: [
+                    "Every outcome links to the visit card so your team can review what happened and understand follow-up actions.",
+                  ],
+                },
+                {
+                  heading: "Operational learnings:",
+                  lines: [
+                    "Use drilldowns to identify common post-adoption issues, improve education resources, and refine partner coverage over time.",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
 
   clinics: {
@@ -9911,6 +10059,7 @@ const sharedKeys = [
 
 sharedKeys.forEach((k) => {
   contentData.corporations[k] = contentData.home[k];
+  contentData.shelters[k] = contentData.home[k];
   contentData.clinics[k] = contentData.home[k];
   contentData.compliance[k] = contentData.home[k];
 });
