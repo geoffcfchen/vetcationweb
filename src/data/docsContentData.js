@@ -6287,6 +6287,10 @@ requirements and explain how MyPet Health keeps you compliant.`,
           title: "Connect Adopters to Your Organization",
           blocks: [
             {
+              type: "paragraph",
+              text: "The image below is from the pet owner’s Telehealth settings screen. At adoption, help adopters select your shelter or rescue as their adoption organization so they can see your partnered veterinarians and access messaging and virtual appointments after they go home.",
+            },
+            {
               type: "framedImage",
               imageSrcs: [
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2103.webp?alt=media&token=b7bfd108-967d-4544-9192-86dd6b048b39",
@@ -6299,8 +6303,8 @@ requirements and explain how MyPet Health keeps you compliant.`,
                   heading:
                     "At adoption, help adopters select your organization:",
                   lines: [
-                    "Encourage adopters to add your shelter or rescue as their adoption organization in MyPet Health.",
-                    "This allows them to see your partnered veterinarians and access post-adoption telehealth support.",
+                    "Ask adopters to add your shelter or rescue as their adoption organization in MyPet Health.",
+                    "Once selected, they can browse your partnered veterinarians, message them for follow-up support, and book virtual appointments.",
                   ],
                 },
               ],
