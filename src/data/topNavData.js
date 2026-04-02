@@ -35,11 +35,11 @@ const topNavData = [
     label: "Case Map",
     defaultDocId: "telemedicineCasesOverview",
   },
-  {
-    id: "contributors",
-    label: "Contributors",
-    defaultDocId: "ourContributors",
-  },
+  // {
+  //   id: "contributors",
+  //   label: "Contributors",
+  //   defaultDocId: "ourContributors",
+  // },
 ];
 
 export default topNavData;
