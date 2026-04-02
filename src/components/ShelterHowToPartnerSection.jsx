@@ -112,6 +112,21 @@ function ShelterHowToPartnerSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2105.webp?alt=media&token=6b39bd55-1fd5-4d40-a208-fdfd8e11c68d"
         headerFontSize={36}
       />
+      <Feature
+        heading="Create a recurring support stream for shelters"
+        text={
+          <>
+            MyPet Health helps shelters stay connected to adopted pets even
+            after they go to their new homes. When adopters use paid
+            consultations, they can choose to allocate part of the consultation
+            to the shelter that helped their pet, with no additional charge.
+            This creates ongoing support for shelters as adopters continue using
+            the platform for follow-up questions and care.
+          </>
+        }
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1794.webp?alt=media&token=3aab35be-5c80-4e95-80bd-1dfcfcfb2450"
+        headerFontSize={36}
+      />
     </FeaturesContainer>
   );
 }

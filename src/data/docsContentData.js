@@ -6137,7 +6137,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0828.webp?alt=media&token=6c2de185-8eb8-4f19-afc2-168dbec6810b",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2164.webp?alt=media&token=7d646ab5-b1be-4a41-87f5-e92d4c99f3fe",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0830.webp?alt=media&token=d0e41069-a189-4084-9f3c-8d69473aafbb",
               ],
             },
@@ -6170,7 +6170,8 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-30%20at%209.35.57%E2%80%AFPM.webp?alt=media&token=05834873-b587-4771-9e37-8f08d5209ef0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2165.webp?alt=media&token=0a5b2263-7fec-47d1-aef7-f5388f61ceec",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2166.webp?alt=media&token=ffcd21ea-70a8-4dea-b39e-80fa7ea9583c",
               ],
             },
             {
@@ -6201,7 +6202,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0837.webp?alt=media&token=82ef47cf-c7f4-400d-98d1-0b2d20360fa0",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2167.webp?alt=media&token=fbdeb04b-d052-4b87-af1e-dfdea4cb6f0c",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1570.webp?alt=media&token=85bc08e1-7a50-4795-a0ea-37ea000a0848",
               ],
             },
@@ -6223,6 +6224,13 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 },
               ],
             },
+            {
+              type: "framedImage",
+              imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2169.webp?alt=media&token=95961fa0-eee4-43e6-89b7-7703fb8ebcf2",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2175.webp?alt=media&token=a12d0db3-f41f-453c-a45c-8afc890933d5",
+              ],
+            },
           ],
         },
 
@@ -6233,7 +6241,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-30%20at%209.43.33%E2%80%AFPM.webp?alt=media&token=0386e537-9a99-4449-88b2-1dbc9e5205e6",
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2171.webp?alt=media&token=cf4144ad-b9cc-4293-a4a4-00af036ca269",
               ],
             },
             {
@@ -6306,6 +6314,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
+                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2128.webp?alt=media&token=17aa694e-c7a7-4c46-8be4-778d879930bb",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2101.webp?alt=media&token=62da48d7-5053-4070-aaff-198bec1e6264",
               ],
             },
