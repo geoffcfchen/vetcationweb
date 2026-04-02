@@ -6398,7 +6398,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "qa",
               question: "How many veterinarians do we need to partner with?",
               answer:
-                "A good approach is to start with a small pilot and scale based on real demand. For most shelters, we recommend starting with 2 partnered veterinarians so you have coverage and backup. Capacity planning is straightforward: a veterinarian who dedicates 5–10 hours per week can typically handle about 10–20 thirty-minute telehealth appointments per week (more if some cases are messaging-only). We then adjust the number of partners based on your adoption volume, expected uptake, and the availability targets you want (for example, same-week appointments). Because support is remote, you can add additional partnered veterinarians quickly as demand grows.",
+                "A good approach is to start with a small pilot and scale based on real demand. We recommend starting with 2 partnered veterinarians so you have coverage and backup. As a rough planning baseline, you can estimate about 1 partnered veterinarian per 500–1,000 adoptions per year, then adjust based on real appointment demand and seasonality. Capacity planning is straightforward: a veterinarian who dedicates 5–10 hours per week can typically handle about 10–20 thirty-minute telehealth appointments per week (more if some cases are messaging-only). Because support is remote, you can add additional partnered veterinarians quickly as demand grows.",
             },
             {
               type: "qa",
