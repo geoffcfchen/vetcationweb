@@ -28,7 +28,7 @@ function RightSideBarRouter({
                 // update the URL hash
                 navigate(
                   { pathname: location.pathname, hash: sec.id },
-                  { replace: false }
+                  { replace: false },
                 );
                 // then smooth-scroll
                 onSectionClick(sec.id);

@@ -6471,7 +6471,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
                 // Reuse existing analytics screenshots for now if the UI is shared.
                 // Swap to shelter-specific screenshots later if you have them.
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0850.webp?alt=media&token=2b09333e-b495-4f1a-9597-0cab3594b7ec",
-                "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_0854.webp?alt=media&token=3362662c-1b60-4138-8f84-ccefacf04994",
               ],
             },
             {
@@ -6484,12 +6483,12 @@ requirements and explain how MyPet Health keeps you compliant.`,
                     "You can select different time ranges (7D, 2W, 4W, 3M, 1Y) to see engagement trends.",
                   ],
                 },
-                {
-                  heading: "New adopters (4W):",
-                  lines: [
-                    "New pet owners who connected to your organization in the last 4 weeks.",
-                  ],
-                },
+                // {
+                //   heading: "New adopters (4W):",
+                //   lines: [
+                //     "New pet owners who connected to your organization in the last 4 weeks.",
+                //   ],
+                // },
               ],
             },
           ],
