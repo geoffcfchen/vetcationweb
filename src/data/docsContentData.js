@@ -9899,11 +9899,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     afterYourAppointment: {
-      mainTitle: "Telehealth Medical Record Overview",
+      mainTitle: "After Your Telehealth Visit",
       mainDescription: `
-    After each telehealth visit, MyPet Health saves a medical record to your pet’s history. 
-    You can review appointment details, visit notes, prescriptions when applicable, and follow-up guidance in one place. 
-    You can also export the telehealth medical record to share with any clinic, ER, or specialist when needed.
+    After each telehealth visit, MyPet Health saves a medical record to your pet’s history.
+    You can review what was discussed, next steps, and any prescriptions when applicable.
+    You can also export the visit record as a PDF to share with any clinic, ER, or specialist.
   `,
       sections: [
         {
@@ -9920,9 +9920,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "All telehealth appointments in one place",
+                  heading: "See your appointments",
                   lines: [
-                    "See past and upcoming telehealth appointments, including visit status and key details.",
+                    "View past and upcoming telehealth appointments, including status and key details.",
                   ],
                 },
               ],
@@ -9943,11 +9943,11 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Telehealth visit records and prescriptions",
+                  heading: "Review visit notes and prescriptions",
                   lines: [
-                    "After each telehealth visit, your veterinarian’s notes and recommendations are saved here.",
+                    "Your veterinarian’s notes and recommendations are saved after each visit.",
                     "If a prescription is provided, it will appear in your record for easy reference.",
-                    "This keeps your telehealth care history organized and easy to share later.",
+                    "This helps you keep track of what to do next and what was discussed.",
                   ],
                 },
               ],
@@ -9956,7 +9956,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
         },
         {
           id: "exportHistory",
-          title: "Export Telehealth Medical Record",
+          title: "Export the Visit Record",
           blocks: [
             {
               type: "framedImage",
@@ -9968,10 +9968,10 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Share your telehealth record when needed",
+                  heading: "Share your record when needed",
                   lines: [
-                    "Export your pet’s telehealth medical record as a PDF.",
-                    "This is helpful if you visit an in-person clinic, a new veterinarian, an ER, or a specialist.",
+                    "Export your pet’s telehealth visit record as a PDF.",
+                    "Share it with an in-person clinic, a new veterinarian, an ER, or a specialist when needed.",
                   ],
                 },
               ],
@@ -9981,27 +9981,25 @@ requirements and explain how MyPet Health keeps you compliant.`,
       ],
     },
     followUpCare: {
-      mainTitle: "Vetssenger Overview",
+      mainTitle: "Messaging After Your Visit",
       mainDescription: `
-        Vetssenger is MyPet Health’s messaging tool for post-appointment follow-up. It helps you ask questions, get guidance from your veterinarian, and keep everything organized in one place.
-      `,
+    Vetssenger is MyPet Health’s messaging tool for follow-up after a telehealth appointment. 
+    It helps you ask questions, get guidance from your veterinarian, and keep everything in one place.
+  `,
       sections: [
-        // NEW SECTION to hold the text previously in mainDescription
-
-        // Existing section about navigating the tabs
         {
-          id: "",
+          id: "askAfterVisit",
           title: "Ask questions after your appointment",
           blocks: [
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Asking Questions",
+                  heading: "Send follow-up questions",
                   lines: [
-                    "After your appointment, you can use Vetssenger to ask follow-up questions about your pet's care.",
-                    "Simply open the Vetssenger tab and select the conversation with your veterinarian to send a message.",
-                    "Once the inquiry is resolved, your vets will close the conversation.",
+                    "After your appointment, you can message your veterinarian in Vetssenger for follow-up questions.",
+                    "Open the Vetssenger tab and select your conversation to send a message.",
+                    "When your question is resolved, the veterinarian may close the conversation to keep things organized.",
                   ],
                 },
               ],
@@ -10017,10 +10015,10 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Submit new inquiries",
+                  heading: "Follow-up windows and new inquiries",
                   lines: [
-                    "You can freely ask questions within the time where set by your veterinarian. Typically, this period is 72 hours after your appointment.",
-                    "After that, you can still ask questions, but they may incur additional charges as per your veterinarian's policies.",
+                    "Many veterinarians include a follow-up window after your appointment (often around 72 hours) where messaging is included.",
+                    "After that window, you can still send questions, but additional charges may apply depending on the veterinarian’s policy.",
                   ],
                 },
               ],
