@@ -6380,7 +6380,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "qa",
               question: "What does the shelter need to do day to day?",
               answer:
-                "Very little. Your team’s main tasks are to claim your organization once during onboarding, accept veterinarian partners through the Partnership Hub, and remind adopters at adoption time to select your organization in MyPet Health for post-adoption support.",
+                "Very little. Your team’s main tasks are to claim your organization once during onboarding, accept or request veterinarian partners through the Partnership Hub, and remind adopters at adoption time to select your organization in MyPet Health for post-adoption support.",
             },
             {
               type: "qa",
@@ -9683,7 +9683,7 @@ requirements and explain how MyPet Health keeps you compliant.`,
                   heading: "Find your appointment and updated wallet balance",
                   lines: [
                     "Your wallet balance will update to reflect the cost of the appointment.",
-                    "You can find your appointment details in the Telehealth tab.",
+                    "You can find your appointment details in the MyPet Health tab.",
                   ],
                 },
               ],
@@ -9702,12 +9702,9 @@ requirements and explain how MyPet Health keeps you compliant.`,
     duringYourAppointment: {
       mainTitle: "Join a Video Call",
       mainDescription: `
-          MyPet Health's video consultation feature enables you to meet your vet 
-          face-to-face (virtually) and provide information needed 
-          to diagnose and treat patients. Below, learn how to access 
-          your scheduled calls, test your mic and camera, and begin 
-          your real-time telemedicine session.
-        `,
+    MyPet Health’s video visit lets you meet with a licensed veterinarian from home. 
+    Below you’ll learn how to find your scheduled appointment, join the call, and use the main call features.
+  `,
       sections: [
         {
           id: "howToJoinSection",
@@ -9716,7 +9713,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8367.PNG?alt=media&token=2615e2aa-5d1b-4f61-9a6a-1a6afa0a48b1",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_8372.PNG?alt=media&token=0e8a49c8-10f0-43ca-99da-902c91a17043",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%201.31.06%20PM.png?alt=media&token=0e2adb20-f48d-4e18-bdc7-0cf3854ad7ba",
@@ -9726,80 +9722,69 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Access Scheduled Appointments",
+                  heading: "Find your scheduled appointment",
                   lines: [
-                    "Go to My Schedule for the upcoming appintment. Press it to navigate to the appointment card.",
-                    "Look for a “Join Call” button on the appointment card.",
+                    "Open Telehealth and go to My Schedule.",
+                    "Tap your upcoming appointment to open the appointment card.",
+                    "Tap “Join Call” when it is time to start.",
                   ],
                 },
-
                 {
-                  heading: "Stable Internet Connection",
+                  heading: "Use a stable connection",
                   lines: [
                     "A strong connection helps keep video and audio smooth.",
-                    "If using mobile data, find a reliable spot with good reception.",
+                    "If you are on mobile data, try to join from a location with good reception.",
                   ],
                 },
                 {
-                  heading: "Start the Call",
+                  heading: "Allow camera and microphone",
                   lines: [
-                    "Once you’re ready, click Join Call to enter the video call.",
-                    "Remember to enable your camera so the client can see you (and vice versa).",
-                    "Be mindful of background surroundings for privacy and professionalism.",
-                    "Under AB 1399, you must use synchronous audio-video to form a valid VCPR unless you’ve already examined the patient in person.",
+                    "When prompted, allow camera and microphone access so the veterinarian can see and hear you.",
+                    "For many telehealth visits, live audio and video are required to begin care in California.",
                   ],
                 },
                 {
-                  heading: "Camera Access Prompt",
+                  heading: "Prepare your setup",
                   lines: [
-                    `When you enable your camera, MyPet Health may show a prompt such as “MyPet Health Would Like to Access the Camera.”`,
-                    "Allowing camera access enables you to share live video with the client",
-                    "If you tap “Don’t Allow,” you’ll be unable to share your video directly from your device and VCPR establishment cannot be completed.",
+                    "Choose a quiet space with good lighting.",
+                    "Have your pet nearby and ready to show on camera if requested.",
                   ],
                 },
               ],
             },
           ],
         },
+
         {
           id: "featureOverview",
-          title: "Features Overview",
+          title: "Call Features",
           blocks: [
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.12.55%20PM.png?alt=media&token=e653f8e4-4a3b-43b2-b8b4-6c8b33b0350f",
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.25.35%20PM.png?alt=media&token=e7e6acaa-c25f-4a8f-9c29-9ad96b057021",
               ],
             },
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Camera and Audio Requirements",
+                  heading: "Camera and microphone",
                   lines: [
-                    "To achieve legal telemedicine requirements (if your pet is not yet conducted in-person), you must appear on video and turn on the microphone.",
-                    "MyPet Health prompts you if your camera is off and nudges clients to enable theirs for an in-clinic-like interaction.",
+                    "Keep your camera on when possible so the veterinarian can assess your pet visually.",
+                    "Use mute if needed, but unmute when you are speaking with the veterinarian.",
                   ],
                 },
                 {
-                  heading: "Flip Camera",
+                  heading: "Flip camera",
                   lines: [
-                    "If you want to show your vet something, tap the camera icon to switch between front and back views.",
+                    "Tap the camera switch icon to show your pet using the front or back camera.",
                   ],
                 },
                 {
-                  heading: "Mute/Unmute",
+                  heading: "End call",
                   lines: [
-                    "Tap the microphone icon to mute or unmute your audio during the call.",
-                  ],
-                },
-
-                {
-                  heading: "End Call",
-                  lines: [
-                    "When you’re finished, tap the red Leave icon to leave the video call room.",
+                    "When you are finished, tap the red Leave button to end the call.",
                   ],
                 },
               ],
@@ -9807,8 +9792,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-                // "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%202.26.35%20PM.png?alt=media&token=a2c17838-bd95-459b-8920-76b75aa9d97a",
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.13.19%20PM.png?alt=media&token=086e22cd-ffcc-4028-a467-5e8b8b777788",
               ],
             },
@@ -9816,12 +9799,10 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading: "Access Telemedicine Info (top middle)",
+                  heading: "Session info",
                   lines: [
-                    "Tap the MyPet Health icon during a video call to view important session details in real-time.",
-                    "This includes your Appointment ID, the names of both the veterinarian and the pet owner, and the patient’s name.",
-                    "You’ll also see confirmation of enhanced encryption and the U.S.-based data center powering the call.",
-                    "This feature promotes transparency and trust while also helping you keep accurate documentation during the session.",
+                    "Tap the MyPet Health icon during the call to view key visit details like the appointment ID, veterinarian name, and your pet’s name.",
+                    "This helps keep the visit organized and supports accurate documentation.",
                   ],
                 },
               ],
@@ -9829,8 +9810,6 @@ requirements and explain how MyPet Health keeps you compliant.`,
             {
               type: "framedImage",
               imageSrcs: [
-                // Replace with your actual screenshot URLs
-
                 "https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreen%20Shot%202025-04-01%20at%2011.14.13%20PM.png?alt=media&token=1cdeae5b-84ee-440f-b2d9-f92547699a60",
               ],
             },
@@ -9838,84 +9817,79 @@ requirements and explain how MyPet Health keeps you compliant.`,
               type: "bulletList",
               items: [
                 {
-                  heading:
-                    "Access Inquiry-based Messager (bottom right corner)",
+                  heading: "In-call messaging",
                   lines: [
-                    "During a video call, you can use the inquiry-based Messager to send text messages to your vet.",
-                    "This feature is useful for sharing links, files, or other details that might be hard to convey verbally.",
-                    "The chat is saved in the Inquiry-Based Messager, ensuring continuity of care.",
+                    "During a video visit, you can send messages to your veterinarian to share details that are hard to say out loud.",
+                    "Messages are saved with the visit so you can refer back to them later if needed.",
                   ],
                 },
               ],
             },
           ],
         },
+
         {
           id: "recordingBasics",
-          title: "Recording Basics & Consent",
+          title: "Recording and Consent",
           blocks: [
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "No Media Storage",
+                  heading: "No saved video recordings",
                   lines: [
-                    "MyPet Health does not retain video or audio once processing is complete.",
-                    "Audio is temporarily captured in real time so our AI can generate summaries, then permanently deleted.",
-                    "This minimizes privacy concerns and long-term data risks.",
+                    "MyPet Health does not store video from your appointment as a recording.",
                   ],
                 },
                 {
-                  heading: "AI-Assisted Medical Records (No Saved Recordings)",
+                  heading: "Audio use for visit notes (when enabled)",
                   lines: [
-                    "Audio from the session is briefly processed to produce a draft medical record for review.",
-                    "After processing, the raw audio is discarded—only the structured text record remains.",
+                    "If audio processing is enabled for your visit, audio may be temporarily processed to help generate a visit summary.",
+                    "After processing, the raw audio is deleted and only the structured text record remains.",
                   ],
                 },
                 {
-                  heading: "Client-Facing Summaries",
+                  heading: "Plain-language summaries",
                   lines: [
-                    "We create a plain-language recap that clients can view in their portal.",
-                    "This summary highlights key discussion points, recommended treatments, and next steps.",
+                    "After the visit, you may see a plain-language recap with key discussion points and next steps.",
                   ],
                 },
               ],
             },
           ],
         },
+
         {
           id: "privacySecurity",
-          title: "Privacy & Security",
+          title: "Privacy and Security",
           blocks: [
             {
               type: "bulletList",
               items: [
                 {
-                  heading: "Data Protection",
+                  heading: "Secure calls",
                   lines: [
-                    "All live calls are end-to-end encrypted. Only the assigned veterinarian and authorized staff can access session details.",
-                    "If audio is processed by our AI, it’s stored only until the summary is generated, then automatically deleted.",
+                    "Live calls are end-to-end encrypted so only you and the assigned veterinarian can access the session content.",
                   ],
                 },
                 {
-                  heading: "Liability Under BPC § 4857",
+                  heading: "Data minimization",
                   lines: [
-                    "A veterinarian can face civil liability for negligent release of confidential information.",
-                    "Handle any patient data carefully, whether it’s text, images, or ephemeral audio.",
+                    "We keep only what is needed to support your care and maintain a clear visit record.",
+                    "If audio is processed for summaries, it is retained only long enough to generate the record and then deleted.",
                   ],
                 },
                 {
-                  heading: "Deleting Audio Data",
+                  heading: "Your records",
                   lines: [
-                    "MyPet Health's AI system automatically removes audio once processing is complete.",
-                    "No manual deletion is required—ephemeral files never remain in storage.",
+                    "You can access your visit records in your pet’s medical history.",
+                    "You can export the medical record as a PDF when you need to share it with a clinic, ER, or specialist.",
                   ],
                 },
                 {
-                  heading: "Patient Requests",
+                  heading: "Privacy tips",
                   lines: [
-                    "Clients can request copies of their medical summaries at any time.",
-                    "Per BPC § 4855, you must furnish these upon request, even if the client owes a balance.",
+                    "Join from a private location when possible and avoid public Wi-Fi if you can.",
                   ],
                 },
               ],

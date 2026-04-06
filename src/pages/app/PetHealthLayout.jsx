@@ -830,7 +830,7 @@ function PetHealthLayout() {
 
   // const isOrg = role === "Organization";
   const canSeeDashboard = role === "Organization" || role === "Doctor";
-  const canTransferOwnership = role === "Organization";
+  const canTransferOwnership = role === "Organization" || role === "Client";
 
   const [transferModalConfig, setTransferModalConfig] = useState(null);
 

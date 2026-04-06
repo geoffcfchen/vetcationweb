@@ -472,7 +472,11 @@ function App() {
 
         // 3) Onboarding gating (NEW)
         // hasCompletedProfile includes role + profile completion, same as RN
-        const needsOnboarding = !customer?.hasCompletedProfile;
+        const isForcedOnboardingUser =
+          (firebaseUser.email || "").toLowerCase() === "clinic3@test.com";
+
+        const needsOnboarding =
+          isForcedOnboardingUser || !customer?.hasCompletedProfile;
 
         if (needsOnboarding) {
           const onboardingTarget = getOnboardingTarget(customer);
