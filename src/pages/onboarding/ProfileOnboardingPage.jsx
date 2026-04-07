@@ -736,6 +736,9 @@ export default function ProfileOnboardingPage() {
     }
 
     await updateDoc(doc(firestore, "customers", uid), updateData);
+    if (isClinic3Test) {
+      sessionStorage.setItem("demoBypassOnboardingThisSession", "1");
+    }
     setUserData((prev) => ({ ...(prev || {}), ...updateData }));
   }
 

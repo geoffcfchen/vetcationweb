@@ -427,8 +427,8 @@ function App() {
         console.log("Auth state changed: no user");
         setUser(null);
         setUserData(null);
+        sessionStorage.removeItem("demoBypassOnboardingThisSession");
 
-        // If user gets logged out while on a protected page, send them home
         if (currentPath.startsWith("/ai/") || currentPath.startsWith("/app")) {
           navigate("/", { replace: true });
         }
@@ -475,8 +475,12 @@ function App() {
         const isForcedOnboardingUser =
           (firebaseUser.email || "").toLowerCase() === "clinic3@test.com";
 
+        const demoBypassOnboardingThisSession =
+          sessionStorage.getItem("demoBypassOnboardingThisSession") === "1";
+
         const needsOnboarding =
-          isForcedOnboardingUser || !customer?.hasCompletedProfile;
+          !customer?.hasCompletedProfile ||
+          (isForcedOnboardingUser && !demoBypassOnboardingThisSession);
 
         if (needsOnboarding) {
           const onboardingTarget = getOnboardingTarget(customer);
