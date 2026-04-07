@@ -105,9 +105,9 @@ function ShelterHowItWorksSection() {
           <>
             Once adopted, your team can find the adopter on{" "}
             <BrandLink to="/mypet-health/">MyPet Health</BrandLink> and transfer
-            the pet&apos;s profile to them in one step. The adopter can then add
-            their own vet, upload future records, and share the history with
-            clinics, ERs, or specialists.
+            the pet&apos;s profile to them in one step. The adopter can upload
+            future records and share the history with clinics, ERs, or
+            specialists.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-24%20at%201.11.07%E2%80%AFAM.webp?alt=media&token=c67f885b-a5f9-4fa5-8146-f98c046f4c74"
