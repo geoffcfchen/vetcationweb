@@ -1640,24 +1640,24 @@ const contentData = {
             },
           ],
         },
-        {
-          id: "faqNonVaccineInjectables",
-          title:
-            "Giving Non-vaccine Injections (for example Cytopoint) after a Tele-VCPR",
-          blocks: [
-            {
-              type: "qa",
-              question:
-                "After a video exam that recommends an injection at a partner clinic, does the pet need another in-person exam first? Can staff give the shot if the prescriber is remote?",
-              answer:
-                "If you established a valid VCPR by synchronous audio-video while the animal was in California, a second in-person exam is not automatically required to carry out that plan. At a registered premises, an RVT or a trained veterinary assistant may administer a prescribed, non-controlled injectable such as Cytopoint on your order under indirect supervision. Indirect means you are not on site but are quickly available and have provided instructions. If the clinic prefers to become the attending provider of record, their DVM may perform a brief exam and take over before administering.",
-              helpText:
-                "Legal anchors to cite in your handbook: BPC § 4826.6 for tele-VCPR, BPC § 4836.1 and 16 CCR § 2034 for supervision and task delegation. In MyPet Health, include a written administration order with dose and route, a checkbox for Indirect Vet Supervision, and a field to record the RVT or assistant who administered the dose.",
-              example:
-                "Dermatology video visit on Monday. Order Cytopoint 20 mg SC at Partner Clinic A. Clinic logs Indirect supervision by Dr. Smith and RVT Jones administered. Administration record syncs back to your chart and to the client’s primary DVM.",
-            },
-          ],
-        },
+        // {
+        //   id: "faqNonVaccineInjectables",
+        //   title:
+        //     "Giving Non-vaccine Injections (for example Cytopoint) after a Tele-VCPR",
+        //   blocks: [
+        //     {
+        //       type: "qa",
+        //       question:
+        //         "After a video exam that recommends an injection at a partner clinic, does the pet need another in-person exam first? Can staff give the shot if the prescriber is remote?",
+        //       answer:
+        //         "If you established a valid VCPR by synchronous audio-video while the animal was in California, a second in-person exam is not automatically required to carry out that plan. At a registered premises, an RVT or a trained veterinary assistant may administer a prescribed, non-controlled injectable such as Cytopoint on your order under indirect supervision. Indirect means you are not on site but are quickly available and have provided instructions. If the clinic prefers to become the attending provider of record, their DVM may perform a brief exam and take over before administering.",
+        //       helpText:
+        //         "Legal anchors to cite in your handbook: BPC § 4826.6 for tele-VCPR, BPC § 4836.1 and 16 CCR § 2034 for supervision and task delegation. In MyPet Health, include a written administration order with dose and route, a checkbox for Indirect Vet Supervision, and a field to record the RVT or assistant who administered the dose.",
+        //       example:
+        //         "Dermatology video visit on Monday. Order Cytopoint 20 mg SC at Partner Clinic A. Clinic logs Indirect supervision by Dr. Smith and RVT Jones administered. Administration record syncs back to your chart and to the client’s primary DVM.",
+        //     },
+        //   ],
+        // },
       ],
     },
 
