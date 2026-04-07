@@ -363,6 +363,22 @@ function nearbySearchAllPages(service, request) {
   });
 }
 
+// NEW: Places nearbySearch (first page only, fastest)
+function nearbySearchFirstPage(service, request) {
+  return new Promise((resolve) => {
+    const handle = (results, status) => {
+      const ok = status === window.google.maps.places.PlacesServiceStatus.OK;
+      resolve(ok && Array.isArray(results) ? results : []);
+    };
+
+    try {
+      service.nearbySearch(request, handle);
+    } catch {
+      resolve([]);
+    }
+  });
+}
+
 function getPlaceDetails(service, placeId) {
   const fields = [
     "formatted_phone_number",
@@ -700,6 +716,7 @@ export default function ClinicsMapSection({
   };
 
   // NEW: Places behavior for shelters/rescues/adoption centers
+  // NEW: Places behavior for shelters/rescues/adoption centers
   const fetchFromPlaces = async () => {
     if (!mapRef.current) return;
     if (!window.google?.maps?.places) return;
@@ -718,7 +735,7 @@ export default function ClinicsMapSection({
 
     setLoading(true);
     try {
-      // You can tune these keywords any time
+      // keep your query list exactly as-is
       const keywordQueries =
         placesKind === "shelter"
           ? [
@@ -729,13 +746,14 @@ export default function ClinicsMapSection({
               { keyword: "animal rescue" },
               { keyword: "humane society" },
               { keyword: "SPCA" },
-              { keyword: "petspace" }, // catches names like “PetSpace”
+              { keyword: "petspace" },
             ]
           : [{ keyword: "animal shelter" }];
 
+      // CHANGE: first page only (no pagination waits)
       const pages = await Promise.all(
         keywordQueries.map((q) =>
-          nearbySearchAllPages(service, {
+          nearbySearchFirstPage(service, {
             location: new window.google.maps.LatLng(centerLat, centerLng),
             radius,
             ...q,
@@ -748,116 +766,47 @@ export default function ClinicsMapSection({
         .filter((p) => (p.business_status ?? "OPERATIONAL") === "OPERATIONAL")
         .filter(isLikelyShelter);
 
-      // Merge with Firestore + write into clinics collection, same core schema as RN fetchClinics
-      const merged = await Promise.all(
-        vetted.slice(0, 80).map(async (place) => {
+      // CHANGE: build markers synchronously (no Firestore reads/writes here)
+      const rows = vetted
+        .slice(0, 80)
+        .map((place) => {
           const placeId = place.place_id;
           const g = place.geometry?.location;
           const ll = toPlainLatLng(g);
           if (!placeId || !ll) return null;
 
-          // read existing clinic doc (if any) so email/inviteState/etc show immediately
-          let firebaseData = {};
-          try {
-            const snap = await getDoc(doc(firestore, "clinics", placeId));
-            if (snap.exists()) firebaseData = snap.data() || {};
-          } catch {}
-
-          const state = stateFromPlusCode(place.plus_code);
-
-          const baseDoc = {
-            place_id: safeAssign(placeId),
-            name: safeAssign(place.name),
-            address: safeAssign(place.vicinity || ""),
-            state: safeAssign(state),
-            location: safeAssign({ lat: ll.lat, lng: ll.lng }),
-            geometry: safeAssign({ location: { lat: ll.lat, lng: ll.lng } }),
-            rating: place.rating ?? null,
-            total_ratings: safeAssign(place.user_ratings_total, 0),
-            icon: safeAssign(place.icon),
-            types: safeAssign(place.types),
-            opening_hours: safeAssign(place.opening_hours),
-            plus_code: safeAssign(place.plus_code),
-            business_status: safeAssign(place.business_status),
-            user_ratings: safeAssign(place.user_ratings),
-            price_level: safeAssign(place.price_level, -1),
-            scope: safeAssign(place.scope),
-            permanently_closed: safeAssign(place.permanently_closed, false),
-
-            // Optional fields (kept consistent with your RN pattern)
-            website: firebaseData.website ?? null,
-            phone:
-              firebaseData.phone ||
-              firebaseData.formatted_phone_number ||
-              firebaseData.tel ||
-              null,
-
-            ...firebaseData, // same idea as your RN code: keep Firestore overrides
-          };
-
-          // Ensure geohash exists so your older pages (InviteSurvey) can still query by geohash
-          const geohash = geohashForLocation([ll.lat, ll.lng]);
-
-          // Write a normalized doc into clinics collection
-          try {
-            const batch = writeBatch(firestore);
-            const payload = stripUndefinedAndFunctions({
-              ...baseDoc,
-
-              // store geospatial fields in a stable way
-              geohash,
-              locationGeo: new GeoPoint(ll.lat, ll.lng),
-
-              // optional: store photo urls instead of raw photo objects
-              photoUrls: photoUrlsFromPhotos(place.photos),
-            });
-
-            batch.set(doc(firestore, "clinics", placeId), payload, {
-              merge: true,
-            });
-            await batch.commit();
-          } catch (e) {
-            console.warn("Failed writing shelter into clinics:", e);
-          }
-
-          // Shape the marker object used by this component + ClinicPanel
           return {
             id: placeId,
-            name: baseDoc.name || "Shelter",
+            name: place.name || "Shelter",
             position: { lat: ll.lat, lng: ll.lng },
-            website: baseDoc.website || baseDoc.site || undefined,
-            email: baseDoc.email || undefined,
-            phone: baseDoc.phone || undefined,
-            address: baseDoc.address || baseDoc.formatted_address || "",
-            rating:
-              typeof baseDoc.rating === "number" ? baseDoc.rating : undefined,
+            website: undefined,
+            email: undefined,
+            phone: undefined,
+            address: place.vicinity || "",
+            rating: typeof place.rating === "number" ? place.rating : undefined,
             reviewsCount:
-              baseDoc.reviewsCount ??
-              baseDoc.reviewCount ??
-              baseDoc.total_ratings ??
-              baseDoc?.place?.user_ratings_total ??
-              undefined,
-            inviteState: Number.isFinite(baseDoc?.invite?.state)
-              ? baseDoc.invite.state
-              : 0,
-            // keep these for later “details” merge
-            place_id: baseDoc.place_id,
-            total_ratings: baseDoc.total_ratings,
-            plus_code: baseDoc.plus_code,
-            types: baseDoc.types,
-            business_status: baseDoc.business_status,
-            price_level: baseDoc.price_level,
-            opening_hours: baseDoc.opening_hours,
-            scope: baseDoc.scope,
-            permanently_closed: baseDoc.permanently_closed,
-            geometry: baseDoc.geometry,
+              typeof place.user_ratings_total === "number"
+                ? place.user_ratings_total
+                : undefined,
+            inviteState: 0,
+
+            // keep these for later “details” merge (you already do this on click)
+            place_id: placeId,
+            total_ratings: place.user_ratings_total,
+            plus_code: place.plus_code,
+            types: place.types,
+            business_status: place.business_status,
+            price_level: place.price_level,
+            opening_hours: place.opening_hours,
+            scope: place.scope,
+            permanently_closed: place.permanently_closed,
+            geometry: { location: { lat: ll.lat, lng: ll.lng } },
+            photos: place.photos || null,
           };
-        }),
-      );
+        })
+        .filter(Boolean);
 
-      const rows = merged.filter(Boolean);
-
-      // Sort by distance from current center for nicer UX
+      // keep your existing distance sort behavior
       rows.sort((a, b) => {
         const da = distanceBetween(
           [centerLat, centerLng],
@@ -870,12 +819,63 @@ export default function ClinicsMapSection({
         return da - db;
       });
 
+      // UI updates first
       setMarkers(rows);
       setShowSearchBtn(false);
       setActive((prev) => {
         if (prev !== null) return prev;
         return rows.length ? 0 : null;
       });
+
+      // CHANGE: write to Firestore after UI updates, in ONE batch commit
+      setTimeout(() => {
+        try {
+          const batch = writeBatch(firestore);
+
+          for (const place of vetted.slice(0, 80)) {
+            const placeId = place.place_id;
+            const ll = toPlainLatLng(place.geometry?.location);
+            if (!placeId || !ll) continue;
+
+            const state = stateFromPlusCode(place.plus_code);
+            const geohash = geohashForLocation([ll.lat, ll.lng]);
+
+            const payload = stripUndefinedAndFunctions({
+              place_id: safeAssign(placeId),
+              name: safeAssign(place.name),
+              address: safeAssign(place.vicinity || ""),
+              state: safeAssign(state),
+              location: safeAssign({ lat: ll.lat, lng: ll.lng }),
+              geometry: safeAssign({ location: { lat: ll.lat, lng: ll.lng } }),
+              rating: place.rating ?? null,
+              total_ratings: safeAssign(place.user_ratings_total, 0),
+              icon: safeAssign(place.icon),
+              types: safeAssign(place.types),
+              opening_hours: safeAssign(place.opening_hours),
+              plus_code: safeAssign(place.plus_code),
+              business_status: safeAssign(place.business_status),
+              user_ratings: safeAssign(place.user_ratings),
+              price_level: safeAssign(place.price_level, -1),
+              scope: safeAssign(place.scope),
+              permanently_closed: safeAssign(place.permanently_closed, false),
+
+              geohash,
+              locationGeo: new GeoPoint(ll.lat, ll.lng),
+              photoUrls: photoUrlsFromPhotos(place.photos),
+            });
+
+            batch.set(doc(firestore, "clinics", placeId), payload, {
+              merge: true,
+            });
+          }
+
+          batch.commit().catch((e) => {
+            console.warn("Failed writing shelters into clinics (batch):", e);
+          });
+        } catch (e) {
+          console.warn("Failed preparing clinics batch:", e);
+        }
+      }, 0);
     } catch (err) {
       console.error("Places fetch error:", err);
     } finally {
