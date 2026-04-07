@@ -61,14 +61,15 @@ function ShelterHighLevelSection() {
   return (
     <SectionWrap>
       <Feature
-        heading="Protect pets with a universal medical record"
+        heading="Protect pets with a lifelong medical record system"
         text={
           <>
-            MyPet Health helps shelters start each pet with a centralized
-            medical record that can stay with them for life. Instead of sending
-            adopters home with paperwork that gets lost, you give them a record
-            they can keep, update, and share with future clinics, ER teams, and
-            specialists.
+            MyPet Health helps shelters start each pet with a lifelong medical
+            record system that transfers to the adopter and continues to grow
+            after adoption. Instead of sending adopters home with paperwork that
+            gets lost, shelters give them a record they can keep using over time
+            to organize new records and share their pet’s medical history with
+            future clinics, ER teams, and specialists.
           </>
         }
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2014%2C%202026%2C%2001_14_36%20AM.webp?alt=media&token=a7aab9bb-c561-4c51-abd4-b0625a1279b8"
