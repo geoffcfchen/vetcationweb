@@ -115,7 +115,7 @@ function ShelterHowItWorksSection() {
         mediaVariant="desktop"
       />
       <Feature
-        heading="What adopters get: A lifelong medical record"
+        heading="What adopters get: A lifelong medical record system for their pet"
         text={
           <>
             Adopters receive a complete digital medical record for their pet in{" "}
