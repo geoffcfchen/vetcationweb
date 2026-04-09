@@ -317,7 +317,7 @@ function RegisterSection() {
             key={`${viewMode}-support`}
             heading="Get support from your vet"
             text={`Message your vet when you need help, and keep everything in one place so they can quickly understand your pet’s history and what other vets have already tried. When treatment makes sense, you can schedule a video visit and get medications or refills delivered, where allowed.`}
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783"
             headerFontSize={45}
           />
         </>
@@ -432,7 +432,7 @@ function RegisterSection() {
             key={`${viewMode}-step5`}
             heading="Get support from your vet"
             text={`Message your vet when you need help, and keep everything in one place so they can quickly understand your pet’s history and what other vets have already tried. When treatment makes sense, you can schedule a video visit and get medications or refills delivered, where allowed.`}
-            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_1615.webp?alt=media&token=808eb96e-b65b-48bc-9a04-a501bb04d35a"
+            imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FIMG_2135.webp?alt=media&token=097dce03-86b2-4b3c-a38f-b02c7237f783"
             headerFontSize={45}
           />
         </>
