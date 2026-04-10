@@ -294,7 +294,7 @@ export default function ShelterHeroSection({ onGetStarted }) {
             <Col xs={12} md={10} lg={8} xl={7}>
               <BrandKicker>For shelters and rescue groups</BrandKicker>
               <HeroHeader>
-                A digital medical record system that protects pets for life
+                A universal medical record system that protects pets for life
               </HeroHeader>
               <HeroTagline>
                 MyPet Health helps shelters give adopters a free space to store
