@@ -129,7 +129,7 @@ function ForShelterPage() {
         <ShelterHighLevelSection />
         <ShelterHowItWorksSection />
         {/* <ShelterHowToPartnerSection /> */}
-        <MapShell>
+        {/* <MapShell>
           <Max>
             <Eyebrow>
               <IoLocationOutline aria-hidden="true" />
@@ -144,12 +144,12 @@ function ForShelterPage() {
               more organizations near you.
             </Subtitle>
 
-            {/* <LinkRow>
+            <LinkRow>
               <LinkButton href="/post-adoption-support/">
                 <IoShieldCheckmarkSharp aria-hidden="true" />
                 What is post-adoption support?
               </LinkButton>
-            </LinkRow> */}
+            </LinkRow>
 
             <MapCard>
               <ClinicsMapSection
@@ -171,7 +171,7 @@ function ForShelterPage() {
               details.
             </FinePrint>
           </Max>
-        </MapShell>
+        </MapShell> */}
         <TestimonialsSection />
         <ShelterContactSection />
       </PageShell>
