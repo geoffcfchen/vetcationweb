@@ -117,7 +117,7 @@ function MainHighLevelSection() {
         mediaVariant="highlevel"
       />
 
-      <Feature
+      {/* <Feature
         heading="Support your favorite shelters"
         text={
           <>
@@ -130,8 +130,8 @@ function MainHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F15847442_012925-wabc-animal-shelter-thank-you-img.webp?alt=media&token=457decb9-b965-437b-b47f-ba75e3f4b998"
         headerFontSize={34}
         mediaVariant="highlevel"
-      />
-      <Feature
+      /> */}
+      {/* <Feature
         heading="Free for pet parents, forever"
         text={
           <>
@@ -143,7 +143,7 @@ function MainHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FChatGPT%20Image%20Mar%2016%2C%202026%2C%2011_30_46%20AM%20(1).webp?alt=media&token=314a0f10-b542-40bd-905c-ef77b9ca9287"
         headerFontSize={34}
         mediaVariant="highlevel"
-      />
+      /> */}
 
       <Feature
         heading="Available on web, iPhone, and Android"
