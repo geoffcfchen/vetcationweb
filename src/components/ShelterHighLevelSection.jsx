@@ -79,7 +79,7 @@ function ShelterHighLevelSection() {
         linkHref={/pet-health-record/}
       />
 
-      <Feature
+      {/* <Feature
         heading="Build post-adoption telehealth vet partnerships"
         text={
           <>
@@ -92,9 +92,9 @@ function ShelterHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2FScreenshot%202026-03-19%20at%201.52.25%E2%80%AFPM.webp?alt=media&token=3130b869-631d-40af-886e-4649b1767264"
         headerFontSize={34}
         mediaVariant="highlevel"
-      />
+      /> */}
 
-      <Feature
+      {/* <Feature
         heading="Extend support beyond adoption day"
         text={
           <>
@@ -107,9 +107,9 @@ function ShelterHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F26eebb48-01bf-4af9-8bd6-0c779fe989e6%20(1).webp?alt=media&token=7ed0a87b-0f75-4b3b-ac6b-11ab335a2104"
         headerFontSize={34}
         mediaVariant="highlevel"
-      />
+      /> */}
 
-      <Feature
+      {/* <Feature
         heading="Create a new support stream for shelters"
         text={
           <>
@@ -123,7 +123,7 @@ function ShelterHighLevelSection() {
         imageSrc="https://firebasestorage.googleapis.com/v0/b/vetcationapp.appspot.com/o/website%2F15847442_012925-wabc-animal-shelter-thank-you-img.webp?alt=media&token=457decb9-b965-437b-b47f-ba75e3f4b998"
         headerFontSize={34}
         mediaVariant="highlevel"
-      />
+      /> */}
 
       <Feature
         heading="Built with shelter leaders and frontline vets"

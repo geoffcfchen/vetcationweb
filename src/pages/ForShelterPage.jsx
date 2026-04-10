@@ -128,7 +128,7 @@ function ForShelterPage() {
         <ShelterHeroSection onGetStarted={() => setShowLogin(true)} />
         <ShelterHighLevelSection />
         <ShelterHowItWorksSection />
-        <ShelterHowToPartnerSection />
+        {/* <ShelterHowToPartnerSection /> */}
         <MapShell>
           <Max>
             <Eyebrow>

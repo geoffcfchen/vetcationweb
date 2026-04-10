@@ -297,10 +297,10 @@ export default function ShelterHeroSection({ onGetStarted }) {
                 A digital medical record system that protects pets for life
               </HeroHeader>
               <HeroTagline>
-                MyPet Health helps shelters give adopters a digital medical
-                record system. It’s free for shelters, with no downloads for
-                your staff. Create a pet record and transfer it to the adopter
-                at adoption day.
+                MyPet Health helps shelters give adopters a free space to store
+                and organize all their pet's medical records. It’s free for
+                shelters, with no downloads for your staff. Create a pet record
+                and transfer it to the adopter at adoption day.
               </HeroTagline>
 
               <ButtonsRow>
