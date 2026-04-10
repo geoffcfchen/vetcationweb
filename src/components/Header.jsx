@@ -11,12 +11,15 @@ import { useNavigate, Link } from "react-router-dom";
 
 const breakpoint = 900;
 
+// Size tokens so it is easy to tweak
 const SIZES = {
-  headerPaddingY: "1rem",
+  headerPaddingY: "1.15rem",
   headerPaddingX: "1.5rem",
-  logo: 28,
-  logoMobile: 26,
-  gap: 12,
+  logo: 25, // px
+  logoMobile: 25,
+  text: 20, // px
+  textMobile: 18,
+  gap: 15, // px
 };
 
 const HeaderContainer = styled.header`
@@ -24,121 +27,81 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: ${SIZES.headerPaddingY} ${SIZES.headerPaddingX};
-  background: #14202a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
-  z-index: 20;
+  background-color: #000;
 `;
 
-const LogoContainer = styled.button`
-  display: inline-flex;
+const LogoContainer = styled.div`
+  display: flex;
   align-items: center;
   gap: ${SIZES.gap}px;
   cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0;
-  text-align: left;
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
 
   &:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
+    opacity: 0.85;
   }
 `;
 
 const Logo = styled.img`
   width: ${SIZES.logo}px;
-  height: ${SIZES.logo}px;
-  object-fit: contain;
-  flex: 0 0 auto;
 
   @media (max-width: ${breakpoint}px) {
     width: ${SIZES.logoMobile}px;
-    height: ${SIZES.logoMobile}px;
   }
 `;
 
 const BrandWrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   line-height: 1.05;
 `;
 
 const LogoText = styled.span`
-  font-size: 1.15rem;
+  font-size: ${SIZES.text}px;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1;
 
   @media (max-width: ${breakpoint}px) {
-    font-size: 1.02rem;
+    font-size: ${SIZES.textMobile}px;
   }
 `;
 
 const LogoSubText = styled.span`
-  margin-top: 4px;
-  font-size: 0.78rem;
+  margin-top: 3px;
+  font-size: 11px;
   font-weight: 600;
-  color: rgba(232, 217, 184, 0.9);
+  color: rgba(255, 255, 255, 0.72);
   letter-spacing: 0.02em;
 
   @media (max-width: ${breakpoint}px) {
-    font-size: 0.72rem;
-    margin-top: 3px;
+    font-size: 10px;
   }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.875rem;
   align-items: center;
+  overflow: hidden;
 
   @media (max-width: ${breakpoint}px) {
     display: none;
   }
 `;
 
-const NavLinkItem = styled(Link)`
-  font-size: 0.98rem;
-  font-weight: 600;
-  color: #e8edf2;
-  text-decoration: none;
-  padding: 0.55rem 0.85rem;
-  border-radius: 999px;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    transform: translateY(-1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.92);
-    outline-offset: 3px;
-  }
-`;
-
+// Button style link for "Log in"
 const LoginButton = styled.button`
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.62rem 1.08rem;
-  margin-left: 0.35rem;
+  gap: 0.4rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 999px;
-  border: 1px solid rgba(232, 217, 184, 0.45);
-  background: #e8d9b8;
-  color: #14202a;
-  font-size: 0.92rem;
-  font-weight: 700;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
   transition:
@@ -148,36 +111,52 @@ const LoginButton = styled.button`
     box-shadow 0.15s ease;
 
   &:hover {
-    background: #f1e6cc;
-    border-color: #f1e6cc;
-    box-shadow: 0 8px 18px rgba(12, 18, 24, 0.22);
+    background: #ffffff;
+    color: #111827;
+    border-color: #2563eb;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
     transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 3px 10px rgba(12, 18, 24, 0.18);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.75);
   }
 `;
 
 const BurgerWrap = styled.div`
   display: none;
-  color: #ffffff;
 
   @media (max-width: ${breakpoint}px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.06);
-    cursor: pointer;
+    display: block;
+    padding: 4px;
   }
 
   svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const NavLinkItem = styled(Link)`
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: rgba(249, 250, 251, 0.08);
+    color: #ffffff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(249, 250, 251, 0.9);
+    outline-offset: 3px;
   }
 `;
 
@@ -235,7 +214,7 @@ function Header({ onLoginClick }) {
 
   return (
     <HeaderContainer>
-      <LogoContainer type="button" onClick={() => navigate("/")}>
+      <LogoContainer onClick={() => navigate("/")}>
         <Logo src={logo} alt="MyPet Health by Vetcation logo" />
         <BrandWrap>
           <LogoText>MyPet Health</LogoText>
@@ -243,6 +222,7 @@ function Header({ onLoginClick }) {
         </BrandWrap>
       </LogoContainer>
 
+      {/* Desktop nav */}
       <Nav>
         <NavLinkItem to="/for-shelters/">For shelters</NavLinkItem>
         <NavLinkItem to="/mission/">Mission</NavLinkItem>
@@ -257,6 +237,7 @@ function Header({ onLoginClick }) {
         </LoginButton>
       </Nav>
 
+      {/* Mobile dropdown */}
       {windowWidth <= breakpoint && (
         <Dropdown show={isOpen} onToggle={setIsOpen} align="end">
           <Dropdown.Toggle
@@ -264,7 +245,7 @@ function Header({ onLoginClick }) {
             id="dropdown-basic"
             onClick={toggleDropdown}
           >
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faBars} style={{ color: "#fff" }} />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
