@@ -173,7 +173,7 @@ function ForShelterPage() {
           </Max>
         </MapShell> */}
         <TestimonialsSection />
-        <ShelterContactSection />
+        {/* <ShelterContactSection /> */}
       </PageShell>
 
       {/* Reuse the same QR callout so shelters can see / share the app */}
