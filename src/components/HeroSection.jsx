@@ -305,7 +305,7 @@ export default function HeroSection({ onGetStarted }) {
               <BrandKicker>MyPet Health by Vetcation</BrandKicker>
 
               <HeroHeader>
-                <NoWrap>The universal digital medical record</NoWrap> <br />
+                <NoWrap>The universal medical record</NoWrap> <br />
                 for pets
               </HeroHeader>
 
