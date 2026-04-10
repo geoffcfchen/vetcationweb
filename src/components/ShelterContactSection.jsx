@@ -8,19 +8,19 @@ const FN_SUBMIT_SHELTER_INTEREST =
   "https://us-central1-vetcationapp.cloudfunctions.net/submitShelterInterest";
 
 const Section = styled.section`
-  background: #f8fafc;
-  padding: 20px 20px 72px;
+  background: #f3f0e8;
+  padding: 28px 20px 84px;
 `;
 
 const Max = styled.div`
-  max-width: 1140px;
+  max-width: 1160px;
   margin: 0 auto;
 `;
 
 const Wrap = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
   align-items: stretch;
 
   @media (max-width: 980px) {
@@ -29,110 +29,118 @@ const Wrap = styled.div`
 `;
 
 const LeftPanel = styled.div`
-  background: linear-gradient(180deg, #f7f4ed 0%, #f4efe6 100%);
-  border-radius: 22px;
-  padding: 34px 30px;
+  background: #1f2933;
+  border-radius: 12px;
+  padding: 36px 32px;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  border: 1px solid #31404d;
 `;
 
 const LeftTop = styled.div``;
 
 const Kicker = styled.div`
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #64748b;
+  color: #d9c7a2;
   font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(217, 199, 162, 0.28);
 `;
 
 const LeftTitle = styled.h2`
-  margin: 12px 0 10px;
-  font-size: clamp(30px, 4vw, 46px);
-  line-height: 1.08;
-  color: #35506d;
+  margin: 18px 0 14px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.02;
+  color: #ffffff;
   font-weight: 700;
+  max-width: 420px;
 `;
 
 const LeftBody = styled.p`
   margin: 0;
-  font-size: 18px;
-  line-height: 1.65;
-  color: #4b647f;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #d7dee4;
   max-width: 520px;
 `;
 
 const Points = styled.div`
   display: grid;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 30px;
 `;
 
 const Point = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 18px 1fr;
   gap: 12px;
-  align-items: flex-start;
-  color: #35506d;
+  align-items: start;
+  padding: 14px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #edf2f7;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.55;
 
   svg {
     margin-top: 3px;
+    color: #d9c7a2;
     flex: 0 0 auto;
-    color: #24b6c9;
   }
 `;
 
-const BottomBar = styled.div`
-  margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-radius: 999px;
-  overflow: hidden;
-  height: 14px;
-
-  span:nth-child(1) {
-    background: #f7a255;
-  }
-  span:nth-child(2) {
-    background: #47c6d5;
-  }
-  span:nth-child(3) {
-    background: #ef84c1;
-  }
-  span:nth-child(4) {
-    background: #8fd06a;
-  }
+const BottomRule = styled.div`
+  margin-top: 30px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(217, 199, 162, 0.9) 0%,
+    rgba(217, 199, 162, 0.35) 38%,
+    rgba(217, 199, 162, 0.06) 100%
+  );
 `;
 
 const RightCard = styled.div`
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 30px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-  border: 1px solid #e5edf5;
+  background: #fcfbf7;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid #d8d2c4;
+  box-shadow: 0 10px 24px rgba(24, 32, 38, 0.05);
 
   @media (max-width: 640px) {
     padding: 22px 18px;
   }
 `;
 
+const FormEyebrow = styled.div`
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7a6e57;
+  font-weight: 700;
+`;
+
 const FormTitle = styled.h3`
-  margin: 0 0 8px;
-  font-size: 30px;
-  line-height: 1.15;
-  color: #0f172a;
+  margin: 10px 0 8px;
+  font-size: 34px;
+  line-height: 1.08;
+  color: #17212b;
   font-weight: 700;
 `;
 
 const FormSubhead = styled.p`
-  margin: 0 0 22px;
+  margin: 0 0 24px;
   font-size: 16px;
-  line-height: 1.6;
-  color: #475569;
+  line-height: 1.7;
+  color: #4f5d6b;
+  max-width: 640px;
 `;
 
 const FormGrid = styled.div`
@@ -156,36 +164,40 @@ const FullWidth = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  color: #1e293b;
+  letter-spacing: 0.02em;
+  color: #1d2731;
 `;
 
 const Required = styled.span`
-  color: #dc2626;
+  color: #b42318;
   margin-left: 2px;
 `;
 
 const HelpText = styled.div`
   font-size: 13px;
-  color: #64748b;
+  color: #66717c;
 `;
 
 const sharedInputStyles = `
   width: 100%;
-  border-radius: 16px;
-  border: 1px solid #cfdceb;
-  background: #f8fbff;
-  color: #0f172a;
+  border-radius: 8px;
+  border: 1px solid #cfc6b4;
+  background: #ffffff;
+  color: #17212b;
   padding: 13px 14px;
   font-size: 15px;
   outline: none;
   transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
 
+  &::placeholder {
+    color: #8b96a1;
+  }
+
   &:focus {
-    border-color: #5ea3f3;
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(77, 159, 236, 0.16);
+    border-color: #8f7750;
+    box-shadow: 0 0 0 3px rgba(143, 119, 80, 0.14);
   }
 `;
 
@@ -199,56 +211,75 @@ const Select = styled.select`
 
 const TextArea = styled.textarea`
   ${sharedInputStyles}
-  min-height: 130px;
+  min-height: 132px;
   resize: vertical;
 `;
 
 const RadioWrap = styled.div`
   display: grid;
   gap: 10px;
-  margin-top: 2px;
+  margin-top: 4px;
 `;
 
 const RadioOption = styled.label`
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  padding: 12px 12px;
+  border: 1px solid #ddd4c4;
+  border-radius: 8px;
+  background: #fffdfa;
   font-size: 15px;
-  color: #1f2937;
+  color: #22303c;
   cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+
+  &:hover {
+    border-color: #b7aa92;
+    background: #ffffff;
+  }
+
+  input {
+    margin-top: 2px;
+  }
 `;
 
 const Actions = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
-  margin-top: 22px;
+  margin-top: 24px;
 `;
 
 const SubmitButton = styled.button`
   border: none;
-  background: #1f7a99;
+  background: #2b4a5a;
   color: #ffffff;
-  border-radius: 999px;
-  padding: 14px 24px;
-  font-size: 17px;
+  border-radius: 8px;
+  padding: 14px 22px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   min-width: 150px;
   transition:
     transform 120ms ease,
-    background 120ms ease;
+    background 120ms ease,
+    box-shadow 120ms ease;
 
   &:hover {
-    background: #17677f;
+    background: #213a47;
     transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(33, 58, 71, 0.18);
   }
 
   &:disabled {
     opacity: 0.65;
     cursor: default;
     transform: none;
+    box-shadow: none;
   }
 `;
 
@@ -256,7 +287,7 @@ const EmailLink = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #1d4ed8;
+  color: #2b4a5a;
   text-decoration: none;
   font-weight: 700;
   font-size: 15px;
@@ -268,20 +299,21 @@ const EmailLink = styled.a`
 
 const ErrorText = styled.div`
   font-size: 13px;
-  color: #dc2626;
+  color: #b42318;
+  margin-top: 16px;
 `;
 
 const InlineError = styled.div`
   font-size: 13px;
-  color: #dc2626;
+  color: #b42318;
   margin-top: 2px;
 `;
 
 const SuccessBox = styled.div`
-  border: 1px solid #b9e8cc;
-  background: #effcf4;
-  color: #166534;
-  border-radius: 16px;
+  border: 1px solid #b7d3c0;
+  background: #eef8f1;
+  color: #1d5b36;
+  border-radius: 8px;
   padding: 14px 16px;
   font-size: 15px;
   line-height: 1.5;
@@ -291,8 +323,8 @@ const SuccessBox = styled.div`
 const FinePrint = styled.p`
   margin: 18px 0 0;
   font-size: 12px;
-  line-height: 1.5;
-  color: #64748b;
+  line-height: 1.6;
+  color: #6a7280;
 `;
 
 const HiddenInput = styled.input`
@@ -454,7 +486,7 @@ export default function ShelterContactSection() {
           <LeftPanel>
             <LeftTop>
               <Kicker>Partner with MyPet Health</Kicker>
-              <LeftTitle>Get in touch</LeftTitle>
+              <LeftTitle>Start the conversation</LeftTitle>
               <LeftBody>
                 We help shelters and rescue groups send adopters home with a
                 lifelong medical record, better continuity, and less paperwork
@@ -488,15 +520,11 @@ export default function ShelterContactSection() {
               </Points>
             </LeftTop>
 
-            <BottomBar aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-            </BottomBar>
+            <BottomRule aria-hidden="true" />
           </LeftPanel>
 
           <RightCard>
+            <FormEyebrow>Contact</FormEyebrow>
             <FormTitle>Talk to our team</FormTitle>
             <FormSubhead>
               Fill out this form and we’ll get back to you shortly.
