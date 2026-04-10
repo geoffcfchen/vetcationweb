@@ -629,7 +629,7 @@ export default function ShelterContactSection() {
                   )}
                 </Field>
 
-                <Field as={FullWidth}>
+                {/* <Field as={FullWidth}>
                   <Label htmlFor="shelter-software">
                     Shelter management software
                   </Label>
@@ -650,7 +650,7 @@ export default function ShelterContactSection() {
                       </option>
                     ))}
                   </Select>
-                </Field>
+                </Field> */}
 
                 <Field as={FullWidth}>
                   <Label htmlFor="shelter-message">Message</Label>
