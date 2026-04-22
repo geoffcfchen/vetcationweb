@@ -649,11 +649,6 @@ function VetUploadRecordPage() {
               After upload, the system will generate the summary and index the
               document in the background. You can close this page.
             </Small>
-
-            <Small>
-              Nothing is saved to the pet record until you click “Save to
-              timeline”.
-            </Small>
           </>
         )}
       </Card>
