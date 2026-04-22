@@ -60,8 +60,8 @@ const StatusBadge = styled.div`
   border-radius: 999px;
   font-size: 12px;
   margin-bottom: 16px;
-  background: ${(p) => p.bg || "#eff6ff"};
-  color: ${(p) => p.color || "#1d4ed8"};
+  background: ${(p) => p.$bg || "#eff6ff"};
+  color: ${(p) => p.$color || "#1d4ed8"};
 `;
 
 const FieldLabel = styled.div`
@@ -222,6 +222,11 @@ function VetUploadRecordPage() {
   const [isSendingToAI, setIsSendingToAI] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadDone, setUploadDone] = useState(false);
+
+  const canUpload = !!file && inviteState.status === "ok" && !isUploading;
+
   // Gate: if not logged in, send to login and set redirect
   //   useEffect(() => {
   //     const user = auth.currentUser;
@@ -309,6 +314,77 @@ function VetUploadRecordPage() {
     setAiPreview(null);
     setUploadMeta(null);
   };
+
+  async function handleUploadToTimeline() {
+    if (!canUpload || !file || inviteState.status !== "ok") return;
+
+    try {
+      setIsUploading(true);
+      setUploadDone(false);
+
+      const invite = inviteState.invite;
+      const petId = invite.petId;
+      const petName = invite.petName || "this pet";
+
+      const mimeType = file.type || "application/octet-stream";
+      const fileNameSafe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const storagePath = `petRecords/${petId}/${Date.now()}_${fileNameSafe}`;
+
+      // 1) Upload file to Storage
+      const storageRef = ref(storage, storagePath);
+      await uploadBytes(storageRef, file);
+
+      // 1b) If image, store download URL for UI
+      let imageUrls = null;
+      if (mimeType && mimeType.startsWith("image/")) {
+        try {
+          const downloadUrl = await getDownloadURL(storageRef);
+          imageUrls = [downloadUrl];
+        } catch (urlErr) {
+          console.error("Failed to get download URL for image", urlErr);
+        }
+      }
+
+      // 2) Create timeline record on server (no AI preview step)
+      const resp = await fetch(
+        `${FUNCTIONS_BASE_URL}/createPetRecordPendingFromInvite`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            inviteId: invite.id,
+            storagePath,
+            mimeType,
+            ownerNote,
+            fallbackEventDateIso: new Date().toISOString(),
+            imageUrls: imageUrls || null,
+
+            // optional: link upload to vet profile if signed in
+            uploadedByUid: auth.currentUser?.uid || null,
+          }),
+        },
+      );
+
+      const data = await resp.json().catch(() => null);
+
+      if (!resp.ok || !data?.ok) {
+        console.warn("createPetRecordPendingFromInvite error", data);
+        alert(data?.error || "Unable to upload. Please try again.");
+        return;
+      }
+
+      setUploadDone(true);
+      alert(
+        "Uploaded. The system is processing this record in the background.",
+      );
+      navigate("/", { replace: true });
+    } catch (err) {
+      console.error("handleUploadToTimeline error", err);
+      alert("There was a problem uploading this record. Please try again.");
+    } finally {
+      setIsUploading(false);
+    }
+  }
 
   async function handleSendToAI() {
     if (!canSendToAI || !file || inviteState.status !== "ok") return;
@@ -559,26 +635,20 @@ function VetUploadRecordPage() {
             )}
 
             <ButtonRow>
-              {!aiPreview ? (
-                <Button
-                  variant="primary"
-                  full
-                  disabled={!canSendToAI}
-                  onClick={handleSendToAI}
-                >
-                  {isSendingToAI ? "Sending to System..." : "Send to System"}
-                </Button>
-              ) : (
-                <Button
-                  variant="primary"
-                  full
-                  disabled={!canSave}
-                  onClick={handleSaveToTimeline}
-                >
-                  {isSaving ? "Saving..." : "Save to timeline"}
-                </Button>
-              )}
+              <Button
+                variant="primary"
+                full
+                disabled={!canUpload}
+                onClick={handleUploadToTimeline}
+              >
+                {isUploading ? "Uploading..." : "Upload to medical memory"}
+              </Button>
             </ButtonRow>
+
+            <Small>
+              After upload, the system will generate the summary and index the
+              document in the background. You can close this page.
+            </Small>
 
             <Small>
               Nothing is saved to the pet record until you click “Save to
