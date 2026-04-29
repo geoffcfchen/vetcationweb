@@ -1,5 +1,5 @@
 // src/pages/VetUploadRecordPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -52,6 +52,7 @@ const Subtitle = styled.p`
   color: #6b7280;
 `;
 
+// Use transient props ($bg / $color) to avoid passing props to DOM
 const StatusBadge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -135,9 +136,10 @@ const ButtonRow = styled.div`
   margin-top: 20px;
 `;
 
+// Use transient prop $full (prevents non-boolean attribute warning)
 const Button = styled.button`
-  flex: ${(p) => (p.full ? "1" : "0")};
-  min-width: ${(p) => (p.full ? "0" : "120px")};
+  flex: ${(p) => (p.$full ? "1" : "0")};
+  min-width: ${(p) => (p.$full ? "0" : "120px")};
   padding: 10px 16px;
   border-radius: 999px;
   border: none;
@@ -149,8 +151,8 @@ const Button = styled.button`
   justify-content: center;
   gap: 8px;
   opacity: ${(p) => (p.disabled ? 0.55 : 1)};
-  background: ${(p) => (p.variant === "primary" ? "#2563eb" : "#e5e7eb")};
-  color: ${(p) => (p.variant === "primary" ? "#ffffff" : "#111827")};
+  background: ${(p) => (p.$variant === "primary" ? "#2563eb" : "#e5e7eb")};
+  color: ${(p) => (p.$variant === "primary" ? "#ffffff" : "#111827")};
 
   &:hover {
     filter: ${(p) => (p.disabled ? "none" : "brightness(0.97)")};
@@ -201,12 +203,23 @@ const InlineLinkButton = styled.button`
   text-decoration: underline;
 `;
 
+async function postJson(url, body) {
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body || {}),
+  });
+
+  const data = await resp.json().catch(() => ({}));
+  return { resp, data };
+}
+
 function VetUploadRecordPage() {
   const { inviteId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentUser = auth.currentUser; // new line
+  const currentUser = auth.currentUser;
 
   const [inviteState, setInviteState] = useState({
     status: "loading", // loading | not-found | expired | ok
@@ -217,7 +230,7 @@ function VetUploadRecordPage() {
   const [file, setFile] = useState(null);
   const [ownerNote, setOwnerNote] = useState("");
   const [aiPreview, setAiPreview] = useState(null);
-  const [uploadMeta, setUploadMeta] = useState(null); // { storagePath, mimeType, mode }
+  const [uploadMeta, setUploadMeta] = useState(null); // kept for your future AI flow
 
   const [isSendingToAI, setIsSendingToAI] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -225,18 +238,9 @@ function VetUploadRecordPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadDone, setUploadDone] = useState(false);
 
-  const canUpload = !!file && inviteState.status === "ok" && !isUploading;
+  const hasTrackedClickRef = useRef(false);
 
-  // Gate: if not logged in, send to login and set redirect
-  //   useEffect(() => {
-  //     const user = auth.currentUser;
-  //     if (!user) {
-  //       const fullPath =
-  //         location.pathname + (location.search || "") + (location.hash || "");
-  //       sessionStorage.setItem("postAuthRedirectPath", fullPath);
-  //       navigate("/login", { replace: true });
-  //     }
-  //   }, [navigate, location]);
+  const canUpload = !!file && inviteState.status === "ok" && !isUploading;
 
   // Load invite document
   useEffect(() => {
@@ -300,8 +304,35 @@ function VetUploadRecordPage() {
       }
     }
 
+    hasTrackedClickRef.current = false;
     loadInvite();
   }, [inviteId]);
+
+  // Track clinic clicking the link (once per page load for a valid invite)
+  useEffect(() => {
+    async function trackClick() {
+      if (inviteState.status !== "ok") return;
+      if (!inviteState.invite?.id) return;
+      if (hasTrackedClickRef.current) return;
+
+      hasTrackedClickRef.current = true;
+
+      const params = new URLSearchParams(location.search || "");
+      const src = String(params.get("src") || "unknown").toLowerCase();
+
+      try {
+        await postJson(`${FUNCTIONS_BASE_URL}/trackPetUploadInviteClick`, {
+          inviteId: inviteState.invite.id,
+          src,
+        });
+      } catch (e) {
+        // Non-blocking
+        console.warn("trackPetUploadInviteClick failed", e);
+      }
+    }
+
+    trackClick();
+  }, [inviteState.status, inviteState.invite?.id, location.search]);
 
   const canSendToAI =
     !!file && !isSendingToAI && !aiPreview && inviteState.status === "ok";
@@ -323,12 +354,12 @@ function VetUploadRecordPage() {
       setUploadDone(false);
 
       const invite = inviteState.invite;
-      const petId = invite.petId;
-      const petName = invite.petName || "this pet";
+      const petIdLocal = invite.petId;
+      const petNameLocal = invite.petName || "this pet";
 
       const mimeType = file.type || "application/octet-stream";
       const fileNameSafe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const storagePath = `petRecords/${petId}/${Date.now()}_${fileNameSafe}`;
+      const storagePath = `petRecords/${petIdLocal}/${Date.now()}_${fileNameSafe}`;
 
       // 1) Upload file to Storage
       const storageRef = ref(storage, storagePath);
@@ -345,32 +376,36 @@ function VetUploadRecordPage() {
         }
       }
 
-      // 2) Create timeline record on server (no AI preview step)
-      const resp = await fetch(
+      // 2) Create timeline record on server
+      const { resp, data } = await postJson(
         `${FUNCTIONS_BASE_URL}/createPetRecordPendingFromInvite`,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            inviteId: invite.id,
-            storagePath,
-            mimeType,
-            ownerNote,
-            fallbackEventDateIso: new Date().toISOString(),
-            imageUrls: imageUrls || null,
+          inviteId: invite.id,
+          storagePath,
+          mimeType,
+          ownerNote,
+          fallbackEventDateIso: new Date().toISOString(),
+          imageUrls: imageUrls || null,
 
-            // optional: link upload to vet profile if signed in
-            uploadedByUid: auth.currentUser?.uid || null,
-          }),
+          // optional: link upload to vet profile if signed in
+          uploadedByUid: auth.currentUser?.uid || null,
         },
       );
-
-      const data = await resp.json().catch(() => null);
 
       if (!resp.ok || !data?.ok) {
         console.warn("createPetRecordPendingFromInvite error", data);
         alert(data?.error || "Unable to upload. Please try again.");
         return;
+      }
+
+      // 3) Mark "uploaded" for this invite (non-blocking but should usually succeed)
+      try {
+        await postJson(`${FUNCTIONS_BASE_URL}/markPetUploadInviteUploaded`, {
+          inviteId: invite.id,
+          fileCount: 1,
+        });
+      } catch (e) {
+        console.warn("markPetUploadInviteUploaded failed", e);
       }
 
       setUploadDone(true);
@@ -383,139 +418,6 @@ function VetUploadRecordPage() {
       alert("There was a problem uploading this record. Please try again.");
     } finally {
       setIsUploading(false);
-    }
-  }
-
-  async function handleSendToAI() {
-    if (!canSendToAI || !file || inviteState.status !== "ok") return;
-
-    try {
-      setIsSendingToAI(true);
-      const invite = inviteState.invite;
-      const petId = invite.petId;
-      const petName = invite.petName || "this pet";
-
-      const mimeType = file.type || "application/octet-stream";
-      const fileNameSafe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const storagePath = `petRecords/${petId}/${Date.now()}_${fileNameSafe}`;
-
-      // 1) Upload file to Storage
-      const storageRef = ref(storage, storagePath);
-      await uploadBytes(storageRef, file);
-
-      // 1b) If this is an image, get its download URL so we can save it
-      let imageUrls = null;
-      if (mimeType && mimeType.startsWith("image/")) {
-        try {
-          const downloadUrl = await getDownloadURL(storageRef);
-          imageUrls = [downloadUrl];
-        } catch (urlErr) {
-          console.error("Failed to get download URL for image", urlErr);
-          // optional: keep going without imageUrls
-        }
-      }
-
-      // 2) Call previewPetRecordSummary
-      const fallbackEventDateIso = new Date().toISOString();
-
-      const resp = await fetch(
-        `${FUNCTIONS_BASE_URL}/previewPetRecordSummary`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            petId,
-            petName,
-            storagePath,
-            mimeType,
-            ownerNote,
-            fallbackEventDateIso,
-          }),
-        },
-      );
-
-      const data = await resp.json();
-
-      if (!resp.ok || !data.ok) {
-        console.warn("previewPetRecordSummary error", data);
-        alert(data.error || "Unable to get AI preview. Please try again.");
-        setIsSendingToAI(false);
-        return;
-      }
-
-      const preview = data.preview || {};
-
-      const nextPreview = {
-        summaryText: preview.summaryText,
-        eventDateIso: preview.eventDateIso,
-        recordType: preview.recordType,
-        eventDateSource: preview.eventDateSource,
-        rawTextForEmbedding: preview.rawTextForEmbedding,
-      };
-
-      setAiPreview(nextPreview);
-      setUploadMeta({
-        storagePath,
-        mimeType,
-        mode: data.mode || "vet_upload",
-        imageUrls, // array for images, null for pdfs
-      });
-    } catch (err) {
-      console.error("Send to AI error", err);
-      alert("There was a problem sending this file to AI. Please try again.");
-    } finally {
-      setIsSendingToAI(false);
-    }
-  }
-
-  async function handleSaveToTimeline() {
-    if (!canSave || inviteState.status !== "ok") return;
-
-    try {
-      setIsSaving(true);
-      const invite = inviteState.invite;
-      const { storagePath, mimeType, mode, imageUrls } = uploadMeta;
-
-      const resp = await fetch(
-        `${FUNCTIONS_BASE_URL}/savePetRecordToTimeline`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ownerUid: invite.ownerUid || null,
-            petId: invite.petId,
-            petName: invite.petName || null,
-            storagePath,
-            mimeType,
-            mode,
-            ownerNote,
-            fallbackEventDateIso: new Date().toISOString(),
-            aiPreview,
-            uploadedByUid: auth.currentUser?.uid || null,
-            imageUrls: imageUrls || null,
-          }),
-        },
-      );
-
-      const data = await resp.json();
-
-      if (!resp.ok || !data.ok) {
-        console.warn("savePetRecordToTimeline error", data);
-        alert(data.error || "Unable to save this record. Please try again.");
-        setIsSaving(false);
-        return;
-      }
-
-      // Optional: mark invite as used in Firestore on the client
-      // or do it in Cloud Functions when you see uploadedByRole === "vet"
-
-      alert("Record saved to the pet's medical memory.");
-      navigate("/", { replace: true });
-    } catch (err) {
-      console.error("SaveToTimeline error", err);
-      alert("There was a problem saving this record. Please try again.");
-    } finally {
-      setIsSaving(false);
     }
   }
 
@@ -544,7 +446,7 @@ function VetUploadRecordPage() {
 
         {status === "not-found" && (
           <>
-            <StatusBadge bg="#fef2f2" color="#b91c1c">
+            <StatusBadge $bg="#fef2f2" $color="#b91c1c">
               <FiAlertTriangle />
               Invalid link
             </StatusBadge>
@@ -554,7 +456,7 @@ function VetUploadRecordPage() {
 
         {status === "expired" && (
           <>
-            <StatusBadge bg="#fef2f2" color="#b91c1c">
+            <StatusBadge $bg="#fef2f2" $color="#b91c1c">
               <FiAlertTriangle />
               Link expired
             </StatusBadge>
@@ -587,6 +489,7 @@ function VetUploadRecordPage() {
                 so this upload is linked to your clinic.
               </Small>
             )}
+
             <Text>
               Records uploaded here will be attached to the medical memory for{" "}
               <strong>{invite.petName || "this pet"}</strong>.
@@ -636,8 +539,8 @@ function VetUploadRecordPage() {
 
             <ButtonRow>
               <Button
-                variant="primary"
-                full
+                $variant="primary"
+                $full
                 disabled={!canUpload}
                 onClick={handleUploadToTimeline}
               >
