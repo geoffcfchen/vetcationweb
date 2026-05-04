@@ -1,5 +1,5 @@
 // src/pages/VetUploadRecordPage.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -16,6 +16,8 @@ import { auth, firestore, storage } from "../lib/firebase";
 const FUNCTIONS_BASE_URL =
   "https://us-central1-vetcationapp.cloudfunctions.net";
 
+/* ----------------------------- UI pieces ----------------------------- */
+
 const PageShell = styled.div`
   min-height: 100vh;
   background: #f3f4f6;
@@ -26,7 +28,7 @@ const PageShell = styled.div`
 
 const Card = styled.div`
   width: 100%;
-  max-width: 720px;
+  max-width: 840px;
   background: #ffffff;
   border-radius: 16px;
   padding: 24px;
@@ -52,7 +54,6 @@ const Subtitle = styled.p`
   color: #6b7280;
 `;
 
-// Use transient props ($bg / $color) to avoid passing props to DOM
 const StatusBadge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -72,7 +73,7 @@ const FieldLabel = styled.div`
   margin-bottom: 4px;
 `;
 
-const Text = styled.p`
+const BodyText = styled.p`
   font-size: 13px;
   color: #4b5563;
   margin: 0 0 8px;
@@ -136,7 +137,6 @@ const ButtonRow = styled.div`
   margin-top: 20px;
 `;
 
-// Use transient prop $full (prevents non-boolean attribute warning)
 const Button = styled.button`
   flex: ${(p) => (p.$full ? "1" : "0")};
   min-width: ${(p) => (p.$full ? "0" : "120px")};
@@ -189,7 +189,7 @@ const PreviewValue = styled.div`
 const Small = styled.div`
   font-size: 11px;
   color: #9ca3af;
-  margin-top: 4px;
+  margin-top: 6px;
 `;
 
 const InlineLinkButton = styled.button`
@@ -203,6 +203,198 @@ const InlineLinkButton = styled.button`
   text-decoration: underline;
 `;
 
+/* ------------------------- Header layout (two cards) ------------------------- */
+
+const HeaderContainer = styled.div`
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  margin: 12px 0 10px;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
+`;
+
+const HeaderCardBase = styled.div`
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+`;
+
+const PetCard = styled(HeaderCardBase)`
+  flex: 1;
+  min-width: 0;
+`;
+
+const OwnerCard = styled(HeaderCardBase)`
+  width: 290px;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+`;
+
+const PetHeaderRow = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+
+const AvatarWrap = styled.div`
+  width: 84px;
+  height: 84px;
+  border-radius: 42px;
+  overflow: hidden;
+  background: #f3f4f6;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+`;
+
+const AvatarImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const AvatarFallback = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #111827;
+  background: #eef2ff;
+  font-size: 20px;
+`;
+
+const PetInfoBlock = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const NameRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+const PetName = styled.div`
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.1;
+  min-width: 0;
+`;
+
+const ChipRow = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+`;
+
+const Chip = styled.div`
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  background: ${(p) => p.$bg || "#f3f4f6"};
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  white-space: nowrap;
+`;
+
+const DetailGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -4px 0;
+`;
+
+const DetailPill = styled.div`
+  width: 50%;
+  padding: 0 4px;
+  margin-bottom: 8px;
+
+  @media (max-width: 520px) {
+    width: 100%;
+  }
+`;
+
+const DetailLabel = styled.div`
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 2px;
+`;
+
+const DetailValue = styled.div`
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+`;
+
+const FixedRow = styled.div`
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #4b5563;
+`;
+
+const Dot = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: ${(p) => p.$bg || "#d1d5db"};
+`;
+
+const OwnerTitle = styled.div`
+  font-size: 12px;
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 10px;
+`;
+
+const OwnerRow = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+`;
+
+const OwnerLabel = styled.div`
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+`;
+
+const OwnerValue = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const OwnerLink = styled.a`
+  color: #2563eb;
+  text-decoration: underline;
+`;
+
+/* ----------------------------- helpers ----------------------------- */
+
 async function postJson(url, body) {
   const resp = await fetch(url, {
     method: "POST",
@@ -213,6 +405,37 @@ async function postJson(url, body) {
   const data = await resp.json().catch(() => ({}));
   return { resp, data };
 }
+
+function formatDob(ts) {
+  try {
+    if (!ts) return null;
+    const d =
+      typeof ts?.toDate === "function"
+        ? ts.toDate()
+        : ts?.seconds
+          ? new Date(ts.seconds * 1000)
+          : new Date(ts);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  } catch {
+    return null;
+  }
+}
+
+function initialsFromName(name) {
+  const n = String(name || "").trim();
+  if (!n) return "P";
+  const parts = n.split(/\s+/).filter(Boolean);
+  const a = (parts[0] || "").slice(0, 1).toUpperCase();
+  const b = (parts[1] || "").slice(0, 1).toUpperCase();
+  return a + b || "P";
+}
+
+/* ------------------------------ Page ------------------------------ */
 
 function VetUploadRecordPage() {
   const { inviteId } = useParams();
@@ -239,6 +462,11 @@ function VetUploadRecordPage() {
   const [uploadDone, setUploadDone] = useState(false);
 
   const hasTrackedClickRef = useRef(false);
+
+  const [contextLoading, setContextLoading] = useState(false);
+  const [petProfile, setPetProfile] = useState(null);
+  const [ownerProfile, setOwnerProfile] = useState(null);
+  const [clinicProfile, setClinicProfile] = useState(null);
 
   const canUpload = !!file && inviteState.status === "ok" && !isUploading;
 
@@ -326,13 +554,64 @@ function VetUploadRecordPage() {
           src,
         });
       } catch (e) {
-        // Non-blocking
         console.warn("trackPetUploadInviteClick failed", e);
       }
     }
 
     trackClick();
   }, [inviteState.status, inviteState.invite?.id, location.search]);
+
+  // Load header context data (pet + owner + clinic)
+  useEffect(() => {
+    async function loadContext() {
+      if (inviteState.status !== "ok") return;
+      const inv = inviteState.invite || {};
+      if (!inv?.petId || !inv?.ownerUid) return;
+
+      setContextLoading(true);
+
+      try {
+        const petRef = doc(firestore, "pets", String(inv.petId));
+        const ownerRef = doc(firestore, "customers", String(inv.ownerUid));
+        const clinicRef = inv.clinicId
+          ? doc(firestore, "clinics", String(inv.clinicId))
+          : null;
+
+        const snaps = await Promise.all([
+          getDoc(petRef),
+          getDoc(ownerRef),
+          clinicRef ? getDoc(clinicRef) : Promise.resolve(null),
+        ]);
+
+        const petSnap = snaps[0];
+        const ownerSnap = snaps[1];
+        const clinicSnap = snaps[2];
+
+        setPetProfile(
+          petSnap?.exists() ? { id: petSnap.id, ...petSnap.data() } : null,
+        );
+        setOwnerProfile(
+          ownerSnap?.exists()
+            ? { id: ownerSnap.id, ...ownerSnap.data() }
+            : null,
+        );
+        setClinicProfile(
+          clinicSnap?.exists?.()
+            ? { id: clinicSnap.id, ...clinicSnap.data() }
+            : null,
+        );
+      } catch (e) {
+        console.warn("Failed to load header context", e);
+        setPetProfile(null);
+        setOwnerProfile(null);
+        setClinicProfile(null);
+      } finally {
+        setContextLoading(false);
+      }
+    }
+
+    loadContext();
+  }, [inviteState.status, inviteState.invite]);
 
   const canSendToAI =
     !!file && !isSendingToAI && !aiPreview && inviteState.status === "ok";
@@ -355,7 +634,6 @@ function VetUploadRecordPage() {
 
       const invite = inviteState.invite;
       const petIdLocal = invite.petId;
-      const petNameLocal = invite.petName || "this pet";
 
       const mimeType = file.type || "application/octet-stream";
       const fileNameSafe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
@@ -386,8 +664,6 @@ function VetUploadRecordPage() {
           ownerNote,
           fallbackEventDateIso: new Date().toISOString(),
           imageUrls: imageUrls || null,
-
-          // optional: link upload to vet profile if signed in
           uploadedByUid: auth.currentUser?.uid || null,
         },
       );
@@ -398,7 +674,7 @@ function VetUploadRecordPage() {
         return;
       }
 
-      // 3) Mark "uploaded" for this invite (non-blocking but should usually succeed)
+      // 3) Mark "uploaded" for this invite
       try {
         await postJson(`${FUNCTIONS_BASE_URL}/markPetUploadInviteUploaded`, {
           inviteId: invite.id,
@@ -430,6 +706,41 @@ function VetUploadRecordPage() {
 
   const { status, invite, error } = inviteState;
 
+  // Derived display values (UI only)
+  const petName = petProfile?.displayName || invite?.petName || "Pet";
+  const petPhotoUrl = petProfile?.photoURL || null;
+  const petBreed = petProfile?.categoryBreed?.label || null;
+  const petColor = petProfile?.categoryColor?.label || null;
+  const petSex = petProfile?.petSex || null;
+  const petDob = formatDob(petProfile?.dob) || null;
+  const isFixed =
+    typeof petProfile?.isFixed === "boolean" ? petProfile.isFixed : null;
+  const petType = petProfile?.type ? String(petProfile.type) : null;
+
+  const initials = useMemo(() => initialsFromName(petName), [petName]);
+
+  const ownerFirst = String(ownerProfile?.firstName || "").trim();
+  const ownerLast = String(ownerProfile?.lastName || "").trim();
+  const ownerName =
+    ownerFirst || ownerLast
+      ? `${ownerFirst} ${ownerLast}`.trim()
+      : ownerProfile?.displayName || "Pet owner";
+
+  const ownerEmail =
+    ownerProfile?.email && String(ownerProfile.email).trim()
+      ? String(ownerProfile.email).trim()
+      : null;
+
+  const ownerPhone =
+    ownerProfile?.phoneNumber && String(ownerProfile.phoneNumber).trim()
+      ? String(ownerProfile.phoneNumber).trim()
+      : null;
+
+  const clinicName = clinicProfile?.name || invite?.clinicName || null;
+  const clinicEmail =
+    clinicProfile?.email ||
+    (invite?.clinicEmail ? String(invite.clinicEmail).trim() : null);
+
   return (
     <PageShell>
       <Card>
@@ -442,7 +753,9 @@ function VetUploadRecordPage() {
           pet owner account that shared this link with you.
         </Subtitle>
 
-        {status === "loading" && <Text>Loading invitation details...</Text>}
+        {status === "loading" && (
+          <BodyText>Loading invitation details...</BodyText>
+        )}
 
         {status === "not-found" && (
           <>
@@ -450,7 +763,7 @@ function VetUploadRecordPage() {
               <FiAlertTriangle />
               Invalid link
             </StatusBadge>
-            <Text>{error || "This upload link is not valid."}</Text>
+            <BodyText>{error || "This upload link is not valid."}</BodyText>
           </>
         )}
 
@@ -460,10 +773,10 @@ function VetUploadRecordPage() {
               <FiAlertTriangle />
               Link expired
             </StatusBadge>
-            <Text>
+            <BodyText>
               This upload link has expired. The pet owner can generate a new
               link from their app if needed.
-            </Text>
+            </BodyText>
           </>
         )}
 
@@ -490,10 +803,133 @@ function VetUploadRecordPage() {
               </Small>
             )}
 
-            <Text>
-              Records uploaded here will be attached to the medical memory for{" "}
-              <strong>{invite.petName || "this pet"}</strong>.
-            </Text>
+            {/* Two-card header */}
+            <HeaderContainer>
+              <PetCard>
+                <OwnerTitle>Pet</OwnerTitle>
+
+                <PetHeaderRow>
+                  <AvatarWrap>
+                    {petPhotoUrl ? (
+                      <AvatarImg src={petPhotoUrl} alt={petName} />
+                    ) : (
+                      <AvatarFallback>{initials}</AvatarFallback>
+                    )}
+                  </AvatarWrap>
+
+                  <PetInfoBlock>
+                    <NameRow>
+                      <PetName>{petName}</PetName>
+
+                      <ChipRow>
+                        {petType ? <Chip $bg="#EEF2FF">{petType}</Chip> : null}
+                        {invite?.petId ? (
+                          <Chip $bg="#F3F4F6">
+                            ID {String(invite.petId).slice(0, 6)}
+                          </Chip>
+                        ) : null}
+                      </ChipRow>
+                    </NameRow>
+
+                    {isFixed !== null ? (
+                      <FixedRow>
+                        <Dot $bg={isFixed ? "#16A34A" : "#D1D5DB"} />
+                        {isFixed ? "Spayed / neutered" : "Not marked fixed"}
+                      </FixedRow>
+                    ) : (
+                      <FixedRow>
+                        <Dot $bg="#D1D5DB" />
+                        Not marked fixed
+                      </FixedRow>
+                    )}
+                  </PetInfoBlock>
+                </PetHeaderRow>
+
+                <DetailGrid>
+                  <DetailPill>
+                    <DetailLabel>Breed</DetailLabel>
+                    <DetailValue>{petBreed || "Unknown"}</DetailValue>
+                  </DetailPill>
+
+                  <DetailPill>
+                    <DetailLabel>Color</DetailLabel>
+                    <DetailValue>{petColor || "Unknown"}</DetailValue>
+                  </DetailPill>
+
+                  <DetailPill>
+                    <DetailLabel>Sex</DetailLabel>
+                    <DetailValue>{petSex || "Unknown"}</DetailValue>
+                  </DetailPill>
+
+                  <DetailPill>
+                    <DetailLabel>DOB</DetailLabel>
+                    <DetailValue>{petDob || "Unknown"}</DetailValue>
+                  </DetailPill>
+                </DetailGrid>
+              </PetCard>
+
+              <OwnerCard>
+                <OwnerTitle>Owner contact</OwnerTitle>
+
+                <OwnerRow>
+                  <OwnerLabel>Name</OwnerLabel>
+                  <OwnerValue>{ownerName || "Pet owner"}</OwnerValue>
+                </OwnerRow>
+
+                <OwnerRow>
+                  <OwnerLabel>Email</OwnerLabel>
+                  <OwnerValue>
+                    {ownerEmail ? (
+                      <OwnerLink href={`mailto:${ownerEmail}`}>
+                        {ownerEmail}
+                      </OwnerLink>
+                    ) : (
+                      "Not available"
+                    )}
+                  </OwnerValue>
+                </OwnerRow>
+
+                <OwnerRow>
+                  <OwnerLabel>Phone</OwnerLabel>
+                  <OwnerValue>
+                    {ownerPhone ? (
+                      <OwnerLink href={`tel:${ownerPhone}`}>
+                        {ownerPhone}
+                      </OwnerLink>
+                    ) : (
+                      "Not available"
+                    )}
+                  </OwnerValue>
+                </OwnerRow>
+
+                {(clinicName || clinicEmail) && (
+                  <>
+                    <div style={{ height: 10 }} />
+                    <OwnerTitle>Clinic</OwnerTitle>
+
+                    {clinicName && (
+                      <OwnerRow>
+                        <OwnerLabel>Name</OwnerLabel>
+                        <OwnerValue>{clinicName}</OwnerValue>
+                      </OwnerRow>
+                    )}
+
+                    {clinicEmail && (
+                      <OwnerRow>
+                        <OwnerLabel>Email</OwnerLabel>
+                        <OwnerValue>{clinicEmail}</OwnerValue>
+                      </OwnerRow>
+                    )}
+                  </>
+                )}
+
+                <Small>
+                  {contextLoading
+                    ? "Loading details..."
+                    : "If anything looks wrong, please confirm with the pet owner before uploading."}
+                </Small>
+              </OwnerCard>
+            </HeaderContainer>
 
             <FieldLabel>1. Select a file</FieldLabel>
             <FileBox>
@@ -517,9 +953,6 @@ function VetUploadRecordPage() {
               onChange={(e) => setOwnerNote(e.target.value)}
               placeholder="Example: CBC and chemistry from ER visit on Jan 28"
             />
-            <Small>
-              This note is stored and also helps AI interpret the record.
-            </Small>
 
             {aiPreview && (
               <PreviewBox>
@@ -544,7 +977,9 @@ function VetUploadRecordPage() {
                 disabled={!canUpload}
                 onClick={handleUploadToTimeline}
               >
-                {isUploading ? "Uploading..." : "Upload to medical memory"}
+                {isUploading
+                  ? "Uploading..."
+                  : `Upload to ${petName}'s medical profile`}
               </Button>
             </ButtonRow>
 
