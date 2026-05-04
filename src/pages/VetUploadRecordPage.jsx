@@ -153,17 +153,33 @@ const Button = styled.button`
   border: none;
   font-size: 14px;
   font-weight: 600;
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(p) => (p.disabled || p.$loading ? "not-allowed" : "pointer")};
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  opacity: ${(p) => (p.disabled ? 0.55 : 1)};
+  opacity: ${(p) => (p.disabled && !p.$loading ? 0.55 : 1)};
   background: ${(p) => (p.$variant === "primary" ? "#2563eb" : "#e5e7eb")};
   color: ${(p) => (p.$variant === "primary" ? "#ffffff" : "#111827")};
 
   &:hover {
-    filter: ${(p) => (p.disabled ? "none" : "brightness(0.97)")};
+    filter: ${(p) => (p.disabled || p.$loading ? "none" : "brightness(0.97)")};
+  }
+`;
+
+const ButtonSpinner = styled.span`
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #ffffff;
+  border-radius: 999px;
+  display: inline-block;
+  animation: buttonSpin 0.75s linear infinite;
+
+  @keyframes buttonSpin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -1164,16 +1180,20 @@ function VetUploadRecordPage() {
               <Button
                 $variant="primary"
                 $full
-                disabled={!canUpload}
-                onClick={handleUploadToTimeline}
+                $loading={isUploading}
+                disabled={!canUpload && !isUploading}
+                onClick={isUploading ? undefined : handleUploadToTimeline}
               >
-                {isUploading
-                  ? `Uploading ${uploadingIndex || 1} of ${
-                      rowsReadyForUpload.length
-                    }...`
-                  : `Upload ${rowsReadyForUpload.length || ""} ${
-                      rowsReadyForUpload.length === 1 ? "record" : "records"
-                    } to ${petName}'s medical profile`}
+                {isUploading ? (
+                  <>
+                    <ButtonSpinner />
+                    {`Uploading ${uploadingIndex || 1} of ${rowsReadyForUpload.length}...`}
+                  </>
+                ) : (
+                  `Upload ${rowsReadyForUpload.length || ""} ${
+                    rowsReadyForUpload.length === 1 ? "record" : "records"
+                  } to ${petName}'s medical profile`
+                )}
               </Button>
             </ButtonRow>
 
