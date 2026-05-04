@@ -761,6 +761,9 @@ function VetUploadRecordPage() {
         completedRowIds.push(item.id);
       }
 
+      // ✅ Add it here, after every file has been uploaded successfully.
+      await markUploaded(invite.id, completedCount);
+
       alert(
         `Uploaded ${completedCount} ${
           completedCount === 1 ? "file" : "files"
