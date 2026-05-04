@@ -7,6 +7,8 @@ import {
   FiFileText,
   FiAlertTriangle,
   FiCheckCircle,
+  FiPlus,
+  FiTrash2,
 } from "react-icons/fi";
 import { doc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -15,8 +17,6 @@ import { auth, firestore, storage } from "../lib/firebase";
 
 const FUNCTIONS_BASE_URL =
   "https://us-central1-vetcationapp.cloudfunctions.net";
-
-/* ----------------------------- UI pieces ----------------------------- */
 
 const PageShell = styled.div`
   min-height: 100vh;
@@ -98,12 +98,16 @@ const FileBox = styled.label`
 const FileInfo = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 0;
 `;
 
 const FileName = styled.div`
   font-size: 13px;
   font-weight: 600;
   color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const FileHint = styled.div`
@@ -117,7 +121,7 @@ const HiddenFileInput = styled.input`
 
 const TextArea = styled.textarea`
   width: 100%;
-  min-height: 80px;
+  min-height: 72px;
   font-size: 13px;
   padding: 8px 10px;
   border-radius: 10px;
@@ -135,6 +139,10 @@ const ButtonRow = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
+
+  @media (max-width: 520px) {
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.button`
@@ -159,33 +167,6 @@ const Button = styled.button`
   }
 `;
 
-const PreviewBox = styled.div`
-  margin-top: 20px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-`;
-
-const PreviewTitle = styled.div`
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
-`;
-
-const PreviewLabel = styled.div`
-  font-size: 12px;
-  font-weight: 600;
-  color: #6b7280;
-  margin-top: 6px;
-`;
-
-const PreviewValue = styled.div`
-  font-size: 13px;
-  color: #111827;
-  margin-top: 2px;
-`;
-
 const Small = styled.div`
   font-size: 11px;
   color: #9ca3af;
@@ -202,8 +183,6 @@ const InlineLinkButton = styled.button`
   cursor: pointer;
   text-decoration: underline;
 `;
-
-/* ------------------------- Header layout (two cards) ------------------------- */
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -393,7 +372,70 @@ const OwnerLink = styled.a`
   text-decoration: underline;
 `;
 
-/* ----------------------------- helpers ----------------------------- */
+const FileRows = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const FileRowCard = styled.div`
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  background: #ffffff;
+`;
+
+const FileRowTop = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+`;
+
+const FileRowTitle = styled.div`
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+`;
+
+const IconButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
+  opacity: ${(p) => (p.disabled ? 0.45 : 1)};
+
+  &:hover {
+    background: ${(p) => (p.disabled ? "#ffffff" : "#f9fafb")};
+    color: ${(p) => (p.disabled ? "#6b7280" : "#b91c1c")};
+  }
+`;
+
+const AddFileButton = styled.button`
+  margin-top: 12px;
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background: #dbeafe;
+  }
+`;
 
 async function postJson(url, body) {
   const resp = await fetch(url, {
@@ -435,7 +477,13 @@ function initialsFromName(name) {
   return a + b || "P";
 }
 
-/* ------------------------------ Page ------------------------------ */
+function makeFileRow() {
+  return {
+    id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
+    file: null,
+    note: "",
+  };
+}
 
 function VetUploadRecordPage() {
   const { inviteId } = useParams();
@@ -445,21 +493,14 @@ function VetUploadRecordPage() {
   const currentUser = auth.currentUser;
 
   const [inviteState, setInviteState] = useState({
-    status: "loading", // loading | not-found | expired | ok
+    status: "loading",
     invite: null,
     error: null,
   });
 
-  const [file, setFile] = useState(null);
-  const [ownerNote, setOwnerNote] = useState("");
-  const [aiPreview, setAiPreview] = useState(null);
-  const [uploadMeta, setUploadMeta] = useState(null); // kept for your future AI flow
-
-  const [isSendingToAI, setIsSendingToAI] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-
+  const [fileRows, setFileRows] = useState([makeFileRow()]);
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadDone, setUploadDone] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState(null);
 
   const hasTrackedClickRef = useRef(false);
 
@@ -468,9 +509,19 @@ function VetUploadRecordPage() {
   const [ownerProfile, setOwnerProfile] = useState(null);
   const [clinicProfile, setClinicProfile] = useState(null);
 
-  const canUpload = !!file && inviteState.status === "ok" && !isUploading;
+  const rowsReadyForUpload = useMemo(
+    () => fileRows.filter((row) => !!row.file),
+    [fileRows],
+  );
 
-  // Load invite document
+  const hasEmptyFileRow = fileRows.some((row) => !row.file);
+
+  const canUpload =
+    rowsReadyForUpload.length > 0 &&
+    !hasEmptyFileRow &&
+    inviteState.status === "ok" &&
+    !isUploading;
+
   useEffect(() => {
     async function loadInvite() {
       if (!inviteId) {
@@ -536,7 +587,6 @@ function VetUploadRecordPage() {
     loadInvite();
   }, [inviteId]);
 
-  // Track clinic clicking the link (once per page load for a valid invite)
   useEffect(() => {
     async function trackClick() {
       if (inviteState.status !== "ok") return;
@@ -561,7 +611,6 @@ function VetUploadRecordPage() {
     trackClick();
   }, [inviteState.status, inviteState.invite?.id, location.search]);
 
-  // Load header context data (pet + owner + clinic)
   useEffect(() => {
     async function loadContext() {
       if (inviteState.status !== "ok") return;
@@ -613,87 +662,139 @@ function VetUploadRecordPage() {
     loadContext();
   }, [inviteState.status, inviteState.invite]);
 
-  const canSendToAI =
-    !!file && !isSendingToAI && !aiPreview && inviteState.status === "ok";
-  const canSave = !!aiPreview && !!uploadMeta && !isSaving;
-
-  const handleFileChange = (e) => {
+  const handleFileChange = (rowId, e) => {
     const f = e.target.files?.[0];
     if (!f) return;
-    setFile(f);
-    setAiPreview(null);
-    setUploadMeta(null);
+
+    setFileRows((prev) =>
+      prev.map((row) => (row.id === rowId ? { ...row, file: f } : row)),
+    );
   };
 
+  const handleNoteChange = (rowId, value) => {
+    setFileRows((prev) =>
+      prev.map((row) => (row.id === rowId ? { ...row, note: value } : row)),
+    );
+  };
+
+  const handleAddFileRow = () => {
+    setFileRows((prev) => [...prev, makeFileRow()]);
+  };
+
+  const handleRemoveFileRow = (rowId) => {
+    setFileRows((prev) => {
+      if (prev.length <= 1) return prev;
+      return prev.filter((row) => row.id !== rowId);
+    });
+  };
+
+  async function markUploaded(inviteIdLocal, fileCount) {
+    try {
+      await postJson(`${FUNCTIONS_BASE_URL}/markPetUploadInviteUploaded`, {
+        inviteId: inviteIdLocal,
+        fileCount,
+      });
+    } catch (e) {
+      console.warn("markPetUploadInviteUploaded failed", e);
+    }
+  }
+
   async function handleUploadToTimeline() {
-    if (!canUpload || !file || inviteState.status !== "ok") return;
+    if (!canUpload || inviteState.status !== "ok") return;
+
+    const invite = inviteState.invite;
+    const petIdLocal = invite.petId;
+    const rowsToUpload = rowsReadyForUpload;
+
+    let completedCount = 0;
+    const completedRowIds = [];
 
     try {
       setIsUploading(true);
-      setUploadDone(false);
 
-      const invite = inviteState.invite;
-      const petIdLocal = invite.petId;
+      for (let i = 0; i < rowsToUpload.length; i += 1) {
+        const item = rowsToUpload[i];
+        const selectedFile = item.file;
 
-      const mimeType = file.type || "application/octet-stream";
-      const fileNameSafe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const storagePath = `petRecords/${petIdLocal}/${Date.now()}_${fileNameSafe}`;
+        setUploadingIndex(i + 1);
 
-      // 1) Upload file to Storage
-      const storageRef = ref(storage, storagePath);
-      await uploadBytes(storageRef, file);
+        const mimeType = selectedFile.type || "application/octet-stream";
+        const fileNameSafe = selectedFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const storagePath = `petRecords/${petIdLocal}/${Date.now()}_${
+          i + 1
+        }_${fileNameSafe}`;
 
-      // 1b) If image, store download URL for UI
-      let imageUrls = null;
-      if (mimeType && mimeType.startsWith("image/")) {
-        try {
-          const downloadUrl = await getDownloadURL(storageRef);
-          imageUrls = [downloadUrl];
-        } catch (urlErr) {
-          console.error("Failed to get download URL for image", urlErr);
+        const fileStorageRef = ref(storage, storagePath);
+        await uploadBytes(fileStorageRef, selectedFile);
+
+        let imageUrls = null;
+        if (mimeType && mimeType.startsWith("image/")) {
+          try {
+            const downloadUrl = await getDownloadURL(fileStorageRef);
+            imageUrls = [downloadUrl];
+          } catch (urlErr) {
+            console.error("Failed to get download URL for image", urlErr);
+          }
         }
+
+        const { resp, data } = await postJson(
+          `${FUNCTIONS_BASE_URL}/createPetRecordPendingFromInvite`,
+          {
+            inviteId: invite.id,
+            storagePath,
+            mimeType,
+            ownerNote: item.note || "",
+            fallbackEventDateIso: new Date().toISOString(),
+            imageUrls: imageUrls || null,
+            uploadedByUid: auth.currentUser?.uid || null,
+          },
+        );
+
+        if (!resp.ok || !data?.ok) {
+          console.warn("createPetRecordPendingFromInvite error", data);
+          throw new Error(
+            data?.error || `Unable to upload ${selectedFile.name}.`,
+          );
+        }
+
+        completedCount += 1;
+        completedRowIds.push(item.id);
       }
 
-      // 2) Create timeline record on server
-      const { resp, data } = await postJson(
-        `${FUNCTIONS_BASE_URL}/createPetRecordPendingFromInvite`,
-        {
-          inviteId: invite.id,
-          storagePath,
-          mimeType,
-          ownerNote,
-          fallbackEventDateIso: new Date().toISOString(),
-          imageUrls: imageUrls || null,
-          uploadedByUid: auth.currentUser?.uid || null,
-        },
-      );
-
-      if (!resp.ok || !data?.ok) {
-        console.warn("createPetRecordPendingFromInvite error", data);
-        alert(data?.error || "Unable to upload. Please try again.");
-        return;
-      }
-
-      // 3) Mark "uploaded" for this invite
-      try {
-        await postJson(`${FUNCTIONS_BASE_URL}/markPetUploadInviteUploaded`, {
-          inviteId: invite.id,
-          fileCount: 1,
-        });
-      } catch (e) {
-        console.warn("markPetUploadInviteUploaded failed", e);
-      }
-
-      setUploadDone(true);
       alert(
-        "Uploaded. The system is processing this record in the background.",
+        `Uploaded ${completedCount} ${
+          completedCount === 1 ? "file" : "files"
+        }. The system is processing ${
+          completedCount === 1 ? "this record" : "these records"
+        } in the background.`,
       );
+
       navigate("/", { replace: true });
     } catch (err) {
       console.error("handleUploadToTimeline error", err);
-      alert("There was a problem uploading this record. Please try again.");
+
+      if (completedCount > 0) {
+        setFileRows((prev) => {
+          const remaining = prev.filter(
+            (row) => !completedRowIds.includes(row.id),
+          );
+          return remaining.length ? remaining : [makeFileRow()];
+        });
+
+        alert(
+          `${completedCount} ${
+            completedCount === 1 ? "file was" : "files were"
+          } uploaded, but another file failed. Please review the remaining file and try again.`,
+        );
+      } else {
+        alert(
+          err.message ||
+            "There was a problem uploading these records. Please try again.",
+        );
+      }
     } finally {
       setIsUploading(false);
+      setUploadingIndex(null);
     }
   }
 
@@ -706,7 +807,6 @@ function VetUploadRecordPage() {
 
   const { status, invite, error } = inviteState;
 
-  // Derived display values (UI only)
   const petName = petProfile?.displayName || invite?.petName || "Pet";
   const petPhotoUrl = petProfile?.photoURL || null;
   const petBreed = petProfile?.categoryBreed?.label || null;
@@ -749,7 +849,7 @@ function VetUploadRecordPage() {
           <Title>Upload records into medical memory</Title>
         </TitleRow>
         <Subtitle>
-          This page lets you upload a lab report or document directly into the
+          This page lets you upload lab reports or documents directly into the
           pet owner account that shared this link with you.
         </Subtitle>
 
@@ -803,7 +903,6 @@ function VetUploadRecordPage() {
               </Small>
             )}
 
-            {/* Two-card header */}
             <HeaderContainer>
               <PetCard>
                 <OwnerTitle>Pet</OwnerTitle>
@@ -931,44 +1030,71 @@ function VetUploadRecordPage() {
               </OwnerCard>
             </HeaderContainer>
 
-            <FieldLabel>1. Select a file</FieldLabel>
-            <FileBox>
-              <FiFileText size={20} />
-              <FileInfo>
-                <FileName>
-                  {file ? file.name : "Click to choose a PDF or image"}
-                </FileName>
-                <FileHint>Supported: PDF, JPEG, PNG, other images</FileHint>
-              </FileInfo>
-              <HiddenFileInput
-                type="file"
-                accept=".pdf,image/*"
-                onChange={handleFileChange}
-              />
-            </FileBox>
+            <FieldLabel>1. Select files</FieldLabel>
 
-            <FieldLabel>2. Brief note (optional)</FieldLabel>
-            <TextArea
-              value={ownerNote}
-              onChange={(e) => setOwnerNote(e.target.value)}
-              placeholder="Example: CBC and chemistry from ER visit on Jan 28"
-            />
+            <FileRows>
+              {fileRows.map((item, index) => (
+                <FileRowCard key={item.id}>
+                  <FileRowTop>
+                    <FileRowTitle>Record {index + 1}</FileRowTitle>
 
-            {aiPreview && (
-              <PreviewBox>
-                <PreviewTitle>System preview ready</PreviewTitle>
+                    <IconButton
+                      type="button"
+                      disabled={fileRows.length <= 1 || isUploading}
+                      onClick={() => handleRemoveFileRow(item.id)}
+                      aria-label="Remove this file"
+                      title="Remove this file"
+                    >
+                      <FiTrash2 size={15} />
+                    </IconButton>
+                  </FileRowTop>
 
-                <PreviewLabel>Detected type</PreviewLabel>
-                <PreviewValue>{aiPreview.recordType || "Unknown"}</PreviewValue>
+                  <FileBox>
+                    <FiFileText size={20} />
+                    <FileInfo>
+                      <FileName>
+                        {item.file
+                          ? item.file.name
+                          : "Click to choose a PDF or image"}
+                      </FileName>
+                      <FileHint>
+                        Supported: PDF, JPEG, PNG, other images
+                      </FileHint>
+                    </FileInfo>
+                    <HiddenFileInput
+                      type="file"
+                      accept=".pdf,image/*"
+                      disabled={isUploading}
+                      onChange={(e) => handleFileChange(item.id, e)}
+                    />
+                  </FileBox>
 
-                <PreviewLabel>Summary</PreviewLabel>
-                <PreviewValue>{aiPreview.summaryText}</PreviewValue>
+                  <FieldLabel>Brief note for this file optional</FieldLabel>
+                  <TextArea
+                    value={item.note}
+                    disabled={isUploading}
+                    onChange={(e) => handleNoteChange(item.id, e.target.value)}
+                    placeholder="Example: CBC and chemistry from ER visit on Jan 28"
+                  />
+                </FileRowCard>
+              ))}
+            </FileRows>
 
-                <Small>
-                  You can adjust details later inside the pet medical memory.
-                </Small>
-              </PreviewBox>
-            )}
+            <AddFileButton
+              type="button"
+              onClick={handleAddFileRow}
+              disabled={isUploading}
+            >
+              <FiPlus />
+              Add another file
+            </AddFileButton>
+
+            {hasEmptyFileRow && rowsReadyForUpload.length > 0 ? (
+              <Small>
+                Please choose a file for every record row, or remove the empty
+                row before uploading.
+              </Small>
+            ) : null}
 
             <ButtonRow>
               <Button
@@ -978,14 +1104,19 @@ function VetUploadRecordPage() {
                 onClick={handleUploadToTimeline}
               >
                 {isUploading
-                  ? "Uploading..."
-                  : `Upload to ${petName}'s medical profile`}
+                  ? `Uploading ${uploadingIndex || 1} of ${
+                      rowsReadyForUpload.length
+                    }...`
+                  : `Upload ${rowsReadyForUpload.length || ""} ${
+                      rowsReadyForUpload.length === 1 ? "record" : "records"
+                    } to ${petName}'s medical profile`}
               </Button>
             </ButtonRow>
 
             <Small>
-              After upload, the system will generate the summary and index the
-              document in the background. You can close this page.
+              After upload, the system will generate summaries and index the
+              documents in the background. You can close this page after the
+              upload finishes.
             </Small>
           </>
         )}
