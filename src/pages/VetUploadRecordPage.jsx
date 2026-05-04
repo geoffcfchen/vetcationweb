@@ -437,6 +437,59 @@ const AddFileButton = styled.button`
   }
 `;
 
+const SuccessBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(15, 23, 42, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const SuccessModalCard = styled.div`
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.3);
+  text-align: center;
+`;
+
+const SuccessIconWrap = styled.div`
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+`;
+
+const SuccessTitle = styled.h2`
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #111827;
+`;
+
+const SuccessText = styled.p`
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #4b5563;
+`;
+
+const SuccessButtonRow = styled.div`
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+`;
+
 async function postJson(url, body) {
   const resp = await fetch(url, {
     method: "POST",
@@ -501,6 +554,10 @@ function VetUploadRecordPage() {
   const [fileRows, setFileRows] = useState([makeFileRow()]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadingIndex, setUploadingIndex] = useState(null);
+  const [successModal, setSuccessModal] = useState({
+    open: false,
+    fileCount: 0,
+  });
 
   const hasTrackedClickRef = useRef(false);
 
@@ -764,15 +821,10 @@ function VetUploadRecordPage() {
       // ✅ Add it here, after every file has been uploaded successfully.
       await markUploaded(invite.id, completedCount);
 
-      alert(
-        `Uploaded ${completedCount} ${
-          completedCount === 1 ? "file" : "files"
-        }. The system is processing ${
-          completedCount === 1 ? "this record" : "these records"
-        } in the background.`,
-      );
-
-      navigate("/", { replace: true });
+      setSuccessModal({
+        open: true,
+        fileCount: completedCount,
+      });
     } catch (err) {
       console.error("handleUploadToTimeline error", err);
 
@@ -806,6 +858,15 @@ function VetUploadRecordPage() {
       location.pathname + (location.search || "") + (location.hash || "");
     sessionStorage.setItem("postAuthRedirectPath", fullPath);
     navigate("/login");
+  };
+
+  const handleFinishAfterUpload = () => {
+    setSuccessModal({
+      open: false,
+      fileCount: 0,
+    });
+
+    navigate("/", { replace: true });
   };
 
   const { status, invite, error } = inviteState;
@@ -1124,6 +1185,38 @@ function VetUploadRecordPage() {
           </>
         )}
       </Card>
+      {successModal.open && (
+        <SuccessBackdrop>
+          <SuccessModalCard role="dialog" aria-modal="true">
+            <SuccessIconWrap>
+              <FiCheckCircle size={30} />
+            </SuccessIconWrap>
+
+            <SuccessTitle>Upload complete</SuccessTitle>
+
+            <SuccessText>
+              {successModal.fileCount === 1
+                ? "The record was uploaded successfully."
+                : `${successModal.fileCount} records were uploaded successfully.`}
+            </SuccessText>
+
+            <SuccessText>
+              The system is now generating summaries and indexing the documents
+              in the background.
+            </SuccessText>
+
+            <SuccessButtonRow>
+              <Button
+                $variant="primary"
+                type="button"
+                onClick={handleFinishAfterUpload}
+              >
+                Done
+              </Button>
+            </SuccessButtonRow>
+          </SuccessModalCard>
+        </SuccessBackdrop>
+      )}
     </PageShell>
   );
 }
