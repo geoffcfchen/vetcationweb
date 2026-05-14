@@ -14,12 +14,12 @@ const SectionHeader = styled.div`
   padding: 0 0 1.25rem;
 `;
 
-const Eyebrow = styled.div`
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b7280;
-`;
+// const Eyebrow = styled.div`
+//   font-size: 12px;
+//   letter-spacing: 0.08em;
+//   text-transform: uppercase;
+//   color: #6b7280;
+// `;
 
 const Headline = styled.h2`
   margin: 10px 0 8px;
