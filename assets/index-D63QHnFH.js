@@ -16204,12 +16204,6 @@ attempted value: ${gt}
   padding: 3rem 2rem 1rem;
 `;pt.div`
   padding: 0 0 1.25rem;
-`;pt.h2`
-  margin: 10px 0 8px;
-  font-size: clamp(28px, 3.6vw, 40px);
-  line-height: 1.2;
-  font-weight: 800;
-  color: #0f172a;
 `;pt.p`
   margin: 0;
   max-width: 820px;
