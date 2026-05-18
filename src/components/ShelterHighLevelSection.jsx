@@ -21,13 +21,13 @@ const SectionHeader = styled.div`
 //   color: #6b7280;
 // `;
 
-const Headline = styled.h2`
-  margin: 10px 0 8px;
-  font-size: clamp(28px, 3.6vw, 40px);
-  line-height: 1.2;
-  font-weight: 800;
-  color: #0f172a;
-`;
+// const Headline = styled.h2`
+//   margin: 10px 0 8px;
+//   font-size: clamp(28px, 3.6vw, 40px);
+//   line-height: 1.2;
+//   font-weight: 800;
+//   color: #0f172a;
+// `;
 
 const Subhead = styled.p`
   margin: 0;
