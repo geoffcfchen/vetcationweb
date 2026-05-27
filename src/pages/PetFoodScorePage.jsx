@@ -22,6 +22,7 @@ import ingredientImage from "../images/ingredient.webp";
 import scoreDetailImage from "../images/pet-food-score-breakdown.png";
 import memberFilterImage from "../images/member-filter-products.png";
 import qrCodeImage from "../images/qrcode7.png";
+import socialImage from "../images/social.jpg";
 
 const Page = styled.main`
   background: #ffffff;
@@ -440,6 +441,12 @@ const QR = styled.img`
   margin: 0 auto 14px;
 `;
 
+const SocialImage = styled.img`
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+`;
+
 const QRTitle = styled.div`
   font-size: 18px;
   font-weight: 900;
@@ -734,12 +741,10 @@ function PetFoodScorePage() {
             </div>
 
             <QRPanel>
-              <QR src={qrCodeImage} alt="Vetcation app QR code" />
-              <QRTitle>Download the app</QRTitle>
-              <QRText>
-                Placeholder QR for now. Replace it later with the official app
-                download link.
-              </QRText>
+              <SocialImage
+                src={socialImage}
+                alt="Vetcation Bluesky community"
+              />
             </QRPanel>
           </CommunityInner>
         </CommunityBand>
