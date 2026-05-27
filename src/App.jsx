@@ -14,6 +14,7 @@ import HeroSection from "./components/HeroSection";
 // import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import GlobalContext from "./context/GlobalContext";
 import RegisterPage from "./pages/RegisterPage";
+import PetFoodScorePage from "./pages/PetFoodScorePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "./GlobalStyle";
 
@@ -145,8 +146,9 @@ function SeoForPath() {
   // Start with your priority pages; you can add more anytime.
   const metaMap = {
     "/": {
-      title: `${BRAND.full} | Universal Medical Record for Pets`,
-      description: defaultMeta.description,
+      title: `${BRAND.full} | Pet Food Scores and Ratings`,
+      description:
+        "The mobile app that scores pet food. Search 30,000+ foods, decipher labels, understand health impact, and compare better options from an independent vet-led project.",
     },
     "/mypet-health/": {
       title: `MyPet Health by Vetcation | Official Site`,
@@ -539,7 +541,9 @@ function App() {
       <ScrollToTop />
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
-        <Route path="/" element={<RegisterPage />} />
+        <Route path="/" element={<PetFoodScorePage />} />
+        {/* Previous homepage, kept for quick rollback: */}
+        {/* <Route path="/" element={<RegisterPage />} /> */}
         <Route path="/mypet-health/" element={<MyPetHealthPage />} />
         <Route path="/pet-health-record/" element={<UniversalRecordsPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />

@@ -95,6 +95,18 @@ const FeatureBlock = styled(motion.article)`
       }
     }
   }
+
+  ${(props) =>
+    props.$mediaOnly &&
+    `
+      display: block;
+      margin: 0;
+
+      &:first-of-type,
+      &:last-of-type {
+        margin: 0;
+      }
+    `}
 `;
 
 const FeatureContent = styled(motion.div)`
@@ -292,6 +304,7 @@ export default function Feature({
   headerFontSize = 30,
   mediaVariant = "phone", // "phone" | "desktop" | "highlevel"
   clickTarget = "feature", // "feature" | "cta"
+  mediaOnly = false,
 }) {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
@@ -324,53 +337,56 @@ export default function Feature({
       aria-label={featureClickable ? `Open ${heading}` : undefined}
       $clickable={featureClickable}
       $mediaVariant={mediaVariant}
+      $mediaOnly={mediaOnly}
     >
-      <FeatureContent>
-        {iconId && (
-          <IconContainer>
-            <svg>
-              <use xlinkHref={`${sprite}#${iconId}`} />
-            </svg>
-          </IconContainer>
-        )}
+      {!mediaOnly && (
+        <FeatureContent>
+          {iconId && (
+            <IconContainer>
+              <svg>
+                <use xlinkHref={`${sprite}#${iconId}`} />
+              </svg>
+            </IconContainer>
+          )}
 
-        <Heading $size={headerFontSize}>{heading}</Heading>
+          <Heading $size={headerFontSize}>{heading}</Heading>
 
-        <BodyText>{text}</BodyText>
+          <BodyText>{text}</BodyText>
 
-        {linkText && (
-          <CtaLink
-            href={to || linkHref || "#"}
-            onClick={(e) => {
-              if (ctaNavigates) {
-                e.preventDefault();
-                go();
-              }
-            }}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-            aria-label={linkText}
-          >
-            {linkText}
-            <FaArrowRight
-              style={{
-                marginLeft: "5px",
-                transition: "transform 0.3s ease",
-                transform: hover ? "translateX(5px)" : "translateX(0)",
+          {linkText && (
+            <CtaLink
+              href={to || linkHref || "#"}
+              onClick={(e) => {
+                if (ctaNavigates) {
+                  e.preventDefault();
+                  go();
+                }
               }}
-            />
-          </CtaLink>
-        )}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              aria-label={linkText}
+            >
+              {linkText}
+              <FaArrowRight
+                style={{
+                  marginLeft: "5px",
+                  transition: "transform 0.3s ease",
+                  transform: hover ? "translateX(5px)" : "translateX(0)",
+                }}
+              />
+            </CtaLink>
+          )}
 
-        {qrCodeLink && (
-          <QRCodeImage
-            src={qrCodeLink}
-            alt="QR Code"
-            $clickable={featureClickable}
-            onClick={featureClickable ? go : undefined}
-          />
-        )}
-      </FeatureContent>
+          {qrCodeLink && (
+            <QRCodeImage
+              src={qrCodeLink}
+              alt="QR Code"
+              $clickable={featureClickable}
+              onClick={featureClickable ? go : undefined}
+            />
+          )}
+        </FeatureContent>
+      )}
 
       {videoSrc ? (
         <VideoFrameContainer
