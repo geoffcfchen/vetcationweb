@@ -701,6 +701,12 @@ function PetFoodScorePage() {
                 A score should be useful only if it explains itself. Each rating
                 is designed to show the label signals that matter most for pets.
               </SectionText>
+              <Actions>
+                <SecondaryLink href="/pet-food-scoring-method/">
+                  How we score
+                  <FiChevronRight />
+                </SecondaryLink>
+              </Actions>
 
               <CriteriaGrid>
                 {criteria.map((item) => (

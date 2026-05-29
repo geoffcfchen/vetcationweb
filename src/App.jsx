@@ -15,6 +15,7 @@ import HeroSection from "./components/HeroSection";
 import GlobalContext from "./context/GlobalContext";
 import RegisterPage from "./pages/RegisterPage";
 import PetFoodScorePage from "./pages/PetFoodScorePage";
+import PetFoodScoringMethodPage from "./pages/PetFoodScoringMethodPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "./GlobalStyle";
 
@@ -182,6 +183,34 @@ function SeoForPath() {
     "/mypet-health/": {
       title: `MyPet Health by Vetcation | Official Site`,
       description: defaultMeta.description,
+    },
+    "/pet-food-scoring-method/": {
+      title: `How We Score Pet Food | ${BRAND.company}`,
+      description:
+        "Learn how Vetcation scores pet food using ingredient quality, guaranteed analysis, brand nutrition standards, red flags, helpful extras, and data confidence.",
+      keywords:
+        "pet food scoring method, pet food rating system, dog food score, cat food score, pet food label analysis",
+      image: `${BRAND.domain}/og-image.png`,
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "How Vetcation scores pet food",
+        description:
+          "A clear explanation of the Vetcation pet food scoring method, including ingredient quality, guaranteed analysis, red flags, brand nutrition standards, helpful extras, and data confidence.",
+        author: {
+          "@type": "Organization",
+          name: "Vetcation Inc.",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Vetcation Inc.",
+          logo: {
+            "@type": "ImageObject",
+            url: `${BRAND.domain}/icon_96.png`,
+          },
+        },
+        mainEntityOfPage: `${BRAND.domain}/pet-food-scoring-method/`,
+      },
     },
     "/pet-health-record/": {
       title: `Pet Health Record | ${BRAND.full}`,
@@ -586,6 +615,10 @@ function App() {
         <Route path="/" element={<PetFoodScorePage />} />
         {/* Previous homepage, kept for quick rollback: */}
         {/* <Route path="/" element={<RegisterPage />} /> */}
+        <Route
+          path="/pet-food-scoring-method/"
+          element={<PetFoodScoringMethodPage />}
+        />
         <Route path="/mypet-health/" element={<MyPetHealthPage />} />
         <Route path="/pet-health-record/" element={<UniversalRecordsPage />} />
         <Route path="/invite/:clinicId/:token" element={<InviteSurvey />} />
