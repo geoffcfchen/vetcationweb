@@ -124,6 +124,7 @@ const BRAND = {
   company: "Vetcation",
   product: "MyPet Health",
   full: "MyPet Health by Vetcation",
+  foodProduct: "Vetcation Pet Food Scores",
   domain: "https://vetcation.com",
 };
 
@@ -146,9 +147,37 @@ function SeoForPath() {
   // Start with your priority pages; you can add more anytime.
   const metaMap = {
     "/": {
-      title: `${BRAND.full} | Pet Food Scores and Ratings`,
+      title: `Pet Food Scores & Ratings | ${BRAND.company}`,
       description:
-        "The mobile app that scores pet food. Search 30,000+ foods, decipher labels, understand health impact, and compare better options from an independent vet-led project.",
+        "Search 30,000+ dog and cat foods. Vetcation deciphers labels and explains ingredient quality, guaranteed analysis, brand standards, and red flags.",
+      keywords:
+        "pet food score, pet food ratings, dog food ratings, cat food ratings, pet food label analysis, pet nutrition app",
+      image: `${BRAND.domain}/og-image.png`,
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: BRAND.foodProduct,
+        alternateName: "Vetcation",
+        applicationCategory: "HealthApplication",
+        operatingSystem: "iOS, Android",
+        url: `${BRAND.domain}/`,
+        publisher: {
+          "@type": "Organization",
+          name: "Vetcation Inc.",
+          url: `${BRAND.domain}/`,
+          logo: `${BRAND.domain}/icon_96.png`,
+        },
+        description:
+          "A mobile app for pet parents to search dog and cat food, understand pet food labels, and review independent vet-led food scores.",
+        featureList: [
+          "Search 30,000+ pet foods",
+          "Pet food scoring and ratings",
+          "Ingredient quality explanations",
+          "Guaranteed analysis review",
+          "Brand nutrition standards",
+          "Red flag ingredient checks",
+        ],
+      },
     },
     "/mypet-health/": {
       title: `MyPet Health by Vetcation | Official Site`,
@@ -294,11 +323,24 @@ function SeoForPath() {
     <Helmet>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
+      {meta.keywords && <meta name="keywords" content={meta.keywords} />}
       <link rel="canonical" href={canonical} />
       {/* Optional but recommended */}
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={BRAND.company} />
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
       <meta property="og:url" content={canonical} />
+      {meta.image && <meta property="og:image" content={meta.image} />}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={meta.title} />
+      <meta name="twitter:description" content={meta.description} />
+      {meta.image && <meta name="twitter:image" content={meta.image} />}
+      {meta.structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(meta.structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 }
