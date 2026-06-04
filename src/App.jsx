@@ -612,9 +612,9 @@ function App() {
       <ScrollToTop />
       <Routes>
         {/* <Route path="/" element={<Header />} /> */}
-        <Route path="/" element={<PetFoodScorePage />} />
+        {/* <Route path="/" element={<PetFoodScorePage />} /> */}
         {/* Previous homepage, kept for quick rollback: */}
-        {/* <Route path="/" element={<RegisterPage />} /> */}
+        <Route path="/" element={<RegisterPage />} />
         <Route
           path="/pet-food-scoring-method/"
           element={<PetFoodScoringMethodPage />}
